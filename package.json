@@ -7,6 +7,8 @@
     "format": "prettier --write \"src/**/*.{ts,tsx,js,css,scss}\"",
     "format:check": "prettier --list-different \"src/**/*.{ts,tsx,js,css,scss}\"",
     "format:fix": "prettier --write --ignore-unknown \"src/**/*.{ts,tsx,js,css,scss}\"",
+    "lint": "eslint \"src/**/*.{ts,tsx,js}\" --ext .ts,.tsx,.js",
+    "lint:fix": "eslint \"src/**/*.{ts,tsx,js}\" --ext .ts,.tsx,.js --fix",
     "stylelint": "stylelint \"src/**/*.{css,scss}\"",
     "stylelint:fix": "stylelint \"src/**/*.{css,scss}\" --fix",
     "dev": "vite",
