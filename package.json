@@ -4,6 +4,9 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
+    "format": "prettier --write \"src/**/*.{ts,tsx,js,css,scss}\"",
+    "format:check": "prettier --list-different \"src/**/*.{ts,tsx,js,css,scss}\"",
+    "format:fix": "prettier --write --ignore-unknown \"src/**/*.{ts,tsx,js,css,scss}\"",
     "stylelint": "stylelint \"src/**/*.{css,scss}\"",
     "stylelint:fix": "stylelint \"src/**/*.{css,scss}\" --fix",
     "dev": "vite",
@@ -12,6 +15,11 @@
     "deploy": "npm run build && npx gh-pages -d dist -e ecommerce-application",
     "prepare": "husky .husky",
     "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "src/**/*.{css,scss}": [
+      "npm run stylelint"
+    ]
   },
   "keywords": [],
   "author": "Konstantin Petrov, Daniil Biver, Olga Paklonskaya",
