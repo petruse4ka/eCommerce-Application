@@ -3,6 +3,12 @@
   "version": "1.0.0",
   "type": "module",
   "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "deploy": "npm run build && npx gh-pages -d dist -e ecommerce-application"
+  },
   "keywords": [],
   "author": "Konstantin Petrov, Daniil Biver, Olga Paklonskaya",
   "license": "ISC",
