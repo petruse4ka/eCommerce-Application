@@ -4,6 +4,7 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
+    "test": "npm run lint && npm run stylelint && npm run format:check",
     "format": "prettier --write \"src/**/*.{ts,tsx,js,css,scss}\"",
     "format:check": "prettier --list-different \"src/**/*.{ts,tsx,js,css,scss}\"",
     "format:fix": "prettier --write --ignore-unknown \"src/**/*.{ts,tsx,js,css,scss}\"",
@@ -19,8 +20,13 @@
     "pre-commit": "lint-staged"
   },
   "lint-staged": {
+    "src/**/*.{ts,tsx,js}": [
+      "npm run lint",
+      "npm run format"
+    ],
     "src/**/*.{css,scss}": [
-      "npm run stylelint"
+      "npm run stylelint",
+      "npm run format"
     ]
   },
   "keywords": [],
