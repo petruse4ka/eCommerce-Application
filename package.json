@@ -9,7 +9,9 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "deploy": "npm run build && npx gh-pages -d dist -e ecommerce-application"
+    "deploy": "npm run build && npx gh-pages -d dist -e ecommerce-application",
+    "prepare": "husky .husky",
+    "pre-commit": "lint-staged"
   },
   "keywords": [],
   "author": "Konstantin Petrov, Daniil Biver, Olga Paklonskaya",
