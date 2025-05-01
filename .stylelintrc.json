@@ -1,0 +1,8 @@
+{
+    "extends": ["stylelint-config-standard-scss", "stylelint-config-clean-order"],
+    "rules": {
+      "font-weight-notation": "numeric",
+      "selector-class-pattern": "^[a-z][a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*(?:__[a-z][a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*)?(?:--[a-z][a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*)?(?:\\[.+\\])?$"
+    }
+  }
+  
