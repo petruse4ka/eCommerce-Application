@@ -123,6 +123,10 @@ npm run dev
 
 This will launch the Vite development server to test that the project has been setup correctly.
 
+⚠️ **Note:**  
+If your IDE shows TypeScript-related errors, make sure to check not only the installed TypeScript version but also the TypeScript configuration in your IDE.  
+For **Visual Studio Code**, go to the Command Palette and select: **“TypeScript: Select TypeScript Version”** → choose **“Use Workspace Version”**.
+
 ---
 
 ## 📜 Scripts
