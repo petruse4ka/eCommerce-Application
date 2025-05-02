@@ -3,6 +3,7 @@ import { resolve } from 'path';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
 import viteClean from 'vite-plugin-clean';
+import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '');
@@ -11,6 +12,7 @@ export default defineConfig(({ mode }) => {
     base: './',
     plugins: [
       tsconfigPaths(),
+      tailwindcss(),
       viteClean({
         targetFiles: ['dist'],
       }),
