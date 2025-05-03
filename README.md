@@ -125,7 +125,12 @@ This will launch the Vite development server to test that the project has been s
 
 ⚠️ **Note:**  
 If your IDE shows TypeScript-related errors, make sure to check not only the installed TypeScript version but also the TypeScript configuration in your IDE.  
-For **Visual Studio Code**, go to the Command Palette and select: **“TypeScript: Select TypeScript Version”** → choose **“Use Workspace Version”**.
+For **Visual Studio Code**:
+
+1. Ensure you have the TypeScript extension installed
+2. Select the TypeScript version by either:
+   - Clicking the TypeScript version number in the bottom right corner and choosing "Use Workspace Version"
+   - Or using the Command Palette (Ctrl+Shift+P or Cmd+Shift+P) and selecting "TypeScript: Select TypeScript Version" → "Use Workspace Version"
 
 ---
 
@@ -153,12 +158,12 @@ Use the following scripts to assist with development, formatting, linting, build
 
 ### ⚙️ Development & Deployment
 
-| Script            | Description                                  |
-| :---------------- | :------------------------------------------- |
-| `npm run dev`     | Start a local development server with Vite.  |
-| `npm run build`   | Build the project for production.            |
-| `npm run preview` | Preview the production build locally.        |
-| `npm run deploy`  | Build the project and deploy to GitHub Pages |
+| Script            | Description                                 |
+| :---------------- | :------------------------------------------ |
+| `npm run dev`     | Start a local development server with Vite. |
+| `npm run build`   | Build the project for production.           |
+| `npm run preview` | Preview the production build locally.       |
+| `npm run deploy`  | Build the project and deploy to Netlify     |
 
 ### 🛡️ Git Hooks
 
