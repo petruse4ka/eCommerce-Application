@@ -15,7 +15,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "deploy": "netlify deploy --prod",
+    "deploy": "npm run build && netlify deploy --prod",
     "prepare": "husky .husky",
     "pre-commit": "lint-staged"
   },
