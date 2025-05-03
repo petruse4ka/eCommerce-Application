@@ -58,6 +58,9 @@ The main features of the application include:
 ![Stylelint](https://img.shields.io/badge/Stylelint-263238?logo=stylelint&logoColor=white)  
 **Stylelint** – Used for maintaining consistent and error-free SCSS/CSS code.
 
+![Netlify](https://img.shields.io/badge/Netlify-00C7B7?logo=netlify&logoColor=white)  
+**Netlify** – Used for continuous deployment and hosting.
+
 ---
 
 ## 🚀 Project setup
