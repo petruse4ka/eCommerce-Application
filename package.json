@@ -4,7 +4,9 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "check": "npm run lint && npm run stylelint && npm run format:check",
+    "check": "npm run lint && npm run stylelint && npm run format:check && npm run test",
+    "test": "vitest",
+    "test:coverage": "vitest run --coverage",
     "format": "prettier --write \"src/**/*.{ts,tsx,js,css,scss}\"",
     "format:check": "prettier --list-different \"src/**/*.{ts,tsx,js,css,scss}\"",
     "format:fix": "prettier --write --ignore-unknown \"src/**/*.{ts,tsx,js,css,scss}\"",
@@ -22,7 +24,8 @@
   "lint-staged": {
     "src/**/*.{ts,tsx,js}": [
       "npm run lint",
-      "npm run format"
+      "npm run format",
+      "npm run test"
     ],
     "src/**/*.{css,scss}": [
       "npm run stylelint",
