@@ -44,5 +44,14 @@ export default defineConfig(({ mode }) => {
       port: 3000,
       open: true,
     },
+    test: {
+      globals: true,
+      watch: false,
+      coverage: {
+        provider: 'v8',
+        reporter: ['text'],
+        include: ['src/**/*.{ts,tsx,js,jsx}']
+      }
+    }
   };
 });
