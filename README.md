@@ -86,7 +86,7 @@ npm -v
 1. **Open the console and clone the repository**
 
 ```bash
-git clone https://github.com/<petruse4ka>/<ecommerce-application>.git
+git clone https://github.com/petruse4ka/eCommerce-Application.git
 ```
 
 This will create the new folder with all the files from the repository.
