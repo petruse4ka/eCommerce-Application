@@ -4,7 +4,9 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "check": "npm run lint && npm run stylelint && npm run format:check",
+    "check": "npm run lint && npm run stylelint && npm run format:check && npm run test",
+    "test": "vitest",
+    "test:coverage": "vitest run --coverage",
     "format": "prettier --write \"src/**/*.{ts,tsx,js,css,scss}\"",
     "format:check": "prettier --list-different \"src/**/*.{ts,tsx,js,css,scss}\"",
     "format:fix": "prettier --write --ignore-unknown \"src/**/*.{ts,tsx,js,css,scss}\"",
@@ -22,7 +24,8 @@
   "lint-staged": {
     "src/**/*.{ts,tsx,js}": [
       "npm run lint",
-      "npm run format"
+      "npm run format",
+      "npm run test"
     ],
     "src/**/*.{css,scss}": [
       "npm run stylelint",
@@ -36,6 +39,8 @@
   "devDependencies": {
     "@commitlint/cli": "^19.7.1",
     "@commitlint/config-conventional": "^19.7.1",
+    "@eslint/js": "^9.26.0",
+    "@tailwindcss/vite": "^4.1.5",
     "@types/node": "^22.13.9",
     "@typescript-eslint/eslint-plugin": "^8.26.0",
     "@typescript-eslint/parser": "^8.26.0",
@@ -55,6 +60,7 @@
     "stylelint-config-clean-order": "^7.0.0",
     "stylelint-config-standard": "^37.0.0",
     "stylelint-config-standard-scss": "^14.0.0",
+    "tailwindcss": "^4.1.5",
     "typescript": "^5.8.2",
     "typescript-eslint": "^8.26.0",
     "vite": "^6.2.0",
@@ -62,10 +68,5 @@
     "vite-plugin-static-copy": "^2.3.0",
     "vite-tsconfig-paths": "^5.1.4",
     "vitest": "^3.1.2"
-  },
-  "dependencies": {
-    "@eslint/js": "^9.24.0",
-    "@tailwindcss/vite": "^4.1.5",
-    "tailwindcss": "^4.1.5"
   }
 }
