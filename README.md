@@ -58,6 +58,9 @@ The main features of the application include:
 ![Stylelint](https://img.shields.io/badge/Stylelint-263238?logo=stylelint&logoColor=white)  
 **Stylelint** – Used for maintaining consistent and error-free SCSS/CSS code.
 
+![Netlify](https://img.shields.io/badge/Netlify-00C7B7?logo=netlify&logoColor=white)  
+**Netlify** – Used for continuous deployment and hosting.
+
 ---
 
 ## 🚀 Project setup
@@ -83,7 +86,7 @@ npm -v
 1. **Open the console and clone the repository**
 
 ```bash
-git clone https://github.com/<petruse4ka>/<ecommerce-application>.git
+git clone https://github.com/petruse4ka/eCommerce-Application.git
 ```
 
 This will create the new folder with all the files from the repository.
@@ -125,7 +128,10 @@ This will launch the Vite development server to test that the project has been s
 
 ⚠️ **Note:**  
 If your IDE shows TypeScript-related errors, make sure to check not only the installed TypeScript version but also the TypeScript configuration in your IDE.  
-For **Visual Studio Code**, go to the Command Palette and select: **“TypeScript: Select TypeScript Version”** → choose **“Use Workspace Version”**.
+For **Visual Studio Code** select the TypeScript version by either:
+
+- Clicking the TypeScript version number in the bottom right corner and choosing "Use Workspace Version"
+- Or using the Command Palette (Ctrl+Shift+P or Cmd+Shift+P) and selecting "TypeScript: Select TypeScript Version" → "Use Workspace Version"
 
 ---
 
@@ -154,12 +160,12 @@ Use the following scripts to assist with development, formatting, linting, build
 
 ### ⚙️ Development & Deployment
 
-| Script            | Description                                  |
-| :---------------- | :------------------------------------------- |
-| `npm run dev`     | Start a local development server with Vite.  |
-| `npm run build`   | Build the project for production.            |
-| `npm run preview` | Preview the production build locally.        |
-| `npm run deploy`  | Build the project and deploy to GitHub Pages |
+| Script            | Description                                 |
+| :---------------- | :------------------------------------------ |
+| `npm run dev`     | Start a local development server with Vite. |
+| `npm run build`   | Build the project for production.           |
+| `npm run preview` | Preview the production build locally.       |
+| `npm run deploy`  | Build the project and deploy to Netlify     |
 
 ### 🛡️ Git Hooks
 

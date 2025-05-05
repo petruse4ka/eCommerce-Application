@@ -17,7 +17,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "deploy": "npm run build && npx gh-pages -d dist -e ecommerce-application",
+    "deploy": "npm run build && netlify deploy --prod",
     "prepare": "husky .husky",
     "pre-commit": "lint-staged"
   },
@@ -35,7 +35,7 @@
   "keywords": [],
   "author": "Konstantin Petrov, Daniil Biver, Olga Paklonskaya",
   "license": "ISC",
-  "description": "eCommerece Application team project for the RS School JavaScript/Front-end 2024Q4 course",
+  "description": "eCommerce Application team project for the RS School JavaScript/Front-end 2024Q4 course",
   "devDependencies": {
     "@commitlint/cli": "^19.7.1",
     "@commitlint/config-conventional": "^19.7.1",
@@ -54,6 +54,7 @@
     "gh-pages": "^6.3.0",
     "husky": "^9.1.7",
     "lint-staged": "^15.4.3",
+    "netlify-cli": "^20.1.1",
     "prettier": "^3.5.1",
     "sass": "^1.85.1",
     "stylelint": "^16.15.0",
