@@ -72,3 +72,6 @@ package-lock.json
 
 # Local Netlify folder
 .netlify
+
+# Workflows
+.github/Workflows
