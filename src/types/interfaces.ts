@@ -15,3 +15,10 @@ export interface InputParameters extends ElementParameters {
   placeholder?: string;
   readonly?: boolean;
 }
+
+export interface ImageParameters extends ElementParameters {
+  source: string;
+  alt: string;
+  width?: string;
+  height?: string;
+}

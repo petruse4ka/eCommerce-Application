@@ -1,4 +1,4 @@
-import type { ElementParameters } from '../types/interfaces';
+import type { ElementParameters } from '@/types/interfaces';
 
 export class ElementBuilder {
   protected element: HTMLElement;
