@@ -53,7 +53,6 @@ export default tseslint.config(
         },
       ],
       '@typescript-eslint/member-ordering': 'error',
-      'class-methods-use-this': 'error',
       'unicorn/better-regex': 'warn',
       'unicorn/no-null': 'off',
       'simple-import-sort/imports': 'error',

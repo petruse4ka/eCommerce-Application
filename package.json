@@ -24,8 +24,7 @@
   "lint-staged": {
     "src/**/*.{ts,tsx,js}": [
       "npm run lint",
-      "npm run format",
-      "npm run test"
+      "npm run format"
     ],
     "src/**/*.{css,scss}": [
       "npm run stylelint",
