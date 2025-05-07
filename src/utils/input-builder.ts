@@ -34,15 +34,18 @@ export class InputBuilder extends ElementBuilder {
   ): void {
     if (this.element instanceof HTMLInputElement) {
       this.element.type = type;
-    }
-    if (value && this.element instanceof HTMLInputElement) {
-      this.element.value = value;
-    }
-    if (placeholder && this.element instanceof HTMLInputElement) {
-      this.element.placeholder = placeholder;
-    }
-    if (readonly && this.element instanceof HTMLInputElement) {
-      this.element.readOnly = true;
+
+      if (value) {
+        this.element.value = value;
+      }
+
+      if (placeholder) {
+        this.element.placeholder = placeholder;
+      }
+
+      if (readonly) {
+        this.element.readOnly = true;
+      }
     }
   }
 }

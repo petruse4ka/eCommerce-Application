@@ -1,4 +1,4 @@
-import type { INPUT_TYPE } from './enums';
+import type { BUTTON_TYPE, INPUT_TYPE } from './enums';
 
 export interface ElementParameters {
   tag: string;
@@ -26,4 +26,8 @@ export interface ImageParameters extends ElementParameters {
 export interface LinkParameters extends ElementParameters {
   href: string;
   target: '_blank' | '_self';
+}
+
+export interface ButtonParameters extends ElementParameters {
+  type: BUTTON_TYPE;
 }

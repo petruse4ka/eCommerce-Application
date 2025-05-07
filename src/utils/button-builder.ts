@@ -1,11 +1,6 @@
-import type { BUTTON_TYPE } from '@/types/enums';
-import type { ElementParameters } from '@/types/interfaces';
+import type { ButtonParameters } from '@/types/interfaces';
 
 import { ElementBuilder } from './element-builder';
-
-interface ButtonParameters extends ElementParameters {
-  type: BUTTON_TYPE;
-}
 
 export class ButtonBuilder extends ElementBuilder {
   constructor(parameters: ButtonParameters) {
