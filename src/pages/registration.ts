@@ -1,9 +1,6 @@
 import '@/../styles.css';
 
-import macaronImage from '@/assets/favicons/original.png';
-
 import { ElementBuilder } from '../utils/element-builder';
-import { ImageBuilder } from '../utils/image-builder';
 
 export class HomePage {
   private container: ElementBuilder;
@@ -31,16 +28,9 @@ export class HomePage {
     const title = new ElementBuilder({
       tag: 'h1',
       className: ['text-3xl', 'font-bold', 'p-4'],
-      textContent: 'eCommerce Application',
+      textContent: 'Registration',
     }).getElement();
 
-    const image = new ImageBuilder({
-      tag: 'img',
-      className: '',
-      source: macaronImage,
-      alt: 'Macaron',
-    }).getElement();
-
-    this.container.getElement().append(title, image);
+    this.container.getElement().append(title);
   }
 }
