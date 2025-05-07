@@ -9,3 +9,9 @@ export enum INPUT_TYPE {
   TEL = 'tel',
   EMAIL = 'email',
 }
+
+export enum BUTTON_TYPE {
+  BUTTON = 'button',
+  SUBMIT = 'submit',
+  RESET = 'reset',
+}
