@@ -44,7 +44,7 @@ export class ElementBuilder {
   }
 
   private applyCallback(
-    eventType: ElementParameters['eventType'],
+    eventType: ElementParameters['eventType'] = 'click',
     callback: ElementParameters['callback']
   ): void {
     if (eventType && callback) {
