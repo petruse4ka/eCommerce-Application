@@ -22,3 +22,8 @@ export interface ImageParameters extends ElementParameters {
   width?: string;
   height?: string;
 }
+
+export interface LinkParameters extends ElementParameters {
+  href: string;
+  target: '_blank' | '_self';
+}
