@@ -1,4 +1,4 @@
-export enum INPUT_TYPE {
+export enum InputType {
   TEXT = 'text',
   NUMBER = 'number',
   PASSWORD = 'password',
@@ -10,7 +10,7 @@ export enum INPUT_TYPE {
   EMAIL = 'email',
 }
 
-export enum BUTTON_TYPE {
+export enum ButtonType {
   BUTTON = 'button',
   SUBMIT = 'submit',
   RESET = 'reset',
