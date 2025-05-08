@@ -1,16 +1,14 @@
 import '@/../styles.css';
 
 import macaronImage from '@/assets/favicons/original.png';
+import { BaseComponent } from '@/components/base/component';
 import { Button } from '@/components/buttons/button';
+import { ElementBuilder } from '@/utils/element-builder';
+import { ImageBuilder } from '@/utils/image-builder';
 
-import { ElementBuilder } from '../utils/element-builder';
-import { ImageBuilder } from '../utils/image-builder';
-
-export class HomePage {
-  private container: ElementBuilder;
-
+export class HomePage extends BaseComponent {
   constructor() {
-    this.container = new ElementBuilder({
+    super({
       tag: 'div',
       className: [
         'min-h-screen',
@@ -22,10 +20,6 @@ export class HomePage {
       ],
     });
     this.render();
-  }
-
-  public getElement(): HTMLElement {
-    return this.container.getElement();
   }
 
   private render(): void {
@@ -73,6 +67,6 @@ export class HomePage {
       buttonDisabled.getElement()
     );
 
-    this.container.getElement().append(title, image, buttonContainer);
+    this.component.append(title, image, buttonContainer);
   }
 }
