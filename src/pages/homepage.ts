@@ -1,30 +1,25 @@
 import '@/../styles.css';
 
 import macaronImage from '@/assets/favicons/original.png';
+import { BaseComponent } from '@/components/base/component';
+import { Button } from '@/components/buttons/button';
+import { ElementBuilder } from '@/utils/element-builder';
+import { ImageBuilder } from '@/utils/image-builder';
 
-import { ElementBuilder } from '../utils/element-builder';
-import { ImageBuilder } from '../utils/image-builder';
-
-export class HomePage {
-  private container: ElementBuilder;
-
+export class HomePage extends BaseComponent {
   constructor() {
-    this.container = new ElementBuilder({
+    super({
       tag: 'div',
       className: [
         'min-h-screen',
-        'bg-[#1a1a2e]',
-        'text-[#e6e6e6]',
+        'bg-[var(--homepage-bg)]',
+        'text-[var(--homepage-text)]',
         'font-roboto',
         'text-base',
         'leading-normal',
       ],
     });
     this.render();
-  }
-
-  public getElement(): HTMLElement {
-    return this.container.getElement();
   }
 
   private render(): void {
@@ -41,6 +36,37 @@ export class HomePage {
       alt: 'Macaron',
     }).getElement();
 
-    this.container.getElement().append(title, image);
+    const buttonContainer = new ElementBuilder({
+      tag: 'div',
+      className: ['flex', 'justify-center', 'gap-3'],
+    }).getElement();
+
+    const primaryButton = new Button({
+      style: 'PRIMARY_PINK',
+      textContent: 'Primary Button',
+      callback: (): void => console.log('Primary button clicked'),
+    });
+
+    const secondaryButton = new Button({
+      style: 'SECONDARY_BLUE',
+      textContent: 'Secondary Button',
+      callback: (): void => console.log('Secondary button clicked'),
+    });
+
+    const buttonDisabled = new Button({
+      style: 'PRIMARY_PINK',
+      textContent: 'Button Disabled',
+      callback: (): void => console.log('Disabled button clicked'),
+    });
+
+    buttonDisabled.disableButton();
+
+    buttonContainer.append(
+      primaryButton.getElement(),
+      secondaryButton.getElement(),
+      buttonDisabled.getElement()
+    );
+
+    this.component.append(title, image, buttonContainer);
   }
 }
