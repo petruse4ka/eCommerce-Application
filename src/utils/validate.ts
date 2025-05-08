@@ -58,3 +58,18 @@ function getUserAge(birthDate: Date): number {
   }
   return age;
 }
+
+export function validatePostalCode(postalCode: string): string | null {
+  if (/^\d{6}$/.test(postalCode)) return null;
+  return 'Почтовый индекс должен содержать ровно 6 цифр!';
+}
+
+export function validateInput(value: string, noSpecialChars: boolean = false): string | null {
+  if (!value || value.trim().length === 0) {
+    return 'Поле не должно быть пустым!';
+  }
+  if (noSpecialChars && /[^A-Za-zА-я]/.test(value)) {
+    return 'Допустимы только буквы!';
+  }
+  return null;
+}

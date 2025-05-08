@@ -1,4 +1,10 @@
-import { validateDateOfBirth, validateEMail, validatePassword } from '@/utils/validate';
+import {
+  validateDateOfBirth,
+  validateEMail,
+  validateInput,
+  validatePassword,
+  validatePostalCode,
+} from '@/utils/validate';
 
 it('email validation of rigth Latin input', () => {
   expect(validateEMail('example@tut.by')).toEqual(null);
@@ -119,4 +125,33 @@ it('validateDateOfBirth with age 13 later in this year', () => {
   expect(validateDateOfBirth(pastDate.toISOString())).toBe(
     'Допустимый возраст пользователя - старше 13 лет.'
   );
+});
+
+it('validatePostalCode', () => {
+  expect(validatePostalCode('181412')).toEqual(null);
+});
+it('isValidPostalCode: 7 digits', () => {
+  expect(validatePostalCode('1814121')).toBe('Почтовый индекс должен содержать ровно 6 цифр!');
+});
+it('isValidPostalCode: 5 digits', () => {
+  expect(validatePostalCode('18141')).toBe('Почтовый индекс должен содержать ровно 6 цифр!');
+});
+it('isValidPostalCode: invalid input', () => {
+  expect(validatePostalCode('index!')).toBe('Почтовый индекс должен содержать ровно 6 цифр!');
+});
+
+it('validateInput: empty input', () => {
+  expect(validateInput('')).toBe('Поле не должно быть пустым!');
+});
+it('validateInput: digit lock', () => {
+  expect(validateInput('123456', true)).toBe('Допустимы только буквы!');
+});
+it('validateInput: special chars lock', () => {
+  expect(validateInput('###', true)).toBe('Допустимы только буквы!');
+});
+it('validateInput: right input', () => {
+  expect(validateInput('a', true)).toEqual(null);
+});
+it('validateInput: any chars', () => {
+  expect(validateInput('###')).toEqual(null);
 });
