@@ -1,6 +1,6 @@
 import '../abstracts/colors.css';
 
-const StandardButtonStyle = [
+const STANDARD_BUTTON_STYLE = [
   'font-montserrat',
   'font-semibold',
   'text-[14px]',
@@ -18,9 +18,9 @@ const StandardButtonStyle = [
   'disabled:border-[var(--button-disabled-bg)]',
 ];
 
-export const CustomButtonStyle = {
+export const CUSTOM_BUTTON_STYLE = {
   PRIMARY_PINK: [
-    ...StandardButtonStyle,
+    ...STANDARD_BUTTON_STYLE,
     'bg-[var(--button-primary-bg)]',
     'text-[var(--button-primary-text)]',
     'border-[var(--button-primary-border)]',
@@ -28,7 +28,7 @@ export const CustomButtonStyle = {
     'hover:border-[var(--button-primary-border-hover)]',
   ],
   SECONDARY_BLUE: [
-    ...StandardButtonStyle,
+    ...STANDARD_BUTTON_STYLE,
     'bg-[var(--button-secondary-bg)]',
     'text-[var(--button-secondary-text)]',
     'border-[var(--button-secondary-border)]',
