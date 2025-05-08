@@ -37,7 +37,7 @@ export function validateDateOfBirth(dateOfBirth: string): string | null {
   const userAge = getUserAge(birthDate);
   let result = '';
   if (userAge < 0 || userAge > 130) {
-    result = 'Проверьте, как введен год рождения. ';
+    result = 'Проверьте, как введен год рождения.';
   } else if (userAge < 13) {
     result = 'Допустимый возраст пользователя - старше 13 лет.';
   } else {

@@ -1,4 +1,4 @@
-import { validateEMail, validatePassword } from '@/utils/validate';
+import { validateDateOfBirth, validateEMail, validatePassword } from '@/utils/validate';
 
 it('email validation of rigth Latin input', () => {
   expect(validateEMail('example@tut.by')).toEqual(null);
@@ -86,4 +86,37 @@ it('password validation for all wrong parameters', () => {
 });
 it('password validation for right password', () => {
   expect(validatePassword('aA8asdf$#-')).toEqual(null);
+});
+
+it('validateDateOfBirth with right input', () => {
+  expect(validateDateOfBirth('2000-12-01')).toEqual(null);
+});
+it('validateDateOfBirth with wrong format', () => {
+  expect(validateDateOfBirth('привет')).toBe('Формат даты: ГГГГ-ММ-ДД');
+});
+it('validateDateOfBirth with empty input', () => {
+  expect(validateDateOfBirth('привет')).toBe('Формат даты: ГГГГ-ММ-ДД');
+});
+
+it('validateDateOfBirth with 2050 year', () => {
+  expect(validateDateOfBirth('2050-12-01')).toBe('Проверьте, как введен год рождения.');
+});
+it('validateDateOfBirth with 1814 year', () => {
+  expect(validateDateOfBirth('1814-12-01')).toBe('Проверьте, как введен год рождения.');
+});
+it('validateDateOfBirth with age less than 13', () => {
+  const pastDate = new Date();
+  pastDate.setFullYear(pastDate.getFullYear() - 12);
+  expect(validateDateOfBirth(pastDate.toISOString())).toBe(
+    'Допустимый возраст пользователя - старше 13 лет.'
+  );
+});
+it('validateDateOfBirth with age 13 later in this year', () => {
+  const pastDate = new Date();
+  pastDate.setFullYear(pastDate.getFullYear() - 13);
+  pastDate.setMonth(11);
+  pastDate.setDate(31);
+  expect(validateDateOfBirth(pastDate.toISOString())).toBe(
+    'Допустимый возраст пользователя - старше 13 лет.'
+  );
 });
