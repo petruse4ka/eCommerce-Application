@@ -1,8 +1,13 @@
 :root {
+  /* Button colors */
   --button-primary-bg: #e7426a;
   --button-primary-bg-hover: #f45d82;
   --button-primary-text: #fff;
   --button-secondary-bg: #4e9dd3;
   --button-disabled-bg: #ededf0;
   --button-secondary-text-hover: #fff;
+
+  /* Homepage colors */
+  --homepage-bg: #e6e6e6;
+  --homepage-text: #1a1a2e;
 }
