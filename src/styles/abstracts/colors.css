@@ -2,10 +2,17 @@
   /* Button colors */
   --button-primary-bg: #e7426a;
   --button-primary-bg-hover: #f45d82;
+  --button-primary-border: #e7426a;
+  --button-primary-border-hover: #f45d82;
   --button-primary-text: #fff;
-  --button-secondary-bg: #4e9dd3;
-  --button-disabled-bg: #ededf0;
+  --button-secondary-bg: #fff;
+  --button-secondary-bg-hover: #4e9dd3;
+  --button-secondary-border: #4e9dd3;
+  --button-secondary-text: #4e9dd3;
   --button-secondary-text-hover: #fff;
+  --button-disabled-bg: #ededf0;
+  --button-disabled-border: #ededf0;
+  --button-disabled-text: #fff;
 
   /* Homepage colors */
   --homepage-bg: #e6e6e6;
