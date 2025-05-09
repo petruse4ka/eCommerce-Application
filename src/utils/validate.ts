@@ -1,49 +1,56 @@
+import { ErrorMessages } from '@/types/enum';
+
 export function validateEMail(string_: string): string | null {
-  if (string_.trim() === '') return 'Поле обязательно к заполнению.';
-  if (/[^\dA-Za-zЁА-яё]/.test(string_[0]))
-    return 'Неверный формат email! Первым символом должна быть буква или цифра.';
+  if (string_.trim() === '') return ErrorMessages.EMPTY_INPUT;
+  if (!/@/.test(string_)) return ErrorMessages.INVALID_EMAIL;
+
+  const rightDomain = /@[\d.A-Za-zЁА-яё-]+\.[A-Za-zЁА-яё]{2,}$/;
+  if (!rightDomain.test(string_)) return ErrorMessages.INVALID_DOMAIN;
+
+  if (/[^\dA-Za-zЁА-яё]/.test(string_[0])) return ErrorMessages.INVALID_FIRST_CHAR;
+
   const emailRegex =
     /^[\dA-Za-zЁА-яё][\w!#$%&*+./=?^`{|}~ЁА-яё’-]*@[\d.A-Za-zЁА-яё-]+\.[A-Za-zЁА-яё]{2,}$/;
   if (emailRegex.test(string_)) return null;
-  return 'Неверный формат email! Допускаются латиница и кириллица, цифры, специальные символы. Знак «@» обязателен!';
+
+  return ErrorMessages.INVALID_EMAIL;
 }
 
 export function validatePassword(string_: string): string | null {
   const nonLatinRegex = /[^\d!#$%&*+.:=?@A-Za-z{}-]/;
-  if (nonLatinRegex.test(string_))
-    return 'Пароль может содержать только цифры, латинские и специальные символы.';
+  if (nonLatinRegex.test(string_)) return ErrorMessages.INVALID_PASSWORD;
 
-  let result = '';
   const resultArray = [];
-  if (!/[A-Z]/.test(string_)) resultArray.push('одну заглавную букву');
-  if (!/[a-z]/.test(string_)) resultArray.push('одну строчную букву');
-  if (!/\d/.test(string_)) resultArray.push('одну цифру');
-
-  if (resultArray.length > 0)
-    result = 'Пароль должен содержать как минимум: ' + resultArray.join(', ');
   const minLengthOfPassword = 8;
   if (string_.trim().length < minLengthOfPassword) {
-    const prefix = (result.length > 0 && '. Его длина') || 'Длина пароля ';
-    result += `${prefix} должна быть минимум ${minLengthOfPassword} символов.`;
+    resultArray.push(ErrorMessages.PASSWORD_LENGTH.replace('${}', String(minLengthOfPassword)));
   }
-  return result || null;
+  if (!/[A-Z]/.test(string_)) resultArray.push(ErrorMessages.ONE_UPPER_LETTER);
+  if (!/[a-z]/.test(string_)) resultArray.push(ErrorMessages.ONE_LOWER_LETTER);
+  if (!/\d/.test(string_)) resultArray.push(ErrorMessages.ONE_DIGIT);
+
+  let result: string | null = null;
+  if (resultArray.length > 0) {
+    const colon = resultArray.length > 1 ? ':' : '';
+    result = `${ErrorMessages.PASSWORD_MUST_CONTAIN}${colon} ${resultArray.join(', ')}.`;
+  }
+  return result;
 }
 
 export function validateDateOfBirth(dateOfBirth: string): string | null {
   const birthDate = new Date(dateOfBirth);
   if (Number.isNaN(birthDate.getTime())) {
-    return 'Формат даты: ГГГГ-ММ-ДД';
+    return ErrorMessages.DATE_FORMAT;
   }
+
   const userAge = getUserAge(birthDate);
-  let result = '';
   if (userAge < 0 || userAge > 130) {
-    result = 'Проверьте, как введен год рождения.';
+    return ErrorMessages.CHECK_YEAR;
   } else if (userAge < 13) {
-    result = 'Допустимый возраст пользователя - старше 13 лет.';
+    return ErrorMessages.INVALID_AGE;
   } else {
     return null;
   }
-  return result;
 }
 
 function getUserAge(birthDate: Date): number {
@@ -61,15 +68,15 @@ function getUserAge(birthDate: Date): number {
 
 export function validatePostalCode(postalCode: string): string | null {
   if (/^\d{6}$/.test(postalCode)) return null;
-  return 'Почтовый индекс должен содержать ровно 6 цифр!';
+  return ErrorMessages.POSTAL_CODE_FORMAT;
 }
 
 export function validateInput(value: string, noSpecialChars: boolean = false): string | null {
   if (!value || value.trim().length === 0) {
-    return 'Поле не должно быть пустым!';
+    return ErrorMessages.EMPTY_INPUT;
   }
   if (noSpecialChars && /[^A-Za-zА-я]/.test(value)) {
-    return 'Допустимы только буквы!';
+    return ErrorMessages.ONLY_LETTERS;
   }
   return null;
 }
