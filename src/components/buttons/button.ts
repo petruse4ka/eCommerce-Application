@@ -17,7 +17,6 @@ export class Button {
       textContent: parameters.textContent,
       callback: parameters.callback,
     });
-    this.render();
   }
 
   public getElement(): HTMLElement {
@@ -30,9 +29,5 @@ export class Button {
 
   public enableButton(): void {
     this.button.enableButton();
-  }
-
-  protected render(): void {
-    this.button.getElement();
   }
 }
