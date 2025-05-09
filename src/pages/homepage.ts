@@ -30,7 +30,6 @@ export class HomePage extends BaseComponent {
     }).getElement();
 
     const image = new ImageBuilder({
-      tag: 'img',
       className: '',
       source: macaronImage,
       alt: 'Macaron',

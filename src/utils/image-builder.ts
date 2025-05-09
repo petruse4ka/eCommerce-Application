@@ -3,8 +3,8 @@ import type { ImageParameters } from '@/types/interfaces';
 import { ElementBuilder } from './element-builder';
 
 export class ImageBuilder extends ElementBuilder {
-  constructor(parameters: ImageParameters) {
-    super({ ...parameters });
+  constructor(parameters: Omit<ImageParameters, 'tag'>) {
+    super({ ...parameters, tag: 'img' });
     this.applySource(parameters.source);
     this.applyAlt(parameters.alt);
   }

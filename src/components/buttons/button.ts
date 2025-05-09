@@ -11,7 +11,6 @@ export class Button {
     callback: () => void;
   }) {
     this.button = new ButtonBuilder({
-      tag: 'button',
       type: BUTTON_TYPE.BUTTON,
       className: ['button', ...CUSTOM_BUTTON_STYLE[parameters.style]],
       textContent: parameters.textContent,
