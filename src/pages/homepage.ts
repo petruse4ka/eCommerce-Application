@@ -3,6 +3,8 @@ import '@/../styles.css';
 import macaronImage from '@/assets/favicons/original.png';
 import { BaseComponent } from '@/components/base/component';
 import { Button } from '@/components/buttons/button';
+import { Input } from '@/components/inputs/input';
+import { INPUT_TYPE } from '@/types/enums';
 import { ElementBuilder } from '@/utils/element-builder';
 import { ImageBuilder } from '@/utils/image-builder';
 
@@ -20,6 +22,7 @@ export class HomePage extends BaseComponent {
       ],
     });
     this.render();
+    this.renderInput();
   }
 
   private render(): void {
@@ -68,5 +71,25 @@ export class HomePage extends BaseComponent {
     );
 
     this.component.append(title, image, buttonContainer);
+  }
+
+  private renderInput(): void {
+    const primaryInput = new Input({
+      placeholder: 'Ваше имя',
+      callback: (): void => console.log('Primary button clicked'),
+      labelText: 'Ваше имя',
+      id: 'name',
+      isRequired: false,
+      type: INPUT_TYPE.TEXT,
+    });
+
+    const inputContainer = new ElementBuilder({
+      tag: 'div',
+      className: ['flex', 'justify-center', 'gap-3'],
+    }).getElement();
+
+    inputContainer.append(primaryInput.getElement());
+
+    this.component.append(inputContainer);
   }
 }

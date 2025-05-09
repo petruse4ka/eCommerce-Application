@@ -11,9 +11,11 @@ export interface ElementParameters {
 
 export interface InputParameters extends ElementParameters {
   type: INPUT_TYPE;
+  id: string;
   value?: string;
   placeholder?: string;
   readonly?: boolean;
+  required?: boolean;
 }
 
 export interface ImageParameters extends ElementParameters {
@@ -30,4 +32,14 @@ export interface LinkParameters extends ElementParameters {
 
 export interface ButtonParameters extends ElementParameters {
   type: BUTTON_TYPE;
+}
+
+export interface InputComponent {
+  placeholder: string;
+  id: string;
+  type: string;
+  callback: () => void;
+  labelText: string;
+  isRequired?: boolean;
+  value?: string;
 }

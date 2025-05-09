@@ -17,4 +17,10 @@
   /* Homepage colors */
   --homepage-bg: #e6e6e6;
   --homepage-text: #1a1a2e;
+
+  /* Default colors */
+  --color-white: #fff;
+  --color-gray: #ededf0;
+  --color-black: #292929;
+  --color-accent: #e7426a;
 }
