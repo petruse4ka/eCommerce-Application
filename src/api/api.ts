@@ -1,4 +1,4 @@
-import { ApiEndpoint, ApiMethods, ContentType } from '@/types/enum';
+import { ApiEndpoint, ApiMethods, ContentType } from '@/types/enums';
 import type { AuthResponse } from '@/types/interfaces';
 
 const clientCredentials = btoa(
