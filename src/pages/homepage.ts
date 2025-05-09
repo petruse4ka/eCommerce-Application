@@ -25,7 +25,7 @@ export class HomePage extends BaseComponent {
   private render(): void {
     const title = new ElementBuilder({
       tag: 'h1',
-      className: ['text-3xl', 'font-bold', 'p-4'],
+      className: ['text-3xl', 'font-montserrat', 'font-bold', 'p-4'],
       textContent: 'eCommerce Application',
     }).getElement();
 
