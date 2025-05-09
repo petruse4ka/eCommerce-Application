@@ -1,33 +1,33 @@
 import { ErrorMessages } from '@/types/enum';
 
-export function validateEMail(string_: string): string | null {
-  if (string_.trim() === '') return ErrorMessages.EMPTY_INPUT;
-  if (!/@/.test(string_)) return ErrorMessages.INVALID_EMAIL;
+export function validateEMail(str: string): string | null {
+  if (str.trim() === '') return ErrorMessages.EMPTY_INPUT;
+  if (!/@/.test(str)) return ErrorMessages.INVALID_EMAIL;
 
   const rightDomain = /@[\d.A-Za-zЁА-яё-]+\.[A-Za-zЁА-яё]{2,}$/;
-  if (!rightDomain.test(string_)) return ErrorMessages.INVALID_DOMAIN;
+  if (!rightDomain.test(str)) return ErrorMessages.INVALID_DOMAIN;
 
-  if (/[^\dA-Za-zЁА-яё]/.test(string_[0])) return ErrorMessages.INVALID_FIRST_CHAR;
+  if (/[^\dA-Za-zЁА-яё]/.test(str[0])) return ErrorMessages.INVALID_FIRST_CHAR;
 
   const emailRegex =
     /^[\dA-Za-zЁА-яё][\w!#$%&*+./=?^`{|}~ЁА-яё’-]*@[\d.A-Za-zЁА-яё-]+\.[A-Za-zЁА-яё]{2,}$/;
-  if (emailRegex.test(string_)) return null;
+  if (emailRegex.test(str)) return null;
 
   return ErrorMessages.INVALID_EMAIL;
 }
 
-export function validatePassword(string_: string): string | null {
+export function validatePassword(str: string): string | null {
   const nonLatinRegex = /[^\d!#$%&*+.:=?@A-Za-z{}-]/;
-  if (nonLatinRegex.test(string_)) return ErrorMessages.INVALID_PASSWORD;
+  if (nonLatinRegex.test(str)) return ErrorMessages.INVALID_PASSWORD;
 
   const resultArray = [];
   const minLengthOfPassword = 8;
-  if (string_.trim().length < minLengthOfPassword) {
+  if (str.trim().length < minLengthOfPassword) {
     resultArray.push(ErrorMessages.PASSWORD_LENGTH.replace('${}', String(minLengthOfPassword)));
   }
-  if (!/[A-Z]/.test(string_)) resultArray.push(ErrorMessages.ONE_UPPER_LETTER);
-  if (!/[a-z]/.test(string_)) resultArray.push(ErrorMessages.ONE_LOWER_LETTER);
-  if (!/\d/.test(string_)) resultArray.push(ErrorMessages.ONE_DIGIT);
+  if (!/[A-Z]/.test(str)) resultArray.push(ErrorMessages.ONE_UPPER_LETTER);
+  if (!/[a-z]/.test(str)) resultArray.push(ErrorMessages.ONE_LOWER_LETTER);
+  if (!/\d/.test(str)) resultArray.push(ErrorMessages.ONE_DIGIT);
 
   let result: string | null = null;
   if (resultArray.length > 0) {
