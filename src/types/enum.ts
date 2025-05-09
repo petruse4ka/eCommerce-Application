@@ -1,4 +1,4 @@
-export enum API_METHODS {
+export enum ApiMethods {
   GET = 'GET',
   POST = 'POST',
   DELETE = 'DELETE',
@@ -6,11 +6,11 @@ export enum API_METHODS {
   PATCH = 'PATCH',
 }
 
-export enum API_ENDPOINT {
-  authentication = '/oauth/token',
+export enum ApiEndpoint {
+  AUTHENTICATION = '/oauth/token',
 }
 
-export enum CONTENT_TYPE {
-  urlencoded = 'application/x-www-form-urlencoded',
-  json = 'application/json',
+export enum ContentType {
+  URLENCODED = 'application/x-www-form-urlencoded',
+  JSON = 'application/json',
 }

@@ -1,4 +1,4 @@
-import { API_ENDPOINT, API_METHODS, CONTENT_TYPE } from '@/types/enum';
+import { ApiEndpoint, ApiMethods, ContentType } from '@/types/enum';
 import type { AuthResponse } from '@/types/interfaces';
 
 const clientCredentials = btoa(
@@ -6,14 +6,12 @@ const clientCredentials = btoa(
 );
 
 export default class API {
-  constructor() {}
-
   public static async authentication(): Promise<string> {
-    return await fetch(import.meta.env['VITE_CTP_AUTH_URL'] + API_ENDPOINT.authentication, {
-      method: API_METHODS.POST,
+    return await fetch(import.meta.env['VITE_CTP_AUTH_URL'] + ApiEndpoint.AUTHENTICATION, {
+      method: ApiMethods.POST,
       headers: {
         Authorization: `Basic ${clientCredentials}`,
-        'Content-Type': CONTENT_TYPE.urlencoded,
+        'Content-Type': ContentType.URLENCODED,
       },
       body: new URLSearchParams({
         grant_type: 'client_credentials',
