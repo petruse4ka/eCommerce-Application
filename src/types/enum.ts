@@ -14,4 +14,7 @@ export enum ErrorMessages {
   PASSWORD_MUST_CONTAIN = 'Пароль должен содержать как минимум',
   POSTAL_CODE_FORMAT = 'Почтовый индекс должен состоять из 6 цифр.',
   PASSWORD_LENGTH = '${} символов',
+  MIN_AGE = 13,
+  MAX_AGE = 130,
+  MIN_PASSWORD_LENGTH = 8, 
 }

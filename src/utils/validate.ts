@@ -21,9 +21,9 @@ export function validatePassword(str: string): string | null {
   if (nonLatinRegex.test(str)) return ErrorMessages.INVALID_PASSWORD;
 
   const resultArray = [];
-  const minLengthOfPassword = 8;
-  if (str.trim().length < minLengthOfPassword) {
-    resultArray.push(ErrorMessages.PASSWORD_LENGTH.replace('${}', String(minLengthOfPassword)));
+
+  if (str.trim().length < ErrorMessages.MIN_PASSWORD_LENGTH) {
+    resultArray.push(ErrorMessages.PASSWORD_LENGTH.replace('${}', String(ErrorMessages.MIN_PASSWORD_LENGTH)));
   }
   if (!/[A-Z]/.test(str)) resultArray.push(ErrorMessages.ONE_UPPER_LETTER);
   if (!/[a-z]/.test(str)) resultArray.push(ErrorMessages.ONE_LOWER_LETTER);
@@ -44,9 +44,9 @@ export function validateDateOfBirth(dateOfBirth: string): string | null {
   }
 
   const userAge = getUserAge(birthDate);
-  if (userAge < 0 || userAge > 130) {
+  if (userAge < 0 || userAge > ErrorMessages.MAX_AGE) {
     return ErrorMessages.CHECK_YEAR;
-  } else if (userAge < 13) {
+  } else if (userAge < ErrorMessages.MIN_AGE) {
     return ErrorMessages.INVALID_AGE;
   } else {
     return null;
