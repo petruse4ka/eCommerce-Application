@@ -12,8 +12,8 @@ export class HomePage extends BaseComponent {
       tag: 'div',
       className: [
         'min-h-screen',
-        'bg-[var(--background)]',
-        'text-[var(--text-dark)]',
+        'bg-[var(--color-primary)]',
+        'text-[var(--color-black)]',
         'font-roboto',
         'text-base',
         'leading-normal',

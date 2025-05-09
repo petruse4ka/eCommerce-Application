@@ -1,11 +1,12 @@
 :root {
   /* Button colors */
-  --primary: #e7426a;
-  --primary-hover: #f45d82;
-  --secondary: #4e9dd3;
-  --secondary-hover: #6aafdd;
-  --white: #fff;
-  --disabled: #ededf0;
-  --background: #e6e6e6;
-  --text-dark: #1a1a2e;
+  --color-white: #fff;
+  --color-gray: #ededf0;
+  --color-black: #1a1a2e;
+  --color-accent: #e7426a;
+  --color-accent-hover: #f45d82;
+  --color-primary: #f7ebe5;
+  --color-secondary: #4e9dd3;
+  --color-secondary-hover: #6aafdd;
+  --color-background: #e6e6e6;
 }
