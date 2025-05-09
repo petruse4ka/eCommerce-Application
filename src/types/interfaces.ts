@@ -31,3 +31,11 @@ export interface LinkParameters extends ElementParameters {
 export interface ButtonParameters extends ElementParameters {
   type: BUTTON_TYPE;
 }
+
+export interface AuthResponse {
+  access_token: string;
+  expires_in: number;
+  scope: string;
+  refresh_token: string;
+  token_type: string;
+}
