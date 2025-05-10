@@ -18,7 +18,7 @@ export class Router {
   }
 
   private static checkRouteValidity(hash: string): hash is Route {
-    const validRoutes = new Set<string>([Route.Home, Route.Login, Route.Registration, Route.Error]);
+    const validRoutes = new Set<string>([Route.HOME, Route.LOGIN, Route.REGISTRATION, Route.ERROR]);
     return validRoutes.has(hash);
   }
 
@@ -39,7 +39,7 @@ export class Router {
 
   private handleRoute(): void {
     const currentHash = globalThis.location.hash || this.homeRoute;
-    const route = Router.checkRouteValidity(currentHash) ? currentHash : Route.Error;
+    const route = Router.checkRouteValidity(currentHash) ? currentHash : Route.ERROR;
     const handler = this.routes.get(route);
 
     if (handler) {

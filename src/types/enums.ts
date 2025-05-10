@@ -52,8 +52,8 @@ export enum ErrorMessages {
 }
 
 export enum Route {
-  Home = '#/',
-  Login = '#/login',
-  Registration = '#/register',
-  Error = '#/error',
+  HOME = '#/',
+  LOGIN = '#/login',
+  REGISTRATION = '#/register',
+  ERROR = '#/error',
 }
