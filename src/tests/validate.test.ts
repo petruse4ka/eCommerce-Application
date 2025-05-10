@@ -1,4 +1,5 @@
-import { ErrorMessages } from '@/types/enum';
+import { MIN_AGE } from '@/constants/constants';
+import { ErrorMessages } from '@/types/enums';
 import {
   validateDateOfBirth,
   validateEMail,
@@ -107,14 +108,14 @@ it('validateDateOfBirth with 2050 year', () => {
 it('validateDateOfBirth with 1814 year', () => {
   expect(validateDateOfBirth('1814-12-01')).toBe(ErrorMessages.CHECK_YEAR);
 });
-it('validateDateOfBirth with age less than 13', () => {
+it(`validateDateOfBirth with age less than ${MIN_AGE}`, () => {
   const pastDate = new Date();
-  pastDate.setFullYear(pastDate.getFullYear() - 12);
+  pastDate.setFullYear(pastDate.getFullYear() - MIN_AGE - 1);
   expect(validateDateOfBirth(pastDate.toISOString())).toBe(ErrorMessages.INVALID_AGE);
 });
-it('validateDateOfBirth with age 13 later in this year', () => {
+it(`validateDateOfBirth with age ${MIN_AGE} later in this year`, () => {
   const pastDate = new Date();
-  pastDate.setFullYear(pastDate.getFullYear() - 13);
+  pastDate.setFullYear(pastDate.getFullYear() - MIN_AGE);
   pastDate.setMonth(11);
   pastDate.setDate(31);
   expect(validateDateOfBirth(pastDate.toISOString())).toBe(ErrorMessages.INVALID_AGE);

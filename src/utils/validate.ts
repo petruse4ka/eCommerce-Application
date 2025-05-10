@@ -1,33 +1,34 @@
-import { ErrorMessages } from '@/types/enum';
+import { MAX_AGE, MIN_AGE, MIN_PASSWORD_LENGTH } from '@/constants/constants';
+import { ErrorMessages } from '@/types/enums';
 
-export function validateEMail(str: string): string | null {
-  if (str.trim() === '') return ErrorMessages.EMPTY_INPUT;
-  if (!/@/.test(str)) return ErrorMessages.INVALID_EMAIL;
+export function validateEMail(string_: string): string | null {
+  if (string_.trim() === '') return ErrorMessages.EMPTY_INPUT;
+  if (!/@/.test(string_)) return ErrorMessages.INVALID_EMAIL;
 
   const rightDomain = /@[\d.A-Za-zЁА-яё-]+\.[A-Za-zЁА-яё]{2,}$/;
-  if (!rightDomain.test(str)) return ErrorMessages.INVALID_DOMAIN;
+  if (!rightDomain.test(string_)) return ErrorMessages.INVALID_DOMAIN;
 
-  if (/[^\dA-Za-zЁА-яё]/.test(str[0])) return ErrorMessages.INVALID_FIRST_CHAR;
+  if (/[^\dA-Za-zЁА-яё]/.test(string_[0])) return ErrorMessages.INVALID_FIRST_CHAR;
 
   const emailRegex =
     /^[\dA-Za-zЁА-яё][\w!#$%&*+./=?^`{|}~ЁА-яё’-]*@[\d.A-Za-zЁА-яё-]+\.[A-Za-zЁА-яё]{2,}$/;
-  if (emailRegex.test(str)) return null;
+  if (emailRegex.test(string_)) return null;
 
   return ErrorMessages.INVALID_EMAIL;
 }
 
-export function validatePassword(str: string): string | null {
+export function validatePassword(string_: string): string | null {
   const nonLatinRegex = /[^\d!#$%&*+.:=?@A-Za-z{}-]/;
-  if (nonLatinRegex.test(str)) return ErrorMessages.INVALID_PASSWORD;
+  if (nonLatinRegex.test(string_)) return ErrorMessages.INVALID_PASSWORD;
 
   const resultArray = [];
 
-  if (str.trim().length < ErrorMessages.MIN_PASSWORD_LENGTH) {
-    resultArray.push(ErrorMessages.PASSWORD_LENGTH.replace('${}', String(ErrorMessages.MIN_PASSWORD_LENGTH)));
+  if (string_.trim().length < MIN_PASSWORD_LENGTH) {
+    resultArray.push(ErrorMessages.PASSWORD_LENGTH.replace('${}', String(MIN_PASSWORD_LENGTH)));
   }
-  if (!/[A-Z]/.test(str)) resultArray.push(ErrorMessages.ONE_UPPER_LETTER);
-  if (!/[a-z]/.test(str)) resultArray.push(ErrorMessages.ONE_LOWER_LETTER);
-  if (!/\d/.test(str)) resultArray.push(ErrorMessages.ONE_DIGIT);
+  if (!/[A-Z]/.test(string_)) resultArray.push(ErrorMessages.ONE_UPPER_LETTER);
+  if (!/[a-z]/.test(string_)) resultArray.push(ErrorMessages.ONE_LOWER_LETTER);
+  if (!/\d/.test(string_)) resultArray.push(ErrorMessages.ONE_DIGIT);
 
   let result: string | null = null;
   if (resultArray.length > 0) {
@@ -44,9 +45,9 @@ export function validateDateOfBirth(dateOfBirth: string): string | null {
   }
 
   const userAge = getUserAge(birthDate);
-  if (userAge < 0 || userAge > ErrorMessages.MAX_AGE) {
+  if (userAge < 0 || userAge > MAX_AGE) {
     return ErrorMessages.CHECK_YEAR;
-  } else if (userAge < ErrorMessages.MIN_AGE) {
+  } else if (userAge < MIN_AGE) {
     return ErrorMessages.INVALID_AGE;
   } else {
     return null;
