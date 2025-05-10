@@ -11,9 +11,11 @@ export interface ElementParameters {
 
 export interface InputParameters extends ElementParameters {
   type: InputType;
+  id: string;
   value?: string;
   placeholder?: string;
   readonly?: boolean;
+  required?: boolean;
 }
 
 export interface ImageParameters extends ElementParameters {
@@ -38,4 +40,14 @@ export interface AuthResponse {
   scope: string;
   refresh_token: string;
   token_type: string;
+}
+
+export interface InputComponent {
+  placeholder: string;
+  id: string;
+  type: string;
+  callback: () => void;
+  labelText: string;
+  isRequired?: boolean;
+  value?: string;
 }

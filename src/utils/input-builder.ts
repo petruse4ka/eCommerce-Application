@@ -3,13 +3,17 @@ import type { InputParameters } from '@/types/interfaces';
 import { ElementBuilder } from './element-builder';
 
 export class InputBuilder extends ElementBuilder {
-  constructor(parameters: InputParameters) {
-    super({ ...parameters });
+  constructor(parameters: Omit<InputParameters, 'tag'>) {
+    super({ ...parameters, tag: 'input' });
+
+    this.element.id = parameters.id;
+
     this.setInputProperties(
       parameters.type,
       parameters.value,
       parameters.placeholder,
-      parameters.readonly
+      parameters.readonly,
+      parameters.required
     );
   }
 
@@ -30,7 +34,8 @@ export class InputBuilder extends ElementBuilder {
     type: InputParameters['type'],
     value: InputParameters['value'],
     placeholder: InputParameters['placeholder'],
-    readonly: InputParameters['readonly']
+    readonly: InputParameters['readonly'],
+    required: InputParameters['required']
   ): void {
     if (this.element instanceof HTMLInputElement) {
       this.element.type = type;
@@ -45,6 +50,10 @@ export class InputBuilder extends ElementBuilder {
 
       if (readonly) {
         this.element.readOnly = true;
+      }
+
+      if (required) {
+        this.element.required = true;
       }
     }
   }
