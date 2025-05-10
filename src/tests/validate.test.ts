@@ -110,7 +110,7 @@ it('validateDateOfBirth with 1814 year', () => {
 });
 it(`validateDateOfBirth with age less than ${MIN_AGE}`, () => {
   const pastDate = new Date();
-  pastDate.setFullYear(pastDate.getFullYear() - MIN_AGE - 1);
+  pastDate.setFullYear(pastDate.getFullYear() - MIN_AGE + 1);
   expect(validateDateOfBirth(pastDate.toISOString())).toBe(ErrorMessages.INVALID_AGE);
 });
 it(`validateDateOfBirth with age ${MIN_AGE} later in this year`, () => {
