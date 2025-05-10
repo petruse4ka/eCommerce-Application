@@ -281,6 +281,48 @@ Ensure all commit messages follow this format to maintain consistency throughout
 
 ---
 
+## 🔠 Enums/Constants Naming Rules
+
+### General Guidelines
+
+- Use **PascalCase** for enum names.
+- Use **UPPER_CASE** for enum members and constants.
+- Keep names **meaningful and clear**.
+- **Avoid abbreviations** unless widely recognized.
+- **Separate words with underscores** when necessary.
+
+### Example Enums
+
+```typescript
+enum CardinalDirections {
+  NORTH = 'North',
+  EAST = 'East',
+  SOUTH = 'South',
+  WEST = 'West',
+  SOUTH_WEST = 'South West',
+}
+
+enum UserRoles {
+  ADMIN = 'Administrator',
+  EDITOR = 'Editor',
+  VIEWER = 'Viewer',
+}
+```
+
+### Example Constants
+
+```typescript
+const MAX_RETRIES = 3;
+const API_BASE_URL = 'https://api.example.com';
+const ERROR_MESSAGES = {
+  NETWORK_ERROR: 'Network connection lost',
+  PERMISSION_DENIED: 'You do not have permission to perform this action',
+  INVALID_PASSWORD: 'The provided credentials are incorrect',
+};
+```
+
+---
+
 ## 👥 Team Members
 
 - [**Daniil Biver**](https://github.com/tearzday) - Student
