@@ -20,7 +20,6 @@ export class Input {
     }).getElement();
 
     this.input = new InputBuilder({
-      tag: 'input',
       type: INPUT_TYPE.TEXT,
       id,
       className: [...CUSTOM_INPUT_STYLE['INPUT_DEFAULT']],

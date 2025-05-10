@@ -3,8 +3,8 @@ import type { InputParameters } from '@/types/interfaces';
 import { ElementBuilder } from './element-builder';
 
 export class InputBuilder extends ElementBuilder {
-  constructor(parameters: InputParameters) {
-    super({ ...parameters });
+  constructor(parameters: Omit<InputParameters, 'tag'>) {
+    super({ ...parameters, tag: 'input' });
 
     this.element.id = parameters.id;
 
