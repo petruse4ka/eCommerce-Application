@@ -1,4 +1,4 @@
-import type { BUTTON_TYPE, INPUT_TYPE } from './enums';
+import type { ButtonType, InputType } from './enums';
 
 export interface ElementParameters {
   tag: string;
@@ -10,7 +10,7 @@ export interface ElementParameters {
 }
 
 export interface InputParameters extends ElementParameters {
-  type: INPUT_TYPE;
+  type: InputType;
   id: string;
   value?: string;
   placeholder?: string;
@@ -31,7 +31,15 @@ export interface LinkParameters extends ElementParameters {
 }
 
 export interface ButtonParameters extends ElementParameters {
-  type: BUTTON_TYPE;
+  type: ButtonType;
+}
+
+export interface AuthResponse {
+  access_token: string;
+  expires_in: number;
+  scope: string;
+  refresh_token: string;
+  token_type: string;
 }
 
 export interface InputComponent {

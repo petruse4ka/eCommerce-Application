@@ -1,10 +1,8 @@
-import '../abstracts/colors.css';
-
 const STANDARD_INPUT_STYLE = [
   'font-montserrat',
   'font-semibold',
   'text-[16px]',
-  'bg-[var(--color-white)]',
+  'bg-white',
   'border',
   'outline-none',
   'py-3',
@@ -13,18 +11,8 @@ const STANDARD_INPUT_STYLE = [
 ];
 
 export const CUSTOM_INPUT_STYLE = {
-  INPUT_DEFAULT: [
-    ...STANDARD_INPUT_STYLE,
-    'border-[var(--color-gray)]',
-    'focus:border-[var(--color-black)]',
-    'text-[var(--color-black)]',
-  ],
-  INPUT_ERROR: [
-    ...STANDARD_INPUT_STYLE,
-    'border-[var(--color-accent)]',
-    'placeholder-[var(--color-accent)]',
-    'text-[var(--color-accent)]',
-  ],
+  INPUT_DEFAULT: [...STANDARD_INPUT_STYLE, 'border-gray', 'focus:border-black', 'text-black'],
+  INPUT_ERROR: [...STANDARD_INPUT_STYLE, 'border-accent', 'placeholder-accent', 'text-accent'],
 };
 
 const STANDARD_LABEL_STYLE = [
@@ -35,6 +23,6 @@ const STANDARD_LABEL_STYLE = [
 ];
 
 export const CUSTOM_LABEL_STYLE = {
-  LABEL_DEFAULT: [...STANDARD_LABEL_STYLE, 'text-[var(--color-black)]'],
-  LABEL_ERROR: [...STANDARD_LABEL_STYLE, 'text-[var(--color-accent)]'],
+  LABEL_DEFAULT: [...STANDARD_LABEL_STYLE, 'text-black'],
+  LABEL_ERROR: [...STANDARD_LABEL_STYLE, 'text-accent'],
 };

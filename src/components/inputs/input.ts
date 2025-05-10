@@ -1,5 +1,5 @@
 import { CUSTOM_INPUT_STYLE, CUSTOM_LABEL_STYLE } from '@/styles/inputs/inputs';
-import { INPUT_TYPE } from '@/types/enums';
+import { InputType } from '@/types/enums';
 import type { InputComponent } from '@/types/interfaces';
 import { ElementBuilder } from '@/utils/element-builder';
 import { InputBuilder } from '@/utils/input-builder';
@@ -20,7 +20,7 @@ export class Input {
     }).getElement();
 
     this.input = new InputBuilder({
-      type: INPUT_TYPE.TEXT,
+      type: InputType.TEXT,
       id,
       className: [...CUSTOM_INPUT_STYLE['INPUT_DEFAULT']],
       placeholder,

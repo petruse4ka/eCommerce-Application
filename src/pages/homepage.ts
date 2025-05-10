@@ -1,10 +1,10 @@
-import '@/../styles.css';
+import '@/styles/main.css';
 
 import macaronImage from '@/assets/favicons/original.png';
 import { BaseComponent } from '@/components/base/component';
 import { Button } from '@/components/buttons/button';
 import { Input } from '@/components/inputs/input';
-import { INPUT_TYPE } from '@/types/enums';
+import { InputType } from '@/types/enums';
 import { ElementBuilder } from '@/utils/element-builder';
 import { ImageBuilder } from '@/utils/image-builder';
 
@@ -14,8 +14,8 @@ export class HomePage extends BaseComponent {
       tag: 'div',
       className: [
         'min-h-screen',
-        'bg-[var(--homepage-bg)]',
-        'text-[var(--homepage-text)]',
+        'bg-primary',
+        'text-black',
         'font-roboto',
         'text-base',
         'leading-normal',
@@ -28,12 +28,11 @@ export class HomePage extends BaseComponent {
   private render(): void {
     const title = new ElementBuilder({
       tag: 'h1',
-      className: ['text-3xl', 'font-bold', 'p-4'],
+      className: ['text-3xl', 'font-montserrat', 'font-bold', 'p-4'],
       textContent: 'eCommerce Application',
     }).getElement();
 
     const image = new ImageBuilder({
-      tag: 'img',
       className: '',
       source: macaronImage,
       alt: 'Macaron',
@@ -80,7 +79,7 @@ export class HomePage extends BaseComponent {
       labelText: 'Ваше имя',
       id: 'name',
       isRequired: false,
-      type: INPUT_TYPE.TEXT,
+      type: InputType.TEXT,
     });
 
     const inputContainer = new ElementBuilder({

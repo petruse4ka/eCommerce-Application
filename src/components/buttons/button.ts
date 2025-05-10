@@ -1,5 +1,5 @@
 import { CUSTOM_BUTTON_STYLE } from '@/styles/buttons/buttons';
-import { BUTTON_TYPE } from '@/types/enums';
+import { ButtonType } from '@/types/enums';
 import { ButtonBuilder } from '@/utils/button-builder';
 
 export class Button {
@@ -11,13 +11,11 @@ export class Button {
     callback: () => void;
   }) {
     this.button = new ButtonBuilder({
-      tag: 'button',
-      type: BUTTON_TYPE.BUTTON,
+      type: ButtonType.BUTTON,
       className: ['button', ...CUSTOM_BUTTON_STYLE[parameters.style]],
       textContent: parameters.textContent,
       callback: parameters.callback,
     });
-    this.render();
   }
 
   public getElement(): HTMLElement {
@@ -30,9 +28,5 @@ export class Button {
 
   public enableButton(): void {
     this.button.enableButton();
-  }
-
-  protected render(): void {
-    this.button.getElement();
   }
 }
