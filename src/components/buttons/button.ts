@@ -11,13 +11,11 @@ export class Button {
     callback: () => void;
   }) {
     this.button = new ButtonBuilder({
-      tag: 'button',
       type: ButtonType.BUTTON,
       className: ['button', ...CUSTOM_BUTTON_STYLE[parameters.style]],
       textContent: parameters.textContent,
       callback: parameters.callback,
     });
-    this.render();
   }
 
   public getElement(): HTMLElement {
@@ -30,9 +28,5 @@ export class Button {
 
   public enableButton(): void {
     this.button.enableButton();
-  }
-
-  protected render(): void {
-    this.button.getElement();
   }
 }

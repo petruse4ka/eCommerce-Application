@@ -1,0 +1,24 @@
+{
+  "workbench.settings.useSplitJSON": true,
+  "tailwindCSS.includeLanguages": {
+    "typescript": "html",
+    "javascript": "html"
+  },
+  "editor.inlineSuggest.enabled": true,
+  "emmet.triggerExpansionOnTab": true,
+  "tailwindCSS.emmetCompletions": true,
+  "editor.quickSuggestions": {
+    "strings": true
+  },
+  "tailwindCSS.experimental.classRegex": [
+    ["className:\\s*\\[([^\\]]*)\\]", "\"([^\"]+)\""],
+    ["className:\\s*\\[([\\s\\S]*?)\\]", "'([^']+)'"],
+    ["className:\\s*\\[([\\s\\S]*?)\\]", "\"([^\"]+)\""],
+    ["className:\\s*['\"]([^'\"]*)['\"]"],
+    ["\\[([^\\]]*)\\]", "'([^']+)'"],
+    ["\\[([^\\]]*)\\]", "\"([^\"]+)\""]
+  ],
+  "files.associations": {
+    "*.css": "tailwindcss"
+  }
+}

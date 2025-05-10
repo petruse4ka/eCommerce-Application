@@ -1,4 +1,4 @@
-import '@/../styles.css';
+import '@/styles/main.css';
 
 import macaronImage from '@/assets/favicons/original.png';
 import { BaseComponent } from '@/components/base/component';
@@ -12,8 +12,8 @@ export class HomePage extends BaseComponent {
       tag: 'div',
       className: [
         'min-h-screen',
-        'bg-[var(--color-primary)]',
-        'text-[var(--color-black)]',
+        'bg-primary',
+        'text-black',
         'font-roboto',
         'text-base',
         'leading-normal',
@@ -25,12 +25,11 @@ export class HomePage extends BaseComponent {
   private render(): void {
     const title = new ElementBuilder({
       tag: 'h1',
-      className: ['text-3xl', 'font-bold', 'p-4'],
+      className: ['text-3xl', 'font-montserrat', 'font-bold', 'p-4'],
       textContent: 'eCommerce Application',
     }).getElement();
 
     const image = new ImageBuilder({
-      tag: 'img',
       className: '',
       source: macaronImage,
       alt: 'Macaron',

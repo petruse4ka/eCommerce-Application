@@ -1,4 +1,4 @@
-import '@/../styles.css';
+import '@/styles/main.css';
 
 import { ElementBuilder } from '../utils/element-builder';
 

@@ -1,5 +1,8 @@
-:root {
-  /* Button colors */
+@import 'https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap';
+@import 'tailwindcss';
+
+@theme {
+  --font-montserrat: 'Montserrat', sans-serif;
   --color-white: #fff;
   --color-gray: #ededf0;
   --color-black: #1a1a2e;
