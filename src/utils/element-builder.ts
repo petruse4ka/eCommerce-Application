@@ -19,7 +19,17 @@ export class ElementBuilder {
     this.element.remove();
   }
 
-  private applyCssClasses(className: ElementParameters['className']): void {
+  public removeCssClasses(className: ElementParameters['className']): void {
+    if (className) {
+      if (Array.isArray(className)) {
+        this.element.classList.remove(...className);
+      } else {
+        this.element.classList.remove(className);
+      }
+    }
+  }
+
+  public applyCssClasses(className: ElementParameters['className']): void {
     if (className) {
       if (Array.isArray(className)) {
         this.element.classList.add(...className);
