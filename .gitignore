@@ -47,7 +47,6 @@ out/
 
 # IDE and editor files
 .idea/
-.vscode/
 *.swp
 *.swo
 .DS_Store
@@ -72,3 +71,6 @@ package-lock.json
 
 # Local Netlify folder
 .netlify
+
+# Workflows
+.github/Workflows

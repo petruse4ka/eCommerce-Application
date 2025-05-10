@@ -1,0 +1,36 @@
+const STANDARD_BUTTON_STYLE = [
+  'font-montserrat',
+  'font-semibold',
+  'text-[14px]',
+  'border',
+  'w-[234px]',
+  'px-3',
+  'py-4',
+  'rounded-[3px]',
+  'cursor-pointer',
+  'transition-all',
+  'duration-300',
+  'ease-in-out',
+  'disabled:bg-gray',
+  'disabled:border-gray',
+  'disabled:cursor-not-allowed',
+];
+
+export const CUSTOM_BUTTON_STYLE = {
+  PRIMARY_PINK: [
+    ...STANDARD_BUTTON_STYLE,
+    'bg-accent',
+    'text-white',
+    'border-accent',
+    'hover:bg-accent-hover',
+    'hover:border-accent-hover',
+  ],
+  SECONDARY_BLUE: [
+    ...STANDARD_BUTTON_STYLE,
+    'bg-white',
+    'text-secondary',
+    'border-secondary',
+    'hover:bg-secondary-hover',
+    'hover:text-white',
+  ],
+};
