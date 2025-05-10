@@ -174,6 +174,26 @@ To add new fonts to the project:
 const font = ['custom-font'];
 ```
 
+### Color Configuration
+
+To add custom colors to the project:
+
+1. Configure the colors in Tailwind theme in `src/styles/main.css`:
+
+```css
+@theme {
+  --color-accent: #e7426a;
+  --color-primary: #f7ebe5;
+  --color-secondary: #4e9dd3;
+}
+```
+
+2. Use the colors in the components:
+
+```typescript
+const styles = ['bg-color-accent', 'border-color-secondary', 'hover:bg-color-primary'];
+```
+
 ---
 
 ## 📜 Scripts
