@@ -126,12 +126,53 @@ npm run dev
 
 This will launch the Vite development server to test that the project has been setup correctly.
 
-⚠️ **Note:**  
-If your IDE shows TypeScript-related errors, make sure to check not only the installed TypeScript version but also the TypeScript configuration in your IDE.  
-For **Visual Studio Code** select the TypeScript version by either:
+> ⚠️ **Important:** If your IDE shows TypeScript-related errors, make sure to check not only the installed TypeScript version but also the TypeScript configuration in your IDE. For **Visual Studio Code** select the TypeScript version by either:
 
 - Clicking the TypeScript version number in the bottom right corner and choosing "Use Workspace Version"
 - Or using the Command Palette (Ctrl+Shift+P or Cmd+Shift+P) and selecting "TypeScript: Select TypeScript Version" → "Use Workspace Version"
+
+## 🎨 Tailwind CSS Development Setup
+
+### VS Code Extensions
+
+To enhance your development experience with Tailwind CSS, install the following extension:
+
+1. Open VS Code
+2. Go to Extensions (Ctrl+Shift+X)
+3. Search for "Tailwind CSS IntelliSense"
+4. Click Install
+
+This extension provides:
+
+- Autocomplete suggestions
+- Linting
+- Hover previews
+
+> ⚠️ **Important:** Make sure to open the project as a separate workspace in VS Code (File → Open Folder → select project folder) to ensure that the workspace-specific Tailwind CSS settings are properly applied. Opening the project as a subfolder of another workspace will not apply the correct settings.
+
+### Font Configuration
+
+To add new fonts to the project:
+
+1. Add the font import URL in `src/styles/main.css`:
+
+```css
+@import url('https://fonts.googleapis.com/css2?family=Your+Font&display=swap');
+```
+
+2. Configure the font in Tailwind theme in `src/styles/main.css`:
+
+```css
+@theme {
+  --custom-font: 'Custom Font', sans-serif;
+}
+```
+
+3. Use the font in the components:
+
+```typescript
+const font = ['custom-font'];
+```
 
 ---
 
@@ -152,11 +193,11 @@ Use the following scripts to assist with development, formatting, linting, build
 
 ### ✅ Testing
 
-| Script          | Description                                                                         |
-| :-------------- | :---------------------------------------------------------------------------------- |
-| `npm run test`  | Execute unit tests using Vitest.                                                    |
-| `npm run test:coverage`  | Execute unit tests using Vitest and view coverage info.                                                    |
-| `npm run check` | Execute a code quality check: Vitest, ESLint, Stylelint, Prettier formatting check. |
+| Script                  | Description                                                                         |
+| :---------------------- | :---------------------------------------------------------------------------------- |
+| `npm run test`          | Execute unit tests using Vitest.                                                    |
+| `npm run test:coverage` | Execute unit tests using Vitest and view coverage info.                             |
+| `npm run check`         | Execute a code quality check: Vitest, ESLint, Stylelint, Prettier formatting check. |
 
 ### ⚙️ Development & Deployment
 
