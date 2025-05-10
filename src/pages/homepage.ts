@@ -1,4 +1,4 @@
-import '@/../styles.css';
+import '@/styles/main.css';
 
 import macaronImage from '@/assets/favicons/original.png';
 import { BaseComponent } from '@/components/base/component';
@@ -12,8 +12,8 @@ export class HomePage extends BaseComponent {
       tag: 'div',
       className: [
         'min-h-screen',
-        'bg-[var(--homepage-bg)]',
-        'text-[var(--homepage-text)]',
+        'bg-primary',
+        'text-black',
         'font-roboto',
         'text-base',
         'leading-normal',
