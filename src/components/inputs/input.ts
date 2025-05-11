@@ -1,10 +1,9 @@
 import { CUSTOM_INPUT_STYLE, CUSTOM_LABEL_STYLE } from '@/styles/inputs/inputs';
-import { InputType } from '@/types/enums';
 import type { InputComponent } from '@/types/interfaces';
 import { ElementBuilder } from '@/utils/element-builder';
 import { InputBuilder } from '@/utils/input-builder';
 
-export class Input {
+export default class Input {
   private container: HTMLElement;
   private input: InputBuilder;
   private label: ElementBuilder;
@@ -12,15 +11,15 @@ export class Input {
 
   constructor(parameters: InputComponent) {
     this.isError = false;
-    const { placeholder, id, callback, labelText, isRequired, value } = parameters;
+    const { placeholder, id, callback, labelText, isRequired, value, type, className } = parameters;
 
     this.container = new ElementBuilder({
       tag: 'div',
-      className: '',
+      className: className ?? '',
     }).getElement();
 
     this.input = new InputBuilder({
-      type: InputType.TEXT,
+      type,
       id,
       className: [...CUSTOM_INPUT_STYLE['INPUT_DEFAULT']],
       placeholder,

@@ -19,6 +19,12 @@ export class ElementBuilder {
     this.element.remove();
   }
 
+  public removeChildren(): void {
+    while (this.element.firstChild) {
+      this.element.firstChild.remove();
+    }
+  }
+
   public removeCssClasses(className: ElementParameters['className']): void {
     if (className) {
       if (Array.isArray(className)) {
@@ -58,7 +64,10 @@ export class ElementBuilder {
     callback: ElementParameters['callback']
   ): void {
     if (eventType && callback) {
-      this.element.addEventListener(eventType, callback);
+      this.element.addEventListener(eventType, (event: Event) => {
+        event.preventDefault();
+        callback(event);
+      });
     }
   }
 }

@@ -6,7 +6,7 @@ export default class Overlay {
   constructor() {
     this.overlay = new ElementBuilder({
       tag: 'div',
-      className: ['absolute', 'inset-0', 'bg-black/50'],
+      className: ['fixed', 'inset-0', 'bg-black/50'],
     });
   }
 

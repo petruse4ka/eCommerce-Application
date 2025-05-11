@@ -11,7 +11,13 @@ const STANDARD_INPUT_STYLE = [
 ];
 
 export const CUSTOM_INPUT_STYLE = {
-  INPUT_DEFAULT: [...STANDARD_INPUT_STYLE, 'border-gray', 'focus:border-black', 'text-black'],
+  INPUT_DEFAULT: [
+    ...STANDARD_INPUT_STYLE,
+    'border-gray',
+    'focus:border-black',
+    'text-black/50',
+    'placeholder-black/50',
+  ],
   INPUT_ERROR: [...STANDARD_INPUT_STYLE, 'border-accent', 'placeholder-accent', 'text-accent'],
 };
 
