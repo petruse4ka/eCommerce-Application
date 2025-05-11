@@ -1,13 +1,15 @@
 import { CUSTOM_INPUT_STYLE, CUSTOM_LABEL_STYLE } from '@/styles/inputs/inputs';
+import { InputType } from '@/types/enums';
 import type { InputComponent } from '@/types/interfaces';
 import { ElementBuilder } from '@/utils/element-builder';
 import { InputBuilder } from '@/utils/input-builder';
 
 export default class Input {
-  private container: HTMLElement;
+  private container: ElementBuilder;
   private input: InputBuilder;
   private label: ElementBuilder;
   private isError: boolean;
+  private icon: HTMLElement | undefined;
 
   constructor(parameters: InputComponent) {
     this.isError = false;
@@ -16,7 +18,7 @@ export default class Input {
     this.container = new ElementBuilder({
       tag: 'div',
       className: className ?? '',
-    }).getElement();
+    });
 
     this.input = new InputBuilder({
       type,
@@ -35,11 +37,15 @@ export default class Input {
       attributes: { for: id },
     });
 
-    this.container.append(this.label.getElement(), this.input.getElement());
+    this.container.getElement().append(this.label.getElement(), this.input.getElement());
+
+    if (type === InputType.PASSWORD) {
+      this.addPasswordIcon(type);
+    }
   }
 
   public getElement(): HTMLElement {
-    return this.container;
+    return this.container.getElement();
   }
 
   public getValue(): string {
@@ -61,6 +67,49 @@ export default class Input {
 
       this.input.removeCssClasses([...CUSTOM_INPUT_STYLE['INPUT_ERROR']]);
       this.input.applyCssClasses([...CUSTOM_INPUT_STYLE['INPUT_DEFAULT']]);
+    }
+  }
+
+  private addPasswordIcon(type: InputType): void {
+    let currentType = type;
+    this.container.applyCssClasses('relative');
+    this.icon = new ElementBuilder({
+      tag: 'div',
+      className: [
+        'h-6',
+        'w-6',
+        'absolute',
+        'top-9.5',
+        'right-2',
+        'bg-[url(@/assets/icons/eye-outline.svg)]',
+        'hover:cursor-pointer',
+      ],
+      callback: (): void => {
+        this.toggleIcon(
+          'bg-[url(@/assets/icons/eye-outline.svg)]',
+          'bg-[url(@/assets/icons/eye-off-outline.svg)]'
+        );
+
+        if (currentType === InputType.PASSWORD) {
+          currentType = InputType.TEXT;
+          this.input.applyAttributes({ type: InputType.TEXT });
+        } else {
+          currentType = InputType.PASSWORD;
+          this.input.applyAttributes({ type: InputType.PASSWORD });
+        }
+      },
+    }).getElement();
+
+    this.container.getElement().append(this.icon);
+  }
+
+  private toggleIcon(firstIcon: string, secondIcon?: string): void {
+    if (this.icon) {
+      this.icon.classList.toggle(firstIcon);
+
+      if (secondIcon) {
+        this.icon.classList.toggle(secondIcon);
+      }
     }
   }
 }
