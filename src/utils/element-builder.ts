@@ -19,12 +19,6 @@ export class ElementBuilder {
     this.element.remove();
   }
 
-  public removeChildren(): void {
-    while (this.element.firstChild) {
-      this.element.firstChild.remove();
-    }
-  }
-
   public removeCssClasses(className: ElementParameters['className']): void {
     if (className) {
       if (Array.isArray(className)) {
