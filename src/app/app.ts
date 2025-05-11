@@ -4,6 +4,7 @@ import { HomePage } from '@/pages/homepage';
 import { LoginPage } from '@/pages/login';
 import { RegistrationPage } from '@/pages/registration';
 import { Router } from '@/router/router';
+import { APP_STYLE } from '@/styles/app/app';
 import { Route } from '@/types/enums';
 
 export class App extends BaseComponent {
@@ -15,7 +16,7 @@ export class App extends BaseComponent {
   private currentPage: BaseComponent = this.homePage;
 
   constructor() {
-    super({ tag: 'div', className: 'font-montserrat' });
+    super({ tag: 'div', className: APP_STYLE });
     this.router = new Router(Route.HOME);
     this.setupRoutes();
     this.render();
