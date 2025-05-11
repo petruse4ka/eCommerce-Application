@@ -1,5 +1,5 @@
 import { Button } from '@/components/buttons/button';
-import { INPUTS_REGISTRATION_DATE } from '@/components/date';
+import { INPUTS_REGISTRATION_DATA } from '@/components/data';
 import Input from '@/components/inputs/input';
 import type { InputComponent } from '@/types/interfaces';
 import { ElementBuilder } from '@/utils/element-builder';
@@ -7,10 +7,10 @@ import { ElementBuilder } from '@/utils/element-builder';
 export default class FormRegistration {
   private form: HTMLElement;
   private userInfoContainer: HTMLElement;
-  private INPUTS_DATE: InputComponent[];
+  private INPUTS_DATA: InputComponent[];
 
   constructor() {
-    this.INPUTS_DATE = INPUTS_REGISTRATION_DATE;
+    this.INPUTS_DATA = INPUTS_REGISTRATION_DATA;
     this.form = new ElementBuilder({
       tag: 'form',
       className: ['flex', 'flex-col'],
@@ -29,7 +29,7 @@ export default class FormRegistration {
   }
 
   private createInputs(): void {
-    for (const input of this.INPUTS_DATE) {
+    for (const input of this.INPUTS_DATA) {
       const { id, labelText, placeholder, type, isRequired, callback } = input;
 
       const inputNode = new Input({

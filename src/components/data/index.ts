@@ -1,6 +1,6 @@
 import { InputType } from '@/types/enums';
 
-export const INPUTS_REGISTRATION_DATE = [
+export const INPUTS_REGISTRATION_DATA = [
   {
     id: 'first-name',
     labelText: 'Ваше имя',
