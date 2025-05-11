@@ -1,6 +1,7 @@
 import { Button } from '@/components/buttons/button';
 import { INPUTS_REGISTRATION_DATA } from '@/components/data';
 import Input from '@/components/inputs/input';
+import { FORM, REGISTRATION_INPUTS_CONTAINER } from '@/styles/forms/forms';
 import type { InputComponent } from '@/types/interfaces';
 import { ElementBuilder } from '@/utils/element-builder';
 
@@ -13,12 +14,12 @@ export default class FormRegistration {
     this.INPUTS_DATA = INPUTS_REGISTRATION_DATA;
     this.form = new ElementBuilder({
       tag: 'form',
-      className: ['flex', 'flex-col'],
+      className: FORM,
     }).getElement();
 
     this.userInfoContainer = new ElementBuilder({
       tag: 'div',
-      className: ['sm:grid', 'sm:grid-cols-2', 'gap-x-7', 'my-5'],
+      className: REGISTRATION_INPUTS_CONTAINER,
     }).getElement();
 
     this.render();

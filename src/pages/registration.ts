@@ -2,6 +2,7 @@ import '@/styles/main.css';
 
 import FormRegistration from '@/components/forms/registration';
 import Overlay from '@/components/overlay/overlay';
+import { CONTAINER, FORM_CONTAINER, TITLE } from '@/styles/pages/registration';
 
 import { ElementBuilder } from '../utils/element-builder';
 
@@ -12,17 +13,7 @@ export default class RegistrationPage {
   constructor() {
     this.container = new ElementBuilder({
       tag: 'div',
-      className: [
-        'min-h-screen',
-        'font-roboto',
-        'bg-[url(@/assets/img/bg-macarons.webp)]',
-        'bg-cover',
-        'bg-center',
-        'flex',
-        'flex-col',
-        'justify-center',
-        'items-center',
-      ],
+      className: CONTAINER,
     });
 
     this.overlay = new Overlay().getElement();
@@ -37,25 +28,12 @@ export default class RegistrationPage {
   private renderForm(): void {
     const formContainer = new ElementBuilder({
       tag: 'div',
-      className: [
-        'relative',
-        'z-1',
-        'bg-primary',
-        'xl:px-20',
-        'xl:py-10',
-        'sm:px-10',
-        'sm:py-5',
-        'px-3',
-        'py-3',
-        'rounded-xl',
-        'mx-10',
-        'my-5',
-      ],
+      className: FORM_CONTAINER,
     }).getElement();
 
     const title = new ElementBuilder({
       tag: 'h2',
-      className: ['text-3xl', 'font-bold', 'text-center'],
+      className: TITLE,
       textContent: 'Регистрация',
     }).getElement();
 
