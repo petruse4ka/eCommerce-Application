@@ -4,10 +4,14 @@ import { ElementBuilder } from '@/utils/element-builder';
 import { ImageBuilder } from '@/utils/image-builder';
 
 import { BaseComponent } from '../base/component';
+import SubHeader from './subheader';
 
 export default class Header extends BaseComponent {
+  private subHeader: SubHeader;
+
   constructor() {
     super({ tag: 'header', className: HEADER_STYLES.HEADER });
+    this.subHeader = new SubHeader();
     this.render();
   }
 
@@ -24,6 +28,6 @@ export default class Header extends BaseComponent {
     }).getElement();
 
     headerContainer.append(logoElement);
-    this.component.append(headerContainer);
+    this.component.append(this.subHeader.getElement(), headerContainer);
   }
 }
