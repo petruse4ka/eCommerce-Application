@@ -1,36 +1,68 @@
 import '@/styles/main.css';
 
+import FormRegistration from '@/components/forms/registration';
+import Overlay from '@/components/overlay/overlay';
+
 import { ElementBuilder } from '../utils/element-builder';
 
-export class HomePage {
+export default class RegistrationPage {
   private container: ElementBuilder;
+  private overlay: HTMLElement;
 
   constructor() {
     this.container = new ElementBuilder({
       tag: 'div',
       className: [
         'min-h-screen',
-        'bg-[#1a1a2e]',
-        'text-[#e6e6e6]',
         'font-roboto',
-        'text-base',
-        'leading-normal',
+        'bg-[url(@/assets/img/bg-macarons.webp)]',
+        'bg-cover',
+        'bg-center',
+        'flex',
+        'flex-col',
+        'justify-center',
+        'items-center',
       ],
     });
-    this.render();
+
+    this.overlay = new Overlay().getElement();
+
+    this.renderForm();
   }
 
   public getElement(): HTMLElement {
     return this.container.getElement();
   }
 
-  private render(): void {
-    const title = new ElementBuilder({
-      tag: 'h1',
-      className: ['text-3xl', 'font-bold', 'p-4'],
-      textContent: 'Registration',
+  private renderForm(): void {
+    const formContainer = new ElementBuilder({
+      tag: 'div',
+      className: [
+        'relative',
+        'z-1',
+        'bg-primary',
+        'xl:px-20',
+        'xl:py-10',
+        'sm:px-10',
+        'sm:py-5',
+        'px-3',
+        'py-3',
+        'rounded-xl',
+        'mx-10',
+        'my-5',
+      ],
     }).getElement();
 
-    this.container.getElement().append(title);
+    const title = new ElementBuilder({
+      tag: 'h2',
+      className: ['text-3xl', 'font-bold', 'text-center'],
+      textContent: 'Регистрация',
+    }).getElement();
+
+    const form = new FormRegistration().getElement();
+
+    formContainer.append(title, form);
+
+    this.container.getElement().append(formContainer, this.overlay);
   }
 }
