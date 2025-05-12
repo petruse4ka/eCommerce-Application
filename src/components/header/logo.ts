@@ -1,4 +1,4 @@
-import logo from '@/assets/logo/logo-main.png';
+import logo from '@/assets/logo/logo-main.svg';
 import { BaseComponent } from '@/components/base/component';
 import { HEADER_STYLES } from '@/styles/header/header';
 import { ImageBuilder } from '@/utils/image-builder';
