@@ -25,12 +25,12 @@ export const SUBHEADER_STYLES = {
   AUTHORIZATION_MENU: [
     'flex',
     'flex-col',
-    'items-end',
+    'items-center',
     'gap-2',
+    'ml-14',
     'sm:flex-row',
     'sm:gap-3',
     'md:gap-4',
-    'md:items-center',
   ],
   AUTHORIZATION_ITEM: [
     'cursor-pointer',
