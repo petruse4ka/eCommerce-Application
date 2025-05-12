@@ -4,4 +4,6 @@ export const SUBHEADER_STYLES = {
   PROMO: ['flex', 'gap-8'],
   PROMO_ITEM: ['flex', 'items-center', 'gap-2'],
   PROMO_ICON: ['w-6', 'h-6'],
+  AUTHORIZATION_MENU: ['flex', 'gap-4', 'items-center'],
+  AUTHORIZATION_ITEM: ['cursor-pointer', 'hover:text-accent', 'transition-colors', 'duration-300'],
 };

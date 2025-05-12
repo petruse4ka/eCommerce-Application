@@ -7,3 +7,8 @@ export const SUBHEADER_PROMO_TEXT = {
   FRESH: 'Гарантия свежести',
   PRICE: 'Лучшая цена',
 };
+
+export const AUTHORIZATION_MENU_TEXT = {
+  LOGIN: 'Войти',
+  REGISTRATION: 'Регистрация',
+};

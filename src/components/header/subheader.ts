@@ -2,7 +2,8 @@ import { BaseComponent } from '@/components/base/component';
 import { SUBHEADER_STYLES } from '@/styles/header/subheader';
 import { ElementBuilder } from '@/utils/element-builder';
 
-import { Promo } from './promo';
+import AuthorizationMenu from './authorisation-menu';
+import Promo from './promo';
 
 export default class SubHeader extends BaseComponent {
   constructor() {
@@ -20,8 +21,9 @@ export default class SubHeader extends BaseComponent {
     }).getElement();
 
     const promo = new Promo();
-    subheaderContainer.append(promo.getElement());
+    const authorizationMenu = new AuthorizationMenu();
 
+    subheaderContainer.append(promo.getElement(), authorizationMenu.getElement());
     this.component.append(subheaderContainer);
   }
 }

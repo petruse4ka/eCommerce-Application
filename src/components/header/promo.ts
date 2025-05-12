@@ -7,7 +7,7 @@ import { SUBHEADER_STYLES } from '@/styles/header/subheader';
 import { ElementBuilder } from '@/utils/element-builder';
 import { ImageBuilder } from '@/utils/image-builder';
 
-export class Promo extends BaseComponent {
+export default class Promo extends BaseComponent {
   constructor() {
     super({ tag: 'div', className: SUBHEADER_STYLES.PROMO });
     this.render();
