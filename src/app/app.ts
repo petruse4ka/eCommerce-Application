@@ -1,17 +1,14 @@
-import { HomePage } from '@/pages/homepage';
 import RegistrationPage from '@/pages/registration';
 
 import { ElementBuilder } from '../utils/element-builder';
 
 export class App {
   private container: ElementBuilder;
-  private currentPage: HomePage;
-  private registrationPage: RegistrationPage;
+  private currentPage: RegistrationPage;
 
   constructor() {
     this.container = new ElementBuilder({ tag: 'div', className: 'font-montserrat' });
-    this.currentPage = new HomePage();
-    this.registrationPage = new RegistrationPage();
+    this.currentPage = new RegistrationPage();
     this.render();
   }
 
@@ -20,6 +17,6 @@ export class App {
   }
 
   protected render(): void {
-    this.container.getElement().append(this.registrationPage.getElement());
+    this.container.getElement().append(this.currentPage.getElement());
   }
 }

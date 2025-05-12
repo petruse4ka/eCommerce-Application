@@ -1,9 +1,13 @@
 export const CONTAINER = [
   'min-h-screen',
   'font-roboto',
-  'bg-[url(@/assets/img/bg-macarons.webp)]',
-  'bg-cover',
-  'bg-center',
+  'bg-pink',
+  'bg-[url(@/assets/img/bg-macarons.png)]',
+  'bg-size-[auto_200px]',
+  'md:bg-auto',
+  'bg-top',
+  'bg-no-repeat',
+  'px-[50px]',
   'flex',
   'flex-col',
   'justify-center',
@@ -21,7 +25,6 @@ export const FORM_CONTAINER = [
   'px-3',
   'py-3',
   'rounded-xl',
-  'mx-10',
   'my-5',
 ];
 

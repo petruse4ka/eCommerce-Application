@@ -21,6 +21,16 @@ export const CUSTOM_INPUT_STYLE = {
   INPUT_ERROR: [...STANDARD_INPUT_STYLE, 'border-accent', 'placeholder-accent', 'text-accent'],
 };
 
+export const ICON_IN_INPUT = [
+  'h-6',
+  'w-6',
+  'absolute',
+  'top-9.5',
+  'right-2',
+  'bg-[url(@/assets/icons/eye-outline.svg)]',
+  'hover:cursor-pointer',
+];
+
 const STANDARD_LABEL_STYLE = [
   'font-montserrat',
   'font-semibold',

@@ -1,4 +1,4 @@
-import { CUSTOM_INPUT_STYLE, CUSTOM_LABEL_STYLE } from '@/styles/inputs/inputs';
+import { CUSTOM_INPUT_STYLE, CUSTOM_LABEL_STYLE, ICON_IN_INPUT } from '@/styles/inputs/inputs';
 import { InputType } from '@/types/enums';
 import type { InputComponent } from '@/types/interfaces';
 import { ElementBuilder } from '@/utils/element-builder';
@@ -75,15 +75,7 @@ export default class Input {
     this.container.applyCssClasses('relative');
     this.icon = new ElementBuilder({
       tag: 'div',
-      className: [
-        'h-6',
-        'w-6',
-        'absolute',
-        'top-9.5',
-        'right-2',
-        'bg-[url(@/assets/icons/eye-outline.svg)]',
-        'hover:cursor-pointer',
-      ],
+      className: ICON_IN_INPUT,
       callback: (): void => {
         this.toggleIcon(
           'bg-[url(@/assets/icons/eye-outline.svg)]',
