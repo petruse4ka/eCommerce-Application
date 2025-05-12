@@ -1,17 +1,16 @@
 import '@/styles/main.css';
 
-import { ElementBuilder } from '../utils/element-builder';
+import { BaseComponent } from '@/components/base/component';
+import { ElementBuilder } from '@/utils/element-builder';
 
-export class HomePage {
-  private container: ElementBuilder;
-
+export class LoginPage extends BaseComponent {
   constructor() {
-    this.container = new ElementBuilder({
+    super({
       tag: 'div',
       className: [
         'min-h-screen',
-        'bg-[#1a1a2e]',
-        'text-[#e6e6e6]',
+        'bg-primary',
+        'text-black',
         'font-roboto',
         'text-base',
         'leading-normal',
@@ -20,17 +19,13 @@ export class HomePage {
     this.render();
   }
 
-  public getElement(): HTMLElement {
-    return this.container.getElement();
-  }
-
   private render(): void {
     const title = new ElementBuilder({
       tag: 'h1',
-      className: ['text-3xl', 'font-bold', 'p-4'],
-      textContent: 'Login',
+      className: ['text-3xl', 'font-montserrat', 'font-bold', 'p-4'],
+      textContent: 'Login Page',
     }).getElement();
 
-    this.container.getElement().append(title);
+    this.component.append(title);
   }
 }

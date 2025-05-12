@@ -50,3 +50,10 @@ export enum ErrorMessages {
   POSTAL_CODE_FORMAT = 'Почтовый индекс должен состоять из 6 цифр.',
   PASSWORD_LENGTH = '${} символов',
 }
+
+export enum Route {
+  HOME = '#/',
+  LOGIN = '#/login',
+  REGISTRATION = '#/register',
+  ERROR = '#/error',
+}
