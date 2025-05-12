@@ -1,6 +1,7 @@
-import bestPriceIcon from '@/assets/icons/best-price.png';
-import fastDeliveryIcon from '@/assets/icons/fast-delivery.png';
-import freshProductsIcon from '@/assets/icons/fresh-products.png';
+import fastDeliveryIcon from '@/assets/icons/fast-delivery.svg';
+import freshProductsIcon from '@/assets/icons/fresh-products.svg';
+import naturalIngredients from '@/assets/icons/natural-ingredients.svg';
+import wholesaleSale from '@/assets/icons/wholesale-offer.svg';
 import { BaseComponent } from '@/components/base/component';
 import { SUBHEADER_PROMO_TEXT } from '@/constants/constants';
 import { SUBHEADER_STYLES } from '@/styles/header/subheader';
@@ -17,7 +18,8 @@ export default class Promo extends BaseComponent {
     const promoItems = [
       { icon: fastDeliveryIcon, text: SUBHEADER_PROMO_TEXT.DELIVERY },
       { icon: freshProductsIcon, text: SUBHEADER_PROMO_TEXT.FRESH },
-      { icon: bestPriceIcon, text: SUBHEADER_PROMO_TEXT.PRICE },
+      { icon: wholesaleSale, text: SUBHEADER_PROMO_TEXT.WHOLESALE },
+      { icon: naturalIngredients, text: SUBHEADER_PROMO_TEXT.INGREDIENTS },
     ];
 
     for (const item of promoItems) {
