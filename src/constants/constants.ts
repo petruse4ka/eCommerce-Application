@@ -12,3 +12,9 @@ export const AUTHORIZATION_MENU_TEXT = {
   LOGIN: 'Войти',
   REGISTRATION: 'Регистрация',
 };
+
+export const MENU_TEXT = {
+  HOME: 'Главная',
+  ABOUT: 'О нас',
+  CONTACTS: 'Контакты',
+};

@@ -1,16 +1,19 @@
-import logo from '@/assets/logo/logo-main.png';
+import { BaseComponent } from '@/components/base/component';
 import { HEADER_STYLES } from '@/styles/header/header';
 import { ElementBuilder } from '@/utils/element-builder';
-import { ImageBuilder } from '@/utils/image-builder';
 
-import { BaseComponent } from '../base/component';
+import Logo from './logo';
+import MainMenu from './main-menu';
 import SubHeader from './subheader';
 
 export default class Header extends BaseComponent {
   private subHeader: SubHeader;
 
   constructor() {
-    super({ tag: 'header', className: HEADER_STYLES.HEADER });
+    super({
+      tag: 'header',
+      className: HEADER_STYLES.HEADER,
+    });
     this.subHeader = new SubHeader();
     this.render();
   }
@@ -21,13 +24,10 @@ export default class Header extends BaseComponent {
       className: HEADER_STYLES.HEADER_CONTAINER,
     }).getElement();
 
-    const logoElement = new ImageBuilder({
-      className: HEADER_STYLES.LOGO,
-      source: logo,
-      alt: 'Logo of the Macaron Shop',
-    }).getElement();
+    const logo = new Logo();
+    const mainMenu = new MainMenu();
 
-    headerContainer.append(logoElement);
+    headerContainer.append(logo.getElement(), mainMenu.getElement());
     this.component.append(this.subHeader.getElement(), headerContainer);
   }
 }
