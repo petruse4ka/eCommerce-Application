@@ -22,7 +22,7 @@ export default class Header extends BaseComponent {
     }).getElement();
 
     const logoElement = new ImageBuilder({
-      className: '',
+      className: HEADER_STYLES.LOGO,
       source: logo,
       alt: 'Logo of the Macaron Shop',
     }).getElement();
