@@ -1,3 +1,6 @@
+import { Route } from '@/types/enums';
+import type { MenuItem } from '@/types/interfaces';
+
 export const MIN_AGE = 13;
 export const MAX_AGE = 130;
 export const MIN_PASSWORD_LENGTH = 8;
@@ -19,3 +22,9 @@ export const MENU_TEXT = {
   ABOUT: 'О нас',
   CONTACTS: 'Контакты',
 };
+
+export const MENU_ITEMS: MenuItem[] = [
+  { name: MENU_TEXT.HOME, route: Route.HOME },
+  { name: MENU_TEXT.ABOUT, route: Route.ABOUT },
+  { name: MENU_TEXT.CONTACTS, route: Route.CONTACTS },
+];
