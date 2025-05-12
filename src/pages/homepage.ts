@@ -1,6 +1,7 @@
 import '@/styles/main.css';
 
 import macaronImage from '@/assets/favicons/original.png';
+import Alert from '@/components/alert/alert';
 import { BaseComponent } from '@/components/base/component';
 import { Button } from '@/components/buttons/button';
 import { Input } from '@/components/inputs/input';
@@ -60,7 +61,6 @@ export class HomePage extends BaseComponent {
       textContent: 'Button Disabled',
       callback: (): void => console.log('Disabled button clicked'),
     });
-
     buttonDisabled.disableButton();
 
     buttonContainer.append(
@@ -80,6 +80,12 @@ export class HomePage extends BaseComponent {
       id: 'name',
       isRequired: false,
       type: InputType.TEXT,
+    });
+
+    Alert.render({
+      textContent: "A duplicate value 'user@example.com' exists for field 'email'.",
+      status: true,
+      visibleTime: 3000,
     });
 
     const inputContainer = new ElementBuilder({
