@@ -26,6 +26,7 @@ export enum ApiMethods {
 
 export enum ApiEndpoint {
   AUTHENTICATION = '/oauth/token',
+  REGISTRATION = '/me/signup',
 }
 
 export enum ContentType {
