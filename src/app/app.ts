@@ -1,4 +1,5 @@
 import { BaseComponent } from '@/components/base/component';
+import Footer from '@/components/footer';
 import Header from '@/components/header/header';
 import { ErrorPage } from '@/pages/404';
 import { HomePage } from '@/pages/homepage';
@@ -10,6 +11,7 @@ import { Route } from '@/types/enums';
 
 export class App extends BaseComponent {
   private header: Header;
+  private footer: Footer;
   private homePage: HomePage = new HomePage();
   private loginPage: LoginPage = new LoginPage();
   private registrationPage: RegistrationPage = new RegistrationPage();
@@ -22,11 +24,16 @@ export class App extends BaseComponent {
     this.router = new Router(Route.HOME);
     this.setupRoutes();
     this.header = new Header();
+    this.footer = new Footer();
     this.render();
   }
 
   protected render(): void {
-    this.component.append(this.header.getElement(), this.currentPage.getElement());
+    this.component.append(
+      this.header.getElement(),
+      this.currentPage.getElement(),
+      this.footer.getElement()
+    );
   }
 
   private setupRoutes(): void {
