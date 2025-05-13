@@ -50,10 +50,11 @@ export interface RegistrationResponse {
 }
 
 export interface InputComponent {
-  placeholder: string;
+  placeholder?: string;
+  className?: string | string[];
   id: string;
-  type: string;
-  callback: () => void;
+  type: InputType;
+  callback: (event: Event) => void;
   labelText: string;
   isRequired?: boolean;
   value?: string;
