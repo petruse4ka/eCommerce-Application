@@ -1,4 +1,4 @@
-import type { ButtonType, InputType } from './enums';
+import type { ButtonType, InputType, Route } from './enums';
 
 export interface ElementParameters {
   tag: string;
@@ -50,4 +50,9 @@ export interface InputComponent {
   labelText: string;
   isRequired?: boolean;
   value?: string;
+}
+
+export interface MenuItem {
+  name: string;
+  route: Route;
 }
