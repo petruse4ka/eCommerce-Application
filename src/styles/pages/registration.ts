@@ -1,5 +1,6 @@
 export const CONTAINER = [
   'min-h-screen',
+  'relative',
   'font-roboto',
   'bg-pink',
   'bg-[url(@/assets/img/bg-macarons.png)]',

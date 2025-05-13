@@ -1,0 +1,25 @@
+export const HEADER_STYLES = {
+  HEADER: [],
+  HEADER_CONTAINER: [
+    'max-w-[1440px]',
+    'mx-auto',
+    'px-3',
+    'py-3',
+    'flex',
+    'items-center',
+    'md:px-4',
+    'md:py-4',
+  ],
+  LOGO: ['w-[80px]', 'sm:w-[110px]', 'md:w-[120px]'],
+  MAIN_MENU: ['flex', 'flex-1', 'justify-center', 'gap-6', 'md:gap-8', 'sm:gap-4'],
+  MENU_ITEM: [
+    'cursor-pointer',
+    'text-dark',
+    'hover:text-accent',
+    'uppercase',
+    'transition-colors',
+    'duration-300',
+    'text-[12px]',
+    'md:text-[14px]',
+  ],
+};

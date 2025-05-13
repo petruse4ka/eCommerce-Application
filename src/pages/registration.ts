@@ -1,17 +1,17 @@
 import '@/styles/main.css';
 
+import { BaseComponent } from '@/components/base/component';
 import FormRegistration from '@/components/forms/registration';
 import Overlay from '@/components/overlay/overlay';
 import { CONTAINER, FORM_CONTAINER, TITLE } from '@/styles/pages/registration';
 
 import { ElementBuilder } from '../utils/element-builder';
 
-export default class RegistrationPage {
-  private container: ElementBuilder;
+export default class RegistrationPage extends BaseComponent {
   private overlay: HTMLElement;
 
   constructor() {
-    this.container = new ElementBuilder({
+    super({
       tag: 'div',
       className: CONTAINER,
     });
@@ -19,10 +19,6 @@ export default class RegistrationPage {
     this.overlay = new Overlay().getElement();
 
     this.renderForm();
-  }
-
-  public getElement(): HTMLElement {
-    return this.container.getElement();
   }
 
   private renderForm(): void {
@@ -41,6 +37,6 @@ export default class RegistrationPage {
 
     formContainer.append(title, form);
 
-    this.container.getElement().append(formContainer, this.overlay);
+    this.component.append(formContainer, this.overlay);
   }
 }
