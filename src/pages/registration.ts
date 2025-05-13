@@ -1,36 +1,42 @@
 import '@/styles/main.css';
 
+import { BaseComponent } from '@/components/base/component';
+import FormRegistration from '@/components/forms/registration';
+import Overlay from '@/components/overlay/overlay';
+import { CONTAINER, FORM_CONTAINER, TITLE } from '@/styles/pages/registration';
+
 import { ElementBuilder } from '../utils/element-builder';
 
-export class HomePage {
-  private container: ElementBuilder;
+export default class RegistrationPage extends BaseComponent {
+  private overlay: HTMLElement;
 
   constructor() {
-    this.container = new ElementBuilder({
+    super({
       tag: 'div',
-      className: [
-        'min-h-screen',
-        'bg-[#1a1a2e]',
-        'text-[#e6e6e6]',
-        'font-roboto',
-        'text-base',
-        'leading-normal',
-      ],
+      className: CONTAINER,
     });
-    this.render();
+
+    this.overlay = new Overlay().getElement();
+
+    this.renderForm();
   }
 
-  public getElement(): HTMLElement {
-    return this.container.getElement();
-  }
-
-  private render(): void {
-    const title = new ElementBuilder({
-      tag: 'h1',
-      className: ['text-3xl', 'font-bold', 'p-4'],
-      textContent: 'Registration',
+  private renderForm(): void {
+    const formContainer = new ElementBuilder({
+      tag: 'div',
+      className: FORM_CONTAINER,
     }).getElement();
 
-    this.container.getElement().append(title);
+    const title = new ElementBuilder({
+      tag: 'h2',
+      className: TITLE,
+      textContent: 'Регистрация',
+    }).getElement();
+
+    const form = new FormRegistration().getElement();
+
+    formContainer.append(title, form);
+
+    this.component.append(formContainer, this.overlay);
   }
 }
