@@ -127,9 +127,9 @@ npm run dev
 This will launch the Vite development server to test that the project has been setup correctly.
 
 > ⚠️ **Important:** If your IDE shows TypeScript-related errors, make sure to check not only the installed TypeScript version but also the TypeScript configuration in your IDE. For **Visual Studio Code** select the TypeScript version by either:
-
-- Clicking the TypeScript version number in the bottom right corner and choosing "Use Workspace Version"
-- Or using the Command Palette (Ctrl+Shift+P or Cmd+Shift+P) and selecting "TypeScript: Select TypeScript Version" → "Use Workspace Version"
+>
+> - Clicking the TypeScript version number in the bottom right corner and choosing "Use Workspace Version"
+> - Or using the Command Palette (Ctrl+Shift+P or Cmd+Shift+P) and selecting "TypeScript: Select TypeScript Version" → "Use Workspace Version"
 
 ## 🎨 Tailwind CSS Development Setup
 

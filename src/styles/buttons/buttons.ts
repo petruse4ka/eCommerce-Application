@@ -3,7 +3,6 @@ const STANDARD_BUTTON_STYLE = [
   'font-semibold',
   'text-[14px]',
   'border',
-  'w-[234px]',
   'px-3',
   'py-4',
   'rounded-[3px]',

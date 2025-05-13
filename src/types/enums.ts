@@ -51,6 +51,13 @@ export enum ErrorMessages {
   PASSWORD_LENGTH = '${} символов',
 }
 
+export enum Route {
+  HOME = '#/',
+  LOGIN = '#/login',
+  REGISTRATION = '#/register',
+  ERROR = '#/error',
+}
+
 export enum AlertStatus {
   ERROR = 'ERROR',
   SUCCESS = 'SUCCESS',
