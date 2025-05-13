@@ -1,0 +1,67 @@
+import { InputType } from '@/types/enums';
+
+export const INPUTS_REGISTRATION_DATA = [
+  {
+    id: 'first-name',
+    labelText: 'Ваше имя',
+    placeholder: 'Укажите имя',
+    type: InputType.TEXT,
+    isRequired: true,
+    callback: (): void => console.log('Primary button clicked'),
+  },
+  {
+    id: 'last-name',
+    labelText: 'Ваша фамилия',
+    placeholder: 'Укажите фамилию',
+    type: InputType.TEXT,
+    isRequired: true,
+    callback: (): void => console.log('Primary button clicked'),
+  },
+  {
+    id: 'birthday',
+    labelText: 'День рождения',
+    type: InputType.DATE,
+    isRequired: true,
+    callback: (): void => console.log('Primary button clicked'),
+  },
+  {
+    id: 'email',
+    labelText: 'E-mail',
+    placeholder: 'Укажите e-mail',
+    type: InputType.EMAIL,
+    isRequired: true,
+    callback: (): void => console.log('Primary button clicked'),
+  },
+  {
+    id: 'password',
+    labelText: 'Придумайте пароль',
+    placeholder: 'Укажите пароль',
+    type: InputType.PASSWORD,
+    isRequired: true,
+    callback: (): void => console.log('Primary button clicked'),
+  },
+  {
+    id: 'city',
+    labelText: 'Ваш город',
+    placeholder: 'Укажите город',
+    type: InputType.TEXT,
+    isRequired: true,
+    callback: (): void => console.log('Primary button clicked'),
+  },
+  {
+    id: 'street',
+    labelText: 'Ваша улица',
+    placeholder: 'Укажите улицу',
+    type: InputType.TEXT,
+    isRequired: true,
+    callback: (): void => console.log('Primary button clicked'),
+  },
+  {
+    id: 'postal-code',
+    labelText: 'Ваш почтовый индекс',
+    placeholder: 'Укажите почтовый индекс',
+    type: InputType.NUMBER,
+    isRequired: true,
+    callback: (): void => console.log('Primary button clicked'),
+  },
+];

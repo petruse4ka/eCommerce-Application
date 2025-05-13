@@ -11,9 +11,25 @@ const STANDARD_INPUT_STYLE = [
 ];
 
 export const CUSTOM_INPUT_STYLE = {
-  INPUT_DEFAULT: [...STANDARD_INPUT_STYLE, 'border-gray', 'focus:border-black', 'text-black'],
+  INPUT_DEFAULT: [
+    ...STANDARD_INPUT_STYLE,
+    'border-gray',
+    'focus:border-black',
+    'text-black/50',
+    'placeholder-black/50',
+  ],
   INPUT_ERROR: [...STANDARD_INPUT_STYLE, 'border-accent', 'placeholder-accent', 'text-accent'],
 };
+
+export const ICON_IN_INPUT = [
+  'h-6',
+  'w-6',
+  'absolute',
+  'top-9.5',
+  'right-2',
+  'bg-[url(@/assets/icons/eye-outline.svg)]',
+  'hover:cursor-pointer',
+];
 
 const STANDARD_LABEL_STYLE = [
   'font-montserrat',

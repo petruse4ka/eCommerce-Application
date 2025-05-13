@@ -3,7 +3,7 @@ import Header from '@/components/header/header';
 import { ErrorPage } from '@/pages/404';
 import { HomePage } from '@/pages/homepage';
 import { LoginPage } from '@/pages/login';
-import { RegistrationPage } from '@/pages/registration';
+import RegistrationPage from '@/pages/registration';
 import { Router } from '@/router/router';
 import { APP_STYLE } from '@/styles/app/app';
 import { Route } from '@/types/enums';

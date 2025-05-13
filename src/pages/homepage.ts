@@ -3,7 +3,7 @@ import '@/styles/main.css';
 import macaronImage from '@/assets/favicons/original.png';
 import { BaseComponent } from '@/components/base/component';
 import { Button } from '@/components/buttons/button';
-import { Input } from '@/components/inputs/input';
+import Input from '@/components/inputs/input';
 import { InputType } from '@/types/enums';
 import { ElementBuilder } from '@/utils/element-builder';
 import { ImageBuilder } from '@/utils/image-builder';
