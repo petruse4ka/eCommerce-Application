@@ -19,7 +19,7 @@ export const STANDARD_ALERT_STYLE = [
 ];
 
 export const CUSTOM_ALERT_STYLE = {
-  ALERT__SUCCESS: [
+  ALERT_SUCCESS: [
     ...STANDARD_ALERT_STYLE,
     'bg-white',
     'text-black',
@@ -27,5 +27,8 @@ export const CUSTOM_ALERT_STYLE = {
     'border-t',
     'border-b',
   ],
-  ALERT__ERROR: [...STANDARD_ALERT_STYLE, 'bg-black', 'text-accent'],
+  ALERT_ERROR: [...STANDARD_ALERT_STYLE, 'bg-black', 'text-accent'],
+  ALERT_WARNING: [...STANDARD_ALERT_STYLE, 'bg-accent', 'text-black'],
+  ALERT_INFO: [...STANDARD_ALERT_STYLE, 'bg-secondary', 'text-white'],
+  ALERT_ICON: ['w-[25px]', 'h-[25px]'],
 };

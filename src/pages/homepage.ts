@@ -5,7 +5,7 @@ import Alert from '@/components/alert/alert';
 import { BaseComponent } from '@/components/base/component';
 import { Button } from '@/components/buttons/button';
 import { Input } from '@/components/inputs/input';
-import { InputType } from '@/types/enums';
+import { AlertStatus, InputType } from '@/types/enums';
 import { ElementBuilder } from '@/utils/element-builder';
 import { ImageBuilder } from '@/utils/image-builder';
 
@@ -84,7 +84,7 @@ export class HomePage extends BaseComponent {
 
     Alert.render({
       textContent: "A duplicate value 'user@example.com' exists for field 'email'.",
-      status: true,
+      status: AlertStatus.WARNING,
       visibleTime: 3000,
     });
 

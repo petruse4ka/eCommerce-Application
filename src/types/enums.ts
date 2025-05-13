@@ -50,3 +50,10 @@ export enum ErrorMessages {
   POSTAL_CODE_FORMAT = 'Почтовый индекс должен состоять из 6 цифр.',
   PASSWORD_LENGTH = '${} символов',
 }
+
+export enum AlertStatus {
+  ERROR = 'ERROR',
+  SUCCESS = 'SUCCESS',
+  WARNING = 'WARNING',
+  INFO = 'INFO',
+}
