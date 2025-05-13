@@ -57,3 +57,10 @@ export enum Route {
   REGISTRATION = '#/register',
   ERROR = '#/error',
 }
+
+export enum AlertStatus {
+  ERROR = 'ERROR',
+  SUCCESS = 'SUCCESS',
+  WARNING = 'WARNING',
+  INFO = 'INFO',
+}
