@@ -27,15 +27,15 @@ export default class Promo extends BaseComponent {
       }).getElement();
 
       const icon = new ImageBuilder({
-        source: item.icon,
-        alt: item.text,
+        source: item.ICON,
+        alt: item.TEXT,
         className: FOOTER_STYLES.PROMO_ICON,
       }).getElement();
 
       const text = new ElementBuilder({
         tag: 'span',
         className: '',
-        textContent: item.text,
+        textContent: item.TEXT,
       }).getElement();
 
       promoItem.append(icon, text);
