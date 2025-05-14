@@ -4,7 +4,7 @@ import { ElementBuilder } from './element-builder';
 
 export class InputBuilder extends ElementBuilder {
   constructor(parameters: Omit<InputParameters, 'tag'>) {
-    super({ ...parameters, tag: 'input' });
+    super({ ...parameters, tag: 'input', eventType: 'input' });
 
     this.element.id = parameters.id;
 

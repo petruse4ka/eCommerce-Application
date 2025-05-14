@@ -18,7 +18,7 @@ export const INPUTS_REGISTRATION_DATA = [
     callback: (): void => console.log('Primary button clicked'),
   },
   {
-    id: 'birthday',
+    id: 'date-of-birth',
     labelText: 'День рождения',
     type: InputType.DATE,
     isRequired: true,

@@ -1,14 +1,16 @@
+import API from '@/api/api';
 import { Button } from '@/components/buttons/button';
 import { INPUTS_REGISTRATION_DATA } from '@/components/data';
 import Input from '@/components/inputs/input';
 import { FORM, REGISTRATION_INPUTS_CONTAINER } from '@/styles/forms/forms';
-import type { InputComponent } from '@/types/interfaces';
+import type { InputComponent, RegistrationBody } from '@/types/interfaces';
 import { ElementBuilder } from '@/utils/element-builder';
 
 export default class FormRegistration {
   private form: HTMLElement;
   private userInfoContainer: HTMLElement;
   private INPUTS_DATA: InputComponent[];
+  private formValue: Map<string, string>;
 
   constructor() {
     this.INPUTS_DATA = INPUTS_REGISTRATION_DATA;
@@ -22,6 +24,8 @@ export default class FormRegistration {
       className: REGISTRATION_INPUTS_CONTAINER,
     }).getElement();
 
+    this.formValue = new Map();
+
     this.render();
   }
 
@@ -31,7 +35,7 @@ export default class FormRegistration {
 
   private createInputs(): void {
     for (const input of this.INPUTS_DATA) {
-      const { id, labelText, placeholder, type, isRequired, callback } = input;
+      const { id, labelText, placeholder, type, isRequired } = input;
 
       const inputNode = new Input({
         id,
@@ -39,10 +43,18 @@ export default class FormRegistration {
         placeholder,
         type,
         isRequired,
-        callback,
-      }).getElement();
+        callback: (): void => {
+          const key = id
+            .split('-')
+            .map((part, index) =>
+              index === 0 ? part : part.charAt(0).toUpperCase() + part.slice(1)
+            )
+            .join('');
+          this.formValue.set(key, inputNode.getValue());
+        },
+      });
 
-      this.userInfoContainer.append(inputNode);
+      this.userInfoContainer.append(inputNode.getElement());
     }
   }
 
@@ -50,10 +62,31 @@ export default class FormRegistration {
     const button = new Button({
       style: 'PRIMARY_PINK',
       textContent: 'Зарегестрироваться',
-      callback: (): void => {},
+      callback: (): void => {
+        this.submitForm();
+      },
     }).getElement();
     this.createInputs();
 
     this.form.append(this.userInfoContainer, button);
+  }
+
+  private submitForm(): void {
+    const body: RegistrationBody = {
+      firstName: this.formValue.get('firstName') ?? '',
+      lastName: this.formValue.get('lastName') ?? '',
+      dateOfBirth: this.formValue.get('dateOfBirth') ?? '',
+      email: this.formValue.get('email') ?? '',
+      password: this.formValue.get('password') ?? '',
+      addresses: [
+        {
+          country: 'RU',
+          city: this.formValue.get('city') ?? '',
+          streetName: this.formValue.get('streetName') ?? '',
+          postalCode: this.formValue.get('postalCode') ?? '',
+        },
+      ],
+    };
+    void API.userRegistration(body);
   }
 }

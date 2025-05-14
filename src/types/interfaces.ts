@@ -60,16 +60,18 @@ export interface InputComponent {
   value?: string;
 }
 
+export interface Addresses {
+  country: string;
+  city: string;
+  streetName: string;
+  postalCode: string;
+}
+
 export interface RegistrationBody {
   firstName: string;
   lastName: string;
   dateOfBirth: string;
   email: string;
   password: string;
-  addresses: {
-    country: string;
-    city: string;
-    streetName: string;
-    postalCode: string;
-  }[];
+  addresses: Addresses[];
 }

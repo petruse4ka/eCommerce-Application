@@ -1,4 +1,5 @@
-import { ApiEndpoint, ApiMethods, ContentType } from '@/types/enums';
+import Alert from '@/components/alert/alert';
+import { AlertStatus, ApiEndpoint, ApiMethods, ContentType } from '@/types/enums';
 import type { AuthResponse, RegistrationBody, RegistrationResponse } from '@/types/interfaces';
 
 const clientCredentials = btoa(
@@ -6,7 +7,7 @@ const clientCredentials = btoa(
 );
 
 export default class API {
-  public static async userRegistration(body: RegistrationBody): Promise<string> {
+  public static async userRegistration(body: RegistrationBody): Promise<string | void> {
     return await fetch(
       `${import.meta.env['VITE_CTP_API_URL']}/${import.meta.env['VITE_CTP_PROJECT_KEY']}${ApiEndpoint.REGISTRATION}`,
       {
@@ -18,8 +19,22 @@ export default class API {
         body: JSON.stringify(body),
       }
     )
-      .then((response) => response.json())
-      .then((body: RegistrationResponse) => body.id);
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Ooops...');
+        }
+
+        Alert.render({
+          textContent: 'You have successfully registered!',
+          status: AlertStatus.SUCCESS,
+          visibleTime: 3000,
+        });
+        return response.json();
+      })
+      .then((body: RegistrationResponse) => body.id)
+      .catch((error: Error) => {
+        console.log(error.message);
+      });
   }
 
   public static async authentication(): Promise<string> {
