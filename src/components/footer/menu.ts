@@ -1,5 +1,5 @@
 import { BaseComponent } from '@/components/base/component';
-import { FOOTER_MENU_TEXT } from '@/constants/constants';
+import { FOOTER_TEXTS } from '@/constants/constants';
 import { FOOTER_STYLES } from '@/styles/footer';
 import { ElementBuilder } from '@/utils/element-builder';
 
@@ -13,7 +13,7 @@ export default class Menu extends BaseComponent {
     const header = new ElementBuilder({
       tag: 'h3',
       className: FOOTER_STYLES.TITLE,
-      textContent: FOOTER_MENU_TEXT.TITLE,
+      textContent: FOOTER_TEXTS.MENU_TITLE,
     }).getElement();
 
     this.component.append(header);
@@ -23,7 +23,7 @@ export default class Menu extends BaseComponent {
       className: FOOTER_STYLES.MENU_LIST,
     }).getElement();
 
-    for (const text of Object.values(FOOTER_MENU_TEXT)) {
+    for (const text of Object.values(FOOTER_TEXTS.FOOTER_MENU_TEXT)) {
       const menuItem = new ElementBuilder({
         tag: 'li',
         className: FOOTER_STYLES.MENU_ITEM,

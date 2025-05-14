@@ -5,7 +5,7 @@ import handMade from '@/assets/icons/footer-love.svg';
 import freshProductsIcon from '@/assets/icons/fresh-products.svg';
 import naturalIngredients from '@/assets/icons/natural-ingredients.svg';
 import wholesaleSale from '@/assets/icons/wholesale-offer.svg';
-import { FOOTER_PROMO_TEXT, SUBHEADER_PROMO_TEXT } from '@/constants/constants';
+import { FOOTER_TEXTS, SUBHEADER_PROMO_TEXT } from '@/constants/constants';
 
 export const PROMO_ITEMS = [
   { icon: fastDeliveryIcon, text: SUBHEADER_PROMO_TEXT.DELIVERY },
@@ -15,7 +15,7 @@ export const PROMO_ITEMS = [
 ];
 
 export const FOOTER_PROMO_ITEMS = [
-  { icon: handMade, text: FOOTER_PROMO_TEXT.LOVE },
-  { icon: sameDayDelivery, text: FOOTER_PROMO_TEXT.DELIVERY },
-  { icon: almondFlour, text: FOOTER_PROMO_TEXT.INGREDIENTS },
+  { icon: handMade, text: FOOTER_TEXTS.FOOTER_PROMO_TEXT.LOVE },
+  { icon: sameDayDelivery, text: FOOTER_TEXTS.FOOTER_PROMO_TEXT.DELIVERY },
+  { icon: almondFlour, text: FOOTER_TEXTS.FOOTER_PROMO_TEXT.INGREDIENTS },
 ];
