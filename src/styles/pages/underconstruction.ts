@@ -15,3 +15,5 @@ export const TITLE_STYLE = [
   'p-4',
   'text-white',
 ];
+
+export const ASTRONAUT_STYLE = ['animate-shaking-img', 'origin-bottom', 'inline-block'];

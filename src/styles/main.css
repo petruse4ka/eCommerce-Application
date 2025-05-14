@@ -17,8 +17,7 @@
   --color-background: #e6e6e6;
   --animate-visible-right: animate-visible-right 1s ease-in-out;
   --animate-hidden-right: animate-hidden-right 1s ease-in-out forwards;
-  --shake-strength: 5px;
-  --rotate-angle: 5deg;
+  --animate-shaking-img: shaking-img 10s infinite ease-in-out;
 
   @keyframes animate-visible-right {
     0% {
@@ -39,32 +38,29 @@
       transform: translate(100%);
     }
   }
-}
 
-.shaking-img {
-  transform-origin: bottom center;
-  display: inline-block;
-  animation: rotate 10s infinite ease-in-out;
-}
+  @keyframes shaking-img {
+    0% {
+      transform: rotate(0deg);
+      translate: 0;
+    }
 
-@keyframes rotate {
-  0% {
-    transform: rotate(0deg);
-  }
+    15% {
+      transform: rotate(5deg);
+      translate: 0 -50%;
+    }
 
-  15% {
-    transform: rotate(var(--rotate-angle));
-  }
+    55% {
+      transform: rotate(calc(-15deg));
+    }
 
-  55% {
-    transform: rotate(calc(-1 * var(--rotate-angle)));
-  }
+    75% {
+      transform: rotate(18deg);
+    }
 
-  75% {
-    transform: rotate(var(--rotate-angle));
-  }
-
-  100% {
-    transform: rotate(0deg);
+    100% {
+      transform: rotate(0deg);
+      translate: 0;
+    }
   }
 }

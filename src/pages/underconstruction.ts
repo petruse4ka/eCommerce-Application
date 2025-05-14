@@ -5,7 +5,12 @@ import { BaseComponent } from '@/components/base/component';
 import { Button } from '@/components/buttons/button';
 import { UNDER_CONSTRACTION_TEXTS } from '@/constants/constants';
 import { Router } from '@/router/router';
-import { CONTAINER, MAIN_CONTAINER, TITLE_STYLE } from '@/styles/pages/underconstruction';
+import {
+  ASTRONAUT_STYLE,
+  CONTAINER,
+  MAIN_CONTAINER,
+  TITLE_STYLE,
+} from '@/styles/pages/underconstruction';
 import { Route } from '@/types/enums';
 import { ElementBuilder } from '@/utils/element-builder';
 import { ImageBuilder } from '@/utils/image-builder';
@@ -29,7 +34,7 @@ export class UnderConstaructionPage extends BaseComponent {
     }).getElement();
 
     const macaron = new ImageBuilder({
-      className: 'shaking-img',
+      className: ASTRONAUT_STYLE,
       source: macaronAstonaut,
       alt: 'astronaut macaron',
     }).getElement();
