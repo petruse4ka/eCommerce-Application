@@ -1,15 +1,16 @@
-export const CONTAINER = [
+export const STANDART_CONTAINER = [
   'flex',
   'flex-col',
   'items-center',
   'min-h-[550px]',
-  'bg-[var(--color-gray)]',
   'text-black',
   'text-base',
   'leading-normal',
 ];
 
-export const MAIN_CONTAINER = [
+export const CONTAINER = [...STANDART_CONTAINER, 'bg-[var(--color-gray)]'];
+
+export const STANDART_MAIN_CONTAINER = [
   'w-full',
   'md:min-h-[400px]',
   'relative',
@@ -17,11 +18,15 @@ export const MAIN_CONTAINER = [
   'flex',
   'justify-center',
   'items-end',
-  'bg-[url("./../assets/images/error-404.png")]',
   'bg-center',
   'bg-no-repeat',
   'bg-contain',
   'md:bg-auto',
+];
+
+export const MAIN_CONTAINER = [
+  ...STANDART_MAIN_CONTAINER,
+  'bg-[url("./../assets/images/error-404.png")]',
 ];
 
 export const CRUMB_STYLE = [
@@ -30,7 +35,7 @@ export const CRUMB_STYLE = [
   'transform',
   'origin-center',
   'absolute',
-  'animate-spin',
+  'md:animate-spin',
 ];
 
 export const TITLE_STYLE = ['text-2xl', 'md:text-3xl', 'font-bold', 'text-center', 'p-4'];

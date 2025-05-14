@@ -24,3 +24,8 @@ export const ERRORPAGE_TEXTS = {
   HOME: 'Домой!',
   SORRY: 'Извините, страница не найдена',
 };
+
+export const UNDER_CONSTRACTION_TEXTS = {
+  HOME: 'Домой!',
+  SORRY: 'Эта страница ещё в работе, но скоро всё будет готово!',
+};
