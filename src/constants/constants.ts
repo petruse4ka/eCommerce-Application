@@ -19,3 +19,9 @@ export const MENU_TEXT = {
   ABOUT: 'О нас',
   CONTACTS: 'Контакты',
 };
+
+export const FOOTER_PROMO_TEXT = {
+  LOVE: 'Готовим вручную и c любовью',
+  DELIVERY: 'Доставка в день заказа',
+  INGREDIENTS: '100% миндальная мука',
+};
