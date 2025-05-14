@@ -5,6 +5,7 @@ import crumbImg from '@/assets/images/error-crumb.png';
 import { BaseComponent } from '@/components/base/component';
 import { Button } from '@/components/buttons/button';
 import { ERRORPAGE_TEXTS } from '@/constants/constants';
+import { Router } from '@/router/router';
 import { CONTAINER, CRUMB_STYLE, MAIN_CONTAINER, TITLE_STYLE } from '@/styles/pages/errorpage';
 import { Route } from '@/types/enums';
 import { ElementBuilder } from '@/utils/element-builder';
@@ -47,7 +48,7 @@ export class ErrorPage extends BaseComponent {
       style: 'SECONDARY_BLUE',
       textContent: ERRORPAGE_TEXTS.HOME,
       callback: (): void => {
-        globalThis.location.hash = Route.HOME;
+        Router.followRoute(Route.HOME);
       },
     }).getElement();
 

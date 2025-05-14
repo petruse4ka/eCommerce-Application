@@ -4,6 +4,7 @@ import macaronAstonaut from '@/assets/images/astronaut.png';
 import { BaseComponent } from '@/components/base/component';
 import { Button } from '@/components/buttons/button';
 import { UNDER_CONSTRACTION_TEXTS } from '@/constants/constants';
+import { Router } from '@/router/router';
 import { CONTAINER, MAIN_CONTAINER, TITLE_STYLE } from '@/styles/pages/underconstruction';
 import { Route } from '@/types/enums';
 import { ElementBuilder } from '@/utils/element-builder';
@@ -39,7 +40,7 @@ export class UnderConstaructionPage extends BaseComponent {
       style: 'SECONDARY_BLUE',
       textContent: UNDER_CONSTRACTION_TEXTS.HOME,
       callback: (): void => {
-        globalThis.location.hash = Route.HOME;
+        Router.followRoute(Route.HOME);
       },
     }).getElement();
 
