@@ -40,7 +40,7 @@ export const FOOTER_STYLES = {
   ],
   PROMO_ICON: ['w-8', 'h-8'],
   MENU: ['flex', 'flex-col', 'items-center', 'lg:items-start', 'gap-6', 'w-full', 'col-span-1'],
-  MENU_LIST: ['flex', 'flex-col', 'items-center', 'lg:items-start', 'gap-2', 'w-full'],
+  MENU_LIST: ['flex', 'flex-col', 'items-center', 'lg:items-start', 'gap-3', 'w-full'],
   MENU_ITEM: [
     'cursor-pointer',
     'text-center',
