@@ -1,7 +1,7 @@
 import API from '@/api/api';
 import { Button } from '@/components/buttons/button';
-import { INPUTS_REGISTRATION_DATA } from '@/components/data';
 import Input from '@/components/inputs/input';
+import { INPUTS_REGISTRATION_DATA } from '@/data';
 import { FORM, REGISTRATION_INPUTS_CONTAINER } from '@/styles/forms/forms';
 import type { InputComponent, RegistrationBody } from '@/types/interfaces';
 import { ElementBuilder } from '@/utils/element-builder';
