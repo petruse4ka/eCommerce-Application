@@ -2,6 +2,7 @@ import { BaseComponent } from '@/components/base/component';
 import { FOOTER_STYLES } from '@/styles/footer';
 import { ElementBuilder } from '@/utils/element-builder';
 
+import Menu from './menu';
 import Promo from './promo';
 
 export default class Footer extends BaseComponent {
@@ -20,8 +21,9 @@ export default class Footer extends BaseComponent {
     }).getElement();
 
     const promo = new Promo();
+    const menu = new Menu();
 
-    footerContainer.append(promo.getElement());
+    footerContainer.append(menu.getElement(), promo.getElement());
 
     this.component.append(footerContainer);
   }

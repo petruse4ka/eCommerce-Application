@@ -21,7 +21,17 @@ export const MENU_TEXT = {
 };
 
 export const FOOTER_PROMO_TEXT = {
-  LOVE: 'Готовим вручную и c любовью',
+  TITLE: 'Наши Преимущества',
+  LOVE: 'Приготовлено c любовью',
   DELIVERY: 'Доставка в день заказа',
   INGREDIENTS: '100% миндальная мука',
+};
+
+export const FOOTER_MENU_TEXT = {
+  TITLE: 'Полезная информация',
+  ABOUT: 'О компании',
+  DELIVERY: 'Доставка и оплата',
+  PRIVACY: 'Условия Конфиденциальности',
+  RETURN: 'Возврат заказа',
+  CONTACTS: 'Наши контакты',
 };

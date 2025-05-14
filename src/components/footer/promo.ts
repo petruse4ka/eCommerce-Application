@@ -1,4 +1,5 @@
 import { BaseComponent } from '@/components/base/component';
+import { FOOTER_PROMO_TEXT } from '@/constants/constants';
 import { FOOTER_PROMO_ITEMS } from '@/data';
 import { FOOTER_STYLES } from '@/styles/footer';
 import { ElementBuilder } from '@/utils/element-builder';
@@ -11,6 +12,14 @@ export default class Promo extends BaseComponent {
   }
 
   protected render(): void {
+    const header = new ElementBuilder({
+      tag: 'h3',
+      className: FOOTER_STYLES.TITLE,
+      textContent: FOOTER_PROMO_TEXT.TITLE,
+    }).getElement();
+
+    this.component.append(header);
+
     for (const item of FOOTER_PROMO_ITEMS) {
       const promoItem = new ElementBuilder({
         tag: 'div',
