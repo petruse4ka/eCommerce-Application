@@ -50,7 +50,7 @@ export class App extends BaseComponent {
     if (this.currentPage !== newPage) {
       this.currentPage.getElement().remove();
       this.currentPage = newPage;
-      this.component.append(this.currentPage.getElement());
+      this.component.insertBefore(this.currentPage.getElement(), this.footer.getElement());
     }
   }
 }
