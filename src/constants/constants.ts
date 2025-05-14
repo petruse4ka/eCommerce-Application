@@ -19,3 +19,8 @@ export const MENU_TEXT = {
   ABOUT: 'О нас',
   CONTACTS: 'Контакты',
 };
+
+export const ERRORPAGE_TEXTS = {
+  HOME: 'Домой!',
+  SORRY: 'Извините, страница не найдена',
+};

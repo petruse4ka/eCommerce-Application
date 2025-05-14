@@ -4,6 +4,8 @@ import macaronImg from '@/assets/images/error-big-macaron.png';
 import crumbImg from '@/assets/images/error-crumb.png';
 import { BaseComponent } from '@/components/base/component';
 import { Button } from '@/components/buttons/button';
+import { ERRORPAGE_TEXTS } from '@/constants/constants';
+import { CONTAINER, CRUMB_STYLE, MAIN_CONTAINER, TITLE_STYLE } from '@/styles/pages/errorpage';
 import { Route } from '@/types/enums';
 import { ElementBuilder } from '@/utils/element-builder';
 import { ImageBuilder } from '@/utils/image-builder';
@@ -12,16 +14,7 @@ export class ErrorPage extends BaseComponent {
   constructor() {
     super({
       tag: 'div',
-      className: [
-        'flex',
-        'flex-col',
-        'items-center',
-        'min-h-[550px]',
-        'bg-[var(--color-gray)]',
-        'text-black',
-        'text-base',
-        'leading-normal',
-      ],
+      className: CONTAINER,
     });
 
     this.render();
@@ -30,19 +23,9 @@ export class ErrorPage extends BaseComponent {
   private render(): void {
     this.getTitle();
 
-    const containerStyle = [
-      'bg-[url("./../assets/images/error-404.png")]',
-      'bg-center',
-      'bg-no-repeat',
-      'min-h-[400px]',
-      'w-full',
-      'bg-contain',
-      'md:bg-auto',
-    ];
-
     const imageContainer = new ElementBuilder({
       tag: 'div',
-      className: ['relative', 'flex', 'justify-center', 'items-end', ...containerStyle],
+      className: MAIN_CONTAINER,
     }).getElement();
 
     const macaron = new ImageBuilder({
@@ -53,9 +36,8 @@ export class ErrorPage extends BaseComponent {
 
     imageContainer.append(macaron);
 
-    const crumbStyle = ['translate-x-full', '-translate-y-1/2', 'transform', 'origin-center'];
     const crumb = new ImageBuilder({
-      className: ['absolute', 'animate-spin', ...crumbStyle],
+      className: CRUMB_STYLE,
       source: crumbImg,
       alt: 'crumb',
     }).getElement();
@@ -63,9 +45,8 @@ export class ErrorPage extends BaseComponent {
 
     const returnButton = new Button({
       style: 'SECONDARY_BLUE',
-      textContent: 'На главную',
+      textContent: ERRORPAGE_TEXTS.HOME,
       callback: (): void => {
-        console.log(Route.HOME);
         globalThis.location.hash = Route.HOME;
       },
     }).getElement();
@@ -77,8 +58,8 @@ export class ErrorPage extends BaseComponent {
   private getTitle(): void {
     const title = new ElementBuilder({
       tag: 'h1',
-      className: ['text-2xl', 'text-center', 'font-montserrat', 'font-bold', 'p-4'],
-      textContent: 'Извините, страница не найдена',
+      className: TITLE_STYLE,
+      textContent: ERRORPAGE_TEXTS.SORRY,
     }).getElement();
     if (!(title instanceof HTMLHeadingElement)) {
       throw new TypeError('The element is not HTMLHeadingElement');
