@@ -59,6 +59,9 @@ export enum Route {
   ERROR = '#/error',
   ABOUT = '#/about',
   CONTACTS = '#/contacts',
+  DELIVERY = '#/delivery',
+  PRIVACY = '#/terms',
+  RETURN = '#/returns',
 }
 
 export enum AlertStatus {

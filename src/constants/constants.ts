@@ -63,6 +63,14 @@ export const MENU_ITEMS: MenuItem[] = [
   { name: MENU_TEXT.CONTACTS, route: Route.CONTACTS },
 ];
 
+export const FOOTER_MENU_ITEMS: MenuItem[] = [
+  { name: FOOTER_TEXTS.FOOTER_MENU_TEXT.ABOUT, route: Route.ABOUT },
+  { name: FOOTER_TEXTS.FOOTER_MENU_TEXT.DELIVERY, route: Route.DELIVERY },
+  { name: FOOTER_TEXTS.FOOTER_MENU_TEXT.PRIVACY, route: Route.PRIVACY },
+  { name: FOOTER_TEXTS.FOOTER_MENU_TEXT.RETURN, route: Route.RETURN },
+  { name: FOOTER_TEXTS.FOOTER_MENU_TEXT.CONTACTS, route: Route.CONTACTS },
+];
+
 export const BTN_TEXT = {
   REGISTRATION_PAGE: 'Зарегистрироваться',
   LOGIN_PAGE: 'Вход',

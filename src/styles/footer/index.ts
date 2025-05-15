@@ -43,6 +43,7 @@ export const FOOTER_STYLES = {
   MENU_LIST: ['flex', 'flex-col', 'items-center', 'lg:items-start', 'gap-3', 'w-full'],
   MENU_ITEM: [
     'cursor-pointer',
+    'text-[14px]',
     'text-center',
     'md:text-left',
     'hover:text-pink',
@@ -50,7 +51,6 @@ export const FOOTER_STYLES = {
     'duration-300',
     'ease-in-out',
   ],
-  MENU_LINK: ['text-[14px]'],
   TEAM: ['flex', 'flex-col', 'items-center', 'lg:items-start', 'gap-6', 'w-full', 'col-span-1'],
   TEAM_LIST: ['flex', 'flex-col', 'items-center', 'lg:items-start', 'gap-3', 'w-full'],
   TEAM_LINK: [

@@ -1,5 +1,6 @@
 import { BaseComponent } from '@/components/base/component';
-import { FOOTER_TEXTS } from '@/constants/constants';
+import { FOOTER_MENU_ITEMS, FOOTER_TEXTS } from '@/constants/constants';
+import { Router } from '@/router/router';
 import { FOOTER_STYLES } from '@/styles/footer';
 import { ElementBuilder } from '@/utils/element-builder';
 
@@ -23,19 +24,17 @@ export default class Menu extends BaseComponent {
       className: FOOTER_STYLES.MENU_LIST,
     }).getElement();
 
-    for (const text of Object.values(FOOTER_TEXTS.FOOTER_MENU_TEXT)) {
+    for (const item of FOOTER_MENU_ITEMS) {
       const menuItem = new ElementBuilder({
         tag: 'li',
         className: FOOTER_STYLES.MENU_ITEM,
+        textContent: item.name,
       }).getElement();
 
-      const link = new ElementBuilder({
-        tag: 'div',
-        className: FOOTER_STYLES.MENU_LINK,
-        textContent: text,
-      }).getElement();
+      menuItem.addEventListener('click', () => {
+        Router.followRoute(item.route);
+      });
 
-      menuItem.append(link);
       menuList.append(menuItem);
     }
 
