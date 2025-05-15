@@ -3,6 +3,8 @@
 
 @theme {
   --font-montserrat: 'Montserrat', sans-serif;
+
+  /* Colors */
   --color-white: #fff;
   --color-gray: #ededf0;
   --color-black: #1a1a2e;
@@ -15,6 +17,8 @@
   --color-secondary: #4e9dd3;
   --color-secondary-hover: #6aafdd;
   --color-background: #e6e6e6;
+
+  /* Animation */
   --animate-visible-right: animate-visible-right 1s ease-in-out;
   --animate-hidden-right: animate-hidden-right 1s ease-in-out forwards;
   --animate-shaking-img: shaking-img 10s infinite ease-in-out;

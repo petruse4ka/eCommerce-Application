@@ -1,26 +1,35 @@
 import { BaseComponent } from '@/components/base/component';
-import { PROMO_ITEMS } from '@/data';
-import { SUBHEADER_STYLES } from '@/styles/header/subheader';
+import { FOOTER_TEXTS } from '@/constants/constants';
+import { FOOTER_PROMO_ITEMS } from '@/data';
+import { FOOTER_STYLES } from '@/styles/footer';
 import { ElementBuilder } from '@/utils/element-builder';
 import { ImageBuilder } from '@/utils/image-builder';
 
 export default class Promo extends BaseComponent {
   constructor() {
-    super({ tag: 'div', className: SUBHEADER_STYLES.PROMO });
+    super({ tag: 'div', className: FOOTER_STYLES.PROMO });
     this.render();
   }
 
   protected render(): void {
-    for (const item of PROMO_ITEMS) {
+    const title = new ElementBuilder({
+      tag: 'h3',
+      className: FOOTER_STYLES.TITLE,
+      textContent: FOOTER_TEXTS.PROMO_TITLE,
+    }).getElement();
+
+    this.component.append(title);
+
+    for (const item of FOOTER_PROMO_ITEMS) {
       const promoItem = new ElementBuilder({
         tag: 'div',
-        className: SUBHEADER_STYLES.PROMO_ITEM,
+        className: FOOTER_STYLES.PROMO_ITEM,
       }).getElement();
 
       const icon = new ImageBuilder({
         source: item.ICON,
         alt: item.TEXT,
-        className: SUBHEADER_STYLES.PROMO_ICON,
+        className: FOOTER_STYLES.PROMO_ICON,
       }).getElement();
 
       const text = new ElementBuilder({
