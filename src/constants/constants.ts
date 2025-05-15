@@ -23,6 +23,11 @@ export const MENU_TEXT = {
   CONTACTS: 'Контакты',
 };
 
+export const AUTHORIZATION_MENU_ITEMS: MenuItem[] = [
+  { name: AUTHORIZATION_MENU_TEXT.LOGIN, route: Route.LOGIN },
+  { name: AUTHORIZATION_MENU_TEXT.REGISTRATION, route: Route.REGISTRATION },
+];
+
 export const ERRORPAGE_TEXTS = {
   HOME: 'Вернуться домой',
   SORRY: 'Извините, страница не найдена',
