@@ -1,6 +1,7 @@
 import API from '@/api/api';
 import { Button } from '@/components/buttons/button';
 import Input from '@/components/inputs/input';
+import { BTN_TEXT } from '@/constants/constants';
 import { INPUTS_REGISTRATION_DATA } from '@/data';
 import { FORM, REGISTRATION_INPUTS_CONTAINER } from '@/styles/forms/forms';
 import type { InputComponent, RegistrationBody } from '@/types/interfaces';
@@ -43,6 +44,7 @@ export default class FormRegistration {
         placeholder,
         type,
         isRequired,
+        eventType: 'input',
         callback: (): void => {
           const key = id
             .split('-')
@@ -61,7 +63,7 @@ export default class FormRegistration {
   private render(): void {
     const button = new Button({
       style: 'PRIMARY_PINK',
-      textContent: 'Зарегестрироваться',
+      textContent: BTN_TEXT.REGISTRATION_PAGE,
       callback: (): void => {
         this.submitForm();
       },

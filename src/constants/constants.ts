@@ -19,3 +19,7 @@ export const MENU_TEXT = {
   ABOUT: 'О нас',
   CONTACTS: 'Контакты',
 };
+
+export const BTN_TEXT = {
+  REGISTRATION_PAGE: 'Зарегистрироваться',
+};

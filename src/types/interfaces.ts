@@ -16,6 +16,7 @@ export interface InputParameters extends ElementParameters {
   placeholder?: string;
   readonly?: boolean;
   required?: boolean;
+  eventType?: string;
 }
 
 export interface ImageParameters extends ElementParameters {
@@ -58,6 +59,7 @@ export interface InputComponent {
   labelText: string;
   isRequired?: boolean;
   value?: string;
+  eventType?: string;
 }
 
 export interface Addresses {
