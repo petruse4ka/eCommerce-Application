@@ -25,7 +25,7 @@ export default class API {
         }
 
         Alert.render({
-          textContent: 'You have successfully registered!',
+          textContent: 'Вы успешно зарегистрировались!',
           status: AlertStatus.SUCCESS,
           visibleTime: 3000,
         });
