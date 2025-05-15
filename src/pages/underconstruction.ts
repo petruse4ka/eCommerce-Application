@@ -3,7 +3,7 @@ import '@/styles/main.css';
 import macaronAstonaut from '@/assets/images/astronaut.png';
 import { BaseComponent } from '@/components/base/component';
 import { Button } from '@/components/buttons/button';
-import { UNDER_CONSTRACTION_TEXTS } from '@/constants/constants';
+import { UNDER_CONSTRUCTION_TEXTS } from '@/constants/constants';
 import { Router } from '@/router/router';
 import {
   ASTRONAUT_STYLE,
@@ -15,7 +15,7 @@ import { Route } from '@/types/enums';
 import { ElementBuilder } from '@/utils/element-builder';
 import { ImageBuilder } from '@/utils/image-builder';
 
-export class UnderConstaructionPage extends BaseComponent {
+export default class UnderConstructionPage extends BaseComponent {
   constructor() {
     super({
       tag: 'div',
@@ -23,6 +23,10 @@ export class UnderConstaructionPage extends BaseComponent {
     });
 
     this.render();
+  }
+
+  public override getElement(): HTMLElement {
+    return this.component;
   }
 
   private render(): void {
@@ -42,8 +46,8 @@ export class UnderConstaructionPage extends BaseComponent {
     imageContainer.append(macaron);
 
     const returnButton = new Button({
-      style: 'SECONDARY_BLUE',
-      textContent: UNDER_CONSTRACTION_TEXTS.HOME,
+      style: 'SECONDARY_BLUE_DARK',
+      textContent: UNDER_CONSTRUCTION_TEXTS.HOME,
       callback: (): void => {
         Router.followRoute(Route.HOME);
       },
@@ -57,11 +61,9 @@ export class UnderConstaructionPage extends BaseComponent {
     const title = new ElementBuilder({
       tag: 'h1',
       className: TITLE_STYLE,
-      textContent: UNDER_CONSTRACTION_TEXTS.SORRY,
+      textContent: UNDER_CONSTRUCTION_TEXTS.SORRY,
     }).getElement();
-    if (!(title instanceof HTMLHeadingElement)) {
-      throw new TypeError('The element is not HTMLHeadingElement');
-    }
+
     this.component.append(title);
   }
 }
