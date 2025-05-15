@@ -25,8 +25,11 @@ export enum ApiMethods {
 }
 
 export enum ApiEndpoint {
-  AUTHENTICATION = '/oauth/token',
+  OATH = '/oauth/',
+  AUTHENTICATION = `${OATH}token`,
   REGISTRATION = '/me/signup',
+  LOGIN = '/me/login',
+  USER = '/customers/token',
 }
 
 export enum ContentType {
@@ -66,4 +69,9 @@ export enum AlertStatus {
   SUCCESS = 'SUCCESS',
   WARNING = 'WARNING',
   INFO = 'INFO',
+}
+
+export enum AlertText {
+  REGISTRATION_SUCCESS = 'Вы успешно зарегистрировались!',
+  AUTHORIZATION_SUCCESS = 'Вы успешно авторизовались!',
 }

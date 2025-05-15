@@ -43,11 +43,13 @@ export interface AuthResponse {
   token_type: string;
 }
 
-export interface RegistrationResponse {
-  id: string;
-  version: number;
-  createdAt: string;
-  lastModifiedAt: string;
+export interface CustomerResponse {
+  customer: {
+    id: string;
+    version: number;
+    createdAt: string;
+    lastModifiedAt: string;
+  };
 }
 
 export interface InputComponent {
@@ -76,6 +78,11 @@ export interface RegistrationBody {
   email: string;
   password: string;
   addresses: Addresses[];
+}
+
+export interface AuthorizationBody {
+  email: string;
+  password: string;
 }
 
 export interface MenuItem {
