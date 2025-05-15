@@ -21,6 +21,6 @@ export const MENU_TEXT = {
 };
 
 export const ERRORPAGE_TEXTS = {
-  HOME: 'Домой!',
+  HOME: 'Вернуться домой',
   SORRY: 'Извините, страница не найдена',
 };

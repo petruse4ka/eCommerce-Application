@@ -2,18 +2,21 @@ export const CONTAINER = [
   'flex',
   'flex-col',
   'items-center',
-  'min-h-[550px]',
-  'bg-[var(--color-gray)]',
-  'text-black',
+  'pt-25',
+  'pb-15',
   'text-base',
   'leading-normal',
+  'bg-white',
+  'text-black',
+  'border-t',
+  'border-primary',
+  'flex-grow',
 ];
 
 export const MAIN_CONTAINER = [
   'w-full',
-  'md:min-h-[400px]',
   'relative',
-  'p-4',
+  'px-5',
   'flex',
   'justify-center',
   'items-end',
@@ -21,7 +24,9 @@ export const MAIN_CONTAINER = [
   'bg-center',
   'bg-no-repeat',
   'bg-contain',
-  'md:bg-auto',
+  'bg-origin-content',
+  'sm:bg-auto',
+  'mb-10',
 ];
 
 export const CRUMB_STYLE = [
@@ -33,4 +38,4 @@ export const CRUMB_STYLE = [
   'animate-spin',
 ];
 
-export const TITLE_STYLE = ['text-2xl', 'md:text-3xl', 'font-bold', 'text-center', 'p-4'];
+export const TITLE_STYLE = ['text-xl', 'sm:text-2xl', 'text-center', 'px-3', 'py-4'];
