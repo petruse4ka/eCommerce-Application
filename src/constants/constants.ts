@@ -43,3 +43,7 @@ export const MENU_ITEMS: MenuItem[] = [
   { name: MENU_TEXT.ABOUT, route: Route.ABOUT },
   { name: MENU_TEXT.CONTACTS, route: Route.CONTACTS },
 ];
+
+export const BTN_TEXT = {
+  REGISTRATION_PAGE: 'Зарегистрироваться',
+};
