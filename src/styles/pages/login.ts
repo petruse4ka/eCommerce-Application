@@ -23,9 +23,9 @@ export const FORM_CONTAINER = [
   'xl:py-10',
   'sm:px-10',
   'sm:py-5',
-  'px-3',
+  'sm:rounded-xl',
   'py-3',
-  'rounded-xl',
+  'px-[5px]',
   'my-5',
 ];
 
