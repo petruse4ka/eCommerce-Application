@@ -77,3 +77,22 @@ export const INPUTS_REGISTRATION_DATA = [
     callback: (): void => console.log('Primary button clicked'),
   },
 ];
+
+export const INPUTS_AUTHORIZATION_DATA = [
+  {
+    id: 'email',
+    labelText: 'E-mail',
+    placeholder: 'Укажите e-mail',
+    type: InputType.EMAIL,
+    isRequired: true,
+    callback: (): void => console.log('Primary button clicked'),
+  },
+  {
+    id: 'password',
+    labelText: 'Пароль',
+    placeholder: 'Укажите пароль',
+    type: InputType.PASSWORD,
+    isRequired: true,
+    callback: (): void => console.log('Primary button clicked'),
+  },
+];

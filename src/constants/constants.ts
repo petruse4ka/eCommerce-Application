@@ -46,4 +46,5 @@ export const MENU_ITEMS: MenuItem[] = [
 
 export const BTN_TEXT = {
   REGISTRATION_PAGE: 'Зарегистрироваться',
+  LOGIN_PAGE: 'Вход',
 };
