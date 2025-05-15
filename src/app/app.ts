@@ -1,8 +1,8 @@
 import { BaseComponent } from '@/components/base/component';
 import Header from '@/components/header/header';
-import { ErrorPage } from '@/pages/404';
 import AboutPage from '@/pages/about';
 import ContactsPage from '@/pages/contacts';
+import { ErrorPage } from '@/pages/errorpage';
 import HomePage from '@/pages/homepage';
 import { LoginPage } from '@/pages/login';
 import RegistrationPage from '@/pages/registration';

@@ -23,6 +23,11 @@ export const MENU_TEXT = {
   CONTACTS: 'Контакты',
 };
 
+export const ERRORPAGE_TEXTS = {
+  HOME: 'Вернуться домой',
+  SORRY: 'Извините, страница не найдена',
+};
+
 export const MENU_ITEMS: MenuItem[] = [
   { name: MENU_TEXT.HOME, route: Route.HOME },
   { name: MENU_TEXT.ABOUT, route: Route.ABOUT },
