@@ -1,4 +1,4 @@
-import type { ButtonType, InputType } from './enums';
+import type { ButtonType, InputType, Route } from './enums';
 
 export interface ElementParameters {
   tag: string;
@@ -76,4 +76,9 @@ export interface RegistrationBody {
   email: string;
   password: string;
   addresses: Addresses[];
+}
+
+export interface MenuItem {
+  name: string;
+  route: Route;
 }
