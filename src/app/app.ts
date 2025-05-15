@@ -3,10 +3,13 @@ import Footer from '@/components/footer';
 import Header from '@/components/header/header';
 import AboutPage from '@/pages/about';
 import ContactsPage from '@/pages/contacts';
+import DeliveryPage from '@/pages/delivery';
 import { ErrorPage } from '@/pages/errorpage';
 import HomePage from '@/pages/homepage';
 import { LoginPage } from '@/pages/login';
 import RegistrationPage from '@/pages/registration';
+import ReturnsPage from '@/pages/returns';
+import TermsPage from '@/pages/terms';
 import { Router } from '@/router/router';
 import { APP_STYLE } from '@/styles/app/app';
 import { Route } from '@/types/enums';
@@ -20,6 +23,9 @@ export class App extends BaseComponent {
   private aboutPage: AboutPage = new AboutPage();
   private registrationPage: RegistrationPage = new RegistrationPage();
   private errorPage: ErrorPage = new ErrorPage();
+  private deliveryPage: DeliveryPage = new DeliveryPage();
+  private termsPage: TermsPage = new TermsPage();
+  private returnsPage: ReturnsPage = new ReturnsPage();
   private router: Router;
   private currentPage: BaseComponent = this.homePage;
 
@@ -30,6 +36,9 @@ export class App extends BaseComponent {
     [Route.LOGIN, this.loginPage],
     [Route.REGISTRATION, this.registrationPage],
     [Route.ERROR, this.errorPage],
+    [Route.DELIVERY, this.deliveryPage],
+    [Route.TERMS, this.termsPage],
+    [Route.RETURNS, this.returnsPage],
   ]);
 
   constructor() {

@@ -60,8 +60,8 @@ export enum Route {
   ABOUT = '#/about',
   CONTACTS = '#/contacts',
   DELIVERY = '#/delivery',
-  PRIVACY = '#/terms',
-  RETURN = '#/returns',
+  TERMS = '#/terms',
+  RETURNS = '#/returns',
 }
 
 export enum AlertStatus {

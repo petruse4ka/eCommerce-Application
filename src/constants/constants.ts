@@ -36,8 +36,8 @@ export const FOOTER_TEXTS = {
   FOOTER_MENU_TEXT: {
     ABOUT: 'О компании',
     DELIVERY: 'Доставка и оплата',
-    PRIVACY: 'Условия Конфиденциальности',
-    RETURN: 'Возврат заказа',
+    TERMS: 'Условия Конфиденциальности',
+    RETURNS: 'Возврат заказа',
     CONTACTS: 'Наши контакты',
   },
 };
@@ -66,8 +66,8 @@ export const MENU_ITEMS: MenuItem[] = [
 export const FOOTER_MENU_ITEMS: MenuItem[] = [
   { name: FOOTER_TEXTS.FOOTER_MENU_TEXT.ABOUT, route: Route.ABOUT },
   { name: FOOTER_TEXTS.FOOTER_MENU_TEXT.DELIVERY, route: Route.DELIVERY },
-  { name: FOOTER_TEXTS.FOOTER_MENU_TEXT.PRIVACY, route: Route.PRIVACY },
-  { name: FOOTER_TEXTS.FOOTER_MENU_TEXT.RETURN, route: Route.RETURN },
+  { name: FOOTER_TEXTS.FOOTER_MENU_TEXT.TERMS, route: Route.TERMS },
+  { name: FOOTER_TEXTS.FOOTER_MENU_TEXT.RETURNS, route: Route.RETURNS },
   { name: FOOTER_TEXTS.FOOTER_MENU_TEXT.CONTACTS, route: Route.CONTACTS },
 ];
 
