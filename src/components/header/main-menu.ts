@@ -1,5 +1,6 @@
 import { BaseComponent } from '@/components/base/component';
-import { MENU_TEXT } from '@/constants/constants';
+import { MENU_ITEMS } from '@/constants/constants';
+import { Router } from '@/router/router';
 import { HEADER_STYLES } from '@/styles/header/header';
 import { ElementBuilder } from '@/utils/element-builder';
 
@@ -10,14 +11,18 @@ export default class MainMenu extends BaseComponent {
   }
 
   protected render(): void {
-    const menuItems = Object.values(MENU_TEXT).map((text) => {
-      return new ElementBuilder({
+    for (const item of MENU_ITEMS) {
+      const menuItem = new ElementBuilder({
         tag: 'span',
         className: HEADER_STYLES.MENU_ITEM,
-        textContent: text,
+        textContent: item.name,
       }).getElement();
-    });
 
-    this.component.append(...menuItems);
+      menuItem.addEventListener('click', () => {
+        Router.followRoute(item.route);
+      });
+
+      this.component.append(menuItem);
+    }
   }
 }

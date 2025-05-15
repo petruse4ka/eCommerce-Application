@@ -1,11 +1,18 @@
 import logo from '@/assets/logo/logo-main.svg';
 import { BaseComponent } from '@/components/base/component';
+import { Router } from '@/router/router';
 import { HEADER_STYLES } from '@/styles/header/header';
+import { Route } from '@/types/enums';
 import { ImageBuilder } from '@/utils/image-builder';
 
 export default class Logo extends BaseComponent {
   constructor() {
     super({ tag: 'div', className: '' });
+
+    this.component.addEventListener('click', () => {
+      Router.followRoute(Route.HOME);
+    });
+
     this.render();
   }
 
