@@ -27,3 +27,14 @@ export const AUTHORIZATION_MENU_ITEMS: MenuItem[] = [
   { name: AUTHORIZATION_MENU_TEXT.LOGIN, route: Route.LOGIN },
   { name: AUTHORIZATION_MENU_TEXT.REGISTRATION, route: Route.REGISTRATION },
 ];
+
+export const ERRORPAGE_TEXTS = {
+  HOME: 'Вернуться домой',
+  SORRY: 'Извините, страница не найдена',
+};
+
+export const MENU_ITEMS: MenuItem[] = [
+  { name: MENU_TEXT.HOME, route: Route.HOME },
+  { name: MENU_TEXT.ABOUT, route: Route.ABOUT },
+  { name: MENU_TEXT.CONTACTS, route: Route.CONTACTS },
+];

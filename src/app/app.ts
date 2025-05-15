@@ -1,9 +1,11 @@
 import { BaseComponent } from '@/components/base/component';
 import Header from '@/components/header/header';
-import { ErrorPage } from '@/pages/404';
-import { HomePage } from '@/pages/homepage';
+import AboutPage from '@/pages/about';
+import ContactsPage from '@/pages/contacts';
+import { ErrorPage } from '@/pages/errorpage';
+import HomePage from '@/pages/homepage';
 import { LoginPage } from '@/pages/login';
-import { RegistrationPage } from '@/pages/registration';
+import RegistrationPage from '@/pages/registration';
 import { Router } from '@/router/router';
 import { APP_STYLE } from '@/styles/app/app';
 import { Route } from '@/types/enums';
@@ -12,6 +14,8 @@ export class App extends BaseComponent {
   private header: Header;
   private homePage: HomePage = new HomePage();
   private loginPage: LoginPage = new LoginPage();
+  private contactPage: ContactsPage = new ContactsPage();
+  private aboutPage: AboutPage = new AboutPage();
   private registrationPage: RegistrationPage = new RegistrationPage();
   private errorPage: ErrorPage = new ErrorPage();
   private router: Router;
@@ -31,6 +35,10 @@ export class App extends BaseComponent {
 
   private setupRoutes(): void {
     this.router.addRoute(Route.HOME, () => this.showPage(this.homePage));
+
+    this.router.addRoute(Route.ABOUT, () => this.showPage(this.aboutPage));
+
+    this.router.addRoute(Route.CONTACTS, () => this.showPage(this.contactPage));
 
     this.router.addRoute(Route.LOGIN, () => this.showPage(this.loginPage));
 

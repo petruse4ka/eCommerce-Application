@@ -39,17 +39,17 @@ export class ElementBuilder {
     }
   }
 
-  private applyTextContent(text?: string): void {
-    if (text) {
-      this.element.textContent = text;
-    }
-  }
-
-  private applyAttributes(attributes: ElementParameters['attributes']): void {
+  public applyAttributes(attributes: ElementParameters['attributes']): void {
     if (attributes) {
       for (const [key, value] of Object.entries(attributes)) {
         this.element.setAttribute(key, value);
       }
+    }
+  }
+
+  private applyTextContent(text?: string): void {
+    if (text) {
+      this.element.textContent = text;
     }
   }
 
@@ -58,7 +58,10 @@ export class ElementBuilder {
     callback: ElementParameters['callback']
   ): void {
     if (eventType && callback) {
-      this.element.addEventListener(eventType, callback);
+      this.element.addEventListener(eventType, (event: Event) => {
+        event.preventDefault();
+        callback(event);
+      });
     }
   }
 }

@@ -6,6 +6,7 @@
   --color-white: #fff;
   --color-gray: #ededf0;
   --color-black: #1a1a2e;
+  --color-pink: #ca5166;
   --color-dark: #2b1414;
   --color-accent: #e7426a;
   --color-accent-hover: #f45d82;
@@ -13,4 +14,26 @@
   --color-secondary: #4e9dd3;
   --color-secondary-hover: #6aafdd;
   --color-background: #e6e6e6;
+  --animate-visible-right: animate-visible-right 1s ease-in-out;
+  --animate-hidden-right: animate-hidden-right 1s ease-in-out forwards;
+
+  @keyframes animate-visible-right {
+    0% {
+      transform: translate(100%);
+    }
+
+    100% {
+      transform: translate(0%);
+    }
+  }
+
+  @keyframes animate-hidden-right {
+    0% {
+      transform: translate(0%);
+    }
+
+    100% {
+      transform: translate(100%);
+    }
+  }
 }
