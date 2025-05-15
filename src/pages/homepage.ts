@@ -9,7 +9,7 @@ import { AlertStatus, InputType } from '@/types/enums';
 import { ElementBuilder } from '@/utils/element-builder';
 import { ImageBuilder } from '@/utils/image-builder';
 
-export class HomePage extends BaseComponent {
+export default class HomePage extends BaseComponent {
   constructor() {
     super({
       tag: 'div',
