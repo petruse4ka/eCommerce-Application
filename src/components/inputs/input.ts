@@ -1,4 +1,9 @@
-import { CUSTOM_INPUT_STYLE, CUSTOM_LABEL_STYLE, ICON_IN_INPUT } from '@/styles/inputs/inputs';
+import {
+  CUSTOM_INPUT_STYLE,
+  CUSTOM_LABEL_STYLE,
+  ERROR_MESSAGE_STYLE,
+  ICON_IN_INPUT,
+} from '@/styles/inputs/inputs';
 import { InputType } from '@/types/enums';
 import type { InputComponent } from '@/types/interfaces';
 import { ElementBuilder } from '@/utils/element-builder';
@@ -8,6 +13,7 @@ export default class Input {
   private container: ElementBuilder;
   private input: InputBuilder;
   private label: ElementBuilder;
+  private message: ElementBuilder;
   private isError: boolean;
   private icon: HTMLElement | undefined;
 
@@ -40,6 +46,11 @@ export default class Input {
     });
 
     this.container.getElement().append(this.label.getElement(), this.input.getElement());
+    this.message = new ElementBuilder({
+      tag: 'div',
+      className: ERROR_MESSAGE_STYLE,
+    });
+    this.container.getElement().append(this.message.getElement());
 
     if (type === InputType.PASSWORD) {
       this.addPasswordIcon(type);
