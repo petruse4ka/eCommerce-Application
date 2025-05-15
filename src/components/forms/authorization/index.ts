@@ -5,6 +5,7 @@ import { INPUTS_AUTHORIZATION_DATA } from '@/data';
 import { AUTHORIZATION_INPUTS_CONTAINER, FORM } from '@/styles/forms/forms';
 import type { InputComponent } from '@/types/interfaces';
 import { ElementBuilder } from '@/utils/element-builder';
+import { validateEMail, validatePassword } from '@/utils/validate';
 
 export default class FormAuthorization {
   private form: HTMLElement;
@@ -24,6 +25,42 @@ export default class FormAuthorization {
     }).getElement();
 
     this.render();
+  }
+
+  public static showValidationError(event: Event, type: string): void {
+    let validateFunction;
+    switch (type) {
+      case 'email': {
+        validateFunction = validateEMail;
+        break;
+      }
+      default: {
+        validateFunction = validatePassword;
+        break;
+      }
+    }
+    const field = event.target;
+    if (field instanceof HTMLInputElement) {
+      const errorMessage = validateFunction(field.value);
+      let errorElement = field.nextElementSibling;
+      while (!errorElement?.classList.contains('error-message')) {
+        if (errorElement) {
+          errorElement = errorElement.nextElementSibling;
+        } else {
+          break;
+        }
+      }
+      if (errorElement?.classList.contains('error-message')) {
+        errorElement.textContent = '';
+
+        if (errorMessage) {
+          errorElement.textContent = errorMessage;
+          field.after(errorElement);
+        }
+      }
+    } else {
+      throw new TypeError('field is not HTMLInputElement');
+    }
   }
 
   public getElement(): HTMLElement {

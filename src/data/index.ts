@@ -2,6 +2,7 @@ import fastDeliveryIcon from '@/assets/icons/fast-delivery.svg';
 import freshProductsIcon from '@/assets/icons/fresh-products.svg';
 import naturalIngredients from '@/assets/icons/natural-ingredients.svg';
 import wholesaleSale from '@/assets/icons/wholesale-offer.svg';
+import FormAuthorization from '@/components/forms/authorization';
 import { SUBHEADER_PROMO_TEXT } from '@/constants/constants';
 import { InputType } from '@/types/enums';
 
@@ -85,7 +86,9 @@ export const INPUTS_AUTHORIZATION_DATA = [
     placeholder: 'Укажите e-mail',
     type: InputType.EMAIL,
     isRequired: true,
-    callback: (): void => console.log('Primary button clicked'),
+    callback: (event: Event): void => {
+      FormAuthorization.showValidationError(event, 'email');
+    },
   },
   {
     id: 'password',
@@ -93,6 +96,8 @@ export const INPUTS_AUTHORIZATION_DATA = [
     placeholder: 'Укажите пароль',
     type: InputType.PASSWORD,
     isRequired: true,
-    callback: (): void => console.log('Primary button clicked'),
+    callback: (event: Event): void => {
+      FormAuthorization.showValidationError(event, 'password');
+    },
   },
 ];
