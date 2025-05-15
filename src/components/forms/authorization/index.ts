@@ -1,5 +1,6 @@
 import { Button } from '@/components/buttons/button';
 import Input from '@/components/inputs/input';
+import { BTN_TEXT } from '@/constants/constants';
 import { INPUTS_AUTHORIZATION_DATA } from '@/data';
 import { AUTHORIZATION_INPUTS_CONTAINER, FORM } from '@/styles/forms/forms';
 import type { InputComponent } from '@/types/interfaces';
@@ -40,6 +41,7 @@ export default class FormAuthorization {
         type,
         isRequired,
         callback,
+        eventType: 'input',
       }).getElement();
 
       this.userInfoContainer.append(inputNode);
@@ -49,7 +51,7 @@ export default class FormAuthorization {
   private render(): void {
     const button = new Button({
       style: 'PRIMARY_PINK',
-      textContent: 'Вход',
+      textContent: BTN_TEXT.LOGIN_PAGE,
       callback: (): void => {},
     }).getElement();
     this.createInputs();

@@ -26,6 +26,7 @@ export enum ApiMethods {
 
 export enum ApiEndpoint {
   AUTHENTICATION = '/oauth/token',
+  REGISTRATION = '/me/signup',
 }
 
 export enum ContentType {
@@ -56,6 +57,8 @@ export enum Route {
   LOGIN = '#/login',
   REGISTRATION = '#/register',
   ERROR = '#/error',
+  ABOUT = '#/about',
+  CONTACTS = '#/contacts',
 }
 
 export enum AlertStatus {

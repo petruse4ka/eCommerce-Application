@@ -1,3 +1,6 @@
+import { Route } from '@/types/enums';
+import type { MenuItem } from '@/types/interfaces';
+
 export const MIN_AGE = 13;
 export const MAX_AGE = 130;
 export const MIN_PASSWORD_LENGTH = 8;
@@ -18,4 +21,30 @@ export const MENU_TEXT = {
   HOME: 'Главная',
   ABOUT: 'О нас',
   CONTACTS: 'Контакты',
+};
+
+export const AUTHORIZATION_MENU_ITEMS: MenuItem[] = [
+  { name: AUTHORIZATION_MENU_TEXT.LOGIN, route: Route.LOGIN },
+  { name: AUTHORIZATION_MENU_TEXT.REGISTRATION, route: Route.REGISTRATION },
+];
+
+export const ERRORPAGE_TEXTS = {
+  HOME: 'Вернуться домой',
+  SORRY: 'Извините, страница не найдена',
+};
+
+export const UNDER_CONSTRUCTION_TEXTS = {
+  HOME: 'Вернуться домой',
+  SORRY: 'Эта страница ещё в работе, но скоро всё будет готово!',
+};
+
+export const MENU_ITEMS: MenuItem[] = [
+  { name: MENU_TEXT.HOME, route: Route.HOME },
+  { name: MENU_TEXT.ABOUT, route: Route.ABOUT },
+  { name: MENU_TEXT.CONTACTS, route: Route.CONTACTS },
+];
+
+export const BTN_TEXT = {
+  REGISTRATION_PAGE: 'Зарегистрироваться',
+  LOGIN_PAGE: 'Вход',
 };

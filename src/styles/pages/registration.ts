@@ -3,7 +3,7 @@ export const CONTAINER = [
   'relative',
   'font-roboto',
   'bg-pink',
-  'bg-[url(@/assets/img/bg-macarons.png)]',
+  'bg-[url(@/assets/images/bg-macarons.png)]',
   'bg-size-[auto_200px]',
   'md:bg-auto',
   'bg-top',

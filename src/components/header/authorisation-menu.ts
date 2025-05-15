@@ -1,5 +1,6 @@
 import { BaseComponent } from '@/components/base/component';
-import { AUTHORIZATION_MENU_TEXT } from '@/constants/constants';
+import { AUTHORIZATION_MENU_ITEMS } from '@/constants/constants';
+import { Router } from '@/router/router';
 import { SUBHEADER_STYLES } from '@/styles/header/subheader';
 import { ElementBuilder } from '@/utils/element-builder';
 
@@ -10,18 +11,18 @@ export default class AuthorizationMenu extends BaseComponent {
   }
 
   protected render(): void {
-    const loginItem = new ElementBuilder({
-      tag: 'span',
-      className: SUBHEADER_STYLES.AUTHORIZATION_ITEM,
-      textContent: AUTHORIZATION_MENU_TEXT.LOGIN,
-    }).getElement();
+    for (const item of AUTHORIZATION_MENU_ITEMS) {
+      const menuItem = new ElementBuilder({
+        tag: 'span',
+        className: SUBHEADER_STYLES.AUTHORIZATION_ITEM,
+        textContent: item.name,
+      }).getElement();
 
-    const registrationItem = new ElementBuilder({
-      tag: 'span',
-      className: SUBHEADER_STYLES.AUTHORIZATION_ITEM,
-      textContent: AUTHORIZATION_MENU_TEXT.REGISTRATION,
-    }).getElement();
+      menuItem.addEventListener('click', () => {
+        Router.followRoute(item.route);
+      });
 
-    this.component.append(loginItem, registrationItem);
+      this.component.append(menuItem);
+    }
   }
 }

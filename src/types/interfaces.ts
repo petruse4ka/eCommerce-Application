@@ -1,4 +1,4 @@
-import type { ButtonType, InputType } from './enums';
+import type { ButtonType, InputType, Route } from './enums';
 
 export interface ElementParameters {
   tag: string;
@@ -16,6 +16,7 @@ export interface InputParameters extends ElementParameters {
   placeholder?: string;
   readonly?: boolean;
   required?: boolean;
+  eventType?: string;
 }
 
 export interface ImageParameters extends ElementParameters {
@@ -42,6 +43,13 @@ export interface AuthResponse {
   token_type: string;
 }
 
+export interface RegistrationResponse {
+  id: string;
+  version: number;
+  createdAt: string;
+  lastModifiedAt: string;
+}
+
 export interface InputComponent {
   placeholder?: string;
   className?: string | string[];
@@ -51,4 +59,26 @@ export interface InputComponent {
   labelText: string;
   isRequired?: boolean;
   value?: string;
+  eventType?: string;
+}
+
+export interface Addresses {
+  country: string;
+  city: string;
+  streetName: string;
+  postalCode: string;
+}
+
+export interface RegistrationBody {
+  firstName: string;
+  lastName: string;
+  dateOfBirth: string;
+  email: string;
+  password: string;
+  addresses: Addresses[];
+}
+
+export interface MenuItem {
+  name: string;
+  route: Route;
 }
