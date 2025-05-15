@@ -23,7 +23,7 @@ export const MAIN_CONTAINER = [
   'bg-no-repeat',
   'bg-contain',
   'bg-origin-content',
-  'sm:bg-auto',
+  'bg-auto',
   'mb-10',
 ];
 
