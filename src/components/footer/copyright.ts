@@ -1,7 +1,7 @@
-import githubIcon from '@/assets/icons/github.svg';
+import rsLogo from '@/assets/logo/rs-school-logo.svg';
 import { BaseComponent } from '@/components/base/component';
 import { FOOTER_TEXTS } from '@/constants/constants';
-import { SCHOOL_URL, TEAM } from '@/data';
+import { SCHOOL_URL } from '@/data';
 import { FOOTER_STYLES } from '@/styles/footer';
 import { ElementBuilder } from '@/utils/element-builder';
 import { ImageBuilder } from '@/utils/image-builder';
@@ -23,48 +23,20 @@ export default class Copyright extends BaseComponent {
       className: FOOTER_STYLES.COPYRIGHT_LINK,
     }).getElement();
 
+    const logo = new ImageBuilder({
+      source: rsLogo,
+      alt: 'RS School Logo',
+      className: FOOTER_STYLES.COPYRIGHT_ICON,
+    }).getElement();
+
     const copyrightText = new ElementBuilder({
       tag: 'p',
-      className: FOOTER_STYLES.COPYRIGHT_TEXT,
+      className: '',
       textContent: FOOTER_TEXTS.COPYRIGHT,
     }).getElement();
 
-    copyrightLink.append(copyrightText);
+    copyrightLink.append(logo, copyrightText);
     return copyrightLink;
-  }
-
-  private static createLinksContainer(): HTMLElement {
-    const linksContainer = new ElementBuilder({
-      tag: 'div',
-      className: FOOTER_STYLES.COPYRIGHT_LINKS,
-    }).getElement();
-
-    for (const member of TEAM) {
-      const link = new LinkBuilder({
-        href: member.GITHUB,
-        target: '_blank',
-        className: FOOTER_STYLES.COPYRIGHT_LINK,
-      }).getElement();
-
-      const icon = new ImageBuilder({
-        source: githubIcon,
-        alt: 'GitHub Icon',
-        className: FOOTER_STYLES.COPYRIGHT_ICON,
-      }).getElement();
-
-      const name = new ElementBuilder({
-        tag: 'span',
-        className: '',
-        textContent: member.NICKNAME.includes('margaryta')
-          ? `${member.NICKNAME} (Mentor)`
-          : member.NICKNAME,
-      }).getElement();
-
-      link.append(icon, name);
-      linksContainer.append(link);
-    }
-
-    return linksContainer;
   }
 
   protected render(): void {
@@ -74,9 +46,8 @@ export default class Copyright extends BaseComponent {
     }).getElement();
 
     const copyrightLink = Copyright.createCopyrightLink();
-    const linksContainer = Copyright.createLinksContainer();
 
-    copyrightContainer.append(linksContainer, copyrightLink);
+    copyrightContainer.append(copyrightLink);
     this.component.append(copyrightContainer);
   }
 }

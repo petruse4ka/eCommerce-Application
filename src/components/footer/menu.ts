@@ -10,13 +10,13 @@ export default class Menu extends BaseComponent {
   }
 
   protected render(): void {
-    const header = new ElementBuilder({
+    const title = new ElementBuilder({
       tag: 'h3',
       className: FOOTER_STYLES.TITLE,
       textContent: FOOTER_TEXTS.MENU_TITLE,
     }).getElement();
 
-    this.component.append(header);
+    this.component.append(title);
 
     const menuList = new ElementBuilder({
       tag: 'ul',

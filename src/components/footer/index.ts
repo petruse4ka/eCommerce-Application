@@ -5,6 +5,7 @@ import { ElementBuilder } from '@/utils/element-builder';
 import Copyright from './copyright';
 import Menu from './menu';
 import Promo from './promo';
+import Team from './team';
 
 export default class Footer extends BaseComponent {
   constructor() {
@@ -24,8 +25,9 @@ export default class Footer extends BaseComponent {
     const promo = new Promo();
     const menu = new Menu();
     const copyright = new Copyright();
+    const team = new Team();
 
-    footerContainer.append(promo.getElement(), menu.getElement());
+    footerContainer.append(promo.getElement(), menu.getElement(), team.getElement());
 
     this.component.append(footerContainer, copyright.getElement());
   }

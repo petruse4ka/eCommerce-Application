@@ -23,6 +23,7 @@ export const MENU_TEXT = {
 export const FOOTER_TEXTS = {
   PROMO_TITLE: 'Наши Преимущества',
   MENU_TITLE: 'Полезная информация',
+  TEAM_TITLE: 'Наши Кондитеры',
   COPYRIGHT: 'JS/FE 2024Q4 | RS School',
   FOOTER_PROMO_TEXT: {
     LOVE: 'Приготовлено c любовью',

@@ -12,13 +12,13 @@ export default class Promo extends BaseComponent {
   }
 
   protected render(): void {
-    const header = new ElementBuilder({
+    const title = new ElementBuilder({
       tag: 'h3',
       className: FOOTER_STYLES.TITLE,
       textContent: FOOTER_TEXTS.PROMO_TITLE,
     }).getElement();
 
-    this.component.append(header);
+    this.component.append(title);
 
     for (const item of FOOTER_PROMO_ITEMS) {
       const promoItem = new ElementBuilder({
