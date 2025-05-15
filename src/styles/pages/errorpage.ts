@@ -1,32 +1,32 @@
-export const STANDART_CONTAINER = [
+export const CONTAINER = [
   'flex',
   'flex-col',
   'items-center',
-  'min-h-[550px]',
-  'text-black',
+  'pt-25',
+  'pb-15',
   'text-base',
   'leading-normal',
-];
-
-export const CONTAINER = [...STANDART_CONTAINER, 'bg-[var(--color-gray)]'];
-
-export const STANDART_MAIN_CONTAINER = [
-  'w-full',
-  'md:min-h-[400px]',
-  'relative',
-  'p-4',
-  'flex',
-  'justify-center',
-  'items-end',
-  'bg-center',
-  'bg-no-repeat',
-  'bg-contain',
-  'md:bg-auto',
+  'bg-white',
+  'text-black',
+  'border-t',
+  'border-primary',
+  'flex-grow',
 ];
 
 export const MAIN_CONTAINER = [
-  ...STANDART_MAIN_CONTAINER,
+  'w-full',
+  'relative',
+  'px-5',
+  'flex',
+  'justify-center',
+  'items-end',
   'bg-[url("./../assets/images/error-404.png")]',
+  'bg-center',
+  'bg-no-repeat',
+  'bg-contain',
+  'bg-origin-content',
+  'sm:bg-auto',
+  'mb-10',
 ];
 
 export const CRUMB_STYLE = [
@@ -35,7 +35,7 @@ export const CRUMB_STYLE = [
   'transform',
   'origin-center',
   'absolute',
-  'md:animate-spin',
+  'animate-spin',
 ];
 
-export const TITLE_STYLE = ['text-2xl', 'md:text-3xl', 'font-bold', 'text-center', 'p-4'];
+export const TITLE_STYLE = ['text-xl', 'sm:text-2xl', 'text-center', 'px-3', 'py-4'];

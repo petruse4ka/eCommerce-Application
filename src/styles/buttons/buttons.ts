@@ -1,7 +1,7 @@
 const STANDARD_BUTTON_STYLE = [
-  'font-montserrat',
   'font-semibold',
   'text-[14px]',
+  'min-w-[234px]',
   'border',
   'min-w-2xs',
   'px-8',
@@ -31,6 +31,14 @@ export const CUSTOM_BUTTON_STYLE = {
     'text-secondary',
     'border-secondary',
     'hover:bg-secondary-hover',
+    'hover:text-white',
+  ],
+  SECONDARY_PINK: [
+    ...STANDARD_BUTTON_STYLE,
+    'bg-white',
+    'text-accent',
+    'border-accent',
+    'hover:bg-accent-hover',
     'hover:text-white',
   ],
 };

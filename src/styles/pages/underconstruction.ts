@@ -1,9 +1,9 @@
-import { STANDART_CONTAINER, STANDART_MAIN_CONTAINER } from './errorpage';
+import { CONTAINER as ERROR_CONTAINER, MAIN_CONTAINER as ERROR_MAIN_CONTAINER } from './errorpage';
 
-export const CONTAINER = [...STANDART_CONTAINER, 'bg-[var(--color-purple)]'];
+export const CONTAINER = [...ERROR_CONTAINER, 'bg-[var(--color-purple)]'];
 
 export const MAIN_CONTAINER = [
-  ...STANDART_MAIN_CONTAINER,
+  ...ERROR_MAIN_CONTAINER,
   'bg-[url("./../assets/images/bg-space.png")]',
 ];
 

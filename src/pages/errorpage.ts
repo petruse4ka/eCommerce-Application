@@ -29,23 +29,24 @@ export class ErrorPage extends BaseComponent {
       className: MAIN_CONTAINER,
     }).getElement();
 
-    const macaron = new ImageBuilder({
+    const macaronImage = new ImageBuilder({
       className: '',
       source: macaronImg,
       alt: 'big sad macaron',
     }).getElement();
 
-    imageContainer.append(macaron);
+    imageContainer.append(macaronImage);
 
-    const crumb = new ImageBuilder({
+    const crumbImage = new ImageBuilder({
       className: CRUMB_STYLE,
       source: crumbImg,
       alt: 'crumb',
     }).getElement();
-    imageContainer.append(crumb);
+
+    imageContainer.append(crumbImage);
 
     const returnButton = new Button({
-      style: 'SECONDARY_BLUE',
+      style: 'SECONDARY_PINK',
       textContent: ERRORPAGE_TEXTS.HOME,
       callback: (): void => {
         Router.followRoute(Route.HOME);
@@ -62,9 +63,7 @@ export class ErrorPage extends BaseComponent {
       className: TITLE_STYLE,
       textContent: ERRORPAGE_TEXTS.SORRY,
     }).getElement();
-    if (!(title instanceof HTMLHeadingElement)) {
-      throw new TypeError('The element is not HTMLHeadingElement');
-    }
+
     this.component.append(title);
   }
 }

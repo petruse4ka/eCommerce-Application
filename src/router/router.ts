@@ -18,7 +18,7 @@ export class Router {
   }
 
   private static checkRouteValidity(hash: string): hash is Route {
-    const validRoutes = new Set<string>([Route.HOME, Route.LOGIN, Route.REGISTRATION, Route.ERROR]);
+    const validRoutes = new Set<string>(Object.values(Route));
     return validRoutes.has(hash);
   }
 
