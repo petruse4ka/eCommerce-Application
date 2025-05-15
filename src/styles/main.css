@@ -10,6 +10,7 @@
   --color-black: #1a1a2e;
   --color-pink: #ca5166;
   --color-dark: #2b1414;
+  --color-purple: #49387a;
   --color-accent: #e7426a;
   --color-accent-hover: #f45d82;
   --color-primary: #f7ebe5;
@@ -20,6 +21,7 @@
   /* Animation */
   --animate-visible-right: animate-visible-right 1s ease-in-out;
   --animate-hidden-right: animate-hidden-right 1s ease-in-out forwards;
+  --animate-shaking-img: shaking-img 10s infinite ease-in-out;
 
   @keyframes animate-visible-right {
     0% {
@@ -38,6 +40,31 @@
 
     100% {
       transform: translate(100%);
+    }
+  }
+
+  @keyframes shaking-img {
+    0% {
+      transform: rotate(0deg);
+      translate: 0;
+    }
+
+    15% {
+      transform: rotate(5deg);
+      translate: 0 -50%;
+    }
+
+    55% {
+      transform: rotate(calc(-15deg));
+    }
+
+    75% {
+      transform: rotate(18deg);
+    }
+
+    100% {
+      transform: rotate(0deg);
+      translate: 0;
     }
   }
 }

@@ -1,11 +1,42 @@
-import { ApiEndpoint, ApiMethods, ContentType } from '@/types/enums';
-import type { AuthResponse } from '@/types/interfaces';
+import Alert from '@/components/alert/alert';
+import { AlertStatus, ApiEndpoint, ApiMethods, ContentType } from '@/types/enums';
+import type { AuthResponse, RegistrationBody, RegistrationResponse } from '@/types/interfaces';
 
 const clientCredentials = btoa(
   import.meta.env['VITE_CTP_CLIENT_ID'] + ':' + import.meta.env['VITE_CTP_CLIENT_SECRET']
 );
 
 export default class API {
+  public static async userRegistration(body: RegistrationBody): Promise<string | void> {
+    return await fetch(
+      `${import.meta.env['VITE_CTP_API_URL']}/${import.meta.env['VITE_CTP_PROJECT_KEY']}${ApiEndpoint.REGISTRATION}`,
+      {
+        method: ApiMethods.POST,
+        headers: {
+          Authorization: `Bearer ${await API.authentication()}`,
+          'Content-Type': ContentType.JSON,
+        },
+        body: JSON.stringify(body),
+      }
+    )
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Ooops...');
+        }
+
+        Alert.render({
+          textContent: 'Вы успешно зарегистрировались!',
+          status: AlertStatus.SUCCESS,
+          visibleTime: 3000,
+        });
+        return response.json();
+      })
+      .then((body: RegistrationResponse) => body.id)
+      .catch((error: Error) => {
+        console.log(error.message);
+      });
+  }
+
   public static async authentication(): Promise<string> {
     return await fetch(import.meta.env['VITE_CTP_AUTH_URL'] + ApiEndpoint.AUTHENTICATION, {
       method: ApiMethods.POST,

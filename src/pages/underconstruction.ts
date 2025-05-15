@@ -1,17 +1,21 @@
 import '@/styles/main.css';
 
-import macaronImg from '@/assets/images/error-big-macaron.png';
-import crumbImg from '@/assets/images/error-crumb.png';
+import macaronAstonaut from '@/assets/images/astronaut.png';
 import { BaseComponent } from '@/components/base/component';
 import { Button } from '@/components/buttons/button';
-import { ERRORPAGE_TEXTS } from '@/constants/constants';
+import { UNDER_CONSTRUCTION_TEXTS } from '@/constants/constants';
 import { Router } from '@/router/router';
-import { CONTAINER, CRUMB_STYLE, MAIN_CONTAINER, TITLE_STYLE } from '@/styles/pages/errorpage';
+import {
+  ASTRONAUT_STYLE,
+  CONTAINER,
+  MAIN_CONTAINER,
+  TITLE_STYLE,
+} from '@/styles/pages/underconstruction';
 import { Route } from '@/types/enums';
 import { ElementBuilder } from '@/utils/element-builder';
 import { ImageBuilder } from '@/utils/image-builder';
 
-export class ErrorPage extends BaseComponent {
+export default class UnderConstructionPage extends BaseComponent {
   constructor() {
     super({
       tag: 'div',
@@ -19,6 +23,10 @@ export class ErrorPage extends BaseComponent {
     });
 
     this.render();
+  }
+
+  public override getElement(): HTMLElement {
+    return this.component;
   }
 
   private render(): void {
@@ -29,25 +37,17 @@ export class ErrorPage extends BaseComponent {
       className: MAIN_CONTAINER,
     }).getElement();
 
-    const macaronImage = new ImageBuilder({
-      className: '',
-      source: macaronImg,
-      alt: 'big sad macaron',
+    const macaron = new ImageBuilder({
+      className: ASTRONAUT_STYLE,
+      source: macaronAstonaut,
+      alt: 'astronaut macaron',
     }).getElement();
 
-    imageContainer.append(macaronImage);
-
-    const crumbImage = new ImageBuilder({
-      className: CRUMB_STYLE,
-      source: crumbImg,
-      alt: 'crumb',
-    }).getElement();
-
-    imageContainer.append(crumbImage);
+    imageContainer.append(macaron);
 
     const returnButton = new Button({
-      style: 'SECONDARY_PINK',
-      textContent: ERRORPAGE_TEXTS.HOME,
+      style: 'SECONDARY_BLUE_DARK',
+      textContent: UNDER_CONSTRUCTION_TEXTS.HOME,
       callback: (): void => {
         Router.followRoute(Route.HOME);
       },
@@ -61,7 +61,7 @@ export class ErrorPage extends BaseComponent {
     const title = new ElementBuilder({
       tag: 'h1',
       className: TITLE_STYLE,
-      textContent: ERRORPAGE_TEXTS.SORRY,
+      textContent: UNDER_CONSTRUCTION_TEXTS.SORRY,
     }).getElement();
 
     this.component.append(title);

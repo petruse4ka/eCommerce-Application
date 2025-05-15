@@ -23,6 +23,15 @@ export class App extends BaseComponent {
   private router: Router;
   private currentPage: BaseComponent = this.homePage;
 
+  private readonly routes = new Map<Route, BaseComponent>([
+    [Route.HOME, this.homePage],
+    [Route.ABOUT, this.aboutPage],
+    [Route.CONTACTS, this.contactPage],
+    [Route.LOGIN, this.loginPage],
+    [Route.REGISTRATION, this.registrationPage],
+    [Route.ERROR, this.errorPage],
+  ]);
+
   constructor() {
     super({ tag: 'div', className: APP_STYLE });
     this.router = new Router(Route.HOME);
@@ -41,17 +50,9 @@ export class App extends BaseComponent {
   }
 
   private setupRoutes(): void {
-    this.router.addRoute(Route.HOME, () => this.showPage(this.homePage));
-
-    this.router.addRoute(Route.ABOUT, () => this.showPage(this.aboutPage));
-
-    this.router.addRoute(Route.CONTACTS, () => this.showPage(this.contactPage));
-
-    this.router.addRoute(Route.LOGIN, () => this.showPage(this.loginPage));
-
-    this.router.addRoute(Route.REGISTRATION, () => this.showPage(this.registrationPage));
-
-    this.router.addRoute(Route.ERROR, () => this.showPage(this.errorPage));
+    for (const [route, page] of this.routes.entries()) {
+      this.router.addRoute(route, () => this.showPage(page));
+    }
   }
 
   private showPage(newPage: BaseComponent): void {

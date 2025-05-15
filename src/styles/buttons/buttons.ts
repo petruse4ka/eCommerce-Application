@@ -3,7 +3,8 @@ const STANDARD_BUTTON_STYLE = [
   'text-[14px]',
   'min-w-[234px]',
   'border',
-  'px-3',
+  'min-w-2xs',
+  'px-8',
   'py-4',
   'rounded-[3px]',
   'cursor-pointer',
@@ -26,7 +27,7 @@ export const CUSTOM_BUTTON_STYLE = {
   ],
   SECONDARY_BLUE: [
     ...STANDARD_BUTTON_STYLE,
-    'bg-white',
+    'bg-transparent',
     'text-secondary',
     'border-secondary',
     'hover:bg-secondary-hover',
@@ -38,6 +39,14 @@ export const CUSTOM_BUTTON_STYLE = {
     'text-accent',
     'border-accent',
     'hover:bg-accent-hover',
+    'hover:text-white',
+  ],
+  SECONDARY_BLUE_DARK: [
+    ...STANDARD_BUTTON_STYLE,
+    'bg-transparent',
+    'text-white',
+    'border-secondary',
+    'hover:bg-secondary-hover',
     'hover:text-white',
   ],
 };
