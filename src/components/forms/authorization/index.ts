@@ -41,7 +41,7 @@ export default class FormAuthorization {
         type,
         isRequired,
         callback,
-        eventType: 'input',
+        eventType: 'change',
       }).getElement();
 
       this.userInfoContainer.append(inputNode);
