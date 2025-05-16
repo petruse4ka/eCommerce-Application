@@ -5,7 +5,6 @@ import handMade from '@/assets/icons/footer-love.svg';
 import freshProductsIcon from '@/assets/icons/fresh-products.svg';
 import naturalIngredients from '@/assets/icons/natural-ingredients.svg';
 import wholesaleSale from '@/assets/icons/wholesale-offer.svg';
-import FormAuthorization from '@/components/forms/authorization';
 import { FOOTER_TEXTS, SUBHEADER_PROMO_TEXT } from '@/constants/constants';
 import { InputType } from '@/types/enums';
 
@@ -108,9 +107,6 @@ export const INPUTS_AUTHORIZATION_DATA = [
     placeholder: 'Укажите e-mail',
     type: InputType.EMAIL,
     isRequired: true,
-    callback: (event: Event): void => {
-      FormAuthorization.inputErrorHandler(event, 'email');
-    },
   },
   {
     id: 'password',
@@ -118,8 +114,5 @@ export const INPUTS_AUTHORIZATION_DATA = [
     placeholder: 'Укажите пароль',
     type: InputType.PASSWORD,
     isRequired: true,
-    callback: (event: Event): void => {
-      FormAuthorization.inputErrorHandler(event, 'password');
-    },
   },
 ];

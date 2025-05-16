@@ -65,9 +65,19 @@ export default class Input {
     return this.input.getValue();
   }
 
-  public toggleErrorStyle(): void {
-    this.isError = !this.isError;
+  public setError(message: string): void {
+    this.isError = true;
+    this.message.getElement().textContent = message;
+    this.toggleErrorStyle();
+  }
 
+  public clearError(): void {
+    this.isError = false;
+    this.message.getElement().textContent = '';
+    this.toggleErrorStyle();
+  }
+
+  public toggleErrorStyle(): void {
     if (this.isError) {
       this.label.removeCssClasses([...CUSTOM_LABEL_STYLE['LABEL_DEFAULT']]);
       this.label.applyCssClasses([...CUSTOM_LABEL_STYLE['LABEL_ERROR']]);
