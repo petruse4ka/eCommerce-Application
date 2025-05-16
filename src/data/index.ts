@@ -109,7 +109,7 @@ export const INPUTS_AUTHORIZATION_DATA = [
     type: InputType.EMAIL,
     isRequired: true,
     callback: (event: Event): void => {
-      FormAuthorization.showValidationError(event, 'email');
+      FormAuthorization.inputErrorHandler(event, 'email');
     },
   },
   {
@@ -119,7 +119,7 @@ export const INPUTS_AUTHORIZATION_DATA = [
     type: InputType.PASSWORD,
     isRequired: true,
     callback: (event: Event): void => {
-      FormAuthorization.showValidationError(event, 'password');
+      FormAuthorization.inputErrorHandler(event, 'password');
     },
   },
 ];

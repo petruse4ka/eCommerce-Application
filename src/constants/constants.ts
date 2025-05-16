@@ -1,5 +1,6 @@
 import { Route } from '@/types/enums';
 import type { MenuItem } from '@/types/interfaces';
+import { validateEMail, validatePassword } from '@/utils/validate';
 
 export const VALIDATE_CONST = {
   MIN_AGE: 13,
@@ -77,4 +78,9 @@ export const FOOTER_MENU_ITEMS: MenuItem[] = [
 export const BTN_TEXT = {
   REGISTRATION_PAGE: 'Зарегистрироваться',
   LOGIN_PAGE: 'Вход',
+};
+
+export const VALIDATION_FUNCTIONS: Record<string, (string_: string) => string | null> = {
+  email: validateEMail,
+  password: validatePassword,
 };

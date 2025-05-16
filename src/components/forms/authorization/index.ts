@@ -1,9 +1,10 @@
 import API from '@/api/api';
 import { Button } from '@/components/buttons/button';
 import Input from '@/components/inputs/input';
-import { BTN_TEXT } from '@/constants/constants';
+import { BTN_TEXT, VALIDATION_FUNCTIONS } from '@/constants/constants';
 import { INPUTS_AUTHORIZATION_DATA } from '@/data';
 import { AUTHORIZATION_INPUTS_CONTAINER, FORM } from '@/styles/forms/forms';
+import { CUSTOM_INPUT_STYLE } from '@/styles/inputs/inputs';
 import type { AuthorizationBody, InputComponent } from '@/types/interfaces';
 import { ElementBuilder } from '@/utils/element-builder';
 import { validateEMail, validatePassword } from '@/utils/validate';
@@ -32,35 +33,30 @@ export default class FormAuthorization {
     this.render();
   }
 
-  public static showValidationError(event: Event, type: string): void {
-    let validateFunction;
-    switch (type) {
-      case 'email': {
-        validateFunction = validateEMail;
-        break;
-      }
-      default: {
-        validateFunction = validatePassword;
-        break;
-      }
-    }
+  public static inputErrorHandler(event: Event, type: string): void {
+    const validateFunction = VALIDATION_FUNCTIONS[type];
+
     const field = event.target;
     if (field instanceof HTMLInputElement) {
       const errorMessage = validateFunction(field.value);
-      let errorElement = field.nextElementSibling;
-      while (!errorElement?.classList.contains('error-message')) {
-        if (errorElement) {
-          errorElement = errorElement.nextElementSibling;
-        } else {
-          break;
-        }
-      }
-      if (errorElement?.classList.contains('error-message')) {
-        errorElement.textContent = '';
+      FormAuthorization.showValidationError(field.id, errorMessage);
+    }
+  }
 
+  private static showValidationError(id: string, errorMessage: string | null): void {
+    const field = document.querySelector(`#${id}`);
+
+    if (field instanceof HTMLInputElement) {
+      const errorElement = field.parentNode?.querySelector('.error-message');
+      if (errorElement instanceof HTMLDivElement) {
+        errorElement.textContent = '';
         if (errorMessage) {
+          field.classList.remove(...CUSTOM_INPUT_STYLE.INPUT_DEFAULT);
+          field.classList.add(...CUSTOM_INPUT_STYLE.INPUT_ERROR);
           errorElement.textContent = errorMessage;
-          field.after(errorElement);
+        } else {
+          field.classList.remove(...CUSTOM_INPUT_STYLE.INPUT_ERROR);
+          field.classList.add(...CUSTOM_INPUT_STYLE.INPUT_DEFAULT);
         }
       }
     } else {
@@ -74,8 +70,7 @@ export default class FormAuthorization {
 
   private createInputs(): void {
     for (const input of this.INPUTS_DATA) {
-      const { id, labelText, placeholder, type, isRequired } = input;
-
+      const { id, labelText, placeholder, type, isRequired, callback } = input;
       const inputNode = new Input({
         id,
         labelText,
@@ -83,7 +78,8 @@ export default class FormAuthorization {
         type,
         isRequired,
         eventType: 'input',
-        callback: (): void => {
+        callback: (event: Event): void => {
+          callback(event);
           const key = id
             .split('-')
             .map((part, index) =>
@@ -93,14 +89,7 @@ export default class FormAuthorization {
           this.formValue.set(key, inputNode.getValue());
         },
       });
-      const inputBlock = inputNode.getElement();
-      if (inputBlock.querySelector('input')) {
-        inputBlock.querySelector('input')?.addEventListener('input', (event: Event): void => {
-          FormAuthorization.showValidationError(event, type);
-        });
-      }
-
-      this.userInfoContainer.append(inputBlock);
+      this.userInfoContainer.append(inputNode.getElement());
     }
   }
 
@@ -124,6 +113,13 @@ export default class FormAuthorization {
       password: this.formValue.get('password') ?? '',
     };
 
-    void API.userSignInResponse(body);
+    const isNotValidEmail = validateEMail(body.email);
+    FormAuthorization.showValidationError('email', isNotValidEmail);
+    const isNotValidPassword = validatePassword(body.password);
+    FormAuthorization.showValidationError('password', isNotValidPassword);
+
+    if (!(Boolean(isNotValidEmail) && Boolean(isNotValidPassword))) {
+      void API.userSignInResponse(body);
+    }
   }
 }
