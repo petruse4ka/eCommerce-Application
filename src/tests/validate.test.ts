@@ -31,7 +31,7 @@ it('email validation of double domain', () => {
 });
 
 it('email validation of empty input', () => {
-  expect(validateEMail('')).toBe(ErrorMessages.EMPTY_INPUT);
+  expect(validateEMail('')).toBe(ErrorMessages.EMPTY_EMAIL);
 });
 it('email validation of input without @', () => {
   expect(validateEMail('exampletut.by')).toBe(ErrorMessages.INVALID_EMAIL);

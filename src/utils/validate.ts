@@ -2,13 +2,13 @@ import { VALIDATE_CONST } from '@/constants/constants';
 import { ErrorMessages } from '@/types/enums';
 
 export function validateEMail(string_: string): string | null {
-  if (string_.trim() === '') return ErrorMessages.EMPTY_INPUT;
+  if (string_.trim() === '') return ErrorMessages.EMPTY_EMAIL;
+  if (/ /.test(string_)) return ErrorMessages.INVALID_SPACE;
+  if (/[^\dA-Za-zЁА-яё]/.test(string_[0])) return ErrorMessages.INVALID_FIRST_CHAR;
   if (!/@/.test(string_)) return ErrorMessages.INVALID_EMAIL;
 
   const rightDomain = /@[\dA-Za-zЁА-яё][\d.A-Za-zЁА-яё-]*\.[A-Za-zЁА-яё]{2,}$/;
   if (!rightDomain.test(string_)) return ErrorMessages.INVALID_DOMAIN;
-
-  if (/[^\dA-Za-zЁА-яё]/.test(string_[0])) return ErrorMessages.INVALID_FIRST_CHAR;
 
   const emailRegex =
     /^[\dA-Za-zЁА-яё][\w!#$%&*+./=?^`{|}~ЁА-яё’-]*@[\d.A-Za-zЁА-яё-]+\.[A-Za-zЁА-яё]{2,}$/;
@@ -18,7 +18,8 @@ export function validateEMail(string_: string): string | null {
 }
 
 export function validatePassword(string_: string): string | null {
-  const nonLatinRegex = /[^\d!#$%&*+.:=?@A-Za-z{}-]/;
+  const nonLatinRegex = /[^\w!#$%&*+.:=?@^{}-]/;
+  if (string_.trim() !== string_) return ErrorMessages.INVALID_SPACE;
   if (nonLatinRegex.test(string_)) return ErrorMessages.INVALID_PASSWORD;
 
   const resultArray = [];
@@ -70,12 +71,13 @@ function getUserAge(birthDate: Date): number {
 }
 
 export function validatePostalCode(postalCode: string): string | null {
+  if (postalCode.trim() !== postalCode) return ErrorMessages.INVALID_SPACE;
   if (/^\d{6}$/.test(postalCode)) return null;
   return ErrorMessages.POSTAL_CODE_FORMAT;
 }
 
 export function validateInput(value: string, noSpecialChars: boolean = false): string | null {
-  if (!value || value.trim().length === 0) {
+  if (value.trim().length === 0) {
     return ErrorMessages.EMPTY_INPUT;
   }
   if (noSpecialChars && /[^A-Za-zА-я]/.test(value)) {
