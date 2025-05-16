@@ -1,4 +1,4 @@
-import { MIN_AGE } from '@/constants/constants';
+import { VALIDATE_CONST } from '@/constants/constants';
 import { ErrorMessages } from '@/types/enums';
 import {
   validateDateOfBirth,
@@ -108,14 +108,14 @@ it('validateDateOfBirth with 2050 year', () => {
 it('validateDateOfBirth with 1814 year', () => {
   expect(validateDateOfBirth('1814-12-01')).toBe(ErrorMessages.CHECK_YEAR);
 });
-it(`validateDateOfBirth with age less than ${MIN_AGE}`, () => {
+it(`validateDateOfBirth with age less than ${VALIDATE_CONST.MIN_AGE}`, () => {
   const pastDate = new Date();
-  pastDate.setFullYear(pastDate.getFullYear() - MIN_AGE + 1);
+  pastDate.setFullYear(pastDate.getFullYear() - VALIDATE_CONST.MIN_AGE + 1);
   expect(validateDateOfBirth(pastDate.toISOString())).toBe(ErrorMessages.INVALID_AGE);
 });
-it(`validateDateOfBirth with age ${MIN_AGE} later in this year`, () => {
+it(`validateDateOfBirth with age ${VALIDATE_CONST.MIN_AGE} later in this year`, () => {
   const pastDate = new Date();
-  pastDate.setFullYear(pastDate.getFullYear() - MIN_AGE);
+  pastDate.setFullYear(pastDate.getFullYear() - VALIDATE_CONST.MIN_AGE);
   pastDate.setMonth(11);
   pastDate.setDate(31);
   expect(validateDateOfBirth(pastDate.toISOString())).toBe(ErrorMessages.INVALID_AGE);

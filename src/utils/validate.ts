@@ -1,11 +1,11 @@
-import { MAX_AGE, MIN_AGE, MIN_PASSWORD_LENGTH } from '@/constants/constants';
+import { VALIDATE_CONST } from '@/constants/constants';
 import { ErrorMessages } from '@/types/enums';
 
 export function validateEMail(string_: string): string | null {
   if (string_.trim() === '') return ErrorMessages.EMPTY_INPUT;
   if (!/@/.test(string_)) return ErrorMessages.INVALID_EMAIL;
 
-  const rightDomain = /@[\d.A-Za-zЁА-яё-]+\.[A-Za-zЁА-яё]{2,}$/;
+  const rightDomain = /@[\dA-Za-zЁА-яё][\d.A-Za-zЁА-яё-]*\.[A-Za-zЁА-яё]{2,}$/;
   if (!rightDomain.test(string_)) return ErrorMessages.INVALID_DOMAIN;
 
   if (/[^\dA-Za-zЁА-яё]/.test(string_[0])) return ErrorMessages.INVALID_FIRST_CHAR;
@@ -23,8 +23,10 @@ export function validatePassword(string_: string): string | null {
 
   const resultArray = [];
 
-  if (string_.trim().length < MIN_PASSWORD_LENGTH) {
-    resultArray.push(ErrorMessages.PASSWORD_LENGTH.replace('${}', String(MIN_PASSWORD_LENGTH)));
+  if (string_.trim().length < VALIDATE_CONST.MIN_PASSWORD_LENGTH) {
+    resultArray.push(
+      ErrorMessages.PASSWORD_LENGTH.replace('${}', String(VALIDATE_CONST.MIN_PASSWORD_LENGTH))
+    );
   }
   if (!/[A-Z]/.test(string_)) resultArray.push(ErrorMessages.ONE_UPPER_LETTER);
   if (!/[a-z]/.test(string_)) resultArray.push(ErrorMessages.ONE_LOWER_LETTER);
@@ -45,9 +47,9 @@ export function validateDateOfBirth(dateOfBirth: string): string | null {
   }
 
   const userAge = getUserAge(birthDate);
-  if (userAge < 0 || userAge > MAX_AGE) {
+  if (userAge < 0 || userAge > VALIDATE_CONST.MAX_AGE) {
     return ErrorMessages.CHECK_YEAR;
-  } else if (userAge < MIN_AGE) {
+  } else if (userAge < VALIDATE_CONST.MIN_AGE) {
     return ErrorMessages.INVALID_AGE;
   } else {
     return null;
