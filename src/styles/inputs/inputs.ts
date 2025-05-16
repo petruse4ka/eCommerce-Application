@@ -45,7 +45,7 @@ export const CUSTOM_LABEL_STYLE = {
 
 export const ERROR_MESSAGE_STYLE = [
   'error-message',
-  'h-12',
+  'h-10',
   'text-xs',
   'text-left',
   'text-(--color-accent)',

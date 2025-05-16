@@ -25,8 +25,11 @@ export enum ApiMethods {
 }
 
 export enum ApiEndpoint {
-  AUTHENTICATION = '/oauth/token',
+  OATH = '/oauth/',
+  AUTHENTICATION = `${OATH}token`,
   REGISTRATION = '/me/signup',
+  LOGIN = '/me/login',
+  USER = '/customers/token',
 }
 
 export enum ContentType {
@@ -40,7 +43,7 @@ export enum ErrorMessages {
   EMPTY_INPUT = 'Поле обязательно к заполнению.',
   INVALID_AGE = 'Регистрация доступна только пользователям старше 13 лет. Спасибо за понимание!',
   INVALID_DOMAIN = 'Неверный формат домена! После «@» допустимы только буквы и точки.',
-  INVALID_EMAIL = 'Неверный формат email! Используйте латиницу, кириллицу, цифры и специальные символы. Символ «@» обязателен.',
+  INVALID_EMAIL = 'Неверный формат email! Используйте латинские буквы, цифры и специальные символы. Символ «@» обязателен.',
   INVALID_FIRST_CHAR = 'Первый символ должен быть буквой или цифрой.',
   INVALID_PASSWORD = 'Пароль может содержать только латинские буквы, цифры и специальные символы.',
   ONE_DIGIT = 'одну цифру',
@@ -49,7 +52,7 @@ export enum ErrorMessages {
   ONLY_LETTERS = 'Допустимы только буквы.',
   PASSWORD_MUST_CONTAIN = 'Пароль должен содержать как минимум',
   POSTAL_CODE_FORMAT = 'Почтовый индекс должен состоять из 6 цифр.',
-  PASSWORD_LENGTH = '${} символов',
+  PASSWORD_LENGTH = '8 символов',
 }
 
 export enum Route {
@@ -59,6 +62,9 @@ export enum Route {
   ERROR = '#/error',
   ABOUT = '#/about',
   CONTACTS = '#/contacts',
+  DELIVERY = '#/delivery',
+  TERMS = '#/terms',
+  RETURNS = '#/returns',
 }
 
 export enum AlertStatus {
@@ -66,4 +72,9 @@ export enum AlertStatus {
   SUCCESS = 'SUCCESS',
   WARNING = 'WARNING',
   INFO = 'INFO',
+}
+
+export enum AlertText {
+  REGISTRATION_SUCCESS = 'Вы успешно зарегистрировались!',
+  AUTHORIZATION_SUCCESS = 'Вы успешно авторизовались!',
 }
