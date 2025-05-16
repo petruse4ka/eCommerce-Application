@@ -5,7 +5,7 @@ const STANDARD_INPUT_STYLE = [
   'bg-white',
   'border',
   'outline-none',
-  'py-1',
+  'py-2',
   'px-2',
   'w-full',
 ];
@@ -45,7 +45,7 @@ export const CUSTOM_LABEL_STYLE = {
 
 export const ERROR_MESSAGE_STYLE = [
   'error-message',
-  'h-10',
+  'h-8',
   'text-xs',
   'text-left',
   'text-(--color-accent)',

@@ -8,25 +8,25 @@ export const CONTAINER = [
   'md:bg-auto',
   'bg-top',
   'bg-no-repeat',
-  'px-[50px]',
+  'sm:px-[50px]',
   'flex',
   'flex-col',
   'justify-center',
-  'items-center',
+  'sm:items-center',
 ];
 
 export const FORM_CONTAINER = [
   'relative',
   'z-1',
+  'py-3',
+  'my-5',
   'bg-primary',
   'xl:px-20',
   'xl:py-10',
   'sm:px-10',
   'sm:py-5',
   'sm:rounded-xl',
-  'py-3',
   'px-[5px]',
-  'my-5',
 ];
 
 export const TITLE = ['text-3xl', 'font-bold', 'text-center'];
