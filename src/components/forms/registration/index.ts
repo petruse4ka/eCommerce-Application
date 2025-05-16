@@ -96,15 +96,16 @@ export default class FormRegistration {
       });
 
       this.userBillingAddressContainer.append(inputNode.getElement());
-      const lastNode = this.form.lastElementChild;
-      this.form.insertBefore(this.userBillingAddressContainer, lastNode);
     }
+
+    const lastNode = this.form.lastElementChild;
+    this.form.insertBefore(this.userBillingAddressContainer, lastNode);
   }
 
   private toggleVisibleBillingContainer(): void {
     if (this.isSameAddresses) {
-      for (const children of this.userBillingAddressContainer.children) {
-        children.remove();
+      while (this.userBillingAddressContainer.firstChild) {
+        this.userBillingAddressContainer.firstChild.remove();
       }
 
       this.userBillingAddressContainer.remove();
