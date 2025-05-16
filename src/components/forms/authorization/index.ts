@@ -16,6 +16,7 @@ export default class FormAuthorization {
 
   constructor() {
     this.INPUTS_DATA = INPUTS_AUTHORIZATION_DATA;
+
     this.form = new ElementBuilder({
       tag: 'form',
       className: FORM,
@@ -92,8 +93,14 @@ export default class FormAuthorization {
           this.formValue.set(key, inputNode.getValue());
         },
       });
+      const inputBlock = inputNode.getElement();
+      if (inputBlock.querySelector('input')) {
+        inputBlock.querySelector('input')?.addEventListener('input', (event: Event): void => {
+          FormAuthorization.showValidationError(event, type);
+        });
+      }
 
-      this.userInfoContainer.append(inputNode.getElement());
+      this.userInfoContainer.append(inputBlock);
     }
   }
 
@@ -105,6 +112,7 @@ export default class FormAuthorization {
         this.submitForm();
       },
     }).getElement();
+
     this.createInputs();
 
     this.form.append(this.userInfoContainer, button);
