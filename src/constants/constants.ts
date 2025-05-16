@@ -75,3 +75,11 @@ export const BTN_TEXT = {
   REGISTRATION_PAGE: 'Зарегистрироваться',
   LOGIN_PAGE: 'Вход',
 };
+
+export const INTRO_TEXTS = {
+  TITLE: 'MACARONSHOP',
+  SINCE: '--- since 2013 ---',
+  SUBTITLE: 'Настоящая любовь',
+  CATCH_PHRASE:
+    'Пирожные макарон и другие десерты из натуральных ингредиентов, приготовленные с любовью',
+};

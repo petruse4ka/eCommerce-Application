@@ -1,100 +1,27 @@
 import '@/styles/main.css';
 
-import macaronImage from '@/assets/favicons/original.png';
-import Alert from '@/components/alert/alert';
 import { BaseComponent } from '@/components/base/component';
-import { Button } from '@/components/buttons/button';
-import Input from '@/components/inputs/input';
-import { AlertStatus, InputType } from '@/types/enums';
+import { Intro } from '@/components/promo/intro';
+import { CONTAINER, MAIN_CONTAINER } from '@/styles/pages/homepage';
 import { ElementBuilder } from '@/utils/element-builder';
-import { ImageBuilder } from '@/utils/image-builder';
 
 export default class HomePage extends BaseComponent {
   constructor() {
     super({
-      tag: 'div',
-      className: [
-        'min-h-screen',
-        'bg-primary',
-        'text-black',
-        'font-roboto',
-        'text-base',
-        'leading-normal',
-      ],
+      tag: 'main',
+      className: CONTAINER,
     });
     this.render();
-    this.renderInput();
   }
 
   private render(): void {
-    const title = new ElementBuilder({
-      tag: 'h1',
-      className: ['text-3xl', 'font-montserrat', 'font-bold', 'p-4'],
-      textContent: 'eCommerce Application',
-    }).getElement();
-
-    const image = new ImageBuilder({
-      className: '',
-      source: macaronImage,
-      alt: 'Macaron',
-    }).getElement();
-
-    const buttonContainer = new ElementBuilder({
+    const mainContainer = new ElementBuilder({
       tag: 'div',
-      className: ['flex', 'justify-center', 'gap-3'],
+      className: MAIN_CONTAINER,
     }).getElement();
 
-    const primaryButton = new Button({
-      style: 'PRIMARY_PINK',
-      textContent: 'Primary Button',
-      callback: (): void => console.log('Primary button clicked'),
-    });
-
-    const secondaryButton = new Button({
-      style: 'SECONDARY_BLUE',
-      textContent: 'Secondary Button',
-      callback: (): void => console.log('Secondary button clicked'),
-    });
-
-    const buttonDisabled = new Button({
-      style: 'PRIMARY_PINK',
-      textContent: 'Button Disabled',
-      callback: (): void => console.log('Disabled button clicked'),
-    });
-    buttonDisabled.disableButton();
-
-    buttonContainer.append(
-      primaryButton.getElement(),
-      secondaryButton.getElement(),
-      buttonDisabled.getElement()
-    );
-
-    this.component.append(title, image, buttonContainer);
-  }
-
-  private renderInput(): void {
-    const primaryInput = new Input({
-      placeholder: 'Ваше имя',
-      callback: (): void => console.log('Primary button clicked'),
-      labelText: 'Ваше имя',
-      id: 'name',
-      isRequired: false,
-      type: InputType.TEXT,
-    });
-
-    Alert.render({
-      textContent: "A duplicate value 'user@example.com' exists for field 'email'.",
-      status: AlertStatus.WARNING,
-      visibleTime: 3000,
-    });
-
-    const inputContainer = new ElementBuilder({
-      tag: 'div',
-      className: ['flex', 'justify-center', 'gap-3'],
-    }).getElement();
-
-    inputContainer.append(primaryInput.getElement());
-
-    this.component.append(inputContainer);
+    const intro = new Intro();
+    mainContainer.append(intro.getElement());
+    this.component.append(mainContainer);
   }
 }
