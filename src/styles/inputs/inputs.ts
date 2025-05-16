@@ -42,3 +42,12 @@ export const CUSTOM_LABEL_STYLE = {
   LABEL_DEFAULT: [...STANDARD_LABEL_STYLE, 'text-black'],
   LABEL_ERROR: [...STANDARD_LABEL_STYLE, 'text-accent'],
 };
+
+export const DEFAULT_CHECKBOX_STYLE = [
+  'h-5',
+  'w-5',
+  'accent-accent',
+  'hover:accent-accent-hover',
+  'border-red-500',
+  'cursor-pointer',
+];

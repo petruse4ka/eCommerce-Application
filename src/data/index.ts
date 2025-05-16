@@ -54,15 +54,15 @@ export const INPUTS_REGISTRATION_DATA = [
   },
   {
     id: 'city',
-    labelText: 'Ваш город',
+    labelText: 'Ваш город доставки',
     placeholder: 'Укажите город',
     type: InputType.TEXT,
     isRequired: true,
     callback: (): void => console.log('Primary button clicked'),
   },
   {
-    id: 'street',
-    labelText: 'Ваша улица',
+    id: 'street-name',
+    labelText: 'Ваша улица доставки',
     placeholder: 'Укажите улицу',
     type: InputType.TEXT,
     isRequired: true,
@@ -70,7 +70,7 @@ export const INPUTS_REGISTRATION_DATA = [
   },
   {
     id: 'postal-code',
-    labelText: 'Ваш почтовый индекс',
+    labelText: 'Ваш почтовый индекс доставки',
     placeholder: 'Укажите почтовый индекс',
     type: InputType.NUMBER,
     isRequired: true,

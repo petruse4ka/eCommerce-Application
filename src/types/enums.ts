@@ -67,3 +67,7 @@ export enum AlertStatus {
   WARNING = 'WARNING',
   INFO = 'INFO',
 }
+
+export enum CheckboxText {
+  DEFAULT_SAVE = 'Сохранить адрес по умолчанию',
+}
