@@ -1,4 +1,9 @@
-import { CUSTOM_INPUT_STYLE, CUSTOM_LABEL_STYLE, ICON_IN_INPUT } from '@/styles/inputs/inputs';
+import {
+  CUSTOM_INPUT_STYLE,
+  CUSTOM_LABEL_STYLE,
+  DEFAULT_CHECKBOX_STYLE,
+  ICON_IN_INPUT,
+} from '@/styles/inputs/inputs';
 import { InputType } from '@/types/enums';
 import type { InputComponent } from '@/types/interfaces';
 import { ElementBuilder } from '@/utils/element-builder';
@@ -13,8 +18,7 @@ export default class Input {
 
   constructor(parameters: InputComponent) {
     this.isError = false;
-    const { placeholder, id, callback, labelText, isRequired, value, type, className, eventType } =
-      parameters;
+    const { placeholder, id, callback, labelText, isRequired, value, type, className } = parameters;
 
     this.container = new ElementBuilder({
       tag: 'div',
@@ -24,12 +28,14 @@ export default class Input {
     this.input = new InputBuilder({
       type,
       id,
-      className: [...CUSTOM_INPUT_STYLE['INPUT_DEFAULT']],
+      className:
+        type === InputType.CHECKBOX
+          ? [...DEFAULT_CHECKBOX_STYLE]
+          : [...CUSTOM_INPUT_STYLE['INPUT_DEFAULT']],
       placeholder,
       callback,
       value,
       required: isRequired,
-      eventType,
     });
 
     this.label = new ElementBuilder({
