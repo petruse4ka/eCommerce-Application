@@ -1,11 +1,11 @@
 export const INTRO_STYLES = {
-  INTRO: [
+  SECTION: [
     'flex',
     'flex-col-reverse',
     'md:flex-row',
     'items-stretch',
     'justify-between',
-    'gap-15',
+    'md:gap-15',
     'mx-auto',
   ],
   IMAGE: ['w-full', 'md:w-1/2', 'h-auto', 'object-contain'],
@@ -13,7 +13,8 @@ export const INTRO_STYLES = {
     'flex',
     'flex-col',
     'gap-6',
-    'py-8',
+    'pt-5',
+    'md:py-8',
     'md:py-20',
     'md:bg-[url(@/assets/images/promo/bg.png)]',
     'md:bg-no-repeat',
@@ -23,9 +24,9 @@ export const INTRO_STYLES = {
     'xl:mt-20',
     'lg:mt-10',
   ],
-  TITLEBLOCK: ['flex', 'flex-col', 'gap-2', 'items-center'],
-  TITLE: ['text-2xl', 'font-semibold'],
+  NAMECONTAINER: ['flex', 'flex-col', 'gap-2', 'items-center'],
+  NAME: ['text-2xl', 'font-semibold'],
   SINCE: ['text-base', 'font-semibold'],
-  SUBTITLE: ['text-4xl', 'font-semibold', 'text-center', 'mt-5'],
+  TITLE: ['text-4xl', 'font-semibold', 'text-center', 'mt-5'],
   CATCH_PHRASE: ['text-lg', 'text-center'],
 };

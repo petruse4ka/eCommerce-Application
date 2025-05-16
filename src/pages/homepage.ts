@@ -2,6 +2,7 @@ import '@/styles/main.css';
 
 import { BaseComponent } from '@/components/base/component';
 import { Intro } from '@/components/promo/intro';
+import Packages from '@/components/promo/packages';
 import { CONTAINER, MAIN_CONTAINER } from '@/styles/pages/homepage';
 import { ElementBuilder } from '@/utils/element-builder';
 
@@ -21,7 +22,8 @@ export default class HomePage extends BaseComponent {
     }).getElement();
 
     const intro = new Intro();
-    mainContainer.append(intro.getElement());
+    const packages = new Packages();
+    mainContainer.append(intro.getElement(), packages.getElement());
     this.component.append(mainContainer);
   }
 }
