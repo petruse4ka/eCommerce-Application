@@ -75,7 +75,7 @@ export const INPUTS_REGISTRATION_DATA = [
     callback: (): void => console.log('Primary button clicked'),
   },
   {
-    id: 'city',
+    id: 'shipping-city',
     labelText: 'Ваш город доставки',
     placeholder: 'Укажите город',
     type: InputType.TEXT,
@@ -83,7 +83,7 @@ export const INPUTS_REGISTRATION_DATA = [
     callback: (): void => console.log('Primary button clicked'),
   },
   {
-    id: 'street-name',
+    id: 'shipping-street-name',
     labelText: 'Ваша улица доставки',
     placeholder: 'Укажите улицу',
     type: InputType.TEXT,
@@ -91,8 +91,35 @@ export const INPUTS_REGISTRATION_DATA = [
     callback: (): void => console.log('Primary button clicked'),
   },
   {
-    id: 'postal-code',
+    id: 'shipping-postal-code',
     labelText: 'Ваш почтовый индекс доставки',
+    placeholder: 'Укажите почтовый индекс',
+    type: InputType.NUMBER,
+    isRequired: true,
+    callback: (): void => console.log('Primary button clicked'),
+  },
+];
+
+export const INPUTS_BILLING_DATA = [
+  {
+    id: 'billing-city',
+    labelText: 'Ваш город выставления счета',
+    placeholder: 'Укажите город',
+    type: InputType.TEXT,
+    isRequired: true,
+    callback: (): void => console.log('Primary button clicked'),
+  },
+  {
+    id: 'billing-street-name',
+    labelText: 'Ваша улица выставления счета',
+    placeholder: 'Укажите улицу',
+    type: InputType.TEXT,
+    isRequired: true,
+    callback: (): void => console.log('Primary button clicked'),
+  },
+  {
+    id: 'billing-postal-code',
+    labelText: 'Ваш почтовый индекс выставления счета',
     placeholder: 'Укажите почтовый индекс',
     type: InputType.NUMBER,
     isRequired: true,

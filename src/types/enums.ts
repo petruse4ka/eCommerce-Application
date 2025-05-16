@@ -81,4 +81,5 @@ export enum AlertText {
 
 export enum CheckboxText {
   DEFAULT_SAVE = 'Сохранить адрес по умолчанию',
+  SAME_ADDRESSES = 'Использовать одинаковые адреса',
 }

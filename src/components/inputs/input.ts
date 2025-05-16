@@ -18,7 +18,8 @@ export default class Input {
 
   constructor(parameters: InputComponent) {
     this.isError = false;
-    const { placeholder, id, callback, labelText, isRequired, value, type, className } = parameters;
+    const { placeholder, id, callback, labelText, isRequired, value, type, className, attributes } =
+      parameters;
 
     this.container = new ElementBuilder({
       tag: 'div',
@@ -35,6 +36,7 @@ export default class Input {
       placeholder,
       callback,
       value,
+      attributes,
       required: isRequired,
     });
 
