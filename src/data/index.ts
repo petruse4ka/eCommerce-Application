@@ -123,7 +123,6 @@ export const INPUTS_AUTHORIZATION_DATA = [
     placeholder: 'Укажите e-mail',
     type: InputType.EMAIL,
     isRequired: true,
-    callback: (): void => console.log('Primary button clicked'),
   },
   {
     id: 'password',
@@ -131,7 +130,6 @@ export const INPUTS_AUTHORIZATION_DATA = [
     placeholder: 'Укажите пароль',
     type: InputType.PASSWORD,
     isRequired: true,
-    callback: (): void => console.log('Primary button clicked'),
   },
 ];
 
