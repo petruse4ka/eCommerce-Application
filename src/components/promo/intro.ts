@@ -1,11 +1,11 @@
 import introImg from '@/assets/images/promo/main-heart.png';
 import { BaseComponent } from '@/components/base/component';
 import { INTRO_TEXTS } from '@/constants/constants';
-import { INTRO_STYLES } from '@/styles/promo';
+import { INTRO_STYLES } from '@/styles/promo/intro';
 import { ElementBuilder } from '@/utils/element-builder';
 import { ImageBuilder } from '@/utils/image-builder';
 
-export class Intro extends BaseComponent {
+export default class Intro extends BaseComponent {
   constructor() {
     super({ tag: 'section', className: INTRO_STYLES.SECTION });
     this.render();

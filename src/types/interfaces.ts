@@ -86,6 +86,12 @@ export interface MenuItem {
 export interface Packages {
   title: string;
   description: string;
-  gradient: string[];
   icon: string;
+  gradient: string[];
+}
+
+export interface Guarantees {
+  title: string;
+  description: string;
+  image: string;
 }

@@ -1,7 +1,8 @@
 import '@/styles/main.css';
 
 import { BaseComponent } from '@/components/base/component';
-import { Intro } from '@/components/promo/intro';
+import Guarantees from '@/components/promo/guarantees';
+import Intro from '@/components/promo/intro';
 import Packages from '@/components/promo/packages';
 import { CONTAINER, MAIN_CONTAINER } from '@/styles/pages/homepage';
 import { ElementBuilder } from '@/utils/element-builder';
@@ -23,7 +24,8 @@ export default class HomePage extends BaseComponent {
 
     const intro = new Intro();
     const packages = new Packages();
-    mainContainer.append(intro.getElement(), packages.getElement());
+    const guarantees = new Guarantees();
+    mainContainer.append(intro.getElement(), packages.getElement(), guarantees.getElement());
     this.component.append(mainContainer);
   }
 }
