@@ -1,12 +1,12 @@
 import API from '@/api/api';
 import { Button } from '@/components/buttons/button';
 import Input from '@/components/inputs/input';
-import { BTN_TEXT, VALIDATION_FUNCTIONS } from '@/constants/constants';
+import { BTN_TEXT } from '@/constants/constants';
 import { INPUTS_AUTHORIZATION_DATA } from '@/data';
 import { AUTHORIZATION_INPUTS_CONTAINER, FORM } from '@/styles/forms/forms';
 import type { AuthorizationBody, InputComponent } from '@/types/interfaces';
 import { ElementBuilder } from '@/utils/element-builder';
-import { validateEMail, validatePassword } from '@/utils/validate';
+import { getValidator, validateEMail, validatePassword } from '@/utils/validations';
 
 export default class FormAuthorization {
   private form: HTMLElement;
@@ -35,9 +35,10 @@ export default class FormAuthorization {
   }
 
   public inputErrorHandler(event: Event, type: string): void {
-    const validateFunction = VALIDATION_FUNCTIONS[type];
-    const field = event.target;
+    const validateFunction = getValidator(type);
+    if (!validateFunction) return;
 
+    const field = event.target;
     if (field instanceof HTMLInputElement) {
       const errorMessage = validateFunction(field.value);
       this.showValidationError(field.id, errorMessage);

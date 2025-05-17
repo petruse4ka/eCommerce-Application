@@ -6,7 +6,7 @@ import {
   validateInput,
   validatePassword,
   validatePostalCode,
-} from '@/utils/validate';
+} from '@/utils/validations';
 
 /********** email validation test ***************/
 
