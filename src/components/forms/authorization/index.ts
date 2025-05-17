@@ -6,15 +6,54 @@ import { INPUTS_AUTHORIZATION_DATA } from '@/data';
 import { AUTHORIZATION_INPUTS_CONTAINER, FORM } from '@/styles/forms/forms';
 import type { AuthorizationBody, InputComponent } from '@/types/interfaces';
 import { ElementBuilder } from '@/utils/element-builder';
+import { getValidator, validateEMail, validatePassword } from '@/utils/validations';
 
 export default class FormAuthorization {
-  private form: HTMLElement;
-  private userInfoContainer: HTMLElement;
+  private form: HTMLElement | undefined;
+  private userInfoContainer: HTMLElement | undefined;
   private INPUTS_DATA: InputComponent[];
   private formValue: Map<string, string>;
+  private inputs: Map<string, Input>;
 
   constructor() {
     this.INPUTS_DATA = INPUTS_AUTHORIZATION_DATA;
+    this.formValue = new Map();
+    this.inputs = new Map();
+
+    this.createFormContainer();
+    this.render();
+  }
+
+  public inputErrorHandler(event: Event, type: string): void {
+    const validateFunction = getValidator(type);
+    if (!validateFunction) return;
+
+    const field = event.target;
+    if (field instanceof HTMLInputElement) {
+      const errorMessage = validateFunction(field.value);
+      this.showValidationError(field.id, errorMessage);
+    }
+  }
+
+  public getElement(): HTMLElement {
+    if (!this.form) {
+      throw new Error('Form element is not initialized');
+    }
+    return this.form;
+  }
+
+  private showValidationError(id: string, errorMessage: string | null): void {
+    const input = this.inputs.get(id);
+    if (!input) return;
+
+    if (errorMessage) {
+      input.setError(errorMessage);
+    } else {
+      input.clearError();
+    }
+  }
+
+  private createFormContainer(): void {
     this.form = new ElementBuilder({
       tag: 'form',
       className: FORM,
@@ -24,14 +63,6 @@ export default class FormAuthorization {
       tag: 'div',
       className: AUTHORIZATION_INPUTS_CONTAINER,
     }).getElement();
-
-    this.formValue = new Map();
-
-    this.render();
-  }
-
-  public getElement(): HTMLElement {
-    return this.form;
   }
 
   private createInputs(): void {
@@ -45,7 +76,8 @@ export default class FormAuthorization {
         type,
         isRequired,
         eventType: 'input',
-        callback: (): void => {
+        callback: (event: Event): void => {
+          this.inputErrorHandler(event, id);
           const key = id
             .split('-')
             .map((part, index) =>
@@ -56,7 +88,10 @@ export default class FormAuthorization {
         },
       });
 
-      this.userInfoContainer.append(inputNode.getElement());
+      if (this.userInfoContainer) {
+        this.userInfoContainer.append(inputNode.getElement());
+      }
+      this.inputs.set(id, inputNode);
     }
   }
 
@@ -68,9 +103,11 @@ export default class FormAuthorization {
         this.submitForm();
       },
     }).getElement();
-    this.createInputs();
 
-    this.form.append(this.userInfoContainer, button);
+    this.createInputs();
+    if (this.form && this.userInfoContainer) {
+      this.form.append(this.userInfoContainer, button);
+    }
   }
 
   private submitForm(): void {
@@ -79,6 +116,14 @@ export default class FormAuthorization {
       password: this.formValue.get('password') ?? '',
     };
 
-    void API.userSignInResponse(body);
+    const isNotValidEmail = validateEMail(body.email);
+    this.showValidationError('email', isNotValidEmail);
+
+    const isNotValidPassword = validatePassword(body.password);
+    this.showValidationError('password', isNotValidPassword);
+
+    if (!isNotValidEmail && !isNotValidPassword) {
+      void API.userSignInResponse(body);
+    }
   }
 }

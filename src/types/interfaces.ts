@@ -57,7 +57,7 @@ export interface InputComponent {
   className?: string | string[];
   id: string;
   type: InputType;
-  callback: (event: Event) => void;
+  callback?: (event: Event) => void;
   labelText: string;
   isRequired?: boolean;
   value?: string;

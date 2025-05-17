@@ -7,4 +7,4 @@ export const REGISTRATION_INPUTS_CONTAINER = [
   'gap-y-2',
   'my-5',
 ];
-export const AUTHORIZATION_INPUTS_CONTAINER = [...FORM, 'gap-x-7', 'my-5'];
+export const AUTHORIZATION_INPUTS_CONTAINER = [...FORM, 'my-5', 'mt-2'];

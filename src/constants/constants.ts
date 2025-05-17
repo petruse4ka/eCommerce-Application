@@ -1,9 +1,12 @@
 import { Route } from '@/types/enums';
 import type { MenuItem } from '@/types/interfaces';
 
-export const MIN_AGE = 13;
-export const MAX_AGE = 130;
-export const MIN_PASSWORD_LENGTH = 8;
+export const VALIDATE_CONST = {
+  MIN_AGE: 13,
+  MAX_AGE: 130,
+  MIN_PASSWORD_LENGTH: 8,
+  MAX_INPUT_LENGTH: 50,
+};
 
 export const SUBHEADER_PROMO_TEXT = {
   DELIVERY: 'Быстрая доставка',

@@ -2,6 +2,7 @@ import {
   CUSTOM_INPUT_STYLE,
   CUSTOM_LABEL_STYLE,
   DEFAULT_CHECKBOX_STYLE,
+  ERROR_MESSAGE_STYLE,
   ICON_IN_INPUT,
 } from '@/styles/inputs/inputs';
 import { InputType } from '@/types/enums';
@@ -13,6 +14,7 @@ export default class Input {
   private container: ElementBuilder;
   private input: InputBuilder;
   private label: ElementBuilder;
+  private message: ElementBuilder;
   private isError: boolean;
   private icon: HTMLElement | undefined;
 
@@ -38,6 +40,8 @@ export default class Input {
       required: isRequired,
     });
 
+    this.addEventListeners(type);
+
     this.label = new ElementBuilder({
       tag: 'label',
       className: [...CUSTOM_LABEL_STYLE['LABEL_DEFAULT']],
@@ -46,6 +50,11 @@ export default class Input {
     });
 
     this.container.getElement().append(this.label.getElement(), this.input.getElement());
+    this.message = new ElementBuilder({
+      tag: 'div',
+      className: ERROR_MESSAGE_STYLE,
+    });
+    this.container.getElement().append(this.message.getElement());
 
     if (type === InputType.PASSWORD) {
       this.addPasswordIcon(type);
@@ -60,9 +69,19 @@ export default class Input {
     return this.input.getValue();
   }
 
-  public toggleErrorStyle(): void {
-    this.isError = !this.isError;
+  public setError(message: string): void {
+    this.isError = true;
+    this.message.getElement().textContent = message;
+    this.toggleErrorStyle();
+  }
 
+  public clearError(): void {
+    this.isError = false;
+    this.message.getElement().textContent = '';
+    this.toggleErrorStyle();
+  }
+
+  public toggleErrorStyle(): void {
     if (this.isError) {
       this.label.removeCssClasses([...CUSTOM_LABEL_STYLE['LABEL_DEFAULT']]);
       this.label.applyCssClasses([...CUSTOM_LABEL_STYLE['LABEL_ERROR']]);
@@ -75,6 +94,16 @@ export default class Input {
 
       this.input.removeCssClasses([...CUSTOM_INPUT_STYLE['INPUT_ERROR']]);
       this.input.applyCssClasses([...CUSTOM_INPUT_STYLE['INPUT_DEFAULT']]);
+    }
+  }
+
+  private addEventListeners(type: InputType): void {
+    if (type === InputType.EMAIL || type === InputType.PASSWORD) {
+      this.input.getElement().addEventListener('keydown', (event: KeyboardEvent) => {
+        if (event.key === ' ') {
+          event.preventDefault();
+        }
+      });
     }
   }
 
