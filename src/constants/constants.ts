@@ -23,6 +23,25 @@ export const MENU_TEXT = {
   CONTACTS: 'Контакты',
 };
 
+export const FOOTER_TEXTS = {
+  PROMO_TITLE: 'Наши Преимущества',
+  MENU_TITLE: 'Полезная информация',
+  TEAM_TITLE: 'Наши Кондитеры',
+  COPYRIGHT: 'JS/FE 2024Q4 | RS School',
+  FOOTER_PROMO_TEXT: {
+    LOVE: 'Приготовлено c любовью',
+    DELIVERY: 'Доставка в день заказа',
+    INGREDIENTS: '100% миндальная мука',
+  },
+  FOOTER_MENU_TEXT: {
+    ABOUT: 'О компании',
+    DELIVERY: 'Доставка и оплата',
+    TERMS: 'Условия Конфиденциальности',
+    RETURNS: 'Возврат заказа',
+    CONTACTS: 'Наши контакты',
+  },
+};
+
 export const AUTHORIZATION_MENU_ITEMS: MenuItem[] = [
   { name: AUTHORIZATION_MENU_TEXT.LOGIN, route: Route.LOGIN },
   { name: AUTHORIZATION_MENU_TEXT.REGISTRATION, route: Route.REGISTRATION },
@@ -44,7 +63,79 @@ export const MENU_ITEMS: MenuItem[] = [
   { name: MENU_TEXT.CONTACTS, route: Route.CONTACTS },
 ];
 
+export const FOOTER_MENU_ITEMS: MenuItem[] = [
+  { name: FOOTER_TEXTS.FOOTER_MENU_TEXT.ABOUT, route: Route.ABOUT },
+  { name: FOOTER_TEXTS.FOOTER_MENU_TEXT.DELIVERY, route: Route.DELIVERY },
+  { name: FOOTER_TEXTS.FOOTER_MENU_TEXT.TERMS, route: Route.TERMS },
+  { name: FOOTER_TEXTS.FOOTER_MENU_TEXT.RETURNS, route: Route.RETURNS },
+  { name: FOOTER_TEXTS.FOOTER_MENU_TEXT.CONTACTS, route: Route.CONTACTS },
+];
+
 export const BTN_TEXT = {
   REGISTRATION_PAGE: 'Зарегистрироваться',
   LOGIN_PAGE: 'Вход',
+};
+
+export const INTRO_TEXTS = {
+  NAME: 'MACARONSHOP',
+  SINCE: 'since 2013',
+  TITLE: 'Настоящая любовь',
+  CATCH_PHRASE:
+    'Пирожные макарон и другие десерты из натуральных ингредиентов, приготовленные с любовью',
+};
+
+export const PACKAGES_TEXTS = {
+  TITLE: 'Предложения для самых искушенных',
+  PACKAGES: {
+    READY_PACK: {
+      title: 'Готовые Наборы',
+      description: 'Готовые наборы со скидкой. Вы можете подобрать набор на подходящий случай',
+    },
+    CREATE_OWN: {
+      title: 'Соберите свой набор',
+      description: 'Выберите количество макарун и уникальные вкусы',
+    },
+    INDIVIDUAL_PACK: {
+      title: 'Набор с индивидуальной печатью',
+      description: 'Соберите набор макарун с уникальным дизайном',
+    },
+    WEDDING_PACK: {
+      title: 'Свадебные предложения',
+      description: 'Нежные макаруны с разными вкусами для украшения вашего торжества',
+    },
+    CORPORATE_PACK: {
+      title: 'Корпоративные подарки',
+      description: 'От 85р. за штуку с уникальным дизайном для ваших коллег и партнеров',
+    },
+    WHOLESALE_PACK: {
+      title: 'Оптовые поставки',
+      description: 'Уникальные предложения для кофеен, кафе, отелей и других бизнесов',
+    },
+  },
+};
+
+export const GUARANTEES_TEXTS = {
+  TITLE: 'Мы обо всем позаботилсь',
+  GUARANTEES: {
+    INGREDIENTS: {
+      title: 'Лучшие Ингредиенты',
+      description:
+        'Мы используем только премиальные ингредиенты, отборную муку, натуральные красители и свежие начинки',
+    },
+    PACKAGING: {
+      title: 'Красивая Упаковка',
+      description:
+        'Каждый заказ оформляем в элегантную и стильную упаковку, которая подчеркнёт изысканность макарун',
+    },
+    DELIVERY: {
+      title: 'Доставка в день заказа',
+      description:
+        'Мы доставляем ваш заказ в тот же день, чтобы вы могли наслаждаться ими именно тогда, когда хочется',
+    },
+    ANONYMOUS: {
+      title: 'Анонимная доставка',
+      description:
+        'Если вам нужна максимальная конфиденциальность, мы обеспечим анонимную доставку – без логотипов и лишних вопросов',
+    },
+  },
 };

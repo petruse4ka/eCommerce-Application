@@ -1,6 +1,11 @@
 import Alert from '@/components/alert/alert';
-import { AlertStatus, ApiEndpoint, ApiMethods, ContentType } from '@/types/enums';
-import type { AuthResponse, RegistrationBody, RegistrationResponse } from '@/types/interfaces';
+import { AlertStatus, AlertText, ApiEndpoint, ApiMethods, ContentType } from '@/types/enums';
+import type {
+  AuthorizationBody,
+  AuthResponse,
+  CustomerResponse,
+  RegistrationBody,
+} from '@/types/interfaces';
 
 const clientCredentials = btoa(
   import.meta.env['VITE_CTP_CLIENT_ID'] + ':' + import.meta.env['VITE_CTP_CLIENT_SECRET']
@@ -13,7 +18,7 @@ export default class API {
       {
         method: ApiMethods.POST,
         headers: {
-          Authorization: `Bearer ${await API.authentication()}`,
+          Authorization: `Bearer ${await this.authentication()}`,
           'Content-Type': ContentType.JSON,
         },
         body: JSON.stringify(body),
@@ -25,19 +30,66 @@ export default class API {
         }
 
         Alert.render({
-          textContent: 'Вы успешно зарегистрировались!',
+          textContent: AlertText.REGISTRATION_SUCCESS,
           status: AlertStatus.SUCCESS,
           visibleTime: 3000,
         });
         return response.json();
       })
-      .then((body: RegistrationResponse) => body.id)
+      .then((body: CustomerResponse) => body.customer.id)
       .catch((error: Error) => {
         console.log(error.message);
       });
   }
 
-  public static async authentication(): Promise<string> {
+  public static async userSignInResponse(body: AuthorizationBody): Promise<string> {
+    return await fetch(
+      `${import.meta.env['VITE_CTP_API_URL']}/${import.meta.env['VITE_CTP_PROJECT_KEY']}${ApiEndpoint.LOGIN}`,
+      {
+        method: ApiMethods.POST,
+        headers: {
+          Authorization: `Bearer ${await this.userAuthentication(body)}`,
+          'Content-Type': ContentType.JSON,
+        },
+        body: JSON.stringify(body),
+      }
+    )
+      .then((response) => {
+        Alert.render({
+          textContent: AlertText.AUTHORIZATION_SUCCESS,
+          status: AlertStatus.SUCCESS,
+          visibleTime: 3000,
+        });
+
+        return response.json();
+      })
+      .then((body: CustomerResponse) => body.customer.id);
+  }
+
+  private static async userAuthentication(body: AuthorizationBody): Promise<string> {
+    return await fetch(
+      import.meta.env['VITE_CTP_AUTH_URL'] +
+        ApiEndpoint.OATH +
+        import.meta.env['VITE_CTP_PROJECT_KEY'] +
+        ApiEndpoint.USER,
+      {
+        method: ApiMethods.POST,
+        headers: {
+          Authorization: `Basic ${clientCredentials}`,
+          'Content-Type': ContentType.URLENCODED,
+        },
+        body: new URLSearchParams({
+          grant_type: 'password',
+          username: body.email,
+          password: body.password,
+        }),
+      }
+    )
+      .then((response) => response.json())
+      .then((body: AuthResponse) => body.access_token);
+  }
+
+  private static async authentication(): Promise<string> {
     return await fetch(import.meta.env['VITE_CTP_AUTH_URL'] + ApiEndpoint.AUTHENTICATION, {
       method: ApiMethods.POST,
       headers: {

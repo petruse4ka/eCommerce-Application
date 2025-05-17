@@ -3,6 +3,8 @@
 
 @theme {
   --font-montserrat: 'Montserrat', sans-serif;
+
+  /* Colors */
   --color-white: #fff;
   --color-gray: #ededf0;
   --color-black: #1a1a2e;
@@ -15,6 +17,20 @@
   --color-secondary: #4e9dd3;
   --color-secondary-hover: #6aafdd;
   --color-background: #e6e6e6;
+  --color-peach: #ffdbc3;
+  --color-peach-light: #ffdbc34d;
+  --color-red: #ffc2cc;
+  --color-red-light: #ffc2cc4d;
+  --color-green: #b4eab3;
+  --color-green-light: #b4eab34d;
+  --color-orange: #fdd5cd;
+  --color-orange-light: #fdd5cd4d;
+  --color-mint: #a8dcdf;
+  --color-mint-light: #a8dcdf4d;
+  --color-lilac: #c4c6ec;
+  --color-lilac-light: #c4c6ec4d;
+
+  /* Animation */
   --animate-visible-right: animate-visible-right 1s ease-in-out;
   --animate-hidden-right: animate-hidden-right 1s ease-in-out forwards;
   --animate-shaking-img: shaking-img 10s infinite ease-in-out;

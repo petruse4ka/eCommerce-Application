@@ -43,11 +43,13 @@ export interface AuthResponse {
   token_type: string;
 }
 
-export interface RegistrationResponse {
-  id: string;
-  version: number;
-  createdAt: string;
-  lastModifiedAt: string;
+export interface CustomerResponse {
+  customer: {
+    id: string;
+    version: number;
+    createdAt: string;
+    lastModifiedAt: string;
+  };
 }
 
 export interface InputComponent {
@@ -79,7 +81,25 @@ export interface RegistrationBody {
   defaultShippingAddress?: number;
 }
 
+export interface AuthorizationBody {
+  email: string;
+  password: string;
+}
+
 export interface MenuItem {
   name: string;
   route: Route;
+}
+
+export interface Packages {
+  title: string;
+  description: string;
+  icon: string;
+  gradient: string[];
+}
+
+export interface Guarantees {
+  title: string;
+  description: string;
+  image: string;
 }
