@@ -30,8 +30,8 @@ export default class FormRegistration {
       tag: 'form',
       className: FORM,
     }).getElement();
+
     this.createFormContainer();
-    this.render();
   }
 
   public getElement(): HTMLElement {
@@ -43,6 +43,7 @@ export default class FormRegistration {
 
   public inputErrorHandler(event: Event, type: string): void {
     const validateFunction = getValidator(type);
+
     if (!validateFunction) return;
 
     const field = event.target;
@@ -66,9 +67,6 @@ export default class FormRegistration {
     this.formValue = new Map();
     this.isDefaultAddress = false;
     this.isSameAddresses = true;
-  }
-
-  private render(): void {
     const button = new Button({
       style: 'PRIMARY_PINK',
       textContent: BTN_TEXT.REGISTRATION_PAGE,

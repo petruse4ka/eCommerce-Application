@@ -6,8 +6,11 @@ const validators: Record<string, ValidationFunction> = {
   email: validateEMail,
   password: validatePassword,
   dateOfBirth: validateDateOfBirth,
-  postalCode: validatePostalCode,
-  input: validateInput,
+  firstName: validateNoDigitsNoSymbols,
+  lastName: validateNoDigitsNoSymbols,
+  shippingPostalcode: validatePostalCode,
+  shippingCity: validateNoDigitsNoSymbols,
+  shippingStreet: validateInput,
 };
 
 export function getValidator(type: string): ValidationFunction | undefined {
@@ -93,11 +96,16 @@ export function validatePostalCode(postalCode: string): string | null {
   return ErrorMessages.POSTAL_CODE_FORMAT;
 }
 
-export function validateInput(value: string, noSpecialChars: boolean = false): string | null {
+export function validateInput(value: string): string | null {
   if (value.trim().length === 0) {
     return ErrorMessages.EMPTY_INPUT;
   }
-  if (noSpecialChars && /[^A-Za-zА-я]/.test(value)) {
+  return null;
+}
+
+export function validateNoDigitsNoSymbols(value: string): string | null {
+  if (validateInput(value)) return validateInput(value);
+  if (/[^A-Za-zА-я-]/.test(value)) {
     return ErrorMessages.ONLY_LETTERS;
   }
   return null;

@@ -52,7 +52,7 @@ export const SCHOOL_URL = 'https://rs.school/';
 
 export const INPUTS_REGISTRATION_DATA = [
   {
-    id: 'first-name',
+    id: 'firstName',
     labelText: 'Имя',
     placeholder: 'Укажите имя',
     type: InputType.TEXT,
@@ -60,7 +60,7 @@ export const INPUTS_REGISTRATION_DATA = [
     callback: (): void => console.log('Primary button clicked'),
   },
   {
-    id: 'last-name',
+    id: 'lastName',
     labelText: 'Фамилия',
     placeholder: 'Укажите фамилию',
     type: InputType.TEXT,
@@ -68,7 +68,7 @@ export const INPUTS_REGISTRATION_DATA = [
     callback: (): void => console.log('Primary button clicked'),
   },
   {
-    id: 'date-of-birth',
+    id: 'dateOfBirth',
     labelText: 'День рождения',
     type: InputType.DATE,
     isRequired: true,
@@ -91,7 +91,7 @@ export const INPUTS_REGISTRATION_DATA = [
     callback: (): void => console.log('Primary button clicked'),
   },
   {
-    id: 'shipping-city',
+    id: 'shippingCity',
     labelText: 'Город доставки',
     placeholder: 'Укажите город',
     type: InputType.TEXT,
@@ -99,7 +99,7 @@ export const INPUTS_REGISTRATION_DATA = [
     callback: (): void => console.log('Primary button clicked'),
   },
   {
-    id: 'shipping-street-name',
+    id: 'shippingStreet',
     labelText: 'Улица доставки',
     placeholder: 'Укажите улицу',
     type: InputType.TEXT,
@@ -107,7 +107,7 @@ export const INPUTS_REGISTRATION_DATA = [
     callback: (): void => console.log('Primary button clicked'),
   },
   {
-    id: 'shipping-postal-code',
+    id: 'shippingPostalcode',
     labelText: 'Почтовый индекс доставки',
     placeholder: 'Укажите почтовый индекс',
     type: InputType.NUMBER,
@@ -118,7 +118,7 @@ export const INPUTS_REGISTRATION_DATA = [
 
 export const INPUTS_BILLING_DATA = [
   {
-    id: 'billing-city',
+    id: 'billingCity',
     labelText: 'Город выставления счета',
     placeholder: 'Укажите город',
     type: InputType.TEXT,
@@ -126,7 +126,7 @@ export const INPUTS_BILLING_DATA = [
     callback: (): void => console.log('Primary button clicked'),
   },
   {
-    id: 'billing-street-name',
+    id: 'billingStreet',
     labelText: 'Улица выставления счета',
     placeholder: 'Укажите улицу',
     type: InputType.TEXT,
@@ -134,7 +134,7 @@ export const INPUTS_BILLING_DATA = [
     callback: (): void => console.log('Primary button clicked'),
   },
   {
-    id: 'billing-postal-code',
+    id: 'billingPostalcode',
     labelText: 'Почтовый индекс выставления счета',
     placeholder: 'Укажите почтовый индекс',
     type: InputType.TEXT,
