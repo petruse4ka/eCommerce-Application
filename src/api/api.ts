@@ -1,4 +1,5 @@
 import Alert from '@/components/alert/alert';
+import { userState } from '@/store/user-state';
 import { AlertStatus, AlertText, ApiEndpoint, ApiMethods, ContentType } from '@/types/enums';
 import type {
   AuthorizationBody,
@@ -36,7 +37,10 @@ export default class API {
         });
         return response.json();
       })
-      .then((body: CustomerResponse) => body.customer.id)
+      .then((body: CustomerResponse) => {
+        userState.setAuthorized(true);
+        return body.customer.id;
+      })
       .catch((error: Error) => {
         console.log(error.message);
       });
@@ -63,7 +67,10 @@ export default class API {
 
         return response.json();
       })
-      .then((body: CustomerResponse) => body.customer.id);
+      .then((body: CustomerResponse) => {
+        userState.setAuthorized(true);
+        return body.customer.id;
+      });
   }
 
   private static async userAuthentication(body: AuthorizationBody): Promise<string> {
