@@ -6,15 +6,43 @@ import { INPUTS_REGISTRATION_DATA } from '@/data';
 import { FORM, REGISTRATION_INPUTS_CONTAINER } from '@/styles/forms/forms';
 import type { InputComponent, RegistrationBody } from '@/types/interfaces';
 import { ElementBuilder } from '@/utils/element-builder';
+import { getValidator, validateEMail, validatePassword } from '@/utils/validations';
 
 export default class FormRegistration {
-  private form: HTMLElement;
-  private userInfoContainer: HTMLElement;
+  private form: HTMLElement | undefined;
+  private userInfoContainer: HTMLElement | undefined;
   private INPUTS_DATA: InputComponent[];
   private formValue: Map<string, string>;
+  private inputs: Map<string, Input>;
 
   constructor() {
     this.INPUTS_DATA = INPUTS_REGISTRATION_DATA;
+    this.formValue = new Map();
+    this.inputs = new Map();
+
+    this.createFormContainer();
+    this.render();
+  }
+
+  public getElement(): HTMLElement {
+    if (!this.form) {
+      throw new Error('Form element is not initialized');
+    }
+    return this.form;
+  }
+
+  public inputErrorHandler(event: Event, type: string): void {
+    const validateFunction = getValidator(type);
+    if (!validateFunction) return;
+
+    const field = event.target;
+    if (field instanceof HTMLInputElement) {
+      const errorMessage = validateFunction(field.value);
+      this.showValidationError(field.id, errorMessage);
+    }
+  }
+
+  private createFormContainer(): void {
     this.form = new ElementBuilder({
       tag: 'form',
       className: FORM,
@@ -24,14 +52,17 @@ export default class FormRegistration {
       tag: 'div',
       className: REGISTRATION_INPUTS_CONTAINER,
     }).getElement();
-
-    this.formValue = new Map();
-
-    this.render();
   }
 
-  public getElement(): HTMLElement {
-    return this.form;
+  private showValidationError(id: string, errorMessage: string | null): void {
+    const input = this.inputs.get(id);
+    if (!input) return;
+
+    if (errorMessage) {
+      input.setError(errorMessage);
+    } else {
+      input.clearError();
+    }
   }
 
   private createInputs(): void {
@@ -45,7 +76,8 @@ export default class FormRegistration {
         type,
         isRequired,
         eventType: 'input',
-        callback: (): void => {
+        callback: (event: Event): void => {
+          this.inputErrorHandler(event, id);
           const key = id
             .split('-')
             .map((part, index) =>
@@ -56,7 +88,10 @@ export default class FormRegistration {
         },
       });
 
-      this.userInfoContainer.append(inputNode.getElement());
+      if (this.userInfoContainer) {
+        this.userInfoContainer.append(inputNode.getElement());
+      }
+      this.inputs.set(id, inputNode);
     }
   }
 
@@ -70,7 +105,9 @@ export default class FormRegistration {
     }).getElement();
     this.createInputs();
 
-    this.form.append(this.userInfoContainer, button);
+    if (this.form && this.userInfoContainer) {
+      this.form.append(this.userInfoContainer, button);
+    }
   }
 
   private submitForm(): void {
@@ -89,6 +126,14 @@ export default class FormRegistration {
         },
       ],
     };
-    void API.userRegistration(body);
+    const isNotValidEmail = validateEMail(body.email);
+    this.showValidationError('email', isNotValidEmail);
+
+    const isNotValidPassword = validatePassword(body.password);
+    this.showValidationError('password', isNotValidPassword);
+
+    if (!isNotValidEmail && !isNotValidPassword) {
+      void API.userRegistration(body);
+    }
   }
 }

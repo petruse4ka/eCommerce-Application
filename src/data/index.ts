@@ -110,7 +110,7 @@ export const INPUTS_REGISTRATION_DATA = [
     id: 'postal-code',
     labelText: 'Ваш почтовый индекс',
     placeholder: 'Укажите почтовый индекс',
-    type: InputType.NUMBER,
+    type: InputType.TEXT,
     isRequired: true,
     callback: (): void => console.log('Primary button clicked'),
   },
