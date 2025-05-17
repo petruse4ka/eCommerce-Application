@@ -3,7 +3,8 @@ export const GUARANTEES_STYLES = {
   TITLE: ['text-3xl', 'font-semibold', 'text-center', 'mb-10', 'text-black'],
   LIST: ['grid', 'grid-cols-1', 'sm:grid-cols-2', 'xl:grid-cols-4', 'gap-8'],
   CARD: [
-    'border-lilac',
+    'group',
+    'border-mint-light',
     'border-1',
     'rounded-md',
     'shadow-md',
@@ -12,8 +13,16 @@ export const GUARANTEES_STYLES = {
     'flex-col',
     'items-center',
     'text-center',
+    'hover:border-mint',
   ],
-  IMAGE: ['mb-5'],
+  IMAGE: [
+    'mb-5',
+    'rounded-md',
+    'transition-transform',
+    'duration-500',
+    'group-hover:scale-105',
+    'group-hover:drop-shadow-lg',
+  ],
   CARD_TITLE: ['text-lg', 'font-semibold', 'mb-3', 'text-black'],
   CARD_DESCRIPTION: ['text-sm', 'text-black'],
 };

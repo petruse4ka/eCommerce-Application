@@ -1,8 +1,9 @@
 export const PACKAGES_STYLES = {
-  SECTION: ['w-full', 'pb-10'],
+  SECTION: ['w-full', 'pb-10', 'py-10', 'lg:py-0'],
   TITLE: ['text-3xl', 'font-semibold', 'text-center', 'mb-10', 'text-black'],
   LIST: ['grid', 'grid-cols-1', 'sm:grid-cols-2', 'lg:grid-cols-2', 'xl:grid-cols-2', 'gap-8'],
   CARD: [
+    'group',
     'flex',
     'flex-col',
     'items-center',
@@ -13,7 +14,7 @@ export const PACKAGES_STYLES = {
     'px-10',
     'lg:px-20',
   ],
-  ICON: ['mb-4'],
+  ICON: ['mb-4', 'transition-transform', 'duration-500', 'group-hover:rotate-[360deg]'],
   CARD_TITLE: ['text-xl', 'font-semibold', 'mb-2', 'text-center'],
   DESCRIPTION: ['text-base', 'text-center'],
 };
