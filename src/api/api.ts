@@ -40,7 +40,7 @@ export default class API {
         return response.json();
       })
       .then((body: CustomerResponse) => {
-        userState.setAuthorized(true);
+        userState.setAuthorizationState(true);
         Router.followRoute(Route.HOME);
         return body.customer.id;
       })
@@ -71,8 +71,11 @@ export default class API {
         return response.json();
       })
       .then((body: CustomerResponse) => {
-        userState.setAuthorized(true);
+        userState.setAuthorizationState(true);
         return body.customer.id;
+      })
+      .catch((error: Error) => {
+        console.log(error.message);
       });
   }
 

@@ -5,11 +5,11 @@ class UserState {
     this.isAuthorized = false;
   }
 
-  public getIsAuthorized(): boolean {
+  public getAuthorizationState(): boolean {
     return this.isAuthorized;
   }
 
-  public setAuthorized(value: boolean): void {
+  public setAuthorizationState(value: boolean): void {
     this.isAuthorized = value;
   }
 }
