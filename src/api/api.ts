@@ -1,6 +1,8 @@
 import Alert from '@/components/alert/alert';
+import { Router } from '@/router/router';
 import { userState } from '@/store/user-state';
 import { AlertStatus, AlertText, ApiEndpoint, ApiMethods, ContentType } from '@/types/enums';
+import { Route } from '@/types/enums';
 import type {
   AuthorizationBody,
   AuthResponse,
@@ -39,6 +41,7 @@ export default class API {
       })
       .then((body: CustomerResponse) => {
         userState.setAuthorized(true);
+        Router.followRoute(Route.HOME);
         return body.customer.id;
       })
       .catch((error: Error) => {
