@@ -122,7 +122,7 @@ export default class FormAuthorization {
     const isNotValidPassword = validatePassword(body.password);
     this.showValidationError('password', isNotValidPassword);
 
-    if (!(Boolean(isNotValidEmail) && Boolean(isNotValidPassword))) {
+    if (!isNotValidEmail && !isNotValidPassword) {
       void API.userSignInResponse(body);
     }
   }
