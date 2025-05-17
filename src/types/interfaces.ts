@@ -89,3 +89,16 @@ export interface MenuItem {
   name: string;
   route: Route;
 }
+
+export interface Packages {
+  title: string;
+  description: string;
+  icon: string;
+  gradient: string[];
+}
+
+export interface Guarantees {
+  title: string;
+  description: string;
+  image: string;
+}

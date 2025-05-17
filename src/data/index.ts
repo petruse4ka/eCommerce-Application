@@ -5,8 +5,24 @@ import handMade from '@/assets/icons/footer-love.svg';
 import freshProductsIcon from '@/assets/icons/fresh-products.svg';
 import naturalIngredients from '@/assets/icons/natural-ingredients.svg';
 import wholesaleSale from '@/assets/icons/wholesale-offer.svg';
-import { FOOTER_TEXTS, SUBHEADER_PROMO_TEXT } from '@/constants/constants';
+import anonymousIcon from '@/assets/images/guarantees/anonymous.png';
+import deliveryIcon from '@/assets/images/guarantees/delivery.png';
+import ingerientsIcon from '@/assets/images/guarantees/ingredients.png';
+import packagingIcon from '@/assets/images/guarantees/packaging.png';
+import corporateIcon from '@/assets/images/packages/corporate.png';
+import customIcon from '@/assets/images/packages/custom.png';
+import readyIcon from '@/assets/images/packages/ready.png';
+import stampIcon from '@/assets/images/packages/stamp.png';
+import weddingIcon from '@/assets/images/packages/wedding.png';
+import wholesaleIcon from '@/assets/images/packages/wholesale.png';
+import {
+  FOOTER_TEXTS,
+  GUARANTEES_TEXTS,
+  PACKAGES_TEXTS,
+  SUBHEADER_PROMO_TEXT,
+} from '@/constants/constants';
 import { InputType } from '@/types/enums';
+import type { Guarantees, Packages } from '@/types/interfaces';
 
 export const PROMO_ITEMS = [
   { ICON: fastDeliveryIcon, TEXT: SUBHEADER_PROMO_TEXT.DELIVERY },
@@ -116,5 +132,57 @@ export const INPUTS_AUTHORIZATION_DATA = [
     type: InputType.PASSWORD,
     isRequired: true,
     callback: (): void => console.log('Primary button clicked'),
+  },
+];
+
+export const PACKAGES: Packages[] = [
+  {
+    ...PACKAGES_TEXTS.PACKAGES.READY_PACK,
+    icon: readyIcon,
+    gradient: ['bg-gradient-to-br', 'from-peach', 'to-peach-light'],
+  },
+  {
+    ...PACKAGES_TEXTS.PACKAGES.CREATE_OWN,
+    icon: customIcon,
+    gradient: ['bg-gradient-to-br', 'from-red', 'to-red-light'],
+  },
+  {
+    ...PACKAGES_TEXTS.PACKAGES.INDIVIDUAL_PACK,
+    icon: stampIcon,
+    gradient: ['bg-gradient-to-br', 'from-green', 'to-green-light'],
+  },
+  {
+    ...PACKAGES_TEXTS.PACKAGES.WEDDING_PACK,
+    icon: weddingIcon,
+    gradient: ['bg-gradient-to-br', 'from-orange', 'to-orange-light'],
+  },
+  {
+    ...PACKAGES_TEXTS.PACKAGES.CORPORATE_PACK,
+    icon: corporateIcon,
+    gradient: ['bg-gradient-to-br', 'from-mint', 'to-mint-light'],
+  },
+  {
+    ...PACKAGES_TEXTS.PACKAGES.WHOLESALE_PACK,
+    icon: wholesaleIcon,
+    gradient: ['bg-gradient-to-br', 'from-lilac', 'to-lilac-light'],
+  },
+];
+
+export const GUARANTEES: Guarantees[] = [
+  {
+    ...GUARANTEES_TEXTS.GUARANTEES.INGREDIENTS,
+    image: ingerientsIcon,
+  },
+  {
+    ...GUARANTEES_TEXTS.GUARANTEES.PACKAGING,
+    image: packagingIcon,
+  },
+  {
+    ...GUARANTEES_TEXTS.GUARANTEES.DELIVERY,
+    image: deliveryIcon,
+  },
+  {
+    ...GUARANTEES_TEXTS.GUARANTEES.ANONYMOUS,
+    image: anonymousIcon,
   },
 ];
