@@ -59,3 +59,5 @@ export const DEFAULT_CHECKBOX_STYLE = [
   'border-red-500',
   'cursor-pointer',
 ];
+
+export const CHECKBOX_CONTAINER_STYLE = ['flex', 'justify-between'];

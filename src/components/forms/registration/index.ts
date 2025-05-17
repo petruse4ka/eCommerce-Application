@@ -4,6 +4,7 @@ import Input from '@/components/inputs/input';
 import { BTN_TEXT } from '@/constants/constants';
 import { INPUTS_BILLING_DATA, INPUTS_REGISTRATION_DATA } from '@/data';
 import { FORM, REGISTRATION_INPUTS_CONTAINER } from '@/styles/forms/forms';
+import { CHECKBOX_CONTAINER_STYLE } from '@/styles/inputs/inputs';
 import { CheckboxText, InputType } from '@/types/enums';
 import type { InputComponent, RegistrationBody } from '@/types/interfaces';
 import { ElementBuilder } from '@/utils/element-builder';
@@ -57,7 +58,7 @@ export default class FormRegistration {
         placeholder,
         type,
         isRequired,
-        eventType: 'keyup',
+        eventType: 'input',
         callback: (): void => {
           const key = id
             .split('-')
@@ -82,7 +83,7 @@ export default class FormRegistration {
         placeholder,
         type,
         isRequired,
-        eventType: 'keyup',
+        eventType: 'input',
         callback: (): void => {
           const key = id
             .split('-')
@@ -118,7 +119,7 @@ export default class FormRegistration {
       id: 'is-default-address',
       type: InputType.CHECKBOX,
       labelText: CheckboxText.DEFAULT_SAVE,
-      className: ['flex', 'justify-between'],
+      className: CHECKBOX_CONTAINER_STYLE,
       callback: (): void => {
         this.isDefaultAddress = !this.isDefaultAddress;
       },
@@ -128,7 +129,7 @@ export default class FormRegistration {
       id: 'is-same-addresses',
       type: InputType.CHECKBOX,
       labelText: CheckboxText.SAME_ADDRESSES,
-      className: ['flex', 'justify-between'],
+      className: CHECKBOX_CONTAINER_STYLE,
       attributes: { checked: '' },
       callback: (): void => {
         this.isSameAddresses = !this.isSameAddresses;
@@ -149,7 +150,6 @@ export default class FormRegistration {
     }).getElement();
 
     this.createInputs();
-    this.createCheckboxes();
     this.createCheckboxes();
 
     this.form.append(this.userInfoContainer, button);

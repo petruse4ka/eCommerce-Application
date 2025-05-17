@@ -40,6 +40,7 @@ export default class Input {
       value,
       attributes,
       required: isRequired,
+      eventType: parameters.eventType,
     });
 
     this.addEventListeners(type);
