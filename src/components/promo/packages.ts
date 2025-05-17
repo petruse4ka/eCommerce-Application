@@ -1,4 +1,5 @@
 import { BaseComponent } from '@/components/base/component';
+import { PACKAGES_TEXTS } from '@/constants/constants';
 import { PACKAGES } from '@/data';
 import { PACKAGES_STYLES } from '@/styles/promo/packages';
 import { ElementBuilder } from '@/utils/element-builder';
@@ -14,6 +15,17 @@ export default class Packages extends BaseComponent {
   }
 
   protected render(): void {
+    const title = new ElementBuilder({
+      tag: 'h2',
+      className: PACKAGES_STYLES.TITLE,
+      textContent: PACKAGES_TEXTS.TITLE,
+    }).getElement();
+
+    const list = new ElementBuilder({
+      tag: 'div',
+      className: PACKAGES_STYLES.LIST,
+    }).getElement();
+
     for (const item of PACKAGES) {
       const card = new ElementBuilder({
         tag: 'div',
@@ -26,9 +38,9 @@ export default class Packages extends BaseComponent {
         className: PACKAGES_STYLES.ICON,
       }).getElement();
 
-      const title = new ElementBuilder({
+      const cardTitle = new ElementBuilder({
         tag: 'h3',
-        className: PACKAGES_STYLES.TITLE,
+        className: PACKAGES_STYLES.CARD_TITLE,
         textContent: item.title,
       }).getElement();
 
@@ -38,8 +50,10 @@ export default class Packages extends BaseComponent {
         textContent: item.description,
       }).getElement();
 
-      card.append(icon, title, description);
-      this.component.append(card);
+      card.append(icon, cardTitle, description);
+      list.append(card);
     }
+
+    this.component.append(title, list);
   }
 }

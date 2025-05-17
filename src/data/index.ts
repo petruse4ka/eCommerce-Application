@@ -137,32 +137,32 @@ export const INPUTS_AUTHORIZATION_DATA = [
 
 export const PACKAGES: Packages[] = [
   {
-    ...PACKAGES_TEXTS.READY_PACK,
+    ...PACKAGES_TEXTS.PACKAGES.READY_PACK,
     icon: readyIcon,
     gradient: ['bg-gradient-to-br', 'from-peach', 'to-peach-light'],
   },
   {
-    ...PACKAGES_TEXTS.CREATE_OWN,
+    ...PACKAGES_TEXTS.PACKAGES.CREATE_OWN,
     icon: customIcon,
     gradient: ['bg-gradient-to-br', 'from-red', 'to-red-light'],
   },
   {
-    ...PACKAGES_TEXTS.INDIVIDUAL_PACK,
+    ...PACKAGES_TEXTS.PACKAGES.INDIVIDUAL_PACK,
     icon: stampIcon,
     gradient: ['bg-gradient-to-br', 'from-green', 'to-green-light'],
   },
   {
-    ...PACKAGES_TEXTS.WEDDING_PACK,
+    ...PACKAGES_TEXTS.PACKAGES.WEDDING_PACK,
     icon: weddingIcon,
     gradient: ['bg-gradient-to-br', 'from-orange', 'to-orange-light'],
   },
   {
-    ...PACKAGES_TEXTS.CORPORATE_PACK,
+    ...PACKAGES_TEXTS.PACKAGES.CORPORATE_PACK,
     icon: corporateIcon,
     gradient: ['bg-gradient-to-br', 'from-mint', 'to-mint-light'],
   },
   {
-    ...PACKAGES_TEXTS.WHOLESALE_PACK,
+    ...PACKAGES_TEXTS.PACKAGES.WHOLESALE_PACK,
     icon: wholesaleIcon,
     gradient: ['bg-gradient-to-br', 'from-lilac', 'to-lilac-light'],
   },
@@ -170,19 +170,19 @@ export const PACKAGES: Packages[] = [
 
 export const GUARANTEES: Guarantees[] = [
   {
-    ...GUARANTEES_TEXTS.OUR_GUARANTEES.INGREDIENTS,
+    ...GUARANTEES_TEXTS.GUARANTEES.INGREDIENTS,
     image: ingerientsIcon,
   },
   {
-    ...GUARANTEES_TEXTS.OUR_GUARANTEES.PACKAGING,
+    ...GUARANTEES_TEXTS.GUARANTEES.PACKAGING,
     image: packagingIcon,
   },
   {
-    ...GUARANTEES_TEXTS.OUR_GUARANTEES.DELIVERY,
+    ...GUARANTEES_TEXTS.GUARANTEES.DELIVERY,
     image: deliveryIcon,
   },
   {
-    ...GUARANTEES_TEXTS.OUR_GUARANTEES.ANONYMOUS,
+    ...GUARANTEES_TEXTS.GUARANTEES.ANONYMOUS,
     image: anonymousIcon,
   },
 ];

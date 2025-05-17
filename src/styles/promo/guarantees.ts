@@ -1,5 +1,5 @@
 export const GUARANTEES_STYLES = {
-  SECTION: ['w-full', 'py-12'],
+  SECTION: ['w-full', 'py-10'],
   TITLE: ['text-3xl', 'font-semibold', 'text-center', 'mb-10', 'text-black'],
   LIST: ['grid', 'grid-cols-1', 'sm:grid-cols-2', 'xl:grid-cols-4', 'gap-8'],
   CARD: [
