@@ -1,5 +1,5 @@
 export const PACKAGES_STYLES = {
-  SECTION: ['w-full', 'pb-10', 'py-10', 'lg:py-0'],
+  SECTION: ['w-full', 'pb-10', 'py-10', 'lg:pt-0'],
   TITLE: ['text-3xl', 'font-semibold', 'text-center', 'mb-10', 'text-black'],
   LIST: ['grid', 'grid-cols-1', 'sm:grid-cols-2', 'lg:grid-cols-2', 'xl:grid-cols-2', 'gap-8'],
   CARD: [
