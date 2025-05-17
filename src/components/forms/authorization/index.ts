@@ -9,28 +9,18 @@ import { ElementBuilder } from '@/utils/element-builder';
 import { getValidator, validateEMail, validatePassword } from '@/utils/validations';
 
 export default class FormAuthorization {
-  private form: HTMLElement;
-  private userInfoContainer: HTMLElement;
+  private form: HTMLElement | undefined;
+  private userInfoContainer: HTMLElement | undefined;
   private INPUTS_DATA: InputComponent[];
   private formValue: Map<string, string>;
   private inputs: Map<string, Input>;
 
   constructor() {
     this.INPUTS_DATA = INPUTS_AUTHORIZATION_DATA;
-
-    this.form = new ElementBuilder({
-      tag: 'form',
-      className: FORM,
-    }).getElement();
-
-    this.userInfoContainer = new ElementBuilder({
-      tag: 'div',
-      className: AUTHORIZATION_INPUTS_CONTAINER,
-    }).getElement();
-
     this.formValue = new Map();
     this.inputs = new Map();
 
+    this.createFormContainer();
     this.render();
   }
 
@@ -46,6 +36,9 @@ export default class FormAuthorization {
   }
 
   public getElement(): HTMLElement {
+    if (!this.form) {
+      throw new Error('Form element is not initialized');
+    }
     return this.form;
   }
 
@@ -58,6 +51,18 @@ export default class FormAuthorization {
     } else {
       input.clearError();
     }
+  }
+
+  private createFormContainer(): void {
+    this.form = new ElementBuilder({
+      tag: 'form',
+      className: FORM,
+    }).getElement();
+
+    this.userInfoContainer = new ElementBuilder({
+      tag: 'div',
+      className: AUTHORIZATION_INPUTS_CONTAINER,
+    }).getElement();
   }
 
   private createInputs(): void {
@@ -83,7 +88,9 @@ export default class FormAuthorization {
         },
       });
 
-      this.userInfoContainer.append(inputNode.getElement());
+      if (this.userInfoContainer) {
+        this.userInfoContainer.append(inputNode.getElement());
+      }
       this.inputs.set(id, inputNode);
     }
   }
@@ -98,8 +105,9 @@ export default class FormAuthorization {
     }).getElement();
 
     this.createInputs();
-
-    this.form.append(this.userInfoContainer, button);
+    if (this.form && this.userInfoContainer) {
+      this.form.append(this.userInfoContainer, button);
+    }
   }
 
   private submitForm(): void {
