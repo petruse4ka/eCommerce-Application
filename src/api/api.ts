@@ -49,7 +49,7 @@ export default class API {
       });
   }
 
-  public static async userSignInResponse(body: AuthorizationBody): Promise<string> {
+  public static async userSignInResponse(body: AuthorizationBody): Promise<string | void> {
     return await fetch(
       `${import.meta.env['VITE_CTP_API_URL']}/${import.meta.env['VITE_CTP_PROJECT_KEY']}${ApiEndpoint.LOGIN}`,
       {
