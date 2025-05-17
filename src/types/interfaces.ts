@@ -78,6 +78,7 @@ export interface RegistrationBody {
   email: string;
   password: string;
   addresses: Addresses[];
+  defaultShippingAddress?: number;
 }
 
 export interface AuthorizationBody {

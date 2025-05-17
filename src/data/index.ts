@@ -53,7 +53,7 @@ export const SCHOOL_URL = 'https://rs.school/';
 export const INPUTS_REGISTRATION_DATA = [
   {
     id: 'first-name',
-    labelText: 'Ваше имя',
+    labelText: 'Имя',
     placeholder: 'Укажите имя',
     type: InputType.TEXT,
     isRequired: true,
@@ -61,7 +61,7 @@ export const INPUTS_REGISTRATION_DATA = [
   },
   {
     id: 'last-name',
-    labelText: 'Ваша фамилия',
+    labelText: 'Фамилия',
     placeholder: 'Укажите фамилию',
     type: InputType.TEXT,
     isRequired: true,
@@ -92,15 +92,15 @@ export const INPUTS_REGISTRATION_DATA = [
   },
   {
     id: 'city',
-    labelText: 'Ваш город',
+    labelText: 'Город доставки',
     placeholder: 'Укажите город',
     type: InputType.TEXT,
     isRequired: true,
     callback: (): void => console.log('Primary button clicked'),
   },
   {
-    id: 'street',
-    labelText: 'Ваша улица',
+    id: 'street-name',
+    labelText: 'Улица доставки',
     placeholder: 'Укажите улицу',
     type: InputType.TEXT,
     isRequired: true,
@@ -108,7 +108,7 @@ export const INPUTS_REGISTRATION_DATA = [
   },
   {
     id: 'postal-code',
-    labelText: 'Ваш почтовый индекс',
+    labelText: 'Почтовый индекс доставки',
     placeholder: 'Укажите почтовый индекс',
     type: InputType.NUMBER,
     isRequired: true,

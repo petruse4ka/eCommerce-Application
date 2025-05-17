@@ -59,7 +59,9 @@ export class ElementBuilder {
   ): void {
     if (eventType && callback) {
       this.element.addEventListener(eventType, (event: Event) => {
-        event.preventDefault();
+        if (!(this.element instanceof HTMLInputElement)) {
+          event.preventDefault();
+        }
         callback(event);
       });
     }

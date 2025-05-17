@@ -4,6 +4,7 @@ import Input from '@/components/inputs/input';
 import { BTN_TEXT } from '@/constants/constants';
 import { INPUTS_REGISTRATION_DATA } from '@/data';
 import { FORM, REGISTRATION_INPUTS_CONTAINER } from '@/styles/forms/forms';
+import { CheckboxText, InputType } from '@/types/enums';
 import type { InputComponent, RegistrationBody } from '@/types/interfaces';
 import { ElementBuilder } from '@/utils/element-builder';
 
@@ -12,6 +13,7 @@ export default class FormRegistration {
   private userInfoContainer: HTMLElement;
   private INPUTS_DATA: InputComponent[];
   private formValue: Map<string, string>;
+  private isDefaultAddress: boolean;
 
   constructor() {
     this.INPUTS_DATA = INPUTS_REGISTRATION_DATA;
@@ -26,6 +28,7 @@ export default class FormRegistration {
     }).getElement();
 
     this.formValue = new Map();
+    this.isDefaultAddress = false;
 
     this.render();
   }
@@ -60,6 +63,20 @@ export default class FormRegistration {
     }
   }
 
+  private createCheckboxes(): void {
+    const checkboxDefaultAddress = new Input({
+      id: 'is-default-address',
+      type: InputType.CHECKBOX,
+      labelText: CheckboxText.DEFAULT_SAVE,
+      className: ['flex', 'justify-between'],
+      callback: (): void => {
+        this.isDefaultAddress = !this.isDefaultAddress;
+      },
+    }).getElement();
+
+    this.userInfoContainer.append(checkboxDefaultAddress);
+  }
+
   private render(): void {
     const button = new Button({
       style: 'PRIMARY_PINK',
@@ -68,7 +85,9 @@ export default class FormRegistration {
         this.submitForm();
       },
     }).getElement();
+
     this.createInputs();
+    this.createCheckboxes();
 
     this.form.append(this.userInfoContainer, button);
   }
@@ -88,6 +107,7 @@ export default class FormRegistration {
           postalCode: this.formValue.get('postalCode') ?? '',
         },
       ],
+      defaultShippingAddress: this.isDefaultAddress ? 0 : undefined,
     };
     void API.userRegistration(body);
   }

@@ -50,3 +50,12 @@ export const ERROR_MESSAGE_STYLE = [
   'text-left',
   'text-(--color-accent)',
 ];
+
+export const DEFAULT_CHECKBOX_STYLE = [
+  'h-5',
+  'w-5',
+  'accent-accent',
+  'hover:accent-accent-hover',
+  'border-red-500',
+  'cursor-pointer',
+];
