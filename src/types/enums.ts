@@ -79,3 +79,8 @@ export enum AlertText {
   REGISTRATION_SUCCESS = 'Вы успешно зарегистрировались!',
   AUTHORIZATION_SUCCESS = 'Вы успешно авторизовались!',
 }
+
+export enum CheckboxText {
+  DEFAULT_SAVE = 'Сохранить адрес по умолчанию',
+  SAME_ADDRESSES = 'Использовать одинаковые адреса',
+}

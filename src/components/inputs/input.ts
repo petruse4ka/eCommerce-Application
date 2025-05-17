@@ -1,6 +1,7 @@
 import {
   CUSTOM_INPUT_STYLE,
   CUSTOM_LABEL_STYLE,
+  DEFAULT_CHECKBOX_STYLE,
   ERROR_MESSAGE_STYLE,
   ICON_IN_INPUT,
 } from '@/styles/inputs/inputs';
@@ -19,7 +20,7 @@ export default class Input {
 
   constructor(parameters: InputComponent) {
     this.isError = false;
-    const { placeholder, id, callback, labelText, isRequired, value, type, className, eventType } =
+    const { placeholder, id, callback, labelText, isRequired, value, type, className, attributes } =
       parameters;
 
     this.container = new ElementBuilder({
@@ -30,12 +31,16 @@ export default class Input {
     this.input = new InputBuilder({
       type,
       id,
-      className: [...CUSTOM_INPUT_STYLE['INPUT_DEFAULT']],
+      className:
+        type === InputType.CHECKBOX
+          ? [...DEFAULT_CHECKBOX_STYLE]
+          : [...CUSTOM_INPUT_STYLE['INPUT_DEFAULT']],
       placeholder,
       callback,
       value,
+      attributes,
       required: isRequired,
-      eventType,
+      eventType: parameters.eventType,
     });
 
     this.addEventListeners(type);

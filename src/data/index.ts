@@ -53,7 +53,7 @@ export const SCHOOL_URL = 'https://rs.school/';
 export const INPUTS_REGISTRATION_DATA = [
   {
     id: 'first-name',
-    labelText: 'Ваше имя',
+    labelText: 'Имя',
     placeholder: 'Укажите имя',
     type: InputType.TEXT,
     isRequired: true,
@@ -61,7 +61,7 @@ export const INPUTS_REGISTRATION_DATA = [
   },
   {
     id: 'last-name',
-    labelText: 'Ваша фамилия',
+    labelText: 'Фамилия',
     placeholder: 'Укажите фамилию',
     type: InputType.TEXT,
     isRequired: true,
@@ -91,24 +91,51 @@ export const INPUTS_REGISTRATION_DATA = [
     callback: (): void => console.log('Primary button clicked'),
   },
   {
-    id: 'city',
-    labelText: 'Ваш город',
+    id: 'shipping-city',
+    labelText: 'Город доставки',
     placeholder: 'Укажите город',
     type: InputType.TEXT,
     isRequired: true,
     callback: (): void => console.log('Primary button clicked'),
   },
   {
-    id: 'street',
-    labelText: 'Ваша улица',
+    id: 'shipping-street-name',
+    labelText: 'Улица доставки',
     placeholder: 'Укажите улицу',
     type: InputType.TEXT,
     isRequired: true,
     callback: (): void => console.log('Primary button clicked'),
   },
   {
-    id: 'postal-code',
-    labelText: 'Ваш почтовый индекс',
+    id: 'shipping-postal-code',
+    labelText: 'Почтовый индекс доставки',
+    placeholder: 'Укажите почтовый индекс',
+    type: InputType.NUMBER,
+    isRequired: true,
+    callback: (): void => console.log('Primary button clicked'),
+  },
+];
+
+export const INPUTS_BILLING_DATA = [
+  {
+    id: 'billing-city',
+    labelText: 'Город выставления счета',
+    placeholder: 'Укажите город',
+    type: InputType.TEXT,
+    isRequired: true,
+    callback: (): void => console.log('Primary button clicked'),
+  },
+  {
+    id: 'billing-street-name',
+    labelText: 'Улица выставления счета',
+    placeholder: 'Укажите улицу',
+    type: InputType.TEXT,
+    isRequired: true,
+    callback: (): void => console.log('Primary button clicked'),
+  },
+  {
+    id: 'billing-postal-code',
+    labelText: 'Почтовый индекс выставления счета',
     placeholder: 'Укажите почтовый индекс',
     type: InputType.TEXT,
     isRequired: true,
