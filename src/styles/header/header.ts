@@ -33,6 +33,6 @@ export const HEADER_STYLES = {
     'duration-300',
     'ease-in-out',
     'text-[12px]',
-    'md:text-[14px]',
+    'md:text-base',
   ],
 };
