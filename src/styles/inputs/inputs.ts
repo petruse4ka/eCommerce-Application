@@ -5,7 +5,7 @@ const STANDARD_INPUT_STYLE = [
   'bg-white',
   'border',
   'outline-none',
-  'py-3',
+  'py-2',
   'px-2',
   'w-full',
 ];
@@ -25,9 +25,9 @@ export const ICON_IN_INPUT = [
   'h-6',
   'w-6',
   'absolute',
-  'top-9.5',
+  'top-7',
   'right-2',
-  'bg-[url(@/assets/icons/eye-outline.svg)]',
+  'bg-[url(@/assets/icons/eye-off-outline.svg)]',
   'hover:cursor-pointer',
 ];
 
@@ -42,6 +42,14 @@ export const CUSTOM_LABEL_STYLE = {
   LABEL_DEFAULT: [...STANDARD_LABEL_STYLE, 'text-black'],
   LABEL_ERROR: [...STANDARD_LABEL_STYLE, 'text-accent'],
 };
+
+export const ERROR_MESSAGE_STYLE = [
+  'error-message',
+  'h-8',
+  'text-xs',
+  'text-left',
+  'text-(--color-accent)',
+];
 
 export const DEFAULT_CHECKBOX_STYLE = [
   'h-5',

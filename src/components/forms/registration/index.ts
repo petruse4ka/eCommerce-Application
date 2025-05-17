@@ -72,7 +72,6 @@ export default class FormRegistration {
       this.userInfoContainer.append(inputNode.getElement());
     }
   }
-
   private createBillingInputs(): void {
     for (const input of this.INPUTS_BILLING_DATA) {
       const { id, labelText, placeholder, type, isRequired } = input;
@@ -150,6 +149,7 @@ export default class FormRegistration {
     }).getElement();
 
     this.createInputs();
+    this.createCheckboxes();
     this.createCheckboxes();
 
     this.form.append(this.userInfoContainer, button);

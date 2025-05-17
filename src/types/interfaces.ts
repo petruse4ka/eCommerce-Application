@@ -57,7 +57,7 @@ export interface InputComponent {
   className?: string | string[];
   id: string;
   type: InputType;
-  callback: (event: Event) => void;
+  callback?: (event: Event) => void;
   labelText: string;
   isRequired?: boolean;
   value?: string;
@@ -91,4 +91,17 @@ export interface AuthorizationBody {
 export interface MenuItem {
   name: string;
   route: Route;
+}
+
+export interface Packages {
+  title: string;
+  description: string;
+  icon: string;
+  gradient: string[];
+}
+
+export interface Guarantees {
+  title: string;
+  description: string;
+  image: string;
 }

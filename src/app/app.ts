@@ -27,7 +27,7 @@ export class App extends BaseComponent {
   private termsPage: TermsPage = new TermsPage();
   private returnsPage: ReturnsPage = new ReturnsPage();
   private router: Router;
-  private currentPage: BaseComponent = this.homePage;
+  private currentPage: BaseComponent;
 
   private readonly routes = new Map<Route, BaseComponent>([
     [Route.HOME, this.homePage],
@@ -47,6 +47,10 @@ export class App extends BaseComponent {
     this.setupRoutes();
     this.header = new Header();
     this.footer = new Footer();
+
+    const defaultRoute = this.router.getDefaultRoute();
+    this.currentPage = this.routes.get(defaultRoute) || this.errorPage;
+
     this.render();
   }
 
