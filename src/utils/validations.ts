@@ -2,16 +2,16 @@ import { VALIDATE_CONST } from '@/constants/constants';
 import { ErrorMessages } from '@/types/enums';
 import type { ValidationFunction } from '@/types/types';
 
-const validators: Record<string, ValidationFunction> = {
+export const validators: Record<string, ValidationFunction> = {
   email: validateEMail,
   password: validatePassword,
   dateOfBirth: validateDateOfBirth,
   firstName: validateNoDigitsNoSymbols,
   lastName: validateNoDigitsNoSymbols,
-  shippingPostalcode: validatePostalCode,
+  shippingPostalCode: validatePostalCode,
   shippingCity: validateNoDigitsNoSymbols,
   shippingStreet: validateInput,
-  billingPostalcode: validatePostalCode,
+  billingPostalCode: validatePostalCode,
   billingCity: validateNoDigitsNoSymbols,
   billingStreet: validateInput,
 };

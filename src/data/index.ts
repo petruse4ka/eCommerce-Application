@@ -96,9 +96,8 @@ export const INPUTS_ADDRESS_DATA = [
   {
     id: 'Country',
     labelText: 'Страна:',
-    placeholder: 'Укажите страну',
+    placeholder: 'Россия',
     type: InputType.TEXT,
-    isRequired: true,
     callback: (): void => console.log('Primary button clicked'),
   },
   {
@@ -118,7 +117,7 @@ export const INPUTS_ADDRESS_DATA = [
     callback: (): void => console.log('Primary button clicked'),
   },
   {
-    id: 'Postalcode',
+    id: 'PostalCode',
     labelText: 'Почтовый индекс доставки',
     placeholder: 'Укажите почтовый индекс',
     type: InputType.TEXT,

@@ -12,7 +12,15 @@ import { CHECKBOX_CONTAINER_STYLE } from '@/styles/inputs/inputs';
 import { CheckboxText, InputType } from '@/types/enums';
 import type { RegistrationBody } from '@/types/interfaces';
 import { ElementBuilder } from '@/utils/element-builder';
-import { getValidator, validateEMail, validatePassword } from '@/utils/validations';
+import {
+  getValidator,
+  validateDateOfBirth,
+  validateEMail,
+  validateInput,
+  validateNoDigitsNoSymbols,
+  validatePassword,
+  validatePostalCode,
+} from '@/utils/validations';
 
 export default class FormRegistration {
   private form: HTMLElement;
@@ -61,7 +69,7 @@ export default class FormRegistration {
     }).getElement();
 
     this.isDefaultAddress = false;
-    this.isSameAddresses = true;
+    this.isSameAddresses = false;
 
     const button = new Button({
       style: 'PRIMARY_PINK',
@@ -181,7 +189,7 @@ export default class FormRegistration {
 
   private showValidationError(id: string, errorMessage: string | null): void {
     const input = this.inputs.get(id);
-    console.log(id, input);
+
     if (!input) return;
 
     if (errorMessage) {
@@ -190,35 +198,6 @@ export default class FormRegistration {
       input.clearError();
     }
   }
-
-  /* private createBillingInputs(): void {
-    for (const input of this.INPUTS_BILLING_DATA) {
-      const { id, labelText, placeholder, type, isRequired } = input;
-
-      const inputNode = new Input({
-        id,
-        labelText,
-        placeholder,
-        type,
-        isRequired,
-        eventType: 'input',
-        callback: (event: Event): void => {
-          this.inputErrorHandler(event, id);
-          const key = id
-            .split('-')
-            .map((part, index) =>
-              index === 0 ? part : part.charAt(0).toUpperCase() + part.slice(1)
-            )
-            .join('');
-          this.formValue.set(key, inputNode.getValue());
-        },
-      });
-      if (this.userBillingAddressContainer) {
-        this.userBillingAddressContainer.append(inputNode.getElement());
-        this.form.insertBefore(this.userBillingAddressContainer, this.form.lastElementChild);
-      }
-    }
-  }*/
 
   private toggleVisibleBillingContainer(): void {
     if (this.userBillingAddressContainer) {
@@ -242,7 +221,6 @@ export default class FormRegistration {
       type: InputType.CHECKBOX,
       labelText: CheckboxText.SAME_ADDRESSES,
       className: CHECKBOX_CONTAINER_STYLE,
-      //attributes: { checked: '' },
       callback: (): void => {
         this.isSameAddresses = !this.isSameAddresses;
         this.toggleVisibleBillingContainer();
@@ -275,7 +253,7 @@ export default class FormRegistration {
         {
           country: 'RU',
           city: this.formValue.get('shippingCity') ?? '',
-          streetName: this.formValue.get('shippingStreetName') ?? '',
+          streetName: this.formValue.get('shippingStreet') ?? '',
           postalCode: this.formValue.get('shippingPostalCode') ?? '',
         },
       ],
@@ -283,22 +261,66 @@ export default class FormRegistration {
       defaultBillingAddress: indexBillingAddress,
     };
 
-    /*    if (!this.isSameAddresses) {
+    if (!this.isSameAddresses) {
       body.addresses.push({
         country: 'RU',
         city: this.formValue.get('billingCity') ?? '',
-        streetName: this.formValue.get('billingStreetName') ?? '',
+        streetName: this.formValue.get('billingStreet') ?? '',
         postalCode: this.formValue.get('billingPostalCode') ?? '',
       });
-    }*/
+    }
+
+    if (this.isDataValidBeforeSending(body)) {
+      void API.userRegistration(body);
+    }
+  }
+
+  private isDataValidBeforeSending(body: RegistrationBody): boolean {
+    const isNotValidFirstName = validateNoDigitsNoSymbols(body.firstName);
+    this.showValidationError('firstName', isNotValidFirstName);
+
+    const isNotValidLastName = validateNoDigitsNoSymbols(body.lastName);
+    this.showValidationError('lastName', isNotValidLastName);
+
     const isNotValidEmail = validateEMail(body.email);
     this.showValidationError('email', isNotValidEmail);
 
+    const isNotValidDate = validateDateOfBirth(body.dateOfBirth);
+    this.showValidationError('dateOfBirth', isNotValidDate);
+
     const isNotValidPassword = validatePassword(body.password);
     this.showValidationError('password', isNotValidPassword);
+    console.log(body);
+    const isNotValidShippingPostalCode = validatePostalCode(body.addresses[0].postalCode);
+    this.showValidationError('shippingPostalCode', isNotValidShippingPostalCode);
 
-    if (!isNotValidEmail && !isNotValidPassword) {
-      void API.userRegistration(body);
-    }
+    const isNotValidShippingCity = validateNoDigitsNoSymbols(body.addresses[0].city);
+    this.showValidationError('shippingCity', isNotValidShippingCity);
+
+    const isNotValidShippingStreet = validateInput(body.addresses[0].streetName);
+    this.showValidationError('shippingStreet', isNotValidShippingStreet);
+
+    const isNotValidBillingPostalCode = validatePostalCode(body.addresses[1].postalCode);
+    this.showValidationError('billingPostalCode', isNotValidBillingPostalCode);
+
+    const isNotValidBillingCity = validateNoDigitsNoSymbols(body.addresses[1].city);
+    this.showValidationError('billingCity', isNotValidBillingCity);
+
+    const isNotValidBillingStreet = validateInput(body.addresses[1].streetName);
+    this.showValidationError('billingStreet', isNotValidBillingStreet);
+
+    return !(
+      isNotValidFirstName &&
+      isNotValidLastName &&
+      isNotValidDate &&
+      isNotValidEmail &&
+      isNotValidPassword &&
+      isNotValidShippingPostalCode &&
+      isNotValidShippingCity &&
+      isNotValidShippingStreet &&
+      isNotValidBillingPostalCode &&
+      isNotValidBillingCity &&
+      isNotValidBillingStreet
+    );
   }
 }
