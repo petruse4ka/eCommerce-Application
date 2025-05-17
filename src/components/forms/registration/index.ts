@@ -47,7 +47,7 @@ export default class FormRegistration {
         placeholder,
         type,
         isRequired,
-        eventType: 'keyup',
+        eventType: 'input',
         callback: (): void => {
           const key = id
             .split('-')
