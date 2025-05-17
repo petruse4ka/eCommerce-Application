@@ -11,6 +11,9 @@ const validators: Record<string, ValidationFunction> = {
   shippingPostalcode: validatePostalCode,
   shippingCity: validateNoDigitsNoSymbols,
   shippingStreet: validateInput,
+  billingPostalcode: validatePostalCode,
+  billingCity: validateNoDigitsNoSymbols,
+  billingStreet: validateInput,
 };
 
 export function getValidator(type: string): ValidationFunction | undefined {

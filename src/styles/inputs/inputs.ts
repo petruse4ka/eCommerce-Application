@@ -30,7 +30,7 @@ export const CHECKBOX_STYLE = [
   'cursor-pointer',
 ];
 
-export const CHECKBOX_CONTAINER_STYLE = ['flex', 'justify-between'];
+export const CHECKBOX_CONTAINER_STYLE = ['flex', 'justify-start', 'gap-2'];
 
 export const ICON_IN_INPUT = [
   'h-6',

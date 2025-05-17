@@ -2,28 +2,29 @@ import API from '@/api/api';
 import { Button } from '@/components/buttons/button';
 import Input from '@/components/inputs/input';
 import { BTN_TEXT } from '@/constants/constants';
-import { INPUTS_BILLING_DATA, INPUTS_REGISTRATION_DATA } from '@/data';
-import { FORM, REGISTRATION_INPUTS_CONTAINER } from '@/styles/forms/forms';
+import { INPUTS_ADDRESS_DATA, INPUTS_REGISTRATION_DATA } from '@/data';
+import {
+  FORM,
+  REGISTRATION_ADDRESS_CONTAINER,
+  REGISTRATION_INPUTS_CONTAINER,
+} from '@/styles/forms/forms';
 import { CHECKBOX_CONTAINER_STYLE } from '@/styles/inputs/inputs';
 import { CheckboxText, InputType } from '@/types/enums';
-import type { InputComponent, RegistrationBody } from '@/types/interfaces';
+import type { RegistrationBody } from '@/types/interfaces';
 import { ElementBuilder } from '@/utils/element-builder';
 import { getValidator, validateEMail, validatePassword } from '@/utils/validations';
 
 export default class FormRegistration {
   private form: HTMLElement;
   private userInfoContainer: HTMLElement | undefined;
+  private userShippingAddressContainer: HTMLElement | undefined;
   private userBillingAddressContainer: HTMLElement | undefined;
-  private INPUTS_DATA: InputComponent[];
-  private INPUTS_BILLING_DATA: InputComponent[];
   private formValue: Map<string, string>;
   private inputs: Map<string, Input>;
   private isDefaultAddress: boolean | undefined;
   private isSameAddresses: boolean | undefined;
 
   constructor() {
-    this.INPUTS_DATA = INPUTS_REGISTRATION_DATA;
-    this.INPUTS_BILLING_DATA = INPUTS_BILLING_DATA;
     this.formValue = new Map();
     this.inputs = new Map();
     this.form = new ElementBuilder({
@@ -59,14 +60,9 @@ export default class FormRegistration {
       className: REGISTRATION_INPUTS_CONTAINER,
     }).getElement();
 
-    this.userBillingAddressContainer = new ElementBuilder({
-      tag: 'div',
-      className: REGISTRATION_INPUTS_CONTAINER,
-    }).getElement();
-
-    this.formValue = new Map();
     this.isDefaultAddress = false;
     this.isSameAddresses = true;
+
     const button = new Button({
       style: 'PRIMARY_PINK',
       textContent: BTN_TEXT.REGISTRATION_PAGE,
@@ -76,26 +72,41 @@ export default class FormRegistration {
     }).getElement();
 
     this.createInputs();
+    const shipping = this.createAddressContainer('shipping');
+
+    if (shipping instanceof HTMLFieldSetElement) {
+      this.userShippingAddressContainer = shipping;
+      this.userInfoContainer.append(this.userShippingAddressContainer);
+    }
     this.createCheckboxes();
+    const billing = this.createAddressContainer('billing');
+
+    if (billing instanceof HTMLFieldSetElement) {
+      this.userBillingAddressContainer = billing;
+      this.userInfoContainer.append(this.userBillingAddressContainer);
+    }
 
     if (this.form && this.userInfoContainer) {
+      this.userInfoContainer.append();
       this.form.append(this.userInfoContainer, button);
     }
   }
 
-  private showValidationError(id: string, errorMessage: string | null): void {
-    const input = this.inputs.get(id);
-    if (!input) return;
-
-    if (errorMessage) {
-      input.setError(errorMessage);
-    } else {
-      input.clearError();
-    }
-  }
-
   private createInputs(): void {
-    for (const input of this.INPUTS_DATA) {
+    const container = new ElementBuilder({
+      tag: 'fieldset',
+      className: REGISTRATION_ADDRESS_CONTAINER,
+    }).getElement();
+
+    const legend = new ElementBuilder({
+      tag: 'legend',
+      className: REGISTRATION_INPUTS_CONTAINER,
+      textContent: 'Персональные данные',
+    }).getElement();
+
+    container.append(legend);
+
+    for (const input of INPUTS_REGISTRATION_DATA) {
       const { id, labelText, placeholder, type, isRequired } = input;
 
       const inputNode = new Input({
@@ -116,14 +127,71 @@ export default class FormRegistration {
           this.formValue.set(key, inputNode.getValue());
         },
       });
+      container.append(inputNode.getElement());
 
-      if (this.userInfoContainer) {
-        this.userInfoContainer.append(inputNode.getElement());
-      }
       this.inputs.set(id, inputNode);
     }
+    if (this.userInfoContainer) {
+      this.userInfoContainer.append(container);
+    }
   }
-  private createBillingInputs(): void {
+
+  private createAddressContainer(prefix: string): HTMLFieldSetElement | null {
+    const container = new ElementBuilder({
+      tag: 'fieldset',
+      className: REGISTRATION_ADDRESS_CONTAINER,
+    }).getElement();
+
+    const legend = new ElementBuilder({
+      tag: 'legend',
+      className: REGISTRATION_INPUTS_CONTAINER,
+      textContent: `Адрес ${prefix === 'billing' ? ' оплаты' : ' доставки'}`,
+    }).getElement();
+
+    container.append(legend);
+
+    for (const input of INPUTS_ADDRESS_DATA) {
+      const { labelText, placeholder, type, isRequired } = input;
+      const id = prefix + input.id;
+      const inputNode = new Input({
+        id,
+        labelText,
+        placeholder,
+        type,
+        isRequired,
+        eventType: 'input',
+        callback: (event: Event): void => {
+          console.log(id);
+          this.inputErrorHandler(event, id);
+          const key = id
+            .split('-')
+            .map((part, index) =>
+              index === 0 ? part : part.charAt(0).toUpperCase() + part.slice(1)
+            )
+            .join('');
+          this.formValue.set(key, inputNode.getValue());
+        },
+      });
+      this.inputs.set(id, inputNode);
+      container.append(inputNode.getElement());
+    }
+    if (container instanceof HTMLFieldSetElement) return container;
+    return null;
+  }
+
+  private showValidationError(id: string, errorMessage: string | null): void {
+    const input = this.inputs.get(id);
+    console.log(id, input);
+    if (!input) return;
+
+    if (errorMessage) {
+      input.setError(errorMessage);
+    } else {
+      input.clearError();
+    }
+  }
+
+  /* private createBillingInputs(): void {
     for (const input of this.INPUTS_BILLING_DATA) {
       const { id, labelText, placeholder, type, isRequired } = input;
 
@@ -150,13 +218,11 @@ export default class FormRegistration {
         this.form.insertBefore(this.userBillingAddressContainer, this.form.lastElementChild);
       }
     }
-  }
+  }*/
 
   private toggleVisibleBillingContainer(): void {
-    if (this.isSameAddresses && this.userBillingAddressContainer) {
-      this.userBillingAddressContainer.remove();
-    } else {
-      this.createBillingInputs();
+    if (this.userBillingAddressContainer) {
+      this.userBillingAddressContainer.classList.toggle('hidden');
     }
   }
 
@@ -176,14 +242,14 @@ export default class FormRegistration {
       type: InputType.CHECKBOX,
       labelText: CheckboxText.SAME_ADDRESSES,
       className: CHECKBOX_CONTAINER_STYLE,
-      attributes: { checked: '' },
+      //attributes: { checked: '' },
       callback: (): void => {
         this.isSameAddresses = !this.isSameAddresses;
         this.toggleVisibleBillingContainer();
       },
     }).getElement();
     if (this.userInfoContainer) {
-      this.userInfoContainer.append(checkboxDefaultAddress, checkboxSameAddresses);
+      this.userInfoContainer.append(checkboxSameAddresses, checkboxDefaultAddress);
     }
   }
 
