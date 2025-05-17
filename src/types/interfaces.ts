@@ -62,6 +62,7 @@ export interface InputComponent {
   isRequired?: boolean;
   value?: string;
   eventType?: string;
+  attributes?: Record<string, string>;
 }
 
 export interface Addresses {
@@ -79,6 +80,7 @@ export interface RegistrationBody {
   password: string;
   addresses: Addresses[];
   defaultShippingAddress?: number;
+  defaultBillingAddress?: number;
 }
 
 export interface AuthorizationBody {
