@@ -15,7 +15,7 @@ export function getValidator(type: string): ValidationFunction | undefined {
 }
 
 export function validateEMail(string_: string): string | null {
-  if (string_.trim() === '') return ErrorMessages.EMPTY_EMAIL;
+  if (string_.trim() === '') return ErrorMessages.EMPTY_INPUT;
   if (/ /.test(string_)) return ErrorMessages.INVALID_SPACE;
   if (/[^\dA-Za-zЁА-яё]/.test(string_[0])) return ErrorMessages.INVALID_FIRST_CHAR;
   if (!/@/.test(string_)) return ErrorMessages.INVALID_EMAIL;
@@ -30,6 +30,7 @@ export function validateEMail(string_: string): string | null {
 }
 
 export function validatePassword(string_: string): string | null {
+  if (string_.trim() === '') return ErrorMessages.EMPTY_INPUT;
   const nonLatinRegex = /[^\w!#$%&*+.:=?@^{}-]/;
   if (string_.trim() !== string_) return ErrorMessages.INVALID_SPACE;
   if (nonLatinRegex.test(string_)) return ErrorMessages.INVALID_PASSWORD;
@@ -55,6 +56,9 @@ export function validatePassword(string_: string): string | null {
 
 export function validateDateOfBirth(dateOfBirth: string): string | null {
   const birthDate = new Date(dateOfBirth);
+
+  if (birthDate.toDateString().trim() === '') return ErrorMessages.EMPTY_INPUT;
+
   if (Number.isNaN(birthDate.getTime())) {
     return ErrorMessages.DATE_FORMAT;
   }
@@ -83,6 +87,7 @@ function getUserAge(birthDate: Date): number {
 }
 
 export function validatePostalCode(postalCode: string): string | null {
+  if (postalCode.trim() === '') return ErrorMessages.EMPTY_INPUT;
   if (postalCode.trim() !== postalCode) return ErrorMessages.INVALID_SPACE;
   if (/^\d{6}$/.test(postalCode)) return null;
   return ErrorMessages.POSTAL_CODE_FORMAT;

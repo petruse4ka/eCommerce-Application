@@ -38,6 +38,8 @@ export default class Input {
       eventType,
     });
 
+    this.addEventListeners(type);
+
     this.label = new ElementBuilder({
       tag: 'label',
       className: [...CUSTOM_LABEL_STYLE['LABEL_DEFAULT']],
@@ -90,6 +92,16 @@ export default class Input {
 
       this.input.removeCssClasses([...CUSTOM_INPUT_STYLE['INPUT_ERROR']]);
       this.input.applyCssClasses([...CUSTOM_INPUT_STYLE['INPUT_DEFAULT']]);
+    }
+  }
+
+  private addEventListeners(type: InputType): void {
+    if (type === InputType.EMAIL || type === InputType.PASSWORD) {
+      this.input.getElement().addEventListener('keydown', (event: KeyboardEvent) => {
+        if (event.key === ' ') {
+          event.preventDefault();
+        }
+      });
     }
   }
 
