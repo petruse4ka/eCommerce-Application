@@ -11,6 +11,7 @@ import RegistrationPage from '@/pages/registration';
 import ReturnsPage from '@/pages/returns';
 import TermsPage from '@/pages/terms';
 import { Router } from '@/router/router';
+import { userState } from '@/store/user-state';
 import { APP_STYLE } from '@/styles/app/app';
 import { Route } from '@/types/enums';
 
@@ -64,7 +65,17 @@ export class App extends BaseComponent {
 
   private setupRoutes(): void {
     for (const [route, page] of this.routes.entries()) {
-      this.router.addRoute(route, () => this.showPage(page));
+      if (route === Route.LOGIN || route === Route.REGISTRATION) {
+        this.router.addRoute(route, () => {
+          if (userState.getAuthorizationState()) {
+            Router.followRoute(Route.HOME);
+            return;
+          }
+          this.showPage(page);
+        });
+      } else {
+        this.router.addRoute(route, () => this.showPage(page));
+      }
     }
   }
 
