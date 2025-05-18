@@ -37,15 +37,15 @@ describe('Notify subscribers of user state change', () => {
   });
 
   test('should notify all subscribers on user state change', () => {
-    const mockCallback1 = vi.fn();
-    const mockCallback2 = vi.fn();
+    const mockFirstCallback = vi.fn();
+    const mockSecondCallback = vi.fn();
 
-    userState.subscribe(mockCallback1);
-    userState.subscribe(mockCallback2);
+    userState.subscribe(mockFirstCallback);
+    userState.subscribe(mockSecondCallback);
 
     userState.setAuthorizationState(true);
 
-    expect(mockCallback1).toHaveBeenCalledTimes(1);
-    expect(mockCallback2).toHaveBeenCalledTimes(1);
+    expect(mockFirstCallback).toHaveBeenCalledTimes(1);
+    expect(mockSecondCallback).toHaveBeenCalledTimes(1);
   });
 });
