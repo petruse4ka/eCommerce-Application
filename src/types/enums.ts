@@ -49,7 +49,7 @@ export enum ErrorMessages {
   ONE_DIGIT = 'одну цифру',
   ONE_LOWER_LETTER = 'одну строчную букву',
   ONE_UPPER_LETTER = 'одну заглавную букву',
-  ONLY_LETTERS = 'Допустимы только буквы.',
+  ONLY_LETTERS = 'Допустимы только буквы и дефис.',
   PASSWORD_MUST_CONTAIN = 'Пароль должен содержать как минимум',
   POSTAL_CODE_FORMAT = 'Почтовый индекс должен состоять из 6 цифр.',
   PASSWORD_LENGTH = '8 символов',

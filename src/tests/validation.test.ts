@@ -4,6 +4,7 @@ import {
   validateDateOfBirth,
   validateEMail,
   validateInput,
+  validateNoDigitsNoSymbols,
   validatePassword,
   validatePostalCode,
 } from '@/utils/validations';
@@ -134,7 +135,7 @@ it('isValidPostalCode: invalid input', () => {
   expect(validatePostalCode('index!')).toBe(ErrorMessages.POSTAL_CODE_FORMAT);
 });
 
-/********** Other validation test, second parametr = true lock digits and special characters***************/
+/********** Other validation test***************/
 it('validateInput: right input with one char', () => {
   expect(validateInput('a')).toEqual(null);
 });
@@ -146,8 +147,8 @@ it('validateInput: empty input', () => {
   expect(validateInput('')).toBe(ErrorMessages.EMPTY_INPUT);
 });
 it('validateInput: digit lock', () => {
-  expect(validateInput('123456', true)).toBe(ErrorMessages.ONLY_LETTERS);
+  expect(validateNoDigitsNoSymbols('123456')).toBe(ErrorMessages.ONLY_LETTERS);
 });
 it('validateInput: special chars lock', () => {
-  expect(validateInput('###', true)).toBe(ErrorMessages.ONLY_LETTERS);
+  expect(validateNoDigitsNoSymbols('###')).toBe(ErrorMessages.ONLY_LETTERS);
 });
