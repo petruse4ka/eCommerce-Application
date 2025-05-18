@@ -1,16 +1,21 @@
 export const FORM = ['flex', 'flex-col'];
 
+export const AUTHORIZATION_INPUTS_CONTAINER = [...FORM, 'my-5', 'mt-2'];
+
 export const REGISTRATION_INPUTS_CONTAINER = [
-  'sm:grid',
-  'sm:grid-cols-2',
-  'gap-x-7',
-  'gap-y-2',
+  ...FORM,
   'my-5',
+  'py-3',
+  'lg:grid',
+  'lg:grid-cols-2',
+  'lg:gap-7',
+  'lg:gap-y-2',
 ];
 
-export const REGISTRATION_ADDRESS_CONTAINER = ['border', 'flex', 'flex-col', 'p-2', 'my-5'];
-
-export const AUTHORIZATION_INPUTS_CONTAINER = [...FORM, 'my-5', 'mt-2'];
+export const REGISTRATION_ADDRESS = {
+  CONTAINER: ['border', 'border-gray-500', 'p-3', 'rounded-lg', 'flex', 'flex-col', 'my-5'],
+  LEGEND: ['px-2'],
+};
 
 export const REDIRECT_LINK = [
   'mt-5',
