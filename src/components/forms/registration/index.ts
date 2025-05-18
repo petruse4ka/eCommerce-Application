@@ -272,6 +272,7 @@ export default class FormRegistration {
     }
 
     if (this.isDataValidBeforeSending(body)) {
+      console.log('SEND!!');
       void API.userRegistration(body);
     }
   }
@@ -301,27 +302,28 @@ export default class FormRegistration {
     const isNotValidShippingStreet = validateInput(body.addresses[0].streetName);
     this.showValidationError('shippingStreet', isNotValidShippingStreet);
 
-    const isNotValidBillingPostalCode = validatePostalCode(body.addresses[1].postalCode);
-    this.showValidationError('billingPostalCode', isNotValidBillingPostalCode);
+    let isNotValidShippingAddress = false;
+    if (!this.isSameAddresses) {
+      const isNotValidBillingPostalCode = validatePostalCode(body.addresses[1].postalCode);
+      this.showValidationError('billingPostalCode', isNotValidBillingPostalCode);
 
-    const isNotValidBillingCity = validateNoDigitsNoSymbols(body.addresses[1].city);
-    this.showValidationError('billingCity', isNotValidBillingCity);
+      const isNotValidBillingCity = validateNoDigitsNoSymbols(body.addresses[1].city);
+      this.showValidationError('billingCity', isNotValidBillingCity);
 
-    const isNotValidBillingStreet = validateInput(body.addresses[1].streetName);
-    this.showValidationError('billingStreet', isNotValidBillingStreet);
-
-    return !(
-      isNotValidFirstName &&
-      isNotValidLastName &&
-      isNotValidDate &&
-      isNotValidEmail &&
-      isNotValidPassword &&
-      isNotValidShippingPostalCode &&
-      isNotValidShippingCity &&
-      isNotValidShippingStreet &&
-      isNotValidBillingPostalCode &&
-      isNotValidBillingCity &&
-      isNotValidBillingStreet
+      const isNotValidBillingStreet = validateInput(body.addresses[1].streetName);
+      this.showValidationError('billingStreet', isNotValidBillingStreet);
+      isNotValidShippingAddress =
+        !!isNotValidBillingPostalCode && !!isNotValidBillingCity && !!isNotValidBillingStreet;
+    }
+    return (
+      !isNotValidFirstName &&
+      !isNotValidLastName &&
+      !isNotValidDate &&
+      !isNotValidEmail &&
+      !isNotValidPassword &&
+      !isNotValidShippingPostalCode &&
+      !isNotValidShippingCity &&
+      !isNotValidShippingAddress
     );
   }
 }
