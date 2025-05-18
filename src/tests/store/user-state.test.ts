@@ -8,14 +8,14 @@ beforeEach(() => {
   userState = new UserState();
 });
 
-describe('Starting value', () => {
-  test('should have unauthorized state at initialization', () => {
+describe('User state starting value', () => {
+  test('should have unauthorized user state at initialization', () => {
     expect(userState.getAuthorizationState()).toBe(false);
   });
 });
 
-describe('Change state', () => {
-  test('should correctly change and return authorization state', () => {
+describe('Change user state value', () => {
+  test('should correctly change and return user authorization state', () => {
     userState.setAuthorizationState(true);
     expect(userState.getAuthorizationState()).toBe(true);
 
@@ -24,8 +24,8 @@ describe('Change state', () => {
   });
 });
 
-describe('Notify subscribers', () => {
-  test('should notify subscribers on state change', () => {
+describe('Notify subscribers of user state change', () => {
+  test('should notify subscriber on each user state change', () => {
     const mockCallback = vi.fn();
     userState.subscribe(mockCallback);
 
@@ -36,7 +36,7 @@ describe('Notify subscribers', () => {
     expect(mockCallback).toHaveBeenCalledTimes(2);
   });
 
-  test('should notify all subscribers', () => {
+  test('should notify all subscribers on user state change', () => {
     const mockCallback1 = vi.fn();
     const mockCallback2 = vi.fn();
 
