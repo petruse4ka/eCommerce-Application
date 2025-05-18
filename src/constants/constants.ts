@@ -76,7 +76,9 @@ export const FOOTER_MENU_ITEMS: MenuItem[] = [
 
 export const BTN_TEXT = {
   REGISTRATION_PAGE: 'Зарегистрироваться',
+  REGISTRATION_REDIRECT: 'Перейти к регистрации',
   LOGIN_PAGE: 'Вход',
+  LOGIN_REDIRECT: 'Перейти к авторизации',
 };
 
 export const INTRO_TEXTS = {
