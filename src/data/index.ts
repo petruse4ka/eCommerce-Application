@@ -98,6 +98,7 @@ export const INPUTS_ADDRESS_DATA = [
     labelText: 'Страна:',
     placeholder: 'Россия',
     type: InputType.TEXT,
+    isDisabled: true,
     callback: (): void => console.log('Primary button clicked'),
   },
   {

@@ -20,8 +20,8 @@ export default class Input {
 
   constructor(parameters: InputComponent) {
     this.isError = false;
-    const { placeholder, id, callback, labelText, isRequired, value, type, className, attributes } =
-      parameters;
+    const { placeholder, id, callback, labelText, value, type, className, attributes } = parameters;
+    const { isDisabled, isRequired } = parameters;
 
     this.container = new ElementBuilder({
       tag: 'div',
@@ -38,9 +38,10 @@ export default class Input {
       value,
       attributes,
       required: isRequired,
+      disabled: isDisabled,
       eventType: parameters.eventType,
     });
-
+    if (/Country/.test(id)) console.log(this.input, this.input.getElement());
     this.addEventListeners(type);
 
     this.label = new ElementBuilder({
@@ -55,10 +56,7 @@ export default class Input {
       this.container.getElement().append(this.label.getElement(), this.input.getElement());
     }
 
-    this.message = new ElementBuilder({
-      tag: 'div',
-      className: ERROR_MESSAGE_STYLE,
-    });
+    this.message = new ElementBuilder({ tag: 'div', className: ERROR_MESSAGE_STYLE });
     this.container.getElement().append(this.message.getElement());
 
     if (type === InputType.PASSWORD) this.addPasswordIcon(type);

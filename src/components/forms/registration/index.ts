@@ -159,7 +159,7 @@ export default class FormRegistration {
     container.append(legend);
 
     for (const input of INPUTS_ADDRESS_DATA) {
-      const { labelText, placeholder, type, isRequired } = input;
+      const { labelText, placeholder, type, isRequired, isDisabled } = input;
       const id = prefix + input.id;
       const inputNode = new Input({
         id,
@@ -167,6 +167,7 @@ export default class FormRegistration {
         placeholder,
         type,
         isRequired,
+        isDisabled,
         eventType: 'input',
         callback: (event: Event): void => {
           console.log(id);
