@@ -20,7 +20,7 @@ export default class Input {
 
   constructor(parameters: InputComponent) {
     this.isError = false;
-    const { placeholder, id, callback, labelText, value, type, className, attributes } = parameters;
+    const { placeholder, id, callback, labelText, value, type, className } = parameters;
     const { isDisabled, isRequired } = parameters;
 
     this.container = new ElementBuilder({
@@ -36,7 +36,7 @@ export default class Input {
       placeholder,
       callback,
       value,
-      attributes,
+      attributes: getAutocomplete(id),
       required: isRequired,
       disabled: isDisabled,
       eventType: parameters.eventType,
@@ -142,4 +142,8 @@ export default class Input {
       }
     }
   }
+}
+function getAutocomplete(id: string): { autocomplete: string } | undefined {
+  if (id === 'password') return { autocomplete: 'current-password' };
+  return id === 'email' ? { autocomplete: 'email' } : undefined;
 }
