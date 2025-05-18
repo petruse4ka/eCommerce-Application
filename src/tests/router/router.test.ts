@@ -3,7 +3,7 @@ import { beforeEach, describe, expect, test } from 'vitest';
 import { Router } from '@/router/router';
 import { Route } from '@/types/enums';
 
-describe('Router', () => {
+describe('Test handling of different routes by router', () => {
   let router: Router;
 
   beforeEach(() => {

@@ -8,13 +8,13 @@ beforeEach(() => {
   userState = new UserState();
 });
 
-describe('User state starting value', () => {
+describe('Test user state starting value', () => {
   test('should have unauthorized user state at initialization', () => {
     expect(userState.getAuthorizationState()).toBe(false);
   });
 });
 
-describe('Change user state value', () => {
+describe('Test user state value change', () => {
   test('should correctly change and return user authorization state', () => {
     userState.setAuthorizationState(true);
     expect(userState.getAuthorizationState()).toBe(true);
@@ -24,7 +24,7 @@ describe('Change user state value', () => {
   });
 });
 
-describe('Notify subscribers of user state change', () => {
+describe('Test notification of subscribers of user state change', () => {
   test('should notify subscriber on each user state change', () => {
     const mockCallback = vi.fn();
     userState.subscribe(mockCallback);
