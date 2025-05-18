@@ -12,15 +12,29 @@ import { ElementBuilder } from '@/utils/element-builder';
 export default class AuthorizationMenu extends BaseComponent {
   constructor() {
     super({ tag: 'div', className: SUBHEADER_STYLES.AUTHORIZATION_MENU });
+    userState.subscribe(this.updateMenu.bind(this));
     this.render();
   }
 
+  public override remove(): void {
+    userState.unsubscribe(this.updateMenu.bind(this));
+    super.remove();
+  }
+
   protected render(): void {
+    while (this.component.firstChild) {
+      this.component.firstChild.remove();
+    }
+
     if (userState.getAuthorizationState()) {
       this.createAuthorizedMenu();
     } else {
       this.createUnauthorizedMenu();
     }
+  }
+
+  private updateMenu(): void {
+    this.render();
   }
 
   private createUnauthorizedMenu(): void {
