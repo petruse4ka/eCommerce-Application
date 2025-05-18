@@ -2,6 +2,7 @@ import { BaseComponent } from '@/components/base/component';
 import Footer from '@/components/footer';
 import Header from '@/components/header/header';
 import AboutPage from '@/pages/about';
+import AccountPage from '@/pages/account';
 import ContactsPage from '@/pages/contacts';
 import DeliveryPage from '@/pages/delivery';
 import { ErrorPage } from '@/pages/errorpage';
@@ -27,6 +28,7 @@ export class App extends BaseComponent {
   private deliveryPage: DeliveryPage = new DeliveryPage();
   private termsPage: TermsPage = new TermsPage();
   private returnsPage: ReturnsPage = new ReturnsPage();
+  private accountPage: AccountPage = new AccountPage();
   private router: Router;
   private currentPage: BaseComponent;
 
@@ -40,6 +42,7 @@ export class App extends BaseComponent {
     [Route.DELIVERY, this.deliveryPage],
     [Route.TERMS, this.termsPage],
     [Route.RETURNS, this.returnsPage],
+    [Route.ACCOUNT, this.accountPage],
   ]);
 
   constructor() {
