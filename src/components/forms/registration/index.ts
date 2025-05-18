@@ -3,9 +3,11 @@ import { Button } from '@/components/buttons/button';
 import Input from '@/components/inputs/input';
 import { BTN_TEXT } from '@/constants/constants';
 import { INPUTS_BILLING_DATA, INPUTS_REGISTRATION_DATA } from '@/data';
-import { FORM, REGISTRATION_INPUTS_CONTAINER } from '@/styles/forms/forms';
+import { Router } from '@/router/router';
+import { FORM, REDIRECT_LINK, REGISTRATION_INPUTS_CONTAINER } from '@/styles/forms/forms';
 import { CHECKBOX_CONTAINER_STYLE } from '@/styles/inputs/inputs';
 import { CheckboxText, InputType } from '@/types/enums';
+import { Route } from '@/types/enums';
 import type { InputComponent, RegistrationBody } from '@/types/interfaces';
 import { ElementBuilder } from '@/utils/element-builder';
 
@@ -140,6 +142,21 @@ export default class FormRegistration {
     this.userInfoContainer.append(checkboxDefaultAddress, checkboxSameAddresses);
   }
 
+  private createRedirectLink(): void {
+    const link = new ElementBuilder({
+      tag: 'div',
+      textContent: BTN_TEXT.LOGIN_REDIRECT,
+      className: REDIRECT_LINK,
+      callback: (): void => {
+        Router.followRoute(Route.LOGIN);
+      },
+    }).getElement();
+
+    if (this.form) {
+      this.form.append(link);
+    }
+  }
+
   private render(): void {
     const button = new Button({
       style: 'PRIMARY_PINK',
@@ -153,6 +170,7 @@ export default class FormRegistration {
     this.createCheckboxes();
 
     this.form.append(this.userInfoContainer, button);
+    this.createRedirectLink();
   }
 
   private submitForm(): void {
