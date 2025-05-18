@@ -1,3 +1,5 @@
+import { expect, it } from 'vitest';
+
 import { VALIDATE_CONST } from '@/constants/constants';
 import { ErrorMessages } from '@/types/enums';
 import {

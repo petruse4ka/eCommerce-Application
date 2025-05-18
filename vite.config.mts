@@ -45,6 +45,7 @@ export default defineConfig(({ mode }) => {
       open: true,
     },
     test: {
+      environment: 'jsdom',
       globals: true,
       watch: false,
       coverage: {
