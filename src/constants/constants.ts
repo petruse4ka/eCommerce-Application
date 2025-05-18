@@ -18,6 +18,8 @@ export const SUBHEADER_PROMO_TEXT = {
 export const AUTHORIZATION_MENU_TEXT = {
   LOGIN: 'Войти',
   REGISTRATION: 'Регистрация',
+  ACCOUNT: 'Личный Кабинет',
+  LOGOUT: 'Выйти',
 };
 
 export const MENU_TEXT = {
@@ -48,6 +50,11 @@ export const FOOTER_TEXTS = {
 export const AUTHORIZATION_MENU_ITEMS: MenuItem[] = [
   { name: AUTHORIZATION_MENU_TEXT.LOGIN, route: Route.LOGIN },
   { name: AUTHORIZATION_MENU_TEXT.REGISTRATION, route: Route.REGISTRATION },
+];
+
+export const UNAUTHORIZED_MENU_ITEMS: MenuItem[] = [
+  { name: AUTHORIZATION_MENU_TEXT.ACCOUNT, route: Route.ABOUT },
+  { name: AUTHORIZATION_MENU_TEXT.LOGOUT, route: Route.HOME },
 ];
 
 export const ERRORPAGE_TEXTS = {

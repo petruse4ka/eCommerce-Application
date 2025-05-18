@@ -1,6 +1,11 @@
 import { BaseComponent } from '@/components/base/component';
-import { AUTHORIZATION_MENU_ITEMS } from '@/constants/constants';
+import {
+  AUTHORIZATION_MENU_ITEMS,
+  AUTHORIZATION_MENU_TEXT,
+  UNAUTHORIZED_MENU_ITEMS,
+} from '@/constants/constants';
 import { Router } from '@/router/router';
+import { userState } from '@/store/user-state';
 import { SUBHEADER_STYLES } from '@/styles/header/subheader';
 import { ElementBuilder } from '@/utils/element-builder';
 
@@ -11,6 +16,14 @@ export default class AuthorizationMenu extends BaseComponent {
   }
 
   protected render(): void {
+    if (userState.getAuthorizationState()) {
+      this.createAuthorizedMenu();
+    } else {
+      this.createUnauthorizedMenu();
+    }
+  }
+
+  private createUnauthorizedMenu(): void {
     for (const item of AUTHORIZATION_MENU_ITEMS) {
       const menuItem = new ElementBuilder({
         tag: 'span',
@@ -19,6 +32,25 @@ export default class AuthorizationMenu extends BaseComponent {
       }).getElement();
 
       menuItem.addEventListener('click', () => {
+        Router.followRoute(item.route);
+      });
+
+      this.component.append(menuItem);
+    }
+  }
+
+  private createAuthorizedMenu(): void {
+    for (const item of UNAUTHORIZED_MENU_ITEMS) {
+      const menuItem = new ElementBuilder({
+        tag: 'span',
+        className: SUBHEADER_STYLES.AUTHORIZATION_ITEM,
+        textContent: item.name,
+      }).getElement();
+
+      menuItem.addEventListener('click', () => {
+        if (item.name === AUTHORIZATION_MENU_TEXT.LOGOUT) {
+          userState.setAuthorizationState(false);
+        }
         Router.followRoute(item.route);
       });
 
