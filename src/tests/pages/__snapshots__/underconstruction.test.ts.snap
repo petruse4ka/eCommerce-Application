@@ -1,0 +1,27 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`UnderConstructionPage > should match snapshot 1`] = `
+<div
+  class="flex flex-col items-center pt-25 pb-15 text-base leading-normal bg-purple text-black flex-grow"
+>
+  <h1
+    class="text-xl text-white sm:text-2xl text-center px-3 py-4"
+  >
+    Эта страница ещё в работе, но скоро всё будет готово!
+  </h1>
+  <div
+    class="w-full relative px-5 flex justify-center items-end bg-[url("./../assets/images/bg-space.png")] bg-center bg-no-repeat bg-contain bg-origin-content bg-auto mb-10"
+  >
+    <img
+      alt="astronaut macaron"
+      class="animate-shaking-img origin-bottom inline-block"
+      src="/src/assets/images/astronaut.png"
+    />
+  </div>
+  <button
+    class="button font-semibold text-[14px] min-w-[234px] border min-w-2xs px-8 py-4 rounded-[3px] cursor-pointer transition-all duration-300 ease-in-out disabled:bg-gray disabled:border-gray disabled:cursor-not-allowed bg-transparent text-white border-secondary hover:bg-secondary-hover hover:text-white"
+  >
+    Вернуться домой
+  </button>
+</div>
+`;
