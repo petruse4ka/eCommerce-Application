@@ -1,3 +1,4 @@
+import { AlertText } from '@/types/enums';
 import type { ErrorInfo } from '@/types/interfaces';
 
 export default class ApiErrors {
@@ -6,7 +7,7 @@ export default class ApiErrors {
       case 'invalid_customer_account_credentials': {
         return {
           inputs: ['email', 'password'],
-          message: 'Учетная запись клиента с указанными учетными данными не найдена.',
+          message: AlertText.ACCOUNT_CREDENTIALS_ERROR,
         };
 
         break;
@@ -15,7 +16,7 @@ export default class ApiErrors {
       default: {
         return {
           inputs: [],
-          message: 'Произошли какие-то проблемы. Попробуйте еще раз',
+          message: AlertText.ERROR_DEFAULT,
         };
         break;
       }
