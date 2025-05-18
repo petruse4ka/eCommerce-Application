@@ -4,7 +4,9 @@ import { Button } from '@/components/buttons/button';
 import Input from '@/components/inputs/input';
 import { BTN_TEXT } from '@/constants/constants';
 import { INPUTS_AUTHORIZATION_DATA } from '@/data';
-import { AUTHORIZATION_INPUTS_CONTAINER, FORM } from '@/styles/forms/forms';
+import { Router } from '@/router/router';
+import { AUTHORIZATION_INPUTS_CONTAINER, FORM, REDIRECT_LINK } from '@/styles/forms/forms';
+import { Route } from '@/types/enums';
 import { AlertStatus } from '@/types/enums';
 import type { AuthorizationBody, ErrorInfo, InputComponent } from '@/types/interfaces';
 import ApiErrors from '@/utils/api-errors';
@@ -98,6 +100,21 @@ export default class FormAuthorization {
     }
   }
 
+  private createRedirectLink(): void {
+    const link = new ElementBuilder({
+      tag: 'div',
+      textContent: BTN_TEXT.REGISTRATION_REDIRECT,
+      className: REDIRECT_LINK,
+      callback: (): void => {
+        Router.followRoute(Route.REGISTRATION);
+      },
+    }).getElement();
+
+    if (this.form) {
+      this.form.append(link);
+    }
+  }
+
   private render(): void {
     const button = new Button({
       style: 'PRIMARY_PINK',
@@ -111,6 +128,7 @@ export default class FormAuthorization {
     if (this.form && this.userInfoContainer) {
       this.form.append(this.userInfoContainer, button);
     }
+    this.createRedirectLink();
   }
 
   private submitForm(): void {

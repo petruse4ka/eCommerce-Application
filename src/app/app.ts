@@ -2,6 +2,7 @@ import { BaseComponent } from '@/components/base/component';
 import Footer from '@/components/footer';
 import Header from '@/components/header/header';
 import AboutPage from '@/pages/about';
+import AccountPage from '@/pages/account';
 import ContactsPage from '@/pages/contacts';
 import DeliveryPage from '@/pages/delivery';
 import { ErrorPage } from '@/pages/errorpage';
@@ -11,6 +12,7 @@ import RegistrationPage from '@/pages/registration';
 import ReturnsPage from '@/pages/returns';
 import TermsPage from '@/pages/terms';
 import { Router } from '@/router/router';
+import { userState } from '@/store/user-state';
 import { APP_STYLE } from '@/styles/app/app';
 import { Route } from '@/types/enums';
 
@@ -26,6 +28,7 @@ export class App extends BaseComponent {
   private deliveryPage: DeliveryPage = new DeliveryPage();
   private termsPage: TermsPage = new TermsPage();
   private returnsPage: ReturnsPage = new ReturnsPage();
+  private accountPage: AccountPage = new AccountPage();
   private router: Router;
   private currentPage: BaseComponent;
 
@@ -39,6 +42,7 @@ export class App extends BaseComponent {
     [Route.DELIVERY, this.deliveryPage],
     [Route.TERMS, this.termsPage],
     [Route.RETURNS, this.returnsPage],
+    [Route.ACCOUNT, this.accountPage],
   ]);
 
   constructor() {
@@ -49,7 +53,13 @@ export class App extends BaseComponent {
     this.footer = new Footer();
 
     const defaultRoute = this.router.getDefaultRoute();
-    this.currentPage = this.routes.get(defaultRoute) || this.errorPage;
+
+    if (defaultRoute === Route.ACCOUNT && !userState.getAuthorizationState()) {
+      Router.followRoute(Route.LOGIN);
+      this.currentPage = this.routes.get(Route.LOGIN) || this.errorPage;
+    } else {
+      this.currentPage = this.routes.get(defaultRoute) || this.errorPage;
+    }
 
     this.render();
   }
@@ -64,7 +74,25 @@ export class App extends BaseComponent {
 
   private setupRoutes(): void {
     for (const [route, page] of this.routes.entries()) {
-      this.router.addRoute(route, () => this.showPage(page));
+      if (route === Route.LOGIN || route === Route.REGISTRATION) {
+        this.router.addRoute(route, () => {
+          if (userState.getAuthorizationState()) {
+            Router.followRoute(Route.HOME);
+            return;
+          }
+          this.showPage(page);
+        });
+      } else if (route === Route.ACCOUNT) {
+        this.router.addRoute(route, () => {
+          if (!userState.getAuthorizationState()) {
+            Router.followRoute(Route.LOGIN);
+            return;
+          }
+          this.showPage(page);
+        });
+      } else {
+        this.router.addRoute(route, () => this.showPage(page));
+      }
     }
   }
 

@@ -18,6 +18,8 @@ export const SUBHEADER_PROMO_TEXT = {
 export const AUTHORIZATION_MENU_TEXT = {
   LOGIN: 'Войти',
   REGISTRATION: 'Регистрация',
+  ACCOUNT: 'Личный Кабинет',
+  LOGOUT: 'Выйти',
 };
 
 export const MENU_TEXT = {
@@ -50,6 +52,11 @@ export const AUTHORIZATION_MENU_ITEMS: MenuItem[] = [
   { name: AUTHORIZATION_MENU_TEXT.REGISTRATION, route: Route.REGISTRATION },
 ];
 
+export const UNAUTHORIZED_MENU_ITEMS: MenuItem[] = [
+  { name: AUTHORIZATION_MENU_TEXT.ACCOUNT, route: Route.ACCOUNT },
+  { name: AUTHORIZATION_MENU_TEXT.LOGOUT, route: Route.HOME },
+];
+
 export const ERRORPAGE_TEXTS = {
   HOME: 'Вернуться домой',
   SORRY: 'Извините, страница не найдена',
@@ -76,7 +83,9 @@ export const FOOTER_MENU_ITEMS: MenuItem[] = [
 
 export const BTN_TEXT = {
   REGISTRATION_PAGE: 'Зарегистрироваться',
+  REGISTRATION_REDIRECT: 'Перейти к регистрации',
   LOGIN_PAGE: 'Вход',
+  LOGIN_REDIRECT: 'Перейти к авторизации',
 };
 
 export const INTRO_TEXTS = {

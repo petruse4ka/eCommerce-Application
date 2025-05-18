@@ -1,7 +1,7 @@
 import {
+  CHECKBOX_STYLE,
   CUSTOM_INPUT_STYLE,
   CUSTOM_LABEL_STYLE,
-  DEFAULT_CHECKBOX_STYLE,
   ERROR_MESSAGE_STYLE,
   ICON_IN_INPUT,
 } from '@/styles/inputs/inputs';
@@ -20,8 +20,8 @@ export default class Input {
 
   constructor(parameters: InputComponent) {
     this.isError = false;
-    const { placeholder, id, callback, labelText, isRequired, value, type, className, attributes } =
-      parameters;
+    const { placeholder, id, callback, labelText, value, type, className, attributes } = parameters;
+    const { isDisabled, isRequired } = parameters;
 
     this.container = new ElementBuilder({
       tag: 'div',
@@ -32,17 +32,16 @@ export default class Input {
       type,
       id,
       className:
-        type === InputType.CHECKBOX
-          ? [...DEFAULT_CHECKBOX_STYLE]
-          : [...CUSTOM_INPUT_STYLE['INPUT_DEFAULT']],
+        type === InputType.CHECKBOX ? [...CHECKBOX_STYLE] : [...CUSTOM_INPUT_STYLE.INPUT_DEFAULT],
       placeholder,
       callback,
       value,
       attributes,
       required: isRequired,
+      disabled: isDisabled,
       eventType: parameters.eventType,
     });
-
+    if (/Country/.test(id)) console.log(this.input, this.input.getElement());
     this.addEventListeners(type);
 
     this.label = new ElementBuilder({
@@ -51,17 +50,16 @@ export default class Input {
       textContent: isRequired ? `${labelText}*` : labelText,
       attributes: { for: id },
     });
+    if (type === InputType.CHECKBOX) {
+      this.container.getElement().append(this.input.getElement(), this.label.getElement());
+    } else {
+      this.container.getElement().append(this.label.getElement(), this.input.getElement());
+    }
 
-    this.container.getElement().append(this.label.getElement(), this.input.getElement());
-    this.message = new ElementBuilder({
-      tag: 'div',
-      className: ERROR_MESSAGE_STYLE,
-    });
+    this.message = new ElementBuilder({ tag: 'div', className: ERROR_MESSAGE_STYLE });
     this.container.getElement().append(this.message.getElement());
 
-    if (type === InputType.PASSWORD) {
-      this.addPasswordIcon(type);
-    }
+    if (type === InputType.PASSWORD) this.addPasswordIcon(type);
   }
 
   public getElement(): HTMLElement {
