@@ -1,10 +1,13 @@
 import API from '@/api/api';
+import Alert from '@/components/alert/alert';
 import { Button } from '@/components/buttons/button';
 import Input from '@/components/inputs/input';
 import { BTN_TEXT } from '@/constants/constants';
 import { INPUTS_AUTHORIZATION_DATA } from '@/data';
 import { AUTHORIZATION_INPUTS_CONTAINER, FORM } from '@/styles/forms/forms';
-import type { AuthorizationBody, InputComponent } from '@/types/interfaces';
+import { AlertStatus } from '@/types/enums';
+import type { AuthorizationBody, ErrorInfo, InputComponent } from '@/types/interfaces';
+import ApiErrors from '@/utils/api-errors';
 import { ElementBuilder } from '@/utils/element-builder';
 import { getValidator, validateEMail, validatePassword } from '@/utils/validations';
 
@@ -123,7 +126,23 @@ export default class FormAuthorization {
     this.showValidationError('password', isNotValidPassword);
 
     if (!isNotValidEmail && !isNotValidPassword) {
-      void API.userSignInResponse(body);
+      API.userSignInResponse(body)
+        .then((response) => {
+          console.log(response, 'wd');
+        })
+        .catch((error: ErrorInfo) => {
+          const errorInfo = ApiErrors.getErrorInfo(error.message);
+
+          Alert.render({
+            textContent: errorInfo.message,
+            status: AlertStatus.ERROR,
+            visibleTime: 4000,
+          });
+
+          for (const input of errorInfo.inputs) {
+            this.showValidationError(input, ' ');
+          }
+        });
     }
   }
 }

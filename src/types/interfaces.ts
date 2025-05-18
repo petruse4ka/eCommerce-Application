@@ -105,3 +105,16 @@ export interface Guarantees {
   description: string;
   image: string;
 }
+
+export interface ErrorInfo {
+  inputs: string[];
+  message: string;
+}
+
+export interface ErrorResponse {
+  statusCode: number;
+  messages: string;
+  errors: [];
+  error: string;
+  error_description: string;
+}
