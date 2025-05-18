@@ -53,7 +53,7 @@ export const AUTHORIZATION_MENU_ITEMS: MenuItem[] = [
 ];
 
 export const UNAUTHORIZED_MENU_ITEMS: MenuItem[] = [
-  { name: AUTHORIZATION_MENU_TEXT.ACCOUNT, route: Route.ABOUT },
+  { name: AUTHORIZATION_MENU_TEXT.ACCOUNT, route: Route.ACCOUNT },
   { name: AUTHORIZATION_MENU_TEXT.LOGOUT, route: Route.HOME },
 ];
 

@@ -53,7 +53,13 @@ export class App extends BaseComponent {
     this.footer = new Footer();
 
     const defaultRoute = this.router.getDefaultRoute();
-    this.currentPage = this.routes.get(defaultRoute) || this.errorPage;
+
+    if (defaultRoute === Route.ACCOUNT && !userState.getAuthorizationState()) {
+      Router.followRoute(Route.LOGIN);
+      this.currentPage = this.routes.get(Route.LOGIN) || this.errorPage;
+    } else {
+      this.currentPage = this.routes.get(defaultRoute) || this.errorPage;
+    }
 
     this.render();
   }
@@ -72,6 +78,14 @@ export class App extends BaseComponent {
         this.router.addRoute(route, () => {
           if (userState.getAuthorizationState()) {
             Router.followRoute(Route.HOME);
+            return;
+          }
+          this.showPage(page);
+        });
+      } else if (route === Route.ACCOUNT) {
+        this.router.addRoute(route, () => {
+          if (!userState.getAuthorizationState()) {
+            Router.followRoute(Route.LOGIN);
             return;
           }
           this.showPage(page);
