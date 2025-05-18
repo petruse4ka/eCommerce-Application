@@ -1,5 +1,8 @@
 import Alert from '@/components/alert/alert';
+import { Router } from '@/router/router';
+import { userState } from '@/store/user-state';
 import { AlertStatus, AlertText, ApiEndpoint, ApiMethods, ContentType } from '@/types/enums';
+import { Route } from '@/types/enums';
 import type {
   AuthorizationBody,
   AuthResponse,
@@ -36,13 +39,17 @@ export default class API {
         });
         return response.json();
       })
-      .then((body: CustomerResponse) => body.customer.id)
+      .then((body: CustomerResponse) => {
+        userState.setAuthorizationState(true);
+        Router.followRoute(Route.HOME);
+        return body.customer.id;
+      })
       .catch((error: Error) => {
         console.log(error.message);
       });
   }
 
-  public static async userSignInResponse(body: AuthorizationBody): Promise<string> {
+  public static async userSignInResponse(body: AuthorizationBody): Promise<string | void> {
     return await fetch(
       `${import.meta.env['VITE_CTP_API_URL']}/${import.meta.env['VITE_CTP_PROJECT_KEY']}${ApiEndpoint.LOGIN}`,
       {
@@ -63,7 +70,13 @@ export default class API {
 
         return response.json();
       })
-      .then((body: CustomerResponse) => body.customer.id);
+      .then((body: CustomerResponse) => {
+        userState.setAuthorizationState(true);
+        return body.customer.id;
+      })
+      .catch((error: Error) => {
+        console.log(error.message);
+      });
   }
 
   private static async userAuthentication(body: AuthorizationBody): Promise<string> {
