@@ -63,28 +63,26 @@ it('password validation of nonLatinic input', () => {
 });
 it('password validation for password without upper character', () => {
   expect(validatePassword('a1234567')).toBe(
-    'Пароль должен содержать как минимум одну заглавную букву.'
+    'Пароль должен содержать минимум одну заглавную букву.'
   );
 });
 it('password validation for password without lower character', () => {
-  expect(validatePassword('A1234567')).toBe(
-    'Пароль должен содержать как минимум одну строчную букву.'
-  );
+  expect(validatePassword('A1234567')).toBe('Пароль должен содержать минимум одну строчную букву.');
 });
 it('password validation for password without number', () => {
-  expect(validatePassword('ABCDEFabcdef')).toBe('Пароль должен содержать как минимум одну цифру.');
+  expect(validatePassword('ABCDEFabcdef')).toBe('Пароль должен содержать минимум одну цифру.');
 });
 it('password validation for password without upper character and number', () => {
   expect(validatePassword('asdfghjk')).toBe(
-    'Пароль должен содержать как минимум: одну заглавную букву, одну цифру.'
+    'Пароль должен содержать минимум: одну заглавную букву, одну цифру.'
   );
 });
 it('password validation for length of password less then 8 characters', () => {
-  expect(validatePassword('aA8')).toBe('Пароль должен содержать как минимум 8 символов.');
+  expect(validatePassword('aA8')).toBe('Пароль должен содержать минимум 8 символов.');
 });
 it('password validation for all wrong parameters', () => {
   expect(validatePassword('pass')).toBe(
-    'Пароль должен содержать как минимум: 8 символов, одну заглавную букву, одну цифру.'
+    'Пароль должен содержать минимум: 8 символов, одну заглавную букву, одну цифру.'
   );
 });
 
