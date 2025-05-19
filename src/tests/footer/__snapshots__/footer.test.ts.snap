@@ -64,27 +64,27 @@ exports[`Footer > should match the snapshot 1`] = `
         class="flex flex-col items-center lg:items-start gap-3 w-full"
       >
         <li
-          class="cursor-pointer text-[14px] text-center md:text-left hover:text-pink transition-all duration-300 ease-in-out"
+          class="cursor-pointer text-[14px] text-center md:text-left hover:text-accent-hover transition-all duration-300 ease-in-out"
         >
           О компании
         </li>
         <li
-          class="cursor-pointer text-[14px] text-center md:text-left hover:text-pink transition-all duration-300 ease-in-out"
+          class="cursor-pointer text-[14px] text-center md:text-left hover:text-accent-hover transition-all duration-300 ease-in-out"
         >
           Доставка и оплата
         </li>
         <li
-          class="cursor-pointer text-[14px] text-center md:text-left hover:text-pink transition-all duration-300 ease-in-out"
+          class="cursor-pointer text-[14px] text-center md:text-left hover:text-accent-hover transition-all duration-300 ease-in-out"
         >
           Условия конфиденциальности
         </li>
         <li
-          class="cursor-pointer text-[14px] text-center md:text-left hover:text-pink transition-all duration-300 ease-in-out"
+          class="cursor-pointer text-[14px] text-center md:text-left hover:text-accent-hover transition-all duration-300 ease-in-out"
         >
           Возврат заказа
         </li>
         <li
-          class="cursor-pointer text-[14px] text-center md:text-left hover:text-pink transition-all duration-300 ease-in-out"
+          class="cursor-pointer text-[14px] text-center md:text-left hover:text-accent-hover transition-all duration-300 ease-in-out"
         >
           Наши контакты
         </li>
@@ -102,7 +102,7 @@ exports[`Footer > should match the snapshot 1`] = `
         class="flex flex-col items-center lg:items-start gap-3 w-full"
       >
         <a
-          class="flex items-center gap-2 text-[14px] hover:text-pink transition-all duration-300 ease-in-out"
+          class="flex items-center gap-2 text-[14px] hover:text-accent-hover transition-all duration-300 ease-in-out"
           href="https://github.com/petruse4ka"
           target="_blank"
         >
@@ -116,7 +116,7 @@ exports[`Footer > should match the snapshot 1`] = `
           </span>
         </a>
         <a
-          class="flex items-center gap-2 text-[14px] hover:text-pink transition-all duration-300 ease-in-out"
+          class="flex items-center gap-2 text-[14px] hover:text-accent-hover transition-all duration-300 ease-in-out"
           href="https://github.com/tearzday"
           target="_blank"
         >
@@ -130,7 +130,7 @@ exports[`Footer > should match the snapshot 1`] = `
           </span>
         </a>
         <a
-          class="flex items-center gap-2 text-[14px] hover:text-pink transition-all duration-300 ease-in-out"
+          class="flex items-center gap-2 text-[14px] hover:text-accent-hover transition-all duration-300 ease-in-out"
           href="https://github.com/pokolga"
           target="_blank"
         >
@@ -144,7 +144,7 @@ exports[`Footer > should match the snapshot 1`] = `
           </span>
         </a>
         <a
-          class="flex items-center gap-2 text-[14px] hover:text-pink transition-all duration-300 ease-in-out"
+          class="flex items-center gap-2 text-[14px] hover:text-accent-hover transition-all duration-300 ease-in-out"
           href="https://github.com/margaryta-maletz"
           target="_blank"
         >
@@ -167,7 +167,7 @@ exports[`Footer > should match the snapshot 1`] = `
       class="max-w-[1440px] mx-auto px-3 flex flex-col items-center gap-3 sm:gap-6 lg:px-4"
     >
       <a
-        class="flex items-center gap-2 text-[14px] hover:text-pink transition-all duration-300 ease-in-out"
+        class="flex items-center gap-2 text-[14px] hover:text-accent-hover transition-all duration-300 ease-in-out"
         href="https://rs.school/"
         target="_blank"
       >

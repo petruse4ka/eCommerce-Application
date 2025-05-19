@@ -35,7 +35,9 @@ export const SUBHEADER_STYLES = {
   ],
   AUTHORIZATION_ITEM: [
     'cursor-pointer',
-    'hover:text-accent',
+    'font-semibold',
+    'text-accent',
+    'hover:text-accent-light',
     'transition-colors',
     'duration-300',
     'text-base',

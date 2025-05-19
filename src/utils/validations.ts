@@ -42,8 +42,8 @@ export function validateEMail(string_: string): string | null {
 }
 
 export function validatePassword(string_: string): string | null {
-  if (string_.trim() === '') return ErrorMessages.EMPTY_INPUT;
   if (string_.trim() !== string_) return ErrorMessages.INVALID_SPACE;
+  if (string_.trim() === '') return ErrorMessages.EMPTY_INPUT;
   const nonLatinRegex = /[^\w!#$%&*+.:=?@^{}-]/;
   if (nonLatinRegex.test(string_)) return ErrorMessages.INVALID_PASSWORD;
 

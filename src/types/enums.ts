@@ -55,7 +55,7 @@ export enum ErrorMessages {
   PASSWORD_MUST_CONTAIN = 'Пароль должен содержать минимум',
   POSTAL_CODE_FORMAT = 'Почтовый индекс должен состоять из 6 цифр',
   PASSWORD_LENGTH = '8 символов',
-  INVALID_SPACE = 'Пробелы не допускаются',
+  INVALID_SPACE = 'Значение не должно содержать пробелы',
 }
 
 export enum Route {
@@ -84,7 +84,7 @@ export enum AlertText {
   LOGOUT_SUCCESS = 'Вы успешно вышли из системы!',
   ACCOUNT_CREDENTIALS_ERROR = 'Учетная запись клиента с указанными учетными данными не найдена.',
   DUPLICATE_FIELD = 'Пользователь с такой почтой уже существует.',
-  ERROR_DEFAULT = 'Произошли какие-то проблемы. Попробуйте еще раз',
+  ERROR_DEFAULT = 'Проблемы на сервере. Пожалуйста, попробуйте позже',
 }
 
 export enum CheckboxText {
