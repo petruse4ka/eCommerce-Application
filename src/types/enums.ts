@@ -45,6 +45,8 @@ export enum ErrorMessages {
   INVALID_DOMAIN = 'Неверный формат домена',
   INVALID_EMAIL = 'Используйте буквы, цифры и специальные символы. Символ «@» обязателен',
   INVALID_FIRST_CHAR = 'Первый символ должен быть буквой или цифрой',
+  INVALID_USING_AT = 'Не должно быть более одного знака @',
+  INVALID_USING_DOTS = 'Некорректный email',
   INVALID_PASSWORD = 'Пароль может содержать только латинские буквы, цифры и специальные символы',
   ONE_DIGIT = 'одну цифру',
   ONE_LOWER_LETTER = 'одну строчную букву',

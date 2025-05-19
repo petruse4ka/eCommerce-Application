@@ -29,6 +29,12 @@ export function validateEMail(string_: string): string | null {
   const rightDomain = /@[\dA-Za-zЁА-яё][\d.A-Za-zЁА-яё-]*\.[A-Za-zЁА-яё]{2,}$/;
   if (!rightDomain.test(string_)) return ErrorMessages.INVALID_DOMAIN;
 
+  const matches = string_.match(/@/g);
+  if (matches && matches.length > 1) return ErrorMessages.INVALID_USING_AT;
+
+  if (/\.{2}/.test(string_)) return ErrorMessages.INVALID_USING_DOTS;
+  if (/\.@/.test(string_)) return ErrorMessages.INVALID_USING_DOTS;
+
   const emailRegex = /^[\dA-Za-zЁА-яё][\w!#$%&'-\]^`{|}~ЁА-яё-]+\.[A-Za-zЁА-яё]{2,}$/;
   if (emailRegex.test(string_)) return null;
 
