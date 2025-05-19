@@ -79,6 +79,7 @@ export enum AlertStatus {
 export enum AlertText {
   REGISTRATION_SUCCESS = 'Вы успешно зарегистрировались!',
   AUTHORIZATION_SUCCESS = 'Вы успешно авторизовались!',
+  LOGOUT_SUCCESS = 'Вы успешно вышли из системы!',
 }
 
 export enum CheckboxText {
