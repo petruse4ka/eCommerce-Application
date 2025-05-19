@@ -31,8 +31,7 @@ export default class Input {
     this.input = new InputBuilder({
       type,
       id,
-      className:
-        type === InputType.CHECKBOX ? [...CHECKBOX_STYLE] : [...CUSTOM_INPUT_STYLE.INPUT_DEFAULT],
+      className: Input.getInputClasses(type),
       placeholder,
       callback,
       value,
@@ -66,6 +65,16 @@ export default class Input {
   public static getAutocomplete(id: string): { autocomplete: string } | undefined {
     if (id === 'password') return { autocomplete: 'current-password' };
     return id === 'email' ? { autocomplete: 'email' } : undefined;
+  }
+
+  private static getInputClasses(type: InputType): string[] {
+    if (type === InputType.CHECKBOX) {
+      return [...CHECKBOX_STYLE];
+    }
+    if (type === InputType.PASSWORD) {
+      return [...CUSTOM_INPUT_STYLE.INPUT_PASSWORD];
+    }
+    return [...CUSTOM_INPUT_STYLE.INPUT_DEFAULT];
   }
 
   public getElement(): HTMLElement {

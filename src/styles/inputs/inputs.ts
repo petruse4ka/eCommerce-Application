@@ -1,8 +1,11 @@
 const STANDARD_INPUT_STYLE = [
   'h-13',
   'text-[16px]',
+  'text-black/70',
+  'placeholder-black/70',
   'bg-white',
   'border',
+  'border-gray',
   'rounded-md',
   'hover:border-red',
   'focus:border-red',
@@ -13,18 +16,13 @@ const STANDARD_INPUT_STYLE = [
   'outline-none',
   'py-2',
   'pl-2',
-  'pr-10',
+  'pr-2',
   'w-full',
 ];
 
 export const CUSTOM_INPUT_STYLE = {
-  INPUT_DEFAULT: [
-    ...STANDARD_INPUT_STYLE,
-    'border-gray',
-    'focus:border-black',
-    'text-black/70',
-    'placeholder-black/70',
-  ],
+  INPUT_DEFAULT: [...STANDARD_INPUT_STYLE],
+  INPUT_PASSWORD: [...STANDARD_INPUT_STYLE, 'pr-10'],
   INPUT_ERROR: [...STANDARD_INPUT_STYLE, 'border-accent', 'placeholder-accent', 'text-accent'],
 };
 
@@ -40,8 +38,8 @@ export const CHECKBOX_STYLE = [
 ];
 
 export const ICON_IN_INPUT = [
-  'h-6',
-  'w-6',
+  'h-5',
+  'w-5',
   'absolute',
   'top-1/2',
   '-translate-y-2/3',
