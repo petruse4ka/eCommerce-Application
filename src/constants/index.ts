@@ -18,7 +18,7 @@ export const SUBHEADER_PROMO_TEXT = {
 export const AUTHORIZATION_MENU_TEXT = {
   LOGIN: 'Войти',
   REGISTRATION: 'Регистрация',
-  ACCOUNT: 'Личный Кабинет',
+  ACCOUNT: 'Личный кабинет',
   LOGOUT: 'Выйти',
 };
 
@@ -29,9 +29,9 @@ export const MENU_TEXT = {
 };
 
 export const FOOTER_TEXTS = {
-  PROMO_TITLE: 'Наши Преимущества',
+  PROMO_TITLE: 'Наши преимущества',
   MENU_TITLE: 'Полезная информация',
-  TEAM_TITLE: 'Наши Кондитеры',
+  TEAM_TITLE: 'Наши кондитеры',
   COPYRIGHT: 'JS/FE 2024Q4 | RS School',
   FOOTER_PROMO_TEXT: {
     LOVE: 'Приготовлено c любовью',
@@ -41,7 +41,7 @@ export const FOOTER_TEXTS = {
   FOOTER_MENU_TEXT: {
     ABOUT: 'О компании',
     DELIVERY: 'Доставка и оплата',
-    TERMS: 'Условия Конфиденциальности',
+    TERMS: 'Условия конфиденциальности',
     RETURNS: 'Возврат заказа',
     CONTACTS: 'Наши контакты',
   },
@@ -100,7 +100,7 @@ export const PACKAGES_TEXTS = {
   TITLE: 'Предложения для самых искушенных',
   PACKAGES: {
     READY_PACK: {
-      title: 'Готовые Наборы',
+      title: 'Готовые наборы',
       description: 'Готовые наборы со скидкой. Вы можете подобрать набор на подходящий случай',
     },
     CREATE_OWN: {
@@ -130,12 +130,12 @@ export const GUARANTEES_TEXTS = {
   TITLE: 'Мы обо всем позаботилсь',
   GUARANTEES: {
     INGREDIENTS: {
-      title: 'Лучшие Ингредиенты',
+      title: 'Лучшие ингредиенты',
       description:
         'Мы используем только премиальные ингредиенты, отборную муку, натуральные красители и свежие начинки',
     },
     PACKAGING: {
-      title: 'Красивая Упаковка',
+      title: 'Красивая упаковка',
       description:
         'Каждый заказ оформляем в элегантную и стильную упаковку, которая подчеркнёт изысканность макарун',
     },
