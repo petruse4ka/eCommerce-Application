@@ -4,10 +4,17 @@ import Button from '@/components/buttons';
 import Input from '@/components/inputs';
 import { BTN_TEXT, FIELDSET_LABELS } from '@/constants';
 import { INPUTS_ADDRESS_DATA, INPUTS_REGISTRATION_DATA } from '@/data';
-import { FORM, REGISTRATION_ADDRESS, REGISTRATION_INPUTS_CONTAINER } from '@/styles/forms/forms';
+import Router from '@/router';
+import {
+  FORM,
+  REDIRECT_LINK,
+  REGISTRATION_ADDRESS,
+  REGISTRATION_INPUTS_CONTAINER,
+} from '@/styles/forms/forms';
 import { CHECKBOX_CONTAINER_STYLE } from '@/styles/inputs/inputs';
 import { MACARON_CONTAINER } from '@/styles/pages/registration';
 import { AlertStatus, CheckboxText, InputType } from '@/types/enums';
+import { Route } from '@/types/enums';
 import { isErrorInfo } from '@/types/guards';
 import type { RegistrationBody } from '@/types/interfaces';
 import ApiErrors from '@/utils/api-errors';
@@ -42,6 +49,7 @@ export default class FormRegistration {
 
     this.createFormContainer();
     this.createMacaronContainer();
+    this.createRedirectLink();
   }
 
   public getElement(): HTMLElement {
@@ -263,6 +271,21 @@ export default class FormRegistration {
           }
         }
       });
+    }
+  }
+
+  private createRedirectLink(): void {
+    const link = new ElementBuilder({
+      tag: 'div',
+      textContent: BTN_TEXT.LOGIN_REDIRECT,
+      className: REDIRECT_LINK,
+      callback: (): void => {
+        Router.followRoute(Route.LOGIN);
+      },
+    }).getElement();
+
+    if (this.form) {
+      this.form.append(link);
     }
   }
 
