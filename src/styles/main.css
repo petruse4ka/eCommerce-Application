@@ -1,0 +1,82 @@
+@import 'https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap';
+@import 'tailwindcss';
+
+@theme {
+  --font-montserrat: 'Montserrat', sans-serif;
+
+  /* Colors */
+  --color-white: #fff;
+  --color-gray: #ededf0;
+  --color-black: #1a1a2e;
+  --color-pink: #ca5166;
+  --color-dark: #2b1414;
+  --color-purple: #49387a;
+  --color-accent: #e7426a;
+  --color-accent-hover: #f45d82;
+  --color-primary: #f7ebe5;
+  --color-secondary: #4e9dd3;
+  --color-secondary-hover: #6aafdd;
+  --color-background: #e6e6e6;
+  --color-peach: #ffdbc3;
+  --color-peach-light: #ffdbc34d;
+  --color-red: #ffc2cc;
+  --color-red-light: #ffc2cc4d;
+  --color-green: #b4eab3;
+  --color-green-light: #b4eab34d;
+  --color-orange: #fdd5cd;
+  --color-orange-light: #fdd5cd4d;
+  --color-mint: #a8dcdf;
+  --color-mint-light: #a8dcdf4d;
+  --color-lilac: #c4c6ec;
+  --color-lilac-light: #c4c6ec4d;
+
+  /* Animation */
+  --animate-visible-right: animate-visible-right 1s ease-in-out;
+  --animate-hidden-right: animate-hidden-right 1s ease-in-out forwards;
+  --animate-shaking-img: shaking-img 10s infinite ease-in-out;
+
+  @keyframes animate-visible-right {
+    0% {
+      transform: translate(100%);
+    }
+
+    100% {
+      transform: translate(0%);
+    }
+  }
+
+  @keyframes animate-hidden-right {
+    0% {
+      transform: translate(0%);
+    }
+
+    100% {
+      transform: translate(100%);
+    }
+  }
+
+  @keyframes shaking-img {
+    0% {
+      transform: rotate(0deg);
+      translate: 0;
+    }
+
+    15% {
+      transform: rotate(5deg);
+      translate: 0 -50%;
+    }
+
+    55% {
+      transform: rotate(calc(-15deg));
+    }
+
+    75% {
+      transform: rotate(18deg);
+    }
+
+    100% {
+      transform: rotate(0deg);
+      translate: 0;
+    }
+  }
+}

@@ -1,0 +1,51 @@
+const STANDARD_BUTTON_STYLE = [
+  'min-w-[234px]',
+  'px-8',
+  'py-4',
+  'font-semibold',
+  'text-[14px]',
+  'border',
+  'rounded-[3px]',
+  'cursor-pointer',
+  'transition-all',
+  'duration-300',
+  'ease-in-out',
+  'disabled:bg-gray',
+  'disabled:border-gray',
+  'disabled:cursor-not-allowed',
+];
+
+export const CUSTOM_BUTTON_STYLE = {
+  PRIMARY_PINK: [
+    ...STANDARD_BUTTON_STYLE,
+    'bg-accent',
+    'text-white',
+    'border-accent',
+    'hover:bg-accent-hover',
+    'hover:border-accent-hover',
+  ],
+  SECONDARY_BLUE: [
+    ...STANDARD_BUTTON_STYLE,
+    'bg-transparent',
+    'text-secondary',
+    'border-secondary',
+    'hover:bg-secondary-hover',
+    'hover:text-white',
+  ],
+  SECONDARY_PINK: [
+    ...STANDARD_BUTTON_STYLE,
+    'bg-white',
+    'text-accent',
+    'border-accent',
+    'hover:bg-accent-hover',
+    'hover:text-white',
+  ],
+  SECONDARY_BLUE_DARK: [
+    ...STANDARD_BUTTON_STYLE,
+    'bg-transparent',
+    'text-white',
+    'border-secondary',
+    'hover:bg-secondary-hover',
+    'hover:text-white',
+  ],
+};

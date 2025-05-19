@@ -7,6 +7,7 @@
     "check": "npm run lint && npm run stylelint && npm run format:check && npm run test",
     "test": "vitest",
     "test:coverage": "vitest run --coverage",
+    "test:update": "vitest -u",
     "format": "prettier --write \"src/**/*.{ts,tsx,js,css,scss}\"",
     "format:check": "prettier --list-different \"src/**/*.{ts,tsx,js,css,scss}\"",
     "format:fix": "prettier --write --ignore-unknown \"src/**/*.{ts,tsx,js,css,scss}\"",
@@ -24,8 +25,7 @@
   "lint-staged": {
     "src/**/*.{ts,tsx,js}": [
       "npm run lint",
-      "npm run format",
-      "npm run test"
+      "npm run format"
     ],
     "src/**/*.{css,scss}": [
       "npm run stylelint",
@@ -41,6 +41,7 @@
     "@commitlint/config-conventional": "^19.7.1",
     "@eslint/js": "^9.26.0",
     "@tailwindcss/vite": "^4.1.5",
+    "@types/jsdom": "^21.1.7",
     "@types/node": "^22.13.9",
     "@typescript-eslint/eslint-plugin": "^8.26.0",
     "@typescript-eslint/parser": "^8.26.0",
@@ -53,6 +54,7 @@
     "eslint-plugin-unused-imports": "^4.1.4",
     "gh-pages": "^6.3.0",
     "husky": "^9.1.7",
+    "jsdom": "^26.1.0",
     "lint-staged": "^15.4.3",
     "netlify-cli": "^20.1.1",
     "prettier": "^3.5.1",
