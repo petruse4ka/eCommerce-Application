@@ -111,7 +111,7 @@ export const INPUTS_ADDRESS_DATA = [
   },
   {
     id: 'Street',
-    labelText: 'Улица доставки',
+    labelText: 'Улица',
     placeholder: 'Укажите улицу',
     type: InputType.TEXT,
     isRequired: true,
@@ -119,7 +119,7 @@ export const INPUTS_ADDRESS_DATA = [
   },
   {
     id: 'PostalCode',
-    labelText: 'Почтовый индекс доставки',
+    labelText: 'Почтовый индекс',
     placeholder: 'Укажите почтовый индекс',
     type: InputType.TEXT,
     isRequired: true,
