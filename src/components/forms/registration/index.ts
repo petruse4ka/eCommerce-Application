@@ -11,6 +11,7 @@ import {
 } from '@/styles/forms/forms';
 import { CHECKBOX_CONTAINER_STYLE } from '@/styles/inputs/inputs';
 import { AlertStatus, CheckboxText, InputType } from '@/types/enums';
+import { isErrorInfo } from '@/types/guard';
 import type { RegistrationBody } from '@/types/interfaces';
 import ApiErrors from '@/utils/api-errors';
 import { ElementBuilder } from '@/utils/element-builder';
@@ -348,8 +349,4 @@ export default class FormRegistration {
       !isNotValidShippingAddress
     );
   }
-}
-
-function isErrorInfo(object: unknown): object is { code: string; field: string } {
-  return typeof object === 'object' && object !== null && 'code' in object && 'field' in object;
 }

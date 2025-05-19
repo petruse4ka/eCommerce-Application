@@ -118,7 +118,7 @@ export interface ErrorInfo {
 export interface ErrorResponse {
   statusCode: number;
   messages: string;
-  errors: Error[];
+  errors: ErrorInfo[];
   error: string;
   error_description: string;
 }
