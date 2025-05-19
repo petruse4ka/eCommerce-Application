@@ -1,7 +1,7 @@
 import {
+  CHECKBOX_STYLE,
   CUSTOM_INPUT_STYLE,
   CUSTOM_LABEL_STYLE,
-  DEFAULT_CHECKBOX_STYLE,
   ERROR_MESSAGE_STYLE,
   ICON_IN_INPUT,
 } from '@/styles/inputs/inputs';
@@ -20,8 +20,8 @@ export default class Input {
 
   constructor(parameters: InputComponent) {
     this.isError = false;
-    const { placeholder, id, callback, labelText, isRequired, value, type, className, attributes } =
-      parameters;
+    const { placeholder, id, callback, labelText, value, type, className } = parameters;
+    const { isDisabled, isRequired } = parameters;
 
     this.container = new ElementBuilder({
       tag: 'div',
@@ -31,15 +31,13 @@ export default class Input {
     this.input = new InputBuilder({
       type,
       id,
-      className:
-        type === InputType.CHECKBOX
-          ? [...DEFAULT_CHECKBOX_STYLE]
-          : [...CUSTOM_INPUT_STYLE['INPUT_DEFAULT']],
+      className: Input.getInputClasses(type),
       placeholder,
       callback,
       value,
-      attributes,
+      attributes: Input.getAutocomplete(id),
       required: isRequired,
+      disabled: isDisabled,
       eventType: parameters.eventType,
     });
 
@@ -52,16 +50,31 @@ export default class Input {
       attributes: { for: id },
     });
 
-    this.container.getElement().append(this.label.getElement(), this.input.getElement());
-    this.message = new ElementBuilder({
-      tag: 'div',
-      className: ERROR_MESSAGE_STYLE,
-    });
+    if (type === InputType.CHECKBOX) {
+      this.container.getElement().append(this.input.getElement(), this.label.getElement());
+    } else {
+      this.container.getElement().append(this.label.getElement(), this.input.getElement());
+    }
+
+    this.message = new ElementBuilder({ tag: 'div', className: ERROR_MESSAGE_STYLE });
     this.container.getElement().append(this.message.getElement());
 
-    if (type === InputType.PASSWORD) {
-      this.addPasswordIcon(type);
+    if (type === InputType.PASSWORD) this.addPasswordIcon(type);
+  }
+
+  public static getAutocomplete(id: string): { autocomplete: string } | undefined {
+    if (id === 'password') return { autocomplete: 'current-password' };
+    return id === 'email' ? { autocomplete: 'email' } : undefined;
+  }
+
+  private static getInputClasses(type: InputType): string[] {
+    if (type === InputType.CHECKBOX) {
+      return [...CHECKBOX_STYLE];
     }
+    if (type === InputType.PASSWORD) {
+      return [...CUSTOM_INPUT_STYLE.INPUT_PASSWORD];
+    }
+    return [...CUSTOM_INPUT_STYLE.INPUT_DEFAULT];
   }
 
   public getElement(): HTMLElement {

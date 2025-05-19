@@ -13,7 +13,8 @@ export class InputBuilder extends ElementBuilder {
       parameters.value,
       parameters.placeholder,
       parameters.readonly,
-      parameters.required
+      parameters.required,
+      parameters.disabled
     );
   }
 
@@ -35,7 +36,8 @@ export class InputBuilder extends ElementBuilder {
     value: InputParameters['value'],
     placeholder: InputParameters['placeholder'],
     readonly: InputParameters['readonly'],
-    required: InputParameters['required']
+    required: InputParameters['required'],
+    disabled: InputParameters['disabled']
   ): void {
     if (this.element instanceof HTMLInputElement) {
       this.element.type = type;
@@ -54,6 +56,10 @@ export class InputBuilder extends ElementBuilder {
 
       if (required) {
         this.element.required = true;
+      }
+
+      if (disabled) {
+        this.element.disabled = true;
       }
     }
   }

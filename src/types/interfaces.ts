@@ -16,6 +16,7 @@ export interface InputParameters extends ElementParameters {
   placeholder?: string;
   readonly?: boolean;
   required?: boolean;
+  disabled?: boolean;
   eventType?: string;
 }
 
@@ -60,6 +61,7 @@ export interface InputComponent {
   callback?: (event: Event) => void;
   labelText: string;
   isRequired?: boolean;
+  isDisabled?: boolean;
   value?: string;
   eventType?: string;
   attributes?: Record<string, string>;
@@ -104,4 +106,17 @@ export interface Guarantees {
   title: string;
   description: string;
   image: string;
+}
+
+export interface ErrorInfo {
+  inputs: string[];
+  message: string;
+}
+
+export interface ErrorResponse {
+  statusCode: number;
+  messages: string;
+  errors: [];
+  error: string;
+  error_description: string;
 }

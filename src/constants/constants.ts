@@ -83,7 +83,9 @@ export const FOOTER_MENU_ITEMS: MenuItem[] = [
 
 export const BTN_TEXT = {
   REGISTRATION_PAGE: 'Зарегистрироваться',
+  REGISTRATION_REDIRECT: 'Перейти к регистрации',
   LOGIN_PAGE: 'Вход',
+  LOGIN_REDIRECT: 'Перейти к авторизации',
 };
 
 export const INTRO_TEXTS = {
@@ -148,4 +150,9 @@ export const GUARANTEES_TEXTS = {
         'Если вам нужна максимальная конфиденциальность, мы обеспечим анонимную доставку – без логотипов и лишних вопросов',
     },
   },
+};
+export const FIELDSET_LABELS = {
+  PERSONAL_DATA: 'Персональные данные',
+  SHIPPING: 'Адрес доставки',
+  BILLING: 'Расчетный адрес',
 };
