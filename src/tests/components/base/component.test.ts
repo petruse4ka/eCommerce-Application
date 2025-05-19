@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import { BaseComponent } from '@/components/base/component';
+import BaseComponent from '@/components/base';
 
 describe('Base component', () => {
   test('should return HTML element', () => {

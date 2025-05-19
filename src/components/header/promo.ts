@@ -1,8 +1,8 @@
-import { BaseComponent } from '@/components/base/component';
+import BaseComponent from '@/components/base';
 import { PROMO_ITEMS } from '@/data';
 import { SUBHEADER_STYLES } from '@/styles/header/subheader';
-import { ElementBuilder } from '@/utils/element-builder';
-import { ImageBuilder } from '@/utils/image-builder';
+import ElementBuilder from '@/utils/element-builder';
+import ImageBuilder from '@/utils/image-builder';
 
 export default class Promo extends BaseComponent {
   constructor() {

@@ -1,8 +1,8 @@
 import type { InputParameters } from '@/types/interfaces';
 
-import { ElementBuilder } from './element-builder';
+import ElementBuilder from './element-builder';
 
-export class InputBuilder extends ElementBuilder {
+export default class InputBuilder extends ElementBuilder {
   constructor(parameters: Omit<InputParameters, 'tag'>) {
     super({ ...parameters, tag: 'input' });
 

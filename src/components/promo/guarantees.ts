@@ -1,9 +1,9 @@
-import { BaseComponent } from '@/components/base/component';
-import { GUARANTEES_TEXTS } from '@/constants/constants';
+import BaseComponent from '@/components/base';
+import { GUARANTEES_TEXTS } from '@/constants';
 import { GUARANTEES } from '@/data';
 import { GUARANTEES_STYLES } from '@/styles/promo/guarantees';
-import { ElementBuilder } from '@/utils/element-builder';
-import { ImageBuilder } from '@/utils/image-builder';
+import ElementBuilder from '@/utils/element-builder';
+import ImageBuilder from '@/utils/image-builder';
 
 export default class Guarantees extends BaseComponent {
   constructor() {

@@ -1,8 +1,8 @@
-import { BaseComponent } from '@/components/base/component';
-import { MENU_ITEMS } from '@/constants/constants';
-import { Router } from '@/router/router';
+import BaseComponent from '@/components/base';
+import { MENU_ITEMS } from '@/constants';
+import Router from '@/router';
 import { HEADER_STYLES } from '@/styles/header/header';
-import { ElementBuilder } from '@/utils/element-builder';
+import ElementBuilder from '@/utils/element-builder';
 
 export default class MainMenu extends BaseComponent {
   constructor() {

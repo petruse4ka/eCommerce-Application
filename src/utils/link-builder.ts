@@ -1,8 +1,8 @@
 import type { LinkParameters } from '@/types/interfaces';
 
-import { ElementBuilder } from './element-builder';
+import ElementBuilder from './element-builder';
 
-export class LinkBuilder extends ElementBuilder {
+export default class LinkBuilder extends ElementBuilder {
   constructor(parameters: Omit<LinkParameters, 'tag'>) {
     super({ ...parameters, tag: 'a' });
     this.applyURL(parameters.href);

@@ -2,16 +2,16 @@ import '@/styles/main.css';
 
 import macaronImg from '@/assets/images/error-big-macaron.png';
 import crumbImg from '@/assets/images/error-crumb.png';
-import { BaseComponent } from '@/components/base/component';
-import { Button } from '@/components/buttons/button';
-import { ERRORPAGE_TEXTS } from '@/constants/constants';
-import { Router } from '@/router/router';
+import BaseComponent from '@/components/base';
+import Button from '@/components/buttons';
+import { ERRORPAGE_TEXTS } from '@/constants';
+import Router from '@/router';
 import { CONTAINER, CRUMB_STYLE, MAIN_CONTAINER, TITLE_STYLE } from '@/styles/pages/errorpage';
 import { Route } from '@/types/enums';
-import { ElementBuilder } from '@/utils/element-builder';
-import { ImageBuilder } from '@/utils/image-builder';
+import ElementBuilder from '@/utils/element-builder';
+import ImageBuilder from '@/utils/image-builder';
 
-export class ErrorPage extends BaseComponent {
+export default class ErrorPage extends BaseComponent {
   constructor() {
     super({
       tag: 'div',

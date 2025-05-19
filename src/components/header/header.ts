@@ -1,6 +1,6 @@
-import { BaseComponent } from '@/components/base/component';
+import BaseComponent from '@/components/base';
 import { HEADER_STYLES } from '@/styles/header/header';
-import { ElementBuilder } from '@/utils/element-builder';
+import ElementBuilder from '@/utils/element-builder';
 
 import Logo from './logo';
 import MainMenu from './main-menu';

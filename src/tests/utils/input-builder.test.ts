@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'vitest';
 
 import { InputType } from '@/types/enums';
-import { InputBuilder } from '@/utils/input-builder';
+import InputBuilder from '@/utils/input-builder';
 
 describe('Input builder', () => {
   test('should create element with correct attributes', () => {

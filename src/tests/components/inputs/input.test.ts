@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import Input from '@/components/inputs/input';
+import Input from '@/components/inputs';
 import { InputType } from '@/types/enums';
 
 describe('Input', () => {

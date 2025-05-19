@@ -1,11 +1,11 @@
 import '@/styles/main.css';
 
-import { BaseComponent } from '@/components/base/component';
+import BaseComponent from '@/components/base';
 import FormRegistration from '@/components/forms/registration';
-import Overlay from '@/components/overlay/overlay';
+import Overlay from '@/components/overlay';
 import { CONTAINER, FORM_CONTAINER, TITLE } from '@/styles/pages/registration';
 
-import { ElementBuilder } from '../utils/element-builder';
+import ElementBuilder from '../utils/element-builder';
 
 export default class RegistrationPage extends BaseComponent {
   private overlay: HTMLElement;

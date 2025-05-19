@@ -1,8 +1,8 @@
-import API from '@/api/api';
-import Alert from '@/components/alert/alert';
-import { Button } from '@/components/buttons/button';
-import Input from '@/components/inputs/input';
-import { BTN_TEXT, FIELDSET_LABELS } from '@/constants/constants';
+import API from '@/api';
+import Alert from '@/components/alert';
+import Button from '@/components/buttons';
+import Input from '@/components/inputs';
+import { BTN_TEXT, FIELDSET_LABELS } from '@/constants';
 import { INPUTS_ADDRESS_DATA, INPUTS_REGISTRATION_DATA } from '@/data';
 import { FORM, REGISTRATION_ADDRESS, REGISTRATION_INPUTS_CONTAINER } from '@/styles/forms/forms';
 import { CHECKBOX_CONTAINER_STYLE } from '@/styles/inputs/inputs';
@@ -11,7 +11,7 @@ import { AlertStatus, CheckboxText, InputType } from '@/types/enums';
 import { isErrorInfo } from '@/types/guards';
 import type { RegistrationBody } from '@/types/interfaces';
 import ApiErrors from '@/utils/api-errors';
-import { ElementBuilder } from '@/utils/element-builder';
+import ElementBuilder from '@/utils/element-builder';
 import {
   getValidator,
   validateDateOfBirth,

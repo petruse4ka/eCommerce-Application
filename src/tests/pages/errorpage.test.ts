@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { ErrorPage } from '@/pages/errorpage';
+import ErrorPage from '@/pages/errorpage';
 
 describe('Error page', () => {
   it('should match the snapshot', () => {

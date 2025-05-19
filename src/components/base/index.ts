@@ -1,7 +1,7 @@
 import type { ElementParameters } from '@/types/interfaces';
-import { ElementBuilder } from '@/utils/element-builder';
+import ElementBuilder from '@/utils/element-builder';
 
-export class BaseComponent {
+export default class BaseComponent {
   protected component: HTMLElement;
 
   protected constructor(parameters: ElementParameters) {

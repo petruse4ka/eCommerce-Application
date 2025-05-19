@@ -1,8 +1,8 @@
 import type { ButtonParameters } from '@/types/interfaces';
 
-import { ElementBuilder } from './element-builder';
+import ElementBuilder from './element-builder';
 
-export class ButtonBuilder extends ElementBuilder {
+export default class ButtonBuilder extends ElementBuilder {
   constructor(parameters: Omit<ButtonParameters, 'tag'>) {
     super({ ...parameters, tag: 'button' });
     this.setButtonType(parameters.type);

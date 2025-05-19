@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import { Button } from '@/components/buttons/button';
+import Button from '@/components/buttons';
 
 describe('Button', () => {
   test('should be enabled', () => {

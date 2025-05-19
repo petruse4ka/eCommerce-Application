@@ -1,10 +1,10 @@
 import '@/styles/main.css';
 
 import macaronAstonaut from '@/assets/images/astronaut.png';
-import { BaseComponent } from '@/components/base/component';
-import { Button } from '@/components/buttons/button';
-import { UNDER_CONSTRUCTION_TEXTS } from '@/constants/constants';
-import { Router } from '@/router/router';
+import BaseComponent from '@/components/base';
+import Button from '@/components/buttons';
+import { UNDER_CONSTRUCTION_TEXTS } from '@/constants';
+import Router from '@/router';
 import {
   ASTRONAUT_STYLE,
   CONTAINER,
@@ -12,8 +12,8 @@ import {
   TITLE_STYLE,
 } from '@/styles/pages/underconstruction';
 import { Route } from '@/types/enums';
-import { ElementBuilder } from '@/utils/element-builder';
-import { ImageBuilder } from '@/utils/image-builder';
+import ElementBuilder from '@/utils/element-builder';
+import ImageBuilder from '@/utils/image-builder';
 
 export default class UnderConstructionPage extends BaseComponent {
   constructor() {

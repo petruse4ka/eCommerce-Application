@@ -1,9 +1,9 @@
-import { BaseComponent } from '@/components/base/component';
-import { PACKAGES_TEXTS } from '@/constants/constants';
+import BaseComponent from '@/components/base';
+import { PACKAGES_TEXTS } from '@/constants';
 import { PACKAGES } from '@/data';
 import { PACKAGES_STYLES } from '@/styles/promo/packages';
-import { ElementBuilder } from '@/utils/element-builder';
-import { ImageBuilder } from '@/utils/image-builder';
+import ElementBuilder from '@/utils/element-builder';
+import ImageBuilder from '@/utils/image-builder';
 
 export default class Packages extends BaseComponent {
   constructor() {

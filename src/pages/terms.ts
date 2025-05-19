@@ -1,6 +1,6 @@
 import '@/styles/main.css';
 
-import { BaseComponent } from '@/components/base/component';
+import BaseComponent from '@/components/base';
 
 import UnderConstructionPage from './underconstruction';
 

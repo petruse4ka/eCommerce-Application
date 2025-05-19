@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import { LinkBuilder } from '@/utils/link-builder';
+import LinkBuilder from '@/utils/link-builder';
 
 describe('Link builder', () => {
   test('should create element with correct attributes', () => {

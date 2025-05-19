@@ -1,4 +1,4 @@
-import { ElementBuilder } from '@/utils/element-builder';
+import ElementBuilder from '@/utils/element-builder';
 
 export default class Overlay {
   private overlay: ElementBuilder;

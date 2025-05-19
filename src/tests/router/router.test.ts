@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, test } from 'vitest';
 
-import { Router } from '@/router/router';
+import Router from '@/router';
 import { Route } from '@/types/enums';
 
 describe('Router', () => {

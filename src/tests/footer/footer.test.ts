@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import Footer from '@/components/footer';
+import Footer from '@/components/footer/footer';
 
 describe('Footer', () => {
   it('should match the snapshot', () => {

@@ -15,12 +15,7 @@ import readyIcon from '@/assets/images/packages/ready.png';
 import stampIcon from '@/assets/images/packages/stamp.png';
 import weddingIcon from '@/assets/images/packages/wedding.png';
 import wholesaleIcon from '@/assets/images/packages/wholesale.png';
-import {
-  FOOTER_TEXTS,
-  GUARANTEES_TEXTS,
-  PACKAGES_TEXTS,
-  SUBHEADER_PROMO_TEXT,
-} from '@/constants/constants';
+import { FOOTER_TEXTS, GUARANTEES_TEXTS, PACKAGES_TEXTS, SUBHEADER_PROMO_TEXT } from '@/constants';
 import { InputType } from '@/types/enums';
 import type { Guarantees, Packages } from '@/types/interfaces';
 
@@ -57,7 +52,7 @@ export const INPUTS_REGISTRATION_DATA = [
     placeholder: 'Укажите имя',
     type: InputType.TEXT,
     isRequired: true,
-    callback: (): void => console.log('Primary button clicked'),
+    callback: (): void => {},
   },
   {
     id: 'lastName',
@@ -65,14 +60,14 @@ export const INPUTS_REGISTRATION_DATA = [
     placeholder: 'Укажите фамилию',
     type: InputType.TEXT,
     isRequired: true,
-    callback: (): void => console.log('Primary button clicked'),
+    callback: (): void => {},
   },
   {
     id: 'dateOfBirth',
     labelText: 'День рождения',
     type: InputType.DATE,
     isRequired: true,
-    callback: (): void => console.log('Primary button clicked'),
+    callback: (): void => {},
   },
   {
     id: 'email',
@@ -80,7 +75,7 @@ export const INPUTS_REGISTRATION_DATA = [
     placeholder: 'Укажите e-mail',
     type: InputType.EMAIL,
     isRequired: true,
-    callback: (): void => console.log('Primary button clicked'),
+    callback: (): void => {},
   },
   {
     id: 'password',
@@ -88,7 +83,7 @@ export const INPUTS_REGISTRATION_DATA = [
     placeholder: 'Укажите пароль',
     type: InputType.PASSWORD,
     isRequired: true,
-    callback: (): void => console.log('Primary button clicked'),
+    callback: (): void => {},
   },
 ];
 
@@ -99,7 +94,7 @@ export const INPUTS_ADDRESS_DATA = [
     placeholder: 'Россия',
     type: InputType.TEXT,
     isDisabled: true,
-    callback: (): void => console.log('Primary button clicked'),
+    callback: (): void => {},
   },
   {
     id: 'City',
@@ -107,7 +102,7 @@ export const INPUTS_ADDRESS_DATA = [
     placeholder: 'Укажите город:',
     type: InputType.TEXT,
     isRequired: true,
-    callback: (): void => console.log('Primary button clicked'),
+    callback: (): void => {},
   },
   {
     id: 'Street',
@@ -115,7 +110,7 @@ export const INPUTS_ADDRESS_DATA = [
     placeholder: 'Укажите улицу',
     type: InputType.TEXT,
     isRequired: true,
-    callback: (): void => console.log('Primary button clicked'),
+    callback: (): void => {},
   },
   {
     id: 'PostalCode',
@@ -123,7 +118,7 @@ export const INPUTS_ADDRESS_DATA = [
     placeholder: 'Укажите почтовый индекс',
     type: InputType.TEXT,
     isRequired: true,
-    callback: (): void => console.log('Primary button clicked'),
+    callback: (): void => {},
   },
 ];
 
