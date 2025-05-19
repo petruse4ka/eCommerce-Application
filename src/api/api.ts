@@ -7,6 +7,7 @@ import type {
   AuthorizationBody,
   AuthResponse,
   CustomerResponse,
+  ErrorResponse,
   RegistrationBody,
 } from '@/types/interfaces';
 
@@ -50,12 +51,14 @@ export default class API {
   }
 
   public static async userSignInResponse(body: AuthorizationBody): Promise<string | void> {
+    const token = await this.userAuthentication(body);
+
     return await fetch(
       `${import.meta.env['VITE_CTP_API_URL']}/${import.meta.env['VITE_CTP_PROJECT_KEY']}${ApiEndpoint.LOGIN}`,
       {
         method: ApiMethods.POST,
         headers: {
-          Authorization: `Bearer ${await this.userAuthentication(body)}`,
+          Authorization: `Bearer ${token}`,
           'Content-Type': ContentType.JSON,
         },
         body: JSON.stringify(body),
@@ -104,7 +107,16 @@ export default class API {
       }
     )
       .then((response) => response.json())
-      .then((body: AuthResponse) => body.access_token);
+      .then((body: AuthResponse | ErrorResponse) => {
+        if ('access_token' in body) {
+          return body.access_token;
+        } else {
+          throw new Error(body.error);
+        }
+      })
+      .catch((error: Error) => {
+        throw new Error(error.message);
+      });
   }
 
   private static async authentication(): Promise<string> {

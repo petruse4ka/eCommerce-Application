@@ -79,6 +79,8 @@ export enum AlertStatus {
 export enum AlertText {
   REGISTRATION_SUCCESS = 'Вы успешно зарегистрировались!',
   AUTHORIZATION_SUCCESS = 'Вы успешно авторизовались!',
+  ACCOUNT_CREDENTIALS_ERROR = 'Учетная запись клиента с указанными учетными данными не найдена.',
+  ERROR_DEFAULT = 'Произошли какие-то проблемы. Попробуйте еще раз',
 }
 
 export enum CheckboxText {
