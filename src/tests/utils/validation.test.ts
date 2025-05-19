@@ -76,35 +76,33 @@ describe('Password validation', () => {
 
   test('should reject password without uppercase letter', () => {
     expect(validatePassword('a1234567')).toBe(
-      'Пароль должен содержать как минимум одну заглавную букву.'
+      'Пароль должен содержать минимум одну заглавную букву.'
     );
   });
 
   test('should reject password without lowercase letter', () => {
     expect(validatePassword('A1234567')).toBe(
-      'Пароль должен содержать как минимум одну строчную букву.'
+      'Пароль должен содержать минимум одну строчную букву.'
     );
   });
 
   test('should reject password without number', () => {
-    expect(validatePassword('ABCDEFabcdef')).toBe(
-      'Пароль должен содержать как минимум одну цифру.'
-    );
+    expect(validatePassword('ABCDEFabcdef')).toBe('Пароль должен содержать минимум одну цифру.');
   });
 
   test('should reject password without uppercase and number', () => {
     expect(validatePassword('asdfghjk')).toBe(
-      'Пароль должен содержать как минимум: одну заглавную букву, одну цифру.'
+      'Пароль должен содержать минимум: одну заглавную букву, одну цифру.'
     );
   });
 
   test('should reject password shorter than 8 characters', () => {
-    expect(validatePassword('aA8')).toBe('Пароль должен содержать как минимум 8 символов.');
+    expect(validatePassword('aA8')).toBe('Пароль должен содержать минимум 8 символов.');
   });
 
   test('should reject password with multiple rule violations', () => {
     expect(validatePassword('pass')).toBe(
-      'Пароль должен содержать как минимум: 8 символов, одну заглавную букву, одну цифру.'
+      'Пароль должен содержать минимум: 8 символов, одну заглавную букву, одну цифру.'
     );
   });
 });

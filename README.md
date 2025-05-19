@@ -217,6 +217,7 @@ Use the following scripts to assist with development, formatting, linting, build
 | :---------------------- | :---------------------------------------------------------------------------------- |
 | `npm run test`          | Execute unit tests using Vitest.                                                    |
 | `npm run test:coverage` | Execute unit tests using Vitest and view coverage info.                             |
+| `npm run test:update`   | Update snapshots after making changes to test expectations.                         |
 | `npm run check`         | Execute a code quality check: Vitest, ESLint, Stylelint, Prettier formatting check. |
 
 ### ⚙️ Development & Deployment

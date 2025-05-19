@@ -7,6 +7,7 @@
     "check": "npm run lint && npm run stylelint && npm run format:check && npm run test",
     "test": "vitest",
     "test:coverage": "vitest run --coverage",
+    "test:update": "vitest -u",
     "format": "prettier --write \"src/**/*.{ts,tsx,js,css,scss}\"",
     "format:check": "prettier --list-different \"src/**/*.{ts,tsx,js,css,scss}\"",
     "format:fix": "prettier --write --ignore-unknown \"src/**/*.{ts,tsx,js,css,scss}\"",
