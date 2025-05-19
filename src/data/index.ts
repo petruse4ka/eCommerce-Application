@@ -84,7 +84,7 @@ export const INPUTS_REGISTRATION_DATA = [
   },
   {
     id: 'password',
-    labelText: 'Придумайте пароль',
+    labelText: 'Пароль',
     placeholder: 'Укажите пароль',
     type: InputType.PASSWORD,
     isRequired: true,
@@ -95,7 +95,7 @@ export const INPUTS_REGISTRATION_DATA = [
 export const INPUTS_ADDRESS_DATA = [
   {
     id: 'Country',
-    labelText: 'Страна:',
+    labelText: 'Страна',
     placeholder: 'Россия',
     type: InputType.TEXT,
     isDisabled: true,
@@ -103,7 +103,7 @@ export const INPUTS_ADDRESS_DATA = [
   },
   {
     id: 'City',
-    labelText: 'Город:',
+    labelText: 'Город',
     placeholder: 'Укажите город:',
     type: InputType.TEXT,
     isRequired: true,

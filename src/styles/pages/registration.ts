@@ -1,29 +1,32 @@
 export const CONTAINER = [
-  'min-h-screen',
+  'flex-grow',
   'relative',
   'flex',
   'justify-center',
   'bg-pink',
   'bg-[url(@/assets/images/bg-macarons.png)]',
-  'bg-size-[auto_200px]',
   'bg-top',
   'bg-no-repeat',
+  'bg-contain',
+  '2xl:bg-auto',
+  'bg-origin-content',
+  'py-10',
+  'px-3',
+  'xl:px-10',
 ];
 
 export const FORM_CONTAINER = [
   'relative',
-  'mt-15',
-  'mb-5',
+  'mt-20',
+  'sm:mb-20',
   'px-3',
-  'py-5',
+  'py-10',
   'z-1',
+  'md:px-10',
   'bg-primary',
   'rounded-xl',
-  'sm:px-10',
-  'sm:py-10',
-  'lg:w-[1000px]',
-  'xl:px-20',
-  'xl:w-[1200px]',
+  'w-full',
+  'max-w-[1200px]',
 ];
 
 export const TITLE = ['text-3xl', 'font-bold', 'text-center'];

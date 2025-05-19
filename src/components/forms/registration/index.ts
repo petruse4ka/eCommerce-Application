@@ -1,7 +1,7 @@
 import API from '@/api/api';
 import { Button } from '@/components/buttons/button';
 import Input from '@/components/inputs/input';
-import { BTN_TEXT } from '@/constants/constants';
+import { BTN_TEXT, FIELDSET_LABELS } from '@/constants/constants';
 import { INPUTS_ADDRESS_DATA, INPUTS_REGISTRATION_DATA } from '@/data';
 import { FORM, REGISTRATION_ADDRESS, REGISTRATION_INPUTS_CONTAINER } from '@/styles/forms/forms';
 import { CHECKBOX_CONTAINER_STYLE } from '@/styles/inputs/inputs';
@@ -105,7 +105,7 @@ export default class FormRegistration {
     const legend = new ElementBuilder({
       tag: 'legend',
       className: REGISTRATION_ADDRESS.LEGEND,
-      textContent: 'Персональные данные',
+      textContent: FIELDSET_LABELS.PERSONAL_DATA,
     }).getElement();
 
     container.append(legend);
@@ -149,7 +149,7 @@ export default class FormRegistration {
     const legend = new ElementBuilder({
       tag: 'legend',
       className: REGISTRATION_ADDRESS.LEGEND,
-      textContent: `Адрес ${prefix === 'billing' ? ' оплаты' : ' доставки'}`,
+      textContent: prefix === 'billing' ? FIELDSET_LABELS.BILLING : FIELDSET_LABELS.SHIPPING,
     }).getElement();
 
     container.append(legend);
