@@ -35,7 +35,7 @@ export const CHECKBOX_STYLE = [
   'w-5',
   'accent-accent',
   'hover:accent-accent-hover',
-  'border-red-500',
+  'border-accent',
   'cursor-pointer',
 ];
 
@@ -63,5 +63,5 @@ export const ERROR_MESSAGE_STYLE = [
   'text-[11px]',
   'sm:text-xs',
   'text-left',
-  'text-(--color-accent)',
+  'text-accent',
 ];
