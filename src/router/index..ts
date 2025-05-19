@@ -1,7 +1,7 @@
 import { Route } from '@/types/enums';
 import type { ActionHandler } from '@/types/types';
 
-export class Router {
+export default class Router {
   private routes: Map<Route, ActionHandler>;
   private homeRoute: Route;
   private defaultRoute: Route;

@@ -1,13 +1,13 @@
-import { BaseComponent } from '@/components/base/component';
+import BaseComponent from '@/components/base';
 import {
   AUTHORIZATION_MENU_ITEMS,
   AUTHORIZATION_MENU_TEXT,
   UNAUTHORIZED_MENU_ITEMS,
-} from '@/constants/constants';
-import { Router } from '@/router/router';
+} from '@/constants';
+import Router from '@/router/index.';
 import { userState } from '@/store/user-state';
 import { SUBHEADER_STYLES } from '@/styles/header/subheader';
-import { ElementBuilder } from '@/utils/element-builder';
+import ElementBuilder from '@/utils/element-builder';
 
 export default class AuthorizationMenu extends BaseComponent {
   constructor() {

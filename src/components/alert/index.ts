@@ -4,8 +4,8 @@ import infoIcon from '@/assets/icons/info-circle.svg';
 import warningIcon from '@/assets/icons/warning-circle.svg';
 import { CUSTOM_ALERT_STYLE } from '@/styles/alert/alert';
 import type { AlertStatus } from '@/types/enums';
-import { ElementBuilder } from '@/utils/element-builder';
-import { ImageBuilder } from '@/utils/image-builder';
+import ElementBuilder from '@/utils/element-builder';
+import ImageBuilder from '@/utils/image-builder';
 
 const iconsSource = {
   SUCCESS: successIcon,

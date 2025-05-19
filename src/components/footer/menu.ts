@@ -1,8 +1,8 @@
-import { BaseComponent } from '@/components/base/component';
-import { FOOTER_MENU_ITEMS, FOOTER_TEXTS } from '@/constants/constants';
-import { Router } from '@/router/router';
+import BaseComponent from '@/components/base';
+import { FOOTER_MENU_ITEMS, FOOTER_TEXTS } from '@/constants';
+import Router from '@/router/index.';
 import { FOOTER_STYLES } from '@/styles/footer';
-import { ElementBuilder } from '@/utils/element-builder';
+import ElementBuilder from '@/utils/element-builder';
 
 export default class Menu extends BaseComponent {
   constructor() {

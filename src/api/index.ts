@@ -1,5 +1,5 @@
-import Alert from '@/components/alert/alert';
-import { Router } from '@/router/router';
+import Alert from '@/components/alert';
+import Router from '@/router/index.';
 import { userState } from '@/store/user-state';
 import { AlertStatus, AlertText, ApiEndpoint, ApiMethods, ContentType } from '@/types/enums';
 import { Route } from '@/types/enums';

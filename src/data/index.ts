@@ -15,12 +15,7 @@ import readyIcon from '@/assets/images/packages/ready.png';
 import stampIcon from '@/assets/images/packages/stamp.png';
 import weddingIcon from '@/assets/images/packages/wedding.png';
 import wholesaleIcon from '@/assets/images/packages/wholesale.png';
-import {
-  FOOTER_TEXTS,
-  GUARANTEES_TEXTS,
-  PACKAGES_TEXTS,
-  SUBHEADER_PROMO_TEXT,
-} from '@/constants/constants';
+import { FOOTER_TEXTS, GUARANTEES_TEXTS, PACKAGES_TEXTS, SUBHEADER_PROMO_TEXT } from '@/constants';
 import { InputType } from '@/types/enums';
 import type { Guarantees, Packages } from '@/types/interfaces';
 

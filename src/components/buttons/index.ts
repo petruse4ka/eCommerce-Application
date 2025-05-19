@@ -1,8 +1,8 @@
 import { CUSTOM_BUTTON_STYLE } from '@/styles/buttons/buttons';
 import { ButtonType } from '@/types/enums';
-import { ButtonBuilder } from '@/utils/button-builder';
+import ButtonBuilder from '@/utils/button-builder';
 
-export class Button {
+export default class Button {
   protected button: ButtonBuilder;
 
   constructor(parameters: {

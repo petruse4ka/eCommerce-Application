@@ -7,8 +7,8 @@ import {
 } from '@/styles/inputs/inputs';
 import { InputType } from '@/types/enums';
 import type { InputComponent } from '@/types/interfaces';
-import { ElementBuilder } from '@/utils/element-builder';
-import { InputBuilder } from '@/utils/input-builder';
+import ElementBuilder from '@/utils/element-builder';
+import InputBuilder from '@/utils/input-builder';
 
 export default class Input {
   private container: ElementBuilder;

@@ -1,9 +1,9 @@
 import introImg from '@/assets/images/promo/main-heart.png';
-import { BaseComponent } from '@/components/base/component';
-import { INTRO_TEXTS } from '@/constants/constants';
+import BaseComponent from '@/components/base';
+import { INTRO_TEXTS } from '@/constants';
 import { INTRO_STYLES } from '@/styles/promo/intro';
-import { ElementBuilder } from '@/utils/element-builder';
-import { ImageBuilder } from '@/utils/image-builder';
+import ElementBuilder from '@/utils/element-builder';
+import ImageBuilder from '@/utils/image-builder';
 
 export default class Intro extends BaseComponent {
   constructor() {

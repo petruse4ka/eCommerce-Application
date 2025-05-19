@@ -1,6 +1,6 @@
-import { BaseComponent } from '@/components/base/component';
+import BaseComponent from '@/components/base';
 import { SUBHEADER_STYLES } from '@/styles/header/subheader';
-import { ElementBuilder } from '@/utils/element-builder';
+import ElementBuilder from '@/utils/element-builder';
 
 import AuthorizationMenu from './authorisation-menu';
 import Promo from './promo';

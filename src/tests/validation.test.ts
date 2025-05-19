@@ -1,4 +1,4 @@
-import { VALIDATE_CONST } from '@/constants/constants';
+import { VALIDATE_CONST } from '@/constants';
 import { ErrorMessages } from '@/types/enums';
 import {
   validateDateOfBirth,

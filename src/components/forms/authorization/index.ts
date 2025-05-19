@@ -1,16 +1,16 @@
-import API from '@/api/api';
-import Alert from '@/components/alert/alert';
-import { Button } from '@/components/buttons/button';
-import Input from '@/components/inputs/input';
-import { BTN_TEXT } from '@/constants/constants';
+import API from '@/api';
+import Alert from '@/components/alert';
+import Button from '@/components/buttons';
+import Input from '@/components/inputs';
+import { BTN_TEXT } from '@/constants';
 import { INPUTS_AUTHORIZATION_DATA } from '@/data';
-import { Router } from '@/router/router';
+import Router from '@/router/index.';
 import { AUTHORIZATION_INPUTS_CONTAINER, FORM, REDIRECT_LINK } from '@/styles/forms/forms';
 import { Route } from '@/types/enums';
 import { AlertStatus } from '@/types/enums';
 import type { AuthorizationBody, ErrorInfo, InputComponent } from '@/types/interfaces';
 import ApiErrors from '@/utils/api-errors';
-import { ElementBuilder } from '@/utils/element-builder';
+import ElementBuilder from '@/utils/element-builder';
 import { getValidator, validateEMail, validatePassword } from '@/utils/validations';
 
 export default class FormAuthorization {

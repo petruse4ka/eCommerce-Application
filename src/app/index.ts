@@ -1,5 +1,5 @@
-import { BaseComponent } from '@/components/base/component';
-import Footer from '@/components/footer';
+import BaseComponent from '@/components/base';
+import Footer from '@/components/footer/footer';
 import Header from '@/components/header/header';
 import AboutPage from '@/pages/about';
 import AccountPage from '@/pages/account';
@@ -11,12 +11,12 @@ import { LoginPage } from '@/pages/login';
 import RegistrationPage from '@/pages/registration';
 import ReturnsPage from '@/pages/returns';
 import TermsPage from '@/pages/terms';
-import { Router } from '@/router/router';
+import Router from '@/router/index.';
 import { userState } from '@/store/user-state';
 import { APP_STYLE } from '@/styles/app/app';
 import { Route } from '@/types/enums';
 
-export class App extends BaseComponent {
+export default class App extends BaseComponent {
   private header: Header;
   private footer: Footer;
   private homePage: HomePage = new HomePage();

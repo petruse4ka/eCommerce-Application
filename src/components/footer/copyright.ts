@@ -1,11 +1,11 @@
 import rsLogo from '@/assets/logo/rs-school-logo.svg';
-import { BaseComponent } from '@/components/base/component';
-import { FOOTER_TEXTS } from '@/constants/constants';
+import BaseComponent from '@/components/base';
+import { FOOTER_TEXTS } from '@/constants';
 import { SCHOOL_URL } from '@/data';
 import { FOOTER_STYLES } from '@/styles/footer';
-import { ElementBuilder } from '@/utils/element-builder';
-import { ImageBuilder } from '@/utils/image-builder';
-import { LinkBuilder } from '@/utils/link-builder';
+import ElementBuilder from '@/utils/element-builder';
+import ImageBuilder from '@/utils/image-builder';
+import LinkBuilder from '@/utils/link-builder';
 
 export default class Copyright extends BaseComponent {
   constructor() {

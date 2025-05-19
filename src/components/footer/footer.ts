@@ -1,6 +1,6 @@
-import { BaseComponent } from '@/components/base/component';
+import BaseComponent from '@/components/base';
 import { FOOTER_STYLES } from '@/styles/footer';
-import { ElementBuilder } from '@/utils/element-builder';
+import ElementBuilder from '@/utils/element-builder';
 
 import Copyright from './copyright';
 import Menu from './menu';

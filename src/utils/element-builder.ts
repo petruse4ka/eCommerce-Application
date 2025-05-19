@@ -1,6 +1,6 @@
 import type { ElementParameters } from '@/types/interfaces';
 
-export class ElementBuilder {
+export default class ElementBuilder {
   protected element: HTMLElement;
 
   constructor(parameters: ElementParameters) {

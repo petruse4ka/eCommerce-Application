@@ -1,9 +1,9 @@
-import { BaseComponent } from '@/components/base/component';
-import { FOOTER_TEXTS } from '@/constants/constants';
+import BaseComponent from '@/components/base';
+import { FOOTER_TEXTS } from '@/constants';
 import { FOOTER_PROMO_ITEMS } from '@/data';
 import { FOOTER_STYLES } from '@/styles/footer';
-import { ElementBuilder } from '@/utils/element-builder';
-import { ImageBuilder } from '@/utils/image-builder';
+import ElementBuilder from '@/utils/element-builder';
+import ImageBuilder from '@/utils/image-builder';
 
 export default class Promo extends BaseComponent {
   constructor() {

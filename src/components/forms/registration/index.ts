@@ -1,7 +1,7 @@
-import API from '@/api/api';
-import { Button } from '@/components/buttons/button';
-import Input from '@/components/inputs/input';
-import { BTN_TEXT } from '@/constants/constants';
+import API from '@/api';
+import Button from '@/components/buttons';
+import Input from '@/components/inputs';
+import { BTN_TEXT } from '@/constants';
 import { INPUTS_ADDRESS_DATA, INPUTS_REGISTRATION_DATA } from '@/data';
 import {
   FORM,
@@ -11,7 +11,7 @@ import {
 import { CHECKBOX_CONTAINER_STYLE } from '@/styles/inputs/inputs';
 import { CheckboxText, InputType } from '@/types/enums';
 import type { RegistrationBody } from '@/types/interfaces';
-import { ElementBuilder } from '@/utils/element-builder';
+import ElementBuilder from '@/utils/element-builder';
 import {
   getValidator,
   validateDateOfBirth,
