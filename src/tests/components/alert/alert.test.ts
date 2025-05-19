@@ -3,8 +3,8 @@ import { describe, expect, test } from 'vitest';
 import Alert from '@/components/alert/alert';
 import { AlertStatus } from '@/types/enums';
 
-describe('Test base alert class', () => {
-  test('should render alert with icon and correct status', () => {
+describe('Alert', () => {
+  test('should render alert with message and success status', () => {
     Alert.render({
       textContent: 'Test message',
       status: AlertStatus.SUCCESS,

@@ -2,8 +2,8 @@ import { describe, expect, test } from 'vitest';
 
 import { Button } from '@/components/buttons/button';
 
-describe('Test base button class', () => {
-  test('should enable the button', () => {
+describe('Button', () => {
+  test('should be enabled', () => {
     const button = new Button({
       style: 'PRIMARY_PINK',
       textContent: 'Test Button',

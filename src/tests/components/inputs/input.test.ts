@@ -3,8 +3,8 @@ import { describe, expect, test } from 'vitest';
 import Input from '@/components/inputs/input';
 import { InputType } from '@/types/enums';
 
-describe('Test base input class', () => {
-  test('should return input value', () => {
+describe('Input', () => {
+  test('should return correct input value', () => {
     const input = new Input({
       type: InputType.TEXT,
       id: 'test-input',

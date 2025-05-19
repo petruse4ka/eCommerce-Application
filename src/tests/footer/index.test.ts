@@ -2,8 +2,8 @@ import { describe, expect, it } from 'vitest';
 
 import Footer from '@/components/footer';
 
-describe('Snapshot test of footer', () => {
-  it('should match the footer snapshot', () => {
+describe('Footer', () => {
+  it('should match the snapshot', () => {
     const footer = new Footer();
     const element = footer.getElement();
 

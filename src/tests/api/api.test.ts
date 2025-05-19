@@ -2,7 +2,7 @@ import { describe, expect, test, vi } from 'vitest';
 
 import API from '@/api/api';
 
-describe('API Tests', () => {
+describe('API', () => {
   test('should handle successful login', async () => {
     const mockFetchRequest = vi.fn();
     globalThis.fetch = mockFetchRequest;

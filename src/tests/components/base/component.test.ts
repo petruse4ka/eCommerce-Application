@@ -2,7 +2,7 @@ import { describe, expect, test } from 'vitest';
 
 import { BaseComponent } from '@/components/base/component';
 
-describe('Test base component class', () => {
+describe('Base component', () => {
   test('should return HTML element', () => {
     class TestComponent extends BaseComponent {
       constructor() {

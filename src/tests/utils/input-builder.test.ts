@@ -3,8 +3,8 @@ import { describe, expect, test } from 'vitest';
 import { InputType } from '@/types/enums';
 import { InputBuilder } from '@/utils/input-builder';
 
-describe('Test input builder utility', () => {
-  test('should create input with correct attributes', () => {
+describe('Input builder', () => {
+  test('should create element with correct attributes', () => {
     const input = new InputBuilder({
       type: InputType.TEXT,
       id: 'test-input',

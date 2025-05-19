@@ -1,4 +1,4 @@
-import { expect, it } from 'vitest';
+import { describe, expect, test } from 'vitest';
 
 import { VALIDATE_CONST } from '@/constants/constants';
 import { ErrorMessages } from '@/types/enums';
@@ -11,146 +11,176 @@ import {
   validatePostalCode,
 } from '@/utils/validations';
 
-/********** email validation test ***************/
+describe('Email validation', () => {
+  test('should accept Latin email', () => {
+    expect(validateEMail('example@tut.by')).toEqual(null);
+  });
 
-it('email validation of rigth Latin input', () => {
-  expect(validateEMail('example@tut.by')).toEqual(null);
-});
-it('email validation of rigth Cyrillic input', () => {
-  expect(validateEMail('пример@мэйл.ру')).toEqual(null);
-});
-it('email validation of long input', () => {
-  expect(
-    validateEMail(
-      'verylongemailaddress12345@example-thelongestlistofthelongeststuffatthelongestdomainnameatlonglast.com'
-    )
-  ).toEqual(null);
-});
-it('email validation of short input', () => {
-  expect(validateEMail('a@b.ru')).toEqual(null);
-});
-it('email validation of double domain', () => {
-  expect(validateEMail('info@company.com.by')).toEqual(null);
-});
+  test('should accept Cyrillic email', () => {
+    expect(validateEMail('пример@мэйл.ру')).toEqual(null);
+  });
 
-it('email validation of empty input', () => {
-  expect(validateEMail('')).toBe(ErrorMessages.EMPTY_INPUT);
-});
-it('email validation of input without @', () => {
-  expect(validateEMail('exampletut.by')).toBe(ErrorMessages.INVALID_EMAIL);
-});
-it('email validation of invalid input', () => {
-  expect(validateEMail('example@tut,by')).toBe(ErrorMessages.INVALID_DOMAIN);
-});
-it('email validation of beginning with dot', () => {
-  expect(validateEMail('.user@mail.com')).toBe(ErrorMessages.INVALID_FIRST_CHAR);
-});
-it('email validation without domain', () => {
-  expect(validateEMail('name@domain')).toBe(ErrorMessages.INVALID_DOMAIN);
-});
-it('domain validation with wrong characters', () => {
-  expect(validateEMail('name@dom!ain.com')).toBe(ErrorMessages.INVALID_DOMAIN);
-});
+  test('should accept long email', () => {
+    expect(
+      validateEMail(
+        'verylongemailaddress12345@example-thelongestlistofthelongeststuffatthelongestdomainnameatlonglast.com'
+      )
+    ).toEqual(null);
+  });
 
-/********** password validation test ***************/
+  test('should accept short email', () => {
+    expect(validateEMail('a@b.ru')).toEqual(null);
+  });
 
-it('password validation for right password', () => {
-  expect(validatePassword('aA8asdf$#-')).toEqual(null);
-});
-it('password validation of empty input', () => {
-  expect(validatePassword('')).toBe(ErrorMessages.EMPTY_INPUT);
-});
-it('password validation of nonLatinic input', () => {
-  expect(validatePassword('пароль')).toBe(ErrorMessages.INVALID_PASSWORD);
-});
-it('password validation for password without upper character', () => {
-  expect(validatePassword('a1234567')).toBe(
-    'Пароль должен содержать как минимум одну заглавную букву.'
-  );
-});
-it('password validation for password without lower character', () => {
-  expect(validatePassword('A1234567')).toBe(
-    'Пароль должен содержать как минимум одну строчную букву.'
-  );
-});
-it('password validation for password without number', () => {
-  expect(validatePassword('ABCDEFabcdef')).toBe('Пароль должен содержать как минимум одну цифру.');
-});
-it('password validation for password without upper character and number', () => {
-  expect(validatePassword('asdfghjk')).toBe(
-    'Пароль должен содержать как минимум: одну заглавную букву, одну цифру.'
-  );
-});
-it('password validation for length of password less then 8 characters', () => {
-  expect(validatePassword('aA8')).toBe('Пароль должен содержать как минимум 8 символов.');
-});
-it('password validation for all wrong parameters', () => {
-  expect(validatePassword('pass')).toBe(
-    'Пароль должен содержать как минимум: 8 символов, одну заглавную букву, одну цифру.'
-  );
+  test('should accept double domain', () => {
+    expect(validateEMail('info@company.com.by')).toEqual(null);
+  });
+
+  test('should reject empty input', () => {
+    expect(validateEMail('')).toBe(ErrorMessages.EMPTY_INPUT);
+  });
+
+  test('should reject email without @', () => {
+    expect(validateEMail('exampletut.by')).toBe(ErrorMessages.INVALID_EMAIL);
+  });
+
+  test('should reject email with invalid domain', () => {
+    expect(validateEMail('example@tut,by')).toBe(ErrorMessages.INVALID_DOMAIN);
+  });
+
+  test('should reject email starting with dot', () => {
+    expect(validateEMail('.user@mail.com')).toBe(ErrorMessages.INVALID_FIRST_CHAR);
+  });
+
+  test('should reject email with no domain extension', () => {
+    expect(validateEMail('name@domain')).toBe(ErrorMessages.INVALID_DOMAIN);
+  });
+
+  test('should reject email with special characters in domain', () => {
+    expect(validateEMail('name@dom!ain.com')).toBe(ErrorMessages.INVALID_DOMAIN);
+  });
 });
 
-/********** validateDateOfBirth test ***************/
+describe('Password validation', () => {
+  test('should accept valid password', () => {
+    expect(validatePassword('aA8asdf$#-')).toEqual(null);
+  });
 
-it('validateDateOfBirth with right input', () => {
-  expect(validateDateOfBirth('2000-12-01')).toEqual(null);
-});
+  test('should reject empty password', () => {
+    expect(validatePassword('')).toBe(ErrorMessages.EMPTY_INPUT);
+  });
 
-it('validateDateOfBirth with wrong format', () => {
-  expect(validateDateOfBirth('привет')).toBe(ErrorMessages.DATE_FORMAT);
-});
-it('validateDateOfBirth with empty input', () => {
-  expect(validateDateOfBirth('привет')).toBe(ErrorMessages.DATE_FORMAT);
-});
+  test('should reject non-Latin password', () => {
+    expect(validatePassword('пароль')).toBe(ErrorMessages.INVALID_PASSWORD);
+  });
 
-it('validateDateOfBirth with 2050 year', () => {
-  expect(validateDateOfBirth('2050-12-01')).toBe(ErrorMessages.CHECK_YEAR);
-});
-it('validateDateOfBirth with 1814 year', () => {
-  expect(validateDateOfBirth('1814-12-01')).toBe(ErrorMessages.CHECK_YEAR);
-});
-it(`validateDateOfBirth with age less than ${VALIDATE_CONST.MIN_AGE}`, () => {
-  const pastDate = new Date();
-  pastDate.setFullYear(pastDate.getFullYear() - VALIDATE_CONST.MIN_AGE + 1);
-  expect(validateDateOfBirth(pastDate.toISOString())).toBe(ErrorMessages.INVALID_AGE);
-});
-it(`validateDateOfBirth with age ${VALIDATE_CONST.MIN_AGE} later in this year`, () => {
-  const pastDate = new Date();
-  pastDate.setFullYear(pastDate.getFullYear() - VALIDATE_CONST.MIN_AGE);
-  pastDate.setMonth(11);
-  pastDate.setDate(31);
-  expect(validateDateOfBirth(pastDate.toISOString())).toBe(ErrorMessages.INVALID_AGE);
-});
+  test('should reject password without uppercase letter', () => {
+    expect(validatePassword('a1234567')).toBe(
+      'Пароль должен содержать как минимум одну заглавную букву.'
+    );
+  });
 
-/********** PostalCode validation test ***************/
+  test('should reject password without lowercase letter', () => {
+    expect(validatePassword('A1234567')).toBe(
+      'Пароль должен содержать как минимум одну строчную букву.'
+    );
+  });
 
-it('validatePostalCode', () => {
-  expect(validatePostalCode('181412')).toEqual(null);
-});
-it('isValidPostalCode: 7 digits', () => {
-  expect(validatePostalCode('1814121')).toBe(ErrorMessages.POSTAL_CODE_FORMAT);
-});
-it('isValidPostalCode: 5 digits', () => {
-  expect(validatePostalCode('18141')).toBe(ErrorMessages.POSTAL_CODE_FORMAT);
-});
-it('isValidPostalCode: invalid input', () => {
-  expect(validatePostalCode('index!')).toBe(ErrorMessages.POSTAL_CODE_FORMAT);
-});
+  test('should reject password without number', () => {
+    expect(validatePassword('ABCDEFabcdef')).toBe(
+      'Пароль должен содержать как минимум одну цифру.'
+    );
+  });
 
-/********** Other validation test***************/
-it('validateInput: right input with one char', () => {
-  expect(validateInput('a')).toEqual(null);
-});
-it('validateInput: any special chars', () => {
-  expect(validateInput('#$&?')).toEqual(null);
+  test('should reject password without uppercase and number', () => {
+    expect(validatePassword('asdfghjk')).toBe(
+      'Пароль должен содержать как минимум: одну заглавную букву, одну цифру.'
+    );
+  });
+
+  test('should reject password shorter than 8 characters', () => {
+    expect(validatePassword('aA8')).toBe('Пароль должен содержать как минимум 8 символов.');
+  });
+
+  test('should reject password with multiple rule violations', () => {
+    expect(validatePassword('pass')).toBe(
+      'Пароль должен содержать как минимум: 8 символов, одну заглавную букву, одну цифру.'
+    );
+  });
 });
 
-it('validateInput: empty input', () => {
-  expect(validateInput('')).toBe(ErrorMessages.EMPTY_INPUT);
+describe('Date of birth validation', () => {
+  test('should accept valid date', () => {
+    expect(validateDateOfBirth('2000-12-01')).toEqual(null);
+  });
+
+  test('should reject wrong format', () => {
+    expect(validateDateOfBirth('привет')).toBe(ErrorMessages.DATE_FORMAT);
+  });
+
+  test('should reject empty input', () => {
+    expect(validateDateOfBirth('')).toBe(ErrorMessages.DATE_FORMAT);
+  });
+
+  test('should reject dates in the future', () => {
+    expect(validateDateOfBirth('9999-12-01')).toBe(ErrorMessages.CHECK_YEAR);
+  });
+
+  test('should reject dates very far in the past ', () => {
+    expect(validateDateOfBirth('1099-12-01')).toBe(ErrorMessages.CHECK_YEAR);
+  });
+
+  test(`should reject age less than ${VALIDATE_CONST.MIN_AGE}`, () => {
+    const pastDate = new Date();
+    pastDate.setFullYear(pastDate.getFullYear() - VALIDATE_CONST.MIN_AGE + 1);
+    expect(validateDateOfBirth(pastDate.toISOString())).toBe(ErrorMessages.INVALID_AGE);
+  });
+
+  test(`should reject ${VALIDATE_CONST.MIN_AGE} age if the birthday month/day is later than the current date`, () => {
+    const pastDate = new Date();
+    pastDate.setFullYear(pastDate.getFullYear() - VALIDATE_CONST.MIN_AGE);
+    pastDate.setMonth(11);
+    pastDate.setDate(31);
+    expect(validateDateOfBirth(pastDate.toISOString())).toBe(ErrorMessages.INVALID_AGE);
+  });
 });
-it('validateInput: digit lock', () => {
-  expect(validateNoDigitsNoSymbols('123456')).toBe(ErrorMessages.ONLY_LETTERS);
+
+describe('Postal code validation', () => {
+  test('should accept valid postal code', () => {
+    expect(validatePostalCode('181412')).toEqual(null);
+  });
+
+  test('should reject more than 6 digits', () => {
+    expect(validatePostalCode('1814121')).toBe(ErrorMessages.POSTAL_CODE_FORMAT);
+  });
+
+  test('should reject less than 6 digits', () => {
+    expect(validatePostalCode('18141')).toBe(ErrorMessages.POSTAL_CODE_FORMAT);
+  });
+
+  test('should reject invalid characters', () => {
+    expect(validatePostalCode('index!')).toBe(ErrorMessages.POSTAL_CODE_FORMAT);
+  });
 });
-it('validateInput: special chars lock', () => {
-  expect(validateNoDigitsNoSymbols('###')).toBe(ErrorMessages.ONLY_LETTERS);
+
+describe('Default input validation', () => {
+  test('should accept single character', () => {
+    expect(validateInput('a')).toEqual(null);
+  });
+
+  test('should accept special characters', () => {
+    expect(validateInput('#$&?')).toEqual(null);
+  });
+
+  test('should reject empty input', () => {
+    expect(validateInput('')).toBe(ErrorMessages.EMPTY_INPUT);
+  });
+
+  test('should reject digits only', () => {
+    expect(validateNoDigitsNoSymbols('123456')).toBe(ErrorMessages.ONLY_LETTERS);
+  });
+
+  test('should reject special characters only', () => {
+    expect(validateNoDigitsNoSymbols('###')).toBe(ErrorMessages.ONLY_LETTERS);
+  });
 });

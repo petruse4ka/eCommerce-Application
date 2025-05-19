@@ -3,7 +3,7 @@ import { beforeEach, describe, expect, test } from 'vitest';
 import { Router } from '@/router/router';
 import { Route } from '@/types/enums';
 
-describe('Test handling of different routes by router', () => {
+describe('Router', () => {
   let router: Router;
 
   beforeEach(() => {
@@ -11,16 +11,16 @@ describe('Test handling of different routes by router', () => {
     router = new Router(Route.HOME);
   });
 
-  test('should have home route at initialization', () => {
+  test('should initialize with home route', () => {
     expect(router.getDefaultRoute()).toBe(Route.HOME);
   });
 
-  test('should change hash when following new route', () => {
+  test('should update hash when navigating to new route', () => {
     Router.followRoute(Route.ABOUT);
     expect(globalThis.location.hash).toBe(Route.ABOUT);
   });
 
-  test('should handle invalid route and show error page', () => {
+  test('should redirect to error page for invalid routes', () => {
     globalThis.location.hash =
       '#/deliberately-wrong-route-that-does-not-exist-and-will-never-exist';
     router = new Router(Route.HOME);

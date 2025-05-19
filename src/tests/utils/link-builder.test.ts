@@ -2,8 +2,8 @@ import { describe, expect, test } from 'vitest';
 
 import { LinkBuilder } from '@/utils/link-builder';
 
-describe('Test link builder utility', () => {
-  test('should create link with correct attributes', () => {
+describe('Link builder', () => {
+  test('should create element with correct attributes', () => {
     const link = new LinkBuilder({
       href: 'https://test-url.ru',
       target: '_blank',
