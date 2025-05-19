@@ -3,6 +3,7 @@ const STANDARD_INPUT_STYLE = [
   'text-[16px]',
   'bg-white',
   'border',
+  'rounded-md',
   'hover:border-red',
   'focus:border-red',
   'disabled:hover:border-gray',

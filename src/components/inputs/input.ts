@@ -36,7 +36,7 @@ export default class Input {
       placeholder,
       callback,
       value,
-      attributes: getAutocomplete(id),
+      attributes: Input.getAutocomplete(id),
       required: isRequired,
       disabled: isDisabled,
       eventType: parameters.eventType,
@@ -61,6 +61,11 @@ export default class Input {
     this.container.getElement().append(this.message.getElement());
 
     if (type === InputType.PASSWORD) this.addPasswordIcon(type);
+  }
+
+  public static getAutocomplete(id: string): { autocomplete: string } | undefined {
+    if (id === 'password') return { autocomplete: 'current-password' };
+    return id === 'email' ? { autocomplete: 'email' } : undefined;
   }
 
   public getElement(): HTMLElement {
@@ -143,8 +148,4 @@ export default class Input {
       }
     }
   }
-}
-function getAutocomplete(id: string): { autocomplete: string } | undefined {
-  if (id === 'password') return { autocomplete: 'current-password' };
-  return id === 'email' ? { autocomplete: 'email' } : undefined;
 }
