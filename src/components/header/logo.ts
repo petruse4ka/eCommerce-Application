@@ -1,6 +1,6 @@
 import logo from '@/assets/logo/logo-main.svg';
 import BaseComponent from '@/components/base';
-import Router from '@/router/index.';
+import Router from '@/router';
 import { HEADER_STYLES } from '@/styles/header/header';
 import { Route } from '@/types/enums';
 import ImageBuilder from '@/utils/image-builder';

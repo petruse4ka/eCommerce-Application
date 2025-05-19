@@ -151,3 +151,8 @@ export const GUARANTEES_TEXTS = {
     },
   },
 };
+export const FIELDSET_LABELS = {
+  PERSONAL_DATA: 'Персональные данные',
+  SHIPPING: 'Адрес доставки',
+  BILLING: 'Расчетный адрес',
+};

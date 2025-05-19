@@ -1,6 +1,6 @@
 import BaseComponent from '@/components/base';
 import { FOOTER_MENU_ITEMS, FOOTER_TEXTS } from '@/constants';
-import Router from '@/router/index.';
+import Router from '@/router';
 import { FOOTER_STYLES } from '@/styles/footer';
 import ElementBuilder from '@/utils/element-builder';
 

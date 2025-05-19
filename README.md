@@ -217,6 +217,7 @@ Use the following scripts to assist with development, formatting, linting, build
 | :---------------------- | :---------------------------------------------------------------------------------- |
 | `npm run test`          | Execute unit tests using Vitest.                                                    |
 | `npm run test:coverage` | Execute unit tests using Vitest and view coverage info.                             |
+| `npm run test:update`   | Update snapshots after making changes to test expectations.                         |
 | `npm run check`         | Execute a code quality check: Vitest, ESLint, Stylelint, Prettier formatting check. |
 
 ### ⚙️ Development & Deployment
@@ -320,6 +321,26 @@ const ERROR_MESSAGES = {
   INVALID_PASSWORD: 'The provided credentials are incorrect',
 };
 ```
+
+---
+
+### 🧪 Testing Rules
+
+Follow these guidelines for writing tests:
+
+- Use **BDD (Behavior-Driven Development)** style with `describe` and `test`
+- Group related tests under `describe` blocks
+- Write test descriptions that read like technical specifications:
+  ```typescript
+  describe('User Authentication', () => {
+    test('should accept valid credentials', () => {
+      // test code
+    });
+    test('should reject invalid password', () => {
+      // test code
+    });
+  });
+  ```
 
 ---
 

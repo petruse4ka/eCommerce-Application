@@ -7,7 +7,7 @@ import { CONTAINER, FORM_CONTAINER, TITLE } from '@/styles/pages/login';
 
 import ElementBuilder from '../utils/element-builder';
 
-export class LoginPage extends BaseComponent {
+export default class LoginPage extends BaseComponent {
   private overlay: HTMLElement;
 
   constructor() {

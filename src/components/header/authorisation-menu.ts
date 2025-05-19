@@ -1,12 +1,14 @@
+import Alert from '@/components/alert';
 import BaseComponent from '@/components/base';
 import {
   AUTHORIZATION_MENU_ITEMS,
   AUTHORIZATION_MENU_TEXT,
   UNAUTHORIZED_MENU_ITEMS,
 } from '@/constants';
-import Router from '@/router/index.';
+import Router from '@/router';
 import { userState } from '@/store/user-state';
 import { SUBHEADER_STYLES } from '@/styles/header/subheader';
+import { AlertStatus, AlertText } from '@/types/enums';
 import ElementBuilder from '@/utils/element-builder';
 
 export default class AuthorizationMenu extends BaseComponent {
@@ -64,6 +66,11 @@ export default class AuthorizationMenu extends BaseComponent {
       menuItem.addEventListener('click', () => {
         if (item.name === AUTHORIZATION_MENU_TEXT.LOGOUT) {
           userState.setAuthorizationState(false);
+          Alert.render({
+            textContent: AlertText.LOGOUT_SUCCESS,
+            status: AlertStatus.SUCCESS,
+            visibleTime: 3000,
+          });
         }
         Router.followRoute(item.route);
       });

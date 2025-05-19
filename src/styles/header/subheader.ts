@@ -19,7 +19,7 @@ export const SUBHEADER_STYLES = {
     'px-3',
     'md:px-4',
   ],
-  PROMO: ['hidden', 'md:flex', 'flex-row', 'items-start', 'gap-4'],
+  PROMO: ['hidden', 'md:flex', 'flex-row', 'items-start', 'gap-4', 'lg:gap-8', 'xl:gap-15'],
   PROMO_ITEM: ['flex', 'items-center', 'gap-1.5', 'md:gap-2'],
   PROMO_ICON: ['w-4', 'h-4', 'md:w-5', 'md:h-5'],
   AUTHORIZATION_MENU: [

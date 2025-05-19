@@ -20,7 +20,7 @@ export default class Input {
 
   constructor(parameters: InputComponent) {
     this.isError = false;
-    const { placeholder, id, callback, labelText, value, type, className, attributes } = parameters;
+    const { placeholder, id, callback, labelText, value, type, className } = parameters;
     const { isDisabled, isRequired } = parameters;
 
     this.container = new ElementBuilder({
@@ -31,12 +31,11 @@ export default class Input {
     this.input = new InputBuilder({
       type,
       id,
-      className:
-        type === InputType.CHECKBOX ? [...CHECKBOX_STYLE] : [...CUSTOM_INPUT_STYLE.INPUT_DEFAULT],
+      className: Input.getInputClasses(type),
       placeholder,
       callback,
       value,
-      attributes,
+      attributes: Input.getAutocomplete(id),
       required: isRequired,
       disabled: isDisabled,
       eventType: parameters.eventType,
@@ -50,6 +49,7 @@ export default class Input {
       textContent: isRequired ? `${labelText}*` : labelText,
       attributes: { for: id },
     });
+
     if (type === InputType.CHECKBOX) {
       this.container.getElement().append(this.input.getElement(), this.label.getElement());
     } else {
@@ -60,6 +60,21 @@ export default class Input {
     this.container.getElement().append(this.message.getElement());
 
     if (type === InputType.PASSWORD) this.addPasswordIcon(type);
+  }
+
+  public static getAutocomplete(id: string): { autocomplete: string } | undefined {
+    if (id === 'password') return { autocomplete: 'current-password' };
+    return id === 'email' ? { autocomplete: 'email' } : undefined;
+  }
+
+  private static getInputClasses(type: InputType): string[] {
+    if (type === InputType.CHECKBOX) {
+      return [...CHECKBOX_STYLE];
+    }
+    if (type === InputType.PASSWORD) {
+      return [...CUSTOM_INPUT_STYLE.INPUT_PASSWORD];
+    }
+    return [...CUSTOM_INPUT_STYLE.INPUT_DEFAULT];
   }
 
   public getElement(): HTMLElement {

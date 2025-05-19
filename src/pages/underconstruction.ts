@@ -4,7 +4,7 @@ import macaronAstonaut from '@/assets/images/astronaut.png';
 import BaseComponent from '@/components/base';
 import Button from '@/components/buttons';
 import { UNDER_CONSTRUCTION_TEXTS } from '@/constants';
-import Router from '@/router/index.';
+import Router from '@/router';
 import {
   ASTRONAUT_STYLE,
   CONTAINER,
