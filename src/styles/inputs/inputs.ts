@@ -11,7 +11,8 @@ const STANDARD_INPUT_STYLE = [
   'focus:placeholder-transparent',
   'outline-none',
   'py-2',
-  'px-2',
+  'pl-2',
+  'pr-10',
   'w-full',
 ];
 

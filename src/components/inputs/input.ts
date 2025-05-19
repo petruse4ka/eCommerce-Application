@@ -41,7 +41,7 @@ export default class Input {
       disabled: isDisabled,
       eventType: parameters.eventType,
     });
-    if (/Country/.test(id)) console.log(this.input, this.input.getElement());
+
     this.addEventListeners(type);
 
     this.label = new ElementBuilder({
@@ -50,6 +50,7 @@ export default class Input {
       textContent: isRequired ? `${labelText}*` : labelText,
       attributes: { for: id },
     });
+
     if (type === InputType.CHECKBOX) {
       this.container.getElement().append(this.input.getElement(), this.label.getElement());
     } else {

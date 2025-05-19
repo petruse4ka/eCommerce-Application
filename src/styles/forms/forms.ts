@@ -10,10 +10,11 @@ export const REGISTRATION_INPUTS_CONTAINER = [
   'lg:grid-cols-2',
   'lg:gap-7',
   'lg:gap-y-2',
+  '[&>fieldset:last-child]:lg:col-span-2',
 ];
 
 export const REGISTRATION_ADDRESS = {
-  CONTAINER: ['border', 'border-gray-500', 'p-3', 'rounded-lg', 'flex', 'flex-col', 'my-5'],
+  CONTAINER: ['border', 'border-red', 'p-3', 'rounded-lg', 'flex', 'flex-col', 'my-5'],
   LEGEND: ['px-2'],
 };
 
