@@ -53,7 +53,7 @@ export enum ErrorMessages {
   PASSWORD_MUST_CONTAIN = 'Пароль должен содержать минимум',
   POSTAL_CODE_FORMAT = 'Почтовый индекс должен состоять из 6 цифр',
   PASSWORD_LENGTH = '8 символов',
-  INVALID_SPACE = 'Пробелы не допускаются',
+  INVALID_SPACE = 'Значение не должно содержать пробелы',
 }
 
 export enum Route {
