@@ -15,6 +15,7 @@ import { CHECKBOX_CONTAINER_STYLE } from '@/styles/inputs/inputs';
 import { MACARON_CONTAINER } from '@/styles/pages/registration';
 import { AlertStatus, CheckboxText, InputType } from '@/types/enums';
 import { Route } from '@/types/enums';
+import { AlertText } from '@/types/enums';
 import { isErrorInfo } from '@/types/guards';
 import type { RegistrationBody } from '@/types/interfaces';
 import ApiErrors from '@/utils/api-errors';
@@ -261,11 +262,16 @@ export default class FormRegistration {
             if (isErrorInfo(item)) {
               const errorInfo = ApiErrors.getErrorInfo(item.code);
               this.showValidationError(item.field, errorInfo);
-
               Alert.render({
                 textContent: errorInfo,
                 status: AlertStatus.ERROR,
-                visibleTime: 4000,
+                visibleTime: 3000,
+              });
+            } else {
+              Alert.render({
+                textContent: AlertText.ERROR_DEFAULT,
+                status: AlertStatus.ERROR,
+                visibleTime: 3000,
               });
             }
           }

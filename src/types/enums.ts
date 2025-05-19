@@ -84,7 +84,7 @@ export enum AlertText {
   LOGOUT_SUCCESS = 'Вы успешно вышли из системы!',
   ACCOUNT_CREDENTIALS_ERROR = 'Учетная запись клиента с указанными учетными данными не найдена.',
   DUPLICATE_FIELD = 'Пользователь с такой почтой уже существует.',
-  ERROR_DEFAULT = 'Произошли какие-то проблемы. Попробуйте еще раз',
+  ERROR_DEFAULT = 'Проблемы на сервере. Пожалуйста, попробуйте позже',
 }
 
 export enum CheckboxText {
