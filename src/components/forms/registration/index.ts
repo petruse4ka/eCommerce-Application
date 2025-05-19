@@ -8,7 +8,7 @@ import { FORM, REGISTRATION_ADDRESS, REGISTRATION_INPUTS_CONTAINER } from '@/sty
 import { CHECKBOX_CONTAINER_STYLE } from '@/styles/inputs/inputs';
 import { MACARON_CONTAINER } from '@/styles/pages/registration';
 import { AlertStatus, CheckboxText, InputType } from '@/types/enums';
-import { isErrorInfo } from '@/types/guard';
+import { isErrorInfo } from '@/types/guards';
 import type { RegistrationBody } from '@/types/interfaces';
 import ApiErrors from '@/utils/api-errors';
 import { ElementBuilder } from '@/utils/element-builder';

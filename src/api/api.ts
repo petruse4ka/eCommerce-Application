@@ -100,8 +100,8 @@ export default class API {
     )
       .then((response) => response.json())
       .then((body: AuthResponse | ErrorResponse) => {
-        if ('errors' in body) {
-          throw new Error(JSON.stringify(body.errors));
+        if ('error' in body) {
+          throw new Error(body.error);
         } else {
           return body.access_token;
         }
