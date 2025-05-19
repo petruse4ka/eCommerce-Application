@@ -41,7 +41,7 @@ export default class Input {
       disabled: isDisabled,
       eventType: parameters.eventType,
     });
-    if (/Country/.test(id)) console.log(this.input, this.input.getElement());
+
     this.addEventListeners(type);
 
     this.label = new ElementBuilder({

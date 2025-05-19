@@ -109,14 +109,16 @@ export interface Guarantees {
 }
 
 export interface ErrorInfo {
-  inputs: string[];
+  code: string;
   message: string;
+  duplicateValue: string;
+  field: string;
 }
 
 export interface ErrorResponse {
   statusCode: number;
   messages: string;
-  errors: [];
+  errors: Error[];
   error: string;
   error_description: string;
 }

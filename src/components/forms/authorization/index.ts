@@ -144,23 +144,21 @@ export default class FormAuthorization {
     this.showValidationError('password', isNotValidPassword);
 
     if (!isNotValidEmail && !isNotValidPassword) {
-      API.userSignInResponse(body)
-        .then((response) => {
-          console.log(response, 'wd');
-        })
-        .catch((error: ErrorInfo) => {
-          const errorInfo = ApiErrors.getErrorInfo(error.message);
+      API.userSignInResponse(body).catch((error: ErrorInfo) => {
+        const errorInfo = ApiErrors.getErrorInfo(error.message);
 
-          Alert.render({
-            textContent: errorInfo.message,
-            status: AlertStatus.ERROR,
-            visibleTime: 4000,
-          });
-
-          for (const input of errorInfo.inputs) {
-            this.showValidationError(input, ' ');
-          }
+        Alert.render({
+          textContent: errorInfo,
+          status: AlertStatus.ERROR,
+          visibleTime: 4000,
         });
+
+        const inputs = this.inputs.keys();
+
+        for (const input of inputs) {
+          this.showValidationError(input, ' ');
+        }
+      });
     }
   }
 }
