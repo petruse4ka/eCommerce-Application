@@ -323,6 +323,26 @@ const ERROR_MESSAGES = {
 
 ---
 
+### 🧪 Testing Rules
+
+Follow these guidelines for writing tests:
+
+- Use **BDD (Behavior-Driven Development)** style with `describe` and `test`
+- Group related tests under `describe` blocks
+- Write test descriptions that read like technical specifications:
+  ```typescript
+  describe('User Authentication', () => {
+    test('should accept valid credentials', () => {
+      // test code
+    });
+    test('should reject invalid password', () => {
+      // test code
+    });
+  });
+  ```
+
+---
+
 ## 👥 Team Members
 
 - [**Daniil Biver**](https://github.com/tearzday) - Student
