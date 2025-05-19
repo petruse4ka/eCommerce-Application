@@ -46,7 +46,7 @@ export default class API {
         return body.customer.id;
       })
       .catch((error: Error) => {
-        console.log(error.message);
+        console.error(error.message);
       });
   }
 
@@ -83,7 +83,7 @@ export default class API {
         return body.customer.id;
       })
       .catch((error: Error) => {
-        console.log(error.message);
+        console.error(error.message);
       });
   }
 

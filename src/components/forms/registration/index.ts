@@ -170,7 +170,6 @@ export default class FormRegistration {
         isDisabled,
         eventType: 'input',
         callback: (event: Event): void => {
-          console.log(id);
           this.inputErrorHandler(event, id);
           const key = id
             .split('-')
@@ -272,7 +271,6 @@ export default class FormRegistration {
     }
 
     if (this.isDataValidBeforeSending(body)) {
-      console.log('SEND!!');
       void API.userRegistration(body);
     }
   }
@@ -292,7 +290,7 @@ export default class FormRegistration {
 
     const isNotValidPassword = validatePassword(body.password);
     this.showValidationError('password', isNotValidPassword);
-    console.log(body);
+
     const isNotValidShippingPostalCode = validatePostalCode(body.addresses[0].postalCode);
     this.showValidationError('shippingPostalCode', isNotValidShippingPostalCode);
 

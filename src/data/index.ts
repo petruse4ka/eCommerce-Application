@@ -52,7 +52,7 @@ export const INPUTS_REGISTRATION_DATA = [
     placeholder: 'Укажите имя',
     type: InputType.TEXT,
     isRequired: true,
-    callback: (): void => console.log('Primary button clicked'),
+    callback: (): void => {},
   },
   {
     id: 'lastName',
