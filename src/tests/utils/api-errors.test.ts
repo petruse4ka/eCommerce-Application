@@ -7,9 +7,6 @@ describe('Api error', () => {
   test('should return default error for unknown key', () => {
     const result = ApiErrors.getErrorInfo('unknown_error');
 
-    expect(result).toEqual({
-      inputs: [],
-      message: AlertText.ERROR_DEFAULT,
-    });
+    expect(result).toBe(AlertText.ERROR_DEFAULT);
   });
 });

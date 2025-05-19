@@ -29,10 +29,12 @@ describe('API', () => {
     const mockFetchRequest = vi.fn();
     globalThis.fetch = mockFetchRequest;
 
-    mockFetchRequest.mockResolvedValueOnce({
-      ok: false,
-      json: () => Promise.resolve({ error: 'Invalid credentials' }),
-    });
+    const mockResponse = {
+      ok: true,
+      json: (): Promise<{ errors: { message: string }[] }> =>
+        Promise.resolve({ errors: [{ message: 'Invalid credentials' }] }),
+    };
+    mockFetchRequest.mockResolvedValueOnce(mockResponse);
 
     await expect(
       API.userSignInResponse({
