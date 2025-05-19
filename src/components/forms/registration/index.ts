@@ -1,4 +1,5 @@
 import API from '@/api/api';
+import Alert from '@/components/alert/alert';
 import { Button } from '@/components/buttons/button';
 import Input from '@/components/inputs/input';
 import { BTN_TEXT, FIELDSET_LABELS } from '@/constants/constants';
@@ -6,8 +7,10 @@ import { INPUTS_ADDRESS_DATA, INPUTS_REGISTRATION_DATA } from '@/data';
 import { FORM, REGISTRATION_ADDRESS, REGISTRATION_INPUTS_CONTAINER } from '@/styles/forms/forms';
 import { CHECKBOX_CONTAINER_STYLE } from '@/styles/inputs/inputs';
 import { MACARON_CONTAINER } from '@/styles/pages/registration';
-import { CheckboxText, InputType } from '@/types/enums';
+import { AlertStatus, CheckboxText, InputType } from '@/types/enums';
+import { isErrorInfo } from '@/types/guards';
 import type { RegistrationBody } from '@/types/interfaces';
+import ApiErrors from '@/utils/api-errors';
 import { ElementBuilder } from '@/utils/element-builder';
 import {
   getValidator,
@@ -168,7 +171,6 @@ export default class FormRegistration {
         isDisabled,
         eventType: 'input',
         callback: (event: Event): void => {
-          console.log(id);
           this.inputErrorHandler(event, id);
           const key = id
             .split('-')
@@ -241,6 +243,30 @@ export default class FormRegistration {
   }
 
   private submitForm(): void {
+    const body = this.createBody();
+
+    if (this.isDataValidBeforeSending(body)) {
+      API.userRegistration(body).catch((error: Error) => {
+        const parsed: unknown = JSON.parse(error.message);
+        if (Array.isArray(parsed)) {
+          for (const item of parsed) {
+            if (isErrorInfo(item)) {
+              const errorInfo = ApiErrors.getErrorInfo(item.code);
+              this.showValidationError(item.field, errorInfo);
+
+              Alert.render({
+                textContent: errorInfo,
+                status: AlertStatus.ERROR,
+                visibleTime: 4000,
+              });
+            }
+          }
+        }
+      });
+    }
+  }
+
+  private createBody(): RegistrationBody {
     const indexShippingAddress = this.isDefaultAddress ? 0 : undefined;
     let indexBillingAddress = undefined;
 
@@ -279,10 +305,7 @@ export default class FormRegistration {
       });
     }
 
-    if (this.isDataValidBeforeSending(body)) {
-      console.log('SEND!!');
-      void API.userRegistration(body);
-    }
+    return body;
   }
 
   private isDataValidBeforeSending(body: RegistrationBody): boolean {
@@ -300,7 +323,7 @@ export default class FormRegistration {
 
     const isNotValidPassword = validatePassword(body.password);
     this.showValidationError('password', isNotValidPassword);
-    console.log(body);
+
     const isNotValidShippingPostalCode = validatePostalCode(body.addresses[0].postalCode);
     this.showValidationError('shippingPostalCode', isNotValidShippingPostalCode);
 

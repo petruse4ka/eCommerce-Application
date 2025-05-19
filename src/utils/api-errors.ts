@@ -1,24 +1,18 @@
 import { AlertText } from '@/types/enums';
-import type { ErrorInfo } from '@/types/interfaces';
 
 export default class ApiErrors {
-  public static getErrorInfo(key: string): ErrorInfo {
+  public static getErrorInfo(key: string): string {
     switch (key) {
       case 'invalid_customer_account_credentials': {
-        return {
-          inputs: ['email', 'password'],
-          message: AlertText.ACCOUNT_CREDENTIALS_ERROR,
-        };
+        return AlertText.ACCOUNT_CREDENTIALS_ERROR;
+      }
 
-        break;
+      case 'DuplicateField': {
+        return AlertText.DUPLICATE_FIELD;
       }
 
       default: {
-        return {
-          inputs: [],
-          message: AlertText.ERROR_DEFAULT,
-        };
-        break;
+        return AlertText.ERROR_DEFAULT;
       }
     }
   }

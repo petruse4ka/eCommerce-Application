@@ -17,36 +17,35 @@ const clientCredentials = btoa(
 
 export default class API {
   public static async userRegistration(body: RegistrationBody): Promise<string | void> {
+    const token = await this.authentication();
+
     return await fetch(
       `${import.meta.env['VITE_CTP_API_URL']}/${import.meta.env['VITE_CTP_PROJECT_KEY']}${ApiEndpoint.REGISTRATION}`,
       {
         method: ApiMethods.POST,
         headers: {
-          Authorization: `Bearer ${await this.authentication()}`,
+          Authorization: `Bearer ${token}`,
           'Content-Type': ContentType.JSON,
         },
         body: JSON.stringify(body),
       }
     )
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Registration failed. Please check your input and try again.');
-        }
+      .then((response) => response.json())
+      .then((body: CustomerResponse | ErrorResponse) => {
+        if ('errors' in body) {
+          throw new Error(JSON.stringify(body.errors));
+        } else {
+          Alert.render({
+            textContent: AlertText.REGISTRATION_SUCCESS,
+            status: AlertStatus.SUCCESS,
+            visibleTime: 3000,
+          });
 
-        Alert.render({
-          textContent: AlertText.REGISTRATION_SUCCESS,
-          status: AlertStatus.SUCCESS,
-          visibleTime: 3000,
-        });
-        return response.json();
-      })
-      .then((body: CustomerResponse) => {
-        userState.setAuthorizationState(true);
-        Router.followRoute(Route.HOME);
-        return body.customer.id;
-      })
-      .catch((error: Error) => {
-        console.log(error.message);
+          userState.setAuthorizationState(true);
+          Router.followRoute(Route.HOME);
+
+          return body.customer.id;
+        }
       });
   }
 
@@ -65,10 +64,6 @@ export default class API {
       }
     )
       .then((response) => {
-        if (!response.ok) {
-          throw new Error('Login failed. Please check your credentials and try again.');
-        }
-
         Alert.render({
           textContent: AlertText.AUTHORIZATION_SUCCESS,
           status: AlertStatus.SUCCESS,
@@ -81,9 +76,6 @@ export default class API {
         userState.setAuthorizationState(true);
         Router.followRoute(Route.HOME);
         return body.customer.id;
-      })
-      .catch((error: Error) => {
-        console.log(error.message);
       });
   }
 
@@ -108,14 +100,11 @@ export default class API {
     )
       .then((response) => response.json())
       .then((body: AuthResponse | ErrorResponse) => {
-        if ('access_token' in body) {
-          return body.access_token;
-        } else {
+        if ('error' in body) {
           throw new Error(body.error);
+        } else {
+          return body.access_token;
         }
-      })
-      .catch((error: Error) => {
-        throw new Error(error.message);
       });
   }
 
@@ -131,9 +120,6 @@ export default class API {
       }),
     })
       .then((response) => response.json())
-      .then((body: AuthResponse) => body.access_token)
-      .catch((error: string): never => {
-        throw new Error(error);
-      });
+      .then((body: AuthResponse) => body.access_token);
   }
 }
