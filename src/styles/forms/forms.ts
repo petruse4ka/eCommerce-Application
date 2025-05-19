@@ -15,7 +15,7 @@ export const REGISTRATION_INPUTS_CONTAINER = [
 
 export const REGISTRATION_ADDRESS = {
   CONTAINER: ['border', 'border-red', 'p-3', 'rounded-lg', 'flex', 'flex-col', 'my-5'],
-  LEGEND: ['px-2'],
+  LEGEND: ['px-2', 'text-accent'],
 };
 
 export const REDIRECT_LINK = [

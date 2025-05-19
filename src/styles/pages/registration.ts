@@ -29,4 +29,10 @@ export const FORM_CONTAINER = [
   'max-w-[1200px]',
 ];
 
+export const MACARON_CONTAINER = [
+  'bg-[url(@/assets/images/registration.png)]',
+  'bg-bottom',
+  'bg-no-repeat',
+];
+
 export const TITLE = ['text-3xl', 'font-bold', 'text-center'];

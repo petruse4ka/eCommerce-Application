@@ -5,6 +5,7 @@ import { BTN_TEXT, FIELDSET_LABELS } from '@/constants/constants';
 import { INPUTS_ADDRESS_DATA, INPUTS_REGISTRATION_DATA } from '@/data';
 import { FORM, REGISTRATION_ADDRESS, REGISTRATION_INPUTS_CONTAINER } from '@/styles/forms/forms';
 import { CHECKBOX_CONTAINER_STYLE } from '@/styles/inputs/inputs';
+import { MACARON_CONTAINER } from '@/styles/pages/registration';
 import { CheckboxText, InputType } from '@/types/enums';
 import type { RegistrationBody } from '@/types/interfaces';
 import { ElementBuilder } from '@/utils/element-builder';
@@ -37,6 +38,7 @@ export default class FormRegistration {
     }).getElement();
 
     this.createFormContainer();
+    this.createMacaronContainer();
   }
 
   public getElement(): HTMLElement {
@@ -182,6 +184,16 @@ export default class FormRegistration {
     }
     if (container instanceof HTMLFieldSetElement) return container;
     return null;
+  }
+
+  private createMacaronContainer(): void {
+    const macaronContainer = new ElementBuilder({
+      tag: 'div',
+      className: MACARON_CONTAINER,
+    }).getElement();
+    if (this.userInfoContainer) {
+      this.userInfoContainer.append(macaronContainer);
+    }
   }
 
   private showValidationError(id: string, errorMessage: string | null): void {
