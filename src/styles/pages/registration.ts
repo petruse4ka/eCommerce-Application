@@ -1,32 +1,38 @@
 export const CONTAINER = [
-  'min-h-screen',
+  'flex-grow',
   'relative',
-  'font-roboto',
+  'flex',
+  'justify-center',
   'bg-pink',
   'bg-[url(@/assets/images/bg-macarons.png)]',
-  'bg-size-[auto_200px]',
-  'md:bg-auto',
   'bg-top',
   'bg-no-repeat',
-  'px-[50px]',
-  'flex',
-  'flex-col',
-  'justify-center',
-  'items-center',
+  'bg-contain',
+  '2xl:bg-auto',
+  'bg-origin-content',
+  'py-10',
+  'px-3',
+  'xl:px-10',
 ];
 
 export const FORM_CONTAINER = [
   'relative',
-  'z-1',
-  'bg-primary',
-  'xl:px-20',
-  'xl:py-10',
-  'sm:px-10',
-  'sm:py-5',
+  'mt-20',
+  'sm:mb-20',
   'px-3',
-  'py-3',
+  'py-10',
+  'z-1',
+  'md:px-10',
+  'bg-primary',
   'rounded-xl',
-  'my-5',
+  'w-full',
+  'max-w-[1200px]',
+];
+
+export const MACARON_CONTAINER = [
+  'bg-[url(@/assets/images/registration.png)]',
+  'bg-bottom',
+  'bg-no-repeat',
 ];
 
 export const TITLE = ['text-3xl', 'font-bold', 'text-center'];
