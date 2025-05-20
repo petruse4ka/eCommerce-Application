@@ -15,6 +15,7 @@ import {
   REGISTRATION_ADDRESS,
   REGISTRATION_INPUTS_CONTAINER,
 } from '@/styles/forms/forms';
+import { CHECKBOX_CONTAINER_STYLE } from '@/styles/inputs/inputs';
 import { MACARON_CONTAINER } from '@/styles/pages/registration';
 import { AlertStatus, InputType } from '@/types/enums';
 import { Route } from '@/types/enums';
@@ -43,7 +44,7 @@ export default class FormRegistration {
   private isDefaultAddressBilling: boolean | undefined;
   private isDefaultAddressShipping: boolean | undefined;
   private isSameAddresses: boolean | undefined;
-  private checkboxes: Map<string, HTMLElement>;
+  private checkboxes: Map<string, Input>;
 
   constructor() {
     this.formValue = new Map();
@@ -60,6 +61,23 @@ export default class FormRegistration {
     this.createRedirectLink();
   }
 
+  private static createInputsContainer(textContent: string): HTMLElement {
+    const container = new ElementBuilder({
+      tag: 'fieldset',
+      className: REGISTRATION_ADDRESS.CONTAINER,
+    }).getElement();
+
+    const legend = new ElementBuilder({
+      tag: 'legend',
+      className: REGISTRATION_ADDRESS.LEGEND,
+      textContent,
+    }).getElement();
+
+    container.append(legend);
+
+    return container;
+  }
+
   public getElement(): HTMLElement {
     if (!this.form) {
       throw new Error('Form element is not initialized');
@@ -67,16 +85,12 @@ export default class FormRegistration {
     return this.form;
   }
 
-  public inputErrorHandler(event: Event, type: string): void {
+  public inputErrorHandler(value: string, type: string): void {
     const validateFunction = getValidator(type);
 
     if (!validateFunction) return;
-
-    const field = event.target;
-    if (field instanceof HTMLInputElement) {
-      const errorMessage = validateFunction(field.value);
-      this.showValidationError(field.id, errorMessage);
-    }
+    const errorMessage = validateFunction(value);
+    this.showValidationError(type, errorMessage);
   }
 
   private createFormContainer(): void {
@@ -105,12 +119,6 @@ export default class FormRegistration {
       this.userInfoContainer.append(this.userShippingAddressContainer);
     }
 
-    const checkbox = this.checkboxes.get('is-same-addresses');
-
-    if (checkbox) {
-      this.userInfoContainer.append(checkbox);
-    }
-
     const billing = this.createAddressContainer('billing');
 
     if (billing instanceof HTMLFieldSetElement) {
@@ -124,18 +132,7 @@ export default class FormRegistration {
   }
 
   private createInputs(): void {
-    const container = new ElementBuilder({
-      tag: 'fieldset',
-      className: REGISTRATION_ADDRESS.CONTAINER,
-    }).getElement();
-
-    const legend = new ElementBuilder({
-      tag: 'legend',
-      className: REGISTRATION_ADDRESS.LEGEND,
-      textContent: FIELDSET_LABELS.PERSONAL_DATA,
-    }).getElement();
-
-    container.append(legend);
+    const container = FormRegistration.createInputsContainer(FIELDSET_LABELS.PERSONAL_DATA);
 
     for (const input of INPUTS_REGISTRATION_DATA) {
       const { id, labelText, placeholder, type, isRequired } = input;
@@ -147,15 +144,10 @@ export default class FormRegistration {
         type,
         isRequired,
         eventType: 'input',
-        callback: (event: Event): void => {
-          this.inputErrorHandler(event, id);
-          const key = id
-            .split('-')
-            .map((part, index) =>
-              index === 0 ? part : part.charAt(0).toUpperCase() + part.slice(1)
-            )
-            .join('');
-          this.formValue.set(key, inputNode.getValue());
+        callback: (): void => {
+          const value = inputNode.getValue();
+          this.inputErrorHandler(value, id);
+          this.formValue.set(id, value);
         },
       });
       container.append(inputNode.getElement());
@@ -168,18 +160,9 @@ export default class FormRegistration {
   }
 
   private createAddressContainer(prefix: string): HTMLFieldSetElement | null {
-    const container = new ElementBuilder({
-      tag: 'fieldset',
-      className: REGISTRATION_ADDRESS.CONTAINER,
-    }).getElement();
-
-    const legend = new ElementBuilder({
-      tag: 'legend',
-      className: REGISTRATION_ADDRESS.LEGEND,
-      textContent: prefix === 'billing' ? FIELDSET_LABELS.BILLING : FIELDSET_LABELS.SHIPPING,
-    }).getElement();
-
-    container.append(legend);
+    const container = FormRegistration.createInputsContainer(
+      prefix === 'billing' ? FIELDSET_LABELS.BILLING : FIELDSET_LABELS.SHIPPING
+    );
 
     for (const input of INPUTS_ADDRESS_DATA) {
       const { labelText, placeholder, type, isRequired, isDisabled } = input;
@@ -192,9 +175,13 @@ export default class FormRegistration {
         isRequired,
         isDisabled,
         eventType: 'input',
-        callback: (event: Event): void => {
-          this.inputErrorHandler(event, id);
-          this.formValue.set(id, inputNode.getValue());
+        callback: (): void => {
+          const value = inputNode.getValue();
+          this.inputErrorHandler(value, id);
+          this.formValue.set(id, value);
+          if (prefix === 'shipping' && this.isSameAddresses) {
+            this.setSameAddresses();
+          }
         },
       });
       this.inputs.set(id, inputNode);
@@ -204,7 +191,14 @@ export default class FormRegistration {
     const checkboxDefaultAddress = this.checkboxes.get(`is-default-address-${prefix}`);
 
     if (checkboxDefaultAddress) {
-      container.append(checkboxDefaultAddress);
+      container.append(checkboxDefaultAddress.getElement());
+    }
+
+    if (prefix === 'billing') {
+      const checkboxSameAddresses = this.checkboxes.get('is-same-addresses');
+      if (checkboxSameAddresses) {
+        container.append(checkboxSameAddresses.getElement());
+      }
     }
 
     if (container instanceof HTMLFieldSetElement) return container;
@@ -233,21 +227,43 @@ export default class FormRegistration {
     }
   }
 
-  private toggleVisibleBillingContainer(): void {
-    if (this.userBillingAddressContainer) {
-      this.userBillingAddressContainer.classList.toggle('hidden');
+  private setSameAddresses(): void {
+    const inputsShippingId = ['shippingCity', 'shippingStreet', 'shippingPostalCode'];
+    const inputsBillingId = ['billingCity', 'billingStreet', 'billingPostalCode'];
+
+    for (const [index, id] of inputsShippingId.entries()) {
+      const inputBillingId = inputsBillingId[index];
+      const inputShipping = this.inputs.get(id);
+      const inputsBilling = this.inputs.get(inputBillingId);
+
+      if (inputShipping && inputsBilling) {
+        const currentValue = inputShipping.getValue();
+        inputsBilling.setValue(inputShipping.getValue());
+
+        if (currentValue !== '') {
+          this.inputErrorHandler(currentValue, inputBillingId);
+        }
+      }
     }
   }
 
   private createCheckboxes(): void {
     for (const checkboxData of CHECKBOXES_REGISTRATION_DATA) {
-      const { id, labelText, className } = checkboxData;
+      const { id, labelText } = checkboxData;
       let callback;
 
       if (id === 'is-same-addresses') {
         callback = (): void => {
+          const inputsBillingId = ['billingCity', 'billingStreet', 'billingPostalCode'];
+          for (const id of inputsBillingId) {
+            const inputsBilling = this.inputs.get(id);
+            if (inputsBilling) {
+              inputsBilling.toggleDisabledInput();
+            }
+          }
+
           this.isSameAddresses = !this.isSameAddresses;
-          this.toggleVisibleBillingContainer();
+          this.setSameAddresses();
         };
       } else if (id === 'is-default-address-shipping') {
         callback = (): void => {
@@ -263,9 +279,9 @@ export default class FormRegistration {
         id,
         type: InputType.CHECKBOX,
         labelText,
-        className,
+        className: CHECKBOX_CONTAINER_STYLE,
         callback,
-      }).getElement();
+      });
 
       this.checkboxes.set(id, checkbox);
     }
@@ -317,8 +333,7 @@ export default class FormRegistration {
 
   private createBody(): RegistrationBody {
     const indexShippingAddress = this.isDefaultAddressShipping ? 0 : undefined;
-    const indexBillingAddress =
-      this.isDefaultAddressBilling && !this.isSameAddresses ? 1 : undefined;
+    const indexBillingAddress = this.isDefaultAddressBilling ? 1 : undefined;
 
     const body: RegistrationBody = {
       firstName: this.formValue.get('firstName') ?? '',

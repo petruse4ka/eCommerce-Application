@@ -47,6 +47,14 @@ export default class ElementBuilder {
     }
   }
 
+  public deleteAttributes(attributes: string[]): void {
+    if (attributes) {
+      for (const value of attributes) {
+        this.element.removeAttribute(value);
+      }
+    }
+  }
+
   private applyTextContent(text?: string): void {
     if (text) {
       this.element.textContent = text;

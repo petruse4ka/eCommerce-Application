@@ -16,12 +16,14 @@ export default class Input {
   private label: ElementBuilder;
   private message: ElementBuilder;
   private isError: boolean;
+  private isDisabled: boolean;
   private icon: HTMLElement | undefined;
 
   constructor(parameters: InputComponent) {
     this.isError = false;
     const { placeholder, id, callback, labelText, value, type, className } = parameters;
     const { isDisabled, isRequired } = parameters;
+    this.isDisabled = isDisabled ?? false;
 
     this.container = new ElementBuilder({
       tag: 'div',
@@ -85,6 +87,10 @@ export default class Input {
     return this.input.getValue();
   }
 
+  public setValue(value: string): void {
+    this.input.setValue(value);
+  }
+
   public setError(message: string): void {
     this.isError = true;
     this.message.getElement().textContent = message;
@@ -110,6 +116,16 @@ export default class Input {
 
       this.input.removeCssClasses([...CUSTOM_INPUT_STYLE['INPUT_ERROR']]);
       this.input.applyCssClasses([...CUSTOM_INPUT_STYLE['INPUT_DEFAULT']]);
+    }
+  }
+
+  public toggleDisabledInput(): void {
+    this.isDisabled = !this.isDisabled;
+
+    if (this.isDisabled) {
+      this.input.applyAttributes({ disabled: '' });
+    } else {
+      this.input.deleteAttributes(['disabled']);
     }
   }
 
