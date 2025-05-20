@@ -37,7 +37,7 @@ export const SUBHEADER_STYLES = {
     'cursor-pointer',
     'font-semibold',
     'text-accent',
-    'hover:text-accent-light',
+    'hover:text-accent-hover',
     'transition-colors',
     'duration-300',
     'text-base',

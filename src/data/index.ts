@@ -16,7 +16,8 @@ import stampIcon from '@/assets/images/packages/stamp.png';
 import weddingIcon from '@/assets/images/packages/wedding.png';
 import wholesaleIcon from '@/assets/images/packages/wholesale.png';
 import { FOOTER_TEXTS, GUARANTEES_TEXTS, PACKAGES_TEXTS, SUBHEADER_PROMO_TEXT } from '@/constants';
-import { InputType } from '@/types/enums';
+import { CUSTOM_CHECKBOX_CONTAINER_STYLE } from '@/styles/inputs/inputs';
+import { CheckboxText, InputType } from '@/types/enums';
 import type { Guarantees, Packages } from '@/types/interfaces';
 
 export const PROMO_ITEMS = [
@@ -119,6 +120,24 @@ export const INPUTS_ADDRESS_DATA = [
     type: InputType.TEXT,
     isRequired: true,
     callback: (): void => {},
+  },
+];
+
+export const CHECKBOXES_REGISTRATION_DATA = [
+  {
+    id: 'is-same-addresses',
+    labelText: CheckboxText.SAME_ADDRESSES,
+    className: CUSTOM_CHECKBOX_CONTAINER_STYLE.CHECKBOX_CONTAINER_CENTER,
+  },
+  {
+    id: `is-default-address-shipping`,
+    labelText: CheckboxText.DEFAULT_SAVE,
+    className: CUSTOM_CHECKBOX_CONTAINER_STYLE.CHECKBOX_CONTAINER_LEFT,
+  },
+  {
+    id: `is-default-address-billing`,
+    labelText: CheckboxText.DEFAULT_SAVE,
+    className: CUSTOM_CHECKBOX_CONTAINER_STYLE.CHECKBOX_CONTAINER_LEFT,
   },
 ];
 

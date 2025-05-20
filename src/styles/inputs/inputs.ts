@@ -26,7 +26,13 @@ export const CUSTOM_INPUT_STYLE = {
   INPUT_ERROR: [...STANDARD_INPUT_STYLE, 'border-accent', 'placeholder-accent', 'text-accent'],
 };
 
-export const CHECKBOX_CONTAINER_STYLE = ['flex', 'justify-start', 'gap-2'];
+export const CHECKBOX_CONTAINER_STYLE = ['flex', 'gap-2'];
+
+export const CUSTOM_CHECKBOX_CONTAINER_STYLE = {
+  CHECKBOX_CONTAINER_DEFAULT: [...CHECKBOX_CONTAINER_STYLE],
+  CHECKBOX_CONTAINER_LEFT: [...CHECKBOX_CONTAINER_STYLE, 'justify-start'],
+  CHECKBOX_CONTAINER_CENTER: [...CHECKBOX_CONTAINER_STYLE, 'col-span-2', 'justify-center'],
+};
 
 export const CHECKBOX_STYLE = [
   'h-5',
