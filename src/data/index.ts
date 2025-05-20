@@ -99,7 +99,7 @@ export const INPUTS_ADDRESS_DATA = [
   {
     id: 'City',
     labelText: 'Город',
-    placeholder: 'Укажите город:',
+    placeholder: 'Укажите город',
     type: InputType.TEXT,
     isRequired: true,
     callback: (): void => {},

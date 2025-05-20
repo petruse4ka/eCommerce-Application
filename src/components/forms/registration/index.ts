@@ -188,17 +188,16 @@ export default class FormRegistration {
       container.append(inputNode.getElement());
     }
 
-    const checkboxDefaultAddress = this.checkboxes.get(`is-default-address-${prefix}`);
-
-    if (checkboxDefaultAddress) {
-      container.append(checkboxDefaultAddress.getElement());
-    }
-
     if (prefix === 'billing') {
       const checkboxSameAddresses = this.checkboxes.get('is-same-addresses');
       if (checkboxSameAddresses) {
         container.append(checkboxSameAddresses.getElement());
       }
+    }
+
+    const checkboxDefaultAddress = this.checkboxes.get(`is-default-address-${prefix}`);
+    if (checkboxDefaultAddress) {
+      container.append(checkboxDefaultAddress.getElement());
     }
 
     if (container instanceof HTMLFieldSetElement) return container;
@@ -239,9 +238,12 @@ export default class FormRegistration {
       if (inputShipping && inputsBilling) {
         const currentValue = inputShipping.getValue();
         inputsBilling.setValue(inputShipping.getValue());
+        this.formValue.set(inputBillingId, currentValue);
 
-        if (currentValue !== '') {
+        if (currentValue) {
           this.inputErrorHandler(currentValue, inputBillingId);
+        } else {
+          inputsBilling.clearError();
         }
       }
     }
@@ -332,9 +334,6 @@ export default class FormRegistration {
   }
 
   private createBody(): RegistrationBody {
-    const indexShippingAddress = this.isDefaultAddressShipping ? 0 : undefined;
-    const indexBillingAddress = this.isDefaultAddressBilling ? 1 : undefined;
-
     const body: RegistrationBody = {
       firstName: this.formValue.get('firstName') ?? '',
       lastName: this.formValue.get('lastName') ?? '',
@@ -349,8 +348,8 @@ export default class FormRegistration {
           postalCode: this.formValue.get('shippingPostalCode') ?? '',
         },
       ],
-      defaultShippingAddress: indexShippingAddress,
-      defaultBillingAddress: indexBillingAddress,
+      defaultShippingAddress: this.isDefaultAddressShipping ? 0 : undefined,
+      defaultBillingAddress: undefined,
     };
 
     if (!this.isSameAddresses) {
@@ -360,6 +359,10 @@ export default class FormRegistration {
         streetName: this.formValue.get('billingStreet') ?? '',
         postalCode: this.formValue.get('billingPostalCode') ?? '',
       });
+    }
+
+    if (this.isDefaultAddressBilling) {
+      body.defaultBillingAddress = this.isSameAddresses ? 0 : 1;
     }
 
     return body;
@@ -390,19 +393,19 @@ export default class FormRegistration {
     const isNotValidShippingStreet = validateInput(body.addresses[0].streetName);
     this.showValidationError('shippingStreet', isNotValidShippingStreet);
 
-    let isNotValidShippingAddress = false;
-    if (!this.isSameAddresses) {
-      const isNotValidBillingPostalCode = validatePostalCode(body.addresses[1].postalCode);
-      this.showValidationError('billingPostalCode', isNotValidBillingPostalCode);
+    const billingAddress = this.isSameAddresses ? body.addresses[0] : body.addresses[1];
+    const isNotValidBillingPostalCode = validatePostalCode(billingAddress.postalCode);
+    this.showValidationError('billingPostalCode', isNotValidBillingPostalCode);
 
-      const isNotValidBillingCity = validateNoDigitsNoSymbols(body.addresses[1].city);
-      this.showValidationError('billingCity', isNotValidBillingCity);
+    const isNotValidBillingCity = validateNoDigitsNoSymbols(billingAddress.city);
+    this.showValidationError('billingCity', isNotValidBillingCity);
 
-      const isNotValidBillingStreet = validateInput(body.addresses[1].streetName);
-      this.showValidationError('billingStreet', isNotValidBillingStreet);
-      isNotValidShippingAddress =
-        !!isNotValidBillingPostalCode && !!isNotValidBillingCity && !!isNotValidBillingStreet;
-    }
+    const isNotValidBillingStreet = validateInput(billingAddress.streetName);
+    this.showValidationError('billingStreet', isNotValidBillingStreet);
+
+    const isNotValidBillingAddress =
+      !!isNotValidBillingPostalCode || !!isNotValidBillingCity || !!isNotValidBillingStreet;
+
     return (
       !isNotValidFirstName &&
       !isNotValidLastName &&
@@ -411,7 +414,8 @@ export default class FormRegistration {
       !isNotValidPassword &&
       !isNotValidShippingPostalCode &&
       !isNotValidShippingCity &&
-      !isNotValidShippingAddress
+      !isNotValidShippingStreet &&
+      !isNotValidBillingAddress
     );
   }
 }
