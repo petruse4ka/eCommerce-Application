@@ -6,11 +6,16 @@ import ElementBuilder from '@/utils/element-builder';
 
 export default class MainMenu extends BaseComponent {
   constructor() {
-    super({ tag: 'nav', className: HEADER_STYLES.MAIN_MENU });
+    super({ tag: 'div', className: HEADER_STYLES.MAIN_MENU });
     this.render();
   }
 
   protected render(): void {
+    const nav = new ElementBuilder({
+      tag: 'nav',
+      className: HEADER_STYLES.MENU_NAV,
+    }).getElement();
+
     for (const item of MENU_ITEMS) {
       const menuItem = new ElementBuilder({
         tag: 'span',
@@ -22,7 +27,26 @@ export default class MainMenu extends BaseComponent {
         Router.followRoute(item.route);
       });
 
-      this.component.append(menuItem);
+      nav.append(menuItem);
     }
+
+    const burgerButton = new ElementBuilder({
+      tag: 'button',
+      className: HEADER_STYLES.BURGER_BUTTON,
+    }).getElement();
+
+    const burgerIconTop = new ElementBuilder({
+      tag: 'span',
+      className: HEADER_STYLES.BURGER_ICON_TOP,
+    }).getElement();
+
+    const burgerIconTBottom = new ElementBuilder({
+      tag: 'span',
+      className: HEADER_STYLES.BURGER_ICON_BOTTOM,
+    }).getElement();
+
+    burgerButton.append(burgerIconTop, burgerIconTBottom);
+
+    this.component.append(nav, burgerButton);
   }
 }

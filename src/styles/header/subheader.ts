@@ -1,7 +1,6 @@
 export const SUBHEADER_STYLES = {
   SUBHEADER: [
     'bg-primary',
-    'font-montserrat',
     'py-1',
     'text-[12px]',
     'flex',
