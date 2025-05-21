@@ -48,8 +48,8 @@ export const FOOTER_TEXTS = {
 };
 
 export const AUTHORIZATION_MENU_ITEMS: MenuItem[] = [
-  { name: AUTHORIZATION_MENU_TEXT.LOGIN, route: Route.LOGIN },
   { name: AUTHORIZATION_MENU_TEXT.REGISTRATION, route: Route.REGISTRATION },
+  { name: AUTHORIZATION_MENU_TEXT.LOGIN, route: Route.LOGIN },
 ];
 
 export const UNAUTHORIZED_MENU_ITEMS: MenuItem[] = [
