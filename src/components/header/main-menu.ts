@@ -30,6 +30,7 @@ export default class MainMenu extends BaseComponent {
       className: HEADER_STYLES.BURGER_ICON_BOTTOM_CLOSED,
     });
 
+    window.addEventListener('resize', this.handleWindowResize.bind(this));
     this.render();
   }
 
@@ -92,5 +93,12 @@ export default class MainMenu extends BaseComponent {
     this.burgerIconBottom.removeCssClasses(HEADER_STYLES.BURGER_ICON_BOTTOM_OPEN);
     this.burgerIconBottom.applyCssClasses(HEADER_STYLES.BURGER_ICON_BOTTOM_CLOSED);
     document.body.classList.remove(NOSCROLL.join(' '));
+  }
+
+  private handleWindowResize(): void {
+    if (window.innerWidth >= 768 && this.isOpen) {
+      this.isOpen = false;
+      this.closeMenu();
+    }
   }
 }
