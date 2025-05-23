@@ -69,6 +69,8 @@ export enum Route {
   TERMS = '#/terms',
   RETURNS = '#/returns',
   ACCOUNT = '#/account',
+  CATALOG = '#/catalog',
+  PRODUCT = '#/product',
 }
 
 export enum AlertStatus {

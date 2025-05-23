@@ -29,6 +29,14 @@ export default class ElementBuilder {
     }
   }
 
+  public replaceCssClasses(
+    removedClasses: ElementParameters['className'],
+    appliedClasses: ElementParameters['className']
+  ): void {
+    this.removeCssClasses(removedClasses);
+    this.applyCssClasses(appliedClasses);
+  }
+
   public applyCssClasses(className: ElementParameters['className']): void {
     if (className) {
       if (Array.isArray(className)) {

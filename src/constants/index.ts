@@ -24,6 +24,7 @@ export const AUTHORIZATION_MENU_TEXT = {
 
 export const MENU_TEXT = {
   HOME: 'Главная',
+  CATALOG: 'Каталог',
   ABOUT: 'О нас',
   CONTACTS: 'Контакты',
 };
@@ -69,6 +70,7 @@ export const UNDER_CONSTRUCTION_TEXTS = {
 
 export const MENU_ITEMS: MenuItem[] = [
   { name: MENU_TEXT.HOME, route: Route.HOME },
+  { name: MENU_TEXT.CATALOG, route: Route.CATALOG },
   { name: MENU_TEXT.ABOUT, route: Route.ABOUT },
   { name: MENU_TEXT.CONTACTS, route: Route.CONTACTS },
 ];
