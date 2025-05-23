@@ -17,7 +17,7 @@ export default class MainMenu extends BaseComponent {
 
     this.nav = new ElementBuilder({
       tag: 'nav',
-      className: HEADER_STYLES.MENU_NAV,
+      className: HEADER_STYLES.MENU_NAV_CLOSED,
     });
 
     this.burgerIconTop = new ElementBuilder({
@@ -76,22 +76,28 @@ export default class MainMenu extends BaseComponent {
   }
 
   private openMenu(): void {
-    this.nav.removeCssClasses(HEADER_STYLES.MENU_NAV);
-    this.nav.applyCssClasses(HEADER_STYLES.MENU_NAV_OPEN);
-    this.burgerIconTop.removeCssClasses(HEADER_STYLES.BURGER_ICON_TOP_CLOSED);
-    this.burgerIconTop.applyCssClasses(HEADER_STYLES.BURGER_ICON_TOP_OPEN);
-    this.burgerIconBottom.removeCssClasses(HEADER_STYLES.BURGER_ICON_BOTTOM_CLOSED);
-    this.burgerIconBottom.applyCssClasses(HEADER_STYLES.BURGER_ICON_BOTTOM_OPEN);
+    this.nav.toggleCssClasses(HEADER_STYLES.MENU_NAV_CLOSED, HEADER_STYLES.MENU_NAV_OPEN);
+    this.burgerIconTop.toggleCssClasses(
+      HEADER_STYLES.BURGER_ICON_TOP_CLOSED,
+      HEADER_STYLES.BURGER_ICON_TOP_OPEN
+    );
+    this.burgerIconBottom.toggleCssClasses(
+      HEADER_STYLES.BURGER_ICON_BOTTOM_CLOSED,
+      HEADER_STYLES.BURGER_ICON_BOTTOM_OPEN
+    );
     document.body.classList.add(NOSCROLL.join(' '));
   }
 
   private closeMenu(): void {
-    this.nav.removeCssClasses(HEADER_STYLES.MENU_NAV_OPEN);
-    this.nav.applyCssClasses(HEADER_STYLES.MENU_NAV);
-    this.burgerIconTop.removeCssClasses(HEADER_STYLES.BURGER_ICON_TOP_OPEN);
-    this.burgerIconTop.applyCssClasses(HEADER_STYLES.BURGER_ICON_TOP_CLOSED);
-    this.burgerIconBottom.removeCssClasses(HEADER_STYLES.BURGER_ICON_BOTTOM_OPEN);
-    this.burgerIconBottom.applyCssClasses(HEADER_STYLES.BURGER_ICON_BOTTOM_CLOSED);
+    this.nav.toggleCssClasses(HEADER_STYLES.MENU_NAV_OPEN, HEADER_STYLES.MENU_NAV_CLOSED);
+    this.burgerIconTop.toggleCssClasses(
+      HEADER_STYLES.BURGER_ICON_TOP_OPEN,
+      HEADER_STYLES.BURGER_ICON_TOP_CLOSED
+    );
+    this.burgerIconBottom.toggleCssClasses(
+      HEADER_STYLES.BURGER_ICON_BOTTOM_OPEN,
+      HEADER_STYLES.BURGER_ICON_BOTTOM_CLOSED
+    );
     document.body.classList.remove(NOSCROLL.join(' '));
   }
 
