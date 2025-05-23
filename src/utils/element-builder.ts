@@ -29,12 +29,12 @@ export default class ElementBuilder {
     }
   }
 
-  public toggleCssClasses(
-    removeClasses: ElementParameters['className'],
-    addClasses: ElementParameters['className']
+  public replaceCssClasses(
+    removedClasses: ElementParameters['className'],
+    appliedClasses: ElementParameters['className']
   ): void {
-    this.removeCssClasses(removeClasses);
-    this.applyCssClasses(addClasses);
+    this.removeCssClasses(removedClasses);
+    this.applyCssClasses(appliedClasses);
   }
 
   public applyCssClasses(className: ElementParameters['className']): void {

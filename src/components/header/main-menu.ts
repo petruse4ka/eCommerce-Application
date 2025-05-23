@@ -76,12 +76,12 @@ export default class MainMenu extends BaseComponent {
   }
 
   private openMenu(): void {
-    this.nav.toggleCssClasses(HEADER_STYLES.MENU_NAV_CLOSED, HEADER_STYLES.MENU_NAV_OPEN);
-    this.burgerIconTop.toggleCssClasses(
+    this.nav.replaceCssClasses(HEADER_STYLES.MENU_NAV_CLOSED, HEADER_STYLES.MENU_NAV_OPEN);
+    this.burgerIconTop.replaceCssClasses(
       HEADER_STYLES.BURGER_ICON_TOP_CLOSED,
       HEADER_STYLES.BURGER_ICON_TOP_OPEN
     );
-    this.burgerIconBottom.toggleCssClasses(
+    this.burgerIconBottom.replaceCssClasses(
       HEADER_STYLES.BURGER_ICON_BOTTOM_CLOSED,
       HEADER_STYLES.BURGER_ICON_BOTTOM_OPEN
     );
@@ -89,12 +89,12 @@ export default class MainMenu extends BaseComponent {
   }
 
   private closeMenu(): void {
-    this.nav.toggleCssClasses(HEADER_STYLES.MENU_NAV_OPEN, HEADER_STYLES.MENU_NAV_CLOSED);
-    this.burgerIconTop.toggleCssClasses(
+    this.nav.replaceCssClasses(HEADER_STYLES.MENU_NAV_OPEN, HEADER_STYLES.MENU_NAV_CLOSED);
+    this.burgerIconTop.replaceCssClasses(
       HEADER_STYLES.BURGER_ICON_TOP_OPEN,
       HEADER_STYLES.BURGER_ICON_TOP_CLOSED
     );
-    this.burgerIconBottom.toggleCssClasses(
+    this.burgerIconBottom.replaceCssClasses(
       HEADER_STYLES.BURGER_ICON_BOTTOM_OPEN,
       HEADER_STYLES.BURGER_ICON_BOTTOM_CLOSED
     );
