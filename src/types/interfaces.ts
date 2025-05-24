@@ -102,6 +102,12 @@ export interface Packages {
   gradient: string[];
 }
 
+export interface Macarons {
+  name: string;
+  description: string;
+  image: string;
+}
+
 export interface Guarantees {
   title: string;
   description: string;

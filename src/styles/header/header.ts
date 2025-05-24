@@ -10,7 +10,7 @@ const MENU_NAV = [
   'md:w-auto',
   'fixed',
   'md:relative',
-  'top-[36px]',
+  'top-[40px]',
   'md:top-0',
   'z-5',
   'bg-white',
