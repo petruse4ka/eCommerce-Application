@@ -11,6 +11,40 @@ export default class ProductList extends BaseComponent {
     this.render();
   }
 
+  private static createPriceContainer(product: Macarons): HTMLElement {
+    const priceContainer = new ElementBuilder({
+      tag: 'div',
+      className: PRODUCT_LIST_STYLES.PRICE_CONTAINER,
+    }).getElement();
+
+    if (product.discountedPrice) {
+      const originalPrice = new ElementBuilder({
+        tag: 'span',
+        className: PRODUCT_LIST_STYLES.ORIGINAL_PRICE,
+        textContent: `${product.price} €`,
+      }).getElement();
+
+      const discountedPrice = new ElementBuilder({
+        tag: 'span',
+        className: PRODUCT_LIST_STYLES.REGULAR_PRICE,
+        textContent: `${product.discountedPrice} €`,
+      }).getElement();
+
+      priceContainer.append(originalPrice);
+      priceContainer.append(discountedPrice);
+    } else {
+      const regularPrice = new ElementBuilder({
+        tag: 'span',
+        className: PRODUCT_LIST_STYLES.REGULAR_PRICE,
+        textContent: `${product.price} €`,
+      }).getElement();
+
+      priceContainer.append(regularPrice);
+    }
+
+    return priceContainer;
+  }
+
   private static createProductCard(product: Macarons): HTMLElement {
     const card = new ElementBuilder({
       tag: 'div',
@@ -45,9 +79,12 @@ export default class ProductList extends BaseComponent {
       textContent: product.description,
     }).getElement();
 
+    const priceContainer = ProductList.createPriceContainer(product);
+
     imageContainer.append(image);
     contentContainer.append(title);
     contentContainer.append(description);
+    contentContainer.append(priceContainer);
     card.append(imageContainer);
     card.append(contentContainer);
 

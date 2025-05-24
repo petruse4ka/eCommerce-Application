@@ -11,64 +11,84 @@ export const MACARONS: Macarons[] = [
     name: 'Шоколад, банан',
     description: 'Сезонный вкус: молочный  шоколад, отборные свежие бананы',
     image: chocolateMacaron,
-  },
-  {
-    name: 'Облепиха, розмарин',
-    description: 'Сезонный вкус: белый шоколад, свежие ягоды облепихи, немного розмарина',
-    image: rosmarineMacaron,
-  },
-  {
-    name: 'Чёрный трюфель',
-    description: 'Белый шоколад, сливки и паста из летнего чёрного итальянского трюфеля.',
-    image: truffleMacaron,
-  },
-  {
-    name: 'Голубой сыр',
-    description: 'Наш самы пикантный и один из самых популярных вкусов. Это нужно попробовать!',
-    image: blueCheeseMacaron,
+    price: 10,
+    discountedPrice: 8.75,
   },
   {
     name: 'Пармезан',
     description:
       'Пикантный сладко-соленый вкус. Начинка изготавливается с использованием настоящего итальянского сыра Parmigiano Reggiano и Grana Padano категории DOP.',
     image: parmesanMacaron,
+    price: 12,
+  },
+  {
+    name: 'Облепиха, розмарин',
+    description: 'Сезонный вкус: белый шоколад, свежие ягоды облепихи, немного розмарина',
+    image: rosmarineMacaron,
+    price: 9,
+    discountedPrice: 7.75,
+  },
+  {
+    name: 'Чёрный трюфель',
+    description: 'Белый шоколад, сливки и паста из летнего чёрного итальянского трюфеля.',
+    image: truffleMacaron,
+    price: 13,
+    discountedPrice: 11.75,
+  },
+  {
+    name: 'Голубой сыр',
+    description: 'Наш самы пикантный и один из самых популярных вкусов. Это нужно попробовать!',
+    image: blueCheeseMacaron,
+    price: 6,
   },
   {
     name: 'Песто ',
     description:
       'Внутри ингредиетны классического песто - свежий ароматный базилик, итальянский пармезан, кедровые орешки и всё это в виде ганаша на белом шоколаде.',
     image: pestoMacaron,
+    price: 7,
+    discountedPrice: 6,
+  },
+  {
+    name: 'Пармезан',
+    description:
+      'Пикантный сладко-соленый вкус. Начинка изготавливается с использованием настоящего итальянского сыра Parmigiano Reggiano и Grana Padano категории DOP.',
+    image: parmesanMacaron,
+    price: 12,
   },
   {
     name: 'Шоколад, банан',
     description: 'Сезонный вкус: молочный  шоколад, отборные свежие бананы',
     image: chocolateMacaron,
+    price: 10,
+    discountedPrice: 8.75,
   },
   {
     name: 'Облепиха, розмарин',
     description: 'Сезонный вкус: белый шоколад, свежие ягоды облепихи, немного розмарина',
     image: rosmarineMacaron,
+    price: 9,
+    discountedPrice: 7.75,
   },
   {
     name: 'Чёрный трюфель',
     description: 'Белый шоколад, сливки и паста из летнего чёрного итальянского трюфеля.',
     image: truffleMacaron,
+    price: 13,
+    discountedPrice: 11.75,
   },
   {
     name: 'Голубой сыр',
     description: 'Наш самы пикантный и один из самых популярных вкусов. Это нужно попробовать!',
     image: blueCheeseMacaron,
-  },
-  {
-    name: 'Пармезан',
-    description:
-      'Пикантный сладко-соленый вкус. Начинка изготавливается с использованием настоящего итальянского сыра Parmigiano Reggiano и Grana Padano категории DOP.',
-    image: parmesanMacaron,
+    price: 6,
   },
   {
     name: 'Песто ',
     description:
       'Внутри ингредиетны классического песто - свежий ароматный базилик, итальянский пармезан, кедровые орешки и всё это в виде ганаша на белом шоколаде.',
     image: pestoMacaron,
+    price: 7,
+    discountedPrice: 6,
   },
 ];

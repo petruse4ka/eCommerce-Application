@@ -106,6 +106,8 @@ export interface Macarons {
   name: string;
   description: string;
   image: string;
+  price: number;
+  discountedPrice?: number;
 }
 
 export interface Guarantees {
