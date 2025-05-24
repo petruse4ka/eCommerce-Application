@@ -1,0 +1,22 @@
+export const PRODUCT_LIST_STYLES = {
+  CONTAINER: ['w-full', 'grid', 'grid-cols-1', 'sm:grid-cols-2', 'lg:grid-cols-3', 'gap-6'],
+  CARD: [
+    'cursor-pointer',
+    'flex',
+    'flex-col',
+    'bg-white',
+    'border',
+    'border-orange-light',
+    'rounded-lg',
+    'shadow-md',
+    'transition-transform',
+    'duration-300',
+    'ease-in-out',
+    'hover:scale-105',
+  ],
+  IMAGE_CONTAINER: ['w-full', 'h-48', 'flex', 'items-center', 'justify-center'],
+  IMAGE: ['max-h-full', 'max-w-full', 'object-contain'],
+  CONTENT_CONTAINER: ['px-4', 'py-6', 'flex', 'flex-col', 'gap-2'],
+  TITLE: ['text-lg', 'font-semibold', 'text-gray-800'],
+  DESCRIPTION: ['text-black', 'text-sm'],
+};
