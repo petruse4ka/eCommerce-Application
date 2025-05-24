@@ -130,3 +130,8 @@ export interface ErrorResponse {
   error: string;
   error_description: string;
 }
+
+export type SelectOption = {
+  value: string;
+  text: string;
+};

@@ -4,7 +4,7 @@ import parmesanMacaron from '@/assets/images/macarons/parmesan.png';
 import pestoMacaron from '@/assets/images/macarons/pesto.png';
 import rosmarineMacaron from '@/assets/images/macarons/rosmarine.png';
 import truffleMacaron from '@/assets/images/macarons/truffle.png';
-import type { Macarons } from '@/types/interfaces';
+import type { Macarons, SelectOption } from '@/types/interfaces';
 
 export const MACARONS: Macarons[] = [
   {
@@ -91,4 +91,11 @@ export const MACARONS: Macarons[] = [
     price: 7,
     discountedPrice: 6,
   },
+];
+
+export const SORTING_OPTIONS: SelectOption[] = [
+  { value: 'price-asc', text: 'Цена: по возрастанию' },
+  { value: 'price-desc', text: 'Цена: по убыванию' },
+  { value: 'name-asc', text: 'Название: от А-Я' },
+  { value: 'name-desc', text: 'Название: от Я-А' },
 ];

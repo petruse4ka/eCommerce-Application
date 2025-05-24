@@ -1,5 +1,13 @@
 export const PRODUCT_LIST_STYLES = {
-  CONTAINER: ['w-full', 'grid', 'grid-cols-1', 'sm:grid-cols-2', 'lg:grid-cols-3', 'gap-7'],
+  CONTAINER: ['w-full', 'flex', 'flex-col', 'gap-6'],
+  PRODUCTS_CONTAINER: [
+    'w-full',
+    'grid',
+    'grid-cols-1',
+    'sm:grid-cols-2',
+    'lg:grid-cols-3',
+    'gap-7',
+  ],
   CARD: [
     'cursor-pointer',
     'flex',
@@ -13,6 +21,7 @@ export const PRODUCT_LIST_STYLES = {
     'duration-300',
     'ease-in-out',
     'hover:scale-105',
+    'hover:bg-green-light',
   ],
   IMAGE_CONTAINER: ['w-full', 'h-45', 'flex', 'items-center', 'justify-center'],
   IMAGE: ['max-h-full', 'max-w-full', 'object-contain'],

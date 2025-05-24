@@ -4,8 +4,6 @@ export const CONTAINER = [
   'items-center',
   'bg-white',
   'text-black',
-  'border-t',
-  'border-primary',
   'flex-grow',
 ];
 

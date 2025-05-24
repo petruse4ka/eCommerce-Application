@@ -8,6 +8,7 @@ export enum InputType {
   SEARCH = 'search',
   TEL = 'tel',
   EMAIL = 'email',
+  SELECT = 'select',
 }
 
 export enum ButtonType {

@@ -1,14 +1,54 @@
 import BaseComponent from '@/components/base';
-import { MACARONS } from '@/data/products';
+import { CATALOG_TEXTS } from '@/constants';
+import { MACARONS, SORTING_OPTIONS } from '@/data/products';
 import { PRODUCT_LIST_STYLES } from '@/styles/catalog/product-list';
+import { SORTING_STYLES } from '@/styles/catalog/sorting';
 import type { Macarons } from '@/types/interfaces';
 import ElementBuilder from '@/utils/element-builder';
 import ImageBuilder from '@/utils/image-builder';
+import SelectBuilder from '@/utils/select-builder';
 
 export default class ProductList extends BaseComponent {
   constructor() {
     super({ tag: 'div', className: PRODUCT_LIST_STYLES.CONTAINER });
     this.render();
+  }
+
+  private static createSortingContainer(): HTMLElement {
+    const container = new ElementBuilder({
+      tag: 'div',
+      className: SORTING_STYLES.CONTAINER,
+    }).getElement();
+
+    const productCounter = new ElementBuilder({
+      tag: 'span',
+      className: SORTING_STYLES.PRODUCT_COUNTER,
+      textContent: `${CATALOG_TEXTS.TOTAL_PRODUCTS}: ${MACARONS.length}`,
+    }).getElement();
+
+    const dropdownContainer = new ElementBuilder({
+      tag: 'div',
+      className: SORTING_STYLES.DROPDOWN_CONTAINER,
+    }).getElement();
+
+    const label = new ElementBuilder({
+      tag: 'label',
+      className: SORTING_STYLES.DROPDOWN_LABEL,
+      textContent: CATALOG_TEXTS.SORTY_BY,
+    }).getElement();
+
+    const select = new SelectBuilder({
+      className: SORTING_STYLES.DROPDOWN,
+    });
+
+    select.addOptions(SORTING_OPTIONS);
+
+    dropdownContainer.append(label);
+    dropdownContainer.append(select.getElement());
+    container.append(productCounter);
+    container.append(dropdownContainer);
+
+    return container;
   }
 
   private static createPriceContainer(product: Macarons): HTMLElement {
@@ -92,9 +132,19 @@ export default class ProductList extends BaseComponent {
   }
 
   private render(): void {
+    const sortingContainer = ProductList.createSortingContainer();
+
+    const productsContainer = new ElementBuilder({
+      tag: 'div',
+      className: PRODUCT_LIST_STYLES.PRODUCTS_CONTAINER,
+    }).getElement();
+
     for (const product of MACARONS) {
-      const productCard = ProductList.createProductCard(product);
-      this.component.append(productCard);
+      const productItem = ProductList.createProductCard(product);
+      productsContainer.append(productItem);
     }
+
+    this.component.append(sortingContainer);
+    this.component.append(productsContainer);
   }
 }

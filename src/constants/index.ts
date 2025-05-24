@@ -163,3 +163,8 @@ export const FIELDSET_LABELS = {
 export const PAGE_TITLES = {
   CATALOG: 'Каталог десертов',
 };
+
+export const CATALOG_TEXTS = {
+  TOTAL_PRODUCTS: 'Всего товаров',
+  SORTY_BY: 'Сортировка',
+};

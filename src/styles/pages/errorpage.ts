@@ -8,8 +8,6 @@ export const CONTAINER = [
   'leading-normal',
   'bg-white',
   'text-black',
-  'border-t',
-  'border-primary',
   'flex-grow',
 ];
 

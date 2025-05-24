@@ -31,7 +31,7 @@ const BURGER_ICON = [
 ];
 
 export const HEADER_STYLES = {
-  HEADER: ['relative'],
+  HEADER: ['relative', 'border-b', 'border-primary'],
   HEADER_CONTAINER: [
     'max-w-[1440px]',
     'mx-auto',
