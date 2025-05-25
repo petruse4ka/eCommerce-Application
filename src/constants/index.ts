@@ -171,6 +171,8 @@ export const CATALOG_TEXTS = {
   SORTY_BY: 'Сортировка',
   SEARCH_PLACEHOLDER: 'Поиск...',
   TASTE_FILTER: 'Вкус',
+  DIET_FILTER: 'Диета',
+  FILLING_FILTER: 'Наполнитель',
   SHOW_MORE: 'Показать еще ↓',
   SHOW_LESS: 'Скрыть ↑',
 };

@@ -111,4 +111,23 @@ export const FLAVOUR_FILTER: SelectOption[] = [
   { value: 'spicy', text: 'Специи' },
   { value: 'сaramel', text: 'Карамельный' },
   { value: 'coffee', text: 'Кофейный' },
+  { value: 'fish', text: 'Рыбный' },
+];
+
+export const DIET_FILTER: SelectOption[] = [
+  { value: 'traditional', text: 'Тридиционная' },
+  { value: 'gluten-free', text: 'Без глютена' },
+  { value: 'sugar-free', text: 'Без сахара' },
+  { value: 'lactose-free', text: 'Без лактозы' },
+  { value: 'vegan', text: 'Веганская' },
+];
+
+export const FILLING_FILTER: SelectOption[] = [
+  { value: 'cottage-cheese', text: 'Творог' },
+  { value: 'buttercream', text: 'Сливочный крем' },
+  { value: 'custard', text: 'Заварной крем' },
+  { value: 'condensed-milk', text: 'Сгущенка' },
+  { value: 'herring ', text: 'Сельдь' },
+  { value: 'caviar ', text: 'Икра' },
+  { value: 'no-filling ', text: 'Без наполнтеля' },
 ];
