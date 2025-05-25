@@ -170,9 +170,11 @@ export const CATALOG_TEXTS = {
   TOTAL_PRODUCTS: 'Всего товаров',
   SORTY_BY: 'Сортировка',
   SEARCH_PLACEHOLDER: 'Поиск...',
+  PRODUCT_TYPE_FILTER: 'Тип десерта',
   TASTE_FILTER: 'Вкус',
   DIET_FILTER: 'Диета',
   FILLING_FILTER: 'Наполнитель',
+  TOPPING_FILTER: 'Глазурь',
   SHOW_MORE: 'Показать еще ↓',
   SHOW_LESS: 'Скрыть ↑',
 };

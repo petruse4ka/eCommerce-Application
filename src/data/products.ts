@@ -100,6 +100,13 @@ export const SORTING_OPTIONS: SelectOption[] = [
   { value: 'name-desc', text: 'Название: от Я-А' },
 ];
 
+export const PRODUCT_TYPE_FILTER: SelectOption[] = [
+  { value: 'macaron', text: 'Макарон' },
+  { value: 'rolls', text: 'Трубочки' },
+  { value: 'eclair', text: 'Эклеры' },
+  { value: 'profiterole', text: 'Профитроли' },
+];
+
 export const FLAVOUR_FILTER: SelectOption[] = [
   { value: 'vanilla', text: 'Ванильный' },
   { value: 'chocolate', text: 'Шоколадный' },
@@ -130,4 +137,13 @@ export const FILLING_FILTER: SelectOption[] = [
   { value: 'herring ', text: 'Сельдь' },
   { value: 'caviar ', text: 'Икра' },
   { value: 'no-filling ', text: 'Без наполнтеля' },
+];
+
+export const TOPPING_FILTER: SelectOption[] = [
+  { value: 'unglazed', text: 'Без глазури' },
+  { value: 'icing', text: 'Сахарная помадка' },
+  { value: 'chocolate', text: 'Шоколадный топинг' },
+  { value: 'caramel', text: 'Карамельная глазурь' },
+  { value: 'nut-crumble ', text: 'Ореховая Крошка' },
+  { value: 'coconut ', text: 'Кокосовая стружка' },
 ];

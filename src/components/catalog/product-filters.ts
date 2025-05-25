@@ -1,7 +1,13 @@
 import BaseComponent from '@/components/base';
 import Button from '@/components/buttons';
 import { CATALOG_TEXTS, DEFAULT_OPTIONS_COUNT } from '@/constants';
-import { DIET_FILTER, FILLING_FILTER, FLAVOUR_FILTER } from '@/data/products';
+import {
+  DIET_FILTER,
+  FILLING_FILTER,
+  FLAVOUR_FILTER,
+  PRODUCT_TYPE_FILTER,
+  TOPPING_FILTER,
+} from '@/data/products';
 import { filterState } from '@/store/filter-state';
 import { FILTERS_STYLES } from '@/styles/catalog/product-filters';
 import { InputType } from '@/types/enums';
@@ -140,6 +146,12 @@ export default class ProductFilters extends BaseComponent {
   };
 
   private render(): void {
+    const productTypeFilter = ProductFilters.createCheckboxFilter({
+      title: CATALOG_TEXTS.PRODUCT_TYPE_FILTER,
+      options: PRODUCT_TYPE_FILTER,
+      filterId: 'type',
+    });
+
     const tasteFilter = ProductFilters.createCheckboxFilter({
       title: CATALOG_TEXTS.TASTE_FILTER,
       options: FLAVOUR_FILTER,
@@ -158,9 +170,17 @@ export default class ProductFilters extends BaseComponent {
       filterId: 'filling',
     });
 
+    const toppingFilter = ProductFilters.createCheckboxFilter({
+      title: CATALOG_TEXTS.TOPPING_FILTER,
+      options: TOPPING_FILTER,
+      filterId: 'topping',
+    });
+
     filterState.subscribe(this.handleFilterChange);
+    this.component.append(productTypeFilter);
     this.component.append(tasteFilter);
     this.component.append(dietFilter);
+    this.component.append(toppingFilter);
     this.component.append(fillingFilter);
   }
 }
