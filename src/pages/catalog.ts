@@ -1,6 +1,7 @@
 import '@/styles/main.css';
 
 import BaseComponent from '@/components/base';
+import ProductFilters from '@/components/catalog/product-filters';
 import ProductList from '@/components/catalog/product-list';
 import { PAGE_TITLES } from '@/constants';
 import { CATALOG_STYLES } from '@/styles/pages/catalog';
@@ -38,7 +39,9 @@ export default class CatalogPage extends BaseComponent {
     }).getElement();
 
     const productList = new ProductList().getElement();
+    const productFilters = new ProductFilters().getElement();
 
+    filtersSection.append(productFilters);
     productListSection.append(productList);
     catalogContainer.append(filtersSection);
     catalogContainer.append(productListSection);

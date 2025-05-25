@@ -56,16 +56,4 @@ export const SORTING_STYLES = {
     'focus:outline-none',
     'focus:border-orange',
   ],
-  CLEAR_BUTTON: [
-    'absolute',
-    'right-3',
-    'top-1/2',
-    '-translate-y-1/2',
-    'text-accent',
-    'hover:text-accent-hover',
-    'cursor-pointer',
-    'hidden',
-    'text-lg',
-    'font-bold',
-  ],
 };

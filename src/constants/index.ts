@@ -8,6 +8,8 @@ export const VALIDATE_CONST = {
   MAX_INPUT_LENGTH: 50,
 };
 
+export const DEFAULT_OPTIONS_COUNT = 5;
+
 export const SUBHEADER_PROMO_TEXT = {
   DELIVERY: 'Быстрая доставка',
   FRESH: 'Гарантия свежести',
@@ -168,4 +170,7 @@ export const CATALOG_TEXTS = {
   TOTAL_PRODUCTS: 'Всего товаров',
   SORTY_BY: 'Сортировка',
   SEARCH_PLACEHOLDER: 'Поиск...',
+  TASTE_FILTER: 'Вкус',
+  SHOW_MORE: 'Показать еще ↓',
+  SHOW_LESS: 'Скрыть ↑',
 };

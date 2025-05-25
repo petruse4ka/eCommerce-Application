@@ -37,7 +37,7 @@ export const MACARONS: Macarons[] = [
   },
   {
     name: 'Голубой сыр',
-    description: 'Наш самы пикантный и один из самых популярных вкусов. Это нужно попробовать!',
+    description: 'Наш самый пикантный и один из самых популярных вкусов. Это нужно попробовать!',
     image: blueCheeseMacaron,
     price: 6,
   },
@@ -79,7 +79,7 @@ export const MACARONS: Macarons[] = [
   },
   {
     name: 'Голубой сыр',
-    description: 'Наш самы пикантный и один из самых популярных вкусов. Это нужно попробовать!',
+    description: 'Наш самый пикантный и один из самых популярных вкусов. Это нужно попробовать!',
     image: blueCheeseMacaron,
     price: 6,
   },
@@ -98,4 +98,17 @@ export const SORTING_OPTIONS: SelectOption[] = [
   { value: 'price-desc', text: 'Цена: по убыванию' },
   { value: 'name-asc', text: 'Название: от А-Я' },
   { value: 'name-desc', text: 'Название: от Я-А' },
+];
+
+export const FLAVOUR_FILTER: SelectOption[] = [
+  { value: 'vanilla', text: 'Ванильный' },
+  { value: 'chocolate', text: 'Шоколадный' },
+  { value: 'nutty', text: 'Ореховый' },
+  { value: 'fruity', text: 'Фруктовый' },
+  { value: 'berry', text: 'Ягодный' },
+  { value: 'exotic', text: 'Экзотический' },
+  { value: 'milky', text: 'Молочный' },
+  { value: 'spicy', text: 'Специи' },
+  { value: 'сaramel', text: 'Карамельный' },
+  { value: 'coffee', text: 'Кофейный' },
 ];

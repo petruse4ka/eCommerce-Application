@@ -1,6 +1,8 @@
 import BaseComponent from '@/components/base';
+import Button from '@/components/buttons';
 import { CATALOG_TEXTS } from '@/constants';
 import { MACARONS, SORTING_OPTIONS } from '@/data/products';
+import { CUSTOM_BUTTON_STYLE } from '@/styles/buttons/buttons';
 import { PRODUCT_LIST_STYLES } from '@/styles/catalog/product-list';
 import { SORTING_STYLES } from '@/styles/catalog/sorting';
 import { InputType } from '@/types/enums';
@@ -29,27 +31,29 @@ export default class ProductList extends BaseComponent {
       className: SORTING_STYLES.SEARCH_INPUT,
     }).getElement();
 
-    const clearButton = new ElementBuilder({
-      tag: 'span',
-      className: SORTING_STYLES.CLEAR_BUTTON,
+    const button = new Button({
+      style: 'CLEAR',
       textContent: '×',
-    }).getElement();
+      callback: (): void => {
+        if (searchInput instanceof HTMLInputElement) {
+          searchInput.value = '';
+          button.getElement().classList.add(...CUSTOM_BUTTON_STYLE.HIDDEN);
+        }
+      },
+    });
 
     searchInput.addEventListener('input', () => {
       if (searchInput instanceof HTMLInputElement) {
-        clearButton.style.display = searchInput.value ? 'block' : 'none';
-      }
-    });
-
-    clearButton.addEventListener('click', () => {
-      if (searchInput instanceof HTMLInputElement) {
-        searchInput.value = '';
-        clearButton.style.display = 'none';
+        if (searchInput.value) {
+          button.getElement().classList.remove(...CUSTOM_BUTTON_STYLE.HIDDEN);
+        } else {
+          button.getElement().classList.add(...CUSTOM_BUTTON_STYLE.HIDDEN);
+        }
       }
     });
 
     searchContainer.append(searchInput);
-    searchContainer.append(clearButton);
+    searchContainer.append(button.getElement());
 
     return searchContainer;
   }

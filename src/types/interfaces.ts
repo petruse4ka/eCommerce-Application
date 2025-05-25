@@ -131,7 +131,18 @@ export interface ErrorResponse {
   error_description: string;
 }
 
-export type SelectOption = {
+export interface SelectOption {
   value: string;
   text: string;
-};
+}
+
+export interface CheckboxOption {
+  value: string;
+  text: string;
+}
+
+export interface CheckboxFiltersParameters {
+  title: string;
+  options: CheckboxOption[];
+  filterId: string;
+}
