@@ -175,6 +175,7 @@ export const CATALOG_TEXTS = {
   DIET_FILTER: 'Диета',
   FILLING_FILTER: 'Наполнитель',
   TOPPING_FILTER: 'Глазурь',
+  PROMO_FILTER: 'Спецпредложение',
   SHOW_MORE: 'Показать еще ↓',
   SHOW_LESS: 'Скрыть ↑',
 };

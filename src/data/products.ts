@@ -147,3 +147,9 @@ export const TOPPING_FILTER: SelectOption[] = [
   { value: 'nut-crumble ', text: 'Ореховая Крошка' },
   { value: 'coconut ', text: 'Кокосовая стружка' },
 ];
+
+export const PROMO_FILTER: SelectOption[] = [
+  { value: 'promo-and-no-promo', text: 'Все продукты' },
+  { value: 'no-promo', text: 'Без скидки' },
+  { value: 'promo', text: 'Со скидкой' },
+];

@@ -6,6 +6,7 @@ import {
   FILLING_FILTER,
   FLAVOUR_FILTER,
   PRODUCT_TYPE_FILTER,
+  PROMO_FILTER,
   TOPPING_FILTER,
 } from '@/data/products';
 import { filterState } from '@/store/filter-state';
@@ -14,6 +15,7 @@ import { InputType } from '@/types/enums';
 import type { CheckboxFiltersParameters, CheckboxOption } from '@/types/interfaces';
 import ElementBuilder from '@/utils/element-builder';
 import InputBuilder from '@/utils/input-builder';
+import SelectBuilder from '@/utils/select-builder';
 
 export default class ProductFilters extends BaseComponent {
   constructor() {
@@ -136,6 +138,41 @@ export default class ProductFilters extends BaseComponent {
     return filterContainer;
   }
 
+  private static createDropdownFilter(
+    title: string,
+    options: CheckboxOption[],
+    filterId: string
+  ): HTMLElement {
+    const dropdownContainer = new ElementBuilder({
+      tag: 'div',
+      className: FILTERS_STYLES.FILTER_CONTAINER,
+    }).getElement();
+
+    const filterTitle = ProductFilters.createFilterTitle(title);
+
+    const select = new SelectBuilder({
+      className: FILTERS_STYLES.DROPDOWN,
+    });
+
+    select.addOptions(options);
+
+    select.getElement().addEventListener('change', (event) => {
+      const target = event.target;
+      if (target instanceof HTMLSelectElement) {
+        if (target.value) {
+          filterState.toggleOption(filterId, target.value);
+        } else {
+          filterState.toggleOption(filterId, '');
+        }
+      }
+    });
+
+    dropdownContainer.append(filterTitle);
+    dropdownContainer.append(select.getElement());
+
+    return dropdownContainer;
+  }
+
   public override remove(): void {
     filterState.unsubscribe(this.handleFilterChange);
     super.remove();
@@ -176,11 +213,18 @@ export default class ProductFilters extends BaseComponent {
       filterId: 'topping',
     });
 
+    const promoFilter = ProductFilters.createDropdownFilter(
+      CATALOG_TEXTS.PROMO_FILTER,
+      PROMO_FILTER,
+      'promo'
+    );
+
     filterState.subscribe(this.handleFilterChange);
     this.component.append(productTypeFilter);
     this.component.append(tasteFilter);
     this.component.append(dietFilter);
     this.component.append(toppingFilter);
     this.component.append(fillingFilter);
+    this.component.append(promoFilter);
   }
 }
