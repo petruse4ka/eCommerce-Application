@@ -6,7 +6,7 @@ export const CATALOG_STYLES = {
     'lg:col-span-1',
     'bg-white',
     'border',
-    'border-orange-light',
+    'border-primary',
     'rounded-lg',
     'shadow-md',
     'p-4',

@@ -3,15 +3,55 @@ import { CATALOG_TEXTS } from '@/constants';
 import { MACARONS, SORTING_OPTIONS } from '@/data/products';
 import { PRODUCT_LIST_STYLES } from '@/styles/catalog/product-list';
 import { SORTING_STYLES } from '@/styles/catalog/sorting';
+import { InputType } from '@/types/enums';
 import type { Macarons } from '@/types/interfaces';
 import ElementBuilder from '@/utils/element-builder';
 import ImageBuilder from '@/utils/image-builder';
+import InputBuilder from '@/utils/input-builder';
 import SelectBuilder from '@/utils/select-builder';
 
 export default class ProductList extends BaseComponent {
   constructor() {
     super({ tag: 'div', className: PRODUCT_LIST_STYLES.CONTAINER });
     this.render();
+  }
+
+  private static createSearchContainer(): HTMLElement {
+    const searchContainer = new ElementBuilder({
+      tag: 'div',
+      className: SORTING_STYLES.SEARCH_CONTAINER,
+    }).getElement();
+
+    const searchInput = new InputBuilder({
+      id: 'search',
+      type: InputType.TEXT,
+      placeholder: CATALOG_TEXTS.SEARCH_PLACEHOLDER,
+      className: SORTING_STYLES.SEARCH_INPUT,
+    }).getElement();
+
+    const clearButton = new ElementBuilder({
+      tag: 'span',
+      className: SORTING_STYLES.CLEAR_BUTTON,
+      textContent: '×',
+    }).getElement();
+
+    searchInput.addEventListener('input', () => {
+      if (searchInput instanceof HTMLInputElement) {
+        clearButton.style.display = searchInput.value ? 'block' : 'none';
+      }
+    });
+
+    clearButton.addEventListener('click', () => {
+      if (searchInput instanceof HTMLInputElement) {
+        searchInput.value = '';
+        clearButton.style.display = 'none';
+      }
+    });
+
+    searchContainer.append(searchInput);
+    searchContainer.append(clearButton);
+
+    return searchContainer;
   }
 
   private static createSortingContainer(): HTMLElement {
@@ -31,21 +71,17 @@ export default class ProductList extends BaseComponent {
       className: SORTING_STYLES.DROPDOWN_CONTAINER,
     }).getElement();
 
-    const label = new ElementBuilder({
-      tag: 'label',
-      className: SORTING_STYLES.DROPDOWN_LABEL,
-      textContent: CATALOG_TEXTS.SORTY_BY,
-    }).getElement();
-
     const select = new SelectBuilder({
       className: SORTING_STYLES.DROPDOWN,
     });
 
     select.addOptions(SORTING_OPTIONS);
 
-    dropdownContainer.append(label);
+    const searchContainer = ProductList.createSearchContainer();
+
     dropdownContainer.append(select.getElement());
     container.append(productCounter);
+    container.append(searchContainer);
     container.append(dropdownContainer);
 
     return container;

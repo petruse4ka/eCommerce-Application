@@ -167,4 +167,5 @@ export const PAGE_TITLES = {
 export const CATALOG_TEXTS = {
   TOTAL_PRODUCTS: 'Всего товаров',
   SORTY_BY: 'Сортировка',
+  SEARCH_PLACEHOLDER: 'Поиск...',
 };
