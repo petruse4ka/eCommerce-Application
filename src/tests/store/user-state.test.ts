@@ -1,14 +1,13 @@
 import { beforeEach, describe, expect, test, vi } from 'vitest';
 
-import { UserState } from '@/store/user-state';
-
-let userState: UserState;
-
-beforeEach(() => {
-  userState = new UserState();
-});
+import { userState } from '@/store/user-state';
 
 describe('User state', () => {
+  beforeEach(() => {
+    userState.setAuthorizationState(false);
+    userState.unsubscribe(() => {});
+  });
+
   test('should be unauthorized at initialization', () => {
     expect(userState.getAuthorizationState()).toBe(false);
   });
