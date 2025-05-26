@@ -9,6 +9,7 @@ export default class Router {
   constructor(HomeRoute: Route) {
     this.routes = new Map();
     this.homeRoute = HomeRoute;
+    console.log(this.homeRoute);
     this.defaultRoute = this.setDefaultRoute();
     this.setEventListeners();
   }
