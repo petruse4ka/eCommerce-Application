@@ -142,7 +142,7 @@ export const FILLING_FILTER: SelectOption[] = [
 export const TOPPING_FILTER: SelectOption[] = [
   { value: 'unglazed', text: 'Без глазури' },
   { value: 'icing', text: 'Сахарная помадка' },
-  { value: 'chocolate', text: 'Шоколадный топинг' },
+  { value: 'chocolate-top', text: 'Шоколадный топинг' },
   { value: 'caramel', text: 'Карамельная глазурь' },
   { value: 'nut-crumble ', text: 'Ореховая Крошка' },
   { value: 'coconut ', text: 'Кокосовая стружка' },

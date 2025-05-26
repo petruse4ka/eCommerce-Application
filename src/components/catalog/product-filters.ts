@@ -1,6 +1,7 @@
 import BaseComponent from '@/components/base';
 import Button from '@/components/buttons';
 import { CATALOG_TEXTS, DEFAULT_OPTIONS_COUNT } from '@/constants';
+import { FILTER_RANGES } from '@/constants';
 import {
   DIET_FILTER,
   FILLING_FILTER,
@@ -173,6 +174,153 @@ export default class ProductFilters extends BaseComponent {
     return dropdownContainer;
   }
 
+  private static createRangeInputs(
+    filterId: string,
+    min: number,
+    max: number,
+    step: number
+  ): { minInput: HTMLElement; maxInput: HTMLElement } {
+    const minInput = new InputBuilder({
+      id: `min-${filterId}`,
+      type: InputType.NUMBER,
+      min: min.toString(),
+      max: max.toString(),
+      step: step.toString(),
+      value: min.toString(),
+      className: FILTERS_STYLES.RANGE_INPUT,
+    }).getElement();
+
+    const maxInput = new InputBuilder({
+      id: `max-${filterId}`,
+      type: InputType.NUMBER,
+      min: min.toString(),
+      max: max.toString(),
+      step: step.toString(),
+      value: max.toString(),
+      className: FILTERS_STYLES.RANGE_INPUT,
+    }).getElement();
+
+    minInput.addEventListener('change', () => {
+      if (minInput instanceof HTMLInputElement && maxInput instanceof HTMLInputElement) {
+        filterState.toggleOption(filterId, `${minInput.value}-${maxInput.value}`);
+      }
+    });
+
+    maxInput.addEventListener('change', () => {
+      if (minInput instanceof HTMLInputElement && maxInput instanceof HTMLInputElement) {
+        filterState.toggleOption(filterId, `${minInput.value}-${maxInput.value}`);
+      }
+    });
+
+    return { minInput, maxInput };
+  }
+
+  private static createRangeFilter(
+    title: string,
+    min: number,
+    max: number,
+    step: number,
+    filterId: string
+  ): HTMLElement {
+    const rangeContainer = new ElementBuilder({
+      tag: 'div',
+      className: FILTERS_STYLES.FILTER_CONTAINER,
+    }).getElement();
+
+    const filterTitle = ProductFilters.createFilterTitle(title);
+
+    const inputsContainer = new ElementBuilder({
+      tag: 'div',
+      className: FILTERS_STYLES.RANGE_CONTAINER,
+    }).getElement();
+
+    const minLabel = new ElementBuilder({
+      tag: 'span',
+      className: FILTERS_STYLES.RANGE_LABEL,
+      textContent: CATALOG_TEXTS.RANGE_FROM,
+    }).getElement();
+
+    const maxLabel = new ElementBuilder({
+      tag: 'span',
+      className: FILTERS_STYLES.RANGE_LABEL,
+      textContent: CATALOG_TEXTS.RANGE_TO,
+    }).getElement();
+
+    const { minInput, maxInput } = ProductFilters.createRangeInputs(filterId, min, max, step);
+
+    inputsContainer.append(minLabel);
+    inputsContainer.append(minInput);
+    inputsContainer.append(maxLabel);
+    inputsContainer.append(maxInput);
+    rangeContainer.append(filterTitle);
+    rangeContainer.append(inputsContainer);
+
+    return rangeContainer;
+  }
+
+  private static createMainFilters(): HTMLElement[] {
+    return [
+      ProductFilters.createCheckboxFilter({
+        title: CATALOG_TEXTS.PRODUCT_TYPE_FILTER,
+        options: PRODUCT_TYPE_FILTER,
+        filterId: 'type',
+      }),
+      ProductFilters.createRangeFilter(
+        CATALOG_TEXTS.PRICE_FILTER,
+        FILTER_RANGES.PRICE.MIN,
+        FILTER_RANGES.PRICE.MAX,
+        FILTER_RANGES.PRICE.STEP,
+        'price'
+      ),
+    ];
+  }
+
+  private static createSecondaryFilters(): HTMLElement[] {
+    return [
+      ProductFilters.createCheckboxFilter({
+        title: CATALOG_TEXTS.TASTE_FILTER,
+        options: FLAVOUR_FILTER,
+        filterId: 'taste',
+      }),
+      ProductFilters.createCheckboxFilter({
+        title: CATALOG_TEXTS.DIET_FILTER,
+        options: DIET_FILTER,
+        filterId: 'diet',
+      }),
+    ];
+  }
+
+  private static createAdditionalFilters(): HTMLElement[] {
+    return [
+      ProductFilters.createCheckboxFilter({
+        title: CATALOG_TEXTS.TOPPING_FILTER,
+        options: TOPPING_FILTER,
+        filterId: 'topping',
+      }),
+      ProductFilters.createCheckboxFilter({
+        title: CATALOG_TEXTS.FILLING_FILTER,
+        options: FILLING_FILTER,
+        filterId: 'filling',
+      }),
+      ProductFilters.createRangeFilter(
+        CATALOG_TEXTS.WEIGHT_FILTER,
+        FILTER_RANGES.WEIGHT.MIN,
+        FILTER_RANGES.WEIGHT.MAX,
+        FILTER_RANGES.WEIGHT.STEP,
+        'weight'
+      ),
+    ];
+  }
+
+  private static createFilters(): HTMLElement[] {
+    return [
+      ...ProductFilters.createMainFilters(),
+      ...ProductFilters.createSecondaryFilters(),
+      ...ProductFilters.createAdditionalFilters(),
+      ProductFilters.createDropdownFilter(CATALOG_TEXTS.PROMO_FILTER, PROMO_FILTER, 'promo'),
+    ];
+  }
+
   public override remove(): void {
     filterState.unsubscribe(this.handleFilterChange);
     super.remove();
@@ -183,48 +331,8 @@ export default class ProductFilters extends BaseComponent {
   };
 
   private render(): void {
-    const productTypeFilter = ProductFilters.createCheckboxFilter({
-      title: CATALOG_TEXTS.PRODUCT_TYPE_FILTER,
-      options: PRODUCT_TYPE_FILTER,
-      filterId: 'type',
-    });
-
-    const tasteFilter = ProductFilters.createCheckboxFilter({
-      title: CATALOG_TEXTS.TASTE_FILTER,
-      options: FLAVOUR_FILTER,
-      filterId: 'taste',
-    });
-
-    const dietFilter = ProductFilters.createCheckboxFilter({
-      title: CATALOG_TEXTS.DIET_FILTER,
-      options: DIET_FILTER,
-      filterId: 'diet',
-    });
-
-    const fillingFilter = ProductFilters.createCheckboxFilter({
-      title: CATALOG_TEXTS.FILLING_FILTER,
-      options: FILLING_FILTER,
-      filterId: 'filling',
-    });
-
-    const toppingFilter = ProductFilters.createCheckboxFilter({
-      title: CATALOG_TEXTS.TOPPING_FILTER,
-      options: TOPPING_FILTER,
-      filterId: 'topping',
-    });
-
-    const promoFilter = ProductFilters.createDropdownFilter(
-      CATALOG_TEXTS.PROMO_FILTER,
-      PROMO_FILTER,
-      'promo'
-    );
-
+    const filters = ProductFilters.createFilters();
     filterState.subscribe(this.handleFilterChange);
-    this.component.append(productTypeFilter);
-    this.component.append(tasteFilter);
-    this.component.append(dietFilter);
-    this.component.append(toppingFilter);
-    this.component.append(fillingFilter);
-    this.component.append(promoFilter);
+    for (const filter of filters) this.component.append(filter);
   }
 }

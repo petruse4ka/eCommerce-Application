@@ -1,7 +1,7 @@
 import { CHECKBOX_STYLE } from '@/styles/inputs/inputs';
 
 export const FILTERS_STYLES = {
-  CONTAINER: ['flex', 'flex-col', 'gap-6', 'w-[280px]'],
+  CONTAINER: ['flex', 'flex-col', 'gap-6'],
   FILTER_CONTAINER: ['flex', 'flex-col', 'gap-2'],
   FILTER_TITLE: ['text-lg', 'font-semibold'],
   OPTIONS_CONTAINER: ['flex', 'flex-col', 'gap-2'],
@@ -25,4 +25,18 @@ export const FILTERS_STYLES = {
     'w-full',
     'sm:w-auto',
   ],
+  RANGE_CONTAINER: ['flex', 'items-center', 'gap-2'],
+  RANGE_INPUT: [
+    'w-20',
+    'px-2',
+    'py-1',
+    'border',
+    'border-black/55',
+    'rounded',
+    'text-sm',
+    'hover:border-black',
+    'focus:outline-none',
+    'focus:border-black',
+  ],
+  RANGE_LABEL: ['text-sm', 'text-gray-600'],
 };

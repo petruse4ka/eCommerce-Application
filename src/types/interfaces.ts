@@ -7,6 +7,7 @@ export interface ElementParameters {
   callback?: (event: Event) => void;
   eventType?: string;
   attributes?: Record<string, string>;
+  id?: string;
 }
 
 export interface InputParameters extends ElementParameters {
@@ -18,6 +19,9 @@ export interface InputParameters extends ElementParameters {
   required?: boolean;
   disabled?: boolean;
   eventType?: string;
+  min?: string;
+  max?: string;
+  step?: string;
 }
 
 export interface ImageParameters extends ElementParameters {

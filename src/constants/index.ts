@@ -10,6 +10,19 @@ export const VALIDATE_CONST = {
 
 export const DEFAULT_OPTIONS_COUNT = 5;
 
+export const FILTER_RANGES = {
+  PRICE: {
+    MIN: 0,
+    MAX: 100,
+    STEP: 1,
+  },
+  WEIGHT: {
+    MIN: 0,
+    MAX: 1000,
+    STEP: 10,
+  },
+};
+
 export const SUBHEADER_PROMO_TEXT = {
   DELIVERY: 'Быстрая доставка',
   FRESH: 'Гарантия свежести',
@@ -176,6 +189,10 @@ export const CATALOG_TEXTS = {
   FILLING_FILTER: 'Наполнитель',
   TOPPING_FILTER: 'Глазурь',
   PROMO_FILTER: 'Спецпредложение',
+  PRICE_FILTER: 'Цена',
+  WEIGHT_FILTER: 'Вес',
   SHOW_MORE: 'Показать еще ↓',
   SHOW_LESS: 'Скрыть ↑',
+  RANGE_FROM: 'от',
+  RANGE_TO: 'до',
 };
