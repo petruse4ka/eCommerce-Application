@@ -44,13 +44,33 @@ export interface AuthResponse {
   token_type: string;
 }
 
+export interface Customer {
+  addresses: Addresses[];
+  authenticationMode: string;
+  billingAddressIds: string[];
+  createdAt: string;
+  createdBy: { clientId: string; isPlatformClient: boolean };
+  customerGroupAssignments: [];
+  dateOfBirth: string;
+  defaultBillingAddressId: string;
+  defaultShippingAddressId: string;
+  email: string;
+  firstName: string;
+  id: string;
+  isEmailVerified: boolean;
+  lastMessageSequenceNumber: number;
+  lastModifiedAt: string;
+  lastModifiedBy: { clientId: string; isPlatformClient: boolean };
+  lastName: string;
+  password: string;
+  shippingAddressIds: string[];
+  stores: [];
+  version: number;
+  versionModifiedAt: string;
+}
+
 export interface CustomerResponse {
-  customer: {
-    id: string;
-    version: number;
-    createdAt: string;
-    lastModifiedAt: string;
-  };
+  customer: Customer;
 }
 
 export interface InputComponent {
@@ -68,6 +88,7 @@ export interface InputComponent {
 }
 
 export interface Addresses {
+  id?: string;
   country: string;
   city: string;
   streetName: string;
@@ -121,4 +142,19 @@ export interface ErrorResponse {
   errors: ErrorInfo[];
   error: string;
   error_description: string;
+}
+
+export interface AddressInfo {
+  Страна: string;
+  Город: string;
+  Улица: string;
+  'Почтовый индекс': string;
+  isDefault: boolean;
+}
+
+export interface UserInfo {
+  Имя: string;
+  Фамилия: string;
+  'Дата рождения': string;
+  Почта: string;
 }

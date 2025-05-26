@@ -91,3 +91,14 @@ export enum CheckboxText {
   DEFAULT_SAVE = 'Сохранить адрес по умолчанию',
   SAME_ADDRESSES = 'Использовать одинаковые адреса',
 }
+
+export enum TabAccount {
+  INFO = 'Персональная информация',
+  ADDRESSES = 'Адреса',
+  CHANGE_PASS = 'Сменить пароль',
+}
+
+export enum AddressType {
+  SHIPPING = 'shipping',
+  BILLING = 'billing',
+}

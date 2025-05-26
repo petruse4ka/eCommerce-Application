@@ -1,10 +1,11 @@
 import { PERSONAL_INFO } from '@/styles/personal';
+import type { UserInfo } from '@/types/interfaces';
 import ElementBuilder from '@/utils/element-builder';
 
 import BaseComponent from '../base';
 
 export default class PersonalInfo extends BaseComponent {
-  constructor(userInfo: Record<string, string> | void) {
+  constructor(userInfo: UserInfo | void) {
     super({
       tag: 'section',
       className: PERSONAL_INFO.CONTAINER,
@@ -12,7 +13,7 @@ export default class PersonalInfo extends BaseComponent {
 
     if (userInfo) {
       for (const [key, value] of Object.entries(userInfo)) {
-        this.createInfoElement(key, value);
+        this.createInfoElement(key, String(value));
       }
     }
   }
@@ -31,7 +32,7 @@ export default class PersonalInfo extends BaseComponent {
 
     const value = new ElementBuilder({
       tag: 'p',
-      className: PERSONAL_INFO.CONTAINER,
+      className: PERSONAL_INFO.LINE.VALUE,
       textContent: valueText,
     }).getElement();
 
