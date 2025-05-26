@@ -122,3 +122,9 @@ export interface ErrorResponse {
   error: string;
   error_description: string;
 }
+
+export interface TitleProduct {
+  title: string;
+  description: string;
+  weight: string;
+}

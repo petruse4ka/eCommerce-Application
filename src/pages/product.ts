@@ -1,7 +1,6 @@
 import BaseComponent from '@/components/base';
-/*import Guarantees from '@/components/promo/guarantees';
-import Intro from '@/components/promo/intro';
-import Packages from '@/components/promo/packages';*/
+import ProductTitle from '@/components/product/title';
+import productData from '@/data/production';
 import { CONTAINER, MAIN_CONTAINER } from '@/styles/pages/underconstruction';
 import ElementBuilder from '@/utils/element-builder';
 
@@ -20,10 +19,22 @@ export default class ProductPage extends BaseComponent {
       className: MAIN_CONTAINER,
     }).getElement();
 
-    /* const intro = new Intro();
-    const packages = new Packages();
-    const guarantees = new Guarantees();
-    mainContainer.append(intro.getElement(), packages.getElement(), guarantees.getElement());*/
+    const attributes = productData.masterVariant.attributes;
+    const transformedObject: { [key: string]: string | number | boolean | string[] } =
+      Object.fromEntries(
+        attributes.map((attribute) => [
+          attribute.name,
+          typeof attribute.value === 'object' ? JSON.stringify(attribute.value) : attribute.value,
+        ])
+      );
+    console.log(transformedObject);
+    const product = new ProductTitle({
+      title: String(transformedObject['name']),
+      weight: String(transformedObject['weight']),
+      description: 'Какое-то описание',
+    });
+
+    mainContainer.append(product.getElement());
     this.component.append(mainContainer);
   }
 }
