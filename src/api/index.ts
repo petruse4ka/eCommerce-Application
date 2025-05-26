@@ -42,6 +42,7 @@ export default class API {
           });
 
           userState.setAuthorizationState(true);
+          userState.setUserInfoState(body.customer);
           Router.followRoute(Route.HOME);
 
           return body.customer.id;
@@ -74,6 +75,7 @@ export default class API {
       })
       .then((body: CustomerResponse) => {
         userState.setAuthorizationState(true);
+        userState.setUserInfoState(body.customer);
         Router.followRoute(Route.HOME);
         return body.customer.id;
       });
