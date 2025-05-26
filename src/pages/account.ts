@@ -4,6 +4,7 @@ import AddressList from '@/components/address-list';
 import BaseComponent from '@/components/base';
 import PersonalInfo from '@/components/personal-info';
 import Tabs from '@/components/tabs';
+import { userState } from '@/store/user-state';
 import { ACCOUNT_PAGE } from '@/styles/pages/account';
 import { AddressType, TabAccount } from '@/types/enums';
 import TransformApiData from '@/utils/transform-api-data';
@@ -24,32 +25,46 @@ export default class AccountPage extends BaseComponent {
       className: ACCOUNT_PAGE.INFO_CONTAINER,
     }).getElement();
 
+    this.addressesNode = [];
+
+    this.userInfoNode = new PersonalInfo(TransformApiData.transformUserInfo()).getElement();
+    userState.subscribe(this.render.bind(this));
+  }
+
+  private render(): void {
+    this.createTabs();
+    this.createAddresses();
+    this.createUserInfo();
+
+    this.component.append(this.infoContainer);
+
+    userState.unsubscribe(this.render.bind(this));
+  }
+
+  private createAddresses(): void {
     const addressInfo = TransformApiData.transformUserAddresses();
 
     const shippingAddressList = new AddressList(
       'Адреса доставки',
       addressInfo[AddressType.SHIPPING]
-    );
+    ).getElement();
+
     const billingAddressList = new AddressList(
       'Рассчетные адреса',
       addressInfo[AddressType.BILLING]
-    );
+    ).getElement();
 
-    this.addressesNode = [shippingAddressList.getElement(), billingAddressList.getElement()];
+    this.addressesNode = [shippingAddressList, billingAddressList];
 
-    this.userInfoNode = new PersonalInfo(TransformApiData.transformUserInfo()).getElement();
-
-    this.render();
-  }
-
-  private render(): void {
-    this.createTabs();
-    this.infoContainer.append(this.userInfoNode);
     for (const node of this.addressesNode) {
       this.infoContainer.append(node);
     }
+  }
 
-    this.component.append(this.infoContainer);
+  private createUserInfo(): void {
+    this.userInfoNode = new PersonalInfo(TransformApiData.transformUserInfo()).getElement();
+
+    this.infoContainer.append(this.userInfoNode);
   }
 
   private createTabs(): void {

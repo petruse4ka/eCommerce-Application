@@ -5,7 +5,6 @@ import type { AddressInfo, UserInfo } from '@/types/interfaces';
 export default class TransformApiData {
   public static transformUserInfo(): UserInfo | void {
     const userInfo = userState.getUserInfoState();
-
     if (userInfo) {
       const { firstName, lastName, dateOfBirth, email } = userInfo;
 
