@@ -1,0 +1,56 @@
+export const PRODUCT_STYLES = {
+  PRICES_CONTAINER: [
+    'grid',
+    'grid-cols-2',
+    'grid-rows-3',
+    'h-[300px]',
+    'w-full',
+    'gap-2',
+    'p-2',
+    'my-4',
+    'bg-white',
+    'rounded-sm',
+  ],
+  TITLE_CONTAINER: [
+    'flex',
+    'flex-col',
+    'gap-2',
+    'items-start',
+    'p-2',
+    'my-4',
+    'bg-white',
+    'rounded-sm',
+  ],
+  DETAILED_CONTAINER: ['grid-col-span-2', 'p-2', 'bg-white', 'rounded-sm'],
+  TITLE: ['text-3xl', 'font-semibold', 'text-left'],
+  PARAMETER_NAME: ['font-semibold', 'mb-4'],
+  PARAMETER_DESCRIPTION: [],
+  DESCRIPTION: [],
+  ASIDE: ['flex', 'flex-col'],
+  PRICE: ['text-accent'],
+  QUANTITY_BLOCK: ['bg-red'],
+};
+
+export const CONTAINER = [
+  'flex',
+  'flex-col',
+  'items-center',
+  'pt-25',
+  'pb-15',
+  'text-base',
+  'leading-normal',
+  'bg-[--color-background]',
+  'text-black',
+  'flex-grow',
+];
+
+export const MAIN_CONTAINER = [
+  'w-full',
+  'relative',
+  'px-5',
+  'flex',
+  'flex-col',
+  'justify-center',
+  'items-end',
+  'mb-10',
+];
