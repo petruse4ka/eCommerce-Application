@@ -23,7 +23,7 @@ export default class ProductTitle extends BaseComponent {
     }).getElement();
 
     const weightContainer = new ElementBuilder({
-      tag: 'span',
+      tag: 'div',
       className: PRODUCT_STYLES.PARAMETER_DESCRIPTION,
     }).getElement();
 
