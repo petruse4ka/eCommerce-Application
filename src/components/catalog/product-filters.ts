@@ -116,8 +116,7 @@ export default class ProductFilters extends BaseComponent {
       },
     }).getElement();
 
-    optionContainer.append(checkbox);
-    optionContainer.append(label);
+    optionContainer.append(checkbox, label);
     return optionContainer;
   }
 
@@ -147,8 +146,7 @@ export default class ProductFilters extends BaseComponent {
     const filterTitle = ProductFilters.createFilterTitle(parameters.title);
     const optionsContainer = this.createAllCheckboxOptions(parameters.options, parameters.filterId);
 
-    filterContainer.append(filterTitle);
-    filterContainer.append(optionsContainer);
+    filterContainer.append(filterTitle, optionsContainer);
 
     if (parameters.options.length > DEFAULT_OPTIONS_COUNT) {
       const showMoreButton = ProductFilters.createShowMoreButton(optionsContainer);
@@ -196,9 +194,7 @@ export default class ProductFilters extends BaseComponent {
       });
     }
 
-    dropdownContainer.append(filterTitle);
-    dropdownContainer.append(selectElement);
-
+    dropdownContainer.append(filterTitle, selectElement);
     return dropdownContainer;
   }
 
@@ -276,12 +272,8 @@ export default class ProductFilters extends BaseComponent {
 
     const { minInput, maxInput } = this.createRangeInputs(filterId, min, max, step);
 
-    inputsContainer.append(minLabel);
-    inputsContainer.append(minInput);
-    inputsContainer.append(maxLabel);
-    inputsContainer.append(maxInput);
-    rangeContainer.append(filterTitle);
-    rangeContainer.append(inputsContainer);
+    inputsContainer.append(minLabel, minInput, maxLabel, maxInput);
+    rangeContainer.append(filterTitle, inputsContainer);
 
     return rangeContainer;
   }
@@ -412,8 +404,6 @@ export default class ProductFilters extends BaseComponent {
       filtersContainer.getElement().append(filter);
     }
 
-    this.component.append(selectedFilters);
-    this.component.append(toggleButton);
-    this.component.append(filtersContainer.getElement());
+    this.component.append(selectedFilters, toggleButton, filtersContainer.getElement());
   }
 }

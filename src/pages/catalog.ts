@@ -43,10 +43,8 @@ export default class CatalogPage extends BaseComponent {
 
     filtersSection.append(productFilters);
     productListSection.append(productList);
-    catalogContainer.append(filtersSection);
-    catalogContainer.append(productListSection);
+    catalogContainer.append(filtersSection, productListSection);
 
-    this.component.append(title);
-    this.component.append(catalogContainer);
+    this.component.append(title, catalogContainer);
   }
 }

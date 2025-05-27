@@ -29,6 +29,14 @@ export default class ProductList extends BaseComponent {
       type: InputType.TEXT,
       placeholder: CATALOG_TEXTS.SEARCH_PLACEHOLDER,
       className: SORTING_STYLES.SEARCH_INPUT,
+      eventType: 'input',
+      callback: (): void => {
+        if (searchInput instanceof HTMLInputElement && searchInput.value.length > 0) {
+          button.classList.remove(...CUSTOM_BUTTON_STYLE.HIDDEN);
+        } else {
+          button.classList.add(...CUSTOM_BUTTON_STYLE.HIDDEN);
+        }
+      },
     }).getElement();
 
     const button = new Button({
@@ -37,23 +45,12 @@ export default class ProductList extends BaseComponent {
       callback: (): void => {
         if (searchInput instanceof HTMLInputElement) {
           searchInput.value = '';
-          button.getElement().classList.add(...CUSTOM_BUTTON_STYLE.HIDDEN);
+          button.classList.add(...CUSTOM_BUTTON_STYLE.HIDDEN);
         }
       },
-    });
+    }).getElement();
 
-    searchInput.addEventListener('input', () => {
-      if (searchInput instanceof HTMLInputElement) {
-        if (searchInput.value) {
-          button.getElement().classList.remove(...CUSTOM_BUTTON_STYLE.HIDDEN);
-        } else {
-          button.getElement().classList.add(...CUSTOM_BUTTON_STYLE.HIDDEN);
-        }
-      }
-    });
-
-    searchContainer.append(searchInput);
-    searchContainer.append(button.getElement());
+    searchContainer.append(searchInput, button);
 
     return searchContainer;
   }
@@ -84,9 +81,7 @@ export default class ProductList extends BaseComponent {
     const searchContainer = ProductList.createSearchContainer();
 
     dropdownContainer.append(select.getElement());
-    container.append(productCounter);
-    container.append(searchContainer);
-    container.append(dropdownContainer);
+    container.append(productCounter, searchContainer, dropdownContainer);
 
     return container;
   }
@@ -110,8 +105,7 @@ export default class ProductList extends BaseComponent {
         textContent: `${product.discountedPrice} €`,
       }).getElement();
 
-      priceContainer.append(originalPrice);
-      priceContainer.append(discountedPrice);
+      priceContainer.append(originalPrice, discountedPrice);
     } else {
       const regularPrice = new ElementBuilder({
         tag: 'span',
@@ -162,11 +156,8 @@ export default class ProductList extends BaseComponent {
     const priceContainer = ProductList.createPriceContainer(product);
 
     imageContainer.append(image);
-    contentContainer.append(title);
-    contentContainer.append(description);
-    contentContainer.append(priceContainer);
-    card.append(imageContainer);
-    card.append(contentContainer);
+    contentContainer.append(title, description, priceContainer);
+    card.append(imageContainer, contentContainer);
 
     return card;
   }
@@ -184,7 +175,6 @@ export default class ProductList extends BaseComponent {
       productsContainer.append(productItem);
     }
 
-    this.component.append(sortingContainer);
-    this.component.append(productsContainer);
+    this.component.append(sortingContainer, productsContainer);
   }
 }

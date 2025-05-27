@@ -36,8 +36,7 @@ export default class SelectedFilters extends BaseComponent {
       },
     }).getElement();
 
-    item.append(itemValue);
-    item.append(removeButton);
+    item.append(itemValue, removeButton);
     return item;
   }
 
@@ -73,8 +72,7 @@ export default class SelectedFilters extends BaseComponent {
       itemContainer.append(item);
     }
 
-    list.append(title);
-    list.append(itemContainer);
+    list.append(title, itemContainer);
     return list;
   }
 
@@ -111,6 +109,7 @@ export default class SelectedFilters extends BaseComponent {
         className: FILTERS_STYLES.NO_FILTERS_MESSAGE,
         textContent: CATALOG_TEXTS.NO_APPLIED_FILTERS,
       }).getElement();
+
       this.component.append(message);
       return;
     }
@@ -129,7 +128,6 @@ export default class SelectedFilters extends BaseComponent {
 
     const clearAllButton = SelectedFilters.createClearAllButton();
 
-    this.component.append(listContainer);
-    this.component.append(clearAllButton);
+    this.component.append(listContainer, clearAllButton);
   }
 }
