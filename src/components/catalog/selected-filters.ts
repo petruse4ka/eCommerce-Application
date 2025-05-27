@@ -29,7 +29,7 @@ export default class SelectedFilters extends BaseComponent {
     }).getElement();
 
     const removeButton = new Button({
-      style: 'FILTER_TAG_BUTTON',
+      style: 'FILTER_TAG_DELETE',
       textContent: '×',
       callback: (): void => {
         filterState.toggleOption(filterId, value);
@@ -43,7 +43,7 @@ export default class SelectedFilters extends BaseComponent {
 
   private static createClearAllButton(): HTMLElement {
     return new Button({
-      style: 'SECONDARY_PINK',
+      style: 'SECONDARY_PINK_FILTER',
       textContent: CATALOG_TEXTS.CLEAR_ALL,
       callback: (): void => {
         filterState.clearAll();
@@ -94,15 +94,23 @@ export default class SelectedFilters extends BaseComponent {
 
     const selectedFilters = filterState.getSelectedFilters();
 
-    if (Object.keys(selectedFilters).length === 0) {
-      return;
-    }
-
     const title = new ElementBuilder({
       tag: 'h3',
       className: FILTERS_STYLES.FILTERS_TITLE,
       textContent: CATALOG_TEXTS.APPLIED_FILTERS,
     }).getElement();
+
+    this.component.append(title);
+
+    if (Object.keys(selectedFilters).length === 0) {
+      const message = new ElementBuilder({
+        tag: 'p',
+        className: FILTERS_STYLES.NO_FILTERS_MESSAGE,
+        textContent: CATALOG_TEXTS.NO_APPLIED_FILTERS,
+      }).getElement();
+      this.component.append(message);
+      return;
+    }
 
     const listContainer = new ElementBuilder({
       tag: 'div',
@@ -118,7 +126,6 @@ export default class SelectedFilters extends BaseComponent {
 
     const clearAllButton = SelectedFilters.createClearAllButton();
 
-    this.component.append(title);
     this.component.append(listContainer);
     this.component.append(clearAllButton);
   }

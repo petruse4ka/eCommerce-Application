@@ -48,6 +48,15 @@ export const CUSTOM_BUTTON_STYLE = {
     'hover:bg-secondary-hover',
     'hover:text-white',
   ],
+  SECONDARY_PINK_FILTER: [
+    ...STANDARD_BUTTON_STYLE,
+    'bg-white',
+    'text-accent',
+    'border-accent',
+    'hover:bg-accent-hover',
+    'hover:text-white',
+    'mt-5',
+  ],
   SHOW_MORE: ['text-accent', 'text-sm', 'cursor-pointer', 'hover:text-accent-hover', 'self-start'],
   CLEAR: [
     'hidden',
@@ -61,7 +70,7 @@ export const CUSTOM_BUTTON_STYLE = {
     'text-lg',
     'font-bold',
   ],
-  FILTER_TAG_BUTTON: [
+  FILTER_TAG_DELETE: [
     'cursor-pointer',
     'mx-1',
     'p-1',

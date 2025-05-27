@@ -195,6 +195,8 @@ export const CATALOG_TEXTS = {
   SHOW_LESS: 'Скрыть ↑',
   RANGE_FROM: 'от',
   RANGE_TO: 'до',
-  CLEAR_ALL: 'Очистить все',
-  APPLIED_FILTERS: 'Примененные фильтры',
+  CLEAR_ALL: 'Удалить все фильтры',
+  APPLIED_FILTERS: 'Выбранные фильтры',
+  NO_APPLIED_FILTERS:
+    'В данный момент ни один фильтр не выбран. Вы можете выбрать фильтры в списке снизу',
 };

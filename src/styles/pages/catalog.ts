@@ -10,6 +10,7 @@ export const CATALOG_STYLES = {
     'rounded-lg',
     'shadow-md',
     'p-4',
+    'pb-10',
   ],
   PRODUCT_LIST_SECTION: ['xl:col-span-3'],
 };

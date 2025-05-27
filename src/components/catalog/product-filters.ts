@@ -29,7 +29,7 @@ export default class ProductFilters extends BaseComponent {
   };
 
   constructor() {
-    super({ tag: 'div', className: FILTERS_STYLES.CONTAINER });
+    super({ tag: 'div', className: FILTERS_STYLES.WRAPPER });
     this.filters = {
       checkboxes: new Map(),
       ranges: new Map(),
@@ -382,13 +382,20 @@ export default class ProductFilters extends BaseComponent {
 
   private render(): void {
     const selectedFilters = new SelectedFilters().getElement();
+    const filtersContainer = new ElementBuilder({
+      tag: 'div',
+      className: FILTERS_STYLES.CONTAINER,
+    }).getElement();
+
     const allFilters = this.createFilters();
 
     filterState.subscribe(this.handleFilterChange);
-    this.component.append(selectedFilters);
 
     for (const filter of allFilters) {
-      this.component.append(filter);
+      filtersContainer.append(filter);
     }
+
+    this.component.append(selectedFilters);
+    this.component.append(filtersContainer);
   }
 }
