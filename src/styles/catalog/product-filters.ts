@@ -3,6 +3,7 @@ import { CHECKBOX_STYLE } from '@/styles/inputs/inputs';
 export const FILTERS_STYLES = {
   WRAPPER: ['flex', 'flex-col', 'gap-6'],
   CONTAINER: [
+    'hidden',
     'grid',
     'grid-cols-1',
     'sm:grid-cols-2',

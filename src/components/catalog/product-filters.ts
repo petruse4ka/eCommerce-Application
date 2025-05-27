@@ -27,6 +27,7 @@ export default class ProductFilters extends BaseComponent {
     ranges: Map<FilterId, { min: HTMLInputElement; max: HTMLInputElement }>;
     dropdowns: Map<FilterId, HTMLSelectElement>;
   };
+  private isFiltersVisible: boolean;
 
   constructor() {
     super({ tag: 'div', className: FILTERS_STYLES.WRAPPER });
@@ -35,6 +36,7 @@ export default class ProductFilters extends BaseComponent {
       ranges: new Map(),
       dropdowns: new Map(),
     };
+    this.isFiltersVisible = false;
     this.render();
   }
 
@@ -385,6 +387,21 @@ export default class ProductFilters extends BaseComponent {
     const filtersContainer = new ElementBuilder({
       tag: 'div',
       className: FILTERS_STYLES.CONTAINER,
+    });
+
+    const toggleButton = new Button({
+      style: 'TOGGLE_FILTERS',
+      textContent: CATALOG_TEXTS.SHOW_FILTERS,
+      callback: (): void => {
+        this.isFiltersVisible = !this.isFiltersVisible;
+        if (this.isFiltersVisible) {
+          filtersContainer.removeCssClasses(FILTERS_STYLES.HIDDEN);
+          toggleButton.textContent = CATALOG_TEXTS.HIDE_FILTERS;
+        } else {
+          filtersContainer.applyCssClasses(FILTERS_STYLES.HIDDEN);
+          toggleButton.textContent = CATALOG_TEXTS.SHOW_FILTERS;
+        }
+      },
     }).getElement();
 
     const allFilters = this.createFilters();
@@ -392,10 +409,11 @@ export default class ProductFilters extends BaseComponent {
     filterState.subscribe(this.handleFilterChange);
 
     for (const filter of allFilters) {
-      filtersContainer.append(filter);
+      filtersContainer.getElement().append(filter);
     }
 
     this.component.append(selectedFilters);
-    this.component.append(filtersContainer);
+    this.component.append(toggleButton);
+    this.component.append(filtersContainer.getElement());
   }
 }

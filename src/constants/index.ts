@@ -199,4 +199,6 @@ export const CATALOG_TEXTS = {
   APPLIED_FILTERS: 'Выбранные фильтры',
   NO_APPLIED_FILTERS:
     'В данный момент ни один фильтр не выбран. Вы можете выбрать фильтры в списке снизу',
+  SHOW_FILTERS: 'Показать фильтры',
+  HIDE_FILTERS: 'Скрыть фильтры',
 };
