@@ -103,23 +103,35 @@ export default class API {
         if ('error' in body) {
           throw new Error(body.error);
         } else {
-          return body.access_token;
+          const { access_token: token } = body;
+          userState.setTokenState(token);
+          return token;
         }
       });
   }
 
   private static async authentication(): Promise<string> {
-    return await fetch(import.meta.env['VITE_CTP_AUTH_URL'] + ApiEndpoint.AUTHENTICATION, {
-      method: ApiMethods.POST,
-      headers: {
-        Authorization: `Basic ${clientCredentials}`,
-        'Content-Type': ContentType.URLENCODED,
-      },
-      body: new URLSearchParams({
-        grant_type: 'client_credentials',
-      }),
-    })
+    return await fetch(
+      import.meta.env['VITE_CTP_AUTH_URL'] +
+        ApiEndpoint.OATH +
+        import.meta.env['VITE_CTP_PROJECT_KEY'] +
+        ApiEndpoint.AUTHENTICATION,
+      {
+        method: ApiMethods.POST,
+        headers: {
+          Authorization: `Basic ${clientCredentials}`,
+          'Content-Type': ContentType.URLENCODED,
+        },
+        body: new URLSearchParams({
+          grant_type: 'client_credentials',
+        }),
+      }
+    )
       .then((response) => response.json())
-      .then((body: AuthResponse) => body.access_token);
+      .then((body: AuthResponse) => {
+        const { access_token: token } = body;
+        userState.setTokenState(token);
+        return token;
+      });
   }
 }
