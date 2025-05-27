@@ -3,9 +3,10 @@ import ProductAttributes from '@/components/product/attributes';
 import ProductDelivery from '@/components/product/delivery';
 import Detailed from '@/components/product/detailed';
 import ProductPrices from '@/components/product/prices';
+import ProductSlider from '@/components/product/slider';
 import ProductTitle from '@/components/product/title';
 import productData from '@/data/production';
-import { CONTAINER, MAIN_CONTAINER } from '@/styles/pages/product';
+import { PRODUCT_STYLES } from '@/styles/pages/product';
 import type { Attributes } from '@/types/types';
 import ElementBuilder from '@/utils/element-builder';
 
@@ -13,7 +14,7 @@ export default class ProductPage extends BaseComponent {
   constructor() {
     super({
       tag: 'main',
-      className: CONTAINER,
+      className: PRODUCT_STYLES.MAIN_CONTAINER,
     });
     this.render();
   }
@@ -32,12 +33,12 @@ export default class ProductPage extends BaseComponent {
   private render(): void {
     const mainContainer = new ElementBuilder({
       tag: 'div',
-      className: MAIN_CONTAINER,
+      className: PRODUCT_STYLES.CONTAINER,
     }).getElement();
 
     const rightAside = new ElementBuilder({
-      tag: 'rightAside',
-      className: MAIN_CONTAINER,
+      tag: 'aside',
+      className: PRODUCT_STYLES.ASIDE,
     }).getElement();
 
     const transformedObject = ProductPage.parseAttribute();
@@ -58,8 +59,10 @@ export default class ProductPage extends BaseComponent {
     const delivery = new ProductDelivery();
     rightAside.append(delivery.getElement());
 
+    const slider = new ProductSlider();
+
     const detailed = new Detailed(String(transformedObject['description']));
-    mainContainer.append(rightAside, detailed.getElement());
-    this.component.append(mainContainer);
+    mainContainer.append(slider.getElement(), rightAside);
+    this.component.append(mainContainer, detailed.getElement());
   }
 }
