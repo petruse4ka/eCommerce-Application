@@ -5,5 +5,8 @@ export function isErrorInfo(object: unknown): object is { code: string; field: s
 }
 
 export function isFilterId(id: string): id is FilterId {
-  return id in FilterId;
+  for (const value of Object.values(FilterId)) {
+    if (value === id) return true;
+  }
+  return false;
 }
