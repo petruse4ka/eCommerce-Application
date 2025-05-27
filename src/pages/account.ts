@@ -6,7 +6,8 @@ import PersonalInfo from '@/components/personal-info';
 import Tabs from '@/components/tabs';
 import { userState } from '@/store/user-state';
 import { ACCOUNT_PAGE } from '@/styles/pages/account';
-import { AddressType, TabAccount } from '@/types/enums';
+import { AddressType, AddressTypeText, TabAccount } from '@/types/enums';
+import ElementBuilder from '@/utils/element-builder';
 import TransformApiData from '@/utils/transform-api-data';
 
 export default class AccountPage extends BaseComponent {
@@ -20,7 +21,7 @@ export default class AccountPage extends BaseComponent {
       className: ACCOUNT_PAGE.CONTAINER,
     });
 
-    this.infoContainer = new BaseComponent({
+    this.infoContainer = new ElementBuilder({
       tag: 'div',
       className: ACCOUNT_PAGE.INFO_CONTAINER,
     }).getElement();
@@ -28,7 +29,8 @@ export default class AccountPage extends BaseComponent {
     this.addressesNode = [];
 
     this.userInfoNode = new PersonalInfo(TransformApiData.transformUserInfo()).getElement();
-    userState.subscribe(this.render.bind(this));
+    userState.subscribe(this.updateContent.bind(this));
+    this.render();
   }
 
   private render(): void {
@@ -37,20 +39,30 @@ export default class AccountPage extends BaseComponent {
     this.createUserInfo();
 
     this.component.append(this.infoContainer);
+  }
 
-    userState.unsubscribe(this.render.bind(this));
+  private updateContent(): void {
+    while (this.infoContainer.firstChild) {
+      this.infoContainer.firstChild.remove();
+    }
+
+    while (this.component.firstChild) {
+      this.component.firstChild.remove();
+    }
+
+    this.render();
   }
 
   private createAddresses(): void {
     const addressInfo = TransformApiData.transformUserAddresses();
 
     const shippingAddressList = new AddressList(
-      'Адреса доставки',
+      AddressTypeText.SHIPPING,
       addressInfo[AddressType.SHIPPING]
     ).getElement();
 
     const billingAddressList = new AddressList(
-      'Рассчетные адреса',
+      AddressTypeText.BILLING,
       addressInfo[AddressType.BILLING]
     ).getElement();
 

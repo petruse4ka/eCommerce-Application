@@ -1,5 +1,5 @@
 import { userState } from '@/store/user-state';
-import { AddressType } from '@/types/enums';
+import { AddressKey, AddressType, UserInfoKey } from '@/types/enums';
 import type { AddressInfo, UserInfo } from '@/types/interfaces';
 
 export default class TransformApiData {
@@ -9,10 +9,10 @@ export default class TransformApiData {
       const { firstName, lastName, dateOfBirth, email } = userInfo;
 
       return {
-        Имя: firstName,
-        Фамилия: lastName,
-        'Дата рождения': dateOfBirth,
-        Почта: email,
+        [UserInfoKey.FIRST_NAME]: firstName,
+        [UserInfoKey.LAST_NAME]: lastName,
+        [UserInfoKey.DATA_OF_BIRTH]: dateOfBirth,
+        [UserInfoKey.EMAIL]: email,
       };
     }
   }
@@ -38,10 +38,10 @@ export default class TransformApiData {
           const { id, streetName, city, postalCode } = address;
 
           const addressTransform = {
-            Страна: 'Россия',
-            Город: city,
-            Улица: streetName,
-            'Почтовый индекс': postalCode,
+            [AddressKey.COUNTRY]: 'Россия',
+            [AddressKey.CITY]: city,
+            [AddressKey.STREET]: streetName,
+            [AddressKey.POSTAL_CODE]: postalCode,
             isDefault: defaultBillingAddressId === id || defaultShippingAddressId === id,
           };
 

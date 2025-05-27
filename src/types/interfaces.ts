@@ -1,4 +1,4 @@
-import type { ButtonType, InputType, Route } from './enums';
+import type { AddressKey, ButtonType, InputType, Route, UserInfoKey } from './enums';
 
 export interface ElementParameters {
   tag: string;
@@ -145,16 +145,16 @@ export interface ErrorResponse {
 }
 
 export interface AddressInfo {
-  Страна: string;
-  Город: string;
-  Улица: string;
-  'Почтовый индекс': string;
+  [AddressKey.COUNTRY]: string;
+  [AddressKey.CITY]: string;
+  [AddressKey.STREET]: string;
+  [AddressKey.POSTAL_CODE]: string;
   isDefault: boolean;
 }
 
 export interface UserInfo {
-  Имя: string;
-  Фамилия: string;
-  'Дата рождения': string;
-  Почта: string;
+  [UserInfoKey.FIRST_NAME]: string;
+  [UserInfoKey.LAST_NAME]: string;
+  [UserInfoKey.DATA_OF_BIRTH]: string;
+  [UserInfoKey.EMAIL]: string;
 }

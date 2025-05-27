@@ -1,9 +1,10 @@
 import { TAB } from '@/styles/tab';
+import ElementBuilder from '@/utils/element-builder';
 
 import BaseComponent from '../base';
 
 export default class Tabs extends BaseComponent {
-  private tabs: BaseComponent[];
+  private tabs: ElementBuilder[];
 
   constructor(tabsInfo: { textContent: string; isActive: boolean; callback: () => void }[]) {
     super({
@@ -19,7 +20,7 @@ export default class Tabs extends BaseComponent {
   }
 
   private createTabItem(textContent: string, isActive: boolean, callback: () => void): void {
-    const tabItem = new BaseComponent({
+    const tabItem = new ElementBuilder({
       tag: 'div',
       className: isActive ? TAB.BUTTON_STYLE.ACTIVE : TAB.BUTTON_STYLE.DEFAULT,
       textContent,
@@ -38,13 +39,13 @@ export default class Tabs extends BaseComponent {
     this.getElement().append(tabItem.getElement());
   }
 
-  private toggleActive(node: BaseComponent): void {
+  private toggleActive(node: ElementBuilder): void {
     for (const tab of this.tabs) {
-      tab.removeClass(TAB.BUTTON_STYLE.ACTIVE);
-      tab.addClass(TAB.BUTTON_STYLE.DEFAULT);
+      tab.removeCssClasses(TAB.BUTTON_STYLE.ACTIVE);
+      tab.applyCssClasses(TAB.BUTTON_STYLE.DEFAULT);
     }
 
-    node.removeClass(TAB.BUTTON_STYLE.DEFAULT);
-    node.addClass(TAB.BUTTON_STYLE.ACTIVE);
+    node.removeCssClasses(TAB.BUTTON_STYLE.DEFAULT);
+    node.applyCssClasses(TAB.BUTTON_STYLE.ACTIVE);
   }
 }
