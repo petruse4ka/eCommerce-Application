@@ -26,7 +26,7 @@ export enum ApiMethods {
 
 export enum ApiEndpoint {
   OATH = '/oauth/',
-  AUTHENTICATION = `${OATH}token`,
+  AUTHENTICATION = '/anonymous/token',
   REGISTRATION = '/me/signup',
   LOGIN = '/me/login',
   USER = '/customers/token',

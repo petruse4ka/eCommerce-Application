@@ -3,9 +3,11 @@ import type { ActionHandler } from '@/types/types';
 export class UserState {
   private isAuthorized: boolean;
   private subscribers: ActionHandler[];
+  private token: string;
 
   constructor() {
     this.isAuthorized = false;
+    this.token = '';
     this.subscribers = [];
   }
 
@@ -16,6 +18,14 @@ export class UserState {
   public setAuthorizationState(value: boolean): void {
     this.isAuthorized = value;
     this.notify();
+  }
+
+  public getTokenState(): string {
+    return this.token;
+  }
+
+  public setTokenState(value: string): void {
+    this.token = value;
   }
 
   public subscribe(callback: ActionHandler): void {
