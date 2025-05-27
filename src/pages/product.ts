@@ -6,6 +6,7 @@ import ProductPrices from '@/components/product/prices';
 import ProductTitle from '@/components/product/title';
 import productData from '@/data/production';
 import { CONTAINER, MAIN_CONTAINER } from '@/styles/pages/product';
+import type { Attributes } from '@/types/types';
 import ElementBuilder from '@/utils/element-builder';
 
 export default class ProductPage extends BaseComponent {
@@ -15,6 +16,17 @@ export default class ProductPage extends BaseComponent {
       className: CONTAINER,
     });
     this.render();
+  }
+
+  private static parseAttribute(): Attributes {
+    const attributes = productData.masterVariant.attributes;
+    const transformedObject: Attributes = Object.fromEntries(
+      attributes.map((attribute) => [
+        attribute.name,
+        typeof attribute.value === 'object' ? JSON.stringify(attribute.value) : attribute.value,
+      ])
+    );
+    return transformedObject;
   }
 
   private render(): void {
@@ -28,14 +40,7 @@ export default class ProductPage extends BaseComponent {
       className: MAIN_CONTAINER,
     }).getElement();
 
-    const attributes = productData.masterVariant.attributes;
-    const transformedObject: { [key: string]: string | number | boolean | string[] } =
-      Object.fromEntries(
-        attributes.map((attribute) => [
-          attribute.name,
-          typeof attribute.value === 'object' ? JSON.stringify(attribute.value) : attribute.value,
-        ])
-      );
+    const transformedObject = ProductPage.parseAttribute();
 
     const product = new ProductTitle({
       title: String(transformedObject['name']),

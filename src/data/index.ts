@@ -5,6 +5,9 @@ import handMade from '@/assets/icons/footer-love.svg';
 import freshProductsIcon from '@/assets/icons/fresh-products.svg';
 import naturalIngredients from '@/assets/icons/natural-ingredients.svg';
 import wholesaleSale from '@/assets/icons/wholesale-offer.svg';
+import anonimDeliveryIcon from '@/assets/images/delivery/anonimDeliveryIcon.png';
+import payDeliveryIcon from '@/assets/images/delivery/payDeliveryIcon.png';
+import selfDeliveryIcon from '@/assets/images/delivery/selfDeliveryIcon.png';
 import anonymousIcon from '@/assets/images/guarantees/anonymous.png';
 import deliveryIcon from '@/assets/images/guarantees/delivery.png';
 import ingerientsIcon from '@/assets/images/guarantees/ingredients.png';
@@ -16,7 +19,7 @@ import stampIcon from '@/assets/images/packages/stamp.png';
 import weddingIcon from '@/assets/images/packages/wedding.png';
 import wholesaleIcon from '@/assets/images/packages/wholesale.png';
 import { FOOTER_TEXTS, GUARANTEES_TEXTS, PACKAGES_TEXTS, SUBHEADER_PROMO_TEXT } from '@/constants';
-import { CheckboxText, InputType } from '@/types/enums';
+import { CheckboxText, DeliveryText, InputType } from '@/types/enums';
 import type { Guarantees, Packages } from '@/types/interfaces';
 
 export const PROMO_ITEMS = [
@@ -204,4 +207,10 @@ export const GUARANTEES: Guarantees[] = [
     ...GUARANTEES_TEXTS.GUARANTEES.ANONYMOUS,
     image: anonymousIcon,
   },
+];
+
+export const DELIVERY_ITEMS = [
+  { ICON: payDeliveryIcon, TEXT: DeliveryText.PAY },
+  { ICON: selfDeliveryIcon, TEXT: DeliveryText.SELF_DELIVERY },
+  { ICON: anonimDeliveryIcon, TEXT: DeliveryText.ANONIM_PRESENT },
 ];
