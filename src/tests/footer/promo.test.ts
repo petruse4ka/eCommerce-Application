@@ -1,5 +1,3 @@
-import { describe, expect, it } from 'vitest';
-
 import Promo from '@/components/footer/promo';
 
 describe('Footer promo', () => {

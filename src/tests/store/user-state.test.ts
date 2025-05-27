@@ -1,5 +1,3 @@
-import { beforeEach, describe, expect, test, vi } from 'vitest';
-
 import { userState } from '@/store/user-state';
 
 describe('User state', () => {

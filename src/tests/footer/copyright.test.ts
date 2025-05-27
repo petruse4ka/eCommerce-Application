@@ -1,5 +1,3 @@
-import { describe, expect, it } from 'vitest';
-
 import Copyright from '@/components/footer/copyright';
 
 describe('Copyright', () => {

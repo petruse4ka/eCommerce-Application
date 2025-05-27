@@ -1,5 +1,3 @@
-import { describe, expect, test } from 'vitest';
-
 import SelectBuilder from '@/utils/select-builder';
 
 describe('SelectBuilder', () => {

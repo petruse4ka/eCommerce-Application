@@ -1,5 +1,3 @@
-import { describe, expect, test } from 'vitest';
-
 import BaseComponent from '@/components/base';
 
 describe('Base component', () => {
