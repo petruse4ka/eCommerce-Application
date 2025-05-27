@@ -93,6 +93,9 @@ export default class SelectedFilters extends BaseComponent {
     }
 
     const selectedFilters = filterState.getSelectedFilters();
+    const hasFilters = Object.keys(selectedFilters).some(
+      (filterId) => selectedFilters[filterId]?.size > 0
+    );
 
     const title = new ElementBuilder({
       tag: 'h3',
@@ -102,7 +105,7 @@ export default class SelectedFilters extends BaseComponent {
 
     this.component.append(title);
 
-    if (Object.keys(selectedFilters).length === 0) {
+    if (!hasFilters) {
       const message = new ElementBuilder({
         tag: 'p',
         className: FILTERS_STYLES.NO_FILTERS_MESSAGE,
