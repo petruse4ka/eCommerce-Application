@@ -1,7 +1,11 @@
 import BaseComponent from '@/components/base';
+import ProductAttributes from '@/components/product/attributes';
+import ProductDelivery from '@/components/product/delivery';
+import Detailed from '@/components/product/detailed';
+import ProductPrices from '@/components/product/prices';
 import ProductTitle from '@/components/product/title';
 import productData from '@/data/production';
-import { CONTAINER, MAIN_CONTAINER } from '@/styles/pages/underconstruction';
+import { CONTAINER, MAIN_CONTAINER } from '@/styles/pages/product';
 import ElementBuilder from '@/utils/element-builder';
 
 export default class ProductPage extends BaseComponent {
@@ -19,6 +23,11 @@ export default class ProductPage extends BaseComponent {
       className: MAIN_CONTAINER,
     }).getElement();
 
+    const rightAside = new ElementBuilder({
+      tag: 'rightAside',
+      className: MAIN_CONTAINER,
+    }).getElement();
+
     const attributes = productData.masterVariant.attributes;
     const transformedObject: { [key: string]: string | number | boolean | string[] } =
       Object.fromEntries(
@@ -27,14 +36,25 @@ export default class ProductPage extends BaseComponent {
           typeof attribute.value === 'object' ? JSON.stringify(attribute.value) : attribute.value,
         ])
       );
-    console.log(transformedObject);
+
     const product = new ProductTitle({
       title: String(transformedObject['name']),
       weight: String(transformedObject['weight']),
-      description: 'Какое-то описание',
+      description: String(transformedObject['description']),
     });
+    rightAside.append(product.getElement());
 
-    mainContainer.append(product.getElement());
+    const prices = new ProductPrices();
+    rightAside.append(prices.getElement());
+
+    const productAttributs = new ProductAttributes();
+    rightAside.append(productAttributs.getElement());
+
+    const delivery = new ProductDelivery();
+    rightAside.append(delivery.getElement());
+
+    const detailed = new Detailed(String(transformedObject['description']));
+    mainContainer.append(rightAside, detailed.getElement());
     this.component.append(mainContainer);
   }
 }
