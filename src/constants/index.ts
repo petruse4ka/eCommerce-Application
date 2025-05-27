@@ -195,4 +195,6 @@ export const CATALOG_TEXTS = {
   SHOW_LESS: 'Скрыть ↑',
   RANGE_FROM: 'от',
   RANGE_TO: 'до',
+  CLEAR_ALL: 'Очистить все',
+  APPLIED_FILTERS: 'Примененные фильтры',
 };

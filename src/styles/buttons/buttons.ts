@@ -61,6 +61,15 @@ export const CUSTOM_BUTTON_STYLE = {
     'text-lg',
     'font-bold',
   ],
+  FILTER_TAG_BUTTON: [
+    'cursor-pointer',
+    'mx-1',
+    'p-1',
+    'text-black',
+    'hover:text-accent',
+    'text-lg',
+    'font-semibold',
+  ],
   HIDDEN: ['hidden'],
   VISIBLE: ['block'],
 };

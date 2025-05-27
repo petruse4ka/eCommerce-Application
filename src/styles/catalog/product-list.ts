@@ -26,9 +26,9 @@ export const PRODUCT_LIST_STYLES = {
   IMAGE_CONTAINER: ['w-full', 'h-45', 'flex', 'items-center', 'justify-center'],
   IMAGE: ['max-h-full', 'max-w-full', 'object-contain'],
   CONTENT_CONTAINER: ['px-4', 'py-6', 'flex', 'flex-col', 'flex-grow', 'gap-2'],
-  TITLE: ['text-lg', 'font-semibold', 'text-dark'],
+  TITLE: ['text-xl', 'font-semibold', 'text-dark'],
   DESCRIPTION: ['text-dark', 'text-sm', 'flex-grow'],
   PRICE_CONTAINER: ['flex', 'items-center', 'gap-4', 'mt-auto', 'pt-5'],
   ORIGINAL_PRICE: ['text-dark', 'line-through', 'text-sm'],
-  REGULAR_PRICE: ['text-success', 'font-semibold', 'text-lg'],
+  REGULAR_PRICE: ['text-accent', 'font-semibold', 'text-lg'],
 };

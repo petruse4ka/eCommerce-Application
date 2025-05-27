@@ -1,3 +1,6 @@
+import { FILTER_CONFIGS } from '@/data/products';
+import type { FilterId } from '@/types/enums';
+import { isFilterId } from '@/types/guards';
 import type { ActionHandler } from '@/types/types';
 
 class FilterState {
@@ -9,20 +12,45 @@ class FilterState {
     this.subscribers = [];
   }
 
-  public getSelectedOptions(filterId: string): Set<string> {
+  public getSelectedOptions(filterId: FilterId): Set<string> {
     if (!this.selectedOptions.has(filterId)) {
       this.selectedOptions.set(filterId, new Set());
     }
     return this.selectedOptions.get(filterId)!;
   }
 
-  public toggleOption(filterId: string, optionValue: string): void {
+  public getSelectedFilters(): Record<string, Set<string>> {
+    return Object.fromEntries(this.selectedOptions);
+  }
+
+  public toggleOption(filterId: FilterId, value: string): void {
     const options = this.getSelectedOptions(filterId);
-    if (options.has(optionValue)) {
-      options.delete(optionValue);
+    const isRangeOrDropdown =
+      FILTER_CONFIGS.range.some(({ id }) => isFilterId(id) && id === filterId) ||
+      FILTER_CONFIGS.dropdown.some(({ id }) => isFilterId(id) && id === filterId);
+
+    if (isRangeOrDropdown) {
+      options.clear();
+      if (value) {
+        options.add(value);
+      }
     } else {
-      options.add(optionValue);
+      if (options.has(value)) {
+        options.delete(value);
+      } else {
+        options.add(value);
+      }
     }
+
+    if (options.size === 0) {
+      this.selectedOptions.delete(filterId);
+    }
+
+    this.notify();
+  }
+
+  public clearAll(): void {
+    this.selectedOptions.clear();
     this.notify();
   }
 
