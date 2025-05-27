@@ -75,6 +75,36 @@ export default class ProductFilters extends BaseComponent {
     return button.getElement();
   }
 
+  private static handleMinInputChange(
+    filterId: FilterId,
+    min: number,
+    minInput: HTMLInputElement,
+    maxInput: HTMLInputElement
+  ): void {
+    const minValue = Number.parseInt(minInput.value);
+    const maxValue = Number.parseInt(maxInput.value);
+    if (minValue >= min && minValue <= maxValue) {
+      filterState.toggleOption(filterId, `${minInput.value}-${maxInput.value}`);
+    } else {
+      minInput.value = min.toString();
+    }
+  }
+
+  private static handleMaxInputChange(
+    filterId: FilterId,
+    max: number,
+    minInput: HTMLInputElement,
+    maxInput: HTMLInputElement
+  ): void {
+    const minValue = Number.parseInt(minInput.value);
+    const maxValue = Number.parseInt(maxInput.value);
+    if (maxValue <= max && maxValue >= minValue) {
+      filterState.toggleOption(filterId, `${minInput.value}-${maxInput.value}`);
+    } else {
+      maxInput.value = max.toString();
+    }
+  }
+
   public override remove(): void {
     filterState.unsubscribe(this.handleFilterChange);
     super.remove();
@@ -212,6 +242,11 @@ export default class ProductFilters extends BaseComponent {
       step: step.toString(),
       value: min.toString(),
       className: FILTERS_STYLES.RANGE_INPUT,
+      eventType: 'change',
+      callback: (): void => {
+        if (minInput instanceof HTMLInputElement && maxInput instanceof HTMLInputElement)
+          ProductFilters.handleMinInputChange(filterId, min, minInput, maxInput);
+      },
     }).getElement();
 
     const maxInput = new InputBuilder({
@@ -222,18 +257,15 @@ export default class ProductFilters extends BaseComponent {
       step: step.toString(),
       value: max.toString(),
       className: FILTERS_STYLES.RANGE_INPUT,
+      eventType: 'change',
+      callback: (): void => {
+        if (minInput instanceof HTMLInputElement && maxInput instanceof HTMLInputElement)
+          ProductFilters.handleMaxInputChange(filterId, max, minInput, maxInput);
+      },
     }).getElement();
 
     if (minInput instanceof HTMLInputElement && maxInput instanceof HTMLInputElement) {
       this.filters.ranges.set(filterId, { min: minInput, max: maxInput });
-
-      minInput.addEventListener('change', () => {
-        filterState.toggleOption(filterId, `${minInput.value}-${maxInput.value}`);
-      });
-
-      maxInput.addEventListener('change', () => {
-        filterState.toggleOption(filterId, `${minInput.value}-${maxInput.value}`);
-      });
     }
 
     return { minInput, maxInput };

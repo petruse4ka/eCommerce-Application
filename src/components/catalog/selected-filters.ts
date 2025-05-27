@@ -1,7 +1,7 @@
 import BaseComponent from '@/components/base';
 import Button from '@/components/buttons';
 import { CATALOG_TEXTS } from '@/constants';
-import { FILTER_NAMES, FILTER_TEXTS } from '@/data/products';
+import { FILTER_CONFIGS, FILTER_NAMES, FILTER_TEXTS } from '@/data/products';
 import { filterState } from '@/store/filter-state';
 import { FILTERS_STYLES } from '@/styles/catalog/product-filters';
 import type { FilterId } from '@/types/enums';
@@ -32,7 +32,8 @@ export default class SelectedFilters extends BaseComponent {
       style: 'FILTER_TAG_DELETE',
       textContent: '×',
       callback: (): void => {
-        filterState.toggleOption(filterId, value);
+        const isRange = FILTER_CONFIGS.range.some(({ id }) => id === filterId);
+        filterState.toggleOption(filterId, isRange ? '' : value);
       },
     }).getElement();
 
