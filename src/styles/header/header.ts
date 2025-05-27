@@ -10,7 +10,7 @@ const MENU_NAV = [
   'md:w-auto',
   'fixed',
   'md:relative',
-  'top-[36px]',
+  'top-[40px]',
   'md:top-0',
   'z-5',
   'bg-white',
@@ -31,7 +31,7 @@ const BURGER_ICON = [
 ];
 
 export const HEADER_STYLES = {
-  HEADER: ['relative'],
+  HEADER: ['relative', 'border-b', 'border-primary'],
   HEADER_CONTAINER: [
     'max-w-[1440px]',
     'mx-auto',

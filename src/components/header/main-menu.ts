@@ -45,7 +45,6 @@ export default class MainMenu extends BaseComponent {
       menuItem.addEventListener('click', () => {
         this.isOpen = false;
         this.closeMenu();
-
         Router.followRoute(item.route);
       });
 

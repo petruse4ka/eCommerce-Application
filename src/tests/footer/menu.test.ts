@@ -1,5 +1,3 @@
-import { describe, expect, it } from 'vitest';
-
 import Menu from '@/components/footer/menu';
 
 describe('Footer menu', () => {

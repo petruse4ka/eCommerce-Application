@@ -1,6 +1,6 @@
 import type { ActionHandler } from '@/types/types';
 
-export class UserState {
+class UserState {
   private isAuthorized: boolean;
   private subscribers: ActionHandler[];
   private token: string;

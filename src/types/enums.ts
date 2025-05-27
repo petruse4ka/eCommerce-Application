@@ -8,6 +8,7 @@ export enum InputType {
   SEARCH = 'search',
   TEL = 'tel',
   EMAIL = 'email',
+  SELECT = 'select',
 }
 
 export enum ButtonType {
@@ -92,4 +93,21 @@ export enum AlertText {
 export enum CheckboxText {
   DEFAULT_SAVE = 'Сохранить адрес по умолчанию',
   SAME_ADDRESSES = 'Использовать одинаковые адреса',
+}
+
+export enum FilterType {
+  CHECKBOX = 'checkbox',
+  RANGE = 'range',
+  DROPDOWN = 'dropdown',
+}
+
+export enum FilterId {
+  TYPE = 'type',
+  TASTE = 'taste',
+  DIET = 'diet',
+  TOPPING = 'topping',
+  FILLING = 'filling',
+  PRICE = 'price',
+  WEIGHT = 'weight',
+  PROMO = 'promo',
 }

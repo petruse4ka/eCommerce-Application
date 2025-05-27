@@ -1,4 +1,4 @@
-import type { ButtonType, InputType, Route } from './enums';
+import type { ButtonType, FilterId, FilterType, InputType, Route } from './enums';
 
 export interface ElementParameters {
   tag: string;
@@ -7,6 +7,7 @@ export interface ElementParameters {
   callback?: (event: Event) => void;
   eventType?: string;
   attributes?: Record<string, string>;
+  id?: string;
 }
 
 export interface InputParameters extends ElementParameters {
@@ -18,6 +19,9 @@ export interface InputParameters extends ElementParameters {
   required?: boolean;
   disabled?: boolean;
   eventType?: string;
+  min?: string;
+  max?: string;
+  step?: string;
 }
 
 export interface ImageParameters extends ElementParameters {
@@ -102,6 +106,14 @@ export interface Packages {
   gradient: string[];
 }
 
+export interface Macarons {
+  name: string;
+  description: string;
+  image: string;
+  price: number;
+  discountedPrice?: number;
+}
+
 export interface Guarantees {
   title: string;
   description: string;
@@ -121,4 +133,39 @@ export interface ErrorResponse {
   errors: ErrorInfo[];
   error: string;
   error_description: string;
+}
+
+export interface SelectOption {
+  value: string;
+  text: string;
+}
+
+export interface CheckboxOption {
+  value: string;
+  text: string;
+}
+
+export interface CheckboxFiltersParameters {
+  title: string;
+  options: CheckboxOption[];
+  filterId: FilterId;
+}
+
+export interface FilterConfigs {
+  checkbox: {
+    id: FilterId;
+    type: FilterType.CHECKBOX;
+    options: SelectOption[];
+  }[];
+  range: {
+    id: FilterId;
+    type: FilterType.RANGE;
+    min: number;
+    max: number;
+  }[];
+  dropdown: {
+    id: FilterId;
+    type: FilterType.DROPDOWN;
+    options: SelectOption[];
+  }[];
 }
