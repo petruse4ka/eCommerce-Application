@@ -67,6 +67,7 @@ export const PRODUCT_STYLES = {
     'border-solid',
     'border-gray',
   ],
+  QUANTITY_MESSAGE: ['font-semibold', 'pt-2', 'text-center', 'lg:text-left'],
   DELIVERY_CONTAINER: [
     'flex',
     'flex-col',

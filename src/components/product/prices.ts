@@ -14,16 +14,18 @@ export default class ProductPrices extends BaseComponent {
   }
 
   protected render(): void {
+    const actualPrice = 50;
+    const noActualPrice = 90;
     const currentPrice = new ElementBuilder({
       tag: 'div',
       className: PRODUCT_STYLES.PRICE,
-      textContent: `50.00 ${PRODUCT_TEXT.CURRANCY}`,
+      textContent: `${actualPrice.toFixed(2)} ${PRODUCT_TEXT.CURRANCY}`,
     }).getElement();
 
     const oldPrice = new ElementBuilder({
       tag: 'div',
       className: PRODUCT_STYLES.PRICE_OLD,
-      textContent: `90.00 ${PRODUCT_TEXT.CURRANCY}`,
+      textContent: `${noActualPrice.toFixed(2)} ${PRODUCT_TEXT.CURRANCY}`,
     }).getElement();
 
     const button = new Button({
@@ -34,11 +36,11 @@ export default class ProductPrices extends BaseComponent {
 
     const totalAmount = new ElementBuilder({
       tag: 'div',
-      className: PRODUCT_STYLES.PARAMETER_NAME,
-      textContent: `${PRODUCT_TEXT.TOTAL} 1900 ${PRODUCT_TEXT.CURRANCY}`,
+      className: PRODUCT_STYLES.QUANTITY_MESSAGE,
+      textContent: `${PRODUCT_TEXT.TOTAL} ${actualPrice} ${PRODUCT_TEXT.CURRANCY}`,
     }).getElement();
 
-    const quantityInputBlock = new ProductQuantity();
+    const quantityInputBlock = new ProductQuantity(actualPrice, totalAmount);
 
     this.component.append(
       currentPrice,

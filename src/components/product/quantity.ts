@@ -1,28 +1,45 @@
 import BaseComponent from '@/components/base';
+import { PRODUCT_TEXT } from '@/constants';
 import { PRODUCT_STYLES } from '@/styles/pages/product';
 import ElementBuilder from '@/utils/element-builder';
 
 import Button from '../buttons';
 
 export default class ProductQuantity extends BaseComponent {
-  constructor() {
+  constructor(price: number, element: HTMLElement) {
     super({ tag: 'div', className: PRODUCT_STYLES.QUANTITY_BLOCK });
 
-    this.render();
+    this.render(price, element);
   }
 
-  private render(): void {
+  private render(price: number, element: HTMLElement): void {
     const minusButton = new Button({
       style: 'PRICE_QUANTITY',
       textContent: '-',
-      callback: (): void => {},
+      callback: (): void => {
+        let number = Number(quantityInput.textContent);
+        if (number === 1) {
+          minusButton.setAttribute('disabled', 'true');
+        } else {
+          quantityInput.textContent = String(--number);
+          element.textContent = `${PRODUCT_TEXT.TOTAL} ${String(price * number)} ${PRODUCT_TEXT.CURRANCY}`;
+        }
+      },
     }).getElement();
-    // minusButton.classList.remove('min-w-[234px]');
 
     const plusButton = new Button({
       style: 'PRICE_QUANTITY',
       textContent: '+',
-      callback: (): void => {},
+      callback: (): void => {
+        let number = Number(quantityInput.textContent);
+        ++number;
+        if (minusButton.hasAttribute('disabled')) {
+          minusButton.removeAttribute('disabled');
+        } else {
+          quantityInput.textContent = String(number);
+        }
+        element.textContent = `${PRODUCT_TEXT.TOTAL} ${String(price * number)} ${PRODUCT_TEXT.CURRANCY}`;
+      },
     }).getElement();
 
     const quantityInput = new ElementBuilder({
