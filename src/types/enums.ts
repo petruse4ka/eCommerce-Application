@@ -31,6 +31,7 @@ export enum ApiEndpoint {
   REGISTRATION = '/me/signup',
   LOGIN = '/me/login',
   USER = '/customers/token',
+  PRODUCTS = '/products',
 }
 
 export enum ContentType {

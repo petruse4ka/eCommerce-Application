@@ -1,3 +1,4 @@
+import CatalogAPI from '@/api/catalog';
 import BaseComponent from '@/components/base';
 import Button from '@/components/buttons';
 import { CATALOG_TEXTS } from '@/constants';
@@ -163,6 +164,22 @@ export default class ProductList extends BaseComponent {
   }
 
   private render(): void {
+    const testButton = new Button({
+      style: 'PRIMARY_PINK',
+      textContent: 'Test API',
+      callback: (): void => {
+        CatalogAPI.getProducts()
+          .then((response) => {
+            if (response) {
+              console.log('Products response:', response);
+            }
+          })
+          .catch((error) => {
+            console.error('Error:', error);
+          });
+      },
+    }).getElement();
+
     const sortingContainer = ProductList.createSortingContainer();
 
     const productsContainer = new ElementBuilder({
@@ -175,6 +192,6 @@ export default class ProductList extends BaseComponent {
       productsContainer.append(productItem);
     }
 
-    this.component.append(sortingContainer, productsContainer);
+    this.component.append(testButton, sortingContainer, productsContainer);
   }
 }
