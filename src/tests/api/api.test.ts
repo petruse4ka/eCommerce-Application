@@ -1,5 +1,3 @@
-import { describe, expect, test, vi } from 'vitest';
-
 import API from '@/api';
 
 describe('API', () => {

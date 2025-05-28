@@ -8,6 +8,7 @@ export enum InputType {
   SEARCH = 'search',
   TEL = 'tel',
   EMAIL = 'email',
+  SELECT = 'select',
 }
 
 export enum ButtonType {
@@ -26,7 +27,7 @@ export enum ApiMethods {
 
 export enum ApiEndpoint {
   OATH = '/oauth/',
-  AUTHENTICATION = `${OATH}token`,
+  AUTHENTICATION = '/anonymous/token',
   REGISTRATION = '/me/signup',
   LOGIN = '/me/login',
   USER = '/customers/token',
@@ -69,6 +70,8 @@ export enum Route {
   TERMS = '#/terms',
   RETURNS = '#/returns',
   ACCOUNT = '#/account',
+  CATALOG = '#/catalog',
+  PRODUCT = '#/product',
 }
 
 export enum AlertStatus {
@@ -90,6 +93,23 @@ export enum AlertText {
 export enum CheckboxText {
   DEFAULT_SAVE = 'Сохранить адрес по умолчанию',
   SAME_ADDRESSES = 'Использовать одинаковые адреса',
+}
+
+export enum FilterType {
+  CHECKBOX = 'checkbox',
+  RANGE = 'range',
+  DROPDOWN = 'dropdown',
+}
+
+export enum FilterId {
+  TYPE = 'type',
+  TASTE = 'taste',
+  DIET = 'diet',
+  TOPPING = 'topping',
+  FILLING = 'filling',
+  PRICE = 'price',
+  WEIGHT = 'weight',
+  PROMO = 'promo',
 }
 
 export enum TabAccount {

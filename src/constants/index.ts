@@ -8,6 +8,21 @@ export const VALIDATE_CONST = {
   MAX_INPUT_LENGTH: 50,
 };
 
+export const DEFAULT_OPTIONS_COUNT = 5;
+
+export const FILTER_RANGES = {
+  PRICE: {
+    MIN: 0,
+    MAX: 100,
+    STEP: 1,
+  },
+  WEIGHT: {
+    MIN: 0,
+    MAX: 1000,
+    STEP: 10,
+  },
+};
+
 export const SUBHEADER_PROMO_TEXT = {
   DELIVERY: 'Быстрая доставка',
   FRESH: 'Гарантия свежести',
@@ -24,6 +39,7 @@ export const AUTHORIZATION_MENU_TEXT = {
 
 export const MENU_TEXT = {
   HOME: 'Главная',
+  CATALOG: 'Каталог',
   ABOUT: 'О нас',
   CONTACTS: 'Контакты',
 };
@@ -48,8 +64,8 @@ export const FOOTER_TEXTS = {
 };
 
 export const AUTHORIZATION_MENU_ITEMS: MenuItem[] = [
-  { name: AUTHORIZATION_MENU_TEXT.LOGIN, route: Route.LOGIN },
   { name: AUTHORIZATION_MENU_TEXT.REGISTRATION, route: Route.REGISTRATION },
+  { name: AUTHORIZATION_MENU_TEXT.LOGIN, route: Route.LOGIN },
 ];
 
 export const UNAUTHORIZED_MENU_ITEMS: MenuItem[] = [
@@ -69,6 +85,7 @@ export const UNDER_CONSTRUCTION_TEXTS = {
 
 export const MENU_ITEMS: MenuItem[] = [
   { name: MENU_TEXT.HOME, route: Route.HOME },
+  { name: MENU_TEXT.CATALOG, route: Route.CATALOG },
   { name: MENU_TEXT.ABOUT, route: Route.ABOUT },
   { name: MENU_TEXT.CONTACTS, route: Route.CONTACTS },
 ];
@@ -151,8 +168,37 @@ export const GUARANTEES_TEXTS = {
     },
   },
 };
+
 export const FIELDSET_LABELS = {
   PERSONAL_DATA: 'Персональные данные',
   SHIPPING: 'Адрес доставки',
   BILLING: 'Расчетный адрес',
+};
+
+export const PAGE_TITLES = {
+  CATALOG: 'Каталог десертов',
+};
+
+export const CATALOG_TEXTS = {
+  TOTAL_PRODUCTS: 'Всего товаров',
+  SORTY_BY: 'Сортировка',
+  SEARCH_PLACEHOLDER: 'Поиск...',
+  PRODUCT_TYPE_FILTER: 'Тип десерта',
+  TASTE_FILTER: 'Вкус',
+  DIET_FILTER: 'Диета',
+  FILLING_FILTER: 'Наполнитель',
+  TOPPING_FILTER: 'Глазурь',
+  PROMO_FILTER: 'Спецпредложение',
+  PRICE_FILTER: 'Цена',
+  WEIGHT_FILTER: 'Вес',
+  SHOW_MORE: 'Показать еще ↓',
+  SHOW_LESS: 'Скрыть ↑',
+  RANGE_FROM: 'от',
+  RANGE_TO: 'до',
+  CLEAR_ALL: 'Удалить все фильтры',
+  APPLIED_FILTERS: 'Выбранные фильтры',
+  NO_APPLIED_FILTERS:
+    'В данный момент ни один фильтр не выбран. Вы можете выбрать фильтры в списке снизу',
+  SHOW_FILTERS: 'Показать фильтры',
+  HIDE_FILTERS: 'Скрыть фильтры',
 };

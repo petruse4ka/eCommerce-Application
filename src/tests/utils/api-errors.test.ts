@@ -1,5 +1,3 @@
-import { describe, expect, test } from 'vitest';
-
 import { AlertText } from '@/types/enums';
 import ApiErrors from '@/utils/api-errors';
 

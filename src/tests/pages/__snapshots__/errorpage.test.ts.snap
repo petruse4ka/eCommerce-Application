@@ -2,7 +2,7 @@
 
 exports[`Error page > should match the snapshot 1`] = `
 <div
-  class="flex flex-col items-center pt-25 pb-15 text-base leading-normal bg-white text-black border-t border-primary flex-grow"
+  class="flex flex-col items-center pt-25 pb-15 text-base leading-normal bg-white text-black flex-grow"
 >
   <h1
     class="text-xl sm:text-2xl text-center px-3 py-4"
