@@ -1,37 +1,43 @@
 import BaseComponent from '@/components/base';
+import { PRODUCT_ATTRIBUTES } from '@/constants';
 import { PRODUCT_STYLES } from '@/styles/pages/product';
+import type { Attributes } from '@/types/types';
 import ElementBuilder from '@/utils/element-builder';
 
 export default class ProductAttributes extends BaseComponent {
-  constructor() {
+  constructor(parameters: Attributes) {
     super({ tag: 'div', className: PRODUCT_STYLES.TITLE_CONTAINER });
-    this.render();
+    this.render(parameters);
   }
 
-  protected render(): void {
-    const flavors = new ElementBuilder({
-      tag: 'h2',
-      className: PRODUCT_STYLES.TITLE,
-      textContent: 'Вкусы:',
+  protected render(parameters: Attributes): void {
+    Object.entries(PRODUCT_ATTRIBUTES).map((title: [string, string]): void =>
+      this.addAttributeItem(title, parameters)
+    );
+  }
+
+  private addAttributeItem(title: [string, string], parameters: Attributes): void {
+    const value = parameters[title[0].toLowerCase()] ?? '';
+    if (value === '') return;
+    const container = new ElementBuilder({
+      tag: 'div',
+      className: '',
     }).getElement();
 
-    const flavorsDescription = new ElementBuilder({
+    const attribute = new ElementBuilder({
+      tag: 'h3',
+      className: PRODUCT_STYLES.PARAMETER_NAME,
+      textContent: `${title[1]}: `,
+    }).getElement();
+    container.append(attribute);
+
+    const attributeDescription = new ElementBuilder({
       tag: 'div',
       className: PRODUCT_STYLES.PARAMETER_DESCRIPTION,
-      textContent: 'Перечень вкусов',
+      textContent: String(value),
     }).getElement();
 
-    const diet = new ElementBuilder({
-      tag: 'h2',
-      className: PRODUCT_STYLES.TITLE,
-      textContent: 'Диета:',
-    }).getElement();
-
-    const dietDescription = new ElementBuilder({
-      tag: 'div',
-      className: PRODUCT_STYLES.PARAMETER_DESCRIPTION,
-      textContent: 'Перечень ограничений по диете',
-    }).getElement();
-    this.component.append(flavors, flavorsDescription, diet, dietDescription);
+    container.append(attributeDescription);
+    this.component.append(container);
   }
 }

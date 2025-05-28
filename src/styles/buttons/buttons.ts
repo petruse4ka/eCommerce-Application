@@ -23,6 +23,7 @@ export const CUSTOM_BUTTON_STYLE = {
     'border-accent',
     'hover:bg-accent-hover',
     'hover:border-accent-hover',
+    'active:bg-pink',
   ],
   SECONDARY_BLUE: [
     ...STANDARD_BUTTON_STYLE,
