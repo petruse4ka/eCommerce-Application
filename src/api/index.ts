@@ -45,6 +45,7 @@ export default class API {
             visibleTime: 3000,
           });
 
+          userState.setUserInfoState(body.customer);
           userState.setAuthorizationState(true);
           Router.followRoute(Route.HOME);
 
@@ -77,6 +78,7 @@ export default class API {
         return response.json();
       })
       .then((body: CustomerResponse) => {
+        userState.setUserInfoState(body.customer);
         userState.setAuthorizationState(true);
         Router.followRoute(Route.HOME);
         return body.customer.id;

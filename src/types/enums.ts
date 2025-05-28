@@ -111,3 +111,33 @@ export enum FilterId {
   WEIGHT = 'weight',
   PROMO = 'promo',
 }
+
+export enum TabAccount {
+  INFO = 'Персональная информация',
+  ADDRESSES = 'Адреса',
+  CHANGE_PASS = 'Сменить пароль',
+}
+
+export enum AddressType {
+  SHIPPING = 'shipping',
+  BILLING = 'billing',
+}
+
+export enum AddressTypeText {
+  SHIPPING = 'Адреса доставки',
+  BILLING = 'Адреса для расчетов',
+}
+
+export enum AddressKey {
+  COUNTRY = 'Страна',
+  CITY = 'Город',
+  STREET = 'Улица',
+  POSTAL_CODE = 'Почтовый индекс',
+}
+
+export enum UserInfoKey {
+  FIRST_NAME = 'Имя',
+  LAST_NAME = 'Фамилия',
+  DATA_OF_BIRTH = 'Дата рождения',
+  EMAIL = 'Почта',
+}
