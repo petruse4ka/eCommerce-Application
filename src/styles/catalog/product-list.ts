@@ -24,7 +24,7 @@ export const PRODUCT_LIST_STYLES = {
     'hover:bg-primary',
   ],
   IMAGE_CONTAINER: ['w-full', 'h-45', 'flex', 'items-center', 'justify-center'],
-  IMAGE: ['max-h-full', 'max-w-full', 'object-contain'],
+  IMAGE: ['max-h-full', 'max-w-full', 'object-contain', 'mt-5'],
   CONTENT_CONTAINER: ['px-4', 'py-6', 'flex', 'flex-col', 'flex-grow', 'gap-2'],
   TITLE: ['text-xl', 'font-semibold', 'text-dark'],
   DESCRIPTION: ['text-dark', 'text-sm', 'flex-grow'],

@@ -2,7 +2,7 @@ import CatalogAPI from '@/api/catalog';
 import BaseComponent from '@/components/base';
 import Button from '@/components/buttons';
 import { CATALOG_TEXTS } from '@/constants';
-import { MACARONS, SORTING_OPTIONS } from '@/data/products';
+import { SORTING_OPTIONS } from '@/data/products';
 import { CUSTOM_BUTTON_STYLE } from '@/styles/buttons/buttons';
 import { PRODUCT_LIST_STYLES } from '@/styles/catalog/product-list';
 import { SORTING_STYLES } from '@/styles/catalog/sorting';
@@ -14,8 +14,24 @@ import InputBuilder from '@/utils/input-builder';
 import SelectBuilder from '@/utils/select-builder';
 
 export default class ProductList extends BaseComponent {
+  private products: Macarons[] = [];
+  private productsContainer: HTMLElement;
+  private productCounter: HTMLElement;
+
   constructor() {
     super({ tag: 'div', className: PRODUCT_LIST_STYLES.CONTAINER });
+
+    this.productsContainer = new ElementBuilder({
+      tag: 'div',
+      className: PRODUCT_LIST_STYLES.PRODUCTS_CONTAINER,
+    }).getElement();
+
+    this.productCounter = new ElementBuilder({
+      tag: 'span',
+      className: SORTING_STYLES.PRODUCT_COUNTER,
+      textContent: `${CATALOG_TEXTS.TOTAL_PRODUCTS}: 0`,
+    }).getElement();
+
     this.render();
   }
 
@@ -56,16 +72,10 @@ export default class ProductList extends BaseComponent {
     return searchContainer;
   }
 
-  private static createSortingContainer(): HTMLElement {
+  private static createSortingContainer(productCounter: HTMLElement): HTMLElement {
     const container = new ElementBuilder({
       tag: 'div',
       className: SORTING_STYLES.CONTAINER,
-    }).getElement();
-
-    const productCounter = new ElementBuilder({
-      tag: 'span',
-      className: SORTING_STYLES.PRODUCT_COUNTER,
-      textContent: `${CATALOG_TEXTS.TOTAL_PRODUCTS}: ${MACARONS.length}`,
     }).getElement();
 
     const dropdownContainer = new ElementBuilder({
@@ -163,35 +173,44 @@ export default class ProductList extends BaseComponent {
     return card;
   }
 
+  private async loadProducts(): Promise<void> {
+    try {
+      const loadedProducts = await CatalogAPI.getProducts();
+      if (loadedProducts) {
+        this.products = loadedProducts;
+        this.updateProductList();
+      }
+    } catch (error) {
+      console.error('Error loading products:', error);
+    }
+  }
+
+  private updateProductList(): void {
+    while (this.productsContainer.firstChild) {
+      this.productsContainer.firstChild.remove();
+    }
+
+    for (const product of this.products) {
+      const productItem = ProductList.createProductCard(product);
+      this.productsContainer.append(productItem);
+    }
+
+    this.productCounter.textContent = `${CATALOG_TEXTS.TOTAL_PRODUCTS}: ${this.products.length}`;
+  }
+
   private render(): void {
     const testButton = new Button({
       style: 'PRIMARY_PINK',
-      textContent: 'Test API',
+      textContent: 'Запросить Продукты',
       callback: (): void => {
-        CatalogAPI.getProducts()
-          .then((response) => {
-            if (response) {
-              console.log('Products response:', response);
-            }
-          })
-          .catch((error) => {
-            console.error('Error:', error);
-          });
+        void this.loadProducts().catch((error) => {
+          console.error('Error rendering products:', error);
+        });
       },
     }).getElement();
 
-    const sortingContainer = ProductList.createSortingContainer();
+    const sortingContainer = ProductList.createSortingContainer(this.productCounter);
 
-    const productsContainer = new ElementBuilder({
-      tag: 'div',
-      className: PRODUCT_LIST_STYLES.PRODUCTS_CONTAINER,
-    }).getElement();
-
-    for (const product of MACARONS) {
-      const productItem = ProductList.createProductCard(product);
-      productsContainer.append(productItem);
-    }
-
-    this.component.append(testButton, sortingContainer, productsContainer);
+    this.component.append(testButton, sortingContainer, this.productsContainer);
   }
 }
