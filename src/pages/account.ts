@@ -14,12 +14,18 @@ export default class AccountPage extends BaseComponent {
   private infoContainer: HTMLElement;
   private addressesNode: HTMLElement[];
   private userInfoNode: HTMLElement;
+  private container: HTMLElement;
 
   constructor() {
     super({
+      tag: 'main',
+      className: ACCOUNT_PAGE.MAIN,
+    });
+
+    this.container = new ElementBuilder({
       tag: 'div',
       className: ACCOUNT_PAGE.CONTAINER,
-    });
+    }).getElement();
 
     this.infoContainer = new ElementBuilder({
       tag: 'div',
@@ -38,7 +44,8 @@ export default class AccountPage extends BaseComponent {
     this.createAddresses();
     this.createUserInfo();
 
-    this.component.append(this.infoContainer);
+    this.container.append(this.infoContainer);
+    this.component.append(this.container);
   }
 
   private updateContent(): void {
@@ -46,8 +53,8 @@ export default class AccountPage extends BaseComponent {
       this.infoContainer.firstChild.remove();
     }
 
-    while (this.component.firstChild) {
-      this.component.firstChild.remove();
+    while (this.container.firstChild) {
+      this.container.firstChild.remove();
     }
 
     this.render();
@@ -102,7 +109,7 @@ export default class AccountPage extends BaseComponent {
       },
     ]);
 
-    this.component.append(tab.getElement());
+    this.container.append(tab.getElement());
   }
 
   private visibleCurrentContent(nodeVisible: HTMLElement | HTMLElement[]): void {
