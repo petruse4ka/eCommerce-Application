@@ -1,4 +1,5 @@
 import BaseComponent from '@/components/base';
+import { PRODUCT_TEXT } from '@/constants';
 import { PRODUCT_STYLES } from '@/styles/pages/product';
 import ElementBuilder from '@/utils/element-builder';
 
@@ -14,8 +15,8 @@ export default class DetailedProduct extends BaseComponent {
   private render(_content: string): void {
     const name = new ElementBuilder({
       tag: 'h3',
-      className: PRODUCT_STYLES.PARAMETER_NAME,
-      textContent: 'Описание',
+      className: PRODUCT_STYLES.DETAILED_NAME,
+      textContent: PRODUCT_TEXT.DESCRIPTION,
     }).getElement();
 
     const description = new ElementBuilder({

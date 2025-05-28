@@ -1,8 +1,7 @@
 import BaseComponent from '@/components/base';
-import { CUSTOM_BUTTON_STYLE } from '@/styles/buttons/buttons';
+import Button from '@/components/buttons';
+import { PRODUCT_TEXT } from '@/constants';
 import { PRODUCT_STYLES } from '@/styles/pages/product';
-import { ButtonType } from '@/types/enums';
-import ButtonBuilder from '@/utils/button-builder';
 import ElementBuilder from '@/utils/element-builder';
 
 import ProductQuantity from './quantity';
@@ -18,25 +17,25 @@ export default class ProductPrices extends BaseComponent {
     const currentPrice = new ElementBuilder({
       tag: 'div',
       className: PRODUCT_STYLES.PRICE,
-      textContent: '50.00 руб',
+      textContent: `50.00 ${PRODUCT_TEXT.CURRANCY}`,
     }).getElement();
 
     const oldPrice = new ElementBuilder({
       tag: 'div',
       className: PRODUCT_STYLES.PRICE_OLD,
-      textContent: '90.00 руб',
+      textContent: `90.00 ${PRODUCT_TEXT.CURRANCY}`,
     }).getElement();
 
-    const button = new ButtonBuilder({
-      className: [...CUSTOM_BUTTON_STYLE.PRIMARY_PINK, ...PRODUCT_STYLES.PRICE_BUTTON],
-      textContent: 'В корзину',
-      type: ButtonType.BUTTON,
+    const button = new Button({
+      style: 'PRICE_BUTTON',
+      textContent: PRODUCT_TEXT.BASKET,
+      callback: (): void => {},
     }).getElement();
 
     const totalAmount = new ElementBuilder({
       tag: 'div',
       className: PRODUCT_STYLES.PARAMETER_NAME,
-      textContent: 'Итого: 1900 руб',
+      textContent: `${PRODUCT_TEXT.TOTAL} 1900 ${PRODUCT_TEXT.CURRANCY}`,
     }).getElement();
 
     const quantityInputBlock = new ProductQuantity();

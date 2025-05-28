@@ -1,9 +1,8 @@
 import BaseComponent from '@/components/base';
-import { CUSTOM_BUTTON_STYLE } from '@/styles/buttons/buttons';
 import { PRODUCT_STYLES } from '@/styles/pages/product';
-import { ButtonType } from '@/types/enums';
-import ButtonBuilder from '@/utils/button-builder';
 import ElementBuilder from '@/utils/element-builder';
+
+import Button from '../buttons';
 
 export default class ProductQuantity extends BaseComponent {
   constructor() {
@@ -13,19 +12,18 @@ export default class ProductQuantity extends BaseComponent {
   }
 
   private render(): void {
-    const minusButton = new ButtonBuilder({
-      className: [...CUSTOM_BUTTON_STYLE.SECONDARY_BLUE, ...PRODUCT_STYLES.QUANTITY_ADD],
+    const minusButton = new Button({
+      style: 'PRICE_QUANTITY',
       textContent: '-',
-      type: ButtonType.BUTTON,
+      callback: (): void => {},
     }).getElement();
-    minusButton.classList.remove('min-w-[234px]');
+    // minusButton.classList.remove('min-w-[234px]');
 
-    const plusButton = new ButtonBuilder({
-      className: [...CUSTOM_BUTTON_STYLE.SECONDARY_BLUE, ...PRODUCT_STYLES.QUANTITY_ADD],
+    const plusButton = new Button({
+      style: 'PRICE_QUANTITY',
       textContent: '+',
-      type: ButtonType.BUTTON,
+      callback: (): void => {},
     }).getElement();
-    plusButton.classList.remove('min-w-[234px]');
 
     const quantityInput = new ElementBuilder({
       tag: 'div',

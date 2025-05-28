@@ -210,3 +210,11 @@ export const PRODUCT_ATTRIBUTES = {
   TOPPING: 'Глазурь',
   FILLING: 'Начинка',
 };
+
+export const PRODUCT_TEXT = {
+  BASKET: 'В корзину',
+  TOTAL: 'Итого по наименованию: ',
+  CURRANCY: 'руб',
+  DESCRIPTION: 'Описание',
+  GRAMM: 'г',
+};
