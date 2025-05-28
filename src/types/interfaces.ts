@@ -1,4 +1,12 @@
-import type { ButtonType, InputType, Route } from './enums';
+import type {
+  AddressKey,
+  ButtonType,
+  FilterId,
+  FilterType,
+  InputType,
+  Route,
+  UserInfoKey,
+} from './enums';
 
 export interface ElementParameters {
   tag: string;
@@ -7,6 +15,7 @@ export interface ElementParameters {
   callback?: (event: Event) => void;
   eventType?: string;
   attributes?: Record<string, string>;
+  id?: string;
 }
 
 export interface InputParameters extends ElementParameters {
@@ -18,6 +27,9 @@ export interface InputParameters extends ElementParameters {
   required?: boolean;
   disabled?: boolean;
   eventType?: string;
+  min?: string;
+  max?: string;
+  step?: string;
 }
 
 export interface ImageParameters extends ElementParameters {
@@ -44,13 +56,33 @@ export interface AuthResponse {
   token_type: string;
 }
 
+export interface Customer {
+  addresses: Addresses[];
+  authenticationMode: string;
+  billingAddressIds: string[];
+  createdAt: string;
+  createdBy: { clientId: string; isPlatformClient: boolean };
+  customerGroupAssignments: [];
+  dateOfBirth: string;
+  defaultBillingAddressId: string;
+  defaultShippingAddressId: string;
+  email: string;
+  firstName: string;
+  id: string;
+  isEmailVerified: boolean;
+  lastMessageSequenceNumber: number;
+  lastModifiedAt: string;
+  lastModifiedBy: { clientId: string; isPlatformClient: boolean };
+  lastName: string;
+  password: string;
+  shippingAddressIds: string[];
+  stores: [];
+  version: number;
+  versionModifiedAt: string;
+}
+
 export interface CustomerResponse {
-  customer: {
-    id: string;
-    version: number;
-    createdAt: string;
-    lastModifiedAt: string;
-  };
+  customer: Customer;
 }
 
 export interface InputComponent {
@@ -68,6 +100,7 @@ export interface InputComponent {
 }
 
 export interface Addresses {
+  id?: string;
   country: string;
   city: string;
   streetName: string;
@@ -102,6 +135,14 @@ export interface Packages {
   gradient: string[];
 }
 
+export interface Macarons {
+  name: string;
+  description: string;
+  image: string;
+  price: number;
+  discountedPrice?: number;
+}
+
 export interface Guarantees {
   title: string;
   description: string;
@@ -121,6 +162,56 @@ export interface ErrorResponse {
   errors: ErrorInfo[];
   error: string;
   error_description: string;
+}
+
+export interface SelectOption {
+  value: string;
+  text: string;
+}
+
+export interface CheckboxOption {
+  value: string;
+  text: string;
+}
+
+export interface CheckboxFiltersParameters {
+  title: string;
+  options: CheckboxOption[];
+  filterId: FilterId;
+}
+
+export interface FilterConfigs {
+  checkbox: {
+    id: FilterId;
+    type: FilterType.CHECKBOX;
+    options: SelectOption[];
+  }[];
+  range: {
+    id: FilterId;
+    type: FilterType.RANGE;
+    min: number;
+    max: number;
+  }[];
+  dropdown: {
+    id: FilterId;
+    type: FilterType.DROPDOWN;
+    options: SelectOption[];
+  }[];
+}
+
+export interface AddressInfo {
+  [AddressKey.COUNTRY]: string;
+  [AddressKey.CITY]: string;
+  [AddressKey.STREET]: string;
+  [AddressKey.POSTAL_CODE]: string;
+  isDefault: boolean;
+}
+
+export interface UserInfo {
+  [UserInfoKey.FIRST_NAME]: string;
+  [UserInfoKey.LAST_NAME]: string;
+  [UserInfoKey.DATA_OF_BIRTH]: string;
+  [UserInfoKey.EMAIL]: string;
 }
 
 export interface TitleProduct {
