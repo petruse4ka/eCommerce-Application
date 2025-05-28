@@ -24,10 +24,21 @@ export default class ProductPage extends BaseComponent {
     const transformedObject: Attributes = Object.fromEntries(
       attributes.map((attribute) => [
         attribute.name,
-        typeof attribute.value === 'object' ? JSON.stringify(attribute.value) : attribute.value,
+        typeof attribute.value === 'object'
+          ? ProductPage.parseList(JSON.stringify(attribute.value))
+          : attribute.value,
       ])
     );
     return transformedObject;
+  }
+
+  private static parseList(jsonString: string): string {
+    if (!jsonString.trim()) return '';
+
+    const matches = jsonString.match(/"label":"(.*?)"/g);
+    if (!matches) return '';
+
+    return matches.map((match) => match.replace(/"label":"/, '').replace(/"/, '')).join(', ');
   }
 
   private render(): void {
@@ -53,7 +64,10 @@ export default class ProductPage extends BaseComponent {
     const prices = new ProductPrices();
     rightAside.append(prices.getElement());
 
-    const productAttributs = new ProductAttributes();
+    const productAttributs = new ProductAttributes({
+      flavors: String(transformedObject['flavors']),
+      diet: String(transformedObject['diet']),
+    });
     rightAside.append(productAttributs.getElement());
 
     const delivery = new ProductDelivery();
