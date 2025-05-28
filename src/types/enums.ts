@@ -8,6 +8,7 @@ export enum InputType {
   SEARCH = 'search',
   TEL = 'tel',
   EMAIL = 'email',
+  SELECT = 'select',
 }
 
 export enum ButtonType {
@@ -26,7 +27,7 @@ export enum ApiMethods {
 
 export enum ApiEndpoint {
   OATH = '/oauth/',
-  AUTHENTICATION = `${OATH}token`,
+  AUTHENTICATION = '/anonymous/token',
   REGISTRATION = '/me/signup',
   LOGIN = '/me/login',
   USER = '/customers/token',
@@ -98,4 +99,51 @@ export enum DeliveryText {
   PAY = 'Доставка от 400 руб. в день заказа с 12 до 21. Бесплатно при заказе на сумму от 2000 руб',
   SELF_DELIVERY = 'Самовывоз - бесплатно через 3 часа после оплаты заказа',
   ANONIM_PRESENT = 'Можем преподнести как анонимный подарок',
+}
+
+export enum FilterType {
+  CHECKBOX = 'checkbox',
+  RANGE = 'range',
+  DROPDOWN = 'dropdown',
+}
+
+export enum FilterId {
+  TYPE = 'type',
+  TASTE = 'taste',
+  DIET = 'diet',
+  TOPPING = 'topping',
+  FILLING = 'filling',
+  PRICE = 'price',
+  WEIGHT = 'weight',
+  PROMO = 'promo',
+}
+
+export enum TabAccount {
+  INFO = 'Персональная информация',
+  ADDRESSES = 'Адреса',
+  CHANGE_PASS = 'Сменить пароль',
+}
+
+export enum AddressType {
+  SHIPPING = 'shipping',
+  BILLING = 'billing',
+}
+
+export enum AddressTypeText {
+  SHIPPING = 'Адреса доставки',
+  BILLING = 'Адреса для расчетов',
+}
+
+export enum AddressKey {
+  COUNTRY = 'Страна',
+  CITY = 'Город',
+  STREET = 'Улица',
+  POSTAL_CODE = 'Почтовый индекс',
+}
+
+export enum UserInfoKey {
+  FIRST_NAME = 'Имя',
+  LAST_NAME = 'Фамилия',
+  DATA_OF_BIRTH = 'Дата рождения',
+  EMAIL = 'Почта',
 }

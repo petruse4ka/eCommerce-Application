@@ -1,0 +1,22 @@
+export const ACCOUNT_PAGE = {
+  MAIN: ['border-t', 'border-primary', 'flex-grow'],
+  CONTAINER: [
+    'items-center',
+    'px-3',
+    'py-5',
+    'sm:py-10',
+    'md:px-4',
+    'md:py-10',
+    'flex',
+    'gap-7',
+    'sm:gap-10',
+    'xl:gap-30',
+    'max-w-[1440px]',
+    'mx-auto',
+    'w-full',
+    'relative',
+    'flex-col',
+    'sm:flex-row',
+  ],
+  INFO_CONTAINER: ['flex', 'gap-7', 'lg:gap-5', 'xl:gap-15', 'flex-col', 'lg:flex-row'],
+};

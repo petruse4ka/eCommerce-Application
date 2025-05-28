@@ -1,5 +1,3 @@
-import { describe, expect, it } from 'vitest';
-
 import UnderConstructionPage from '@/pages/underconstruction';
 
 describe('Under construction', () => {

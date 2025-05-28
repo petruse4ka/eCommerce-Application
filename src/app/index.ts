@@ -1,3 +1,4 @@
+import API from '@/api';
 import BaseComponent from '@/components/base';
 import Footer from '@/components/footer/footer';
 import Header from '@/components/header/header';
@@ -68,6 +69,7 @@ export default class App extends BaseComponent {
     }
 
     this.render();
+    void API.authentication();
   }
 
   protected render(): void {

@@ -53,6 +53,7 @@ export default tseslint.config(
         },
       ],
       '@typescript-eslint/member-ordering': 'error',
+      '@typescript-eslint/no-unsafe-enum-comparison': 'off',
       'class-methods-use-this': 'error',
       'unicorn/better-regex': 'warn',
       'unicorn/no-null': 'off',

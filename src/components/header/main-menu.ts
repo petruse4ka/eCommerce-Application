@@ -43,14 +43,8 @@ export default class MainMenu extends BaseComponent {
       }).getElement();
 
       menuItem.addEventListener('click', () => {
-        this.isOpen = !this.isOpen;
-
-        if (this.isOpen) {
-          this.openMenu();
-        } else {
-          this.closeMenu();
-        }
-
+        this.isOpen = false;
+        this.closeMenu();
         Router.followRoute(item.route);
       });
 
