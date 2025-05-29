@@ -10,6 +10,13 @@ export const VALIDATE_CONST = {
 
 export const DEFAULT_OPTIONS_COUNT = 5;
 
+export const DEFAULT_CURRENCY = '₽';
+
+export const LOADING_CONFIG = {
+  MAX_ATTEMPTS: 10,
+  DELAY: 500,
+};
+
 export const FILTER_RANGES = {
   PRICE: {
     MIN: 0,
@@ -201,4 +208,6 @@ export const CATALOG_TEXTS = {
     'В данный момент ни один фильтр не выбран. Вы можете выбрать фильтры в списке снизу',
   SHOW_FILTERS: 'Показать фильтры',
   HIDE_FILTERS: 'Скрыть фильтры',
+  LOADING_PRODUCTS: 'Обновляем каталог...',
+  NO_PRODUCTS: 'К сожалению, продуктов не найдено',
 };

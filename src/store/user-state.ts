@@ -23,7 +23,6 @@ class UserState {
     this.notify();
   }
 
-
   public getUserInfoState(): Customer | null {
     return this.userInfo;
   }

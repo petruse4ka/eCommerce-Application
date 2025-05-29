@@ -1,4 +1,12 @@
-import type { AddressKey, ButtonType, InputType, Route, UserInfoKey, FilterId, FilterType} from './enums';
+import type {
+  AddressKey,
+  ButtonType,
+  FilterId,
+  FilterType,
+  InputType,
+  Route,
+  UserInfoKey,
+} from './enums';
 
 export interface ElementParameters {
   tag: string;
@@ -156,7 +164,6 @@ export interface ErrorResponse {
   error_description: string;
 }
 
-
 export interface SelectOption {
   value: string;
   text: string;
@@ -190,6 +197,111 @@ export interface FilterConfigs {
     type: FilterType.DROPDOWN;
     options: SelectOption[];
   }[];
+}
+
+export interface ProductResponse {
+  limit: number;
+  offset: number;
+  count: number;
+  total: number;
+  results: Product[];
+}
+
+export interface Product {
+  id: string;
+  version: number;
+  versionModifiedAt: string;
+  lastMessageSequenceNumber: number;
+  createdAt: string;
+  lastModifiedAt: string;
+  lastModifiedBy: {
+    isPlatformClient: boolean;
+    user: {
+      typeId: string;
+      id: string;
+    };
+  };
+  createdBy: {
+    isPlatformClient: boolean;
+    user: {
+      typeId: string;
+      id: string;
+    };
+  };
+  productType: {
+    typeId: string;
+    id: string;
+  };
+  masterData: {
+    current: {
+      name: { [key: string]: string };
+      description?: { [key: string]: string };
+      categories: Category[];
+      categoryOrderHints: Record<string, string>;
+      slug: { [key: string]: string };
+      metaTitle?: { [key: string]: string };
+      metaDescription?: { [key: string]: string };
+      masterVariant: ProductVariant;
+      variants: ProductVariant[];
+    };
+  };
+}
+
+export interface Category {
+  typeId: string;
+  id: string;
+}
+
+export interface ProductVariant {
+  id: number;
+  sku: string;
+  key: string;
+  prices: Price[];
+  images?: Image[];
+  attributes?: Attribute[];
+}
+
+export interface Price {
+  id: string;
+  value: {
+    type: string;
+    currencyCode: string;
+    centAmount: number;
+    fractionDigits: number;
+  };
+  key: string;
+  country: string;
+  discounted?: {
+    value: {
+      type: string;
+      currencyCode: string;
+      centAmount: number;
+      fractionDigits: number;
+    };
+    discount: {
+      typeId: string;
+      id: string;
+    };
+  };
+}
+
+export interface Image {
+  url: string;
+  label?: string;
+  dimensions: {
+    w: number;
+    h: number;
+  };
+}
+
+export interface Attribute {
+  name: string;
+  value:
+    | boolean
+    | number
+    | string
+    | { [key: string]: string }
+    | Array<{ key: string; label: string }>;
 }
 
 export interface AddressInfo {
