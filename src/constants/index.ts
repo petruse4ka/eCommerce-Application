@@ -10,6 +10,8 @@ export const VALIDATE_CONST = {
 
 export const DEFAULT_OPTIONS_COUNT = 5;
 
+export const DEFAULT_CURRENCY = '₽';
+
 export const FILTER_RANGES = {
   PRICE: {
     MIN: 0,

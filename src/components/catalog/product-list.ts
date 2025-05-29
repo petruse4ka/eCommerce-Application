@@ -1,7 +1,7 @@
 import CatalogAPI from '@/api/catalog';
 import BaseComponent from '@/components/base';
 import Button from '@/components/buttons';
-import { CATALOG_TEXTS } from '@/constants';
+import { CATALOG_TEXTS, DEFAULT_CURRENCY } from '@/constants';
 import { SORTING_OPTIONS } from '@/data/products';
 import { CUSTOM_BUTTON_STYLE } from '@/styles/buttons/buttons';
 import { PRODUCT_LIST_STYLES } from '@/styles/catalog/product-list';
@@ -107,13 +107,13 @@ export default class ProductList extends BaseComponent {
       const originalPrice = new ElementBuilder({
         tag: 'span',
         className: PRODUCT_LIST_STYLES.ORIGINAL_PRICE,
-        textContent: `${product.price} €`,
+        textContent: `${product.price} ${DEFAULT_CURRENCY}`,
       }).getElement();
 
       const discountedPrice = new ElementBuilder({
         tag: 'span',
         className: PRODUCT_LIST_STYLES.REGULAR_PRICE,
-        textContent: `${product.discountedPrice} €`,
+        textContent: `${product.discountedPrice} ${DEFAULT_CURRENCY}`,
       }).getElement();
 
       priceContainer.append(originalPrice, discountedPrice);
@@ -121,7 +121,7 @@ export default class ProductList extends BaseComponent {
       const regularPrice = new ElementBuilder({
         tag: 'span',
         className: PRODUCT_LIST_STYLES.REGULAR_PRICE,
-        textContent: `${product.price} €`,
+        textContent: `${product.price} ${DEFAULT_CURRENCY}`,
       }).getElement();
 
       priceContainer.append(regularPrice);
