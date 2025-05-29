@@ -1,14 +1,17 @@
+import type { Customer } from '@/types/interfaces';
 import type { ActionHandler } from '@/types/types';
 
 class UserState {
   private isAuthorized: boolean;
   private subscribers: ActionHandler[];
+  private userInfo: Customer | null;
   private token: string;
 
   constructor() {
     this.isAuthorized = false;
     this.token = '';
     this.subscribers = [];
+    this.userInfo = null;
   }
 
   public getAuthorizationState(): boolean {
@@ -18,6 +21,14 @@ class UserState {
   public setAuthorizationState(value: boolean): void {
     this.isAuthorized = value;
     this.notify();
+  }
+
+  public getUserInfoState(): Customer | null {
+    return this.userInfo;
+  }
+
+  public setUserInfoState(value: Customer): void {
+    this.userInfo = value;
   }
 
   public getTokenState(): string {

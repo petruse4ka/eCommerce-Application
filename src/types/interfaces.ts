@@ -1,4 +1,12 @@
-import type { ButtonType, FilterId, FilterType, InputType, Route } from './enums';
+import type {
+  AddressKey,
+  ButtonType,
+  FilterId,
+  FilterType,
+  InputType,
+  Route,
+  UserInfoKey,
+} from './enums';
 
 export interface ElementParameters {
   tag: string;
@@ -48,13 +56,33 @@ export interface AuthResponse {
   token_type: string;
 }
 
+export interface Customer {
+  addresses: Addresses[];
+  authenticationMode: string;
+  billingAddressIds: string[];
+  createdAt: string;
+  createdBy: { clientId: string; isPlatformClient: boolean };
+  customerGroupAssignments: [];
+  dateOfBirth: string;
+  defaultBillingAddressId: string;
+  defaultShippingAddressId: string;
+  email: string;
+  firstName: string;
+  id: string;
+  isEmailVerified: boolean;
+  lastMessageSequenceNumber: number;
+  lastModifiedAt: string;
+  lastModifiedBy: { clientId: string; isPlatformClient: boolean };
+  lastName: string;
+  password: string;
+  shippingAddressIds: string[];
+  stores: [];
+  version: number;
+  versionModifiedAt: string;
+}
+
 export interface CustomerResponse {
-  customer: {
-    id: string;
-    version: number;
-    createdAt: string;
-    lastModifiedAt: string;
-  };
+  customer: Customer;
 }
 
 export interface InputComponent {
@@ -72,6 +100,7 @@ export interface InputComponent {
 }
 
 export interface Addresses {
+  id?: string;
   country: string;
   city: string;
   streetName: string;
@@ -178,14 +207,6 @@ export interface ProductResponse {
   results: Product[];
 }
 
-export interface ProductTestResponse {
-  limit: number;
-  offset: number;
-  count: number;
-  total: number;
-  results: TestProduct[];
-}
-
 export interface Product {
   id: string;
   version: number;
@@ -281,4 +302,19 @@ export interface Attribute {
     | string
     | { [key: string]: string }
     | Array<{ key: string; label: string }>;
+}
+
+export interface AddressInfo {
+  [AddressKey.COUNTRY]: string;
+  [AddressKey.CITY]: string;
+  [AddressKey.STREET]: string;
+  [AddressKey.POSTAL_CODE]: string;
+  isDefault: boolean;
+}
+
+export interface UserInfo {
+  [UserInfoKey.FIRST_NAME]: string;
+  [UserInfoKey.LAST_NAME]: string;
+  [UserInfoKey.DATA_OF_BIRTH]: string;
+  [UserInfoKey.EMAIL]: string;
 }
