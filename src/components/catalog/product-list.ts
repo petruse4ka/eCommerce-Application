@@ -1,4 +1,3 @@
-import CatalogAPI from '@/api/catalog';
 import BaseComponent from '@/components/base';
 import Button from '@/components/buttons';
 import { CATALOG_TEXTS, DEFAULT_CURRENCY } from '@/constants';
@@ -17,6 +16,7 @@ export default class ProductList extends BaseComponent {
   private products: Macarons[] = [];
   private productsContainer: HTMLElement;
   private productCounter: HTMLElement;
+  private errorMessage: string | null = null;
 
   constructor() {
     super({ tag: 'div', className: PRODUCT_LIST_STYLES.CONTAINER });
@@ -173,21 +173,30 @@ export default class ProductList extends BaseComponent {
     return card;
   }
 
-  private async loadProducts(): Promise<void> {
-    try {
-      const loadedProducts = await CatalogAPI.getProducts();
-      if (loadedProducts) {
-        this.products = loadedProducts;
-        this.updateProductList();
-      }
-    } catch (error) {
-      console.error('Error loading products:', error);
-    }
+  public updateProducts(products: Macarons[]): void {
+    this.products = products;
+    this.errorMessage = null;
+    this.updateProductList();
+  }
+
+  public showError(message: string): void {
+    this.errorMessage = message;
+    this.updateProductList();
   }
 
   private updateProductList(): void {
     while (this.productsContainer.firstChild) {
       this.productsContainer.firstChild.remove();
+    }
+
+    if (this.errorMessage) {
+      const errorElement = new ElementBuilder({
+        tag: 'div',
+        className: ['text-center', 'text-red'],
+        textContent: this.errorMessage,
+      }).getElement();
+      this.productsContainer.append(errorElement);
+      return;
     }
 
     for (const product of this.products) {
@@ -199,18 +208,7 @@ export default class ProductList extends BaseComponent {
   }
 
   private render(): void {
-    const testButton = new Button({
-      style: 'PRIMARY_PINK',
-      textContent: 'Запросить Продукты',
-      callback: (): void => {
-        void this.loadProducts().catch((error) => {
-          console.error('Error rendering products:', error);
-        });
-      },
-    }).getElement();
-
     const sortingContainer = ProductList.createSortingContainer(this.productCounter);
-
-    this.component.append(testButton, sortingContainer, this.productsContainer);
+    this.component.append(sortingContainer, this.productsContainer);
   }
 }
