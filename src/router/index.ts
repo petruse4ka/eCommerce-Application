@@ -9,7 +9,6 @@ export default class Router {
   constructor(HomeRoute: Route) {
     this.routes = new Map();
     this.homeRoute = HomeRoute;
-    console.log(this.homeRoute);
     this.defaultRoute = this.setDefaultRoute();
     this.setEventListeners();
   }
@@ -32,11 +31,17 @@ export default class Router {
   }
 
   private setDefaultRoute(): Route {
-    const currentHash = globalThis.location.hash;
+    let currentHash = globalThis.location.hash;
+
+    if (currentHash.includes(`${Route.PRODUCT}/`)) {
+      currentHash = Route.PRODUCT;
+    }
+
     if (!currentHash) {
       globalThis.location.hash = this.homeRoute;
       return this.homeRoute;
     }
+
     return Router.checkRouteValidity(currentHash) ? currentHash : Route.ERROR;
   }
 
@@ -45,7 +50,10 @@ export default class Router {
   }
 
   private handleRoute(): void {
-    const currentHash = globalThis.location.hash || this.homeRoute;
+    let currentHash = globalThis.location.hash || this.homeRoute;
+    if (currentHash.includes(`${Route.PRODUCT}/`)) {
+      currentHash = Route.PRODUCT;
+    }
     const route = Router.checkRouteValidity(currentHash) ? currentHash : Route.ERROR;
     const handler = this.routes.get(route);
 

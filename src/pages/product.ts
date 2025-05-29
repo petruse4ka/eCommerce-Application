@@ -1,3 +1,4 @@
+import CatalogAPI from '@/api/catalog';
 import BaseComponent from '@/components/base';
 import ProductAttributes from '@/components/product/attributes';
 import ProductDelivery from '@/components/product/delivery';
@@ -5,8 +6,12 @@ import Detailed from '@/components/product/detailed';
 import ProductPrices from '@/components/product/prices';
 import ProductSlider from '@/components/product/slider';
 import ProductTitle from '@/components/product/title';
+import { LOADING_CONFIG } from '@/constants';
 import productData from '@/data/production';
+import { userState } from '@/store/user-state';
 import { PRODUCT_STYLES } from '@/styles/pages/product';
+import { Route } from '@/types/enums';
+import type { Attribute } from '@/types/interfaces';
 import type { Attributes } from '@/types/types';
 import ElementBuilder from '@/utils/element-builder';
 
@@ -16,7 +21,14 @@ export default class ProductPage extends BaseComponent {
       tag: 'main',
       className: PRODUCT_STYLES.MAIN_CONTAINER,
     });
+
     this.render();
+
+    const hash = globalThis.location.hash;
+
+    if (hash.includes(`${Route.PRODUCT}/`)) {
+      void ProductPage.loadProduct(hash.replace(`${Route.PRODUCT}/`, ''));
+    }
   }
 
   private static parseAttribute(): Attributes {
@@ -39,6 +51,27 @@ export default class ProductPage extends BaseComponent {
     if (!matches) return '';
 
     return matches.map((match) => match.replace(/"label":"/, '').replace(/"/, '')).join(', ');
+  }
+
+  private static async loadProduct(key: string): Promise<void | Attribute[]> {
+    let attempts = 0;
+
+    while (attempts < LOADING_CONFIG.MAX_ATTEMPTS) {
+      const token = userState.getTokenState();
+
+      if (token) {
+        const loadedProduct = await CatalogAPI.getProduct(key);
+        if (loadedProduct) {
+          console.log(loadedProduct);
+          return loadedProduct;
+        }
+
+        break;
+      }
+
+      await new Promise((resolve) => setTimeout(resolve, LOADING_CONFIG.DELAY));
+      attempts += 1;
+    }
   }
 
   private render(): void {
