@@ -1,4 +1,12 @@
-import type { AddressKey, ButtonType, InputType, Route, UserInfoKey, FilterId, FilterType} from './enums';
+import type {
+  AddressKey,
+  ButtonType,
+  FilterId,
+  FilterType,
+  InputType,
+  Route,
+  UserInfoKey,
+} from './enums';
 
 export interface ElementParameters {
   tag: string;
@@ -155,7 +163,6 @@ export interface ErrorResponse {
   error: string;
   error_description: string;
 }
-
 
 export interface SelectOption {
   value: string;

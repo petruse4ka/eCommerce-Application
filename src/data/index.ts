@@ -154,6 +154,40 @@ export const INPUTS_AUTHORIZATION_DATA = [
   },
 ];
 
+export const INPUTS_EDIT_USER_INFO_DATA = [
+  {
+    id: 'firstName',
+    labelText: 'Имя',
+    placeholder: 'Укажите имя',
+    type: InputType.TEXT,
+    isRequired: true,
+    callback: (): void => {},
+  },
+  {
+    id: 'lastName',
+    labelText: 'Фамилия',
+    placeholder: 'Укажите фамилию',
+    type: InputType.TEXT,
+    isRequired: true,
+    callback: (): void => {},
+  },
+  {
+    id: 'dateOfBirth',
+    labelText: 'День рождения',
+    type: InputType.DATE,
+    isRequired: true,
+    callback: (): void => {},
+  },
+  {
+    id: 'email',
+    labelText: 'E-mail',
+    placeholder: 'Укажите e-mail',
+    type: InputType.EMAIL,
+    isRequired: true,
+    callback: (): void => {},
+  },
+];
+
 export const PACKAGES: Packages[] = [
   {
     ...PACKAGES_TEXTS.PACKAGES.READY_PACK,

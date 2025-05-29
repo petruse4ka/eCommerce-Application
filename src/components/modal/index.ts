@@ -3,15 +3,17 @@ import ElementBuilder from '@/utils/element-builder';
 
 import BaseComponent from '../base';
 import Button from '../buttons';
+import type FormEditUserInfo from '../forms/edit-user-info';
 
 export default class Modal extends BaseComponent {
-  constructor(parameters: { title: string; content: HTMLElement }) {
+  constructor(parameters: { title: string; content: FormEditUserInfo }) {
     super({
       tag: 'dialog',
       className: MODAL.COMPONENT,
       attributes: { 'arial-label': parameters.title },
     });
 
+    parameters.content.setCallback(this.closeModal.bind(this));
     this.createHeader(parameters.title);
     this.createContent(parameters.content);
   }
@@ -50,13 +52,13 @@ export default class Modal extends BaseComponent {
     this.component.append(container);
   }
 
-  private createContent(content: HTMLElement): void {
+  private createContent(content: FormEditUserInfo): void {
     const container = new ElementBuilder({
       tag: 'div',
       className: MODAL.CONTENT.CONTAINER,
     }).getElement();
 
-    container.append(content);
+    container.append(content.getElement());
     this.component.append(container);
   }
 }
