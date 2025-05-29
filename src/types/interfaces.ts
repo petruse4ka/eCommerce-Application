@@ -178,6 +178,14 @@ export interface ProductResponse {
   results: Product[];
 }
 
+export interface ProductTestResponse {
+  limit: number;
+  offset: number;
+  count: number;
+  total: number;
+  results: TestProduct[];
+}
+
 export interface Product {
   id: string;
   version: number;
