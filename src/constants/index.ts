@@ -209,4 +209,5 @@ export const CATALOG_TEXTS = {
   SHOW_FILTERS: 'Показать фильтры',
   HIDE_FILTERS: 'Скрыть фильтры',
   LOADING_PRODUCTS: 'Обновляем каталог...',
+  NO_PRODUCTS: 'К сожалению, продуктов не найдено',
 };

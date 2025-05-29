@@ -1,5 +1,6 @@
 import BaseComponent from '@/components/base';
-import { DEFAULT_CURRENCY } from '@/constants';
+import EmptyCatalog from '@/components/catalog/empty-catalog';
+import { CATALOG_TEXTS, DEFAULT_CURRENCY } from '@/constants';
 import { PRODUCT_LIST_STYLES } from '@/styles/catalog/product-list';
 import type { Macarons } from '@/types/interfaces';
 import ElementBuilder from '@/utils/element-builder';
@@ -8,7 +9,6 @@ import ImageBuilder from '@/utils/image-builder';
 export default class ProductList extends BaseComponent {
   private products: Macarons[] = [];
   private productsContainer: HTMLElement;
-  private errorMessage: string | null = null;
 
   constructor() {
     super({ tag: 'div', className: PRODUCT_LIST_STYLES.CONTAINER });
@@ -16,7 +16,6 @@ export default class ProductList extends BaseComponent {
       tag: 'div',
       className: PRODUCT_LIST_STYLES.PRODUCTS_CONTAINER,
     }).getElement();
-    this.render();
   }
 
   private static createPriceContainer(product: Macarons): HTMLElement {
@@ -97,37 +96,24 @@ export default class ProductList extends BaseComponent {
 
   public updateProducts(products: Macarons[]): void {
     this.products = products;
-    this.errorMessage = null;
-    this.updateProductList();
-  }
-
-  public showError(message: string): void {
-    this.errorMessage = message;
     this.updateProductList();
   }
 
   private updateProductList(): void {
-    while (this.productsContainer.firstChild) {
-      this.productsContainer.firstChild.remove();
+    while (this.component.firstChild) {
+      this.component.firstChild.remove();
     }
 
-    if (this.errorMessage) {
-      const errorElement = new ElementBuilder({
-        tag: 'div',
-        className: ['text-center', 'text-red'],
-        textContent: this.errorMessage,
-      }).getElement();
-      this.productsContainer.append(errorElement);
+    if (this.products.length === 0) {
+      const emptyState = new EmptyCatalog(`${CATALOG_TEXTS.NO_PRODUCTS}`);
+      this.component.append(emptyState.getElement());
       return;
     }
 
+    this.component.append(this.productsContainer);
     for (const product of this.products) {
       const productItem = ProductList.createProductCard(product);
       this.productsContainer.append(productItem);
     }
-  }
-
-  private render(): void {
-    this.component.append(this.productsContainer);
   }
 }

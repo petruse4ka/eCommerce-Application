@@ -68,8 +68,10 @@ export default class CatalogPage extends BaseComponent {
           if (loadedProducts) {
             this.productList.updateProducts(loadedProducts);
             this.productSorting.updateProductCount(loadedProducts.length);
+            this.isLoading = false;
+            this.render();
+            return;
           }
-          return;
         }
 
         await new Promise((resolve) => setTimeout(resolve, LOADING_CONFIG.DELAY));
@@ -79,9 +81,8 @@ export default class CatalogPage extends BaseComponent {
       throw new Error('Failed to get authentication token');
     } catch (error) {
       console.error('Error loading products:', error);
-      this.productList.showError('Failed to load products');
-    } finally {
       this.isLoading = false;
+      this.productList.updateProducts([]);
       this.render();
     }
   }
@@ -121,11 +122,9 @@ export default class CatalogPage extends BaseComponent {
 
     filtersSection.append(productFilters);
     productListContainer.append(this.productList.getElement());
-
     if (this.isLoading) {
       productListContainer.append(this.loadingOverlay);
     }
-
     productListSection.append(this.productSorting.getElement(), productListContainer);
     catalogContainer.append(filtersSection, productListSection);
 
