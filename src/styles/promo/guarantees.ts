@@ -4,7 +4,7 @@ export const GUARANTEES_STYLES = {
   LIST: ['grid', 'grid-cols-1', 'sm:grid-cols-2', 'xl:grid-cols-4', 'gap-8'],
   CARD: [
     'group',
-    'border-mint-light',
+    'border-primary',
     'border-1',
     'rounded-md',
     'shadow-md',
@@ -13,7 +13,7 @@ export const GUARANTEES_STYLES = {
     'flex-col',
     'items-center',
     'text-center',
-    'hover:border-mint',
+    'hover:border-orange',
   ],
   IMAGE: [
     'mb-5',
