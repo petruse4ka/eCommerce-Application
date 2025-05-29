@@ -318,3 +318,64 @@ export interface UserInfo {
   [UserInfoKey.DATA_OF_BIRTH]: string;
   [UserInfoKey.EMAIL]: string;
 }
+
+export interface ProductTypeResponse {
+  limit: number;
+  offset: number;
+  count: number;
+  total: number;
+  results: ProductType[];
+}
+
+export interface ProductType {
+  id: string;
+  version: number;
+  versionModifiedAt: string;
+  createdAt: string;
+  lastModifiedAt: string;
+  lastModifiedBy: {
+    isPlatformClient: boolean;
+    user: {
+      typeId: string;
+      id: string;
+    };
+  };
+  createdBy: {
+    isPlatformClient: boolean;
+    user: {
+      typeId: string;
+      id: string;
+    };
+  };
+  name: string;
+  description: string;
+  classifier: string;
+  attributes: ProductTypeAttribute[];
+  key: string;
+}
+
+export interface ProductTypeAttribute {
+  name: string;
+  label: {
+    [key: string]: string;
+  };
+  inputTip: {
+    [key: string]: string;
+  };
+  isRequired: boolean;
+  type: {
+    name: string;
+    elementType?: {
+      name: string;
+      values?: Array<{
+        key: string;
+        label: string;
+      }>;
+    };
+  };
+  attributeConstraint: string;
+  isSearchable: boolean;
+  inputHint: string;
+  displayGroup: string;
+  level: string;
+}

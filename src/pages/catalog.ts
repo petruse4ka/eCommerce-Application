@@ -64,10 +64,15 @@ export default class CatalogPage extends BaseComponent {
       while (attempts < LOADING_CONFIG.MAX_ATTEMPTS) {
         const token = userState.getTokenState();
         if (token) {
-          const loadedProducts = await CatalogAPI.getProducts();
+          const [loadedProducts, loadedProductTypes] = await Promise.all([
+            CatalogAPI.getProducts(),
+            CatalogAPI.getProductTypes(),
+          ]);
+
           if (loadedProducts) {
             this.productList.updateProducts(loadedProducts);
             this.productSorting.updateProductCount(loadedProducts.length);
+            console.log('Product Types:', loadedProductTypes);
             this.isLoading = false;
             this.render();
             return;
