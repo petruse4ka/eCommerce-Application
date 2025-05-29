@@ -4,6 +4,7 @@ import CatalogAPI from '@/api/catalog';
 import BaseComponent from '@/components/base';
 import ProductFilters from '@/components/catalog/product-filters';
 import ProductList from '@/components/catalog/product-list';
+import ProductSorting from '@/components/catalog/product-sorting';
 import { CATALOG_TEXTS, LOADING_CONFIG, PAGE_TITLES } from '@/constants';
 import { userState } from '@/store/user-state';
 import { CATALOG_STYLES } from '@/styles/pages/catalog';
@@ -11,7 +12,9 @@ import ElementBuilder from '@/utils/element-builder';
 
 export default class CatalogPage extends BaseComponent {
   private productList: ProductList;
+  private productSorting: ProductSorting;
   private isLoading: boolean;
+  private loadingOverlay: HTMLElement;
 
   constructor() {
     super({
@@ -19,17 +22,39 @@ export default class CatalogPage extends BaseComponent {
       className: CATALOG_STYLES.PAGE_CONTAINER,
     });
     this.productList = new ProductList();
+    this.productSorting = new ProductSorting();
     this.isLoading = true;
+    this.loadingOverlay = CatalogPage.createLoadingOverlay();
     this.render();
     void this.loadProducts();
   }
 
   private static createLoadingOverlay(): HTMLElement {
-    return new ElementBuilder({
+    const overlay = new ElementBuilder({
       tag: 'div',
-      className: ['text-center', 'py-8'],
+      className: CATALOG_STYLES.LOADING_OVERLAY,
+    }).getElement();
+
+    const spinnerContainer = new ElementBuilder({
+      tag: 'div',
+      className: CATALOG_STYLES.SPINNER_CONTAINER,
+    }).getElement();
+
+    const spinner = new ElementBuilder({
+      tag: 'div',
+      className: CATALOG_STYLES.LOADING_SPINNER,
+    }).getElement();
+
+    const text = new ElementBuilder({
+      tag: 'p',
+      className: CATALOG_STYLES.LOADING_TEXT,
       textContent: CATALOG_TEXTS.LOADING_PRODUCTS,
     }).getElement();
+
+    spinnerContainer.append(spinner, text);
+    overlay.append(spinnerContainer);
+
+    return overlay;
   }
 
   private async loadProducts(): Promise<void> {
@@ -42,8 +67,8 @@ export default class CatalogPage extends BaseComponent {
           const loadedProducts = await CatalogAPI.getProducts();
           if (loadedProducts) {
             this.productList.updateProducts(loadedProducts);
+            this.productSorting.updateProductCount(loadedProducts.length);
           }
-          attempts = 0;
           return;
         }
 
@@ -87,12 +112,21 @@ export default class CatalogPage extends BaseComponent {
       className: CATALOG_STYLES.PRODUCT_LIST_SECTION,
     }).getElement();
 
+    const productListContainer = new ElementBuilder({
+      tag: 'div',
+      className: CATALOG_STYLES.PRODUCT_LIST_CONTAINER,
+    }).getElement();
+
     const productFilters = new ProductFilters().getElement();
 
     filtersSection.append(productFilters);
-    productListSection.append(
-      this.isLoading ? CatalogPage.createLoadingOverlay() : this.productList.getElement()
-    );
+    productListContainer.append(this.productList.getElement());
+
+    if (this.isLoading) {
+      productListContainer.append(this.loadingOverlay);
+    }
+
+    productListSection.append(this.productSorting.getElement(), productListContainer);
     catalogContainer.append(filtersSection, productListSection);
 
     this.component.append(title, catalogContainer);

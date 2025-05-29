@@ -1,5 +1,5 @@
 export const CATALOG_STYLES = {
-  PAGE_CONTAINER: ['container', 'max-w-[1440px]', 'mx-auto', 'px-4', 'py-10'],
+  PAGE_CONTAINER: ['container', 'max-w-[1440px]', 'mx-auto', 'px-4', 'py-10', 'flex-grow'],
   TITLE: ['text-3xl', 'text-center', 'font-semibold', 'text-black', 'mb-9'],
   CATALOG_CONTAINER: ['grid', 'grid-cols-1', 'xl:grid-cols-4', 'gap-8'],
   FILTERS_SECTION: [
@@ -11,6 +11,29 @@ export const CATALOG_STYLES = {
     'shadow-md',
     'p-4',
     'pb-10',
+    'self-start',
   ],
-  PRODUCT_LIST_SECTION: ['xl:col-span-3'],
+  PRODUCT_LIST_SECTION: ['xl:col-span-3', 'flex', 'flex-col', 'gap-7'],
+  PRODUCT_LIST_CONTAINER: ['relative', 'flex-grow'],
+  LOADING_OVERLAY: [
+    'absolute',
+    'inset-0',
+    'backdrop-blur-sm',
+    'flex',
+    'items-center',
+    'justify-center',
+    'z-10',
+    'min-h-[400px]',
+  ],
+  SPINNER_CONTAINER: ['flex', 'flex-col', 'items-center'],
+  LOADING_SPINNER: [
+    'w-10',
+    'h-10',
+    'border-4',
+    'border-accent',
+    'border-t-transparent',
+    'rounded-full',
+    'animate-spin',
+  ],
+  LOADING_TEXT: ['mt-4', 'text-accent', 'font-medium', 'font-semibold'],
 };

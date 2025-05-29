@@ -1,5 +1,5 @@
 export const PRODUCT_LIST_STYLES = {
-  CONTAINER: ['w-full', 'flex', 'flex-col', 'gap-6'],
+  CONTAINER: ['w-full', 'flex', 'flex-col', 'gap-6', 'relative'],
   PRODUCTS_CONTAINER: [
     'w-full',
     'grid',
