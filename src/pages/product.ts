@@ -7,7 +7,7 @@ import ProductPrices from '@/components/product/prices';
 import ProductSlider from '@/components/product/slider';
 import ProductTitle from '@/components/product/title';
 import { LOADING_CONFIG } from '@/constants';
-import productData from '@/data/production';
+//import productData from '@/data/production';
 import { userState } from '@/store/user-state';
 import { PRODUCT_STYLES } from '@/styles/pages/product';
 import { Route } from '@/types/enums';
@@ -22,17 +22,10 @@ export default class ProductPage extends BaseComponent {
       className: PRODUCT_STYLES.MAIN_CONTAINER,
     });
 
-    this.render();
-
-    const hash = globalThis.location.hash;
-
-    if (hash.includes(`${Route.PRODUCT}/`)) {
-      void ProductPage.loadProduct(hash.replace(`${Route.PRODUCT}/`, ''));
-    }
+    void ProductPage.init(this.component);
   }
 
-  private static parseAttribute(): Attributes {
-    const attributes = productData.masterVariant.attributes;
+  private static parseAttribute(attributes: Attribute[]): Attributes {
     const transformedObject: Attributes = Object.fromEntries(
       attributes.map((attribute) => [
         attribute.name,
@@ -47,13 +40,20 @@ export default class ProductPage extends BaseComponent {
   private static parseList(jsonString: string): string {
     if (!jsonString.trim()) return '';
 
-    const matches = jsonString.match(/"label":"(.*?)"/g);
-    if (!matches) return '';
-
-    return matches.map((match) => match.replace(/"label":"/, '').replace(/"/, '')).join(', ');
+    const matchesLabel = jsonString.match(/"label":"(.*?)"/g);
+    if (matchesLabel) {
+      return matchesLabel
+        .map((match) => match.replace(/"label":"/, '').replace(/"/, ''))
+        .join(', ');
+    }
+    const matchesRu = jsonString.match(/"ru":"(.*?)"/g);
+    if (matchesRu) {
+      return matchesRu[0].replace(/"ru":"/, '').replace(/"/, '');
+    }
+    return '';
   }
 
-  private static async loadProduct(key: string): Promise<void | Attribute[]> {
+  private static async loadProduct(key: string): Promise<void | Attributes> {
     let attempts = 0;
 
     while (attempts < LOADING_CONFIG.MAX_ATTEMPTS) {
@@ -62,8 +62,8 @@ export default class ProductPage extends BaseComponent {
       if (token) {
         const loadedProduct = await CatalogAPI.getProduct(key);
         if (loadedProduct) {
-          console.log(loadedProduct);
-          return loadedProduct;
+          const transformedAtribute = ProductPage.parseAttribute(loadedProduct);
+          return transformedAtribute;
         }
 
         break;
@@ -74,7 +74,18 @@ export default class ProductPage extends BaseComponent {
     }
   }
 
-  private render(): void {
+  private static async init(mainComponent: HTMLElement): Promise<void> {
+    const hash = globalThis.location.hash;
+
+    if (hash.includes(`${Route.PRODUCT}/`)) {
+      const productData = await ProductPage.loadProduct(hash.replace(`${Route.PRODUCT}/`, ''));
+      if (productData) {
+        ProductPage.render(productData, mainComponent);
+      }
+    }
+  }
+
+  private static render(productData: Attributes, mainComponent: HTMLElement): void {
     const mainContainer = new ElementBuilder({
       tag: 'div',
       className: PRODUCT_STYLES.CONTAINER,
@@ -85,31 +96,27 @@ export default class ProductPage extends BaseComponent {
       className: PRODUCT_STYLES.ASIDE,
     }).getElement();
 
-    const transformedObject = ProductPage.parseAttribute();
-
     const product = new ProductTitle({
-      title: String(transformedObject['name']),
-      weight: String(transformedObject['weight']),
-      description: String(transformedObject['description']),
+      title: String(productData['name']),
+      weight: String(productData['weight']),
+      description: String(productData['description']),
     });
     rightAside.append(product.getElement());
+
+    const productAttributs = new ProductAttributes(productData);
+    rightAside.append(productAttributs.getElement());
 
     const prices = new ProductPrices();
     rightAside.append(prices.getElement());
 
-    const productAttributs = new ProductAttributes({
-      flavors: String(transformedObject['flavors']),
-      diet: String(transformedObject['diet']),
-    });
-    rightAside.append(productAttributs.getElement());
-
     const delivery = new ProductDelivery();
     rightAside.append(delivery.getElement());
 
+    const detailed = new Detailed(String(productData['detailing']));
     const slider = new ProductSlider();
-
-    const detailed = new Detailed(String(transformedObject['description']));
     mainContainer.append(slider.getElement(), rightAside);
-    this.component.append(mainContainer, detailed.getElement());
+
+    mainComponent.append(mainContainer);
+    mainComponent.append(detailed.getElement());
   }
 }

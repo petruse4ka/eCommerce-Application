@@ -9,10 +9,12 @@ export default class DetailedProduct extends BaseComponent {
       tag: 'section',
       className: PRODUCT_STYLES.DETAILED_CONTAINER,
     });
-    this.render(content);
+
+    const paragraphes = content.split(/\\n/g);
+    this.render(paragraphes);
   }
 
-  private render(_content: string): void {
+  private render(paragraphes: string[]): void {
     const name = new ElementBuilder({
       tag: 'h3',
       className: PRODUCT_STYLES.DETAILED_NAME,
@@ -22,8 +24,17 @@ export default class DetailedProduct extends BaseComponent {
     const description = new ElementBuilder({
       tag: 'div',
       className: PRODUCT_STYLES.PARAMETER_DESCRIPTION,
-      textContent: _content,
     }).getElement();
+
+    for (const item of paragraphes) {
+      const paragraph = new ElementBuilder({
+        tag: 'p',
+        className: '',
+        textContent: item,
+      }).getElement();
+
+      description.append(paragraph);
+    }
 
     this.component.append(name, description);
   }
