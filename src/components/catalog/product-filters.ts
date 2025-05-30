@@ -1,5 +1,6 @@
 import BaseComponent from '@/components/base';
 import Button from '@/components/buttons';
+import EmptyFilters from '@/components/catalog/empty-filters';
 import { CATALOG_TEXTS, DEFAULT_CURRENCY, DEFAULT_OPTIONS_COUNT, FILTER_RANGES } from '@/constants';
 import { filterState } from '@/store/filter-state';
 import { FILTERS_STYLES } from '@/styles/catalog/product-filters';
@@ -16,7 +17,8 @@ export default class ProductFilters extends BaseComponent {
     dropdowns: Map<string, HTMLSelectElement>;
   };
   private isFiltersVisible: boolean;
-  private filterConfigs: FilterConfigs;
+  private filterConfigs: FilterConfigs | null;
+  private filtersContainer: ElementBuilder;
 
   constructor() {
     super({ tag: 'div', className: FILTERS_STYLES.WRAPPER });
@@ -26,8 +28,14 @@ export default class ProductFilters extends BaseComponent {
       dropdowns: new Map(),
     };
     this.isFiltersVisible = false;
-    this.filterConfigs = { checkbox: [], range: [], dropdown: [] };
-    this.render();
+    this.filterConfigs = null;
+
+    this.filtersContainer = new ElementBuilder({
+      tag: 'div',
+      className: FILTERS_STYLES.CONTAINER,
+    });
+
+    this.component.append(this.filtersContainer.getElement());
   }
 
   private static createFilterTitle(title: string): HTMLElement {
@@ -105,14 +113,55 @@ export default class ProductFilters extends BaseComponent {
     }
   }
 
-  public updateFilters(config: FilterConfigs): void {
+  public updateFilters(config: FilterConfigs | null): void {
     this.filterConfigs = config;
-    this.render();
+    this.updateFiltersContent();
   }
 
-  public override remove(): void {
-    filterState.unsubscribe(this.handleFilterChange);
-    super.remove();
+  private updateFiltersContent(): void {
+    while (this.component.firstChild) this.component.firstChild.remove();
+
+    const container = this.filtersContainer.getElement();
+    while (container.firstChild) container.firstChild.remove();
+
+    if (!this.filterConfigs) {
+      this.component.append(this.filtersContainer.getElement());
+      return;
+    }
+
+    if (
+      this.filterConfigs.checkbox.length === 0 &&
+      this.filterConfigs.range.length === 0 &&
+      this.filterConfigs.dropdown.length === 0
+    ) {
+      const emptyFilters = new EmptyFilters(CATALOG_TEXTS.NO_FILTERS);
+      this.component.append(emptyFilters.getElement());
+      return;
+    }
+
+    const toggleButton = new Button({
+      style: 'TOGGLE_FILTERS',
+      textContent: CATALOG_TEXTS.SHOW_FILTERS,
+      callback: (): void => {
+        this.isFiltersVisible = !this.isFiltersVisible;
+        if (this.isFiltersVisible) {
+          this.filtersContainer.removeCssClasses(FILTERS_STYLES.HIDDEN);
+          toggleButton.textContent = CATALOG_TEXTS.HIDE_FILTERS;
+        } else {
+          this.filtersContainer.applyCssClasses(FILTERS_STYLES.HIDDEN);
+          toggleButton.textContent = CATALOG_TEXTS.SHOW_FILTERS;
+        }
+      },
+    }).getElement();
+
+    this.component.append(toggleButton);
+
+    const filters = this.createFilters();
+    filterState.subscribe(this.handleFilterChange);
+
+    for (const filter of filters) container.append(filter);
+
+    this.component.append(this.filtersContainer.getElement());
   }
 
   private createCheckboxOption(filterId: string, option: CheckboxOption): HTMLElement {
@@ -328,7 +377,7 @@ export default class ProductFilters extends BaseComponent {
   private createFilters(): HTMLElement[] {
     const filters: HTMLElement[] = [];
 
-    for (const config of this.filterConfigs.checkbox) {
+    for (const config of this.filterConfigs!.checkbox) {
       filters.push(
         this.createCheckboxFilter({
           title: config.title,
@@ -338,7 +387,7 @@ export default class ProductFilters extends BaseComponent {
       );
     }
 
-    for (const config of this.filterConfigs.range) {
+    for (const config of this.filterConfigs!.range) {
       filters.push(
         this.createRangeFilter(
           config.title,
@@ -350,7 +399,7 @@ export default class ProductFilters extends BaseComponent {
       );
     }
 
-    for (const config of this.filterConfigs.dropdown) {
+    for (const config of this.filterConfigs!.dropdown) {
       filters.push(this.createDropdownFilter(config.title, config.options, config.id));
     }
 
@@ -358,75 +407,35 @@ export default class ProductFilters extends BaseComponent {
   }
 
   private handleFilterChange = (): void => {
-    for (const config of this.filterConfigs.checkbox) {
-      const checkboxes = this.filters.checkboxes.get(config.id);
-      if (checkboxes) {
-        for (const checkbox of checkboxes) {
-          const selectedOptions = filterState.getSelectedOptions(config.id);
-          checkbox.checked = [...selectedOptions].some((option) => option.key === checkbox.value);
+    if (this.filterConfigs) {
+      for (const config of this.filterConfigs.checkbox) {
+        const checkboxes = this.filters.checkboxes.get(config.id);
+        if (checkboxes) {
+          for (const checkbox of checkboxes) {
+            const selectedOptions = filterState.getSelectedOptions(config.id);
+            checkbox.checked = [...selectedOptions].some((option) => option.key === checkbox.value);
+          }
+        }
+      }
+
+      for (const config of this.filterConfigs.range) {
+        const range = this.filters.ranges.get(config.id);
+        if (range) {
+          const values = [...filterState.getSelectedOptions(config.id)];
+          const [minValue, maxValue] = values.length > 0 ? values[0].key.split('-') : ['', ''];
+
+          range.min.value = minValue || config.min.toString();
+          range.max.value = maxValue || config.max.toString();
+        }
+      }
+
+      for (const config of this.filterConfigs.dropdown) {
+        const select = this.filters.dropdowns.get(config.id);
+        if (select) {
+          const values = [...filterState.getSelectedOptions(config.id)];
+          select.value = values.length > 0 ? values[0].key : '';
         }
       }
     }
-
-    for (const config of this.filterConfigs.range) {
-      const range = this.filters.ranges.get(config.id);
-      if (range) {
-        const values = [...filterState.getSelectedOptions(config.id)];
-        const [minValue, maxValue] = values.length > 0 ? values[0].key.split('-') : ['', ''];
-
-        range.min.value = minValue || config.min.toString();
-        range.max.value = maxValue || config.max.toString();
-      }
-    }
-
-    for (const config of this.filterConfigs.dropdown) {
-      const select = this.filters.dropdowns.get(config.id);
-      if (select) {
-        const values = [...filterState.getSelectedOptions(config.id)];
-        select.value = values.length > 0 ? values[0].key : '';
-      }
-    }
   };
-
-  private render(): void {
-    while (this.component.firstChild) {
-      this.component.firstChild.remove();
-    }
-
-    if (
-      this.filterConfigs.checkbox.length > 0 ||
-      this.filterConfigs.range.length > 0 ||
-      this.filterConfigs.dropdown.length > 0
-    ) {
-      const filtersContainer = new ElementBuilder({
-        tag: 'div',
-        className: FILTERS_STYLES.CONTAINER,
-      });
-
-      const toggleButton = new Button({
-        style: 'TOGGLE_FILTERS',
-        textContent: CATALOG_TEXTS.SHOW_FILTERS,
-        callback: (): void => {
-          this.isFiltersVisible = !this.isFiltersVisible;
-          if (this.isFiltersVisible) {
-            filtersContainer.removeCssClasses(FILTERS_STYLES.HIDDEN);
-            toggleButton.textContent = CATALOG_TEXTS.HIDE_FILTERS;
-          } else {
-            filtersContainer.applyCssClasses(FILTERS_STYLES.HIDDEN);
-            toggleButton.textContent = CATALOG_TEXTS.SHOW_FILTERS;
-          }
-        },
-      }).getElement();
-
-      const filters = this.createFilters();
-
-      filterState.subscribe(this.handleFilterChange);
-
-      for (const filter of filters) {
-        filtersContainer.getElement().append(filter);
-      }
-
-      this.component.append(toggleButton, filtersContainer.getElement());
-    }
-  }
 }

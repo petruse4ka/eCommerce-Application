@@ -216,6 +216,7 @@ export const CATALOG_TEXTS = {
   LOADING_PRODUCTS: 'Обновляем каталог...',
   LOADING_FILTERS: 'Обновляем фильтры...',
   NO_PRODUCTS: 'К сожалению, продуктов не найдено',
+  NO_FILTERS: 'Подходящие фильтры отсутствуют',
   PRICE: 'Цена',
   PRICE_ID: 'price',
   CATEGORY: 'Категория',

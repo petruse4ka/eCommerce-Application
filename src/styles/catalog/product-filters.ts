@@ -1,7 +1,7 @@
 import { CHECKBOX_STYLE } from '@/styles/inputs/inputs';
 
 export const FILTERS_STYLES = {
-  WRAPPER: ['flex', 'flex-col', 'gap-6', 'relative', 'min-h-[200px]'],
+  WRAPPER: ['flex', 'flex-col', 'gap-6', 'relative', 'min-h-[60px]', 'xl:min-h-[150px]'],
   CONTAINER: [
     'hidden',
     'grid',
@@ -79,4 +79,16 @@ export const FILTERS_STYLES = {
   FILTERS_CONTAINER: ['flex', 'flex-col', 'gap-4'],
   FILTERS_TITLE: ['text-lg', 'font-semibold', 'mb-2'],
   NO_FILTERS_MESSAGE: ['text-sm', 'text-dark', 'mt-2'],
+  EMPTY_FILTERS_CONTAINER: [
+    'flex',
+    'flex-col',
+    'align-start',
+    'justify-center',
+    'gap-3',
+    'items-center',
+    'min-h-[100px]',
+    'mt-5',
+  ],
+  EMPTY_FILTERS_IMAGE: ['w-[75px]', 'xl:w-[125x]', 'grow-0'],
+  EMPTY_FILTERS_TEXT: ['text-accent', 'text-lg', 'text-center'],
 };

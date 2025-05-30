@@ -49,8 +49,7 @@ export default class CatalogPage extends BaseComponent {
       let attempts = 0;
 
       while (attempts < LOADING_CONFIG.MAX_ATTEMPTS) {
-        const token = userState.getTokenState();
-        if (token) {
+        if (userState.getTokenState()) {
           const [productsData, loadedProductTypes, loadedCategories] = await Promise.all([
             CatalogAPI.getProducts(),
             CatalogAPI.getProductTypes(),
@@ -86,6 +85,8 @@ export default class CatalogPage extends BaseComponent {
       console.error('Error loading products:', error);
       this.isLoading = false;
       this.productList.updateProducts([]);
+      this.productFilters.updateFilters({ checkbox: [], range: [], dropdown: [] });
+      this.selectedFilters.updateFilterConfigs({ checkbox: [], range: [], dropdown: [] });
       this.render();
     }
   }
