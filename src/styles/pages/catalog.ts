@@ -15,7 +15,7 @@ export const CATALOG_STYLES = {
   ],
   PRODUCT_LIST_SECTION: ['xl:col-span-3', 'flex', 'flex-col', 'gap-7', 'min-h-[500px]'],
   PRODUCT_LIST_CONTAINER: ['relative', 'flex-grow'],
-  LOADING_OVERLAY: [
+  OVERLAY_PRODUCTS: [
     'absolute',
     'inset-0',
     'backdrop-blur-sm',
@@ -23,19 +23,20 @@ export const CATALOG_STYLES = {
     'items-center',
     'justify-center',
     'z-10',
-    'min-h-[300px]',
+    'min-h-[200px]',
+    'rounded-lg',
   ],
-  SPINNER_CONTAINER: ['flex', 'flex-col', 'items-center'],
-  LOADING_SPINNER: [
-    'w-10',
-    'h-10',
-    'border-4',
-    'border-accent',
-    'border-t-transparent',
-    'rounded-full',
-    'animate-spin',
+  OVERLAY_FILTERS: [
+    'absolute',
+    'inset-0',
+    'backdrop-blur-sm',
+    'flex',
+    'items-center',
+    'justify-center',
+    'z-10',
+    'min-h-[220px]',
+    'rounded-lg',
   ],
-  LOADING_TEXT: ['mt-4', 'text-accent', 'text-base', 'font-semibold'],
   EMPTY_CATALOG_CONTAINER: [
     'flex',
     'flex-col',
@@ -51,6 +52,6 @@ export const CATALOG_STYLES = {
     'z-10',
     'min-h-[300px]',
   ],
-  EMPTY_CATALOG_IMAGE: ['w-[250px]', 'h-[250px]', 'xl:w-auto', 'xl:h-auto'],
+  EMPTY_CATALOG_IMAGE: ['w-[250px]', 'h-[250px]'],
   EMPTY_CATALOG_TEXT: ['text-accent', 'text-xl', 'font-semibold'],
 };

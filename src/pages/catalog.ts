@@ -6,6 +6,7 @@ import ProductFilters from '@/components/catalog/product-filters';
 import ProductList from '@/components/catalog/product-list';
 import ProductSorting from '@/components/catalog/product-sorting';
 import SelectedFilters from '@/components/catalog/selected-filters';
+import LoaderOverlay from '@/components/overlay/loader-overlay';
 import { CATALOG_TEXTS, LOADING_CONFIG, PAGE_TITLES } from '@/constants';
 import { userState } from '@/store/user-state';
 import { CATALOG_STYLES } from '@/styles/pages/catalog';
@@ -18,7 +19,8 @@ export default class CatalogPage extends BaseComponent {
   private productFilters: ProductFilters;
   private selectedFilters: SelectedFilters;
   private isLoading: boolean;
-  private loadingOverlay: HTMLElement;
+  private productListLoader: LoaderOverlay;
+  private filtersLoader: LoaderOverlay;
 
   constructor() {
     super({
@@ -30,37 +32,16 @@ export default class CatalogPage extends BaseComponent {
     this.productFilters = new ProductFilters();
     this.selectedFilters = new SelectedFilters();
     this.isLoading = true;
-    this.loadingOverlay = CatalogPage.createLoadingOverlay();
+    this.productListLoader = new LoaderOverlay({
+      text: CATALOG_TEXTS.LOADING_PRODUCTS,
+      className: CATALOG_STYLES.OVERLAY_PRODUCTS,
+    });
+    this.filtersLoader = new LoaderOverlay({
+      text: CATALOG_TEXTS.LOADING_FILTERS,
+      className: CATALOG_STYLES.OVERLAY_FILTERS,
+    });
     this.render();
     void this.loadProducts();
-  }
-
-  private static createLoadingOverlay(): HTMLElement {
-    const overlay = new ElementBuilder({
-      tag: 'div',
-      className: CATALOG_STYLES.LOADING_OVERLAY,
-    }).getElement();
-
-    const spinnerContainer = new ElementBuilder({
-      tag: 'div',
-      className: CATALOG_STYLES.SPINNER_CONTAINER,
-    }).getElement();
-
-    const spinner = new ElementBuilder({
-      tag: 'div',
-      className: CATALOG_STYLES.LOADING_SPINNER,
-    }).getElement();
-
-    const text = new ElementBuilder({
-      tag: 'p',
-      className: CATALOG_STYLES.LOADING_TEXT,
-      textContent: CATALOG_TEXTS.LOADING_PRODUCTS,
-    }).getElement();
-
-    spinnerContainer.append(spinner, text);
-    overlay.append(spinnerContainer);
-
-    return overlay;
   }
 
   private async loadProducts(): Promise<void> {
@@ -141,10 +122,17 @@ export default class CatalogPage extends BaseComponent {
     }).getElement();
 
     filtersSection.append(this.selectedFilters.getElement(), this.productFilters.getElement());
+    if (this.isLoading) {
+      this.productFilters.getElement().append(this.filtersLoader.getElement());
+    } else {
+      this.filtersLoader.getElement().remove();
+    }
+
     productListContainer.append(this.productList.getElement());
     if (this.isLoading) {
-      productListContainer.append(this.loadingOverlay);
+      productListContainer.append(this.productListLoader.getElement());
     }
+
     productListSection.append(this.productSorting.getElement(), productListContainer);
     catalogContainer.append(filtersSection, productListSection);
 

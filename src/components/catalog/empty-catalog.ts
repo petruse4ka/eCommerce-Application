@@ -1,4 +1,4 @@
-import macaronAstonaut from '@/assets/images/error-macaron.png';
+import notFoundImage from '@/assets/images/not-found.svg';
 import BaseComponent from '@/components/base';
 import { CATALOG_STYLES } from '@/styles/pages/catalog';
 import ElementBuilder from '@/utils/element-builder';
@@ -17,7 +17,7 @@ export default class EmptyCatalog extends BaseComponent {
   private render(message: string): void {
     const macaron = new ImageBuilder({
       className: CATALOG_STYLES.EMPTY_CATALOG_IMAGE,
-      source: macaronAstonaut,
+      source: notFoundImage,
       alt: 'sad macaron',
     }).getElement();
 

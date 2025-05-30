@@ -1,7 +1,7 @@
 import { CHECKBOX_STYLE } from '@/styles/inputs/inputs';
 
 export const FILTERS_STYLES = {
-  WRAPPER: ['flex', 'flex-col', 'gap-6'],
+  WRAPPER: ['flex', 'flex-col', 'gap-6', 'relative', 'min-h-[200px]'],
   CONTAINER: [
     'hidden',
     'grid',
