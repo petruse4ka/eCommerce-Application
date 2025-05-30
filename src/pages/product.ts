@@ -11,7 +11,7 @@ import productData from '@/data/production';
 import { userState } from '@/store/user-state';
 import { PRODUCT_STYLES } from '@/styles/pages/product';
 import { Route } from '@/types/enums';
-import type { Attribute } from '@/types/interfaces';
+import type { ProductVariantView } from '@/types/interfaces';
 import type { Attributes } from '@/types/types';
 import ElementBuilder from '@/utils/element-builder';
 
@@ -22,13 +22,13 @@ export default class ProductPage extends BaseComponent {
       className: PRODUCT_STYLES.MAIN_CONTAINER,
     });
 
-    this.render();
-
     const hash = globalThis.location.hash;
 
     if (hash.includes(`${Route.PRODUCT}/`)) {
       void ProductPage.loadProduct(hash.replace(`${Route.PRODUCT}/`, ''));
     }
+
+    this.render();
   }
 
   private static parseAttribute(): Attributes {
@@ -53,7 +53,7 @@ export default class ProductPage extends BaseComponent {
     return matches.map((match) => match.replace(/"label":"/, '').replace(/"/, '')).join(', ');
   }
 
-  private static async loadProduct(key: string): Promise<void | Attribute[]> {
+  private static async loadProduct(key: string): Promise<void | ProductVariantView> {
     let attempts = 0;
 
     while (attempts < LOADING_CONFIG.MAX_ATTEMPTS) {

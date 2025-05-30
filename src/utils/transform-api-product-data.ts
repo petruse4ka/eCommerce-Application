@@ -1,4 +1,4 @@
-import type { Macarons, ProductResponse } from '@/types/interfaces';
+import type { Macarons, Product, ProductResponse, ProductVariantView } from '@/types/interfaces';
 
 export default class TransformApiProductsData {
   public static transformProducts(response: ProductResponse): Macarons[] {
@@ -31,5 +31,16 @@ export default class TransformApiProductsData {
     }
 
     return products;
+  }
+
+  public static transformProduct(response: Product): ProductVariantView {
+    const masterVariant = response.masterData.current.masterVariant;
+    const { attributes, prices, images } = masterVariant;
+
+    return {
+      attributes,
+      prices,
+      images,
+    };
   }
 }
