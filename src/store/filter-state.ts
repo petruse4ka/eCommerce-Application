@@ -1,4 +1,4 @@
-import { FILTER_CONFIGS } from '@/data/products';
+import { FilterType } from '@/types/enums';
 import type { ActionHandler } from '@/types/types';
 
 class FilterState {
@@ -21,11 +21,9 @@ class FilterState {
     return Object.fromEntries(this.selectedOptions);
   }
 
-  public toggleOption(filterId: string, value: string): void {
+  public toggleOption(filterId: string, value: string, type: FilterType): void {
     const options = this.getSelectedOptions(filterId);
-    const isRangeOrDropdown =
-      FILTER_CONFIGS.range.some(({ id }) => id === filterId) ||
-      FILTER_CONFIGS.dropdown.some(({ id }) => id === filterId);
+    const isRangeOrDropdown = type === FilterType.RANGE || type === FilterType.DROPDOWN;
 
     if (isRangeOrDropdown) {
       options.clear();

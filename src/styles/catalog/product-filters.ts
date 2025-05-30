@@ -51,7 +51,15 @@ export const FILTERS_STYLES = {
     'focus:border-black',
   ],
   RANGE_LABEL: ['text-sm', 'text-black'],
-  SELECTED_FILTERS_CONTAINER: ['flex', 'flex-col', 'gap-2', 'p-4', 'bg-orange-light', 'rounded'],
+  SELECTED_FILTERS_CONTAINER: [
+    'flex',
+    'flex-col',
+    'gap-2',
+    'p-4',
+    'bg-orange-light',
+    'rounded',
+    'mb-5',
+  ],
   FILTER_TAGS: ['flex', 'flex-wrap', 'gap-2'],
   FILTER_ITEM: [
     'flex',

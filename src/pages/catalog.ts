@@ -5,6 +5,7 @@ import BaseComponent from '@/components/base';
 import ProductFilters from '@/components/catalog/product-filters';
 import ProductList from '@/components/catalog/product-list';
 import ProductSorting from '@/components/catalog/product-sorting';
+import SelectedFilters from '@/components/catalog/selected-filters';
 import { CATALOG_TEXTS, LOADING_CONFIG, PAGE_TITLES } from '@/constants';
 import { userState } from '@/store/user-state';
 import { CATALOG_STYLES } from '@/styles/pages/catalog';
@@ -15,6 +16,7 @@ export default class CatalogPage extends BaseComponent {
   private productList: ProductList;
   private productSorting: ProductSorting;
   private productFilters: ProductFilters;
+  private selectedFilters: SelectedFilters;
   private isLoading: boolean;
   private loadingOverlay: HTMLElement;
 
@@ -26,6 +28,7 @@ export default class CatalogPage extends BaseComponent {
     this.productList = new ProductList();
     this.productSorting = new ProductSorting();
     this.productFilters = new ProductFilters();
+    this.selectedFilters = new SelectedFilters();
     this.isLoading = true;
     this.loadingOverlay = CatalogPage.createLoadingOverlay();
     this.render();
@@ -84,6 +87,7 @@ export default class CatalogPage extends BaseComponent {
                 loadedCategories || []
               );
               this.productFilters.updateFilters(filterConfigs);
+              this.selectedFilters.updateFilterConfigs(filterConfigs);
             }
 
             this.isLoading = false;
@@ -136,7 +140,7 @@ export default class CatalogPage extends BaseComponent {
       className: CATALOG_STYLES.PRODUCT_LIST_CONTAINER,
     }).getElement();
 
-    filtersSection.append(this.productFilters.getElement());
+    filtersSection.append(this.selectedFilters.getElement(), this.productFilters.getElement());
     productListContainer.append(this.productList.getElement());
     if (this.isLoading) {
       productListContainer.append(this.loadingOverlay);
