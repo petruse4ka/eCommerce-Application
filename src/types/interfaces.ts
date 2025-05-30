@@ -261,6 +261,12 @@ export interface ProductVariant {
   attributes?: Attribute[];
 }
 
+export interface ProductVariantView {
+  prices: Price[];
+  images?: Image[];
+  attributes?: Attribute[];
+}
+
 export interface Price {
   id: string;
   value: {

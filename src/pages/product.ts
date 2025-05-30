@@ -46,8 +46,8 @@ export default class ProductPage extends BaseComponent {
 
       if (token) {
         const loadedProduct = await CatalogAPI.getProduct(key);
-        if (loadedProduct) {
-          const transformedAtribute = ProductPage.parseAttribute(loadedProduct);
+        if (loadedProduct && loadedProduct.attributes) {
+          const transformedAtribute = ProductPage.parseAttribute(loadedProduct.attributes);
           return transformedAtribute;
         }
         break;

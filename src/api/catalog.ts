@@ -2,7 +2,7 @@
 import { userState } from '@/store/user-state';
 import { ApiEndpoint, ApiMethods, ContentType } from '@/types/enums';
 import { isProductResponse } from '@/types/guards';
-import type { Attribute, Macarons, ProductVariant } from '@/types/interfaces';
+import type { Macarons, Product, ProductVariantView } from '@/types/interfaces';
 import TransformApiProductsData from '@/utils/transform-api-product-data';
 
 export default class CatalogAPI {
@@ -37,11 +37,11 @@ export default class CatalogAPI {
     }
   }
 
-  public static async getProduct(key: string): Promise<Attribute[] | void> {
+  public static async getProduct(key: string): Promise<ProductVariantView | void> {
     const token = userState.getTokenState();
 
     return await fetch(
-      `${import.meta.env['VITE_CTP_API_URL']}/${import.meta.env['VITE_CTP_PROJECT_KEY']}${ApiEndpoint.PRODUCT}/key=${key}`,
+      `${import.meta.env['VITE_CTP_API_URL']}/${import.meta.env['VITE_CTP_PROJECT_KEY']}${ApiEndpoint.PRODUCTS}/key=${key}`,
       {
         method: ApiMethods.GET,
         headers: {
@@ -62,7 +62,7 @@ export default class CatalogAPI {
 
         return response.json();
       })
-      .then((body: { masterVariant: ProductVariant }) => body.masterVariant.attributes)
+      .then((body: Product): ProductVariantView => TransformApiProductsData.transformProduct(body))
       .catch((error) => {
         console.error('Error fetching product:', error);
       });
