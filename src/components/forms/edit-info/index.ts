@@ -1,11 +1,12 @@
-import Alert from '@/components/alert';
+import APIUpdateData from '@/api/update-data';
 import Button from '@/components/buttons';
 import Input from '@/components/inputs';
 import { BTN_TEXT } from '@/constants';
 import { FORM } from '@/styles/forms/forms';
-import { AlertStatus, AlertText } from '@/types/enums';
-import type { InputComponent } from '@/types/interfaces';
+import { isUserInfo } from '@/types/guards';
+import type { InputComponent, UserInfoBody } from '@/types/interfaces';
 import ElementBuilder from '@/utils/element-builder';
+import { getValidator } from '@/utils/validations';
 
 export default class FormEditUserInfo {
   private form: HTMLElement;
@@ -36,6 +37,28 @@ export default class FormEditUserInfo {
     this.callback = callback;
   }
 
+  public inputErrorHandler(value: string, type: string): boolean | void {
+    const validateFunction = getValidator(type);
+
+    if (!validateFunction) return;
+    const errorMessage = validateFunction(value);
+    this.showValidationError(type, errorMessage);
+
+    return errorMessage ? true : false;
+  }
+
+  private showValidationError(id: string, errorMessage: string | null): void {
+    const input = this.inputs.get(id);
+
+    if (!input) return;
+
+    if (errorMessage) {
+      input.setError(errorMessage);
+    } else {
+      input.clearError();
+    }
+  }
+
   private createInputs(): void {
     let index = 0;
     for (const input of this.INPUTS_DATA) {
@@ -53,7 +76,10 @@ export default class FormEditUserInfo {
           isRequired,
           eventType: 'input',
           value,
-          callback: (): void => {},
+          callback: (): void => {
+            const value = inputNode.getValue();
+            this.inputErrorHandler(value, id);
+          },
         });
 
         this.inputs.set(id, inputNode);
@@ -67,7 +93,6 @@ export default class FormEditUserInfo {
       style: 'PRIMARY_PINK',
       textContent: BTN_TEXT.SAVE_CHANGES,
       callback: (): void => {
-        this.callback();
         this.submitForm();
       },
     }).getElement();
@@ -77,20 +102,42 @@ export default class FormEditUserInfo {
   }
 
   private submitForm(): void {
-    const inputKeys = [...this.inputs.keys()];
-    for (const [index, value] of this.currentInputs.entries()) {
-      const key = inputKeys[index];
+    const body = {
+      firstName: '',
+      lastName: '',
+      dateOfBirth: '',
+      email: '',
+    };
 
-      const valueInput = this.inputs.get(key);
-      if (valueInput) {
-        value.applyTextContent(valueInput.getValue());
+    const inputsInfo = this.inputs.entries();
+    for (const inputInfo of inputsInfo) {
+      const [key, input] = inputInfo;
+      const value = input.getValue();
+
+      if (isUserInfo(key, body)) {
+        body[key] = value;
       }
     }
 
-    Alert.render({
-      textContent: AlertText.CHANGE_SUCCESS,
-      status: AlertStatus.SUCCESS,
-      visibleTime: 2000,
-    });
+    if (this.isDataValidBeforeSending(body)) {
+      void APIUpdateData.userUpdateInfo(body);
+      this.callback();
+    }
+  }
+
+  private isDataValidBeforeSending(body: UserInfoBody): boolean {
+    let result = true;
+
+    for (const key in body) {
+      if (isUserInfo(key, body)) {
+        const value = body[key];
+
+        if (this.inputErrorHandler(value, key)) {
+          result = false;
+        }
+      }
+    }
+
+    return result;
   }
 }
