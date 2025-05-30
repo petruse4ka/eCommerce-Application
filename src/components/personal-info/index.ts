@@ -1,15 +1,17 @@
 import { BTN_TEXT } from '@/constants';
+import { INPUTS_EDIT_USER_INFO_DATA } from '@/data';
 import { PERSONAL_INFO } from '@/styles/personal';
+import { ModalTitle } from '@/types/enums';
 import type { UserInfo } from '@/types/interfaces';
 import ElementBuilder from '@/utils/element-builder';
 
 import BaseComponent from '../base';
 import Button from '../buttons';
-import FormEditUserInfo from '../forms/edit-user-info';
+import FormEditUserInfo from '../forms/edit-info';
 import Modal from '../modal';
 
 export default class PersonalInfo extends BaseComponent {
-  public static infoValue: ElementBuilder[];
+  public infoValue: ElementBuilder[];
   private userInfo: UserInfo | void;
 
   constructor(userInfo: UserInfo | void) {
@@ -19,7 +21,7 @@ export default class PersonalInfo extends BaseComponent {
     });
 
     this.userInfo = userInfo;
-    PersonalInfo.infoValue = [];
+    this.infoValue = [];
 
     if (this.userInfo) {
       for (const [key, value] of Object.entries(this.userInfo)) {
@@ -48,7 +50,7 @@ export default class PersonalInfo extends BaseComponent {
       textContent: valueText,
     });
 
-    PersonalInfo.infoValue.push(value);
+    this.infoValue.push(value);
 
     container.append(title, value.getElement());
 
@@ -60,8 +62,8 @@ export default class PersonalInfo extends BaseComponent {
       style: 'PRIMARY_PINK',
       textContent: BTN_TEXT.EDIT,
       callback: (): void => {
-        const form = new FormEditUserInfo();
-        const modal = new Modal({ title: 'Редактирование', content: form });
+        const form = new FormEditUserInfo(INPUTS_EDIT_USER_INFO_DATA, this.infoValue);
+        const modal = new Modal({ title: ModalTitle.CHANGE, content: form });
         this.component.append(modal.getElement());
 
         modal.showModal();

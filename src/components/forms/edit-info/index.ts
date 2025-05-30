@@ -1,11 +1,9 @@
+import Alert from '@/components/alert';
 import Button from '@/components/buttons';
 import Input from '@/components/inputs';
-import PersonalInfo from '@/components/personal-info';
 import { BTN_TEXT } from '@/constants';
-import { INPUTS_EDIT_USER_INFO_DATA } from '@/data';
-import { userState } from '@/store/user-state';
 import { FORM } from '@/styles/forms/forms';
-import { isCustomerKey } from '@/types/guards';
+import { AlertStatus, AlertText } from '@/types/enums';
 import type { InputComponent } from '@/types/interfaces';
 import ElementBuilder from '@/utils/element-builder';
 
@@ -13,12 +11,14 @@ export default class FormEditUserInfo {
   private form: HTMLElement;
   private INPUTS_DATA: InputComponent[];
   private inputs: Map<string, Input>;
+  private currentInputs: ElementBuilder[];
   private callback: () => void;
 
-  constructor() {
-    this.INPUTS_DATA = INPUTS_EDIT_USER_INFO_DATA;
+  constructor(data: InputComponent[], currentInputs: ElementBuilder[]) {
+    this.INPUTS_DATA = data;
     this.inputs = new Map();
     this.callback = (): void => {};
+    this.currentInputs = currentInputs;
 
     this.form = new ElementBuilder({
       tag: 'form',
@@ -37,30 +37,27 @@ export default class FormEditUserInfo {
   }
 
   private createInputs(): void {
-    const userInfo = userState.getUserInfoState();
+    let index = 0;
+    for (const input of this.INPUTS_DATA) {
+      const { labelText, placeholder, type, isRequired } = input;
 
-    if (userInfo) {
-      for (const input of this.INPUTS_DATA) {
-        const { id, labelText, placeholder, type, isRequired } = input;
+      const id = input.id.charAt(0).toLocaleLowerCase() + input.id.slice(1);
 
-        if (isCustomerKey(id, userInfo)) {
-          const value = isCustomerKey(id, userInfo) ? userInfo[id] : '';
-          if (typeof value === 'string') {
-            const inputNode = new Input({
-              id,
-              labelText,
-              placeholder,
-              type,
-              isRequired,
-              eventType: 'input',
-              value,
-              callback: (): void => {},
-            });
+      const value = this.currentInputs[index++].getElement().textContent;
+      if (typeof value === 'string') {
+        const inputNode = new Input({
+          id,
+          labelText,
+          placeholder,
+          type,
+          isRequired,
+          eventType: 'input',
+          value,
+          callback: (): void => {},
+        });
 
-            this.inputs.set(id, inputNode);
-            this.form.append(inputNode.getElement());
-          }
-        }
+        this.inputs.set(id, inputNode);
+        this.form.append(inputNode.getElement());
       }
     }
   }
@@ -81,7 +78,7 @@ export default class FormEditUserInfo {
 
   private submitForm(): void {
     const inputKeys = [...this.inputs.keys()];
-    for (const [index, value] of PersonalInfo.infoValue.entries()) {
+    for (const [index, value] of this.currentInputs.entries()) {
       const key = inputKeys[index];
 
       const valueInput = this.inputs.get(key);
@@ -89,5 +86,11 @@ export default class FormEditUserInfo {
         value.applyTextContent(valueInput.getValue());
       }
     }
+
+    Alert.render({
+      textContent: AlertText.CHANGE_SUCCESS,
+      status: AlertStatus.SUCCESS,
+      visibleTime: 2000,
+    });
   }
 }

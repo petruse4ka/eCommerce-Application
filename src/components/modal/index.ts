@@ -3,7 +3,7 @@ import ElementBuilder from '@/utils/element-builder';
 
 import BaseComponent from '../base';
 import Button from '../buttons';
-import type FormEditUserInfo from '../forms/edit-user-info';
+import type FormEditUserInfo from '../forms/edit-info';
 
 export default class Modal extends BaseComponent {
   constructor(parameters: { title: string; content: FormEditUserInfo }) {
@@ -28,6 +28,8 @@ export default class Modal extends BaseComponent {
     if (this.component instanceof HTMLDialogElement) {
       this.component.close();
     }
+
+    this.component.remove();
   }
 
   private createHeader(titleTest: string): void {

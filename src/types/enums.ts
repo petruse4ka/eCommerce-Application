@@ -88,6 +88,7 @@ export enum AlertText {
   ACCOUNT_CREDENTIALS_ERROR = 'Учетная запись клиента с указанными учетными данными не найдена.',
   DUPLICATE_FIELD = 'Пользователь с такой почтой уже существует.',
   ERROR_DEFAULT = 'Проблемы на сервере. Пожалуйста, попробуйте позже',
+  CHANGE_SUCCESS = 'Данные успешно изменены',
 }
 
 export enum CheckboxText {
@@ -126,6 +127,7 @@ export enum AddressType {
 export enum AddressTypeText {
   SHIPPING = 'Адреса доставки',
   BILLING = 'Адреса для расчетов',
+  DEFAULT = 'По умолчанию',
 }
 
 export enum AddressKey {
@@ -140,4 +142,8 @@ export enum UserInfoKey {
   LAST_NAME = 'Фамилия',
   DATA_OF_BIRTH = 'День рождения',
   EMAIL = 'E-mail',
+}
+
+export enum ModalTitle {
+  CHANGE = 'Редактирование',
 }
