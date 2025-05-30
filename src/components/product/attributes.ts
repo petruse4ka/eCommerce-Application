@@ -1,5 +1,5 @@
 import BaseComponent from '@/components/base';
-import { PRODUCT_ATTRIBUTES } from '@/constants';
+import { PRODUCT_ATTRIBUTES, PRODUCT_TEXT } from '@/constants';
 import { PRODUCT_STYLES } from '@/styles/pages/product';
 import type { Attributes } from '@/types/types';
 import ElementBuilder from '@/utils/element-builder';
@@ -31,10 +31,11 @@ export default class ProductAttributes extends BaseComponent {
     }).getElement();
     container.append(attribute);
 
+    const text = `${String(value)} ${title[1] === PRODUCT_ATTRIBUTES.WEIGHT ? PRODUCT_TEXT.GRAMM : ''}`;
     const attributeDescription = new ElementBuilder({
       tag: 'div',
       className: PRODUCT_STYLES.PARAMETER_DESCRIPTION,
-      textContent: String(value),
+      textContent: text,
     }).getElement();
 
     container.append(attributeDescription);

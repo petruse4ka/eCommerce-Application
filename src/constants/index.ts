@@ -213,10 +213,10 @@ export const CATALOG_TEXTS = {
 };
 
 export const PRODUCT_ATTRIBUTES = {
-  DIET: 'Диета',
   WEIGHT: 'Вес',
-  FLAVOR: 'Вкус',
-  TOPPING: 'Глазурь',
+  FLAVORS: 'Вкус',
+  DIET: 'Диета',
+  TOPING: 'Глазурь',
   FILLING: 'Начинка',
 };
 
