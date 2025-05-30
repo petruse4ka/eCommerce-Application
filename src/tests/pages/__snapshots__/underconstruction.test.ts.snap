@@ -5,7 +5,7 @@ exports[`Under construction > should match the snapshot 1`] = `
   class="flex flex-col items-center pt-25 pb-15 text-base leading-normal bg-purple text-black flex-grow"
 >
   <h1
-    class="text-xl text-white sm:text-2xl text-center px-3 py-4"
+    class="text-xl z-1 text-white sm:text-2xl text-center px-3 py-4"
   >
     Эта страница ещё в работе, но скоро всё будет готово!
   </h1>
