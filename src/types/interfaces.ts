@@ -329,3 +329,9 @@ export interface TitleProduct {
   title: string;
   description: string;
 }
+
+export interface PriceValue {
+  price: number;
+  oldPrice?: number;
+  code: string;
+}

@@ -2,7 +2,7 @@ import CatalogAPI from '@/api/catalog';
 import BaseComponent from '@/components/base';
 import ProductAttributes from '@/components/product/attributes';
 import ProductDelivery from '@/components/product/delivery';
-import Detailed from '@/components/product/detailed';
+import DetailedProduct from '@/components/product/detailed';
 import ProductPrices from '@/components/product/prices';
 import ProductSlider from '@/components/product/slider';
 import ProductTitle from '@/components/product/title';
@@ -10,7 +10,7 @@ import { LOADING_CONFIG } from '@/constants';
 import { userState } from '@/store/user-state';
 import { PRODUCT_STYLES } from '@/styles/pages/product';
 import { Route } from '@/types/enums';
-import type { Attribute } from '@/types/interfaces';
+import type { Attribute, ProductVariantView } from '@/types/interfaces';
 import type { Attributes } from '@/types/types';
 import ElementBuilder from '@/utils/element-builder';
 
@@ -38,7 +38,7 @@ export default class ProductPage extends BaseComponent {
     }
   }
 
-  private static async loadProduct(key: string): Promise<void | Attributes> {
+  private static async loadProduct(key: string): Promise<void | ProductVariantView> {
     let attempts = 0;
 
     while (attempts < LOADING_CONFIG.MAX_ATTEMPTS) {
@@ -46,9 +46,12 @@ export default class ProductPage extends BaseComponent {
 
       if (token) {
         const loadedProduct = await CatalogAPI.getProduct(key);
-        if (loadedProduct && loadedProduct.attributes) {
-          const transformedAtribute = ProductPage.parseAttribute(loadedProduct.attributes);
-          return transformedAtribute;
+
+        if (loadedProduct) {
+          /*    
+          const prices = ProductPage.parsePrices(loadedProduct.prices);
+          const images = ProductPage.parseImages(loadedProduct.images);*/
+          return loadedProduct;
         }
         break;
       }
@@ -60,14 +63,15 @@ export default class ProductPage extends BaseComponent {
   }
 
   private static parseAttribute(attributes: Attribute[]): Attributes {
-    const transformedObject: Attributes = Object.fromEntries(
+    const transformedObject = Object.fromEntries(
       attributes.map((attribute) => [
         attribute.name,
-        typeof attribute.value === 'object'
+        attribute.value && typeof attribute.value === 'object'
           ? ProductPage.parseList(JSON.stringify(attribute.value))
-          : attribute.value,
+          : String(attribute.value ?? ''),
       ])
     );
+
     return transformedObject;
   }
 
@@ -98,7 +102,7 @@ export default class ProductPage extends BaseComponent {
     mainComponent.append(errorContainer);
   }
 
-  private static render(productData: Attributes, mainComponent: HTMLElement): void {
+  private static render(productData: ProductVariantView, mainComponent: HTMLElement): void {
     const mainContainer = new ElementBuilder({
       tag: 'div',
       className: PRODUCT_STYLES.CONTAINER,
@@ -108,27 +112,29 @@ export default class ProductPage extends BaseComponent {
       tag: 'aside',
       className: PRODUCT_STYLES.ASIDE,
     }).getElement();
+    if (productData.attributes) {
+      const attributes = ProductPage.parseAttribute(productData.attributes);
+      const productTitle = new ProductTitle({
+        title: String(attributes['name']),
+        description: String(attributes['description']),
+      });
+      rightAside.append(productTitle.getElement());
 
-    const productTitle = new ProductTitle({
-      title: String(productData['name']),
-      description: String(productData['description']),
-    });
-    rightAside.append(productTitle.getElement());
+      const productAttributs = new ProductAttributes(attributes);
+      rightAside.append(productAttributs.getElement());
 
-    const productAttributs = new ProductAttributes(productData);
-    rightAside.append(productAttributs.getElement());
+      const prices = new ProductPrices(productData.prices);
+      rightAside.append(prices.getElement());
 
-    const prices = new ProductPrices();
-    rightAside.append(prices.getElement());
+      const delivery = new ProductDelivery();
+      rightAside.append(delivery.getElement());
 
-    const delivery = new ProductDelivery();
-    rightAside.append(delivery.getElement());
-
-    const detailed = new Detailed(String(productData['detailing']));
-    const slider = new ProductSlider();
-    mainContainer.append(slider.getElement(), rightAside);
-
-    mainComponent.append(mainContainer);
-    mainComponent.append(detailed.getElement());
+      const detailed = new DetailedProduct(String(attributes['detailing']));
+      const slider = new ProductSlider();
+      mainContainer.append(slider.getElement(), rightAside);
+      mainContainer.append(rightAside);
+      mainComponent.append(mainContainer);
+      mainComponent.append(detailed.getElement());
+    }
   }
 }

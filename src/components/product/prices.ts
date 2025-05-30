@@ -2,31 +2,55 @@ import BaseComponent from '@/components/base';
 import Button from '@/components/buttons';
 import { PRODUCT_TEXT } from '@/constants';
 import { PRODUCT_STYLES } from '@/styles/pages/product';
+import type { Price, PriceValue } from '@/types/interfaces';
 import ElementBuilder from '@/utils/element-builder';
 
 import ProductQuantity from './quantity';
 
 export default class ProductPrices extends BaseComponent {
-  constructor() {
+  constructor(inputPrices: Price[]) {
     super({ tag: 'div', className: PRODUCT_STYLES.PRICES_CONTAINER });
-
-    this.render();
+    const prices = ProductPrices.parsePrices(inputPrices);
+    this.render(prices);
   }
 
-  protected render(): void {
-    const actualPrice = 50;
-    const noActualPrice = 90;
+  private static parsePrices(prices: Price[]): PriceValue {
+    if (Array.isArray(prices) && prices[0].value?.centAmount && prices[0].value?.fractionDigits) {
+      const price: PriceValue = {
+        price: prices[0].value?.centAmount / 10 ** prices[0].value?.fractionDigits,
+        code: PRODUCT_TEXT.CURRANCY,
+      };
+      const discounted = prices[0].discounted?.value;
+      if (discounted && discounted.centAmount && discounted.fractionDigits) {
+        price.oldPrice = price.price;
+        price.price = discounted.centAmount / 10 ** discounted.fractionDigits;
+      }
+      return price;
+    } else {
+      throw new Error('data error');
+    }
+  }
+
+  protected render(prices: PriceValue): void {
+    console.log(prices);
+    const actualPrice = `${prices.price.toFixed(2)} ${PRODUCT_TEXT.CURRANCY}`;
+    const noActualPrice = prices.oldPrice
+      ? `${prices.oldPrice.toFixed(2)} ${PRODUCT_TEXT.CURRANCY}`
+      : '';
     const currentPrice = new ElementBuilder({
       tag: 'div',
       className: PRODUCT_STYLES.PRICE,
-      textContent: `${actualPrice.toFixed(2)} ${PRODUCT_TEXT.CURRANCY}`,
+      textContent: actualPrice,
     }).getElement();
+
+    this.component.append(currentPrice);
 
     const oldPrice = new ElementBuilder({
       tag: 'div',
       className: PRODUCT_STYLES.PRICE_OLD,
-      textContent: `${noActualPrice.toFixed(2)} ${PRODUCT_TEXT.CURRANCY}`,
+      textContent: noActualPrice,
     }).getElement();
+    this.component.append(oldPrice);
 
     const button = new Button({
       style: 'PRICE_BUTTON',
@@ -40,14 +64,8 @@ export default class ProductPrices extends BaseComponent {
       textContent: `${PRODUCT_TEXT.TOTAL} ${actualPrice} ${PRODUCT_TEXT.CURRANCY}`,
     }).getElement();
 
-    const quantityInputBlock = new ProductQuantity(actualPrice, totalAmount);
+    const quantityInputBlock = new ProductQuantity(prices.price, totalAmount);
 
-    this.component.append(
-      currentPrice,
-      oldPrice,
-      quantityInputBlock.getElement(),
-      totalAmount,
-      button
-    );
+    this.component.append(quantityInputBlock.getElement(), totalAmount, button);
   }
 }
