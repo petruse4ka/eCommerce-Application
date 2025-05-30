@@ -1,6 +1,6 @@
-import Router from '@/router';
+//import Router from '@/router';
 import { userState } from '@/store/user-state';
-import { ApiEndpoint, ApiMethods, ContentType, Route } from '@/types/enums';
+import { ApiEndpoint, ApiMethods, ContentType } from '@/types/enums';
 import { isProductResponse } from '@/types/guards';
 import type { Attribute, Macarons, ProductVariant } from '@/types/interfaces';
 import TransformApiProductsData from '@/utils/transform-api-product-data';
@@ -54,7 +54,7 @@ export default class CatalogAPI {
         if (!response.ok) {
           const status = response.status;
           if (status === 404) {
-            Router.followRoute(Route.ERROR);
+            //Router.followRoute(Route.ERROR);
           }
 
           throw new Error(`HTTP error! status: ${response.status}`);

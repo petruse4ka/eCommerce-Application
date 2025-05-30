@@ -322,5 +322,4 @@ export interface UserInfo {
 export interface TitleProduct {
   title: string;
   description: string;
-  weight: string;
 }

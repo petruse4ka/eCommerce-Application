@@ -36,12 +36,10 @@ export default class ProductSlider extends BaseComponent {
           tag: 'div',
           className: PRODUCT_STYLES.SLIDER_PREVIEW,
           callback: (): void => {
-            imageContainer.getElement().style.backgroundImage = `url('${preview.getElement().dataset['image']}')`;
+            imageContainer.getElement().style.backgroundImage = `url('${image}')`;
           },
         });
         preview.getElement().style.backgroundImage = `url('${image}')`;
-        preview.getElement().dataset['image'] = image;
-        //preview.applyCssClasses(`bg-[url('${image}')]`);
         previewContainer.append(preview.getElement());
       }
       this.component.append(previewContainer);
