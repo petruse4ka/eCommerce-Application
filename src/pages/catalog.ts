@@ -9,10 +9,12 @@ import { CATALOG_TEXTS, LOADING_CONFIG, PAGE_TITLES } from '@/constants';
 import { userState } from '@/store/user-state';
 import { CATALOG_STYLES } from '@/styles/pages/catalog';
 import ElementBuilder from '@/utils/element-builder';
+import TransformApiProductTypesData from '@/utils/transform-api-product-types-data';
 
 export default class CatalogPage extends BaseComponent {
   private productList: ProductList;
   private productSorting: ProductSorting;
+  private productFilters: ProductFilters;
   private isLoading: boolean;
   private loadingOverlay: HTMLElement;
 
@@ -23,6 +25,7 @@ export default class CatalogPage extends BaseComponent {
     });
     this.productList = new ProductList();
     this.productSorting = new ProductSorting();
+    this.productFilters = new ProductFilters();
     this.isLoading = true;
     this.loadingOverlay = CatalogPage.createLoadingOverlay();
     this.render();
@@ -72,7 +75,13 @@ export default class CatalogPage extends BaseComponent {
           if (loadedProducts) {
             this.productList.updateProducts(loadedProducts);
             this.productSorting.updateProductCount(loadedProducts.length);
-            console.log('Product Types:', loadedProductTypes);
+
+            if (loadedProductTypes) {
+              const filterConfigs =
+                TransformApiProductTypesData.transformProductTypes(loadedProductTypes);
+              this.productFilters.updateFilters(filterConfigs);
+            }
+
             this.isLoading = false;
             this.render();
             return;
@@ -123,9 +132,7 @@ export default class CatalogPage extends BaseComponent {
       className: CATALOG_STYLES.PRODUCT_LIST_CONTAINER,
     }).getElement();
 
-    const productFilters = new ProductFilters().getElement();
-
-    filtersSection.append(productFilters);
+    filtersSection.append(this.productFilters.getElement());
     productListContainer.append(this.productList.getElement());
     if (this.isLoading) {
       productListContainer.append(this.loadingOverlay);

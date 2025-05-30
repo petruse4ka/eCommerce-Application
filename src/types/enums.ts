@@ -103,15 +103,10 @@ export enum FilterType {
   DROPDOWN = 'dropdown',
 }
 
-export enum FilterId {
-  TYPE = 'type',
-  TASTE = 'taste',
-  DIET = 'diet',
-  TOPPING = 'topping',
-  FILLING = 'filling',
-  PRICE = 'price',
-  WEIGHT = 'weight',
-  PROMO = 'promo',
+export enum DropdownOptions {
+  DEFAULT = 'Выберите...',
+  FALSE = 'Нет',
+  TRUE = 'Да',
 }
 
 export enum TabAccount {

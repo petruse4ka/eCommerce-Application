@@ -1,5 +1,4 @@
 import { filterState } from '@/store/filter-state';
-import { FilterId } from '@/types/enums';
 
 describe('Filter state', () => {
   beforeEach(() => {
@@ -7,11 +6,11 @@ describe('Filter state', () => {
   });
 
   test('should return empty set for new filter', () => {
-    expect(filterState.getSelectedOptions(FilterId.TYPE)).toEqual(new Set());
+    expect(filterState.getSelectedOptions('type')).toEqual(new Set());
   });
 
   test('should correctly toggle options', () => {
-    const filterId = FilterId.TYPE;
+    const filterId = 'type';
     const optionValue = 'testValue';
 
     filterState.toggleOption(filterId, optionValue);
@@ -25,10 +24,10 @@ describe('Filter state', () => {
     const mockCallback = vi.fn();
     filterState.subscribe(mockCallback);
 
-    filterState.toggleOption(FilterId.TYPE, 'testOption');
+    filterState.toggleOption('type', 'testOption');
     expect(mockCallback).toHaveBeenCalledTimes(1);
 
-    filterState.toggleOption(FilterId.TYPE, 'testOption');
+    filterState.toggleOption('type', 'testOption');
     expect(mockCallback).toHaveBeenCalledTimes(2);
   });
 
@@ -39,7 +38,7 @@ describe('Filter state', () => {
     filterState.subscribe(mockFirstCallback);
     filterState.subscribe(mockSecondCallback);
 
-    filterState.toggleOption(FilterId.TYPE, 'testOption');
+    filterState.toggleOption('type', 'testOption');
 
     expect(mockFirstCallback).toHaveBeenCalledTimes(1);
     expect(mockSecondCallback).toHaveBeenCalledTimes(1);

@@ -1,6 +1,4 @@
 import { FILTER_CONFIGS } from '@/data/products';
-import type { FilterId } from '@/types/enums';
-import { isFilterId } from '@/types/guards';
 import type { ActionHandler } from '@/types/types';
 
 class FilterState {
@@ -12,7 +10,7 @@ class FilterState {
     this.subscribers = [];
   }
 
-  public getSelectedOptions(filterId: FilterId): Set<string> {
+  public getSelectedOptions(filterId: string): Set<string> {
     if (!this.selectedOptions.has(filterId)) {
       this.selectedOptions.set(filterId, new Set());
     }
@@ -23,11 +21,11 @@ class FilterState {
     return Object.fromEntries(this.selectedOptions);
   }
 
-  public toggleOption(filterId: FilterId, value: string): void {
+  public toggleOption(filterId: string, value: string): void {
     const options = this.getSelectedOptions(filterId);
     const isRangeOrDropdown =
-      FILTER_CONFIGS.range.some(({ id }) => isFilterId(id) && id === filterId) ||
-      FILTER_CONFIGS.dropdown.some(({ id }) => isFilterId(id) && id === filterId);
+      FILTER_CONFIGS.range.some(({ id }) => id === filterId) ||
+      FILTER_CONFIGS.dropdown.some(({ id }) => id === filterId);
 
     if (isRangeOrDropdown) {
       options.clear();

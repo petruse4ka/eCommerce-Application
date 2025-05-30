@@ -1,12 +1,4 @@
-import type {
-  AddressKey,
-  ButtonType,
-  FilterId,
-  FilterType,
-  InputType,
-  Route,
-  UserInfoKey,
-} from './enums';
+import type { AddressKey, ButtonType, FilterType, InputType, Route, UserInfoKey } from './enums';
 
 export interface ElementParameters {
   tag: string;
@@ -177,25 +169,28 @@ export interface CheckboxOption {
 export interface CheckboxFiltersParameters {
   title: string;
   options: CheckboxOption[];
-  filterId: FilterId;
+  filterId: string;
 }
 
 export interface FilterConfigs {
   checkbox: {
-    id: FilterId;
+    id: string;
     type: FilterType.CHECKBOX;
-    options: SelectOption[];
+    options: CheckboxOption[];
+    title: string;
   }[];
   range: {
-    id: FilterId;
+    id: string;
     type: FilterType.RANGE;
     min: number;
     max: number;
+    title: string;
   }[];
   dropdown: {
-    id: FilterId;
+    id: string;
     type: FilterType.DROPDOWN;
     options: SelectOption[];
+    title: string;
   }[];
 }
 

@@ -1,11 +1,9 @@
 import BaseComponent from '@/components/base';
 import Button from '@/components/buttons';
 import { CATALOG_TEXTS } from '@/constants';
-import { FILTER_CONFIGS, FILTER_NAMES, FILTER_TEXTS } from '@/data/products';
+import { FILTER_CONFIGS, FILTER_TEXTS } from '@/data/products';
 import { filterState } from '@/store/filter-state';
 import { FILTERS_STYLES } from '@/styles/catalog/product-filters';
-import type { FilterId } from '@/types/enums';
-import { isFilterId } from '@/types/guards';
 import type { ActionHandler } from '@/types/types';
 import ElementBuilder from '@/utils/element-builder';
 
@@ -16,7 +14,7 @@ export default class SelectedFilters extends BaseComponent {
     filterState.subscribe(this.handleFilterChange);
   }
 
-  private static createFilterItem(filterId: FilterId, value: string): HTMLElement {
+  private static createFilterItem(filterId: string, value: string): HTMLElement {
     const item = new ElementBuilder({
       tag: 'div',
       className: FILTERS_STYLES.FILTER_ITEM,
@@ -51,16 +49,22 @@ export default class SelectedFilters extends BaseComponent {
     }).getElement();
   }
 
-  private static createFilterList(filterId: FilterId, values: Set<string>): HTMLElement {
+  private static createFilterList(filterId: string, values: Set<string>): HTMLElement {
     const list = new ElementBuilder({
       tag: 'div',
       className: FILTERS_STYLES.FILTER_LIST,
     }).getElement();
 
+    const filterConfig = [
+      ...FILTER_CONFIGS.checkbox,
+      ...FILTER_CONFIGS.range,
+      ...FILTER_CONFIGS.dropdown,
+    ].find((config) => config.id === filterId);
+
     const title = new ElementBuilder({
-      tag: 'h4',
+      tag: 'span',
       className: FILTERS_STYLES.FILTER_LIST_TITLE,
-      textContent: FILTER_NAMES[filterId],
+      textContent: filterConfig?.title || filterId,
     }).getElement();
 
     const itemContainer = new ElementBuilder({
@@ -121,7 +125,7 @@ export default class SelectedFilters extends BaseComponent {
     }).getElement();
 
     for (const [filterId, values] of Object.entries(selectedFilters)) {
-      if (values.size > 0 && isFilterId(filterId)) {
+      if (values.size > 0) {
         const list = SelectedFilters.createFilterList(filterId, values);
         listContainer.append(list);
       }

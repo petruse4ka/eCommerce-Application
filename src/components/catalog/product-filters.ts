@@ -13,8 +13,8 @@ import {
 } from '@/data/products';
 import { filterState } from '@/store/filter-state';
 import { FILTERS_STYLES } from '@/styles/catalog/product-filters';
-import { FilterId, InputType } from '@/types/enums';
-import type { CheckboxFiltersParameters, CheckboxOption } from '@/types/interfaces';
+import { InputType } from '@/types/enums';
+import type { CheckboxFiltersParameters, CheckboxOption, FilterConfigs } from '@/types/interfaces';
 import ElementBuilder from '@/utils/element-builder';
 import InputBuilder from '@/utils/input-builder';
 import SelectBuilder from '@/utils/select-builder';
@@ -23,11 +23,12 @@ import SelectedFilters from './selected-filters';
 
 export default class ProductFilters extends BaseComponent {
   private filters: {
-    checkboxes: Map<FilterId, HTMLInputElement[]>;
-    ranges: Map<FilterId, { min: HTMLInputElement; max: HTMLInputElement }>;
-    dropdowns: Map<FilterId, HTMLSelectElement>;
+    checkboxes: Map<string, HTMLInputElement[]>;
+    ranges: Map<string, { min: HTMLInputElement; max: HTMLInputElement }>;
+    dropdowns: Map<string, HTMLSelectElement>;
   };
   private isFiltersVisible: boolean;
+  private filterConfigs: FilterConfigs;
 
   constructor() {
     super({ tag: 'div', className: FILTERS_STYLES.WRAPPER });
@@ -37,6 +38,7 @@ export default class ProductFilters extends BaseComponent {
       dropdowns: new Map(),
     };
     this.isFiltersVisible = false;
+    this.filterConfigs = { checkbox: [], range: [], dropdown: [] };
     this.render();
   }
 
@@ -76,7 +78,7 @@ export default class ProductFilters extends BaseComponent {
   }
 
   private static handleMinInputChange(
-    filterId: FilterId,
+    filterId: string,
     min: number,
     minInput: HTMLInputElement,
     maxInput: HTMLInputElement
@@ -91,7 +93,7 @@ export default class ProductFilters extends BaseComponent {
   }
 
   private static handleMaxInputChange(
-    filterId: FilterId,
+    filterId: string,
     max: number,
     minInput: HTMLInputElement,
     maxInput: HTMLInputElement
@@ -105,12 +107,17 @@ export default class ProductFilters extends BaseComponent {
     }
   }
 
+  public updateFilters(config: FilterConfigs): void {
+    this.filterConfigs = config;
+    this.render();
+  }
+
   public override remove(): void {
     filterState.unsubscribe(this.handleFilterChange);
     super.remove();
   }
 
-  private createCheckboxOption(filterId: FilterId, option: CheckboxOption): HTMLElement {
+  private createCheckboxOption(filterId: string, option: CheckboxOption): HTMLElement {
     const optionContainer = new ElementBuilder({
       tag: 'div',
       className: FILTERS_STYLES.OPTION_CONTAINER,
@@ -150,7 +157,7 @@ export default class ProductFilters extends BaseComponent {
     return optionContainer;
   }
 
-  private createAllCheckboxOptions(options: CheckboxOption[], filterId: FilterId): HTMLElement {
+  private createAllCheckboxOptions(options: CheckboxOption[], filterId: string): HTMLElement {
     const optionsContainer = new ElementBuilder({
       tag: 'div',
       className: FILTERS_STYLES.OPTIONS_CONTAINER,
@@ -189,7 +196,7 @@ export default class ProductFilters extends BaseComponent {
   private createDropdownFilter(
     title: string,
     options: CheckboxOption[],
-    filterId: FilterId
+    filterId: string
   ): HTMLElement {
     const dropdownContainer = new ElementBuilder({
       tag: 'div',
@@ -229,7 +236,7 @@ export default class ProductFilters extends BaseComponent {
   }
 
   private createRangeInputs(
-    filterId: FilterId,
+    filterId: string,
     min: number,
     max: number,
     step: number
@@ -276,7 +283,7 @@ export default class ProductFilters extends BaseComponent {
     min: number,
     max: number,
     step: number,
-    filterId: FilterId
+    filterId: string
   ): HTMLElement {
     const rangeContainer = new ElementBuilder({
       tag: 'div',
@@ -315,14 +322,14 @@ export default class ProductFilters extends BaseComponent {
       this.createCheckboxFilter({
         title: CATALOG_TEXTS.PRODUCT_TYPE_FILTER,
         options: PRODUCT_TYPE_FILTER,
-        filterId: FilterId.TYPE,
+        filterId: 'type',
       }),
       this.createRangeFilter(
         CATALOG_TEXTS.PRICE_FILTER,
         FILTER_RANGES.PRICE.MIN,
         FILTER_RANGES.PRICE.MAX,
         FILTER_RANGES.PRICE.STEP,
-        FilterId.PRICE
+        'price'
       ),
     ];
   }
@@ -332,12 +339,12 @@ export default class ProductFilters extends BaseComponent {
       this.createCheckboxFilter({
         title: CATALOG_TEXTS.TASTE_FILTER,
         options: FLAVOUR_FILTER,
-        filterId: FilterId.TASTE,
+        filterId: 'taste',
       }),
       this.createCheckboxFilter({
         title: CATALOG_TEXTS.DIET_FILTER,
         options: DIET_FILTER,
-        filterId: FilterId.DIET,
+        filterId: 'diet',
       }),
     ];
   }
@@ -347,30 +354,67 @@ export default class ProductFilters extends BaseComponent {
       this.createCheckboxFilter({
         title: CATALOG_TEXTS.TOPPING_FILTER,
         options: TOPPING_FILTER,
-        filterId: FilterId.TOPPING,
+        filterId: 'topping',
       }),
       this.createCheckboxFilter({
         title: CATALOG_TEXTS.FILLING_FILTER,
         options: FILLING_FILTER,
-        filterId: FilterId.FILLING,
+        filterId: 'filling',
       }),
       this.createRangeFilter(
         CATALOG_TEXTS.WEIGHT_FILTER,
         FILTER_RANGES.WEIGHT.MIN,
         FILTER_RANGES.WEIGHT.MAX,
         FILTER_RANGES.WEIGHT.STEP,
-        FilterId.WEIGHT
+        'weight'
       ),
     ];
   }
 
-  private createFilters(): HTMLElement[] {
-    return [
+  private createTemporaryFilters(): HTMLElement[] {
+    const temporaryFilters: HTMLElement[] = [];
+
+    temporaryFilters.push(
       ...this.createMainFilters(),
       ...this.createSecondaryFilters(),
       ...this.createAdditionalFilters(),
-      this.createDropdownFilter(CATALOG_TEXTS.PROMO_FILTER, PROMO_FILTER, FilterId.PROMO),
-    ];
+      this.createDropdownFilter(CATALOG_TEXTS.PROMO_FILTER, PROMO_FILTER, 'promo')
+    );
+
+    const separator = new ElementBuilder({
+      tag: 'div',
+      className: [],
+    }).getElement();
+    temporaryFilters.push(separator);
+
+    const temporaryFiltersTitle = new ElementBuilder({
+      tag: 'h2',
+      className: [],
+      textContent: 'Временные фильтры',
+    }).getElement();
+    temporaryFilters.push(temporaryFiltersTitle);
+
+    for (const config of this.filterConfigs.checkbox) {
+      temporaryFilters.push(
+        this.createCheckboxFilter({
+          title: config.title,
+          options: config.options,
+          filterId: config.id,
+        })
+      );
+    }
+
+    for (const config of this.filterConfigs.range) {
+      temporaryFilters.push(
+        this.createRangeFilter(config.title, config.min, config.max, 1, config.id)
+      );
+    }
+
+    for (const config of this.filterConfigs.dropdown) {
+      temporaryFilters.push(this.createDropdownFilter(config.title, config.options, config.id));
+    }
+
+    return temporaryFilters;
   }
 
   private handleFilterChange = (): void => {
@@ -428,11 +472,11 @@ export default class ProductFilters extends BaseComponent {
       },
     }).getElement();
 
-    const allFilters = this.createFilters();
+    const temporaryFilters = this.createTemporaryFilters();
 
     filterState.subscribe(this.handleFilterChange);
 
-    for (const filter of allFilters) {
+    for (const filter of temporaryFilters) {
       filtersContainer.getElement().append(filter);
     }
 

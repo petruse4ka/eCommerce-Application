@@ -5,7 +5,7 @@ import pestoMacaron from '@/assets/images/macarons/pesto.png';
 import rosmarineMacaron from '@/assets/images/macarons/rosmarine.png';
 import truffleMacaron from '@/assets/images/macarons/truffle.png';
 import { CATALOG_TEXTS, FILTER_RANGES } from '@/constants';
-import { FilterId, FilterType } from '@/types/enums';
+import { FilterType } from '@/types/enums';
 import type { FilterConfigs, Macarons, SelectOption } from '@/types/interfaces';
 
 export const MACARONS: Macarons[] = [
@@ -115,12 +115,6 @@ export const FLAVOUR_FILTER: SelectOption[] = [
   { value: 'nutty', text: 'Ореховый' },
   { value: 'fruity', text: 'Фруктовый' },
   { value: 'berry', text: 'Ягодный' },
-  { value: 'exotic', text: 'Экзотический' },
-  { value: 'milky', text: 'Молочный' },
-  { value: 'spicy', text: 'Специи' },
-  { value: 'сaramel', text: 'Карамельный' },
-  { value: 'coffee', text: 'Кофейный' },
-  { value: 'fish', text: 'Рыбный' },
 ];
 
 export const DIET_FILTER: SelectOption[] = [
@@ -156,49 +150,51 @@ export const PROMO_FILTER: SelectOption[] = [
   { value: 'promo', text: 'Со скидкой' },
 ];
 
-export const FILTER_NAMES: Record<FilterId, string> = {
-  [FilterId.TYPE]: CATALOG_TEXTS.PRODUCT_TYPE_FILTER,
-  [FilterId.TASTE]: CATALOG_TEXTS.TASTE_FILTER,
-  [FilterId.DIET]: CATALOG_TEXTS.DIET_FILTER,
-  [FilterId.FILLING]: CATALOG_TEXTS.FILLING_FILTER,
-  [FilterId.TOPPING]: CATALOG_TEXTS.TOPPING_FILTER,
-  [FilterId.PRICE]: CATALOG_TEXTS.PRICE_FILTER,
-  [FilterId.WEIGHT]: CATALOG_TEXTS.WEIGHT_FILTER,
-  [FilterId.PROMO]: CATALOG_TEXTS.PROMO_FILTER,
+export const FILTER_NAMES: Record<string, string> = {
+  type: CATALOG_TEXTS.PRODUCT_TYPE_FILTER,
+  taste: CATALOG_TEXTS.TASTE_FILTER,
+  diet: CATALOG_TEXTS.DIET_FILTER,
+  filling: CATALOG_TEXTS.FILLING_FILTER,
+  topping: CATALOG_TEXTS.TOPPING_FILTER,
+  price: CATALOG_TEXTS.PRICE_FILTER,
+  weight: CATALOG_TEXTS.WEIGHT_FILTER,
+  promo: CATALOG_TEXTS.PROMO_FILTER,
 };
 
 export const FILTER_CONFIGS: FilterConfigs = {
   checkbox: [
-    { id: FilterId.TYPE, type: FilterType.CHECKBOX, options: PRODUCT_TYPE_FILTER },
-    { id: FilterId.TASTE, type: FilterType.CHECKBOX, options: FLAVOUR_FILTER },
-    { id: FilterId.DIET, type: FilterType.CHECKBOX, options: DIET_FILTER },
-    { id: FilterId.FILLING, type: FilterType.CHECKBOX, options: FILLING_FILTER },
-    { id: FilterId.TOPPING, type: FilterType.CHECKBOX, options: TOPPING_FILTER },
+    { id: 'type', type: FilterType.CHECKBOX, options: PRODUCT_TYPE_FILTER, title: 'Тип' },
+    { id: 'taste', type: FilterType.CHECKBOX, options: FLAVOUR_FILTER, title: 'Вкус' },
+    { id: 'diet', type: FilterType.CHECKBOX, options: DIET_FILTER, title: 'Диета' },
+    { id: 'filling', type: FilterType.CHECKBOX, options: FILLING_FILTER, title: 'Наполнитель' },
+    { id: 'topping', type: FilterType.CHECKBOX, options: TOPPING_FILTER, title: 'Топинг' },
   ],
   range: [
     {
-      id: FilterId.PRICE,
+      id: 'price',
       type: FilterType.RANGE,
       min: FILTER_RANGES.PRICE.MIN,
       max: FILTER_RANGES.PRICE.MAX,
+      title: 'Цена',
     },
     {
-      id: FilterId.WEIGHT,
+      id: 'weight',
       type: FilterType.RANGE,
       min: FILTER_RANGES.WEIGHT.MIN,
       max: FILTER_RANGES.WEIGHT.MAX,
+      title: 'Вес',
     },
   ],
-  dropdown: [{ id: FilterId.PROMO, type: FilterType.DROPDOWN, options: PROMO_FILTER }],
+  dropdown: [{ id: 'promo', type: FilterType.DROPDOWN, options: PROMO_FILTER, title: 'Скидка' }],
 };
 
-export const FILTER_TEXTS: Record<FilterId, Record<string, string>> = {
-  [FilterId.TYPE]: Object.fromEntries(PRODUCT_TYPE_FILTER.map((item) => [item.value, item.text])),
-  [FilterId.TASTE]: Object.fromEntries(FLAVOUR_FILTER.map((item) => [item.value, item.text])),
-  [FilterId.DIET]: Object.fromEntries(DIET_FILTER.map((item) => [item.value, item.text])),
-  [FilterId.FILLING]: Object.fromEntries(FILLING_FILTER.map((item) => [item.value, item.text])),
-  [FilterId.TOPPING]: Object.fromEntries(TOPPING_FILTER.map((item) => [item.value, item.text])),
-  [FilterId.PRICE]: {},
-  [FilterId.WEIGHT]: {},
-  [FilterId.PROMO]: Object.fromEntries(PROMO_FILTER.map((item) => [item.value, item.text])),
+export const FILTER_TEXTS: Record<string, Record<string, string>> = {
+  type: Object.fromEntries(PRODUCT_TYPE_FILTER.map((item) => [item.value, item.text])),
+  taste: Object.fromEntries(FLAVOUR_FILTER.map((item) => [item.value, item.text])),
+  diet: Object.fromEntries(DIET_FILTER.map((item) => [item.value, item.text])),
+  filling: Object.fromEntries(FILLING_FILTER.map((item) => [item.value, item.text])),
+  topping: Object.fromEntries(TOPPING_FILTER.map((item) => [item.value, item.text])),
+  price: {},
+  weight: {},
+  promo: Object.fromEntries(PROMO_FILTER.map((item) => [item.value, item.text])),
 };
