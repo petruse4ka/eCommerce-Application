@@ -1,6 +1,6 @@
 import BaseComponent from '@/components/base';
 import Button from '@/components/buttons';
-import { CATALOG_TEXTS, DEFAULT_OPTIONS_COUNT, FILTER_RANGES } from '@/constants';
+import { CATALOG_TEXTS, DEFAULT_CURRENCY, DEFAULT_OPTIONS_COUNT, FILTER_RANGES } from '@/constants';
 import { filterState } from '@/store/filter-state';
 import { FILTERS_STYLES } from '@/styles/catalog/product-filters';
 import { FilterType, InputType } from '@/types/enums';
@@ -74,7 +74,12 @@ export default class ProductFilters extends BaseComponent {
     const minValue = Number.parseInt(minInput.value);
     const maxValue = Number.parseInt(maxInput.value);
     if (minValue >= min && minValue <= maxValue) {
-      filterState.toggleOption(filterId, `${minInput.value}-${maxInput.value}`, FilterType.RANGE);
+      const rangeValue = `${minInput.value}-${maxInput.value}`;
+      const displayValue =
+        filterId === 'price'
+          ? `${minInput.value} ${DEFAULT_CURRENCY} - ${maxInput.value} ${DEFAULT_CURRENCY}`
+          : `${minInput.value} - ${maxInput.value}`;
+      filterState.toggleOption(filterId, rangeValue, displayValue, FilterType.RANGE);
     } else {
       minInput.value = min.toString();
     }
@@ -89,7 +94,12 @@ export default class ProductFilters extends BaseComponent {
     const minValue = Number.parseInt(minInput.value);
     const maxValue = Number.parseInt(maxInput.value);
     if (maxValue <= max && maxValue >= minValue) {
-      filterState.toggleOption(filterId, `${minInput.value}-${maxInput.value}`, FilterType.RANGE);
+      const rangeValue = `${minInput.value}-${maxInput.value}`;
+      const displayValue =
+        filterId === 'price'
+          ? `${minInput.value} ${DEFAULT_CURRENCY} - ${maxInput.value} ${DEFAULT_CURRENCY}`
+          : `${minInput.value} - ${maxInput.value}`;
+      filterState.toggleOption(filterId, rangeValue, displayValue, FilterType.RANGE);
     } else {
       maxInput.value = max.toString();
     }
@@ -119,12 +129,16 @@ export default class ProductFilters extends BaseComponent {
     }).getElement();
 
     if (checkbox instanceof HTMLInputElement) {
-      if (filterState.getSelectedOptions(filterId).has(option.value)) {
+      const selectedOptions = filterState.getSelectedOptions(filterId);
+      const isSelected = [...selectedOptions].some(
+        (selectedOption) => selectedOption.key === option.value
+      );
+      if (isSelected) {
         checkbox.checked = true;
       }
 
       checkbox.addEventListener('change', () => {
-        filterState.toggleOption(filterId, option.value, FilterType.CHECKBOX);
+        filterState.toggleOption(filterId, option.value, option.text, FilterType.CHECKBOX);
       });
 
       const checkboxes = this.filters.checkboxes.get(filterId) || [];
@@ -195,6 +209,7 @@ export default class ProductFilters extends BaseComponent {
 
     const select = new SelectBuilder({
       className: FILTERS_STYLES.DROPDOWN,
+      attributes: { id: `dropdown-${filterId}` },
     });
 
     select.addOptions(options);
@@ -208,11 +223,17 @@ export default class ProductFilters extends BaseComponent {
 
         if (target instanceof HTMLSelectElement) {
           if (target.value) {
-            filterState.toggleOption(filterId, target.value, FilterType.DROPDOWN);
+            const option = options.find((option) => option.value === target.value);
+            filterState.toggleOption(
+              filterId,
+              target.value,
+              option?.text || target.value,
+              FilterType.DROPDOWN
+            );
           } else {
             const options = filterState.getSelectedOptions(filterId);
             options.clear();
-            filterState.toggleOption(filterId, '', FilterType.DROPDOWN);
+            filterState.toggleOption(filterId, '', '', FilterType.DROPDOWN);
           }
         }
       });
@@ -341,7 +362,8 @@ export default class ProductFilters extends BaseComponent {
       const checkboxes = this.filters.checkboxes.get(config.id);
       if (checkboxes) {
         for (const checkbox of checkboxes) {
-          checkbox.checked = filterState.getSelectedOptions(config.id).has(checkbox.value);
+          const selectedOptions = filterState.getSelectedOptions(config.id);
+          checkbox.checked = [...selectedOptions].some((option) => option.key === checkbox.value);
         }
       }
     }
@@ -350,7 +372,7 @@ export default class ProductFilters extends BaseComponent {
       const range = this.filters.ranges.get(config.id);
       if (range) {
         const values = [...filterState.getSelectedOptions(config.id)];
-        const [minValue, maxValue] = values.length > 0 ? values[0].split('-') : ['', ''];
+        const [minValue, maxValue] = values.length > 0 ? values[0].key.split('-') : ['', ''];
 
         range.min.value = minValue || config.min.toString();
         range.max.value = maxValue || config.max.toString();
@@ -361,7 +383,7 @@ export default class ProductFilters extends BaseComponent {
       const select = this.filters.dropdowns.get(config.id);
       if (select) {
         const values = [...filterState.getSelectedOptions(config.id)];
-        select.value = values[0] || '';
+        select.value = values.length > 0 ? values[0].key : '';
       }
     }
   };

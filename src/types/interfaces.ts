@@ -13,6 +13,7 @@ export interface ElementParameters {
 export interface InputParameters extends ElementParameters {
   type: InputType;
   id: string;
+  name?: string;
   value?: string;
   placeholder?: string;
   readonly?: boolean;
@@ -386,4 +387,9 @@ export interface CategoryResponse {
     id: string;
     name: { [key: string]: string };
   }>;
+}
+
+export interface FilterValue {
+  key: string;
+  value: string;
 }

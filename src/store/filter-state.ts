@@ -1,8 +1,9 @@
 import { FilterType } from '@/types/enums';
+import type { FilterValue } from '@/types/interfaces';
 import type { ActionHandler } from '@/types/types';
 
 class FilterState {
-  private selectedOptions: Map<string, Set<string>>;
+  private selectedOptions: Map<string, Set<FilterValue>>;
   private subscribers: ActionHandler[];
 
   constructor() {
@@ -10,31 +11,42 @@ class FilterState {
     this.subscribers = [];
   }
 
-  public getSelectedOptions(filterId: string): Set<string> {
+  public getSelectedOptions(filterId: string): Set<FilterValue> {
     if (!this.selectedOptions.has(filterId)) {
       this.selectedOptions.set(filterId, new Set());
     }
     return this.selectedOptions.get(filterId)!;
   }
 
-  public getSelectedFilters(): Record<string, Set<string>> {
+  public getSelectedFilters(): Record<string, Set<FilterValue>> {
     return Object.fromEntries(this.selectedOptions);
   }
 
-  public toggleOption(filterId: string, value: string, type: FilterType): void {
+  public toggleOption(filterId: string, key: string, value: string, type: FilterType): void {
     const options = this.getSelectedOptions(filterId);
-    const isRangeOrDropdown = type === FilterType.RANGE || type === FilterType.DROPDOWN;
 
-    if (isRangeOrDropdown) {
-      options.clear();
-      if (value) {
-        options.add(value);
+    if (type === FilterType.RANGE) {
+      const existingOption = [...options].find((option) => option.key === key);
+      if (existingOption) {
+        options.delete(existingOption);
+      } else {
+        options.clear();
+        options.add({ key, value });
+      }
+    } else if (type === FilterType.DROPDOWN) {
+      const existingOption = [...options].find((option) => option.key === key);
+      if (existingOption) {
+        options.delete(existingOption);
+      } else {
+        options.clear();
+        options.add({ key, value });
       }
     } else {
-      if (options.has(value)) {
-        options.delete(value);
+      const existingOption = [...options].find((option) => option.key === key);
+      if (existingOption) {
+        options.delete(existingOption);
       } else {
-        options.add(value);
+        options.add({ key, value });
       }
     }
 

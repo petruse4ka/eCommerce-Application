@@ -38,7 +38,10 @@ export default class SelectedFilters extends BaseComponent {
     super.remove();
   }
 
-  private createFilterItem(filterId: string, value: string): HTMLElement {
+  private createFilterItem(
+    filterId: string,
+    filterValue: { key: string; value: string }
+  ): HTMLElement {
     const item = new ElementBuilder({
       tag: 'div',
       className: FILTERS_STYLES.FILTER_ITEM,
@@ -47,7 +50,7 @@ export default class SelectedFilters extends BaseComponent {
     const itemValue = new ElementBuilder({
       tag: 'span',
       className: FILTERS_STYLES.FILTER_ITEM_VALUE,
-      textContent: value,
+      textContent: filterValue.value,
     }).getElement();
 
     const removeButton = new Button({
@@ -64,7 +67,7 @@ export default class SelectedFilters extends BaseComponent {
         } else {
           type = FilterType.CHECKBOX;
         }
-        filterState.toggleOption(filterId, isRange || isDropdown ? '' : value, type);
+        filterState.toggleOption(filterId, filterValue.key, filterValue.value, type);
       },
     }).getElement();
 
@@ -72,7 +75,10 @@ export default class SelectedFilters extends BaseComponent {
     return item;
   }
 
-  private createFilterList(filterId: string, values: Set<string>): HTMLElement {
+  private createFilterList(
+    filterId: string,
+    values: Set<{ key: string; value: string }>
+  ): HTMLElement {
     const list = new ElementBuilder({
       tag: 'div',
       className: FILTERS_STYLES.FILTER_LIST,
