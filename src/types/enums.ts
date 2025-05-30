@@ -33,6 +33,7 @@ export enum ApiEndpoint {
   USER = '/customers/token',
   PRODUCTS = '/products',
   PRODUCT_TYPES = '/product-types',
+  CATEGORIES = '/categories',
 }
 
 export enum ContentType {

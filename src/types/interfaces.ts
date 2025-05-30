@@ -127,7 +127,7 @@ export interface Packages {
   gradient: string[];
 }
 
-export interface Macarons {
+export interface Products {
   name: string;
   description: string;
   image: string;
@@ -172,26 +172,32 @@ export interface CheckboxFiltersParameters {
   filterId: string;
 }
 
+export interface RangeFilter {
+  id: string;
+  type: FilterType.RANGE;
+  min: number;
+  max: number;
+  title: string;
+}
+
+export interface DropdownFilter {
+  id: string;
+  type: FilterType.DROPDOWN;
+  options: SelectOption[];
+  title: string;
+}
+
+export interface CheckboxFilter {
+  id: string;
+  type: FilterType.CHECKBOX;
+  options: CheckboxOption[];
+  title: string;
+}
+
 export interface FilterConfigs {
-  checkbox: {
-    id: string;
-    type: FilterType.CHECKBOX;
-    options: CheckboxOption[];
-    title: string;
-  }[];
-  range: {
-    id: string;
-    type: FilterType.RANGE;
-    min: number;
-    max: number;
-    title: string;
-  }[];
-  dropdown: {
-    id: string;
-    type: FilterType.DROPDOWN;
-    options: SelectOption[];
-    title: string;
-  }[];
+  checkbox: CheckboxFilter[];
+  range: RangeFilter[];
+  dropdown: DropdownFilter[];
 }
 
 export interface ProductResponse {
@@ -373,4 +379,11 @@ export interface ProductTypeAttribute {
   inputHint: string;
   displayGroup: string;
   level: string;
+}
+
+export interface CategoryResponse {
+  results: Array<{
+    id: string;
+    name: { [key: string]: string };
+  }>;
 }

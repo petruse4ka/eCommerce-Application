@@ -2,12 +2,12 @@ import BaseComponent from '@/components/base';
 import EmptyCatalog from '@/components/catalog/empty-catalog';
 import { CATALOG_TEXTS, DEFAULT_CURRENCY } from '@/constants';
 import { PRODUCT_LIST_STYLES } from '@/styles/catalog/product-list';
-import type { Macarons } from '@/types/interfaces';
+import type { Products } from '@/types/interfaces';
 import ElementBuilder from '@/utils/element-builder';
 import ImageBuilder from '@/utils/image-builder';
 
 export default class ProductList extends BaseComponent {
-  private products: Macarons[] = [];
+  private products: Products[] = [];
   private productsContainer: HTMLElement;
 
   constructor() {
@@ -18,7 +18,7 @@ export default class ProductList extends BaseComponent {
     }).getElement();
   }
 
-  private static createPriceContainer(product: Macarons): HTMLElement {
+  private static createPriceContainer(product: Products): HTMLElement {
     const priceContainer = new ElementBuilder({
       tag: 'div',
       className: PRODUCT_LIST_STYLES.PRICE_CONTAINER,
@@ -51,7 +51,7 @@ export default class ProductList extends BaseComponent {
     return priceContainer;
   }
 
-  private static createProductCard(product: Macarons): HTMLElement {
+  private static createProductCard(product: Products): HTMLElement {
     const card = new ElementBuilder({
       tag: 'div',
       className: PRODUCT_LIST_STYLES.CARD,
@@ -94,7 +94,7 @@ export default class ProductList extends BaseComponent {
     return card;
   }
 
-  public updateProducts(products: Macarons[]): void {
+  public updateProducts(products: Products[]): void {
     this.products = products;
     this.updateProductList();
   }

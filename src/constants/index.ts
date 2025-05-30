@@ -18,6 +18,11 @@ export const LOADING_CONFIG = {
 };
 
 export const FILTER_RANGES = {
+  DEFAULT: {
+    MIN: 0,
+    MAX: 1000,
+    STEP: 10,
+  },
   PRICE: {
     MIN: 0,
     MAX: 100,
@@ -25,7 +30,7 @@ export const FILTER_RANGES = {
   },
   WEIGHT: {
     MIN: 0,
-    MAX: 1000,
+    MAX: 100,
     STEP: 10,
   },
 };
@@ -210,4 +215,8 @@ export const CATALOG_TEXTS = {
   HIDE_FILTERS: 'Скрыть фильтры',
   LOADING_PRODUCTS: 'Обновляем каталог...',
   NO_PRODUCTS: 'К сожалению, продуктов не найдено',
+  PRICE: 'Цена',
+  PRICE_ID: 'price',
+  CATEGORY: 'Категория',
+  CATEGORY_ID: 'category',
 };

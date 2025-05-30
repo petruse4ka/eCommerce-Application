@@ -1,19 +1,23 @@
-import type { ErrorInfo, ProductResponse, ProductTypeResponse } from './interfaces';
+import type {
+  CategoryResponse,
+  ErrorInfo,
+  ProductResponse,
+  ProductTypeResponse,
+} from './interfaces';
 
-export function isErrorInfo(object: unknown): object is ErrorInfo {
-  return typeof object === 'object' && object !== null && 'code' in object && 'field' in object;
+export function isErrorInfo(data: unknown): data is ErrorInfo {
+  return (
+    typeof data === 'object' &&
+    data !== null &&
+    'statusCode' in data &&
+    'message' in data &&
+    'errors' in data
+  );
 }
 
 export function isProductResponse(data: unknown): data is ProductResponse {
   return (
-    typeof data === 'object' &&
-    data !== null &&
-    'limit' in data &&
-    'offset' in data &&
-    'count' in data &&
-    'total' in data &&
-    'results' in data &&
-    Array.isArray(data.results)
+    typeof data === 'object' && data !== null && 'results' in data && Array.isArray(data.results)
   );
 }
 
@@ -27,5 +31,15 @@ export function isProductTypeResponse(data: unknown): data is ProductTypeRespons
     'total' in data &&
     'results' in data &&
     Array.isArray(data.results)
+  );
+}
+
+export function isCategoryResponse(data: unknown): data is CategoryResponse {
+  return (
+    typeof data === 'object' &&
+    data !== null &&
+    'results' in data &&
+    Array.isArray(data.results) &&
+    data.results.every((category) => 'id' in category && 'name' in category)
   );
 }

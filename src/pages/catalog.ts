@@ -67,18 +67,22 @@ export default class CatalogPage extends BaseComponent {
       while (attempts < LOADING_CONFIG.MAX_ATTEMPTS) {
         const token = userState.getTokenState();
         if (token) {
-          const [loadedProducts, loadedProductTypes] = await Promise.all([
+          const [productsData, loadedProductTypes, loadedCategories] = await Promise.all([
             CatalogAPI.getProducts(),
             CatalogAPI.getProductTypes(),
+            CatalogAPI.getCategories(),
           ]);
 
-          if (loadedProducts) {
-            this.productList.updateProducts(loadedProducts);
-            this.productSorting.updateProductCount(loadedProducts.length);
+          if (productsData) {
+            this.productList.updateProducts(productsData.products);
+            this.productSorting.updateProductCount(productsData.products.length);
 
             if (loadedProductTypes) {
-              const filterConfigs =
-                TransformApiProductTypesData.transformProductTypes(loadedProductTypes);
+              const filterConfigs = TransformApiProductTypesData.transformProductTypes(
+                loadedProductTypes,
+                productsData.productData,
+                loadedCategories || []
+              );
               this.productFilters.updateFilters(filterConfigs);
             }
 
