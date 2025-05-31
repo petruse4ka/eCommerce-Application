@@ -1,14 +1,15 @@
 import BaseComponent from '@/components/base';
 import EmptyCatalog from '@/components/catalog/empty-catalog';
 import { CATALOG_TEXTS, DEFAULT_CURRENCY } from '@/constants';
+import { productsState } from '@/store/products-state';
 import { PRODUCT_LIST_STYLES } from '@/styles/catalog/product-list';
 import type { Products } from '@/types/interfaces';
 import ElementBuilder from '@/utils/element-builder';
 import ImageBuilder from '@/utils/image-builder';
 
 export default class ProductList extends BaseComponent {
-  private products: Products[] = [];
   private productsContainer: HTMLElement;
+  private isLoading: boolean;
 
   constructor() {
     super({ tag: 'div', className: PRODUCT_LIST_STYLES.CONTAINER });
@@ -16,6 +17,10 @@ export default class ProductList extends BaseComponent {
       tag: 'div',
       className: PRODUCT_LIST_STYLES.PRODUCTS_CONTAINER,
     }).getElement();
+    this.isLoading = true;
+
+    productsState.subscribe(this.handleProductsChange);
+    this.updateProductList();
   }
 
   private static createPriceContainer(product: Products): HTMLElement {
@@ -94,24 +99,30 @@ export default class ProductList extends BaseComponent {
     return card;
   }
 
-  public updateProducts(products: Products[]): void {
-    this.products = products;
+  private handleProductsChange = (): void => {
+    this.isLoading = false;
     this.updateProductList();
-  }
+  };
 
   private updateProductList(): void {
     while (this.component.firstChild) {
       this.component.firstChild.remove();
     }
 
-    if (this.products.length === 0) {
+    while (this.productsContainer.firstChild) {
+      this.productsContainer.firstChild.remove();
+    }
+
+    const products = productsState.getProducts();
+
+    if (!this.isLoading && products.length === 0) {
       const emptyState = new EmptyCatalog(`${CATALOG_TEXTS.NO_PRODUCTS}`);
       this.component.append(emptyState.getElement());
       return;
     }
 
     this.component.append(this.productsContainer);
-    for (const product of this.products) {
+    for (const product of products) {
       const productItem = ProductList.createProductCard(product);
       this.productsContainer.append(productItem);
     }

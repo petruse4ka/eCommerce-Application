@@ -168,10 +168,12 @@ export default class TransformApiProductTypesData {
     let maxPrice = FILTER_RANGES.PRICE.MAX;
 
     for (const product of products) {
-      const variant = product.masterData.current.masterVariant;
-      for (const price of variant.prices) {
-        const amount = price.value.centAmount / 100;
-        maxPrice = Math.max(maxPrice, amount);
+      if (product.masterData) {
+        const variant = product.masterData.current.masterVariant;
+        for (const price of variant.prices) {
+          const amount = price.value.centAmount / 100;
+          maxPrice = Math.max(maxPrice, amount);
+        }
       }
     }
 

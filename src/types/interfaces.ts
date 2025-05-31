@@ -234,7 +234,7 @@ export interface Product {
     typeId: string;
     id: string;
   };
-  masterData: {
+  masterData?: {
     current: {
       name: { [key: string]: string };
       description?: { [key: string]: string };
@@ -247,6 +247,7 @@ export interface Product {
       variants: ProductVariant[];
     };
   };
+  masterVariant?: ProductVariant;
 }
 
 export interface Category {
@@ -392,4 +393,9 @@ export interface CategoryResponse {
 export interface FilterValue {
   key: string;
   value: string;
+  type: FilterType;
+}
+
+export interface FilterRequest {
+  [key: string]: Set<FilterValue>;
 }

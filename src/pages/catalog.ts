@@ -8,6 +8,8 @@ import ProductSorting from '@/components/catalog/product-sorting';
 import SelectedFilters from '@/components/catalog/selected-filters';
 import LoaderOverlay from '@/components/overlay/loader-overlay';
 import { CATALOG_TEXTS, LOADING_CONFIG, PAGE_TITLES } from '@/constants';
+import { filterState } from '@/store/filter-state';
+import { productsState } from '@/store/products-state';
 import { userState } from '@/store/user-state';
 import { CATALOG_STYLES } from '@/styles/pages/catalog';
 import ElementBuilder from '@/utils/element-builder';
@@ -42,6 +44,9 @@ export default class CatalogPage extends BaseComponent {
     });
     this.render();
     void this.loadProducts();
+    filterState.subscribe(() => {
+      void this.handleFilterChange();
+    });
   }
 
   private async loadProducts(): Promise<void> {
@@ -57,7 +62,7 @@ export default class CatalogPage extends BaseComponent {
           ]);
 
           if (productsData) {
-            this.productList.updateProducts(productsData.products);
+            productsState.updateProducts(productsData.products);
             this.productSorting.updateProductCount(productsData.products.length);
 
             if (loadedProductTypes) {
@@ -84,12 +89,28 @@ export default class CatalogPage extends BaseComponent {
     } catch (error) {
       console.error('Error loading products:', error);
       this.isLoading = false;
-      this.productList.updateProducts([]);
+      productsState.updateProducts([]);
       this.productFilters.updateFilters({ checkbox: [], range: [], dropdown: [] });
       this.selectedFilters.updateFilterConfigs({ checkbox: [], range: [], dropdown: [] });
       this.render();
     }
   }
+
+  private handleFilterChange = async (): Promise<void> => {
+    this.isLoading = true;
+    this.render();
+
+    const selectedFilters = filterState.getSelectedFilters();
+    const productsData = await CatalogAPI.getProductsWithFilters(selectedFilters);
+
+    if (productsData) {
+      productsState.updateProducts(productsData.products);
+      this.productSorting.updateProductCount(productsData.products.length);
+    }
+
+    this.isLoading = false;
+    this.render();
+  };
 
   private render(): void {
     while (this.component.firstChild) {

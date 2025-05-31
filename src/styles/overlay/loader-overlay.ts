@@ -1,5 +1,5 @@
 export const LOADER_STYLES = {
-  SPINNER_CONTAINER: ['flex', 'flex-col', 'items-center'],
+  SPINNER_CONTAINER: ['flex', 'flex-col', 'items-center', 'xl:mt-10'],
   LOADING_SPINNER: [
     'w-10',
     'h-10',

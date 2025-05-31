@@ -102,6 +102,8 @@ export enum FilterType {
   CHECKBOX = 'checkbox',
   RANGE = 'range',
   DROPDOWN = 'dropdown',
+  PRICE = 'price',
+  CATEGORY = 'category',
 }
 
 export enum DropdownOptions {

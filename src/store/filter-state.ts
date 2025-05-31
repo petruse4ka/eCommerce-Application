@@ -31,22 +31,27 @@ class FilterState {
         options.delete(existingOption);
       } else {
         options.clear();
-        options.add({ key, value });
+        options.add({ key, value, type });
       }
     } else if (type === FilterType.DROPDOWN) {
-      const existingOption = [...options].find((option) => option.key === key);
-      if (existingOption) {
-        options.delete(existingOption);
+      if (key) {
+        const existingOption = [...options].find((option) => option.key === key);
+        if (existingOption) {
+          options.delete(existingOption);
+        } else {
+          options.clear();
+          options.add({ key, value, type });
+        }
       } else {
         options.clear();
-        options.add({ key, value });
+        this.selectedOptions.delete(filterId);
       }
     } else {
       const existingOption = [...options].find((option) => option.key === key);
       if (existingOption) {
         options.delete(existingOption);
       } else {
-        options.add({ key, value });
+        options.add({ key, value, type });
       }
     }
 

@@ -49,6 +49,9 @@ export const FILTERS_STYLES = {
     'hover:border-black',
     'focus:outline-none',
     'focus:border-black',
+    '[appearance:textfield]',
+    '[&::-webkit-outer-spin-button]:appearance-none',
+    '[&::-webkit-inner-spin-button]:appearance-none',
   ],
   RANGE_LABEL: ['text-sm', 'text-black'],
   SELECTED_FILTERS_CONTAINER: [

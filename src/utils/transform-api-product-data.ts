@@ -5,7 +5,7 @@ export default class TransformApiProductsData {
     const products: Products[] = [];
 
     for (const product of response.results) {
-      const masterVariant = product.masterData.current.masterVariant;
+      const masterVariant = product.masterData?.current?.masterVariant || product.masterVariant;
 
       if (masterVariant) {
         const nameAttribute = masterVariant.attributes?.find(
