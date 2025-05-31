@@ -1,6 +1,7 @@
 import { userState } from '@/store/user-state';
 import { AddressKey, AddressType, UserInfoKey } from '@/types/enums';
-import type { AddressInfo, UserInfo } from '@/types/interfaces';
+import { isUserInfo } from '@/types/guards';
+import type { AddressInfo, UpdateUserInfo, UserInfo, UserInfoBody } from '@/types/interfaces';
 
 export default class TransformApiData {
   public static transformUserInfo(): UserInfo | void {
@@ -60,5 +61,28 @@ export default class TransformApiData {
       [AddressType.SHIPPING]: shippingAddress,
       [AddressType.BILLING]: billingAddress,
     };
+  }
+
+  public static transformUserUpdateInfo(body: UserInfoBody): UpdateUserInfo | void {
+    const actions = [];
+    for (const key in body) {
+      if (isUserInfo(key, body)) {
+        const actionKey = key.charAt(0).toUpperCase() + key.slice(1);
+        const currentBody = {
+          action: key === 'email' ? `change${actionKey}` : `set${actionKey}`,
+          [key]: body[key],
+        };
+        actions.push(currentBody);
+      }
+    }
+
+    const userInfo = userState.getUserInfoState();
+
+    if (userInfo) {
+      return {
+        version: Number(userInfo.version),
+        actions,
+      };
+    }
   }
 }

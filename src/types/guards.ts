@@ -3,6 +3,7 @@ import type {
   ErrorInfo,
   ProductResponse,
   ProductTypeResponse,
+  UserInfoBody,
 } from './interfaces';
 
 export function isErrorInfo(data: unknown): data is ErrorInfo {
@@ -13,6 +14,10 @@ export function isErrorInfo(data: unknown): data is ErrorInfo {
     'message' in data &&
     'errors' in data
   );
+}
+
+export function isUserInfo(id: string, userInfo: UserInfoBody): id is keyof UserInfoBody {
+  return id in userInfo;
 }
 
 export function isProductResponse(data: unknown): data is ProductResponse {

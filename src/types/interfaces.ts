@@ -100,6 +100,13 @@ export interface Addresses {
   postalCode: string;
 }
 
+export interface UserInfoBody {
+  firstName: string;
+  lastName: string;
+  dateOfBirth: string;
+  email: string;
+}
+
 export interface RegistrationBody {
   firstName: string;
   lastName: string;
@@ -399,4 +406,9 @@ export interface FilterValue {
 
 export interface FilterRequest {
   [key: string]: Set<FilterValue>;
+}
+
+export interface UpdateUserInfo {
+  version: number;
+  actions: Record<string, string>[];
 }

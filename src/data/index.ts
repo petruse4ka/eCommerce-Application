@@ -64,7 +64,7 @@ export const INPUTS_REGISTRATION_DATA = [
   },
   {
     id: 'dateOfBirth',
-    labelText: 'День рождения',
+    labelText: 'Дата рождения',
     type: InputType.DATE,
     isRequired: true,
     callback: (): void => {},
@@ -151,6 +151,40 @@ export const INPUTS_AUTHORIZATION_DATA = [
     placeholder: 'Укажите пароль',
     type: InputType.PASSWORD,
     isRequired: true,
+  },
+];
+
+export const INPUTS_EDIT_USER_INFO_DATA = [
+  {
+    id: 'firstName',
+    labelText: 'Имя',
+    placeholder: 'Укажите имя',
+    type: InputType.TEXT,
+    isRequired: true,
+    callback: (): void => {},
+  },
+  {
+    id: 'lastName',
+    labelText: 'Фамилия',
+    placeholder: 'Укажите фамилию',
+    type: InputType.TEXT,
+    isRequired: true,
+    callback: (): void => {},
+  },
+  {
+    id: 'dateOfBirth',
+    labelText: 'Дата рождения',
+    type: InputType.DATE,
+    isRequired: true,
+    callback: (): void => {},
+  },
+  {
+    id: 'email',
+    labelText: 'E-mail',
+    placeholder: 'Укажите e-mail',
+    type: InputType.EMAIL,
+    isRequired: true,
+    callback: (): void => {},
   },
 ];
 
