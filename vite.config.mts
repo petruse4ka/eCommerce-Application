@@ -51,8 +51,21 @@ export default defineConfig(({ mode }) => {
       coverage: {
         provider: 'v8',
         reporter: ['text'],
-        include: ['src/**/*.{ts,tsx,js,jsx}']
-      }
-    }
+        include: ['src/**/*.{ts,tsx,js,jsx}'],
+        exclude: [
+          '**/node_modules/**',
+          '**/dist/**',
+          '**/assets/**',
+          '**/styles/**',
+          '**/types/**',
+          '**/pages/**',
+          '**/components/header**',
+          '**/components/footer**',
+          '**/components/promo**',
+          '**/components/overlay**',
+          '**/data**',
+        ],
+      },
+    },
   };
 });

@@ -13,7 +13,7 @@ export default class CatalogAPI {
 
     try {
       const response = await fetch(
-        `${import.meta.env['VITE_CTP_API_URL']}/${import.meta.env['VITE_CTP_PROJECT_KEY']}${ApiEndpoint.PRODUCTS}`,
+        `${import.meta.env['VITE_CTP_API_URL']}/${import.meta.env['VITE_CTP_PROJECT_KEY']}${ApiEndpoint.PRODUCTS}?where=masterData(published=true)`,
         {
           method: ApiMethods.GET,
           headers: {

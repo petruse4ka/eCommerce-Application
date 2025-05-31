@@ -221,4 +221,5 @@ export const CATALOG_TEXTS = {
   PRICE_ID: 'price',
   CATEGORY: 'Категория',
   CATEGORY_ID: 'category',
+  PROMO_TAG: 'Акция',
 };
