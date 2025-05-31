@@ -30,6 +30,7 @@ export default class CatalogAPI {
       if (currentSort) {
         queryParameters.append('sort', currentSort);
       }
+      queryParameters.append('limit', '500');
       const url = `${import.meta.env['VITE_CTP_API_URL']}/${import.meta.env['VITE_CTP_PROJECT_KEY']}/product-projections/search?${queryParameters.toString()}`;
 
       const response = await fetch(url, {

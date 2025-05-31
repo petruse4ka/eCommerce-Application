@@ -1,9 +1,7 @@
-import CatalogAPI from '@/api/catalog';
 import BaseComponent from '@/components/base';
 import { CATALOG_TEXTS } from '@/constants';
 import { SORTING_OPTIONS } from '@/data';
 import { filterState } from '@/store/filter-state';
-import { productsState } from '@/store/products-state';
 import { SORTING_STYLES } from '@/styles/catalog/sorting';
 import { InputType } from '@/types/enums';
 import ElementBuilder from '@/utils/element-builder';
@@ -30,19 +28,6 @@ export default class ProductSorting extends BaseComponent {
     });
 
     this.render();
-
-    filterState.subscribe(() => {
-      const currentSort = filterState.getCurrentSort();
-      const selectElement = this.select.getElement();
-
-      if (
-        selectElement instanceof HTMLSelectElement &&
-        currentSort &&
-        selectElement.value !== currentSort
-      ) {
-        selectElement.value = currentSort;
-      }
-    });
   }
 
   private static createSearchContainer(): HTMLElement {
@@ -62,16 +47,12 @@ export default class ProductSorting extends BaseComponent {
 
     return searchContainer;
   }
-  private static handleSortingSelection = async (event: Event): Promise<void> => {
+  private static handleSortingSelection = (event: Event): void => {
     const select = event.target;
     const sortBy = select instanceof HTMLSelectElement ? select.value : undefined;
-    const selectedFilters = filterState.getSelectedFilters();
 
-    if (typeof sortBy === 'string') filterState.setSort(sortBy);
-
-    const result = await CatalogAPI.getProducts(selectedFilters);
-    if (result) {
-      productsState.updateProducts(result.products);
+    if (typeof sortBy === 'string') {
+      filterState.setSort(sortBy);
     }
   };
 
