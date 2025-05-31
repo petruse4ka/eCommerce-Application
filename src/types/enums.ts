@@ -141,7 +141,7 @@ export enum AddressKey {
 export enum UserInfoKey {
   FIRST_NAME = 'Имя',
   LAST_NAME = 'Фамилия',
-  DATA_OF_BIRTH = 'День рождения',
+  DATA_OF_BIRTH = 'Дата рождения',
   EMAIL = 'E-mail',
 }
 

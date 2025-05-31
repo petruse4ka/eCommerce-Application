@@ -64,7 +64,7 @@ export const INPUTS_REGISTRATION_DATA = [
   },
   {
     id: 'dateOfBirth',
-    labelText: 'День рождения',
+    labelText: 'Дата рождения',
     type: InputType.DATE,
     isRequired: true,
     callback: (): void => {},
@@ -173,7 +173,7 @@ export const INPUTS_EDIT_USER_INFO_DATA = [
   },
   {
     id: 'dateOfBirth',
-    labelText: 'День рождения',
+    labelText: 'Дата рождения',
     type: InputType.DATE,
     isRequired: true,
     callback: (): void => {},

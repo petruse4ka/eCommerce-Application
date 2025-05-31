@@ -104,7 +104,7 @@ export const BTN_TEXT = {
   LOGIN_PAGE: 'Вход',
   LOGIN_REDIRECT: 'Перейти к авторизации',
   EDIT: 'Редактировать',
-  SAVE_CHANGES: 'Сохранить иземения',
+  SAVE_CHANGES: 'Сохранить изменения',
 };
 
 export const INTRO_TEXTS = {
