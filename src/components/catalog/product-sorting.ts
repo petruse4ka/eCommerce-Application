@@ -1,6 +1,9 @@
+import CatalogAPI from '@/api/catalog';
 import BaseComponent from '@/components/base';
 import { CATALOG_TEXTS } from '@/constants';
-import { SORTING_OPTIONS } from '@/data/products';
+import { SORTING_OPTIONS } from '@/data';
+import { filterState } from '@/store/filter-state';
+import { productsState } from '@/store/products-state';
 import { SORTING_STYLES } from '@/styles/catalog/sorting';
 import { InputType } from '@/types/enums';
 import ElementBuilder from '@/utils/element-builder';
@@ -9,6 +12,7 @@ import SelectBuilder from '@/utils/select-builder';
 
 export default class ProductSorting extends BaseComponent {
   private productCounter: HTMLElement;
+  private select: SelectBuilder;
 
   constructor() {
     super({ tag: 'div', className: SORTING_STYLES.CONTAINER });
@@ -17,7 +21,28 @@ export default class ProductSorting extends BaseComponent {
       className: SORTING_STYLES.PRODUCT_COUNTER,
       textContent: `${CATALOG_TEXTS.TOTAL_PRODUCTS}: 0`,
     }).getElement();
+
+    this.select = new SelectBuilder({
+      className: SORTING_STYLES.DROPDOWN,
+      attributes: { id: 'sorting' },
+      eventType: 'change',
+      callback: ProductSorting.handleSortingSelection,
+    });
+
     this.render();
+
+    filterState.subscribe(() => {
+      const currentSort = filterState.getCurrentSort();
+      const selectElement = this.select.getElement();
+
+      if (
+        selectElement instanceof HTMLSelectElement &&
+        currentSort &&
+        selectElement.value !== currentSort
+      ) {
+        selectElement.value = currentSort;
+      }
+    });
   }
 
   private static createSearchContainer(): HTMLElement {
@@ -37,6 +62,18 @@ export default class ProductSorting extends BaseComponent {
 
     return searchContainer;
   }
+  private static handleSortingSelection = async (event: Event): Promise<void> => {
+    const select = event.target;
+    const sortBy = select instanceof HTMLSelectElement ? select.value : undefined;
+    const selectedFilters = filterState.getSelectedFilters();
+
+    if (typeof sortBy === 'string') filterState.setSort(sortBy);
+
+    const result = await CatalogAPI.getProductsWithFilters(selectedFilters);
+    if (result) {
+      productsState.updateProducts(result.products);
+    }
+  };
 
   public updateProductCount(count: number): void {
     this.productCounter.textContent = `${CATALOG_TEXTS.TOTAL_PRODUCTS}: ${count}`;
@@ -48,16 +85,11 @@ export default class ProductSorting extends BaseComponent {
       className: SORTING_STYLES.DROPDOWN_CONTAINER,
     }).getElement();
 
-    const select = new SelectBuilder({
-      className: SORTING_STYLES.DROPDOWN,
-      attributes: { id: 'sorting' },
-    });
-
-    select.addOptions(SORTING_OPTIONS);
+    this.select.addOptions(SORTING_OPTIONS);
 
     const searchContainer = ProductSorting.createSearchContainer();
 
-    dropdownContainer.append(select.getElement());
+    dropdownContainer.append(this.select.getElement());
     this.component.append(this.productCounter, searchContainer, dropdownContainer);
   }
 }

@@ -5,10 +5,12 @@ import type { ActionHandler } from '@/types/types';
 class FilterState {
   private selectedOptions: Map<string, Set<FilterValue>>;
   private subscribers: ActionHandler[];
+  private currentSort: string;
 
   constructor() {
     this.selectedOptions = new Map();
     this.subscribers = [];
+    this.currentSort = '';
   }
 
   public getSelectedOptions(filterId: string): Set<FilterValue> {
@@ -20,6 +22,15 @@ class FilterState {
 
   public getSelectedFilters(): Record<string, Set<FilterValue>> {
     return Object.fromEntries(this.selectedOptions);
+  }
+
+  public getCurrentSort(): string {
+    return this.currentSort;
+  }
+
+  public setSort(sortBy: string): void {
+    this.currentSort = sortBy;
+    this.notify();
   }
 
   public toggleOption(filterId: string, key: string, value: string, type: FilterType): void {

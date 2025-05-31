@@ -1,3 +1,4 @@
+import { filterState } from '@/store/filter-state';
 import { productsState } from '@/store/products-state';
 import { userState } from '@/store/user-state';
 import { ApiEndpoint, ApiMethods, ContentType, FilterType } from '@/types/enums';
@@ -127,6 +128,10 @@ export default class CatalogAPI {
 
     try {
       const queryParameters = CatalogAPI.handleFilters(filters);
+      const currentSort = filterState.getCurrentSort();
+      if (currentSort) {
+        queryParameters.append('sort', currentSort);
+      }
       const url = `${import.meta.env['VITE_CTP_API_URL']}/${import.meta.env['VITE_CTP_PROJECT_KEY']}/product-projections/search?${queryParameters.toString()}`;
 
       const response = await fetch(url, {

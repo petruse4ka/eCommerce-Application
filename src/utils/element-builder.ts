@@ -7,7 +7,7 @@ export default class ElementBuilder {
     this.element = document.createElement(parameters.tag);
     this.applyCssClasses(parameters.className);
     this.applyTextContent(parameters.textContent);
-    this.applyCallback(parameters.eventType, parameters.callback);
+    void this.applyCallback(parameters.eventType, parameters.callback);
     this.applyAttributes(parameters.attributes);
   }
 
@@ -78,7 +78,9 @@ export default class ElementBuilder {
         if (!(this.element instanceof HTMLInputElement)) {
           event.preventDefault();
         }
-        callback(event);
+        Promise.resolve(callback(event)).catch((error) => {
+          console.error('Callback event error:', error);
+        });
       });
     }
   }

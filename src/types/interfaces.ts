@@ -4,7 +4,7 @@ export interface ElementParameters {
   tag: string;
   className: string | string[];
   textContent?: string;
-  callback?: (event: Event) => void;
+  callback?: (event: Event) => Promise<void> | void;
   eventType?: string;
   attributes?: Record<string, string>;
   id?: string;
