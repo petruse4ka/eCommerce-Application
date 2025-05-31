@@ -1,5 +1,6 @@
+import notFoundImage from '@/assets/images/not-found.svg';
 import BaseComponent from '@/components/base';
-import EmptyCatalog from '@/components/catalog/empty-catalog';
+import EmptyComponent from '@/components/base/empty';
 import { CATALOG_TEXTS, DEFAULT_CURRENCY } from '@/constants';
 import { productsState } from '@/store/products-state';
 import { PRODUCT_LIST_STYLES } from '@/styles/catalog/product-list';
@@ -128,7 +129,13 @@ export default class ProductList extends BaseComponent {
     const products = productsState.getProducts();
 
     if (!this.isLoading && products.length === 0) {
-      const emptyState = new EmptyCatalog(`${CATALOG_TEXTS.NO_PRODUCTS}`);
+      const emptyState = new EmptyComponent(
+        `${CATALOG_TEXTS.NO_PRODUCTS}`,
+        notFoundImage,
+        PRODUCT_LIST_STYLES.EMPTY_CATALOG_CONTAINER,
+        PRODUCT_LIST_STYLES.EMPTY_CATALOG_IMAGE,
+        PRODUCT_LIST_STYLES.EMPTY_CATALOG_TEXT
+      );
       this.component.append(emptyState.getElement());
       return;
     }

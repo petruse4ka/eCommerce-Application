@@ -1,6 +1,7 @@
+import noFiltersImage from '@/assets/images/no-filters.svg';
 import BaseComponent from '@/components/base';
+import EmptyComponent from '@/components/base/empty';
 import Button from '@/components/buttons';
-import EmptyFilters from '@/components/catalog/empty-filters';
 import { CATALOG_TEXTS, DEFAULT_CURRENCY, DEFAULT_OPTIONS_COUNT, FILTER_RANGES } from '@/constants';
 import { filterState } from '@/store/filter-state';
 import { FILTERS_STYLES } from '@/styles/catalog/product-filters';
@@ -118,6 +119,23 @@ export default class ProductFilters extends BaseComponent {
     this.updateFiltersContent();
   }
 
+  private createToggleButton(): HTMLElement {
+    return new Button({
+      style: 'TOGGLE_FILTERS',
+      textContent: CATALOG_TEXTS.SHOW_FILTERS,
+      callback: (): void => {
+        this.isFiltersVisible = !this.isFiltersVisible;
+        if (this.isFiltersVisible) {
+          this.filtersContainer.removeCssClasses(FILTERS_STYLES.HIDDEN);
+          this.component.querySelector('button')!.textContent = CATALOG_TEXTS.HIDE_FILTERS;
+        } else {
+          this.filtersContainer.applyCssClasses(FILTERS_STYLES.HIDDEN);
+          this.component.querySelector('button')!.textContent = CATALOG_TEXTS.SHOW_FILTERS;
+        }
+      },
+    }).getElement();
+  }
+
   private updateFiltersContent(): void {
     while (this.component.firstChild) this.component.firstChild.remove();
 
@@ -134,26 +152,18 @@ export default class ProductFilters extends BaseComponent {
       this.filterConfigs.range.length === 0 &&
       this.filterConfigs.dropdown.length === 0
     ) {
-      const emptyFilters = new EmptyFilters(CATALOG_TEXTS.NO_FILTERS);
+      const emptyFilters = new EmptyComponent(
+        CATALOG_TEXTS.NO_FILTERS,
+        noFiltersImage,
+        FILTERS_STYLES.EMPTY_FILTERS_CONTAINER,
+        FILTERS_STYLES.EMPTY_FILTERS_IMAGE,
+        FILTERS_STYLES.EMPTY_FILTERS_TEXT
+      );
       this.component.append(emptyFilters.getElement());
       return;
     }
 
-    const toggleButton = new Button({
-      style: 'TOGGLE_FILTERS',
-      textContent: CATALOG_TEXTS.SHOW_FILTERS,
-      callback: (): void => {
-        this.isFiltersVisible = !this.isFiltersVisible;
-        if (this.isFiltersVisible) {
-          this.filtersContainer.removeCssClasses(FILTERS_STYLES.HIDDEN);
-          toggleButton.textContent = CATALOG_TEXTS.HIDE_FILTERS;
-        } else {
-          this.filtersContainer.applyCssClasses(FILTERS_STYLES.HIDDEN);
-          toggleButton.textContent = CATALOG_TEXTS.SHOW_FILTERS;
-        }
-      },
-    }).getElement();
-
+    const toggleButton = this.createToggleButton();
     this.component.append(toggleButton);
 
     const filters = this.createFilters();

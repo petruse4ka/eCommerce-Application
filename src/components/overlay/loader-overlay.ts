@@ -20,14 +20,13 @@ export default class LoaderOverlay {
       className: LOADER_STYLES.LOADING_SPINNER,
     }).getElement();
 
-    spinnerContainer.append(spinner);
-
     const text = new ElementBuilder({
       tag: 'p',
       className: LOADER_STYLES.LOADING_TEXT,
       textContent: parameters.text,
     }).getElement();
-    spinnerContainer.append(text);
+
+    spinnerContainer.append(spinner, text);
 
     this.overlay.getElement().append(spinnerContainer);
   }

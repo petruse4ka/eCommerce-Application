@@ -40,18 +40,4 @@ export const CATALOG_STYLES = {
     'xl:min-h-[150px]',
     'rounded-lg',
   ],
-  EMPTY_CATALOG_CONTAINER: [
-    'flex',
-    'flex-col',
-    'items-center',
-    'justify-center',
-    'gap-6',
-    'absolute',
-    'inset-0',
-    'backdrop-blur-sm',
-    'z-10',
-    'min-h-[300px]',
-  ],
-  EMPTY_CATALOG_IMAGE: ['w-[250px]'],
-  EMPTY_CATALOG_TEXT: ['text-accent', 'text-xl', 'font-semibold', 'text-center'],
 };
