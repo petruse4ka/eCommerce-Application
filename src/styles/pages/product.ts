@@ -42,7 +42,6 @@ export const PRODUCT_STYLES = {
     'relative',
     'p-4',
     'mx-auto',
-    //'place-self-center',
     'grid',
     'grid-cols-1',
     'lg:grid-cols-2',
@@ -118,7 +117,7 @@ export const PRODUCT_STYLES = {
     'gap-3',
     'bg-white',
     'shadow-md',
-    'rounded-lg', //class="  md:flex-row-reverse md:flex-col md:w-2/3 md:m-auto lg:m-0 lg:w-1/3  bg-white shadow-md rounded-lg"
+    'rounded-lg',
     'sm:flex-row-reverse',
     'sm:w-2/3',
 
