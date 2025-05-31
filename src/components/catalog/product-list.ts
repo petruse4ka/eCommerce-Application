@@ -18,6 +18,14 @@ export default class ProductList extends BaseComponent {
     }).getElement();
   }
 
+  public static createPromoTag(): HTMLElement {
+    return new ElementBuilder({
+      tag: 'div',
+      className: PRODUCT_LIST_STYLES.PROMO_TAG,
+      textContent: CATALOG_TEXTS.PROMO_TAG,
+    }).getElement();
+  }
+
   private static createPriceContainer(product: Macarons): HTMLElement {
     const priceContainer = new ElementBuilder({
       tag: 'div',
@@ -49,14 +57,6 @@ export default class ProductList extends BaseComponent {
     }
 
     return priceContainer;
-  }
-
-  private static createPromoTag(): HTMLElement {
-    return new ElementBuilder({
-      tag: 'div',
-      className: PRODUCT_LIST_STYLES.PROMO_TAG,
-      textContent: CATALOG_TEXTS.PROMO_TAG,
-    }).getElement();
   }
 
   private static createProductCard(product: Macarons): HTMLElement {

@@ -229,4 +229,7 @@ export const PRODUCT_TEXT = {
   CURRANCY: 'руб',
   DESCRIPTION: 'Описание',
   GRAMM: 'г',
+  ERROR_ADDRESS:
+    'Увы, этот десерт закончился, но загляните в каталог — там вас ждут другие вкусные находки!',
+  CATALOG: 'В каталог',
 };

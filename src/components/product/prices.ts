@@ -1,10 +1,11 @@
 import BaseComponent from '@/components/base';
 import Button from '@/components/buttons';
-import { PRODUCT_TEXT } from '@/constants';
+import { DEFAULT_CURRENCY, PRODUCT_TEXT } from '@/constants';
 import { PRODUCT_STYLES } from '@/styles/pages/product';
 import type { Price, PriceValue } from '@/types/interfaces';
 import ElementBuilder from '@/utils/element-builder';
 
+import ProductList from '../catalog/product-list';
 import ProductQuantity from './quantity';
 
 export default class ProductPrices extends BaseComponent {
@@ -18,7 +19,7 @@ export default class ProductPrices extends BaseComponent {
     if (Array.isArray(prices) && prices[0].value?.centAmount && prices[0].value?.fractionDigits) {
       const price: PriceValue = {
         price: prices[0].value?.centAmount / 10 ** prices[0].value?.fractionDigits,
-        code: PRODUCT_TEXT.CURRANCY,
+        code: DEFAULT_CURRENCY,
       };
       const discounted = prices[0].discounted?.value;
       if (discounted && discounted.centAmount && discounted.fractionDigits) {
@@ -32,11 +33,8 @@ export default class ProductPrices extends BaseComponent {
   }
 
   protected render(prices: PriceValue): void {
-    console.log(prices);
-    const actualPrice = `${prices.price.toFixed(2)} ${PRODUCT_TEXT.CURRANCY}`;
-    const noActualPrice = prices.oldPrice
-      ? `${prices.oldPrice.toFixed(2)} ${PRODUCT_TEXT.CURRANCY}`
-      : '';
+    const actualPrice = `${prices.price.toFixed(2)}${DEFAULT_CURRENCY}`;
+    const noActualPrice = prices.oldPrice ? `${prices.oldPrice.toFixed(2)}${DEFAULT_CURRENCY}` : '';
     const currentPrice = new ElementBuilder({
       tag: 'div',
       className: PRODUCT_STYLES.PRICE,
@@ -50,6 +48,10 @@ export default class ProductPrices extends BaseComponent {
       className: PRODUCT_STYLES.PRICE_OLD,
       textContent: noActualPrice,
     }).getElement();
+    if (prices.oldPrice) {
+      this.component.append(ProductList.createPromoTag());
+    }
+
     this.component.append(oldPrice);
 
     const button = new Button({

@@ -39,6 +39,7 @@ export const PRODUCT_STYLES = {
   PRICES_CONTAINER: [
     'w-full',
     'max-w-lg',
+    'relative',
     'p-4',
     'mx-auto',
     //'place-self-center',
@@ -54,7 +55,7 @@ export const PRODUCT_STYLES = {
     'shadow-md',
     'rounded-lg',
   ],
-  PRICE: ['text-accent', 'font-bold', 'text-4xl', 'text-center', 'lg:text-right'],
+  PRICE: ['text-accent', 'font-bold', 'text-4xl', 'text-center'],
   PRICE_OLD: [
     'text-2xl',
     'place-self-start-center',

@@ -1,11 +1,14 @@
 import CatalogAPI from '@/api/catalog';
 import BaseComponent from '@/components/base';
+import Button from '@/components/buttons';
+import EmptyCatalog from '@/components/catalog/empty-catalog';
 import ProductWrappingBlock from '@/components/product/block';
 import ProductDelivery from '@/components/product/delivery';
 import DetailedProduct from '@/components/product/detailed';
 import ProductSlider from '@/components/product/slider';
 import ProductTitle from '@/components/product/title';
-import { LOADING_CONFIG } from '@/constants';
+import { LOADING_CONFIG, PRODUCT_TEXT } from '@/constants';
+import Router from '@/router';
 import { userState } from '@/store/user-state';
 import { PRODUCT_STYLES } from '@/styles/pages/product';
 import { Route } from '@/types/enums';
@@ -89,13 +92,18 @@ export default class ProductPage extends BaseComponent {
   }
 
   private static showError(mainComponent: HTMLElement): void {
-    const errorContainer = new ElementBuilder({
-      tag: 'div',
-      className: PRODUCT_STYLES.CONTAINER,
-      textContent: 'Такой вкуснятины у нас пока нет',
+    const emptyState = new EmptyCatalog(`${PRODUCT_TEXT.ERROR_ADDRESS}`).getElement();
+
+    const returnButton = new Button({
+      style: 'PRIMARY_PINK',
+      textContent: PRODUCT_TEXT.CATALOG,
+      callback: (): void => {
+        Router.followRoute(Route.CATALOG);
+      },
     }).getElement();
 
-    mainComponent.append(errorContainer);
+    emptyState.append(returnButton);
+    mainComponent.append(emptyState);
   }
 
   private static render(productData: ProductVariantView, mainComponent: HTMLElement): void {
