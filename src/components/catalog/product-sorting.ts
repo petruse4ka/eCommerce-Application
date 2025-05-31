@@ -50,6 +50,7 @@ export default class ProductSorting extends BaseComponent {
 
     const select = new SelectBuilder({
       className: SORTING_STYLES.DROPDOWN,
+      attributes: { id: 'sorting' },
     });
 
     select.addOptions(SORTING_OPTIONS);
