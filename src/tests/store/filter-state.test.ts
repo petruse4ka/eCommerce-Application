@@ -1,4 +1,5 @@
 import { filterState } from '@/store/filter-state';
+import { FilterType } from '@/types/enums';
 
 describe('Filter state', () => {
   beforeEach(() => {
@@ -13,10 +14,12 @@ describe('Filter state', () => {
     const filterId = 'type';
     const optionValue = 'testValue';
 
-    filterState.toggleOption(filterId, optionValue);
-    expect(filterState.getSelectedOptions(filterId)).toEqual(new Set([optionValue]));
+    filterState.toggleOption(filterId, optionValue, optionValue, FilterType.CHECKBOX);
+    expect(filterState.getSelectedOptions(filterId)).toEqual(
+      new Set([{ key: optionValue, value: optionValue, type: FilterType.CHECKBOX }])
+    );
 
-    filterState.toggleOption(filterId, optionValue);
+    filterState.toggleOption(filterId, optionValue, optionValue, FilterType.CHECKBOX);
     expect(filterState.getSelectedOptions(filterId)).toEqual(new Set());
   });
 
@@ -24,10 +27,10 @@ describe('Filter state', () => {
     const mockCallback = vi.fn();
     filterState.subscribe(mockCallback);
 
-    filterState.toggleOption('type', 'testOption');
+    filterState.toggleOption('type', 'testOption', 'testOption', FilterType.CHECKBOX);
     expect(mockCallback).toHaveBeenCalledTimes(1);
 
-    filterState.toggleOption('type', 'testOption');
+    filterState.toggleOption('type', 'testOption', 'testOption', FilterType.CHECKBOX);
     expect(mockCallback).toHaveBeenCalledTimes(2);
   });
 
@@ -38,7 +41,7 @@ describe('Filter state', () => {
     filterState.subscribe(mockFirstCallback);
     filterState.subscribe(mockSecondCallback);
 
-    filterState.toggleOption('type', 'testOption');
+    filterState.toggleOption('type', 'testOption', 'testOption', FilterType.CHECKBOX);
 
     expect(mockFirstCallback).toHaveBeenCalledTimes(1);
     expect(mockSecondCallback).toHaveBeenCalledTimes(1);
