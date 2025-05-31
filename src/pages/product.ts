@@ -1,9 +1,8 @@
 import CatalogAPI from '@/api/catalog';
 import BaseComponent from '@/components/base';
-import ProductAttributes from '@/components/product/attributes';
+import ProductWrappingBlock from '@/components/product/block';
 import ProductDelivery from '@/components/product/delivery';
 import DetailedProduct from '@/components/product/detailed';
-import ProductPrices from '@/components/product/prices';
 import ProductSlider from '@/components/product/slider';
 import ProductTitle from '@/components/product/title';
 import { LOADING_CONFIG } from '@/constants';
@@ -116,12 +115,8 @@ export default class ProductPage extends BaseComponent {
         description: String(attributes['description']),
       });
       rightAside.append(productTitle.getElement());
-
-      const productAttributs = new ProductAttributes(attributes);
-      rightAside.append(productAttributs.getElement());
-
-      const prices = new ProductPrices(productData.prices);
-      rightAside.append(prices.getElement());
+      const block = new ProductWrappingBlock(attributes, productData.prices);
+      rightAside.append(block.getElement());
 
       const delivery = new ProductDelivery();
       rightAside.append(delivery.getElement());
