@@ -110,6 +110,8 @@ export const BTN_TEXT = {
   REGISTRATION_REDIRECT: 'Перейти к регистрации',
   LOGIN_PAGE: 'Вход',
   LOGIN_REDIRECT: 'Перейти к авторизации',
+  EDIT: 'Редактировать',
+  SAVE_CHANGES: 'Сохранить изменения',
 };
 
 export const INTRO_TEXTS = {
@@ -210,6 +212,7 @@ export const CATALOG_TEXTS = {
   HIDE_FILTERS: 'Скрыть фильтры',
   LOADING_PRODUCTS: 'Обновляем каталог...',
   NO_PRODUCTS: 'К сожалению, продуктов не найдено',
+  PROMO_TAG: 'Акция',
 };
 
 export const PRODUCT_ATTRIBUTES = {

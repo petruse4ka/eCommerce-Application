@@ -63,7 +63,7 @@ export default class ElementBuilder {
     }
   }
 
-  private applyTextContent(text?: string): void {
+  public applyTextContent(text?: string): void {
     if (text) {
       this.element.textContent = text;
     }

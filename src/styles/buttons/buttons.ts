@@ -131,4 +131,5 @@ export const CUSTOM_BUTTON_STYLE = {
   ],
   HIDDEN: ['hidden'],
   VISIBLE: ['block'],
+  CLOSE: ['text-accent', 'font-bold', 'cursor-pointer', 'px-1'],
 };

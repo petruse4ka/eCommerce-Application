@@ -107,6 +107,13 @@ export interface Addresses {
   postalCode: string;
 }
 
+export interface UserInfoBody {
+  firstName: string;
+  lastName: string;
+  dateOfBirth: string;
+  email: string;
+}
+
 export interface RegistrationBody {
   firstName: string;
   lastName: string;
@@ -334,4 +341,9 @@ export interface PriceValue {
   price: number;
   oldPrice?: number;
   code: string;
+}
+
+export interface UpdateUserInfo {
+  version: number;
+  actions: Record<string, string>[];
 }
