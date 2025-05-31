@@ -93,5 +93,5 @@ export const FILTERS_STYLES = {
     'mt-5',
   ],
   EMPTY_FILTERS_IMAGE: ['w-[75px]', 'xl:w-[125x]', 'grow-0'],
-  EMPTY_FILTERS_TEXT: ['text-accent', 'text-lg', 'text-center'],
+  EMPTY_FILTERS_TEXT: ['text-accent', 'text-xl', 'font-semibold', 'text-center'],
 };
