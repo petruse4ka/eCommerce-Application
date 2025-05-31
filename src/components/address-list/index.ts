@@ -1,10 +1,18 @@
+import { BTN_TEXT } from '@/constants';
+import { INPUTS_ADDRESS_DATA } from '@/data';
 import { ADDRESS } from '@/styles/address';
+import { AddressTypeText, ModalTitle } from '@/types/enums';
 import type { AddressInfo } from '@/types/interfaces';
 import ElementBuilder from '@/utils/element-builder';
 
 import BaseComponent from '../base';
+import Button from '../buttons';
+import FormEditUserInfo from '../forms/edit-info';
+import Modal from '../modal';
 
 export default class AddressList extends BaseComponent {
+  public infoValue: ElementBuilder[];
+
   constructor(titleContent: string, addressesInfo: AddressInfo[]) {
     super({
       tag: 'section',
@@ -12,6 +20,7 @@ export default class AddressList extends BaseComponent {
     });
 
     this.createTitle(titleContent);
+    this.infoValue = [];
 
     for (const address of addressesInfo) {
       this.addCardItem(address);
@@ -42,10 +51,12 @@ export default class AddressList extends BaseComponent {
         tag: 'p',
         className: ADDRESS.LINE.VALUE,
         textContent: value,
-      }).getElement();
+      });
 
-      line.append(titleLine, valueLine);
+      line.append(titleLine, valueLine.getElement());
       card.append(line);
+
+      this.infoValue.push(valueLine);
     }
 
     if (isDefault) {
@@ -53,12 +64,13 @@ export default class AddressList extends BaseComponent {
       const titleCard = new ElementBuilder({
         tag: 'h3',
         className: ADDRESS.CARD.DEFAULT_TITLE,
-        textContent: 'По умолчанию',
+        textContent: AddressTypeText.DEFAULT,
       }).getElement();
 
       card.append(titleCard);
     }
 
+    card.append(this.createEditButton());
     this.component.append(card);
   }
 
@@ -70,5 +82,21 @@ export default class AddressList extends BaseComponent {
     }).getElement();
 
     this.component.append(title);
+  }
+
+  private createEditButton(): HTMLElement {
+    const button = new Button({
+      style: 'PRIMARY_PINK',
+      textContent: BTN_TEXT.EDIT,
+      callback: (): void => {
+        const form = new FormEditUserInfo(INPUTS_ADDRESS_DATA, this.infoValue);
+        const modal = new Modal({ title: ModalTitle.CHANGE, content: form });
+        this.component.append(modal.getElement());
+
+        modal.showModal();
+      },
+    }).getElement();
+
+    return button;
   }
 }

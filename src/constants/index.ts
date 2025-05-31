@@ -110,6 +110,8 @@ export const BTN_TEXT = {
   REGISTRATION_REDIRECT: 'Перейти к регистрации',
   LOGIN_PAGE: 'Вход',
   LOGIN_REDIRECT: 'Перейти к авторизации',
+  EDIT: 'Редактировать',
+  SAVE_CHANGES: 'Сохранить изменения',
 };
 
 export const INTRO_TEXTS = {

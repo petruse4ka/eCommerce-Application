@@ -81,3 +81,9 @@
     }
   }
 }
+
+@layer utilities {
+  dialog::backdrop {
+    @apply bg-black/50;
+  }
+}

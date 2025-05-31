@@ -29,6 +29,7 @@ class UserState {
 
   public setUserInfoState(value: Customer): void {
     this.userInfo = value;
+    this.notify();
   }
 
   public getTokenState(): string {
