@@ -22,12 +22,7 @@ export default class APIUpdateData {
       .then((response) => response.json())
       .then((body: Customer | ErrorResponse) => {
         if ('error' in body) {
-          console.error(body.error);
-          Alert.render({
-            textContent: AlertText.ERROR_DEFAULT,
-            status: AlertStatus.ERROR,
-            visibleTime: 3000,
-          });
+          throw new Error(JSON.stringify(body.errors));
         } else {
           userState.setUserInfoState(body);
 
@@ -37,6 +32,15 @@ export default class APIUpdateData {
             visibleTime: 3000,
           });
         }
+      })
+      .catch((error) => {
+        console.error(error);
+
+        Alert.render({
+          textContent: AlertText.ERROR_DEFAULT,
+          status: AlertStatus.ERROR,
+          visibleTime: 3000,
+        });
       });
   }
 }
