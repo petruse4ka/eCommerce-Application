@@ -18,23 +18,27 @@ export default class CatalogAPI {
     });
   }
 
-  public static async getProducts(): Promise<{
+  public static async getProducts(filters: FilterRequest = {}): Promise<{
     products: Products[];
     productData: Product[];
   } | void> {
     const token = userState.getTokenState();
 
     try {
-      const response = await fetch(
-        `${import.meta.env['VITE_CTP_API_URL']}/${import.meta.env['VITE_CTP_PROJECT_KEY']}${ApiEndpoint.PRODUCTS}?where=masterData(published=true)`,
-        {
-          method: ApiMethods.GET,
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': ContentType.JSON,
-          },
-        }
-      );
+      const queryParameters = CatalogAPI.handleFilters(filters);
+      const currentSort = filterState.getCurrentSort();
+      if (currentSort) {
+        queryParameters.append('sort', currentSort);
+      }
+      const url = `${import.meta.env['VITE_CTP_API_URL']}/${import.meta.env['VITE_CTP_PROJECT_KEY']}/product-projections/search?${queryParameters.toString()}`;
+
+      const response = await fetch(url, {
+        method: ApiMethods.GET,
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': ContentType.JSON,
+        },
+      });
 
       if (!response.ok) {
         throw new Error(`HTTP error: ${response.status}`);
@@ -117,47 +121,6 @@ export default class CatalogAPI {
       throw new Error('Invalid category response format');
     } catch (error) {
       console.error('Error fetching categories:', error);
-    }
-  }
-
-  public static async getProductsWithFilters(filters: FilterRequest): Promise<{
-    products: Products[];
-    productData: Product[];
-  } | void> {
-    const token = userState.getTokenState();
-
-    try {
-      const queryParameters = CatalogAPI.handleFilters(filters);
-      const currentSort = filterState.getCurrentSort();
-      if (currentSort) {
-        queryParameters.append('sort', currentSort);
-      }
-      const url = `${import.meta.env['VITE_CTP_API_URL']}/${import.meta.env['VITE_CTP_PROJECT_KEY']}/product-projections/search?${queryParameters.toString()}`;
-
-      const response = await fetch(url, {
-        method: ApiMethods.GET,
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': ContentType.JSON,
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error: ${response.status}`);
-      }
-
-      const data: unknown = await response.json();
-
-      if (isProductResponse(data)) {
-        return {
-          products: TransformApiProductsData.transformProducts(data),
-          productData: data.results,
-        };
-      }
-
-      throw new Error('Invalid product response format');
-    } catch (error) {
-      console.error('Error fetching filtered products:', error);
     }
   }
 

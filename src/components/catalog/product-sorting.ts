@@ -69,7 +69,7 @@ export default class ProductSorting extends BaseComponent {
 
     if (typeof sortBy === 'string') filterState.setSort(sortBy);
 
-    const result = await CatalogAPI.getProductsWithFilters(selectedFilters);
+    const result = await CatalogAPI.getProducts(selectedFilters);
     if (result) {
       productsState.updateProducts(result.products);
     }
