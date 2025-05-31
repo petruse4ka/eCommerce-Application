@@ -1,89 +1,21 @@
 import BaseComponent from '@/components/base';
-import Button from '@/components/buttons';
-import { CATALOG_TEXTS } from '@/constants';
-import { MACARONS, SORTING_OPTIONS } from '@/data/products';
-import { CUSTOM_BUTTON_STYLE } from '@/styles/buttons/buttons';
+import EmptyCatalog from '@/components/catalog/empty-catalog';
+import { CATALOG_TEXTS, DEFAULT_CURRENCY } from '@/constants';
 import { PRODUCT_LIST_STYLES } from '@/styles/catalog/product-list';
-import { SORTING_STYLES } from '@/styles/catalog/sorting';
-import { InputType } from '@/types/enums';
 import type { Macarons } from '@/types/interfaces';
 import ElementBuilder from '@/utils/element-builder';
 import ImageBuilder from '@/utils/image-builder';
-import InputBuilder from '@/utils/input-builder';
-import SelectBuilder from '@/utils/select-builder';
 
 export default class ProductList extends BaseComponent {
+  private products: Macarons[] = [];
+  private productsContainer: HTMLElement;
+
   constructor() {
     super({ tag: 'div', className: PRODUCT_LIST_STYLES.CONTAINER });
-    this.render();
-  }
-
-  private static createSearchContainer(): HTMLElement {
-    const searchContainer = new ElementBuilder({
+    this.productsContainer = new ElementBuilder({
       tag: 'div',
-      className: SORTING_STYLES.SEARCH_CONTAINER,
+      className: PRODUCT_LIST_STYLES.PRODUCTS_CONTAINER,
     }).getElement();
-
-    const searchInput = new InputBuilder({
-      id: 'search',
-      type: InputType.TEXT,
-      placeholder: CATALOG_TEXTS.SEARCH_PLACEHOLDER,
-      className: SORTING_STYLES.SEARCH_INPUT,
-      eventType: 'input',
-      callback: (): void => {
-        if (searchInput instanceof HTMLInputElement && searchInput.value.length > 0) {
-          button.classList.remove(...CUSTOM_BUTTON_STYLE.HIDDEN);
-        } else {
-          button.classList.add(...CUSTOM_BUTTON_STYLE.HIDDEN);
-        }
-      },
-    }).getElement();
-
-    const button = new Button({
-      style: 'CLEAR',
-      textContent: '×',
-      callback: (): void => {
-        if (searchInput instanceof HTMLInputElement) {
-          searchInput.value = '';
-          button.classList.add(...CUSTOM_BUTTON_STYLE.HIDDEN);
-        }
-      },
-    }).getElement();
-
-    searchContainer.append(searchInput, button);
-
-    return searchContainer;
-  }
-
-  private static createSortingContainer(): HTMLElement {
-    const container = new ElementBuilder({
-      tag: 'div',
-      className: SORTING_STYLES.CONTAINER,
-    }).getElement();
-
-    const productCounter = new ElementBuilder({
-      tag: 'span',
-      className: SORTING_STYLES.PRODUCT_COUNTER,
-      textContent: `${CATALOG_TEXTS.TOTAL_PRODUCTS}: ${MACARONS.length}`,
-    }).getElement();
-
-    const dropdownContainer = new ElementBuilder({
-      tag: 'div',
-      className: SORTING_STYLES.DROPDOWN_CONTAINER,
-    }).getElement();
-
-    const select = new SelectBuilder({
-      className: SORTING_STYLES.DROPDOWN,
-    });
-
-    select.addOptions(SORTING_OPTIONS);
-
-    const searchContainer = ProductList.createSearchContainer();
-
-    dropdownContainer.append(select.getElement());
-    container.append(productCounter, searchContainer, dropdownContainer);
-
-    return container;
   }
 
   private static createPriceContainer(product: Macarons): HTMLElement {
@@ -96,13 +28,13 @@ export default class ProductList extends BaseComponent {
       const originalPrice = new ElementBuilder({
         tag: 'span',
         className: PRODUCT_LIST_STYLES.ORIGINAL_PRICE,
-        textContent: `${product.price} €`,
+        textContent: `${product.price} ${DEFAULT_CURRENCY}`,
       }).getElement();
 
       const discountedPrice = new ElementBuilder({
         tag: 'span',
         className: PRODUCT_LIST_STYLES.REGULAR_PRICE,
-        textContent: `${product.discountedPrice} €`,
+        textContent: `${product.discountedPrice} ${DEFAULT_CURRENCY}`,
       }).getElement();
 
       priceContainer.append(originalPrice, discountedPrice);
@@ -110,13 +42,21 @@ export default class ProductList extends BaseComponent {
       const regularPrice = new ElementBuilder({
         tag: 'span',
         className: PRODUCT_LIST_STYLES.REGULAR_PRICE,
-        textContent: `${product.price} €`,
+        textContent: `${product.price} ${DEFAULT_CURRENCY}`,
       }).getElement();
 
       priceContainer.append(regularPrice);
     }
 
     return priceContainer;
+  }
+
+  private static createPromoTag(): HTMLElement {
+    return new ElementBuilder({
+      tag: 'div',
+      className: PRODUCT_LIST_STYLES.PROMO_TAG,
+      textContent: CATALOG_TEXTS.PROMO_TAG,
+    }).getElement();
   }
 
   private static createProductCard(product: Macarons): HTMLElement {
@@ -135,6 +75,10 @@ export default class ProductList extends BaseComponent {
       alt: product.name,
       className: PRODUCT_LIST_STYLES.IMAGE,
     }).getElement();
+
+    if (product.discountedPrice) {
+      imageContainer.append(ProductList.createPromoTag());
+    }
 
     const contentContainer = new ElementBuilder({
       tag: 'div',
@@ -162,19 +106,26 @@ export default class ProductList extends BaseComponent {
     return card;
   }
 
-  private render(): void {
-    const sortingContainer = ProductList.createSortingContainer();
+  public updateProducts(products: Macarons[]): void {
+    this.products = products;
+    this.updateProductList();
+  }
 
-    const productsContainer = new ElementBuilder({
-      tag: 'div',
-      className: PRODUCT_LIST_STYLES.PRODUCTS_CONTAINER,
-    }).getElement();
-
-    for (const product of MACARONS) {
-      const productItem = ProductList.createProductCard(product);
-      productsContainer.append(productItem);
+  private updateProductList(): void {
+    while (this.component.firstChild) {
+      this.component.firstChild.remove();
     }
 
-    this.component.append(sortingContainer, productsContainer);
+    if (this.products.length === 0) {
+      const emptyState = new EmptyCatalog(`${CATALOG_TEXTS.NO_PRODUCTS}`);
+      this.component.append(emptyState.getElement());
+      return;
+    }
+
+    this.component.append(this.productsContainer);
+    for (const product of this.products) {
+      const productItem = ProductList.createProductCard(product);
+      this.productsContainer.append(productItem);
+    }
   }
 }

@@ -1,5 +1,5 @@
 import { FilterId } from './enums';
-import type { UserInfoBody } from './interfaces';
+import type { UserInfoBody, ProductResponse } from './interfaces';
 
 export function isErrorInfo(object: unknown): object is { code: string; field: string } {
   return typeof object === 'object' && object !== null && 'code' in object && 'field' in object;
@@ -12,6 +12,20 @@ export function isFilterId(id: string): id is FilterId {
   return false;
 }
 
+
 export function isUserInfo(id: string, userInfo: UserInfoBody): id is keyof UserInfoBody {
   return id in userInfo;
+}
+
+export function isProductResponse(data: unknown): data is ProductResponse {
+  return (
+    typeof data === 'object' &&
+    data !== null &&
+    'limit' in data &&
+    'offset' in data &&
+    'count' in data &&
+    'total' in data &&
+    'results' in data &&
+    Array.isArray(data.results)
+  );
 }
