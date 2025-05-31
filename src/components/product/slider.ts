@@ -1,45 +1,47 @@
 import BaseComponent from '@/components/base';
 import { PRODUCT_STYLES } from '@/styles/pages/product';
+import type { Image } from '@/types/interfaces';
 import ElementBuilder from '@/utils/element-builder';
 
 export default class ProductSlider extends BaseComponent {
-  constructor() {
+  constructor(images: Image[]) {
     super({ tag: 'section', className: PRODUCT_STYLES.SLIDER });
-    this.render();
+
+    this.render(images);
   }
 
-  protected render(): void {
+  protected render(images: Image[]): void {
     const imageContainer = new ElementBuilder({
       tag: 'div',
       className: PRODUCT_STYLES.SLIDER_BIG_IMAGE,
-      callback: (): void => {},
+      callback: (): void => {
+        /* const form = new FormEditUserInfo(INPUTS_ADDRESS_DATA, this.infoValue);
+        const modal = new Modal({ title: ModalTitle.CHANGE, content: form });
+        this.component.append(modal.getElement());
+
+        modal.showModal();*/
+      },
     });
 
-    const array = [
-      '././assets/images/macarons/blue-cheese.png',
-      '././assets/images/dessert3.png',
-      '././assets/images/dessert1.png',
-      '././assets/images/macarons.jpg',
-    ];
-
-    imageContainer.applyCssClasses(`bg-[url('././assets/images/dessert1.png')]`);
-
+    //imageContainer.applyCssClasses(`bg-[url(${images[0].url})]`);
+    imageContainer.getElement().style.backgroundImage = `url(${images[0].url})`;
     this.component.append(imageContainer.getElement());
-    if (array.length > 1) {
+    if (images.length > 1) {
       const previewContainer = new ElementBuilder({
         tag: 'div',
         className: PRODUCT_STYLES.SLIDER_PREVIEW_CONTAINER,
         callback: (): void => {},
       }).getElement();
-      for (const image of array) {
+
+      for (const image of images) {
         const preview = new ElementBuilder({
           tag: 'div',
           className: PRODUCT_STYLES.SLIDER_PREVIEW,
           callback: (): void => {
-            imageContainer.getElement().style.backgroundImage = `url('${image}')`;
+            imageContainer.getElement().style.backgroundImage = `url(${image.url})`;
           },
         });
-        preview.getElement().style.backgroundImage = `url('${image}')`;
+        preview.getElement().style.backgroundImage = `url(${image.url})`;
         previewContainer.append(preview.getElement());
       }
       this.component.append(previewContainer);

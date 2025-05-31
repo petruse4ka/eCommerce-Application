@@ -48,9 +48,6 @@ export default class ProductPage extends BaseComponent {
         const loadedProduct = await CatalogAPI.getProduct(key);
 
         if (loadedProduct) {
-          /*    
-          const prices = ProductPage.parsePrices(loadedProduct.prices);
-          const images = ProductPage.parseImages(loadedProduct.images);*/
           return loadedProduct;
         }
         break;
@@ -130,9 +127,12 @@ export default class ProductPage extends BaseComponent {
       rightAside.append(delivery.getElement());
 
       const detailed = new DetailedProduct(String(attributes['detailing']));
-      const slider = new ProductSlider();
-      mainContainer.append(slider.getElement(), rightAside);
+      if (productData.images) {
+        const slider = new ProductSlider(productData.images);
+        mainContainer.append(slider.getElement());
+      }
       mainContainer.append(rightAside);
+
       mainComponent.append(mainContainer);
       mainComponent.append(detailed.getElement());
     }
