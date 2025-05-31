@@ -171,7 +171,9 @@ export default class TransformApiProductTypesData {
       if (product.masterData) {
         const variant = product.masterData.current.masterVariant;
         for (const price of variant.prices) {
-          const amount = price.value.centAmount / 100;
+          const fractionDigits = price.value.fractionDigits || 2;
+          const priceDivider = 10 ** fractionDigits;
+          const amount = price.value.centAmount / priceDivider;
           maxPrice = Math.max(maxPrice, amount);
         }
       }

@@ -1,3 +1,4 @@
+import { productsState } from '@/store/products-state';
 import { userState } from '@/store/user-state';
 import { ApiEndpoint, ApiMethods, ContentType, FilterType } from '@/types/enums';
 import { isCategoryResponse, isProductResponse, isProductTypeResponse } from '@/types/guards';
@@ -5,6 +6,17 @@ import type { FilterRequest, Product, Products, ProductTypeResponse } from '@/ty
 import TransformApiProductsData from '@/utils/transform-api-product-data';
 
 export default class CatalogAPI {
+  private static fractionDigits: number = 2;
+
+  public static initialize(): void {
+    productsState.subscribe(() => {
+      const products = productsState.getProducts();
+      if (products.length > 0 && products[0].fractionDigits) {
+        CatalogAPI.fractionDigits = products[0].fractionDigits;
+      }
+    });
+  }
+
   public static async getProducts(): Promise<{
     products: Products[];
     productData: Product[];
@@ -157,8 +169,10 @@ export default class CatalogAPI {
 
       if (filterId === 'price') {
         const [min, max] = values[0].split('-');
-        const minCents = Math.floor(Number(min) * 100);
-        const maxCents = Math.ceil(Number(max) * 100);
+        const priceMultiplier = 10 ** CatalogAPI.fractionDigits;
+
+        const minCents = Math.floor(Number(min) * priceMultiplier);
+        const maxCents = Math.ceil(Number(max) * priceMultiplier);
         queryParameters.append(
           'filter',
           `variants.price.centAmount:range(${minCents} to ${maxCents})`

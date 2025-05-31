@@ -20,7 +20,7 @@ export const LOADING_CONFIG = {
 export const FILTER_RANGES = {
   DEFAULT: {
     MIN: 0,
-    MAX: 100,
+    MAX: 150,
     STEP: 10,
   },
   PRICE: {

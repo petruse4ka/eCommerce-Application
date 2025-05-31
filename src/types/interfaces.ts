@@ -134,6 +134,7 @@ export interface Products {
   image: string;
   price: number;
   discountedPrice?: number;
+  fractionDigits?: number;
 }
 
 export interface Guarantees {

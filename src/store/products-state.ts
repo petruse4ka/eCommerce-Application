@@ -2,14 +2,22 @@ import type { Products } from '@/types/interfaces';
 
 class ProductsState {
   private products: Products[] = [];
+  private fractionDigits: number = 2;
   private subscribers: Array<() => void> = [];
 
   public getProducts(): Products[] {
     return this.products;
   }
 
+  public getFractionDigits(): number {
+    return this.fractionDigits;
+  }
+
   public updateProducts(products: Products[]): void {
     this.products = products;
+    if (products.length > 0 && products[0].fractionDigits) {
+      this.fractionDigits = products[0].fractionDigits;
+    }
     this.notify();
   }
 
