@@ -88,6 +88,7 @@ describe('TransformApiProductsData', () => {
       image: 'test-image.jpg',
       price: 10,
       discountedPrice: 8,
+      fractionDigits: 2,
     });
   });
 });
