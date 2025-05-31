@@ -3,6 +3,8 @@ import { PRODUCT_STYLES } from '@/styles/pages/product';
 import type { Image } from '@/types/interfaces';
 import ElementBuilder from '@/utils/element-builder';
 
+import ModalSlider from './modal-slider';
+
 export default class ProductSlider extends BaseComponent {
   constructor(images: Image[]) {
     super({ tag: 'section', className: PRODUCT_STYLES.SLIDER });
@@ -15,11 +17,9 @@ export default class ProductSlider extends BaseComponent {
       tag: 'div',
       className: PRODUCT_STYLES.SLIDER_BIG_IMAGE,
       callback: (): void => {
-        /* const form = new FormEditUserInfo(INPUTS_ADDRESS_DATA, this.infoValue);
-        const modal = new Modal({ title: ModalTitle.CHANGE, content: form });
-        this.component.append(modal.getElement());
-
-        modal.showModal();*/
+        const modal = new ModalSlider(images);
+        document.body.append(modal.getElement());
+        modal.showModal();
       },
     });
 
