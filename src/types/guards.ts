@@ -1,8 +1,12 @@
 import { FilterId } from './enums';
-import type { UserInfoBody, ProductResponse } from './interfaces';
+import type { PasswordBody, ProductResponse, UserInfoBody } from './interfaces';
 
 export function isErrorInfo(object: unknown): object is { code: string; field: string } {
   return typeof object === 'object' && object !== null && 'code' in object && 'field' in object;
+}
+
+export function isErrorItem(object: unknown): object is { code: string; field: string } {
+  return typeof object === 'object' && object !== null && 'code' in object;
 }
 
 export function isFilterId(id: string): id is FilterId {
@@ -12,9 +16,12 @@ export function isFilterId(id: string): id is FilterId {
   return false;
 }
 
-
 export function isUserInfo(id: string, userInfo: UserInfoBody): id is keyof UserInfoBody {
   return id in userInfo;
+}
+
+export function isPasswordInfo(id: string, passwordInfo: PasswordBody): id is keyof PasswordBody {
+  return id in passwordInfo;
 }
 
 export function isProductResponse(data: unknown): data is ProductResponse {

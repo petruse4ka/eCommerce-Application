@@ -1,3 +1,3 @@
 export type ActionHandler = () => void;
 
-export type ValidationFunction = (value: string) => string | null;
+export type ValidationFunction = (value: string, secondValue?: string) => string | null;

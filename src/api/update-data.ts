@@ -1,8 +1,16 @@
 import Alert from '@/components/alert';
 import { userState } from '@/store/user-state';
 import { AlertStatus, AlertText, ApiEndpoint, ApiMethods, ContentType } from '@/types/enums';
-import type { Customer, ErrorResponse, UserInfoBody } from '@/types/interfaces';
+import type {
+  Customer,
+  ErrorInfo,
+  ErrorResponse,
+  PasswordBody,
+  UserInfoBody,
+} from '@/types/interfaces';
 import TransformApiData from '@/utils/transform-api-data';
+
+import API from '.';
 
 export default class APIUpdateData {
   public static async userUpdateInfo(body: UserInfoBody): Promise<void> {
@@ -42,5 +50,46 @@ export default class APIUpdateData {
           visibleTime: 3000,
         });
       });
+  }
+
+  public static async changeUserPassword(body: PasswordBody): Promise<void> {
+    const token = userState.getTokenState();
+    const bodyUser = TransformApiData.transformUserPasswordChange(body);
+
+    if (bodyUser) {
+      await fetch(
+        `${import.meta.env['VITE_CTP_API_URL']}/${import.meta.env['VITE_CTP_PROJECT_KEY']}${ApiEndpoint.CHANGE_PASS}`,
+        {
+          method: ApiMethods.POST,
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': ContentType.JSON,
+          },
+          body: JSON.stringify(bodyUser),
+        }
+      )
+        .then((response) => response.json())
+        .then((body: Customer | ErrorResponse) => {
+          if ('errors' in body) {
+            throw new Error(JSON.stringify(body.errors));
+          } else {
+            API.userSignInResponse({
+              userInfo: {
+                email: body.email,
+                password: bodyUser.newPassword,
+              },
+              isLogin: false,
+            }).catch((error: ErrorInfo) => {
+              console.log(error);
+            });
+
+            Alert.render({
+              textContent: AlertText.CHANGE_SUCCESS,
+              status: AlertStatus.SUCCESS,
+              visibleTime: 3000,
+            });
+          }
+        });
+    }
   }
 }

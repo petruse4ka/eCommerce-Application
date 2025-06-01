@@ -1,7 +1,14 @@
 import { userState } from '@/store/user-state';
 import { AddressKey, AddressType, UserInfoKey } from '@/types/enums';
 import { isUserInfo } from '@/types/guards';
-import type { AddressInfo, UpdateUserInfo, UserInfo, UserInfoBody } from '@/types/interfaces';
+import type {
+  AddressInfo,
+  PasswordBody,
+  PasswordRequest,
+  UpdateUserInfo,
+  UserInfo,
+  UserInfoBody,
+} from '@/types/interfaces';
 
 export default class TransformApiData {
   public static transformUserInfo(): UserInfo | void {
@@ -82,6 +89,20 @@ export default class TransformApiData {
       return {
         version: Number(userInfo.version),
         actions,
+      };
+    }
+  }
+
+  public static transformUserPasswordChange(body: PasswordBody): PasswordRequest | void {
+    const { currentPassword, newPassword } = body;
+    const userInfo = userState.getUserInfoState();
+
+    if (userInfo) {
+      return {
+        id: userInfo.id,
+        version: userInfo.version,
+        currentPassword,
+        newPassword,
       };
     }
   }

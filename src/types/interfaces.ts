@@ -114,6 +114,19 @@ export interface UserInfoBody {
   email: string;
 }
 
+export interface PasswordBody {
+  newPassword: string;
+  currentPassword: string;
+  repeatNewPassword: string;
+}
+
+export interface PasswordRequest {
+  id: string;
+  version: number;
+  currentPassword: string;
+  newPassword: string;
+}
+
 export interface RegistrationBody {
   firstName: string;
   lastName: string;

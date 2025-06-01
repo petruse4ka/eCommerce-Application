@@ -2,6 +2,7 @@ import '@/styles/main.css';
 
 import AddressList from '@/components/address-list';
 import BaseComponent from '@/components/base';
+import FormEditPassword from '@/components/forms/edit-password';
 import PersonalInfo from '@/components/personal-info';
 import Tabs from '@/components/tabs';
 import { userState } from '@/store/user-state';
@@ -13,8 +14,10 @@ import TransformApiData from '@/utils/transform-api-data';
 export default class AccountPage extends BaseComponent {
   private infoContainer: HTMLElement;
   private addressesNode: HTMLElement[];
+  private changePasswordNode: HTMLElement;
   private userInfoNode: HTMLElement;
   private container: HTMLElement;
+  private currentActive: string;
 
   constructor() {
     super({
@@ -32,10 +35,15 @@ export default class AccountPage extends BaseComponent {
       className: ACCOUNT_PAGE.INFO_CONTAINER,
     }).getElement();
 
+    this.currentActive = 'userInfo';
+
     this.addressesNode = [];
+
+    this.changePasswordNode = new FormEditPassword().getElement();
 
     this.userInfoNode = new PersonalInfo(TransformApiData.transformUserInfo()).getElement();
     userState.subscribe(this.updateContent.bind(this));
+
     this.render();
   }
 
@@ -43,6 +51,7 @@ export default class AccountPage extends BaseComponent {
     this.createTabs();
     this.createAddresses();
     this.createUserInfo();
+    this.createChangePassword();
 
     this.container.append(this.infoContainer);
     this.component.append(this.container);
@@ -60,6 +69,16 @@ export default class AccountPage extends BaseComponent {
     this.render();
   }
 
+  private createChangePassword(): void {
+    this.changePasswordNode = new FormEditPassword().getElement();
+
+    if (this.currentActive !== 'changePassword') {
+      this.changePasswordNode.classList.add('hidden');
+    }
+
+    this.infoContainer.append(this.changePasswordNode);
+  }
+
   private createAddresses(): void {
     const addressInfo = TransformApiData.transformUserAddresses();
 
@@ -73,6 +92,11 @@ export default class AccountPage extends BaseComponent {
       addressInfo[AddressType.BILLING]
     ).getElement();
 
+    if (this.currentActive !== 'addresses') {
+      shippingAddressList.classList.add('hidden');
+      billingAddressList.classList.add('hidden');
+    }
+
     this.addressesNode = [shippingAddressList, billingAddressList];
 
     for (const node of this.addressesNode) {
@@ -82,30 +106,39 @@ export default class AccountPage extends BaseComponent {
 
   private createUserInfo(): void {
     this.userInfoNode = new PersonalInfo(TransformApiData.transformUserInfo()).getElement();
+    if (this.currentActive !== 'userInfo') {
+      this.userInfoNode.classList.add('hidden');
+    }
 
     this.infoContainer.append(this.userInfoNode);
   }
 
   private createTabs(): void {
+    console.log(this.currentActive);
     const tab = new Tabs([
       {
         textContent: TabAccount.INFO,
-        isActive: true,
+        isActive: this.currentActive === 'userInfo',
         callback: (): void => {
           this.visibleCurrentContent(this.userInfoNode);
+          this.currentActive = 'userInfo';
         },
       },
       {
         textContent: TabAccount.ADDRESSES,
-        isActive: false,
+        isActive: this.currentActive === 'addresses',
         callback: (): void => {
           this.visibleCurrentContent(this.addressesNode);
+          this.currentActive = 'addresses';
         },
       },
       {
         textContent: TabAccount.CHANGE_PASS,
-        isActive: false,
-        callback: (): void => {},
+        isActive: this.currentActive === 'changePassword',
+        callback: (): void => {
+          this.visibleCurrentContent(this.changePasswordNode);
+          this.currentActive = 'changePassword';
+        },
       },
     ]);
 
@@ -113,7 +146,7 @@ export default class AccountPage extends BaseComponent {
   }
 
   private visibleCurrentContent(nodeVisible: HTMLElement | HTMLElement[]): void {
-    const allNode = [this.userInfoNode, ...this.addressesNode];
+    const allNode = [this.userInfoNode, ...this.addressesNode, this.changePasswordNode];
     for (const node of allNode) {
       node.classList.add('hidden');
     }
