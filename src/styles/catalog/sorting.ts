@@ -58,4 +58,5 @@ export const SORTING_STYLES = {
     'focus:border-orange',
   ],
   SEARCH_ICON: ['w-5', 'h-5'],
+  SHORT_SEARCH_QUERY: ['absolute', '-bottom-4', 'left-1', 'text-black/80', 'text-[10px]'],
 };

@@ -113,7 +113,6 @@ export const CUSTOM_BUTTON_STYLE = {
     'rounded-lg',
     'hover:bg-orange-light',
     'focus:outline-none',
-    'focus:bg-primary',
     'cursor-pointer',
   ],
 };

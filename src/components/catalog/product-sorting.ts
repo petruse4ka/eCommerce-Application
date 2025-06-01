@@ -16,6 +16,8 @@ export default class ProductSorting extends BaseComponent {
   private select: SelectBuilder;
   private searchInput: InputBuilder;
   private clearButton: HTMLElement;
+  private validationMessage: HTMLElement;
+  private searchContainer: HTMLElement;
 
   constructor() {
     super({ tag: 'div', className: SORTING_STYLES.CONTAINER });
@@ -47,6 +49,17 @@ export default class ProductSorting extends BaseComponent {
       callback: this.handleClearSearch,
     }).getElement();
 
+    this.validationMessage = new ElementBuilder({
+      tag: 'div',
+      className: SORTING_STYLES.SHORT_SEARCH_QUERY,
+      textContent: CATALOG_TEXTS.SHORT_SEARCH_QUERY,
+    }).getElement();
+
+    this.searchContainer = new ElementBuilder({
+      tag: 'div',
+      className: SORTING_STYLES.SEARCH_CONTAINER,
+    }).getElement();
+
     this.render();
   }
 
@@ -64,11 +77,6 @@ export default class ProductSorting extends BaseComponent {
   }
 
   private createSearchContainer(): HTMLElement {
-    const searchContainer = new ElementBuilder({
-      tag: 'div',
-      className: SORTING_STYLES.SEARCH_CONTAINER,
-    }).getElement();
-
     const searchButton = new Button({
       style: 'SEARCH_BUTTON',
       textContent: '',
@@ -82,9 +90,9 @@ export default class ProductSorting extends BaseComponent {
     }).getElement();
 
     searchButton.append(searchIcon);
-    searchContainer.append(this.searchInput.getElement(), searchButton, this.clearButton);
+    this.searchContainer.append(this.searchInput.getElement(), searchButton, this.clearButton);
 
-    return searchContainer;
+    return this.searchContainer;
   }
 
   private handleSearchKeydown = (event: Event): void => {
@@ -94,14 +102,22 @@ export default class ProductSorting extends BaseComponent {
 
       if (event instanceof KeyboardEvent && event.key === 'Enter') {
         const searchQuery = input.value.trim();
-        filterState.setSearchQuery(searchQuery);
+        if (searchQuery.length > 0 && searchQuery.length <= 2) {
+          this.showValidationMessage();
+        } else {
+          filterState.setSearchQuery(searchQuery);
+        }
       }
     }
   };
 
   private handleSearchClick = (): void => {
     const searchQuery = this.searchInput.getValue().trim();
-    filterState.setSearchQuery(searchQuery);
+    if (searchQuery.length > 0 && searchQuery.length <= 2) {
+      this.showValidationMessage();
+    } else {
+      filterState.setSearchQuery(searchQuery);
+    }
   };
 
   private handleClearSearch = (): void => {
@@ -109,6 +125,13 @@ export default class ProductSorting extends BaseComponent {
     filterState.setSearchQuery('');
     this.clearButton.classList.add('hidden');
   };
+
+  private showValidationMessage(): void {
+    this.searchContainer.append(this.validationMessage);
+    setTimeout(() => {
+      this.validationMessage.remove();
+    }, 1500);
+  }
 
   private render(): void {
     const dropdownContainer = new ElementBuilder({

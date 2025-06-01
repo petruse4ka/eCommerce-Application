@@ -31,10 +31,7 @@ export default class CatalogAPI {
 
       const searchQuery = filterState.getSearchQuery();
       if (searchQuery) {
-        const queryText = `*${searchQuery}*`;
-        queryParameters.append('text.ru', queryText);
-        queryParameters.append('fuzzy', 'true');
-        queryParameters.append('fuzzyLevel', '2');
+        CatalogAPI.handleSearchQuery(queryParameters, searchQuery);
       }
       queryParameters.append('limit', '500');
       const url = `${import.meta.env['VITE_CTP_API_URL']}/${import.meta.env['VITE_CTP_PROJECT_KEY']}/product-projections/search?${queryParameters.toString()}`;
@@ -179,5 +176,18 @@ export default class CatalogAPI {
     }
 
     return queryParameters;
+  }
+  private static handleSearchQuery(queryParameters: URLSearchParams, searchQuery: string): void {
+    const queryText = `*${searchQuery}*`;
+    queryParameters.append('text.ru', queryText);
+    queryParameters.append('fuzzy', 'true');
+
+    let fuzzyLevel = 0;
+    if (searchQuery.length > 5) {
+      fuzzyLevel = 2;
+    } else if (searchQuery.length >= 3) {
+      fuzzyLevel = 1;
+    }
+    queryParameters.append('fuzzyLevel', fuzzyLevel.toString());
   }
 }
