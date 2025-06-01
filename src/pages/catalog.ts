@@ -2,6 +2,7 @@ import '@/styles/main.css';
 
 import CatalogAPI from '@/api/catalog';
 import BaseComponent from '@/components/base';
+import Breadcrumbs from '@/components/breadcrumbs';
 import ProductFilters from '@/components/catalog/product-filters';
 import ProductList from '@/components/catalog/product-list';
 import ProductSorting from '@/components/catalog/product-sorting';
@@ -23,6 +24,7 @@ export default class CatalogPage extends BaseComponent {
   private isLoading: boolean;
   private productListLoader: LoaderOverlay;
   private filtersLoader: LoaderOverlay;
+  private breadcrumbs: Breadcrumbs;
 
   constructor() {
     super({
@@ -33,6 +35,7 @@ export default class CatalogPage extends BaseComponent {
     this.productSorting = new ProductSorting();
     this.productFilters = new ProductFilters();
     this.selectedFilters = new SelectedFilters();
+    this.breadcrumbs = new Breadcrumbs();
     this.isLoading = true;
     this.productListLoader = new LoaderOverlay({
       text: CATALOG_TEXTS.LOADING_PRODUCTS,
@@ -116,6 +119,8 @@ export default class CatalogPage extends BaseComponent {
     while (this.component.firstChild) {
       this.component.firstChild.remove();
     }
+
+    this.component.append(this.breadcrumbs.getElement());
 
     const title = new ElementBuilder({
       tag: 'h1',
