@@ -23,7 +23,6 @@ export default class ProductSlider extends BaseComponent {
       },
     });
 
-    //imageContainer.applyCssClasses(`bg-[url(${images[0].url})]`);
     imageContainer.getElement().style.backgroundImage = `url(${images[0].url})`;
     this.component.append(imageContainer.getElement());
     if (images.length > 1) {

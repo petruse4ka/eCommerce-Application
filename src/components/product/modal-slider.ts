@@ -39,7 +39,7 @@ export default class ModalSlider extends BaseComponent {
     const cross = new BaseComponent({
       tag: 'div',
       className: MODAL_SLIDER.CROSS,
-      textContent: '✖',
+      textContent: '×',
       callback: (): void => {
         this.closeModal();
       },
@@ -47,25 +47,29 @@ export default class ModalSlider extends BaseComponent {
 
     this.component.append(cross.getElement());
 
-    const leftArrow = new BaseComponent({
-      tag: 'div',
-      className: MODAL_SLIDER.LEFT_ARROW,
-      textContent: '<',
-      callback: (): void => {
-        this.leftStep();
-      },
-    });
-    this.component.append(leftArrow.getElement());
+    const leftArrow = this.createArrow(true);
+    const rightArrow = this.createArrow(false);
+    if (this.images.length > 1) {
+      this.component.append(leftArrow, rightArrow);
+    }
+    this.showSlide(0);
+  }
 
-    const rightArrow = new BaseComponent({
+  private createArrow(isLeftArrow: boolean): HTMLElement {
+    const className = isLeftArrow ? MODAL_SLIDER.LEFT_ARROW : MODAL_SLIDER.RIGHT_ARROW;
+    const arrow = new BaseComponent({
       tag: 'div',
-      className: MODAL_SLIDER.RIGHT_ARROW,
-      textContent: '>',
+      className: [...MODAL_SLIDER.ARROW, ...className],
+      textContent: isLeftArrow ? '《' : '》',
       callback: (): void => {
-        this.rightStep();
+        if (isLeftArrow) {
+          this.leftStep();
+        } else {
+          this.rightStep();
+        }
       },
-    });
-    this.component.append(rightArrow.getElement());
+    }).getElement();
+    return arrow;
   }
 
   private leftStep(): void {

@@ -75,7 +75,7 @@ export const PRODUCT_STYLES = {
     'font-bold',
     'border',
     'border-solid',
-    'border-gray',
+    'border-transparent',
   ],
   QUANTITY_MESSAGE: ['font-semibold', 'pt-2', 'text-center', 'lg:text-left'],
   DELIVERY_CONTAINER: [
@@ -137,7 +137,7 @@ export const PRODUCT_STYLES = {
     'rounded-lg',
     'border-2',
     'border-gray',
-    'hover:border-secondary',
+    'hover:border-secondary-light',
     'cursor-pointer',
   ],
   SLIDER_PREVIEW_CONTAINER: [
