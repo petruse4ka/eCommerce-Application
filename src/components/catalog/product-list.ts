@@ -27,6 +27,14 @@ export default class ProductList extends BaseComponent {
     this.updateProductList();
   }
 
+  public static createPromoTag(): HTMLElement {
+    return new ElementBuilder({
+      tag: 'div',
+      className: PRODUCT_LIST_STYLES.PROMO_TAG,
+      textContent: CATALOG_TEXTS.PROMO_TAG,
+    }).getElement();
+  }
+
   private static createPhotoCounter(product: Products): HTMLElement {
     const photoCounterContainer = new ElementBuilder({
       tag: 'div',
@@ -87,14 +95,6 @@ export default class ProductList extends BaseComponent {
     priceContainer.append(priceWrapper, ProductList.createPhotoCounter(product));
 
     return priceContainer;
-  }
-
-  private static createPromoTag(): HTMLElement {
-    return new ElementBuilder({
-      tag: 'div',
-      className: PRODUCT_LIST_STYLES.PROMO_TAG,
-      textContent: CATALOG_TEXTS.PROMO_TAG,
-    }).getElement();
   }
 
   private static cropText(text: string, maxLength: number): string {

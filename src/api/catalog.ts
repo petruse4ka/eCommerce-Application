@@ -177,6 +177,7 @@ export default class CatalogAPI {
 
     return queryParameters;
   }
+
   private static handleSearchQuery(queryParameters: URLSearchParams, searchQuery: string): void {
     const queryText = `*${searchQuery}*`;
     queryParameters.append('text.ru', queryText);

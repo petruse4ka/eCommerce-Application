@@ -275,6 +275,12 @@ export interface ProductVariant {
   attributes?: Attribute[];
 }
 
+export interface ProductVariantView {
+  prices: Price[];
+  images?: Image[];
+  attributes?: Attribute[];
+}
+
 export interface Price {
   id: string;
   value: {
@@ -331,6 +337,17 @@ export interface UserInfo {
   [UserInfoKey.LAST_NAME]: string;
   [UserInfoKey.DATA_OF_BIRTH]: string;
   [UserInfoKey.EMAIL]: string;
+}
+
+export interface TitleProduct {
+  title: string;
+  description: string;
+}
+
+export interface PriceValue {
+  price: number;
+  oldPrice?: number;
+  code: string;
 }
 
 export interface ProductTypeResponse {

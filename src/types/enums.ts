@@ -100,6 +100,12 @@ export enum CheckboxText {
   SAME_ADDRESSES = 'Использовать одинаковые адреса',
 }
 
+export enum DeliveryText {
+  PAY = 'Доставка от 400 руб. в день заказа с 12 до 21. Бесплатно при заказе на сумму от 2000 руб',
+  SELF_DELIVERY = 'Самовывоз - бесплатно через 3 часа после оплаты заказа',
+  ANONIM_PRESENT = 'Можем преподнести как анонимный подарок',
+}
+
 export enum FilterType {
   CHECKBOX = 'checkbox',
   RANGE = 'range',

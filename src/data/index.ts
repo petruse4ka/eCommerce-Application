@@ -15,8 +15,11 @@ import readyIcon from '@/assets/images/packages/ready.png';
 import stampIcon from '@/assets/images/packages/stamp.png';
 import weddingIcon from '@/assets/images/packages/wedding.png';
 import wholesaleIcon from '@/assets/images/packages/wholesale.png';
+import anonimDeliveryIcon from '@/assets/images/product/anonimDeliveryIcon.png';
+import payDeliveryIcon from '@/assets/images/product/payDeliveryIcon.png';
+import selfDeliveryIcon from '@/assets/images/product/selfDeliveryIcon.png';
 import { FOOTER_TEXTS, GUARANTEES_TEXTS, PACKAGES_TEXTS, SUBHEADER_PROMO_TEXT } from '@/constants';
-import { CheckboxText, InputType } from '@/types/enums';
+import { CheckboxText, DeliveryText, InputType } from '@/types/enums';
 import type { Guarantees, Packages, SelectOption } from '@/types/interfaces';
 
 export const PROMO_ITEMS = [
@@ -246,4 +249,10 @@ export const SORTING_OPTIONS: SelectOption[] = [
   { value: 'price desc', text: 'Цена: по убыванию' },
   { value: 'name.ru asc', text: 'Название: от А-Я' },
   { value: 'name.ru desc', text: 'Название: от Я-А' },
+];
+
+export const DELIVERY_ITEMS = [
+  { ICON: payDeliveryIcon, TEXT: DeliveryText.PAY },
+  { ICON: selfDeliveryIcon, TEXT: DeliveryText.SELF_DELIVERY },
+  { ICON: anonimDeliveryIcon, TEXT: DeliveryText.ANONIM_PRESENT },
 ];

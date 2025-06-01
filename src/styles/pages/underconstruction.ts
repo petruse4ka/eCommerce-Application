@@ -27,6 +27,14 @@ export const MAIN_CONTAINER = [
   'mb-10',
 ];
 
-export const TITLE_STYLE = ['text-xl', 'text-white', 'sm:text-2xl', 'text-center', 'px-3', 'py-4'];
+export const TITLE_STYLE = [
+  'text-xl',
+  'z-1',
+  'text-white',
+  'sm:text-2xl',
+  'text-center',
+  'px-3',
+  'py-4',
+];
 
 export const ASTRONAUT_STYLE = ['animate-shaking-img', 'origin-bottom', 'inline-block'];
