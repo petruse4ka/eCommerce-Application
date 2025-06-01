@@ -1,10 +1,12 @@
 import cameraIcon from '@/assets/icons/camera.svg';
+import defaultProductImage from '@/assets/images/default-macaron.svg';
 import notFoundImage from '@/assets/images/not-found.svg';
 import BaseComponent from '@/components/base';
 import EmptyComponent from '@/components/base/empty';
 import { CATALOG_TEXTS, DEFAULT_CURRENCY, MAX_DESCRIPTION_LENGTH } from '@/constants';
 import { productsState } from '@/store/products-state';
 import { PRODUCT_LIST_STYLES } from '@/styles/catalog/product-list';
+import { Route } from '@/types/enums';
 import type { Products } from '@/types/interfaces';
 import ElementBuilder from '@/utils/element-builder';
 import ImageBuilder from '@/utils/image-builder';
@@ -104,6 +106,9 @@ export default class ProductList extends BaseComponent {
     const card = new ElementBuilder({
       tag: 'div',
       className: PRODUCT_LIST_STYLES.CARD,
+      callback: (): void => {
+        globalThis.location.hash = `${Route.PRODUCT}/${product.id}`;
+      },
     }).getElement();
 
     const imageContainer = new ElementBuilder({
@@ -112,7 +117,7 @@ export default class ProductList extends BaseComponent {
     }).getElement();
 
     const image = new ImageBuilder({
-      source: product.image || notFoundImage,
+      source: product.image || defaultProductImage,
       alt: product.name,
       className: PRODUCT_LIST_STYLES.IMAGE,
     }).getElement();

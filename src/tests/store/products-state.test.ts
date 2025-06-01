@@ -14,6 +14,7 @@ describe('ProductsState', () => {
     const mockProducts: Products[] = [
       {
         name: 'Тестовый продукт',
+        id: 'test-id',
         description: 'Тестовое описание',
         image: 'test-image.jpg',
         price: 1000,

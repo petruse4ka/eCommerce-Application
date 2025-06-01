@@ -10,6 +10,7 @@ const mockResponse: ProductResponse = {
     {
       id: 'test-product-id',
       version: 1,
+      key: 'test-key',
       versionModifiedAt: '2025-05-28T15:56:44.526Z',
       lastMessageSequenceNumber: 1,
       createdAt: '2025-05-28T15:56:44.526Z',
@@ -83,6 +84,7 @@ describe('TransformApiProductsData', () => {
 
     expect(result).toHaveLength(1);
     expect(result[0]).toEqual({
+      id: 'test-key',
       name: 'Тестовый продукт',
       description: 'Тестовое описание',
       image: 'test-image.jpg',
