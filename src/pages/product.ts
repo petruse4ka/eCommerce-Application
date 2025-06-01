@@ -1,4 +1,4 @@
-import CatalogAPI from '@/api/catalog';
+import { ProductService } from '@/api/product';
 import BaseComponent from '@/components/base';
 import Button from '@/components/buttons';
 import EmptyCatalog from '@/components/catalog/empty-catalog';
@@ -47,7 +47,7 @@ export default class ProductPage extends BaseComponent {
       const token = userState.getTokenState();
 
       if (token) {
-        const loadedProduct = await CatalogAPI.getProduct(key);
+        const loadedProduct = await ProductService.getProduct(key);
 
         if (loadedProduct) {
           return loadedProduct;

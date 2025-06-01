@@ -37,7 +37,7 @@ export default class CatalogAPI {
     }
   }
 
-  public static async getProduct(key: string): Promise<ProductVariantView | void> {
+  public static async getProductRefuse(key: string): Promise<ProductVariantView | void> {
     const token = userState.getTokenState();
 
     return await fetch(
