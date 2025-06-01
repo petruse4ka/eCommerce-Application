@@ -86,8 +86,6 @@ class FilterState {
 
   public clearAll(): void {
     this.selectedOptions.clear();
-    this.currentSort = '';
-    this.searchQuery = '';
     this.notify();
   }
 
