@@ -30,6 +30,7 @@ export default class TransformApiProductsData {
             ? masterVariant.prices[0].discounted.value.centAmount / priceDivider
             : undefined,
           fractionDigits,
+          imagesCount: masterVariant.images?.length || 0,
         });
       }
     }

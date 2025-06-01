@@ -1,7 +1,8 @@
+import cameraIcon from '@/assets/icons/camera.svg';
 import notFoundImage from '@/assets/images/not-found.svg';
 import BaseComponent from '@/components/base';
 import EmptyComponent from '@/components/base/empty';
-import { CATALOG_TEXTS, DEFAULT_CURRENCY } from '@/constants';
+import { CATALOG_TEXTS, DEFAULT_CURRENCY, MAX_DESCRIPTION_LENGTH } from '@/constants';
 import { productsState } from '@/store/products-state';
 import { PRODUCT_LIST_STYLES } from '@/styles/catalog/product-list';
 import type { Products } from '@/types/interfaces';
@@ -24,10 +25,37 @@ export default class ProductList extends BaseComponent {
     this.updateProductList();
   }
 
+  private static createPhotoCounter(product: Products): HTMLElement {
+    const photoCounterContainer = new ElementBuilder({
+      tag: 'div',
+      className: PRODUCT_LIST_STYLES.PHOTO_COUNTER,
+    }).getElement();
+
+    const icon = new ImageBuilder({
+      source: cameraIcon,
+      alt: 'Camera icon',
+      className: PRODUCT_LIST_STYLES.CAMERA_ICON,
+    }).getElement();
+
+    const photoCount = new ElementBuilder({
+      tag: 'span',
+      className: PRODUCT_LIST_STYLES.PHOTO_COUNT,
+      textContent: product.imagesCount?.toString() || '0',
+    }).getElement();
+
+    photoCounterContainer.append(icon, photoCount);
+    return photoCounterContainer;
+  }
+
   private static createPriceContainer(product: Products): HTMLElement {
     const priceContainer = new ElementBuilder({
       tag: 'div',
       className: PRODUCT_LIST_STYLES.PRICE_CONTAINER,
+    }).getElement();
+
+    const priceWrapper = new ElementBuilder({
+      tag: 'div',
+      className: PRODUCT_LIST_STYLES.PRICE_WRAPPER,
     }).getElement();
 
     if (product.discountedPrice) {
@@ -43,7 +71,7 @@ export default class ProductList extends BaseComponent {
         textContent: `${product.discountedPrice} ${DEFAULT_CURRENCY}`,
       }).getElement();
 
-      priceContainer.append(originalPrice, discountedPrice);
+      priceWrapper.append(originalPrice, discountedPrice);
     } else {
       const regularPrice = new ElementBuilder({
         tag: 'span',
@@ -51,8 +79,10 @@ export default class ProductList extends BaseComponent {
         textContent: `${product.price} ${DEFAULT_CURRENCY}`,
       }).getElement();
 
-      priceContainer.append(regularPrice);
+      priceWrapper.append(regularPrice);
     }
+
+    priceContainer.append(priceWrapper, ProductList.createPhotoCounter(product));
 
     return priceContainer;
   }
@@ -63,6 +93,11 @@ export default class ProductList extends BaseComponent {
       className: PRODUCT_LIST_STYLES.PROMO_TAG,
       textContent: CATALOG_TEXTS.PROMO_TAG,
     }).getElement();
+  }
+
+  private static cropText(text: string, maxLength: number): string {
+    if (text.length <= maxLength) return text;
+    return `${text.slice(0, maxLength)}...`;
   }
 
   private static createProductCard(product: Products): HTMLElement {
@@ -77,7 +112,7 @@ export default class ProductList extends BaseComponent {
     }).getElement();
 
     const image = new ImageBuilder({
-      source: product.image,
+      source: product.image || notFoundImage,
       alt: product.name,
       className: PRODUCT_LIST_STYLES.IMAGE,
     }).getElement();
@@ -100,7 +135,7 @@ export default class ProductList extends BaseComponent {
     const description = new ElementBuilder({
       tag: 'p',
       className: PRODUCT_LIST_STYLES.DESCRIPTION,
-      textContent: product.description,
+      textContent: ProductList.cropText(product.description, MAX_DESCRIPTION_LENGTH),
     }).getElement();
 
     const priceContainer = ProductList.createPriceContainer(product);

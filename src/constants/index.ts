@@ -12,6 +12,8 @@ export const DEFAULT_OPTIONS_COUNT = 5;
 
 export const DEFAULT_CURRENCY = '₽';
 
+export const MAX_DESCRIPTION_LENGTH = 150;
+
 export const LOADING_CONFIG = {
   MAX_ATTEMPTS: 10,
   DELAY: 500,

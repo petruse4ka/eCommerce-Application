@@ -142,6 +142,7 @@ export interface Products {
   price: number;
   discountedPrice?: number;
   fractionDigits?: number;
+  imagesCount?: number;
 }
 
 export interface Guarantees {
