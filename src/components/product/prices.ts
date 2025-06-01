@@ -64,7 +64,7 @@ export default class ProductPrices extends BaseComponent {
     const totalAmount = new ElementBuilder({
       tag: 'div',
       className: PRODUCT_STYLES.QUANTITY_MESSAGE,
-      textContent: `${PRODUCT_TEXT.TOTAL} ${actualPrice} ${PRODUCT_TEXT.CURRANCY}`,
+      textContent: `${PRODUCT_TEXT.TOTAL} ${actualPrice} ${PRODUCT_TEXT.CURRENCY}`,
     }).getElement();
 
     const quantityInputBlock = new ProductQuantity(prices.price, totalAmount);

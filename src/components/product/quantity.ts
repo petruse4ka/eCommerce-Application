@@ -22,7 +22,7 @@ export default class ProductQuantity extends BaseComponent {
           minusButton.setAttribute('disabled', 'true');
         } else {
           quantityInput.textContent = String(--number);
-          element.textContent = `${PRODUCT_TEXT.TOTAL} ${String(price * number)} ${PRODUCT_TEXT.CURRANCY}`;
+          element.textContent = `${PRODUCT_TEXT.TOTAL} ${String(price * number)} ${PRODUCT_TEXT.CURRENCY}`;
         }
       },
     }).getElement();
@@ -38,7 +38,7 @@ export default class ProductQuantity extends BaseComponent {
         } else {
           quantityInput.textContent = String(number);
         }
-        element.textContent = `${PRODUCT_TEXT.TOTAL} ${String(price * number)} ${PRODUCT_TEXT.CURRANCY}`;
+        element.textContent = `${PRODUCT_TEXT.TOTAL} ${String(price * number)} ${PRODUCT_TEXT.CURRENCY}`;
       },
     }).getElement();
 

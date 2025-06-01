@@ -240,7 +240,7 @@ export const PRODUCT_ATTRIBUTES = {
 export const PRODUCT_TEXT = {
   BASKET: 'В корзину',
   TOTAL: 'Итого по данной позиции: ',
-  CURRANCY: DEFAULT_CURRENCY,
+  CURRENCY: DEFAULT_CURRENCY,
   DESCRIPTION: 'Описание',
   GRAMM: 'г',
   ERROR_ADDRESS:
