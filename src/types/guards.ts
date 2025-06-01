@@ -1,4 +1,5 @@
 import type {
+  Addresses,
   CategoryResponse,
   ErrorInfo,
   ProductResponse,
@@ -18,6 +19,21 @@ export function isErrorInfo(data: unknown): data is ErrorInfo {
 
 export function isUserInfo(id: string, userInfo: UserInfoBody): id is keyof UserInfoBody {
   return id in userInfo;
+}
+
+export function isUserAddress(id: string, userAddress: Addresses): id is keyof Addresses {
+  return id in userAddress;
+}
+
+export function isAddresses(object: unknown): object is Addresses {
+  return (
+    typeof object === 'object' &&
+    object !== null &&
+    'country' in object &&
+    'city' in object &&
+    'streetName' in object &&
+    'postalCode' in object
+  );
 }
 
 export function isProductResponse(data: unknown): data is ProductResponse {

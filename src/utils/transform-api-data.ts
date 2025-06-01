@@ -1,7 +1,14 @@
 import { userState } from '@/store/user-state';
 import { AddressKey, AddressType, UserInfoKey } from '@/types/enums';
 import { isUserInfo } from '@/types/guards';
-import type { AddressInfo, UpdateUserInfo, UserInfo, UserInfoBody } from '@/types/interfaces';
+import type {
+  Addresses,
+  AddressInfo,
+  UpdateUserAddress,
+  UpdateUserInfo,
+  UserInfo,
+  UserInfoBody,
+} from '@/types/interfaces';
 
 export default class TransformApiData {
   public static transformUserInfo(): UserInfo | void {
@@ -44,6 +51,7 @@ export default class TransformApiData {
             [AddressKey.STREET]: streetName,
             [AddressKey.POSTAL_CODE]: postalCode,
             isDefault: defaultBillingAddressId === id || defaultShippingAddressId === id,
+            id: id,
           };
 
           if (billingAddressIds.includes(addressId)) {
@@ -82,6 +90,29 @@ export default class TransformApiData {
       return {
         version: Number(userInfo.version),
         actions,
+      };
+    }
+  }
+
+  public static transformUserUpdateAddress(body: Addresses): UpdateUserAddress | void {
+    const { id: addressId, city, postalCode, streetName } = body;
+    const userInfo = userState.getUserInfoState();
+
+    if (userInfo) {
+      return {
+        version: Number(userInfo.version),
+        actions: [
+          {
+            action: 'changeAddress',
+            addressId,
+            address: {
+              country: 'RU',
+              city,
+              postalCode,
+              streetName,
+            },
+          },
+        ],
       };
     }
   }

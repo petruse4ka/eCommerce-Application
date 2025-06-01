@@ -104,4 +104,13 @@ export const CUSTOM_BUTTON_STYLE = {
   HIDDEN: ['hidden'],
   VISIBLE: ['block'],
   CLOSE: ['text-accent', 'font-bold', 'cursor-pointer', 'px-1'],
+  ICON_OUTLINE: [
+    'cursor-pointer',
+    'text-2xl',
+    'block',
+    'bg-accent',
+    'w-[40px]',
+    'h-[40px]',
+    'rounded-md',
+  ],
 };

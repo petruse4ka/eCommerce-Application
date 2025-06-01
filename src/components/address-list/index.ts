@@ -1,5 +1,4 @@
-import { BTN_TEXT } from '@/constants';
-import { INPUTS_ADDRESS_DATA } from '@/data';
+import { INPUTS_CHANGE_ADDRESS_DATA } from '@/data';
 import { ADDRESS } from '@/styles/address';
 import { AddressTypeText, ModalTitle } from '@/types/enums';
 import type { AddressInfo } from '@/types/interfaces';
@@ -14,6 +13,7 @@ export default class AddressList extends BaseComponent {
   public infoValue: ElementBuilder[];
 
   constructor(titleContent: string, addressesInfo: AddressInfo[]) {
+    console.log(addressesInfo);
     super({
       tag: 'section',
       className: ADDRESS.CONTAINER,
@@ -33,30 +33,16 @@ export default class AddressList extends BaseComponent {
       className: ADDRESS.CARD.DEFAULT,
     }).getElement();
 
-    const { isDefault, ...addressInfo } = address;
+    const { id, isDefault, ...addressInfo } = address;
+
+    const cardInfo = new ElementBuilder({
+      tag: 'div',
+      className: '',
+    }).getElement();
 
     for (const [key, value] of Object.entries(addressInfo)) {
-      const line = new ElementBuilder({
-        tag: 'div',
-        className: ADDRESS.LINE.CONTAINER,
-      }).getElement();
-
-      const titleLine = new ElementBuilder({
-        tag: 'p',
-        className: ADDRESS.LINE.TITLE,
-        textContent: `${key}:`,
-      }).getElement();
-
-      const valueLine = new ElementBuilder({
-        tag: 'p',
-        className: ADDRESS.LINE.VALUE,
-        textContent: value,
-      });
-
-      line.append(titleLine, valueLine.getElement());
-      card.append(line);
-
-      this.infoValue.push(valueLine);
+      const line = this.createAddressInfoLine(key, value);
+      cardInfo.append(line);
     }
 
     if (isDefault) {
@@ -67,11 +53,35 @@ export default class AddressList extends BaseComponent {
         textContent: AddressTypeText.DEFAULT,
       }).getElement();
 
-      card.append(titleCard);
+      cardInfo.append(titleCard);
     }
 
-    card.append(this.createEditButton());
+    card.append(cardInfo, this.createButtons(id));
     this.component.append(card);
+  }
+
+  private createAddressInfoLine(key: string, value: string): HTMLElement {
+    const line = new ElementBuilder({
+      tag: 'div',
+      className: ADDRESS.LINE.CONTAINER,
+    }).getElement();
+
+    const titleLine = new ElementBuilder({
+      tag: 'p',
+      className: ADDRESS.LINE.TITLE,
+      textContent: `${key}:`,
+    }).getElement();
+
+    const valueLine = new ElementBuilder({
+      tag: 'p',
+      className: ADDRESS.LINE.VALUE,
+      textContent: value,
+    });
+
+    line.append(titleLine, valueLine.getElement());
+    this.infoValue.push(valueLine);
+
+    return line;
   }
 
   private createTitle(titleContent: string): void {
@@ -84,12 +94,21 @@ export default class AddressList extends BaseComponent {
     this.component.append(title);
   }
 
-  private createEditButton(): HTMLElement {
-    const button = new Button({
-      style: 'PRIMARY_PINK',
-      textContent: BTN_TEXT.EDIT,
+  private createButtons(id: string): HTMLElement {
+    const container = new ElementBuilder({
+      tag: 'div',
+      className: ['flex', 'flex-col', 'gap-2'],
+    }).getElement();
+
+    const buttonEdit = new Button({
+      style: 'ICON_OUTLINE',
+      textContent: '\uD83D\uDD8A',
       callback: (): void => {
-        const form = new FormEditUserInfo(INPUTS_ADDRESS_DATA, this.infoValue);
+        const form = new FormEditUserInfo({
+          data: INPUTS_CHANGE_ADDRESS_DATA,
+          currentInputs: this.infoValue,
+          id,
+        });
         const modal = new Modal({ title: ModalTitle.CHANGE, content: form });
         this.component.append(modal.getElement());
 
@@ -97,6 +116,34 @@ export default class AddressList extends BaseComponent {
       },
     }).getElement();
 
-    return button;
+    const buttonDelete = new Button({
+      style: 'ICON_OUTLINE',
+      textContent: '\uD83D\uDDD1',
+      callback: (): void => {
+        const form = new FormEditUserInfo({
+          data: INPUTS_CHANGE_ADDRESS_DATA,
+          currentInputs: this.infoValue,
+        });
+        const modal = new Modal({ title: ModalTitle.CHANGE, content: form });
+        this.component.append(modal.getElement());
+
+        modal.showModal();
+      },
+    }).getElement();
+
+    // const buttonDefaultAddress = new Button({
+    //   style: 'ICON_OUTLINE',
+    //   textContent: String.fromCodePoint(0x2B50),
+    //   callback: (): void => {
+    //     const form = new FormEditUserInfo(INPUTS_ADDRESS_DATA, this.infoValue);
+    //     const modal = new Modal({ title: ModalTitle.CHANGE, content: form });
+    //     this.component.append(modal.getElement());
+
+    //     modal.showModal();
+    //   },
+    // }).getElement();
+
+    container.append(buttonEdit, buttonDelete);
+    return container;
   }
 }

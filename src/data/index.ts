@@ -122,6 +122,41 @@ export const INPUTS_ADDRESS_DATA = [
   },
 ];
 
+export const INPUTS_CHANGE_ADDRESS_DATA = [
+  {
+    id: 'country',
+    labelText: 'Страна',
+    placeholder: 'Россия',
+    type: InputType.TEXT,
+    isDisabled: true,
+    callback: (): void => {},
+  },
+  {
+    id: 'city',
+    labelText: 'Город',
+    placeholder: 'Укажите город',
+    type: InputType.TEXT,
+    isRequired: true,
+    callback: (): void => {},
+  },
+  {
+    id: 'streetName',
+    labelText: 'Улица',
+    placeholder: 'Укажите улицу',
+    type: InputType.TEXT,
+    isRequired: true,
+    callback: (): void => {},
+  },
+  {
+    id: 'postalCode',
+    labelText: 'Почтовый индекс',
+    placeholder: 'Укажите почтовый индекс',
+    type: InputType.TEXT,
+    isRequired: true,
+    callback: (): void => {},
+  },
+];
+
 export const CHECKBOXES_REGISTRATION_DATA = [
   {
     id: 'is-same-addresses',

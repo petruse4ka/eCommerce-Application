@@ -2,9 +2,10 @@ import APIUpdateData from '@/api/update-data';
 import Button from '@/components/buttons';
 import Input from '@/components/inputs';
 import { BTN_TEXT } from '@/constants';
+import { INPUTS_EDIT_USER_INFO_DATA } from '@/data';
 import { FORM } from '@/styles/forms/forms';
-import { isUserInfo } from '@/types/guards';
-import type { InputComponent, UserInfoBody } from '@/types/interfaces';
+import { isAddresses, isUserAddress, isUserInfo } from '@/types/guards';
+import type { Addresses, InputComponent, UserInfoBody } from '@/types/interfaces';
 import ElementBuilder from '@/utils/element-builder';
 import { getValidator } from '@/utils/validations';
 
@@ -14,12 +15,17 @@ export default class FormEditUserInfo {
   private inputs: Map<string, Input>;
   private currentInputs: ElementBuilder[];
   private callback: () => void;
+  private id: string | undefined;
 
-  constructor(data: InputComponent[], currentInputs: ElementBuilder[]) {
-    this.INPUTS_DATA = data;
+  constructor(formInfo: { data: InputComponent[]; currentInputs: ElementBuilder[]; id?: string }) {
+    this.INPUTS_DATA = formInfo.data;
     this.inputs = new Map();
     this.callback = (): void => {};
-    this.currentInputs = currentInputs;
+    this.currentInputs = formInfo.currentInputs;
+
+    if (formInfo.id) {
+      this.id = formInfo.id;
+    }
 
     this.form = new ElementBuilder({
       tag: 'form',
@@ -93,7 +99,11 @@ export default class FormEditUserInfo {
       style: 'PRIMARY_PINK',
       textContent: BTN_TEXT.SAVE_CHANGES,
       callback: (): void => {
-        this.submitForm();
+        if (this.INPUTS_DATA === INPUTS_EDIT_USER_INFO_DATA) {
+          this.submitFormForUserInfo();
+        } else {
+          this.submitFormForUserAddress();
+        }
       },
     }).getElement();
 
@@ -101,7 +111,7 @@ export default class FormEditUserInfo {
     this.form.append(button);
   }
 
-  private submitForm(): void {
+  private submitFormForUserInfo(): void {
     const body = {
       firstName: '',
       lastName: '',
@@ -125,15 +135,49 @@ export default class FormEditUserInfo {
     }
   }
 
-  private isDataValidBeforeSending(body: UserInfoBody): boolean {
+  private submitFormForUserAddress(): void {
+    const body = {
+      id: this.id ?? '',
+      country: '',
+      city: '',
+      streetName: '',
+      postalCode: '',
+    };
+
+    const inputsInfo = this.inputs.entries();
+    for (const inputInfo of inputsInfo) {
+      const [key, input] = inputInfo;
+      const value = input.getValue();
+
+      if (isUserAddress(key, body)) {
+        body[key] = value;
+      }
+    }
+
+    if (this.isDataValidBeforeSending(body)) {
+      void APIUpdateData.userUpdateAddress(body);
+      this.callback();
+    }
+  }
+
+  private isDataValidBeforeSending(body: UserInfoBody | Addresses): boolean {
     let result = true;
 
     for (const key in body) {
-      if (isUserInfo(key, body)) {
-        const value = body[key];
+      if (isAddresses(body)) {
+        if (isUserAddress(key, body)) {
+          const value = body[key];
+          if (typeof value === 'string' && this.inputErrorHandler(value, key)) {
+            result = false;
+          }
+        }
+      } else {
+        if (isUserInfo(key, body)) {
+          const value = body[key];
 
-        if (this.inputErrorHandler(value, key)) {
-          result = false;
+          if (this.inputErrorHandler(value, key)) {
+            result = false;
+          }
         }
       }
     }

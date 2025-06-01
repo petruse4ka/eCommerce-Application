@@ -93,7 +93,7 @@ export interface InputComponent {
 }
 
 export interface Addresses {
-  id?: string;
+  id: string;
   country: string;
   city: string;
   streetName: string;
@@ -321,6 +321,7 @@ export interface AddressInfo {
   [AddressKey.STREET]: string;
   [AddressKey.POSTAL_CODE]: string;
   isDefault: boolean;
+  id: string;
 }
 
 export interface UserInfo {
@@ -411,4 +412,18 @@ export interface FilterRequest {
 export interface UpdateUserInfo {
   version: number;
   actions: Record<string, string>[];
+}
+
+export interface UpdateUserAddress {
+  version: number;
+  actions: {
+    action: string;
+    addressId: string;
+    address: {
+      country: string;
+      city: string;
+      postalCode: string;
+      streetName: string;
+    };
+  }[];
 }
