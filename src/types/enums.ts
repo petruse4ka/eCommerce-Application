@@ -33,6 +33,8 @@ export enum ApiEndpoint {
   USER = '/customers/token',
   ME = '/me',
   PRODUCTS = '/products',
+  PRODUCT_TYPES = '/product-types',
+  CATEGORIES = '/categories',
 }
 
 export enum ContentType {
@@ -108,17 +110,14 @@ export enum FilterType {
   CHECKBOX = 'checkbox',
   RANGE = 'range',
   DROPDOWN = 'dropdown',
+  PRICE = 'price',
+  CATEGORY = 'category',
 }
 
-export enum FilterId {
-  TYPE = 'type',
-  TASTE = 'taste',
-  DIET = 'diet',
-  TOPPING = 'topping',
-  FILLING = 'filling',
-  PRICE = 'price',
-  WEIGHT = 'weight',
-  PROMO = 'promo',
+export enum DropdownOptions {
+  DEFAULT = 'Выберите...',
+  FALSE = 'Нет',
+  TRUE = 'Да',
 }
 
 export enum TabAccount {

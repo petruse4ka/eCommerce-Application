@@ -1,5 +1,6 @@
 export const PRODUCT_STYLES = {
   MAIN_CONTAINER: [
+    'relative',
     'w-full',
     'px-2',
     'md:px-4',
@@ -162,4 +163,18 @@ export const PRODUCT_STYLES = {
     'cursor-pointer',
     'hover:border-secondary',
   ],
+  EMPTY_PRODUCT_CONTAINER: [
+    'flex',
+    'flex-col',
+    'items-center',
+    'justify-center',
+    'gap-6',
+    'absolute',
+    'inset-0',
+    'backdrop-blur-sm',
+    'z-10',
+    'min-h-[300px]',
+  ],
+  EMPTY_PRODUCT_IMAGE: ['w-[250px]'],
+  EMPTY_PRODUCT_TEXT: ['text-accent', 'text-xl', 'font-semibold', 'text-center'],
 };

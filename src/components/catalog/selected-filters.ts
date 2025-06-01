@@ -1,44 +1,21 @@
 import BaseComponent from '@/components/base';
 import Button from '@/components/buttons';
 import { CATALOG_TEXTS } from '@/constants';
-import { FILTER_CONFIGS, FILTER_NAMES, FILTER_TEXTS } from '@/data/products';
 import { filterState } from '@/store/filter-state';
 import { FILTERS_STYLES } from '@/styles/catalog/product-filters';
-import type { FilterId } from '@/types/enums';
-import { isFilterId } from '@/types/guards';
+import { FilterType } from '@/types/enums';
+import type { FilterConfigs } from '@/types/interfaces';
 import type { ActionHandler } from '@/types/types';
 import ElementBuilder from '@/utils/element-builder';
 
 export default class SelectedFilters extends BaseComponent {
+  private filterConfigs: FilterConfigs;
+
   constructor() {
     super({ tag: 'div', className: FILTERS_STYLES.SELECTED_FILTERS_CONTAINER });
+    this.filterConfigs = { checkbox: [], range: [], dropdown: [] };
     this.render();
     filterState.subscribe(this.handleFilterChange);
-  }
-
-  private static createFilterItem(filterId: FilterId, value: string): HTMLElement {
-    const item = new ElementBuilder({
-      tag: 'div',
-      className: FILTERS_STYLES.FILTER_ITEM,
-    }).getElement();
-
-    const itemValue = new ElementBuilder({
-      tag: 'span',
-      className: FILTERS_STYLES.FILTER_ITEM_VALUE,
-      textContent: FILTER_TEXTS[filterId]?.[value] || value,
-    }).getElement();
-
-    const removeButton = new Button({
-      style: 'FILTER_TAG_DELETE',
-      textContent: '×',
-      callback: (): void => {
-        const isRange = FILTER_CONFIGS.range.some(({ id }) => id === filterId);
-        filterState.toggleOption(filterId, isRange ? '' : value);
-      },
-    }).getElement();
-
-    item.append(itemValue, removeButton);
-    return item;
   }
 
   private static createClearAllButton(): HTMLElement {
@@ -51,16 +28,72 @@ export default class SelectedFilters extends BaseComponent {
     }).getElement();
   }
 
-  private static createFilterList(filterId: FilterId, values: Set<string>): HTMLElement {
+  public updateFilterConfigs(config: FilterConfigs): void {
+    this.filterConfigs = config;
+    this.render();
+  }
+
+  public override remove(): void {
+    filterState.unsubscribe(this.handleFilterChange);
+    super.remove();
+  }
+
+  private createFilterItem(
+    filterId: string,
+    filterValue: { key: string; value: string }
+  ): HTMLElement {
+    const item = new ElementBuilder({
+      tag: 'div',
+      className: FILTERS_STYLES.FILTER_ITEM,
+    }).getElement();
+
+    const itemValue = new ElementBuilder({
+      tag: 'span',
+      className: FILTERS_STYLES.FILTER_ITEM_VALUE,
+      textContent: filterValue.value,
+    }).getElement();
+
+    const removeButton = new Button({
+      style: 'FILTER_TAG_DELETE',
+      textContent: '×',
+      callback: (): void => {
+        const isRange = this.filterConfigs.range.some(({ id }) => id === filterId);
+        const isDropdown = this.filterConfigs.dropdown.some(({ id }) => id === filterId);
+        let type = undefined;
+        if (isRange) {
+          type = FilterType.RANGE;
+        } else if (isDropdown) {
+          type = FilterType.DROPDOWN;
+        } else {
+          type = FilterType.CHECKBOX;
+        }
+        filterState.toggleOption(filterId, filterValue.key, filterValue.value, type);
+      },
+    }).getElement();
+
+    item.append(itemValue, removeButton);
+    return item;
+  }
+
+  private createFilterList(
+    filterId: string,
+    values: Set<{ key: string; value: string }>
+  ): HTMLElement {
     const list = new ElementBuilder({
       tag: 'div',
       className: FILTERS_STYLES.FILTER_LIST,
     }).getElement();
 
+    const filterConfig = [
+      ...this.filterConfigs.checkbox,
+      ...this.filterConfigs.range,
+      ...this.filterConfigs.dropdown,
+    ].find((config) => config.id === filterId);
+
     const title = new ElementBuilder({
-      tag: 'h4',
+      tag: 'span',
       className: FILTERS_STYLES.FILTER_LIST_TITLE,
-      textContent: FILTER_NAMES[filterId],
+      textContent: filterConfig?.title || filterId,
     }).getElement();
 
     const itemContainer = new ElementBuilder({
@@ -69,17 +102,12 @@ export default class SelectedFilters extends BaseComponent {
     }).getElement();
 
     for (const value of values) {
-      const item = SelectedFilters.createFilterItem(filterId, value);
+      const item = this.createFilterItem(filterId, value);
       itemContainer.append(item);
     }
 
     list.append(title, itemContainer);
     return list;
-  }
-
-  public override remove(): void {
-    filterState.unsubscribe(this.handleFilterChange);
-    super.remove();
   }
 
   private handleFilterChange: ActionHandler = () => {
@@ -121,8 +149,8 @@ export default class SelectedFilters extends BaseComponent {
     }).getElement();
 
     for (const [filterId, values] of Object.entries(selectedFilters)) {
-      if (values.size > 0 && isFilterId(filterId)) {
-        const list = SelectedFilters.createFilterList(filterId, values);
+      if (values.size > 0) {
+        const list = this.createFilterList(filterId, values);
         listContainer.append(list);
       }
     }

@@ -5,7 +5,7 @@ export default class TransformApiProductsData {
     const products: Products[] = [];
 
     for (const product of response.results) {
-      const masterVariant = product.masterData?.current?.masterVariant;
+      const masterVariant = product.masterData?.current?.masterVariant || product.masterVariant;
 
       if (masterVariant) {
         const nameAttribute = masterVariant.attributes?.find(
@@ -19,6 +19,7 @@ export default class TransformApiProductsData {
         const priceDivider = 10 ** fractionDigits;
 
         products.push({
+          id: product.key,
           name: typeof nameAttribute?.value === 'string' ? nameAttribute.value : '',
           description:
             typeof descAttribute?.value === 'object' && 'ru' in descAttribute.value
@@ -30,6 +31,7 @@ export default class TransformApiProductsData {
             ? masterVariant.prices[0].discounted.value.centAmount / priceDivider
             : undefined,
           fractionDigits,
+          imagesCount: masterVariant.images?.length || 0,
         });
       }
     }
@@ -38,13 +40,16 @@ export default class TransformApiProductsData {
   }
 
   public static transformProduct(response: Product): ProductVariantView {
-    const masterVariant = response.masterData.current.masterVariant;
-    const { attributes, prices, images } = masterVariant;
+    if (response.masterData) {
+      const masterVariant = response.masterData.current.masterVariant;
+      const { attributes, prices, images } = masterVariant;
 
-    return {
-      attributes,
-      prices,
-      images,
-    };
+      return {
+        attributes,
+        prices,
+        images,
+      };
+    }
+    return { attributes: [], prices: [], images: [] };
   }
 }

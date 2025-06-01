@@ -102,7 +102,7 @@ export const CUSTOM_BUTTON_STYLE = {
   CLEAR: [
     'hidden',
     'absolute',
-    'right-3',
+    'right-10',
     'top-1/2',
     '-translate-y-1/2',
     'text-black',
@@ -132,4 +132,15 @@ export const CUSTOM_BUTTON_STYLE = {
   HIDDEN: ['hidden'],
   VISIBLE: ['block'],
   CLOSE: ['text-accent', 'font-bold', 'cursor-pointer', 'px-1'],
+  SEARCH_BUTTON: [
+    'absolute',
+    'right-2',
+    'top-1/2',
+    '-translate-y-1/2',
+    'p-1',
+    'rounded-lg',
+    'hover:bg-orange-light',
+    'focus:outline-none',
+    'cursor-pointer',
+  ],
 };

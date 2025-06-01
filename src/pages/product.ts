@@ -1,7 +1,8 @@
-import { ProductService } from '@/api/product';
+import { getProductData } from '@/api/product';
+import notFoundImage from '@/assets/images/not-found.svg';
 import BaseComponent from '@/components/base';
+import EmptyComponent from '@/components/base/empty';
 import Button from '@/components/buttons';
-import EmptyCatalog from '@/components/catalog/empty-catalog';
 import ProductWrappingBlock from '@/components/product/block';
 import ProductDelivery from '@/components/product/delivery';
 import DetailedProduct from '@/components/product/detailed';
@@ -31,7 +32,6 @@ export default class ProductPage extends BaseComponent {
 
     if (hash.includes(`${Route.PRODUCT}/`)) {
       const productData = await ProductPage.loadProduct(hash.replace(`${Route.PRODUCT}/`, ''));
-      console.log(productData);
       if (productData) {
         ProductPage.render(productData, mainComponent);
       } else {
@@ -47,7 +47,7 @@ export default class ProductPage extends BaseComponent {
       const token = userState.getTokenState();
 
       if (token) {
-        const loadedProduct = await ProductService.getProduct(key);
+        const loadedProduct = await getProductData.getProduct(key);
 
         if (loadedProduct) {
           return loadedProduct;
@@ -92,7 +92,13 @@ export default class ProductPage extends BaseComponent {
   }
 
   private static showError(mainComponent: HTMLElement): void {
-    const emptyState = new EmptyCatalog(`${PRODUCT_TEXT.ERROR_ADDRESS}`).getElement();
+    const emptyState = new EmptyComponent(
+      PRODUCT_TEXT.ERROR_ADDRESS,
+      notFoundImage,
+      PRODUCT_STYLES.EMPTY_PRODUCT_CONTAINER,
+      PRODUCT_STYLES.EMPTY_PRODUCT_IMAGE,
+      PRODUCT_STYLES.EMPTY_PRODUCT_TEXT
+    ).getElement();
 
     const returnButton = new Button({
       style: 'PRIMARY_PINK',
@@ -112,7 +118,7 @@ export default class ProductPage extends BaseComponent {
       className: PRODUCT_STYLES.CONTAINER,
     }).getElement();
 
-    const rightAside = new ElementBuilder({
+    const asideContainer = new ElementBuilder({
       tag: 'aside',
       className: PRODUCT_STYLES.ASIDE,
     }).getElement();
@@ -123,19 +129,18 @@ export default class ProductPage extends BaseComponent {
         title: String(attributes['name']),
         description: String(attributes['description']),
       });
-      rightAside.append(productTitle.getElement());
-
+      asideContainer.append(productTitle.getElement());
       const block = new ProductWrappingBlock(attributes, productData.prices);
-      rightAside.append(block.getElement());
+      asideContainer.append(block.getElement());
 
       const delivery = new ProductDelivery();
-      rightAside.append(delivery.getElement());
+      asideContainer.append(delivery.getElement());
 
       if (productData.images) {
         const slider = new ProductSlider(productData.images);
         mainContainer.append(slider.getElement());
       }
-      mainContainer.append(rightAside);
+      mainContainer.append(asideContainer);
 
       mainComponent.append(mainContainer);
       const detailed = new DetailedProduct(String(attributes['detailing']));
