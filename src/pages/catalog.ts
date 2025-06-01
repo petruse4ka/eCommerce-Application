@@ -5,16 +5,24 @@ import BaseComponent from '@/components/base';
 import ProductFilters from '@/components/catalog/product-filters';
 import ProductList from '@/components/catalog/product-list';
 import ProductSorting from '@/components/catalog/product-sorting';
+import SelectedFilters from '@/components/catalog/selected-filters';
+import LoaderOverlay from '@/components/overlay/loader-overlay';
 import { CATALOG_TEXTS, LOADING_CONFIG, PAGE_TITLES } from '@/constants';
+import { filterState } from '@/store/filter-state';
+import { productsState } from '@/store/products-state';
 import { userState } from '@/store/user-state';
 import { CATALOG_STYLES } from '@/styles/pages/catalog';
 import ElementBuilder from '@/utils/element-builder';
+import TransformApiProductTypesData from '@/utils/transform-api-product-types-data';
 
 export default class CatalogPage extends BaseComponent {
   private productList: ProductList;
   private productSorting: ProductSorting;
+  private productFilters: ProductFilters;
+  private selectedFilters: SelectedFilters;
   private isLoading: boolean;
-  private loadingOverlay: HTMLElement;
+  private productListLoader: LoaderOverlay;
+  private filtersLoader: LoaderOverlay;
 
   constructor() {
     super({
@@ -23,38 +31,22 @@ export default class CatalogPage extends BaseComponent {
     });
     this.productList = new ProductList();
     this.productSorting = new ProductSorting();
+    this.productFilters = new ProductFilters();
+    this.selectedFilters = new SelectedFilters();
     this.isLoading = true;
-    this.loadingOverlay = CatalogPage.createLoadingOverlay();
+    this.productListLoader = new LoaderOverlay({
+      text: CATALOG_TEXTS.LOADING_PRODUCTS,
+      className: CATALOG_STYLES.OVERLAY_PRODUCTS,
+    });
+    this.filtersLoader = new LoaderOverlay({
+      text: CATALOG_TEXTS.LOADING_FILTERS,
+      className: CATALOG_STYLES.OVERLAY_FILTERS,
+    });
     this.render();
     void this.loadProducts();
-  }
-
-  private static createLoadingOverlay(): HTMLElement {
-    const overlay = new ElementBuilder({
-      tag: 'div',
-      className: CATALOG_STYLES.LOADING_OVERLAY,
-    }).getElement();
-
-    const spinnerContainer = new ElementBuilder({
-      tag: 'div',
-      className: CATALOG_STYLES.SPINNER_CONTAINER,
-    }).getElement();
-
-    const spinner = new ElementBuilder({
-      tag: 'div',
-      className: CATALOG_STYLES.LOADING_SPINNER,
-    }).getElement();
-
-    const text = new ElementBuilder({
-      tag: 'p',
-      className: CATALOG_STYLES.LOADING_TEXT,
-      textContent: CATALOG_TEXTS.LOADING_PRODUCTS,
-    }).getElement();
-
-    spinnerContainer.append(spinner, text);
-    overlay.append(spinnerContainer);
-
-    return overlay;
+    filterState.subscribe(() => {
+      void this.handleFilterChange();
+    });
   }
 
   private async loadProducts(): Promise<void> {
@@ -62,12 +54,27 @@ export default class CatalogPage extends BaseComponent {
       let attempts = 0;
 
       while (attempts < LOADING_CONFIG.MAX_ATTEMPTS) {
-        const token = userState.getTokenState();
-        if (token) {
-          const loadedProducts = await CatalogAPI.getProducts();
-          if (loadedProducts) {
-            this.productList.updateProducts(loadedProducts);
-            this.productSorting.updateProductCount(loadedProducts.length);
+        if (userState.getTokenState()) {
+          const [productsData, loadedProductTypes, loadedCategories] = await Promise.all([
+            CatalogAPI.getProducts(),
+            CatalogAPI.getProductTypes(),
+            CatalogAPI.getCategories(),
+          ]);
+
+          if (productsData) {
+            productsState.updateProducts(productsData.products);
+            this.productSorting.updateProductCount(productsData.products.length);
+
+            if (loadedProductTypes) {
+              const filterConfigs = TransformApiProductTypesData.transformProductTypes(
+                loadedProductTypes,
+                productsData.productData,
+                loadedCategories || []
+              );
+              this.productFilters.updateFilters(filterConfigs);
+              this.selectedFilters.updateFilterConfigs(filterConfigs);
+            }
+
             this.isLoading = false;
             this.render();
             return;
@@ -82,10 +89,28 @@ export default class CatalogPage extends BaseComponent {
     } catch (error) {
       console.error('Error loading products:', error);
       this.isLoading = false;
-      this.productList.updateProducts([]);
+      productsState.updateProducts([]);
+      this.productFilters.updateFilters({ checkbox: [], range: [], dropdown: [] });
+      this.selectedFilters.updateFilterConfigs({ checkbox: [], range: [], dropdown: [] });
       this.render();
     }
   }
+
+  private handleFilterChange = async (): Promise<void> => {
+    this.isLoading = true;
+    this.render();
+
+    const selectedFilters = filterState.getSelectedFilters();
+    const productsData = await CatalogAPI.getProducts(selectedFilters);
+
+    if (productsData) {
+      productsState.updateProducts(productsData.products);
+      this.productSorting.updateProductCount(productsData.products.length);
+    }
+
+    this.isLoading = false;
+    this.render();
+  };
 
   private render(): void {
     while (this.component.firstChild) {
@@ -118,13 +143,18 @@ export default class CatalogPage extends BaseComponent {
       className: CATALOG_STYLES.PRODUCT_LIST_CONTAINER,
     }).getElement();
 
-    const productFilters = new ProductFilters().getElement();
+    filtersSection.append(this.selectedFilters.getElement(), this.productFilters.getElement());
+    if (this.isLoading) {
+      this.productFilters.getElement().append(this.filtersLoader.getElement());
+    } else {
+      this.filtersLoader.getElement().remove();
+    }
 
-    filtersSection.append(productFilters);
     productListContainer.append(this.productList.getElement());
     if (this.isLoading) {
-      productListContainer.append(this.loadingOverlay);
+      productListContainer.append(this.productListLoader.getElement());
     }
+
     productListSection.append(this.productSorting.getElement(), productListContainer);
     catalogContainer.append(filtersSection, productListSection);
 

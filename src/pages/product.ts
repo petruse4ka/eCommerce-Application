@@ -1,7 +1,8 @@
 import { ProductService } from '@/api/product';
+import notFoundImage from '@/assets/images/not-found.svg';
 import BaseComponent from '@/components/base';
+import EmptyComponent from '@/components/base/empty';
 import Button from '@/components/buttons';
-import EmptyCatalog from '@/components/catalog/empty-catalog';
 import ProductWrappingBlock from '@/components/product/block';
 import ProductDelivery from '@/components/product/delivery';
 import DetailedProduct from '@/components/product/detailed';
@@ -92,7 +93,13 @@ export default class ProductPage extends BaseComponent {
   }
 
   private static showError(mainComponent: HTMLElement): void {
-    const emptyState = new EmptyCatalog(`${PRODUCT_TEXT.ERROR_ADDRESS}`).getElement();
+    const emptyState = new EmptyComponent(
+      PRODUCT_TEXT.ERROR_ADDRESS,
+      notFoundImage,
+      PRODUCT_STYLES.EMPTY_PRODUCT_CONTAINER,
+      PRODUCT_STYLES.EMPTY_PRODUCT_IMAGE,
+      PRODUCT_STYLES.EMPTY_PRODUCT_TEXT
+    ).getElement();
 
     const returnButton = new Button({
       style: 'PRIMARY_PINK',

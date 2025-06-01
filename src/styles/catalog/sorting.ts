@@ -22,6 +22,7 @@ export const SORTING_STYLES = {
     'sm:w-auto',
     'sm:text-left',
     'flex-shrink-0',
+    'min-w-[150px]',
   ],
   DROPDOWN_CONTAINER: ['flex', 'items-center', 'gap-4', 'w-full', 'sm:w-auto'],
   DROPDOWN: [
@@ -40,14 +41,14 @@ export const SORTING_STYLES = {
     'w-full',
     'sm:w-auto',
   ],
-  SEARCH_CONTAINER: ['relative', 'w-full', 'sm:max-w-[350px]'],
+  SEARCH_CONTAINER: ['relative', 'w-full', 'sm:max-w-[350px]', 'flex', 'items-center'],
   SEARCH_INPUT: [
     'bg-white',
     'border',
     'border-primary',
     'rounded-lg',
     'pl-4',
-    'pr-8',
+    'pr-14',
     'py-2',
     'text-dark',
     'text-sm',
@@ -56,4 +57,6 @@ export const SORTING_STYLES = {
     'focus:outline-none',
     'focus:border-orange',
   ],
+  SEARCH_ICON: ['w-5', 'h-5'],
+  SHORT_SEARCH_QUERY: ['absolute', '-bottom-4', 'left-1', 'text-black/80', 'text-[10px]'],
 };

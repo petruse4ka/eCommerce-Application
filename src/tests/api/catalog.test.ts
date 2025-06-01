@@ -1,5 +1,5 @@
+import CatalogAPI from '@/api/catalog';
 import type { ProductResponse } from '@/types/interfaces';
-import TransformApiProductsData from '@/utils/transform-api-product-data';
 
 const mockResponse: ProductResponse = {
   limit: 20,
@@ -77,19 +77,31 @@ const mockResponse: ProductResponse = {
   ],
 };
 
-describe('TransformApiProductsData', () => {
-  test('should transform API response to products array', () => {
-    const result = TransformApiProductsData.transformProducts(mockResponse);
+describe('CatalogAPI', () => {
+  test('should fetch products successfully', async () => {
+    const mockFetch = vi.fn();
+    globalThis.fetch = mockFetch;
 
-    expect(result).toHaveLength(1);
-    expect(result[0]).toEqual({
-      name: 'Тестовый продукт',
-      description: 'Тестовое описание',
-      image: 'test-image.jpg',
-      price: 10,
-      discountedPrice: 8,
-      fractionDigits: 2,
-      imagesCount: 1,
+    mockFetch.mockResolvedValueOnce({
+      ok: true,
+      json: () => Promise.resolve(mockResponse),
     });
+
+    const result = await CatalogAPI.getProducts();
+
+    expect(result).toBeDefined();
+    expect(result?.products).toHaveLength(1);
+    expect(result?.products[0].name).toBe('Тестовый продукт');
+  });
+
+  test('should handle fetch error', async () => {
+    const mockFetch = vi.fn();
+    globalThis.fetch = mockFetch;
+
+    mockFetch.mockRejectedValueOnce(new Error('Network error'));
+
+    const result = await CatalogAPI.getProducts();
+
+    expect(result).toBeUndefined();
   });
 });
