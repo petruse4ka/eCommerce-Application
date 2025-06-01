@@ -2,7 +2,7 @@ import cameraIcon from '@/assets/icons/camera.svg';
 import notFoundImage from '@/assets/images/not-found.svg';
 import BaseComponent from '@/components/base';
 import EmptyComponent from '@/components/base/empty';
-import { CATALOG_TEXTS, DEFAULT_CURRENCY } from '@/constants';
+import { CATALOG_TEXTS, DEFAULT_CURRENCY, MAX_DESCRIPTION_LENGTH } from '@/constants';
 import { productsState } from '@/store/products-state';
 import { PRODUCT_LIST_STYLES } from '@/styles/catalog/product-list';
 import type { Products } from '@/types/interfaces';
@@ -95,6 +95,11 @@ export default class ProductList extends BaseComponent {
     }).getElement();
   }
 
+  private static cropText(text: string, maxLength: number): string {
+    if (text.length <= maxLength) return text;
+    return `${text.slice(0, maxLength)}...`;
+  }
+
   private static createProductCard(product: Products): HTMLElement {
     const card = new ElementBuilder({
       tag: 'div',
@@ -107,7 +112,7 @@ export default class ProductList extends BaseComponent {
     }).getElement();
 
     const image = new ImageBuilder({
-      source: product.image,
+      source: product.image || notFoundImage,
       alt: product.name,
       className: PRODUCT_LIST_STYLES.IMAGE,
     }).getElement();
@@ -130,7 +135,7 @@ export default class ProductList extends BaseComponent {
     const description = new ElementBuilder({
       tag: 'p',
       className: PRODUCT_LIST_STYLES.DESCRIPTION,
-      textContent: product.description,
+      textContent: ProductList.cropText(product.description, MAX_DESCRIPTION_LENGTH),
     }).getElement();
 
     const priceContainer = ProductList.createPriceContainer(product);

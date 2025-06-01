@@ -34,7 +34,7 @@ export const PRODUCT_LIST_STYLES = {
   REGULAR_PRICE: ['text-accent', 'font-semibold', 'text-lg'],
   PHOTO_COUNTER: ['flex', 'items-center', 'gap-1'],
   CAMERA_ICON: ['w-4', 'h-4'],
-  PHOTO_COUNT: ['text-dark', 'text-sm'],
+  PHOTO_COUNT: ['text-accent', 'text-sm'],
   PROMO_TAG: [
     'absolute',
     'top-2',
