@@ -17,7 +17,7 @@ import weddingIcon from '@/assets/images/packages/wedding.png';
 import wholesaleIcon from '@/assets/images/packages/wholesale.png';
 import { FOOTER_TEXTS, GUARANTEES_TEXTS, PACKAGES_TEXTS, SUBHEADER_PROMO_TEXT } from '@/constants';
 import { CheckboxText, InputType } from '@/types/enums';
-import type { Guarantees, Packages } from '@/types/interfaces';
+import type { Guarantees, Packages, SelectOption } from '@/types/interfaces';
 
 export const PROMO_ITEMS = [
   { ICON: fastDeliveryIcon, TEXT: SUBHEADER_PROMO_TEXT.DELIVERY },
@@ -238,4 +238,12 @@ export const GUARANTEES: Guarantees[] = [
     ...GUARANTEES_TEXTS.GUARANTEES.ANONYMOUS,
     image: anonymousIcon,
   },
+];
+
+export const SORTING_OPTIONS: SelectOption[] = [
+  { value: '', text: 'Выберите сортировку...' },
+  { value: 'price asc', text: 'Цена: по возрастанию' },
+  { value: 'price desc', text: 'Цена: по убыванию' },
+  { value: 'name.ru asc', text: 'Название: от А-Я' },
+  { value: 'name.ru desc', text: 'Название: от Я-А' },
 ];

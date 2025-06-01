@@ -1,3 +1,4 @@
+import { filterState } from '@/store/filter-state';
 import { productsState } from '@/store/products-state';
 import { userState } from '@/store/user-state';
 import { ApiEndpoint, ApiMethods, ContentType, FilterType } from '@/types/enums';
@@ -17,23 +18,31 @@ export default class CatalogAPI {
     });
   }
 
-  public static async getProducts(): Promise<{
+  public static async getProducts(filters: FilterRequest = {}): Promise<{
     products: Products[];
     productData: Product[];
   } | void> {
     const token = userState.getTokenState();
 
     try {
-      const response = await fetch(
-        `${import.meta.env['VITE_CTP_API_URL']}/${import.meta.env['VITE_CTP_PROJECT_KEY']}${ApiEndpoint.PRODUCTS}?where=masterData(published=true)`,
-        {
-          method: ApiMethods.GET,
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': ContentType.JSON,
-          },
-        }
-      );
+      const queryParameters = CatalogAPI.handleFilters(filters);
+      const currentSort = filterState.getCurrentSort();
+      if (currentSort) queryParameters.append('sort', currentSort);
+
+      const searchQuery = filterState.getSearchQuery();
+      if (searchQuery) {
+        CatalogAPI.handleSearchQuery(queryParameters, searchQuery);
+      }
+      queryParameters.append('limit', '500');
+      const url = `${import.meta.env['VITE_CTP_API_URL']}/${import.meta.env['VITE_CTP_PROJECT_KEY']}/product-projections/search?${queryParameters.toString()}`;
+
+      const response = await fetch(url, {
+        method: ApiMethods.GET,
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': ContentType.JSON,
+        },
+      });
 
       if (!response.ok) {
         throw new Error(`HTTP error: ${response.status}`);
@@ -119,43 +128,6 @@ export default class CatalogAPI {
     }
   }
 
-  public static async getProductsWithFilters(filters: FilterRequest): Promise<{
-    products: Products[];
-    productData: Product[];
-  } | void> {
-    const token = userState.getTokenState();
-
-    try {
-      const queryParameters = CatalogAPI.handleFilters(filters);
-      const url = `${import.meta.env['VITE_CTP_API_URL']}/${import.meta.env['VITE_CTP_PROJECT_KEY']}/product-projections/search?${queryParameters.toString()}`;
-
-      const response = await fetch(url, {
-        method: ApiMethods.GET,
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': ContentType.JSON,
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error: ${response.status}`);
-      }
-
-      const data: unknown = await response.json();
-
-      if (isProductResponse(data)) {
-        return {
-          products: TransformApiProductsData.transformProducts(data),
-          productData: data.results,
-        };
-      }
-
-      throw new Error('Invalid product response format');
-    } catch (error) {
-      console.error('Error fetching filtered products:', error);
-    }
-  }
-
   private static handleFilters(filters: FilterRequest): URLSearchParams {
     const queryParameters = new URLSearchParams();
 
@@ -204,5 +176,18 @@ export default class CatalogAPI {
     }
 
     return queryParameters;
+  }
+  private static handleSearchQuery(queryParameters: URLSearchParams, searchQuery: string): void {
+    const queryText = `*${searchQuery}*`;
+    queryParameters.append('text.ru', queryText);
+    queryParameters.append('fuzzy', 'true');
+
+    let fuzzyLevel = 0;
+    if (searchQuery.length > 5) {
+      fuzzyLevel = 2;
+    } else if (searchQuery.length >= 3) {
+      fuzzyLevel = 1;
+    }
+    queryParameters.append('fuzzyLevel', fuzzyLevel.toString());
   }
 }

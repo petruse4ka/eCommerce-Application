@@ -224,4 +224,5 @@ export const CATALOG_TEXTS = {
   CATEGORY: 'Категория',
   CATEGORY_ID: 'category',
   PROMO_TAG: 'Акция',
+  SHORT_SEARCH_QUERY: 'Используйте более 2 символов для поиска',
 };
