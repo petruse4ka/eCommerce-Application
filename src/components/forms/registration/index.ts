@@ -348,6 +348,8 @@ export default class FormRegistration {
           postalCode: this.formValue.get('shippingPostalCode') ?? '',
         },
       ],
+      shippingAddresses: [0],
+      billingAddresses: [1],
       defaultShippingAddress: this.isDefaultAddressShipping ? 0 : undefined,
       defaultBillingAddress: undefined,
     };
@@ -363,6 +365,7 @@ export default class FormRegistration {
 
     if (this.isDefaultAddressBilling) {
       body.defaultBillingAddress = this.isSameAddresses ? 0 : 1;
+      body.billingAddresses = this.isSameAddresses ? [0] : [1];
     }
 
     return body;

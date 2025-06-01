@@ -93,6 +93,7 @@ export enum AlertText {
   DUPLICATE_FIELD = 'Пользователь с такой почтой уже существует.',
   ERROR_DEFAULT = 'Проблемы на сервере. Пожалуйста, попробуйте позже',
   CHANGE_SUCCESS = 'Данные успешно изменены',
+  DELETE_ADDRESS_SUCCESS = 'Адрес успешно удален',
 }
 
 export enum CheckboxText {

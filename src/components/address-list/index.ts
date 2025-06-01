@@ -1,3 +1,4 @@
+import APIUpdateData from '@/api/update-data';
 import { INPUTS_CHANGE_ADDRESS_DATA } from '@/data';
 import { ADDRESS } from '@/styles/address';
 import { AddressTypeText, ModalTitle } from '@/types/enums';
@@ -13,7 +14,6 @@ export default class AddressList extends BaseComponent {
   public infoValue: ElementBuilder[];
 
   constructor(titleContent: string, addressesInfo: AddressInfo[]) {
-    console.log(addressesInfo);
     super({
       tag: 'section',
       className: ADDRESS.CONTAINER,
@@ -22,8 +22,12 @@ export default class AddressList extends BaseComponent {
     this.createTitle(titleContent);
     this.infoValue = [];
 
-    for (const address of addressesInfo) {
-      this.addCardItem(address);
+    if (addressesInfo.length > 0) {
+      for (const address of addressesInfo) {
+        this.addCardItem(address);
+      }
+    } else {
+      this.createClearAddressInfo();
     }
   }
 
@@ -58,6 +62,16 @@ export default class AddressList extends BaseComponent {
 
     card.append(cardInfo, this.createButtons(id));
     this.component.append(card);
+  }
+
+  private createClearAddressInfo(): void {
+    const info = new ElementBuilder({
+      tag: 'div',
+      className: '',
+      textContent: 'Адресов нет',
+    }).getElement();
+
+    this.component.append(info);
   }
 
   private createAddressInfoLine(key: string, value: string): HTMLElement {
@@ -120,14 +134,7 @@ export default class AddressList extends BaseComponent {
       style: 'ICON_OUTLINE',
       textContent: '\uD83D\uDDD1',
       callback: (): void => {
-        const form = new FormEditUserInfo({
-          data: INPUTS_CHANGE_ADDRESS_DATA,
-          currentInputs: this.infoValue,
-        });
-        const modal = new Modal({ title: ModalTitle.CHANGE, content: form });
-        this.component.append(modal.getElement());
-
-        modal.showModal();
+        void APIUpdateData.deleteAddress(id);
       },
     }).getElement();
 

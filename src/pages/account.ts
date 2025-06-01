@@ -73,6 +73,7 @@ export default class AccountPage extends BaseComponent {
       addressInfo[AddressType.BILLING]
     ).getElement();
 
+    //console.log(shippingAddressList, billingAddressList)
     this.addressesNode = [shippingAddressList, billingAddressList];
 
     for (const node of this.addressesNode) {

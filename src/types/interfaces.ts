@@ -49,8 +49,10 @@ export interface AuthResponse {
   token_type: string;
 }
 
+export type AddressWithId = Addresses & { id: string };
+
 export interface Customer {
-  addresses: Addresses[];
+  addresses: AddressWithId[];
   authenticationMode: string;
   billingAddressIds: string[];
   createdAt: string;
@@ -93,7 +95,7 @@ export interface InputComponent {
 }
 
 export interface Addresses {
-  id: string;
+  id?: string;
   country: string;
   city: string;
   streetName: string;
@@ -114,6 +116,8 @@ export interface RegistrationBody {
   email: string;
   password: string;
   addresses: Addresses[];
+  shippingAddresses: number[];
+  billingAddresses: number[];
   defaultShippingAddress?: number;
   defaultBillingAddress?: number;
 }

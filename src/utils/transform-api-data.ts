@@ -2,8 +2,8 @@ import { userState } from '@/store/user-state';
 import { AddressKey, AddressType, UserInfoKey } from '@/types/enums';
 import { isUserInfo } from '@/types/guards';
 import type {
-  Addresses,
   AddressInfo,
+  AddressWithId,
   UpdateUserAddress,
   UpdateUserInfo,
   UserInfo,
@@ -94,7 +94,7 @@ export default class TransformApiData {
     }
   }
 
-  public static transformUserUpdateAddress(body: Addresses): UpdateUserAddress | void {
+  public static transformUserUpdateAddress(body: AddressWithId): UpdateUserAddress | void {
     const { id: addressId, city, postalCode, streetName } = body;
     const userInfo = userState.getUserInfoState();
 
@@ -111,6 +111,22 @@ export default class TransformApiData {
               postalCode,
               streetName,
             },
+          },
+        ],
+      };
+    }
+  }
+
+  public static transformUserDeleteAddress(addressId: string): UpdateUserInfo | void {
+    const userInfo = userState.getUserInfoState();
+
+    if (userInfo) {
+      return {
+        version: Number(userInfo.version),
+        actions: [
+          {
+            action: 'removeAddress',
+            addressId,
           },
         ],
       };
