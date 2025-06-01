@@ -15,6 +15,7 @@ export default class ProductSorting extends BaseComponent {
   private productCounter: HTMLElement;
   private select: SelectBuilder;
   private searchInput: InputBuilder;
+  private clearButton: HTMLElement;
 
   constructor() {
     super({ tag: 'div', className: SORTING_STYLES.CONTAINER });
@@ -37,21 +38,17 @@ export default class ProductSorting extends BaseComponent {
       placeholder: CATALOG_TEXTS.SEARCH_PLACEHOLDER,
       className: SORTING_STYLES.SEARCH_INPUT,
       eventType: 'keydown',
-      callback: ProductSorting.handleSearchKeydown,
+      callback: this.handleSearchKeydown,
     });
+
+    this.clearButton = new Button({
+      style: 'CLEAR',
+      textContent: '×',
+      callback: this.handleClearSearch,
+    }).getElement();
 
     this.render();
   }
-
-  private static handleSearchKeydown = (event: Event): void => {
-    if (event instanceof KeyboardEvent && event.key === 'Enter') {
-      const input = event.target;
-      if (input instanceof HTMLInputElement) {
-        const searchQuery = input.value.trim();
-        filterState.setSearchQuery(searchQuery);
-      }
-    }
-  };
 
   private static handleSortingSelection = (event: Event): void => {
     const select = event.target;
@@ -85,14 +82,32 @@ export default class ProductSorting extends BaseComponent {
     }).getElement();
 
     searchButton.append(searchIcon);
-    searchContainer.append(this.searchInput.getElement(), searchButton);
+    searchContainer.append(this.searchInput.getElement(), searchButton, this.clearButton);
 
     return searchContainer;
   }
 
+  private handleSearchKeydown = (event: Event): void => {
+    const input = event.target;
+    if (input instanceof HTMLInputElement) {
+      this.clearButton.classList.toggle('hidden', !input.value);
+
+      if (event instanceof KeyboardEvent && event.key === 'Enter') {
+        const searchQuery = input.value.trim();
+        filterState.setSearchQuery(searchQuery);
+      }
+    }
+  };
+
   private handleSearchClick = (): void => {
     const searchQuery = this.searchInput.getValue().trim();
     filterState.setSearchQuery(searchQuery);
+  };
+
+  private handleClearSearch = (): void => {
+    this.searchInput.setValue('');
+    filterState.setSearchQuery('');
+    this.clearButton.classList.add('hidden');
   };
 
   private render(): void {

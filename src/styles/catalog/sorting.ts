@@ -22,6 +22,7 @@ export const SORTING_STYLES = {
     'sm:w-auto',
     'sm:text-left',
     'flex-shrink-0',
+    'min-w-[150px]',
   ],
   DROPDOWN_CONTAINER: ['flex', 'items-center', 'gap-4', 'w-full', 'sm:w-auto'],
   DROPDOWN: [
@@ -47,7 +48,7 @@ export const SORTING_STYLES = {
     'border-primary',
     'rounded-lg',
     'pl-4',
-    'pr-8',
+    'pr-14',
     'py-2',
     'text-dark',
     'text-sm',

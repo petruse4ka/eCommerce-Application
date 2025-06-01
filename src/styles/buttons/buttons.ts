@@ -74,7 +74,7 @@ export const CUSTOM_BUTTON_STYLE = {
   CLEAR: [
     'hidden',
     'absolute',
-    'right-3',
+    'right-10',
     'top-1/2',
     '-translate-y-1/2',
     'text-black',
