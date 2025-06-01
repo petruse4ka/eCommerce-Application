@@ -1,8 +1,8 @@
 import BaseComponent from '@/components/base';
 import { CATALOG_TEXTS } from '@/constants';
 import { BREADCRUMB_STYLES } from '@/styles/breadcrumbs';
+import { Route } from '@/types/enums';
 import ElementBuilder from '@/utils/element-builder';
-import LinkBuilder from '@/utils/link-builder';
 
 export default class Breadcrumbs extends BaseComponent {
   constructor() {
@@ -14,17 +14,19 @@ export default class Breadcrumbs extends BaseComponent {
     this.render();
   }
 
-  private static createBreadcrumbItem(text: string, href: string): HTMLElement {
+  private static createBreadcrumbItem(text: string, route: Route): HTMLElement {
     const item = new ElementBuilder({
       tag: 'li',
       className: BREADCRUMB_STYLES.ITEM,
     }).getElement();
 
-    const link = new LinkBuilder({
+    const link = new ElementBuilder({
+      tag: 'span',
       className: BREADCRUMB_STYLES.LINK,
       textContent: text,
-      href: href,
-      target: '_self',
+      callback: (): void => {
+        globalThis.location.href = route;
+      },
     }).getElement();
 
     item.append(link);
@@ -45,15 +47,11 @@ export default class Breadcrumbs extends BaseComponent {
       className: BREADCRUMB_STYLES.LIST,
     }).getElement();
 
-    const homeItem = Breadcrumbs.createBreadcrumbItem(CATALOG_TEXTS.HOME, '/');
-    list.append(homeItem);
-
+    const homeItem = Breadcrumbs.createBreadcrumbItem(CATALOG_TEXTS.HOME, Route.HOME);
     const separator = Breadcrumbs.createSeparator();
-    list.append(separator);
+    const catalogItem = Breadcrumbs.createBreadcrumbItem(CATALOG_TEXTS.CATALOG, Route.CATALOG);
 
-    const catalogItem = Breadcrumbs.createBreadcrumbItem(CATALOG_TEXTS.CATALOG, '/catalog');
-    list.append(catalogItem);
-
+    list.append(homeItem, separator, catalogItem);
     this.component.append(list);
   }
 }
