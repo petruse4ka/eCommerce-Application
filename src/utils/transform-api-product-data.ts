@@ -19,6 +19,7 @@ export default class TransformApiProductsData {
         const priceDivider = 10 ** fractionDigits;
 
         products.push({
+          id: product.key,
           name: typeof nameAttribute?.value === 'string' ? nameAttribute.value : '',
           description:
             typeof descAttribute?.value === 'object' && 'ru' in descAttribute.value

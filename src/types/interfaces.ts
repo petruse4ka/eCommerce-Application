@@ -136,6 +136,7 @@ export interface Packages {
 }
 
 export interface Products {
+  id: string;
   name: string;
   description: string;
   image: string;
@@ -220,6 +221,7 @@ export interface ProductResponse {
 
 export interface Product {
   id: string;
+  key: string;
   version: number;
   versionModifiedAt: string;
   lastMessageSequenceNumber: number;
