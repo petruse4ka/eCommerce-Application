@@ -3,7 +3,7 @@ import { ApiEndpoint, ApiMethods, ContentType } from '@/types/enums';
 import type { Product, ProductVariantView } from '@/types/interfaces';
 import TransformApiProductsData from '@/utils/transform-api-product-data';
 
-export const ProductService = {
+export const getProductData = {
   async getProduct(key: string): Promise<ProductVariantView | void> {
     const token = userState.getTokenState();
 
@@ -19,9 +19,6 @@ export const ProductService = {
     )
       .then((response) => {
         if (!response.ok) {
-          if (response.status === 404) {
-            //Router.followRoute(Route.ERROR);
-          }
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         return response.json();

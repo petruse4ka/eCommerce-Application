@@ -1,4 +1,4 @@
-import { ProductService } from '@/api/product';
+import { getProductData } from '@/api/product';
 import notFoundImage from '@/assets/images/not-found.svg';
 import BaseComponent from '@/components/base';
 import EmptyComponent from '@/components/base/empty';
@@ -32,7 +32,6 @@ export default class ProductPage extends BaseComponent {
 
     if (hash.includes(`${Route.PRODUCT}/`)) {
       const productData = await ProductPage.loadProduct(hash.replace(`${Route.PRODUCT}/`, ''));
-      console.log(productData);
       if (productData) {
         ProductPage.render(productData, mainComponent);
       } else {
@@ -48,7 +47,7 @@ export default class ProductPage extends BaseComponent {
       const token = userState.getTokenState();
 
       if (token) {
-        const loadedProduct = await ProductService.getProduct(key);
+        const loadedProduct = await getProductData.getProduct(key);
 
         if (loadedProduct) {
           return loadedProduct;
@@ -119,7 +118,7 @@ export default class ProductPage extends BaseComponent {
       className: PRODUCT_STYLES.CONTAINER,
     }).getElement();
 
-    const rightAside = new ElementBuilder({
+    const asideContainer = new ElementBuilder({
       tag: 'aside',
       className: PRODUCT_STYLES.ASIDE,
     }).getElement();
@@ -129,19 +128,19 @@ export default class ProductPage extends BaseComponent {
         title: String(attributes['name']),
         description: String(attributes['description']),
       });
-      rightAside.append(productTitle.getElement());
+      asideContainer.append(productTitle.getElement());
       const block = new ProductWrappingBlock(attributes, productData.prices);
-      rightAside.append(block.getElement());
+      asideContainer.append(block.getElement());
 
       const delivery = new ProductDelivery();
-      rightAside.append(delivery.getElement());
+      asideContainer.append(delivery.getElement());
 
       const detailed = new DetailedProduct(String(attributes['detailing']));
       if (productData.images) {
         const slider = new ProductSlider(productData.images);
         mainContainer.append(slider.getElement());
       }
-      mainContainer.append(rightAside);
+      mainContainer.append(asideContainer);
 
       mainComponent.append(mainContainer);
       mainComponent.append(detailed.getElement());

@@ -1,16 +1,9 @@
 import { filterState } from '@/store/filter-state';
 import { productsState } from '@/store/products-state';
-//import Router from '@/router';
 import { userState } from '@/store/user-state';
 import { ApiEndpoint, ApiMethods, ContentType, FilterType } from '@/types/enums';
 import { isCategoryResponse, isProductResponse, isProductTypeResponse } from '@/types/guards';
-import type {
-  FilterRequest,
-  Product,
-  Products,
-  ProductTypeResponse,
-  ProductVariantView,
-} from '@/types/interfaces';
+import type { FilterRequest, Product, Products, ProductTypeResponse } from '@/types/interfaces';
 import TransformApiProductsData from '@/utils/transform-api-product-data';
 
 export default class CatalogAPI {
@@ -133,37 +126,6 @@ export default class CatalogAPI {
     } catch (error) {
       console.error('Error fetching categories:', error);
     }
-  }
-
-  public static async getProductRefuse(key: string): Promise<ProductVariantView | void> {
-    const token = userState.getTokenState();
-
-    return await fetch(
-      `${import.meta.env['VITE_CTP_API_URL']}/${import.meta.env['VITE_CTP_PROJECT_KEY']}${ApiEndpoint.PRODUCTS}/key=${key}`,
-      {
-        method: ApiMethods.GET,
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': ContentType.JSON,
-        },
-      }
-    )
-      .then((response) => {
-        if (!response.ok) {
-          const status = response.status;
-          if (status === 404) {
-            //Router.followRoute(Route.ERROR);
-          }
-
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        return response.json();
-      })
-      .then((body: Product): ProductVariantView => TransformApiProductsData.transformProduct(body))
-      .catch((error) => {
-        console.error('Error fetching product:', error);
-      });
   }
 
   private static handleFilters(filters: FilterRequest): URLSearchParams {

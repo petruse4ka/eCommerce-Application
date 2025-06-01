@@ -240,10 +240,12 @@ export const PRODUCT_ATTRIBUTES = {
 export const PRODUCT_TEXT = {
   BASKET: 'В корзину',
   TOTAL: 'Итого по данной позиции: ',
-  CURRANCY: 'руб',
+  CURRANCY: DEFAULT_CURRENCY,
   DESCRIPTION: 'Описание',
   GRAMM: 'г',
   ERROR_ADDRESS:
     'Увы, этот десерт закончился, но загляните в каталог — там вас ждут другие вкусные находки!',
   CATALOG: 'В каталог',
 };
+
+export const DEFAULT_QUANTITY_AMOUNT = 1;

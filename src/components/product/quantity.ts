@@ -1,5 +1,5 @@
 import BaseComponent from '@/components/base';
-import { PRODUCT_TEXT } from '@/constants';
+import { DEFAULT_QUANTITY_AMOUNT, PRODUCT_TEXT } from '@/constants';
 import { PRODUCT_STYLES } from '@/styles/pages/product';
 import ElementBuilder from '@/utils/element-builder';
 
@@ -18,7 +18,7 @@ export default class ProductQuantity extends BaseComponent {
       textContent: '-',
       callback: (): void => {
         let number = Number(quantityInput.textContent);
-        if (number === 1) {
+        if (number <= DEFAULT_QUANTITY_AMOUNT) {
           minusButton.setAttribute('disabled', 'true');
         } else {
           quantityInput.textContent = String(--number);
@@ -45,7 +45,7 @@ export default class ProductQuantity extends BaseComponent {
     const quantityInput = new ElementBuilder({
       tag: 'div',
       className: PRODUCT_STYLES.QUANTITY_INPUT,
-      textContent: '1',
+      textContent: String(DEFAULT_QUANTITY_AMOUNT),
     }).getElement();
 
     this.component.append(minusButton, quantityInput, plusButton);

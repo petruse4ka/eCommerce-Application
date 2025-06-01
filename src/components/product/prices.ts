@@ -28,6 +28,7 @@ export default class ProductPrices extends BaseComponent {
       }
       return price;
     } else {
+      console.error('data error');
       throw new Error('data error');
     }
   }

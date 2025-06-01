@@ -14,13 +14,7 @@ export default class ProductSlider extends BaseComponent {
     const imageContainer = new ElementBuilder({
       tag: 'div',
       className: PRODUCT_STYLES.SLIDER_BIG_IMAGE,
-      callback: (): void => {
-        /* const form = new FormEditUserInfo(INPUTS_ADDRESS_DATA, this.infoValue);
-        const modal = new Modal({ title: ModalTitle.CHANGE, content: form });
-        this.component.append(modal.getElement());
-
-        modal.showModal();*/
-      },
+      callback: (): void => {},
     });
 
     //imageContainer.applyCssClasses(`bg-[url(${images[0].url})]`);
