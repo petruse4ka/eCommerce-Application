@@ -6,11 +6,13 @@ class FilterState {
   private selectedOptions: Map<string, Set<FilterValue>>;
   private subscribers: ActionHandler[];
   private currentSort: string;
+  private searchQuery: string;
 
   constructor() {
     this.selectedOptions = new Map();
     this.subscribers = [];
     this.currentSort = '';
+    this.searchQuery = '';
   }
 
   public getSelectedOptions(filterId: string): Set<FilterValue> {
@@ -28,8 +30,17 @@ class FilterState {
     return this.currentSort;
   }
 
+  public getSearchQuery(): string {
+    return this.searchQuery;
+  }
+
   public setSort(sortBy: string): void {
     this.currentSort = sortBy;
+    this.notify();
+  }
+
+  public setSearchQuery(query: string): void {
+    this.searchQuery = query;
     this.notify();
   }
 
@@ -75,6 +86,8 @@ class FilterState {
 
   public clearAll(): void {
     this.selectedOptions.clear();
+    this.currentSort = '';
+    this.searchQuery = '';
     this.notify();
   }
 

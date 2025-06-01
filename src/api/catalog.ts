@@ -27,8 +27,14 @@ export default class CatalogAPI {
     try {
       const queryParameters = CatalogAPI.handleFilters(filters);
       const currentSort = filterState.getCurrentSort();
-      if (currentSort) {
-        queryParameters.append('sort', currentSort);
+      if (currentSort) queryParameters.append('sort', currentSort);
+
+      const searchQuery = filterState.getSearchQuery();
+      if (searchQuery) {
+        const queryText = `*${searchQuery}*`;
+        queryParameters.append('text.ru', queryText);
+        queryParameters.append('fuzzy', 'true');
+        queryParameters.append('fuzzyLevel', '2');
       }
       queryParameters.append('limit', '500');
       const url = `${import.meta.env['VITE_CTP_API_URL']}/${import.meta.env['VITE_CTP_PROJECT_KEY']}/product-projections/search?${queryParameters.toString()}`;

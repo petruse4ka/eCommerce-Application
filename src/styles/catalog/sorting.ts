@@ -40,7 +40,7 @@ export const SORTING_STYLES = {
     'w-full',
     'sm:w-auto',
   ],
-  SEARCH_CONTAINER: ['relative', 'w-full', 'sm:max-w-[350px]'],
+  SEARCH_CONTAINER: ['relative', 'w-full', 'sm:max-w-[350px]', 'flex', 'items-center'],
   SEARCH_INPUT: [
     'bg-white',
     'border',
@@ -56,4 +56,5 @@ export const SORTING_STYLES = {
     'focus:outline-none',
     'focus:border-orange',
   ],
+  SEARCH_ICON: ['w-5', 'h-5'],
 };
