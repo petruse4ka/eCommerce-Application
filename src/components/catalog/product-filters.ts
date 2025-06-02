@@ -388,13 +388,15 @@ export default class ProductFilters extends BaseComponent {
     const filters: HTMLElement[] = [];
 
     for (const config of this.filterConfigs!.checkbox) {
-      filters.push(
-        this.createCheckboxFilter({
-          title: config.title,
-          options: config.options,
-          filterId: config.id,
-        })
-      );
+      if (config.id !== 'category') {
+        filters.push(
+          this.createCheckboxFilter({
+            title: config.title,
+            options: config.options,
+            filterId: config.id,
+          })
+        );
+      }
     }
 
     for (const config of this.filterConfigs!.range) {

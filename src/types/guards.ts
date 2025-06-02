@@ -1,5 +1,6 @@
 import type {
   Addresses,
+  Category,
   CategoryResponse,
   ErrorInfo,
   PasswordBody,
@@ -78,4 +79,21 @@ export function isCategoryResponse(data: unknown): data is CategoryResponse {
     Array.isArray(data.results) &&
     data.results.every((category) => 'id' in category && 'name' in category)
   );
+}
+
+export function isCategory(object: unknown): object is Category {
+  if (
+    typeof object === 'object' &&
+    object !== null &&
+    'id' in object &&
+    'name' in object &&
+    'ancestors' in object
+  ) {
+    const name = object.name;
+    const ancestors = object.ancestors;
+    if (typeof name === 'object' && name !== null && 'ru' in name && Array.isArray(ancestors)) {
+      return true;
+    }
+  }
+  return false;
 }

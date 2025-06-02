@@ -196,7 +196,7 @@ export const FIELDSET_LABELS = {
 };
 
 export const PAGE_TITLES = {
-  CATALOG: 'Каталог десертов',
+  CATALOG: 'Каталог',
 };
 
 export const CATALOG_TEXTS = {
@@ -231,6 +231,9 @@ export const CATALOG_TEXTS = {
   CATEGORY_ID: 'category',
   PROMO_TAG: 'Акция',
   SHORT_SEARCH_QUERY: 'Используйте более 2 символов для поиска',
+  HOME: 'Главная',
+  CATALOG: 'Каталог',
+  ALL_CATEGORIES: 'Все продукты',
 };
 
 export const PRODUCT_ATTRIBUTES = {
@@ -250,6 +253,7 @@ export const PRODUCT_TEXT = {
   ERROR_ADDRESS:
     'Увы, этот десерт закончился, но загляните в каталог — там вас ждут другие вкусные находки!',
   CATALOG: 'В каталог',
+  LOADING_PRODUCT: 'Загружаем продукт...',
 };
 
 export const DEFAULT_QUANTITY_AMOUNT = 1;

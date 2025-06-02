@@ -3,6 +3,7 @@ import notFoundImage from '@/assets/images/not-found.svg';
 import BaseComponent from '@/components/base';
 import EmptyComponent from '@/components/base/empty';
 import Button from '@/components/buttons';
+import LoaderOverlay from '@/components/overlay/loader-overlay';
 import ProductWrappingBlock from '@/components/product/block';
 import ProductDelivery from '@/components/product/delivery';
 import DetailedProduct from '@/components/product/detailed';
@@ -18,26 +19,28 @@ import type { Attributes } from '@/types/types';
 import ElementBuilder from '@/utils/element-builder';
 
 export default class ProductPage extends BaseComponent {
+  private isLoading: boolean;
+  private productLoader: LoaderOverlay;
+
   constructor() {
     super({
       tag: 'main',
       className: PRODUCT_STYLES.MAIN_CONTAINER,
     });
 
-    void ProductPage.init(this.component);
-  }
+    this.isLoading = true;
 
-  private static async init(mainComponent: HTMLElement): Promise<void> {
-    const hash = globalThis.location.hash;
+    this.productLoader = new LoaderOverlay({
+      text: PRODUCT_TEXT.LOADING_PRODUCT,
+      className: PRODUCT_STYLES.MAIN_CONTAINER,
+    });
 
-    if (hash.includes(`${Route.PRODUCT}/`)) {
-      const productData = await ProductPage.loadProduct(hash.replace(`${Route.PRODUCT}/`, ''));
-      if (productData) {
-        ProductPage.render(productData, mainComponent);
-      } else {
-        ProductPage.showError(mainComponent);
-      }
-    }
+    this.renderLoader();
+    void this.init();
+
+    globalThis.addEventListener('hashchange', () => {
+      void this.handleRouteChange();
+    });
   }
 
   private static async loadProduct(key: string): Promise<void | ProductVariantView> {
@@ -122,6 +125,7 @@ export default class ProductPage extends BaseComponent {
       tag: 'aside',
       className: PRODUCT_STYLES.ASIDE,
     }).getElement();
+
     if (productData.attributes) {
       const attributes = ProductPage.parseAttribute(productData.attributes);
       const productTitle = new ProductTitle({
@@ -135,7 +139,6 @@ export default class ProductPage extends BaseComponent {
       const delivery = new ProductDelivery();
       asideContainer.append(delivery.getElement());
 
-      const detailed = new DetailedProduct(String(attributes['detailing']));
       if (productData.images) {
         const slider = new ProductSlider(productData.images);
         mainContainer.append(slider.getElement());
@@ -143,7 +146,61 @@ export default class ProductPage extends BaseComponent {
       mainContainer.append(asideContainer);
 
       mainComponent.append(mainContainer);
+      const detailed = new DetailedProduct(String(attributes['detailing']));
       mainComponent.append(detailed.getElement());
+    }
+  }
+
+  private async init(): Promise<void> {
+    const hash = globalThis.location.hash;
+
+    if (hash.includes(`${Route.PRODUCT}/`)) {
+      const productKey = hash.replace(`${Route.PRODUCT}/`, '');
+      const productData = await ProductPage.loadProduct(productKey);
+
+      if (productData) {
+        this.isLoading = false;
+        this.renderLoader();
+
+        ProductPage.render(productData, this.component);
+      } else {
+        this.isLoading = false;
+        this.renderLoader();
+        ProductPage.showError(this.component);
+      }
+    }
+  }
+
+  private async handleRouteChange(): Promise<void> {
+    const hash = globalThis.location.hash;
+    if (hash.includes(`${Route.PRODUCT}/`)) {
+      this.isLoading = true;
+      this.renderLoader();
+
+      const productKey = hash.replace(`${Route.PRODUCT}/`, '');
+      const productData = await ProductPage.loadProduct(productKey);
+
+      if (productData) {
+        this.isLoading = false;
+        this.renderLoader();
+
+        ProductPage.render(productData, this.component);
+      } else {
+        this.isLoading = false;
+        this.renderLoader();
+
+        ProductPage.showError(this.component);
+      }
+    }
+  }
+
+  private renderLoader(): void {
+    while (this.component.firstChild) {
+      this.component.firstChild.remove();
+    }
+
+    if (this.isLoading) {
+      this.component.append(this.productLoader.getElement());
     }
   }
 }
