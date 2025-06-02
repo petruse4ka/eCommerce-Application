@@ -3,6 +3,7 @@ import '@/styles/main.css';
 import CatalogAPI from '@/api/catalog';
 import BaseComponent from '@/components/base';
 import Breadcrumbs from '@/components/breadcrumbs';
+import Categories from '@/components/catalog/categories';
 import ProductFilters from '@/components/catalog/product-filters';
 import ProductList from '@/components/catalog/product-list';
 import ProductSorting from '@/components/catalog/product-sorting';
@@ -13,6 +14,8 @@ import { filterState } from '@/store/filter-state';
 import { productsState } from '@/store/products-state';
 import { userState } from '@/store/user-state';
 import { CATALOG_STYLES } from '@/styles/pages/catalog';
+import { isCategory } from '@/types/guards';
+import type { CategoryResponse, ProductApiResponse, ProductTypeResponse } from '@/types/interfaces';
 import ElementBuilder from '@/utils/element-builder';
 import TransformApiProductTypesData from '@/utils/transform-api-product-types-data';
 
@@ -21,10 +24,11 @@ export default class CatalogPage extends BaseComponent {
   private productSorting: ProductSorting;
   private productFilters: ProductFilters;
   private selectedFilters: SelectedFilters;
+  private breadcrumbs: Breadcrumbs;
+  private categories: Categories | null;
   private isLoading: boolean;
   private productListLoader: LoaderOverlay;
   private filtersLoader: LoaderOverlay;
-  private breadcrumbs: Breadcrumbs;
 
   constructor() {
     super({
@@ -36,6 +40,7 @@ export default class CatalogPage extends BaseComponent {
     this.productFilters = new ProductFilters();
     this.selectedFilters = new SelectedFilters();
     this.breadcrumbs = new Breadcrumbs();
+    this.categories = null;
     this.isLoading = true;
     this.productListLoader = new LoaderOverlay({
       text: CATALOG_TEXTS.LOADING_PRODUCTS,
@@ -50,6 +55,31 @@ export default class CatalogPage extends BaseComponent {
     filterState.subscribe(() => {
       void this.handleFilterChange();
     });
+  }
+
+  private handleCategories(loadedCategories: CategoryResponse['results'] | null): void {
+    if (loadedCategories && loadedCategories.every((category) => isCategory(category))) {
+      const renderedCategories = loadedCategories.map((category) => ({
+        ...category,
+        typeId: 'category',
+        ancestors: category.ancestors,
+      }));
+      this.categories = new Categories(renderedCategories);
+    }
+  }
+
+  private handleProductTypes(
+    loadedProductTypes: ProductTypeResponse,
+    productsData: ProductApiResponse,
+    loadedCategories: CategoryResponse['results'] | null
+  ): void {
+    const filterConfigs = TransformApiProductTypesData.transformProductTypes(
+      loadedProductTypes,
+      productsData.productData,
+      loadedCategories || []
+    );
+    this.productFilters.updateFilters(filterConfigs);
+    this.selectedFilters.updateFilterConfigs(filterConfigs);
   }
 
   private async loadProducts(): Promise<void> {
@@ -68,14 +98,12 @@ export default class CatalogPage extends BaseComponent {
             productsState.updateProducts(productsData.products);
             this.productSorting.updateProductCount(productsData.products.length);
 
-            if (loadedProductTypes) {
-              const filterConfigs = TransformApiProductTypesData.transformProductTypes(
-                loadedProductTypes,
-                productsData.productData,
-                loadedCategories || []
-              );
-              this.productFilters.updateFilters(filterConfigs);
-              this.selectedFilters.updateFilterConfigs(filterConfigs);
+            if (loadedProductTypes && loadedCategories) {
+              this.handleProductTypes(loadedProductTypes, productsData, loadedCategories);
+            }
+
+            if (loadedCategories) {
+              this.handleCategories(loadedCategories);
             }
 
             this.isLoading = false;
@@ -116,9 +144,7 @@ export default class CatalogPage extends BaseComponent {
   };
 
   private render(): void {
-    while (this.component.firstChild) {
-      this.component.firstChild.remove();
-    }
+    while (this.component.firstChild) this.component.firstChild.remove();
 
     this.component.append(this.breadcrumbs.getElement());
 
@@ -138,6 +164,15 @@ export default class CatalogPage extends BaseComponent {
       className: CATALOG_STYLES.FILTERS_SECTION,
     }).getElement();
 
+    if (this.categories) filtersSection.append(this.categories.getElement());
+
+    filtersSection.append(this.selectedFilters.getElement(), this.productFilters.getElement());
+    if (this.isLoading) {
+      this.productFilters.getElement().append(this.filtersLoader.getElement());
+    } else {
+      this.filtersLoader.getElement().remove();
+    }
+
     const productListSection = new ElementBuilder({
       tag: 'div',
       className: CATALOG_STYLES.PRODUCT_LIST_SECTION,
@@ -148,17 +183,8 @@ export default class CatalogPage extends BaseComponent {
       className: CATALOG_STYLES.PRODUCT_LIST_CONTAINER,
     }).getElement();
 
-    filtersSection.append(this.selectedFilters.getElement(), this.productFilters.getElement());
-    if (this.isLoading) {
-      this.productFilters.getElement().append(this.filtersLoader.getElement());
-    } else {
-      this.filtersLoader.getElement().remove();
-    }
-
     productListContainer.append(this.productList.getElement());
-    if (this.isLoading) {
-      productListContainer.append(this.productListLoader.getElement());
-    }
+    if (this.isLoading) productListContainer.append(this.productListLoader.getElement());
 
     productListSection.append(this.productSorting.getElement(), productListContainer);
     catalogContainer.append(filtersSection, productListSection);
