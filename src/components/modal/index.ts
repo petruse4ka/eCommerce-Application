@@ -3,10 +3,11 @@ import ElementBuilder from '@/utils/element-builder';
 
 import BaseComponent from '../base';
 import Button from '../buttons';
+import type FormAddNewAddress from '../forms/add-new-address';
 import type FormEditUserInfo from '../forms/edit-info';
 
 export default class Modal extends BaseComponent {
-  constructor(parameters: { title: string; content: FormEditUserInfo }) {
+  constructor(parameters: { title: string; content: FormEditUserInfo | FormAddNewAddress }) {
     super({
       tag: 'dialog',
       className: MODAL.COMPONENT,
@@ -54,7 +55,7 @@ export default class Modal extends BaseComponent {
     this.component.append(container);
   }
 
-  private createContent(content: FormEditUserInfo): void {
+  private createContent(content: FormEditUserInfo | FormAddNewAddress): void {
     const container = new ElementBuilder({
       tag: 'div',
       className: MODAL.CONTENT.CONTAINER,

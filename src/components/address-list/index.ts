@@ -7,6 +7,7 @@ import ElementBuilder from '@/utils/element-builder';
 
 import BaseComponent from '../base';
 import Button from '../buttons';
+import FormAddNewAddress from '../forms/add-new-address';
 import FormEditUserInfo from '../forms/edit-info';
 import Modal from '../modal';
 
@@ -35,6 +36,8 @@ export default class AddressList extends BaseComponent {
     } else {
       this.createClearAddressInfo();
     }
+
+    this.createAddNewButton();
   }
 
   public addCardItem(address: AddressInfo): void {
@@ -68,6 +71,26 @@ export default class AddressList extends BaseComponent {
 
     card.append(cardInfo, this.createButtons(id));
     this.component.append(card);
+  }
+
+  private createAddNewButton(): void {
+    const buttonAddNewAddress = new Button({
+      style: 'PRIMARY_PINK',
+      textContent: 'Добавить новый адрес',
+      callback: (): void => {
+        const type =
+          this.addressType === 'setDefaultShippingAddress'
+            ? 'addShippingAddressId'
+            : 'addBillingAddressId';
+        const form = new FormAddNewAddress(type);
+        const modal = new Modal({ title: ModalTitle.CHANGE, content: form });
+        this.component.append(modal.getElement());
+
+        modal.showModal();
+      },
+    }).getElement();
+
+    this.component.append(buttonAddNewAddress);
   }
 
   private createClearAddressInfo(): void {

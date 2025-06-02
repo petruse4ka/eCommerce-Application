@@ -2,6 +2,8 @@ import { userState } from '@/store/user-state';
 import { AddressKey, AddressType, UserInfoKey } from '@/types/enums';
 import { isUserInfo } from '@/types/guards';
 import type {
+  AddAddress,
+  Addresses,
   AddressInfo,
   AddressWithId,
   PasswordBody,
@@ -149,10 +151,7 @@ export default class TransformApiData {
     }
   }
 
-  public static transformUserSetDefaultAddress(
-    addressId: string,
-    action: string
-  ): UpdateUserInfo | void {
+  public static transformUserSetAddress(addressId: string, action: string): UpdateUserInfo | void {
     const userInfo = userState.getUserInfoState();
 
     if (userInfo) {
@@ -162,6 +161,28 @@ export default class TransformApiData {
           {
             action,
             addressId,
+          },
+        ],
+      };
+    }
+  }
+
+  public static transformUserAddAddress(body: Addresses): AddAddress | void {
+    const { city, postalCode, streetName } = body;
+    const userInfo = userState.getUserInfoState();
+
+    if (userInfo) {
+      return {
+        version: Number(userInfo.version),
+        actions: [
+          {
+            action: 'addAddress',
+            address: {
+              country: 'RU',
+              city,
+              postalCode,
+              streetName,
+            },
           },
         ],
       };

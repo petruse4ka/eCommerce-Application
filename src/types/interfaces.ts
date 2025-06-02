@@ -95,7 +95,7 @@ export interface InputComponent {
 }
 
 export interface Addresses {
-  id?: string;
+  //id?: string;
   country: string;
   city: string;
   streetName: string;
@@ -456,6 +456,19 @@ export interface UpdateUserAddress {
   actions: {
     action: string;
     addressId: string;
+    address: {
+      country: string;
+      city: string;
+      postalCode: string;
+      streetName: string;
+    };
+  }[];
+}
+
+export interface AddAddress {
+  version: number;
+  actions: {
+    action: string;
     address: {
       country: string;
       city: string;

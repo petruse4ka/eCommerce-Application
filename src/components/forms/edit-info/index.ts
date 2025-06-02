@@ -68,7 +68,7 @@ export default class FormEditUserInfo {
   private createInputs(): void {
     let index = 0;
     for (const input of this.INPUTS_DATA) {
-      const { labelText, placeholder, type, isRequired } = input;
+      const { labelText, placeholder, type, isRequired, isDisabled } = input;
 
       const id = input.id.charAt(0).toLocaleLowerCase() + input.id.slice(1);
 
@@ -80,6 +80,7 @@ export default class FormEditUserInfo {
           placeholder,
           type,
           isRequired,
+          isDisabled,
           eventType: 'input',
           value,
           callback: (): void => {
