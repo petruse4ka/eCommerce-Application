@@ -3,7 +3,7 @@ import { BTN_TEXT } from '@/constants';
 import { INPUTS_CHANGE_ADDRESS_DATA } from '@/data';
 import { ADDRESS } from '@/styles/address';
 import { AddressTypeText, ModalTitle } from '@/types/enums';
-import type { AddressInfo } from '@/types/interfaces';
+import type { AddressInfo, createButtonFormComponent } from '@/types/interfaces';
 import ElementBuilder from '@/utils/element-builder';
 
 import BaseComponent from '../base';
@@ -13,7 +13,6 @@ import FormEditUserInfo from '../forms/edit-info';
 import Modal from '../modal';
 
 export default class AddressList extends BaseComponent {
-  public infoValue: ElementBuilder[];
   private addressType: string;
 
   constructor(titleContent: string, addressesInfo: AddressInfo[]) {
@@ -28,7 +27,6 @@ export default class AddressList extends BaseComponent {
         : 'setDefaultBillingAddress';
 
     this.createTitle(titleContent);
-    this.infoValue = [];
 
     if (addressesInfo.length > 0) {
       for (const address of addressesInfo) {
@@ -41,7 +39,36 @@ export default class AddressList extends BaseComponent {
     this.createAddNewButton();
   }
 
+  public static createAddressInfoLine(
+    key: string,
+    value: string,
+    currentLine: ElementBuilder[]
+  ): HTMLElement {
+    const line = new ElementBuilder({
+      tag: 'div',
+      className: ADDRESS.LINE.CONTAINER,
+    }).getElement();
+
+    const titleLine = new ElementBuilder({
+      tag: 'p',
+      className: ADDRESS.LINE.TITLE,
+      textContent: `${key}:`,
+    }).getElement();
+
+    const valueLine = new ElementBuilder({
+      tag: 'p',
+      className: ADDRESS.LINE.VALUE,
+      textContent: value,
+    });
+
+    line.append(titleLine, valueLine.getElement());
+    currentLine.push(valueLine);
+
+    return line;
+  }
+
   public addCardItem(address: AddressInfo): void {
+    const currentLine: ElementBuilder[] = [];
     const card = new ElementBuilder({
       tag: 'div',
       className: ADDRESS.CARD.DEFAULT,
@@ -55,7 +82,7 @@ export default class AddressList extends BaseComponent {
     }).getElement();
 
     for (const [key, value] of Object.entries(addressInfo)) {
-      const line = this.createAddressInfoLine(key, value);
+      const line = AddressList.createAddressInfoLine(key, value, currentLine);
       cardInfo.append(line);
     }
 
@@ -70,7 +97,7 @@ export default class AddressList extends BaseComponent {
       cardInfo.append(titleCard);
     }
 
-    card.append(cardInfo, this.createButtons(id, isDefault));
+    card.append(cardInfo, this.createButtons({ id, isDefault, currentLine }));
     this.component.append(card);
   }
 
@@ -104,30 +131,6 @@ export default class AddressList extends BaseComponent {
     this.component.append(info);
   }
 
-  private createAddressInfoLine(key: string, value: string): HTMLElement {
-    const line = new ElementBuilder({
-      tag: 'div',
-      className: ADDRESS.LINE.CONTAINER,
-    }).getElement();
-
-    const titleLine = new ElementBuilder({
-      tag: 'p',
-      className: ADDRESS.LINE.TITLE,
-      textContent: `${key}:`,
-    }).getElement();
-
-    const valueLine = new ElementBuilder({
-      tag: 'p',
-      className: ADDRESS.LINE.VALUE,
-      textContent: value,
-    });
-
-    line.append(titleLine, valueLine.getElement());
-    this.infoValue.push(valueLine);
-
-    return line;
-  }
-
   private createTitle(titleContent: string): void {
     const title = new ElementBuilder({
       tag: 'h3',
@@ -138,7 +141,7 @@ export default class AddressList extends BaseComponent {
     this.component.append(title);
   }
 
-  private createButtons(id: string, isDefault: boolean): HTMLElement {
+  private createButtons(parameters: createButtonFormComponent): HTMLElement {
     const container = new ElementBuilder({
       tag: 'div',
       className: ADDRESS.CARD.BTN_CONTAINER,
@@ -150,8 +153,8 @@ export default class AddressList extends BaseComponent {
       callback: (): void => {
         const form = new FormEditUserInfo({
           data: INPUTS_CHANGE_ADDRESS_DATA,
-          currentInputs: this.infoValue,
-          id,
+          currentInputs: parameters.currentLine,
+          id: parameters.id,
         });
         const modal = new Modal({ title: ModalTitle.CHANGE, content: form });
         this.component.append(modal.getElement());
@@ -164,18 +167,18 @@ export default class AddressList extends BaseComponent {
       style: 'ICON_OUTLINE',
       textContent: BTN_TEXT.TRASH,
       callback: (): void => {
-        void APIUpdateData.deleteAddress(id);
+        void APIUpdateData.deleteAddress(parameters.id);
       },
     }).getElement();
 
     container.append(buttonEdit, buttonDelete);
 
-    if (!isDefault) {
+    if (!parameters.isDefault) {
       const buttonDefaultAddress = new Button({
         style: 'ICON_OUTLINE',
         textContent: BTN_TEXT.STAR,
         callback: (): void => {
-          void APIUpdateData.setAddressDefault(id, this.addressType);
+          void APIUpdateData.setAddressDefault(parameters.id, this.addressType);
         },
       }).getElement();
 

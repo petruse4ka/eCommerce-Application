@@ -1,3 +1,5 @@
+import type ElementBuilder from '@/utils/element-builder';
+
 import type { AddressKey, ButtonType, FilterType, InputType, Route, UserInfoKey } from './enums';
 
 export interface ElementParameters {
@@ -501,4 +503,10 @@ export interface AddAddress {
       streetName: string;
     };
   }[];
+}
+
+export interface createButtonFormComponent {
+  id: string;
+  isDefault: boolean;
+  currentLine: ElementBuilder[];
 }
