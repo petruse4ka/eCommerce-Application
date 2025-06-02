@@ -51,7 +51,7 @@ export default class AddressList extends BaseComponent {
 
     const cardInfo = new ElementBuilder({
       tag: 'div',
-      className: '',
+      className: ADDRESS.CARD.CARD_INFO,
     }).getElement();
 
     for (const [key, value] of Object.entries(addressInfo)) {
