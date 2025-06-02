@@ -175,11 +175,11 @@ export default class CatalogPage extends BaseComponent {
       className: CATALOG_STYLES.FILTERS_SECTION,
     }).getElement();
 
-    filtersSection.append(this.selectedFilters.getElement());
-
     if (this.categories) {
       filtersSection.append(this.categories.getElement());
     }
+
+    filtersSection.append(this.selectedFilters.getElement());
     filtersSection.append(this.productFilters.getElement());
 
     if (this.isLoadingCategories) {
