@@ -122,6 +122,7 @@ export default class ProductPage extends BaseComponent {
       tag: 'aside',
       className: PRODUCT_STYLES.ASIDE,
     }).getElement();
+
     if (productData.attributes) {
       const attributes = ProductPage.parseAttribute(productData.attributes);
       const productTitle = new ProductTitle({
@@ -135,7 +136,6 @@ export default class ProductPage extends BaseComponent {
       const delivery = new ProductDelivery();
       asideContainer.append(delivery.getElement());
 
-      const detailed = new DetailedProduct(String(attributes['detailing']));
       if (productData.images) {
         const slider = new ProductSlider(productData.images);
         mainContainer.append(slider.getElement());
@@ -143,6 +143,7 @@ export default class ProductPage extends BaseComponent {
       mainContainer.append(asideContainer);
 
       mainComponent.append(mainContainer);
+      const detailed = new DetailedProduct(String(attributes['detailing']));
       mainComponent.append(detailed.getElement());
     }
   }

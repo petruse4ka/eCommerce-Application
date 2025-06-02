@@ -274,6 +274,15 @@ export interface Product {
   masterVariant?: ProductVariant;
 }
 
+export interface Products {
+  name: string;
+  description: string;
+  image: string;
+  price: number;
+  discountedPrice?: number;
+  fractionDigits?: number;
+}
+
 export interface Category {
   typeId: string;
   id: string;
