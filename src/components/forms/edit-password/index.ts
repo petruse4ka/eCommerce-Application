@@ -5,7 +5,7 @@ import Button from '@/components/buttons';
 import Input from '@/components/inputs';
 import { BTN_TEXT } from '@/constants';
 import { INPUTS_EDIT_USER_PASSWORD } from '@/data';
-import { AUTHORIZATION_INPUTS_CONTAINER, FORM } from '@/styles/forms/forms';
+import { AUTHORIZATION_INPUTS_CONTAINER, FORM_PASSWORD } from '@/styles/forms/forms';
 import { AlertStatus, AlertText, ErrorMessages } from '@/types/enums';
 import { isErrorItem, isPasswordInfo } from '@/types/guards';
 import type { PasswordBody } from '@/types/interfaces';
@@ -19,7 +19,7 @@ export default class FormEditPassword extends BaseComponent {
   constructor() {
     super({
       tag: 'form',
-      className: [...FORM, 'max-w-[450px]'],
+      className: FORM_PASSWORD,
     });
     this.inputs = new Map();
     this.render();
