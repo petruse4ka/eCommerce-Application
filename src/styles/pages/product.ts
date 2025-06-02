@@ -1,5 +1,6 @@
 export const PRODUCT_STYLES = {
   MAIN_CONTAINER: [
+    'min-h-[500px]',
     'relative',
     'w-full',
     'px-2',
@@ -173,6 +174,7 @@ export const PRODUCT_STYLES = {
     'inset-0',
     'backdrop-blur-sm',
     'z-10',
+    'px-4',
     'min-h-[300px]',
   ],
   EMPTY_PRODUCT_IMAGE: ['w-[250px]'],
