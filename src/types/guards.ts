@@ -20,6 +20,14 @@ export function isErrorInfo(data: unknown): data is ErrorInfo {
   );
 }
 
+export function isErrorInfoItem(data: unknown): data is { code: string; field: string } {
+  return typeof data === 'object' && data !== null && 'code' in data && 'field' in data;
+}
+
+export function isErrorInfoPasswordChange(data: unknown): data is { code: string } {
+  return typeof data === 'object' && data !== null && 'code' in data;
+}
+
 export function isUserInfo(id: string, userInfo: UserInfoBody): id is keyof UserInfoBody {
   return id in userInfo;
 }

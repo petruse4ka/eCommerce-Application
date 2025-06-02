@@ -18,7 +18,7 @@ const clientCredentials = btoa(
 );
 
 export default class API {
-  public static async userRegistration(body: RegistrationBody): Promise<string | void> {
+  public static async userRegistration(bodyUser: RegistrationBody): Promise<string | void> {
     let token = userState.getTokenState();
 
     if (token === '') {
@@ -33,7 +33,7 @@ export default class API {
           Authorization: `Bearer ${token}`,
           'Content-Type': ContentType.JSON,
         },
-        body: JSON.stringify(body),
+        body: JSON.stringify(bodyUser),
       }
     )
       .then((response) => response.json())
@@ -47,8 +47,14 @@ export default class API {
             visibleTime: 3000,
           });
 
-          userState.setUserInfoState(body.customer);
-          userState.setAuthorizationState(true);
+          void API.userSignInResponse({
+            userInfo: {
+              email: bodyUser.email,
+              password: bodyUser.password,
+            },
+            isLogin: false,
+          });
+
           Router.followRoute(Route.HOME);
 
           return body.customer.id;
