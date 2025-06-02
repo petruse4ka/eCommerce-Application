@@ -148,4 +148,23 @@ export default class TransformApiData {
       };
     }
   }
+
+  public static transformUserSetDefaultAddress(
+    addressId: string,
+    action: string
+  ): UpdateUserInfo | void {
+    const userInfo = userState.getUserInfoState();
+
+    if (userInfo) {
+      return {
+        version: Number(userInfo.version),
+        actions: [
+          {
+            action,
+            addressId,
+          },
+        ],
+      };
+    }
+  }
 }

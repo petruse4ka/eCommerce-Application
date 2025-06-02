@@ -97,6 +97,7 @@ export enum AlertText {
   CHANGE_SUCCESS = 'Данные успешно изменены',
   INVALID_CURRENT_PASSWORD = 'Текущий пароль не совпадает',
   DELETE_ADDRESS_SUCCESS = 'Адрес успешно удален',
+  SET_DEFAULT_ADDRESS = 'Адрес успешно установлен по умолчанию',
 }
 
 export enum CheckboxText {

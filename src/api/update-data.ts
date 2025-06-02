@@ -171,4 +171,43 @@ export default class APIUpdateData {
         });
       });
   }
+
+  public static async setAddressDefault(id: string, action: string): Promise<void> {
+    const token = userState.getTokenState();
+
+    await fetch(
+      `${import.meta.env['VITE_CTP_API_URL']}/${import.meta.env['VITE_CTP_PROJECT_KEY']}${ApiEndpoint.ME}`,
+      {
+        method: ApiMethods.POST,
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': ContentType.JSON,
+        },
+        body: JSON.stringify(TransformApiData.transformUserSetDefaultAddress(id, action)),
+      }
+    )
+      .then((response) => response.json())
+      .then((body: Customer | ErrorResponse) => {
+        if ('error' in body) {
+          throw new Error(JSON.stringify(body.errors));
+        } else {
+          userState.setUserInfoState(body);
+
+          Alert.render({
+            textContent: AlertText.SET_DEFAULT_ADDRESS,
+            status: AlertStatus.SUCCESS,
+            visibleTime: 3000,
+          });
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+
+        Alert.render({
+          textContent: AlertText.ERROR_DEFAULT,
+          status: AlertStatus.ERROR,
+          visibleTime: 3000,
+        });
+      });
+  }
 }

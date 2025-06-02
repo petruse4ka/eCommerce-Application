@@ -12,12 +12,18 @@ import Modal from '../modal';
 
 export default class AddressList extends BaseComponent {
   public infoValue: ElementBuilder[];
+  private addressType: string;
 
   constructor(titleContent: string, addressesInfo: AddressInfo[]) {
     super({
       tag: 'section',
       className: ADDRESS.CONTAINER,
     });
+
+    this.addressType =
+      titleContent === AddressTypeText.SHIPPING
+        ? 'setDefaultShippingAddress'
+        : 'setDefaultBillingAddress';
 
     this.createTitle(titleContent);
     this.infoValue = [];
@@ -138,19 +144,15 @@ export default class AddressList extends BaseComponent {
       },
     }).getElement();
 
-    // const buttonDefaultAddress = new Button({
-    //   style: 'ICON_OUTLINE',
-    //   textContent: String.fromCodePoint(0x2B50),
-    //   callback: (): void => {
-    //     const form = new FormEditUserInfo(INPUTS_ADDRESS_DATA, this.infoValue);
-    //     const modal = new Modal({ title: ModalTitle.CHANGE, content: form });
-    //     this.component.append(modal.getElement());
+    const buttonDefaultAddress = new Button({
+      style: 'ICON_OUTLINE',
+      textContent: '\u2B50',
+      callback: (): void => {
+        void APIUpdateData.setAddressDefault(id, this.addressType);
+      },
+    }).getElement();
 
-    //     modal.showModal();
-    //   },
-    // }).getElement();
-
-    container.append(buttonEdit, buttonDelete);
+    container.append(buttonEdit, buttonDelete, buttonDefaultAddress);
     return container;
   }
 }
