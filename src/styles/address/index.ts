@@ -1,5 +1,16 @@
 export const ADDRESS = {
-  CONTAINER: ['border', 'border-accent', 'relative', 'rounded-md', 'px-4', 'pt-14', 'pb-5'],
+  CONTAINER: [
+    'border',
+    'border-accent',
+    'relative',
+    'rounded-md',
+    'px-4',
+    'pt-14',
+    'pb-5',
+    'flex',
+    'flex-col',
+    'justify-between',
+  ],
   TITLE: [
     'absolute',
     '-top-4',
@@ -15,7 +26,7 @@ export const ADDRESS = {
     'rounded-md',
   ],
   CARD: {
-    DEFAULT: ['rounded-md', 'p-2', 'flex', 'gap-1'],
+    DEFAULT: ['p-2', 'flex', 'gap-1', 'justify-between', 'divide-y', 'divide-dark'],
     DEFAULT_TITLE: [
       'absolute',
       '-top-4.5',
@@ -30,8 +41,9 @@ export const ADDRESS = {
       'text-sm',
       'md:text-base',
     ],
-    ACTIVE: ['bg-primary', 'relative'],
-    BTN_CONTAINER: ['flex', 'flex-col', 'gap-2'],
+    ACTIVE: ['bg-primary', 'relative', 'rounded-md', 'divide-primary'],
+    BTN_CONTAINER: ['flex', 'flex-col', 'gap-2', 'justify-center'],
+    CARD_INFO: ['flex', 'flex-col', 'justify-center'],
   },
   LINE: {
     CONTAINER: ['flex', 'gap-4', 'text-dark'],
