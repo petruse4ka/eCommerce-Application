@@ -69,7 +69,7 @@ export default class AddressList extends BaseComponent {
       cardInfo.append(titleCard);
     }
 
-    card.append(cardInfo, this.createButtons(id));
+    card.append(cardInfo, this.createButtons(id, isDefault));
     this.component.append(card);
   }
 
@@ -137,7 +137,7 @@ export default class AddressList extends BaseComponent {
     this.component.append(title);
   }
 
-  private createButtons(id: string): HTMLElement {
+  private createButtons(id: string, isDefault: boolean): HTMLElement {
     const container = new ElementBuilder({
       tag: 'div',
       className: ['flex', 'flex-col', 'gap-2'],
@@ -167,15 +167,19 @@ export default class AddressList extends BaseComponent {
       },
     }).getElement();
 
-    const buttonDefaultAddress = new Button({
-      style: 'ICON_OUTLINE',
-      textContent: '\u2B50',
-      callback: (): void => {
-        void APIUpdateData.setAddressDefault(id, this.addressType);
-      },
-    }).getElement();
+    container.append(buttonEdit, buttonDelete);
 
-    container.append(buttonEdit, buttonDelete, buttonDefaultAddress);
+    if (!isDefault) {
+      const buttonDefaultAddress = new Button({
+        style: 'ICON_OUTLINE',
+        textContent: '\u2B50',
+        callback: (): void => {
+          void APIUpdateData.setAddressDefault(id, this.addressType);
+        },
+      }).getElement();
+
+      container.append(buttonDefaultAddress);
+    }
     return container;
   }
 }

@@ -36,33 +36,31 @@ export default class TransformApiData {
     const shippingAddress = [];
 
     if (userInfo) {
-      const {
-        addresses,
-        billingAddressIds,
-        shippingAddressIds,
-        defaultBillingAddressId,
-        defaultShippingAddressId,
-      } = userInfo;
+      for (const address of userInfo.addresses) {
+        const { id, streetName, city, postalCode } = address;
 
-      for (const address of addresses) {
-        const addressId = address.id;
-        if (addressId) {
-          const { id, streetName, city, postalCode } = address;
+        const addressTransform = {
+          [AddressKey.COUNTRY]: 'Россия',
+          [AddressKey.CITY]: city,
+          [AddressKey.STREET]: streetName,
+          [AddressKey.POSTAL_CODE]: postalCode,
+          isDefault:
+            userInfo.defaultBillingAddressId === id || userInfo.defaultShippingAddressId === id,
+          id: id,
+        };
 
-          const addressTransform = {
-            [AddressKey.COUNTRY]: 'Россия',
-            [AddressKey.CITY]: city,
-            [AddressKey.STREET]: streetName,
-            [AddressKey.POSTAL_CODE]: postalCode,
-            isDefault: defaultBillingAddressId === id || defaultShippingAddressId === id,
-            id: id,
-          };
-
-          if (billingAddressIds.includes(addressId)) {
+        if (userInfo.billingAddressIds.includes(id)) {
+          if (addressTransform.isDefault) {
+            billingAddress.unshift(addressTransform);
+          } else {
             billingAddress.push(addressTransform);
           }
+        }
 
-          if (shippingAddressIds.includes(addressId)) {
+        if (userInfo.shippingAddressIds.includes(id)) {
+          if (addressTransform.isDefault) {
+            shippingAddress.unshift(addressTransform);
+          } else {
             shippingAddress.push(addressTransform);
           }
         }
