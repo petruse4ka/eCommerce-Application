@@ -1,5 +1,8 @@
 import '@/styles/main.css';
 
+import accountEditIcon from '@/assets/icons/account-edit.svg';
+import homeEditIcon from '@/assets/icons/home-edit.svg';
+import shieldEditIcon from '@/assets/icons/shield-edit.svg';
 import AddressList from '@/components/address-list';
 import BaseComponent from '@/components/base';
 import FormEditPassword from '@/components/forms/edit-password';
@@ -7,8 +10,10 @@ import PersonalInfo from '@/components/personal-info';
 import Tabs from '@/components/tabs';
 import { userState } from '@/store/user-state';
 import { ACCOUNT_PAGE } from '@/styles/pages/account';
+import { TAB } from '@/styles/tab';
 import { AddressType, AddressTypeText, TabAccount } from '@/types/enums';
 import ElementBuilder from '@/utils/element-builder';
+import ImageBuilder from '@/utils/image-builder';
 import TransformApiData from '@/utils/transform-api-data';
 
 export default class AccountPage extends BaseComponent {
@@ -17,6 +22,7 @@ export default class AccountPage extends BaseComponent {
   private changePasswordNode: HTMLElement;
   private userInfoNode: HTMLElement;
   private container: HTMLElement;
+  private tabsContainer: HTMLElement;
   private currentActive: string;
 
   constructor() {
@@ -28,6 +34,11 @@ export default class AccountPage extends BaseComponent {
     this.container = new ElementBuilder({
       tag: 'div',
       className: ACCOUNT_PAGE.CONTAINER,
+    }).getElement();
+
+    this.tabsContainer = new ElementBuilder({
+      tag: 'div',
+      className: ACCOUNT_PAGE.TABS_CONTAINER,
     }).getElement();
 
     this.infoContainer = new ElementBuilder({
@@ -47,19 +58,49 @@ export default class AccountPage extends BaseComponent {
     this.render();
   }
 
+  private static createTabIcons(): {
+    personalInfoIcon: HTMLElement;
+    addressesIcon: HTMLElement;
+    passwordIcon: HTMLElement;
+  } {
+    const personalInfoIcon = new ImageBuilder({
+      source: accountEditIcon,
+      alt: 'Personal Info',
+      className: TAB.ICON,
+    }).getElement();
+
+    const addressesIcon = new ImageBuilder({
+      source: homeEditIcon,
+      alt: 'Addresses',
+      className: TAB.ICON,
+    }).getElement();
+
+    const passwordIcon = new ImageBuilder({
+      source: shieldEditIcon,
+      alt: 'Change Password',
+      className: TAB.ICON,
+    }).getElement();
+
+    return { personalInfoIcon, addressesIcon, passwordIcon };
+  }
+
   private render(): void {
     this.createTabs();
     this.createAddresses();
     this.createUserInfo();
     this.createChangePassword();
 
-    this.container.append(this.infoContainer);
+    this.container.append(this.tabsContainer, this.infoContainer);
     this.component.append(this.container);
   }
 
   private updateContent(): void {
     while (this.infoContainer.firstChild) {
       this.infoContainer.firstChild.remove();
+    }
+
+    while (this.tabsContainer.firstChild) {
+      this.tabsContainer.firstChild.remove();
     }
 
     while (this.container.firstChild) {
@@ -114,6 +155,8 @@ export default class AccountPage extends BaseComponent {
   }
 
   private createTabs(): void {
+    const { personalInfoIcon, addressesIcon, passwordIcon } = AccountPage.createTabIcons();
+
     const tab = new Tabs([
       {
         textContent: TabAccount.INFO,
@@ -122,6 +165,7 @@ export default class AccountPage extends BaseComponent {
           this.visibleCurrentContent(this.userInfoNode);
           this.currentActive = 'userInfo';
         },
+        icon: personalInfoIcon,
       },
       {
         textContent: TabAccount.ADDRESSES,
@@ -130,6 +174,7 @@ export default class AccountPage extends BaseComponent {
           this.visibleCurrentContent(this.addressesNode);
           this.currentActive = 'addresses';
         },
+        icon: addressesIcon,
       },
       {
         textContent: TabAccount.CHANGE_PASS,
@@ -138,10 +183,11 @@ export default class AccountPage extends BaseComponent {
           this.visibleCurrentContent(this.changePasswordNode);
           this.currentActive = 'changePassword';
         },
+        icon: passwordIcon,
       },
     ]);
 
-    this.container.append(tab.getElement());
+    this.tabsContainer.append(tab.getElement());
   }
 
   private visibleCurrentContent(nodeVisible: HTMLElement | HTMLElement[]): void {

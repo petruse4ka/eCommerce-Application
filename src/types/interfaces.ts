@@ -502,3 +502,10 @@ export interface AddAddress {
     };
   }[];
 }
+
+export interface TabInfo {
+  textContent: string;
+  isActive: boolean;
+  callback: () => void;
+  icon?: HTMLElement;
+}

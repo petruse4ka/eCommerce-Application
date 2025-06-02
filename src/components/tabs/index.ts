@@ -1,4 +1,5 @@
 import { TAB } from '@/styles/tab';
+import type { TabInfo } from '@/types/interfaces';
 import ElementBuilder from '@/utils/element-builder';
 
 import BaseComponent from '../base';
@@ -6,7 +7,7 @@ import BaseComponent from '../base';
 export default class Tabs extends BaseComponent {
   private tabs: ElementBuilder[];
 
-  constructor(tabsInfo: { textContent: string; isActive: boolean; callback: () => void }[]) {
+  constructor(tabsInfo: TabInfo[]) {
     super({
       tag: 'div',
       className: TAB.CONTAINER,
@@ -15,20 +16,36 @@ export default class Tabs extends BaseComponent {
     this.tabs = [];
 
     for (const tabInfo of tabsInfo) {
-      this.createTabItem(tabInfo.textContent, tabInfo.isActive, tabInfo.callback);
+      this.createTabItem(tabInfo.textContent, tabInfo.isActive, tabInfo.callback, tabInfo.icon);
     }
   }
 
-  private createTabItem(textContent: string, isActive: boolean, callback: () => void): void {
+  private createTabItem(
+    textContent: string,
+    isActive: boolean,
+    callback: () => void,
+    icon?: HTMLElement
+  ): void {
     const tabItem = new ElementBuilder({
       tag: 'div',
       className: isActive ? TAB.BUTTON_STYLE.ACTIVE : TAB.BUTTON_STYLE.DEFAULT,
-      textContent,
       callback: (): void => {
         this.toggleActive(tabItem);
         callback();
       },
     });
+
+    if (icon) {
+      tabItem.getElement().append(icon);
+    }
+
+    const textSpan = new ElementBuilder({
+      tag: 'span',
+      className: [],
+      textContent,
+    }).getElement();
+
+    tabItem.getElement().append(textSpan);
 
     if (isActive) {
       this.toggleActive(tabItem);

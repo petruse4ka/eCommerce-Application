@@ -1,7 +1,8 @@
 const TAB_BUTTON = [
   'flex',
-  'justify-items-center',
+  'justify-center',
   'items-center',
+  'gap-2',
   'p-2',
   'sm:py-3.5',
   'sm:px-3',
@@ -35,4 +36,5 @@ export const TAB = {
     ],
     ACTIVE: [...TAB_BUTTON, 'bg-accent', 'text-primary'],
   },
+  ICON: ['w-8', 'h-8'],
 };
