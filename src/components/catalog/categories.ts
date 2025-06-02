@@ -1,5 +1,6 @@
 import BaseComponent from '@/components/base';
 import { CATALOG_TEXTS } from '@/constants';
+import { filterState } from '@/store/filter-state';
 import { CATEGORY_STYLES } from '@/styles/catalog/categories';
 import type { Category } from '@/types/interfaces';
 import ElementBuilder from '@/utils/element-builder';
@@ -17,7 +18,7 @@ export default class Categories extends BaseComponent {
     this.render();
   }
 
-  private static createCategoryItem(category: Category, isInternalCategory = false): HTMLElement {
+  private createCategoryItem(category: Category, isInternalCategory = false): HTMLElement {
     const item = new ElementBuilder({
       tag: 'li',
       className: CATEGORY_STYLES.ITEM,
@@ -28,7 +29,21 @@ export default class Categories extends BaseComponent {
       className: isInternalCategory ? CATEGORY_STYLES.BUTTON : CATEGORY_STYLES.BUTTON_MAIN,
       textContent: category.name['ru'],
       callback: (): void => {
-        console.log('Selected category:', category.id);
+        if (isInternalCategory) {
+          const mainCategoryId = category.ancestors[0]?.id;
+          if (mainCategoryId) {
+            const mainCategory = this.categories.find(
+              (category: Category) => category.id === mainCategoryId
+            );
+            if (mainCategory) {
+              filterState.setCategory(mainCategory);
+            }
+          }
+          filterState.setSubCategory(category);
+        } else {
+          filterState.setCategory(category);
+          filterState.setSubCategory(null);
+        }
       },
     }).getElement();
 
@@ -53,7 +68,7 @@ export default class Categories extends BaseComponent {
     }).getElement();
 
     for (const mainCategory of mainCategories) {
-      const mainItem = Categories.createCategoryItem(mainCategory);
+      const mainItem = this.createCategoryItem(mainCategory);
       list.append(mainItem);
 
       const internalCats = internalCategories.filter((internalCategory) =>
@@ -67,7 +82,7 @@ export default class Categories extends BaseComponent {
         }).getElement();
 
         for (const internalCategory of internalCats) {
-          const subItem = Categories.createCategoryItem(internalCategory, true);
+          const subItem = this.createCategoryItem(internalCategory, true);
           internalList.append(subItem);
         }
 

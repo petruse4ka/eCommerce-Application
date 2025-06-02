@@ -1,5 +1,5 @@
 import { FilterType } from '@/types/enums';
-import type { FilterValue } from '@/types/interfaces';
+import type { Category, FilterValue } from '@/types/interfaces';
 import type { ActionHandler } from '@/types/types';
 
 class FilterState {
@@ -7,12 +7,35 @@ class FilterState {
   private subscribers: ActionHandler[];
   private currentSort: string;
   private searchQuery: string;
+  private selectedCategory: Category | null;
+  private selectedSubCategory: Category | null;
 
   constructor() {
     this.selectedOptions = new Map();
     this.subscribers = [];
     this.currentSort = '';
     this.searchQuery = '';
+    this.selectedCategory = null;
+    this.selectedSubCategory = null;
+  }
+
+  public getSelectedCategory(): Category | null {
+    return this.selectedCategory;
+  }
+
+  public getSelectedSubCategory(): Category | null {
+    return this.selectedSubCategory;
+  }
+
+  public setCategory(category: Category | null): void {
+    this.selectedCategory = category;
+    this.selectedSubCategory = null;
+    this.notify();
+  }
+
+  public setSubCategory(category: Category | null): void {
+    this.selectedSubCategory = category;
+    this.notify();
   }
 
   public getSelectedOptions(filterId: string): Set<FilterValue> {
