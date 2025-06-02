@@ -197,6 +197,7 @@ export const FIELDSET_LABELS = {
 
 export const PAGE_TITLES = {
   CATALOG: 'Каталог',
+  ACCOUNT: 'Личный Кабинет',
 };
 
 export const CATALOG_TEXTS = {

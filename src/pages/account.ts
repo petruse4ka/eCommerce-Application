@@ -8,6 +8,7 @@ import BaseComponent from '@/components/base';
 import FormEditPassword from '@/components/forms/edit-password';
 import PersonalInfo from '@/components/personal-info';
 import Tabs from '@/components/tabs';
+import { PAGE_TITLES } from '@/constants';
 import { userState } from '@/store/user-state';
 import { ACCOUNT_PAGE } from '@/styles/pages/account';
 import { TAB } from '@/styles/tab';
@@ -85,13 +86,19 @@ export default class AccountPage extends BaseComponent {
   }
 
   private render(): void {
+    const title = new ElementBuilder({
+      tag: 'h1',
+      className: ACCOUNT_PAGE.TITLE,
+      textContent: PAGE_TITLES.ACCOUNT,
+    }).getElement();
+
     this.createTabs();
     this.createAddresses();
     this.createUserInfo();
     this.createChangePassword();
 
     this.container.append(this.tabsContainer, this.infoContainer);
-    this.component.append(this.container);
+    this.component.append(title, this.container);
   }
 
   private updateContent(): void {
