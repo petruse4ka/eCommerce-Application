@@ -7,6 +7,7 @@ import ModalSlider from './modal-slider';
 
 export default class ProductSlider extends BaseComponent {
   private currentIndex: number = 0;
+  private activePreview: HTMLElement | null = null;
   constructor(images: Image[]) {
     super({ tag: 'section', className: PRODUCT_STYLES.SLIDER });
 
@@ -25,12 +26,10 @@ export default class ProductSlider extends BaseComponent {
     });
 
     imageContainer.getElement().style.backgroundImage = `url(${images[0].url})`;
-    this.component.append(imageContainer.getElement());
     if (images.length > 1) {
       const previewContainer = new ElementBuilder({
         tag: 'div',
         className: PRODUCT_STYLES.SLIDER_PREVIEW_CONTAINER,
-        callback: (): void => {},
       }).getElement();
 
       images.map((image, index) => {
@@ -38,15 +37,25 @@ export default class ProductSlider extends BaseComponent {
           tag: 'div',
           className: PRODUCT_STYLES.SLIDER_PREVIEW,
           callback: (): void => {
+            if (this.activePreview instanceof HTMLElement) {
+              this.activePreview.classList.remove(...PRODUCT_STYLES.ACTIVE_PREVIEW);
+            }
+            this.activePreview = preview.getElement();
+            this.activePreview.classList.add(...PRODUCT_STYLES.ACTIVE_PREVIEW);
             imageContainer.getElement().style.backgroundImage = `url(${image.url})`;
+
             this.currentIndex = index;
           },
         });
         preview.getElement().style.backgroundImage = `url(${image.url})`;
+        if (index === 0) {
+          this.activePreview = preview.getElement();
+          this.activePreview.classList.add(...PRODUCT_STYLES.ACTIVE_PREVIEW);
+        }
         previewContainer.append(preview.getElement());
       });
 
-      this.component.append(previewContainer);
+      this.component.append(imageContainer.getElement(), previewContainer);
     }
   }
 }

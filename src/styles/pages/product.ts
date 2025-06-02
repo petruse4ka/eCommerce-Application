@@ -177,4 +177,5 @@ export const PRODUCT_STYLES = {
   ],
   EMPTY_PRODUCT_IMAGE: ['w-[250px]'],
   EMPTY_PRODUCT_TEXT: ['text-accent', 'text-xl', 'font-semibold', 'text-center'],
+  ACTIVE_PREVIEW: ['border-secondary-light'],
 };
