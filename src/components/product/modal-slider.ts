@@ -63,22 +63,22 @@ export default class ModalSlider extends BaseComponent {
       textContent: isLeftArrow ? '《' : '》',
       callback: (): void => {
         if (isLeftArrow) {
-          this.leftStep();
+          this.swipeLeft();
         } else {
-          this.rightStep();
+          this.swipeRight();
         }
       },
     }).getElement();
     return arrow;
   }
 
-  private leftStep(): void {
+  private swipeLeft(): void {
     this.currentIndex =
       (this.currentIndex - 1 + this.imageElements.length) % this.imageElements.length;
     this.showSlide(this.currentIndex);
   }
 
-  private rightStep(): void {
+  private swipeRight(): void {
     this.currentIndex = (this.currentIndex + 1) % this.imageElements.length;
     this.showSlide(this.currentIndex);
   }
