@@ -174,7 +174,9 @@ export default class CatalogPage extends BaseComponent {
 
     filtersSection.append(this.selectedFilters.getElement());
 
-    if (this.categories) filtersSection.append(this.categories.getElement());
+    if (this.categories) {
+      filtersSection.append(this.categories.getElement());
+    }
     filtersSection.append(this.productFilters.getElement());
 
     if (this.isLoadingCategories) {
