@@ -42,7 +42,7 @@ export default class Breadcrumbs extends BaseComponent {
 
   private static createCategoryItem(
     category: Category,
-    isSubCategory: boolean,
+    isInternalCategory: boolean,
     isLast: boolean
   ): HTMLElement {
     const item = new ElementBuilder({
@@ -51,17 +51,17 @@ export default class Breadcrumbs extends BaseComponent {
     }).getElement();
 
     const selectedCategory = filterState.getSelectedCategory();
-    const selectedSubCategory = filterState.getSelectedSubCategory();
+    const selectedInternalCategory = filterState.getSelectedInternalCategory();
     const href =
-      isSubCategory && selectedCategory
-        ? `${Route.CATALOG}?category=${selectedCategory.id}&subcategory=${category.id}`
+      isInternalCategory && selectedCategory
+        ? `${Route.CATALOG}?category=${selectedCategory.id}&intcategory=${category.id}`
         : `${Route.CATALOG}?category=${category.id}`;
 
     const isActive =
       isLast &&
-      (isSubCategory
-        ? selectedSubCategory?.id === category.id
-        : selectedCategory?.id === category.id && !selectedSubCategory);
+      (isInternalCategory
+        ? selectedInternalCategory?.id === category.id
+        : selectedCategory?.id === category.id && !selectedInternalCategory);
 
     const link = new ElementBuilder({
       tag: 'span',
@@ -116,15 +116,19 @@ export default class Breadcrumbs extends BaseComponent {
       const categoryItem = Breadcrumbs.createCategoryItem(
         selectedCategory,
         false,
-        !filterState.getSelectedSubCategory()
+        !filterState.getSelectedInternalCategory()
       );
       list.append(categorySeparator, categoryItem);
 
-      const selectedSubCategory = filterState.getSelectedSubCategory();
-      if (selectedSubCategory) {
-        const subCategorySeparator = Breadcrumbs.createSeparator();
-        const subCategoryItem = Breadcrumbs.createCategoryItem(selectedSubCategory, true, true);
-        list.append(subCategorySeparator, subCategoryItem);
+      const selectedInternalCategory = filterState.getSelectedInternalCategory();
+      if (selectedInternalCategory) {
+        const internalCategorySeparator = Breadcrumbs.createSeparator();
+        const internalCategoryItem = Breadcrumbs.createCategoryItem(
+          selectedInternalCategory,
+          true,
+          true
+        );
+        list.append(internalCategorySeparator, internalCategoryItem);
       }
     }
 

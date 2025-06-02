@@ -33,6 +33,9 @@ export default class CatalogAPI {
       if (searchQuery) {
         CatalogAPI.handleSearchQuery(queryParameters, searchQuery);
       }
+
+      CatalogAPI.handleCategories(queryParameters);
+
       queryParameters.append('limit', '500');
       const url = `${import.meta.env['VITE_CTP_API_URL']}/${import.meta.env['VITE_CTP_PROJECT_KEY']}/product-projections/search?${queryParameters.toString()}`;
 
@@ -128,6 +131,19 @@ export default class CatalogAPI {
     }
   }
 
+  private static handleCategories(queryParameters: URLSearchParams): void {
+    const selectedCategory = filterState.getSelectedCategory();
+    const selectedInternalCategory = filterState.getSelectedInternalCategory();
+
+    if (selectedInternalCategory) {
+      const categoryFilter = `categories.id:"${selectedInternalCategory.id}"`;
+      queryParameters.append('filter', categoryFilter);
+    } else if (selectedCategory && !selectedInternalCategory) {
+      const categoryFilter = `categories.id:"${selectedCategory.id}"`;
+      queryParameters.append('filter', categoryFilter);
+    }
+  }
+
   private static handleFilters(filters: FilterRequest): URLSearchParams {
     const queryParameters = new URLSearchParams();
 
@@ -149,8 +165,6 @@ export default class CatalogAPI {
           'filter',
           `variants.price.centAmount:range(${minCents} to ${maxCents})`
         );
-      } else if (filterId === 'category') {
-        queryParameters.append('filter', `categories.id:${filterValue}`);
       } else
         switch (firstOption.type) {
           case FilterType.RANGE: {

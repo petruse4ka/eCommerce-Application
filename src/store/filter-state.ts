@@ -8,7 +8,7 @@ class FilterState {
   private currentSort: string;
   private searchQuery: string;
   private selectedCategory: Category | null;
-  private selectedSubCategory: Category | null;
+  private selectedInternalCategory: Category | null;
 
   constructor() {
     this.selectedOptions = new Map();
@@ -16,25 +16,34 @@ class FilterState {
     this.currentSort = '';
     this.searchQuery = '';
     this.selectedCategory = null;
-    this.selectedSubCategory = null;
+    this.selectedInternalCategory = null;
   }
 
   public getSelectedCategory(): Category | null {
     return this.selectedCategory;
   }
 
-  public getSelectedSubCategory(): Category | null {
-    return this.selectedSubCategory;
+  public getSelectedInternalCategory(): Category | null {
+    return this.selectedInternalCategory;
   }
 
   public setCategory(category: Category | null): void {
     this.selectedCategory = category;
-    this.selectedSubCategory = null;
+    this.selectedInternalCategory = null;
     this.notify();
   }
 
-  public setSubCategory(category: Category | null): void {
-    this.selectedSubCategory = category;
+  public setInternalCategory(category: Category | null): void {
+    this.selectedInternalCategory = category;
+    this.notify();
+  }
+
+  public setCategoryAndInternalCategory(
+    category: Category | null,
+    subCategory: Category | null
+  ): void {
+    this.selectedCategory = category;
+    this.selectedInternalCategory = subCategory;
     this.notify();
   }
 

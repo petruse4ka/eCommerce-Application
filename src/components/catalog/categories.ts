@@ -36,7 +36,7 @@ export default class Categories extends BaseComponent {
       textContent: CATALOG_TEXTS.ALL_CATEGORIES,
       callback: (): void => {
         filterState.setCategory(null);
-        filterState.setSubCategory(null);
+        filterState.setInternalCategory(null);
       },
     }).getElement();
 
@@ -62,11 +62,11 @@ export default class Categories extends BaseComponent {
     }).getElement();
 
     const selectedCategory = filterState.getSelectedCategory();
-    const selectedSubCategory = filterState.getSelectedSubCategory();
+    const selectedInternalCategory = filterState.getSelectedInternalCategory();
 
     const isActive = isInternalCategory
-      ? selectedSubCategory?.id === category.id
-      : selectedCategory?.id === category.id && !selectedSubCategory;
+      ? selectedInternalCategory?.id === category.id
+      : selectedCategory?.id === category.id && !selectedInternalCategory;
 
     const selector = new ElementBuilder({
       tag: 'div',
@@ -80,13 +80,11 @@ export default class Categories extends BaseComponent {
               (category: Category) => category.id === mainCategoryId
             );
             if (mainCategory) {
-              filterState.setCategory(mainCategory);
+              filterState.setCategoryAndInternalCategory(mainCategory, category);
             }
           }
-          filterState.setSubCategory(category);
         } else {
-          filterState.setCategory(category);
-          filterState.setSubCategory(null);
+          filterState.setCategoryAndInternalCategory(category, null);
         }
       },
     }).getElement();
@@ -95,15 +93,15 @@ export default class Categories extends BaseComponent {
     return item;
   }
 
-  private createSubCategoriesList(
+  private createInternalCategoriesList(
     mainCategory: Category,
-    internalCategories: Category[]
+    subCategories: Category[]
   ): HTMLElement | null {
-    const subCategories = internalCategories.filter((category) =>
+    const internalCategories = subCategories.filter((category) =>
       category.ancestors.some((ancestor) => ancestor.id === mainCategory.id)
     );
 
-    if (subCategories.length === 0) {
+    if (internalCategories.length === 0) {
       return null;
     }
 
@@ -112,9 +110,9 @@ export default class Categories extends BaseComponent {
       className: CATEGORY_STYLES.INTERNAL_LIST,
     }).getElement();
 
-    for (const subCategory of subCategories) {
-      const subItem = this.createCategoryItem(subCategory, true);
-      list.append(subItem);
+    for (const internalCategory of internalCategories) {
+      const internalItem = this.createCategoryItem(internalCategory, true);
+      list.append(internalItem);
     }
 
     return list;
@@ -144,9 +142,12 @@ export default class Categories extends BaseComponent {
     for (const mainCategory of mainCategories) {
       list.append(this.createCategoryItem(mainCategory, false));
 
-      const subCategoriesList = this.createSubCategoriesList(mainCategory, internalCategories);
-      if (subCategoriesList) {
-        list.append(subCategoriesList);
+      const internalCategoriesList = this.createInternalCategoriesList(
+        mainCategory,
+        internalCategories
+      );
+      if (internalCategoriesList) {
+        list.append(internalCategoriesList);
       }
     }
 
