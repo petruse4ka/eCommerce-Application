@@ -140,6 +140,7 @@ export enum AddressTypeText {
   SHIPPING = 'Адреса доставки',
   BILLING = 'Адреса для расчетов',
   DEFAULT = 'По умолчанию',
+  NONE = 'Адресов нет',
 }
 
 export enum AddressKey {

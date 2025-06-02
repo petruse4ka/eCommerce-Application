@@ -1,4 +1,5 @@
 import APIUpdateData from '@/api/update-data';
+import { BTN_TEXT } from '@/constants';
 import { INPUTS_CHANGE_ADDRESS_DATA } from '@/data';
 import { ADDRESS } from '@/styles/address';
 import { AddressTypeText, ModalTitle } from '@/types/enums';
@@ -76,7 +77,7 @@ export default class AddressList extends BaseComponent {
   private createAddNewButton(): void {
     const buttonAddNewAddress = new Button({
       style: 'PRIMARY_PINK',
-      textContent: 'Добавить новый адрес',
+      textContent: BTN_TEXT.ADD_NEW_ADDRESS,
       callback: (): void => {
         const type =
           this.addressType === 'setDefaultShippingAddress'
@@ -97,7 +98,7 @@ export default class AddressList extends BaseComponent {
     const info = new ElementBuilder({
       tag: 'div',
       className: '',
-      textContent: 'Адресов нет',
+      textContent: AddressTypeText.NONE,
     }).getElement();
 
     this.component.append(info);
@@ -140,12 +141,12 @@ export default class AddressList extends BaseComponent {
   private createButtons(id: string, isDefault: boolean): HTMLElement {
     const container = new ElementBuilder({
       tag: 'div',
-      className: ['flex', 'flex-col', 'gap-2'],
+      className: ADDRESS.CARD.BTN_CONTAINER,
     }).getElement();
 
     const buttonEdit = new Button({
       style: 'ICON_OUTLINE',
-      textContent: '\uD83D\uDD8A',
+      textContent: BTN_TEXT.PEN,
       callback: (): void => {
         const form = new FormEditUserInfo({
           data: INPUTS_CHANGE_ADDRESS_DATA,
@@ -161,7 +162,7 @@ export default class AddressList extends BaseComponent {
 
     const buttonDelete = new Button({
       style: 'ICON_OUTLINE',
-      textContent: '\uD83D\uDDD1',
+      textContent: BTN_TEXT.TRASH,
       callback: (): void => {
         void APIUpdateData.deleteAddress(id);
       },
@@ -172,7 +173,7 @@ export default class AddressList extends BaseComponent {
     if (!isDefault) {
       const buttonDefaultAddress = new Button({
         style: 'ICON_OUTLINE',
-        textContent: '\u2B50',
+        textContent: BTN_TEXT.STAR,
         callback: (): void => {
           void APIUpdateData.setAddressDefault(id, this.addressType);
         },

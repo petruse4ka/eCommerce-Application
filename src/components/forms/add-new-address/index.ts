@@ -2,6 +2,7 @@ import APIUpdateData from '@/api/update-data';
 import BaseComponent from '@/components/base';
 import Button from '@/components/buttons';
 import Input from '@/components/inputs';
+import { BTN_TEXT } from '@/constants';
 import { INPUTS_CHANGE_ADDRESS_DATA } from '@/data';
 import { FORM_PASSWORD } from '@/styles/forms/forms';
 import { isUserAddress } from '@/types/guards';
@@ -80,7 +81,7 @@ export default class FormAddNewAddress extends BaseComponent {
   private render(): void {
     const button = new Button({
       style: 'PRIMARY_PINK',
-      textContent: 'Добавить новый адрес',
+      textContent: BTN_TEXT.ADD_NEW_ADDRESS,
       callback: (): void => {
         this.submitForm();
       },

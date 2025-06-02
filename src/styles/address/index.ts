@@ -31,6 +31,7 @@ export const ADDRESS = {
       'md:text-base',
     ],
     ACTIVE: ['bg-primary', 'relative'],
+    BTN_CONTAINER: ['flex', 'flex-col', 'gap-2'],
   },
   LINE: {
     CONTAINER: ['flex', 'gap-4', 'text-dark'],
