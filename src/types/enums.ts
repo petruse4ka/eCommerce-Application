@@ -34,6 +34,8 @@ export enum ApiEndpoint {
   ME = '/me',
   PRODUCTS = '/products',
   CHANGE_PASS = '/customers/password',
+  PRODUCT_TYPES = '/product-types',
+  CATEGORIES = '/categories',
 }
 
 export enum ContentType {
@@ -101,21 +103,24 @@ export enum CheckboxText {
   SAME_ADDRESSES = 'Использовать одинаковые адреса',
 }
 
+export enum DeliveryText {
+  PAY = 'Доставка от 400 руб. в день заказа с 12 до 21. Бесплатно при заказе на сумму от 2000 руб',
+  SELF_DELIVERY = 'Самовывоз - бесплатно через 3 часа после оплаты заказа',
+  ANONIM_PRESENT = 'Можем преподнести как анонимный подарок',
+}
+
 export enum FilterType {
   CHECKBOX = 'checkbox',
   RANGE = 'range',
   DROPDOWN = 'dropdown',
+  PRICE = 'price',
+  CATEGORY = 'category',
 }
 
-export enum FilterId {
-  TYPE = 'type',
-  TASTE = 'taste',
-  DIET = 'diet',
-  TOPPING = 'topping',
-  FILLING = 'filling',
-  PRICE = 'price',
-  WEIGHT = 'weight',
-  PROMO = 'promo',
+export enum DropdownOptions {
+  DEFAULT = 'Выберите...',
+  FALSE = 'Нет',
+  TRUE = 'Да',
 }
 
 export enum TabAccount {

@@ -7,6 +7,7 @@
   /* Colors */
   --color-white: #fff;
   --color-gray: #ededf0;
+  --color-gray-light: #f6f6f6;
   --color-black: #1a1a2e;
   --color-pink: #ca5166;
   --color-dark: #2b1414;
@@ -34,7 +35,7 @@
   /* Animation */
   --animate-visible-right: animate-visible-right 1s ease-in-out;
   --animate-hidden-right: animate-hidden-right 1s ease-in-out forwards;
-  --animate-shaking-img: shaking-img 10s infinite ease-in-out;
+  --animate-shaking-img: shaking-img 12s infinite ease-in-out;
 
   @keyframes animate-visible-right {
     0% {
@@ -58,13 +59,11 @@
 
   @keyframes shaking-img {
     0% {
-      transform: rotate(0deg);
-      translate: 0;
+      transform: rotate(0deg) translate(0);
     }
 
     15% {
-      transform: rotate(5deg);
-      translate: 0 -50%;
+      transform: rotate(5deg) translate(-10%, 30%);
     }
 
     55% {
@@ -72,12 +71,11 @@
     }
 
     75% {
-      transform: rotate(18deg);
+      transform: rotate(18deg) translate(20%, -20%);
     }
 
     100% {
-      transform: rotate(0deg);
-      translate: 0;
+      transform: rotate(0deg) translateY(0);
     }
   }
 }

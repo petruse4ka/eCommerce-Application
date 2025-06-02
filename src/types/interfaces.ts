@@ -1,12 +1,4 @@
-import type {
-  AddressKey,
-  ButtonType,
-  FilterId,
-  FilterType,
-  InputType,
-  Route,
-  UserInfoKey,
-} from './enums';
+import type { AddressKey, ButtonType, FilterType, InputType, Route, UserInfoKey } from './enums';
 
 export interface ElementParameters {
   tag: string;
@@ -21,6 +13,7 @@ export interface ElementParameters {
 export interface InputParameters extends ElementParameters {
   type: InputType;
   id: string;
+  name?: string;
   value?: string;
   placeholder?: string;
   readonly?: boolean;
@@ -155,12 +148,15 @@ export interface Packages {
   gradient: string[];
 }
 
-export interface Macarons {
+export interface Products {
+  id: string;
   name: string;
   description: string;
   image: string;
   price: number;
   discountedPrice?: number;
+  fractionDigits?: number;
+  imagesCount?: number;
 }
 
 export interface Guarantees {
@@ -197,26 +193,35 @@ export interface CheckboxOption {
 export interface CheckboxFiltersParameters {
   title: string;
   options: CheckboxOption[];
-  filterId: FilterId;
+  filterId: string;
+}
+
+export interface RangeFilter {
+  id: string;
+  type: FilterType.RANGE;
+  min: number;
+  max: number;
+  title: string;
+}
+
+export interface DropdownFilter {
+  id: string;
+  type: FilterType.DROPDOWN;
+  options: SelectOption[];
+  title: string;
+}
+
+export interface CheckboxFilter {
+  id: string;
+  type: FilterType.CHECKBOX;
+  options: CheckboxOption[];
+  title: string;
 }
 
 export interface FilterConfigs {
-  checkbox: {
-    id: FilterId;
-    type: FilterType.CHECKBOX;
-    options: SelectOption[];
-  }[];
-  range: {
-    id: FilterId;
-    type: FilterType.RANGE;
-    min: number;
-    max: number;
-  }[];
-  dropdown: {
-    id: FilterId;
-    type: FilterType.DROPDOWN;
-    options: SelectOption[];
-  }[];
+  checkbox: CheckboxFilter[];
+  range: RangeFilter[];
+  dropdown: DropdownFilter[];
 }
 
 export interface ProductResponse {
@@ -229,6 +234,7 @@ export interface ProductResponse {
 
 export interface Product {
   id: string;
+  key: string;
   version: number;
   versionModifiedAt: string;
   lastMessageSequenceNumber: number;
@@ -252,7 +258,7 @@ export interface Product {
     typeId: string;
     id: string;
   };
-  masterData: {
+  masterData?: {
     current: {
       name: { [key: string]: string };
       description?: { [key: string]: string };
@@ -265,6 +271,7 @@ export interface Product {
       variants: ProductVariant[];
     };
   };
+  masterVariant?: ProductVariant;
 }
 
 export interface Category {
@@ -276,6 +283,12 @@ export interface ProductVariant {
   id: number;
   sku: string;
   key: string;
+  prices: Price[];
+  images?: Image[];
+  attributes?: Attribute[];
+}
+
+export interface ProductVariantView {
   prices: Price[];
   images?: Image[];
   attributes?: Attribute[];
@@ -337,6 +350,95 @@ export interface UserInfo {
   [UserInfoKey.LAST_NAME]: string;
   [UserInfoKey.DATA_OF_BIRTH]: string;
   [UserInfoKey.EMAIL]: string;
+}
+
+export interface TitleProduct {
+  title: string;
+  description: string;
+}
+
+export interface PriceValue {
+  price: number;
+  oldPrice?: number;
+  code: string;
+}
+
+export interface ProductTypeResponse {
+  limit: number;
+  offset: number;
+  count: number;
+  total: number;
+  results: ProductType[];
+}
+
+export interface ProductType {
+  id: string;
+  version: number;
+  versionModifiedAt: string;
+  createdAt: string;
+  lastModifiedAt: string;
+  lastModifiedBy: {
+    isPlatformClient: boolean;
+    user: {
+      typeId: string;
+      id: string;
+    };
+  };
+  createdBy: {
+    isPlatformClient: boolean;
+    user: {
+      typeId: string;
+      id: string;
+    };
+  };
+  name: string;
+  description: string;
+  classifier: string;
+  attributes: ProductTypeAttribute[];
+  key: string;
+}
+
+export interface ProductTypeAttribute {
+  name: string;
+  label: {
+    [key: string]: string;
+  };
+  inputTip: {
+    [key: string]: string;
+  };
+  isRequired: boolean;
+  type: {
+    name: string;
+    elementType?: {
+      name: string;
+      values?: Array<{
+        key: string;
+        label: string;
+      }>;
+    };
+  };
+  attributeConstraint: string;
+  isSearchable: boolean;
+  inputHint: string;
+  displayGroup: string;
+  level: string;
+}
+
+export interface CategoryResponse {
+  results: Array<{
+    id: string;
+    name: { [key: string]: string };
+  }>;
+}
+
+export interface FilterValue {
+  key: string;
+  value: string;
+  type: FilterType;
+}
+
+export interface FilterRequest {
+  [key: string]: Set<FilterValue>;
 }
 
 export interface UpdateUserInfo {

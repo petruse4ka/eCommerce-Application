@@ -10,6 +10,7 @@ import DeliveryPage from '@/pages/delivery';
 import ErrorPage from '@/pages/errorpage';
 import HomePage from '@/pages/homepage';
 import LoginPage from '@/pages/login';
+import ProductPage from '@/pages/product';
 import RegistrationPage from '@/pages/registration';
 import ReturnsPage from '@/pages/returns';
 import TermsPage from '@/pages/terms';
@@ -24,6 +25,7 @@ export default class App extends BaseComponent {
   private homePage: HomePage = new HomePage();
   private loginPage: LoginPage = new LoginPage();
   private catalogPage: CatalogPage = new CatalogPage();
+  private productPage: ProductPage = new ProductPage();
   private contactPage: ContactsPage = new ContactsPage();
   private aboutPage: AboutPage = new AboutPage();
   private registrationPage: RegistrationPage = new RegistrationPage();
@@ -47,6 +49,7 @@ export default class App extends BaseComponent {
     [Route.RETURNS, this.returnsPage],
     [Route.ACCOUNT, this.accountPage],
     [Route.CATALOG, this.catalogPage],
+    [Route.PRODUCT, this.productPage],
   ]);
 
   constructor() {

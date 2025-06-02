@@ -1,44 +1,79 @@
-import { FILTER_CONFIGS } from '@/data/products';
-import type { FilterId } from '@/types/enums';
-import { isFilterId } from '@/types/guards';
+import { FilterType } from '@/types/enums';
+import type { FilterValue } from '@/types/interfaces';
 import type { ActionHandler } from '@/types/types';
 
 class FilterState {
-  private selectedOptions: Map<string, Set<string>>;
+  private selectedOptions: Map<string, Set<FilterValue>>;
   private subscribers: ActionHandler[];
+  private currentSort: string;
+  private searchQuery: string;
 
   constructor() {
     this.selectedOptions = new Map();
     this.subscribers = [];
+    this.currentSort = '';
+    this.searchQuery = '';
   }
 
-  public getSelectedOptions(filterId: FilterId): Set<string> {
+  public getSelectedOptions(filterId: string): Set<FilterValue> {
     if (!this.selectedOptions.has(filterId)) {
       this.selectedOptions.set(filterId, new Set());
     }
     return this.selectedOptions.get(filterId)!;
   }
 
-  public getSelectedFilters(): Record<string, Set<string>> {
+  public getSelectedFilters(): Record<string, Set<FilterValue>> {
     return Object.fromEntries(this.selectedOptions);
   }
 
-  public toggleOption(filterId: FilterId, value: string): void {
-    const options = this.getSelectedOptions(filterId);
-    const isRangeOrDropdown =
-      FILTER_CONFIGS.range.some(({ id }) => isFilterId(id) && id === filterId) ||
-      FILTER_CONFIGS.dropdown.some(({ id }) => isFilterId(id) && id === filterId);
+  public getCurrentSort(): string {
+    return this.currentSort;
+  }
 
-    if (isRangeOrDropdown) {
-      options.clear();
-      if (value) {
-        options.add(value);
+  public getSearchQuery(): string {
+    return this.searchQuery;
+  }
+
+  public setSort(sortBy: string): void {
+    this.currentSort = sortBy;
+    this.notify();
+  }
+
+  public setSearchQuery(query: string): void {
+    this.searchQuery = query;
+    this.notify();
+  }
+
+  public toggleOption(filterId: string, key: string, value: string, type: FilterType): void {
+    const options = this.getSelectedOptions(filterId);
+
+    if (type === FilterType.RANGE) {
+      const existingOption = [...options].find((option) => option.key === key);
+      if (existingOption) {
+        options.delete(existingOption);
+      } else {
+        options.clear();
+        options.add({ key, value, type });
+      }
+    } else if (type === FilterType.DROPDOWN) {
+      if (key) {
+        const existingOption = [...options].find((option) => option.key === key);
+        if (existingOption) {
+          options.delete(existingOption);
+        } else {
+          options.clear();
+          options.add({ key, value, type });
+        }
+      } else {
+        options.clear();
+        this.selectedOptions.delete(filterId);
       }
     } else {
-      if (options.has(value)) {
-        options.delete(value);
+      const existingOption = [...options].find((option) => option.key === key);
+      if (existingOption) {
+        options.delete(existingOption);
       } else {
-        options.add(value);
+        options.add({ key, value, type });
       }
     }
 
