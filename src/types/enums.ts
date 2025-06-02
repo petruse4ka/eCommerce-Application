@@ -33,6 +33,7 @@ export enum ApiEndpoint {
   USER = '/customers/token',
   ME = '/me',
   PRODUCTS = '/products',
+  CHANGE_PASS = '/customers/password',
   PRODUCT_TYPES = '/product-types',
   CATEGORIES = '/categories',
 }
@@ -61,6 +62,7 @@ export enum ErrorMessages {
   POSTAL_CODE_FORMAT = 'Почтовый индекс должен состоять из 6 цифр',
   PASSWORD_LENGTH = '8 символов',
   INVALID_SPACE = 'Значение не должно содержать пробелы',
+  ERROR_REPEAT_PASSWORD = 'Новый пароль не совпадает',
 }
 
 export enum Route {
@@ -93,6 +95,7 @@ export enum AlertText {
   DUPLICATE_FIELD = 'Пользователь с такой почтой уже существует.',
   ERROR_DEFAULT = 'Проблемы на сервере. Пожалуйста, попробуйте позже',
   CHANGE_SUCCESS = 'Данные успешно изменены',
+  INVALID_CURRENT_PASSWORD = 'Текущий пароль не совпадает',
 }
 
 export enum CheckboxText {

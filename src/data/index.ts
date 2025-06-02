@@ -191,6 +191,30 @@ export const INPUTS_EDIT_USER_INFO_DATA = [
   },
 ];
 
+export const INPUTS_EDIT_USER_PASSWORD = [
+  {
+    id: 'currentPassword',
+    labelText: 'Текущий пароль',
+    placeholder: 'Укажите пароль',
+    type: InputType.PASSWORD,
+    isRequired: true,
+  },
+  {
+    id: 'newPassword',
+    labelText: 'Новый пароль',
+    placeholder: 'Укажите пароль',
+    type: InputType.PASSWORD,
+    isRequired: true,
+  },
+  {
+    id: 'repeatNewPassword',
+    labelText: 'Повторите новый пароль',
+    placeholder: 'Укажите пароль',
+    type: InputType.PASSWORD,
+    isRequired: true,
+  },
+];
+
 export const PACKAGES: Packages[] = [
   {
     ...PACKAGES_TEXTS.PACKAGES.READY_PACK,
