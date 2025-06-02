@@ -32,6 +32,9 @@ export default class Breadcrumbs extends BaseComponent {
         : BREADCRUMB_STYLES.LINK,
       textContent: text,
       callback: (): void => {
+        if (route === Route.CATALOG) {
+          filterState.setCategoryAndInternalCategory(null, null);
+        }
         globalThis.location.href = route;
       },
     }).getElement();
@@ -52,10 +55,6 @@ export default class Breadcrumbs extends BaseComponent {
 
     const selectedCategory = filterState.getSelectedCategory();
     const selectedInternalCategory = filterState.getSelectedInternalCategory();
-    const href =
-      isInternalCategory && selectedCategory
-        ? `${Route.CATALOG}?category=${selectedCategory.id}&intcategory=${category.id}`
-        : `${Route.CATALOG}?category=${category.id}`;
 
     const isActive =
       isLast &&
@@ -70,7 +69,17 @@ export default class Breadcrumbs extends BaseComponent {
         : BREADCRUMB_STYLES.LINK,
       textContent: category.name['ru'] || category.id,
       callback: (): void => {
-        globalThis.location.href = href;
+        if (isInternalCategory) {
+          const mainCategoryId = category.ancestors[0]?.id;
+          if (mainCategoryId) {
+            const mainCategory = filterState.getSelectedCategory();
+            if (mainCategory) {
+              filterState.setCategoryAndInternalCategory(mainCategory, category);
+            }
+          }
+        } else {
+          filterState.setCategoryAndInternalCategory(category, null);
+        }
       },
     }).getElement();
 
