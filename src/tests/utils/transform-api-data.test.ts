@@ -60,6 +60,7 @@ describe('Transform API data', () => {
     expect(result).toEqual({
       billing: [
         {
+          id: 'mtl2gAee',
           [AddressKey.COUNTRY]: 'Россия',
           [AddressKey.CITY]: 'mockCity',
           [AddressKey.STREET]: 'mockStreet',
@@ -69,6 +70,7 @@ describe('Transform API data', () => {
       ],
       shipping: [
         {
+          id: 'mtl2gAee',
           [AddressKey.COUNTRY]: 'Россия',
           [AddressKey.CITY]: 'mockCity',
           [AddressKey.STREET]: 'mockStreet',

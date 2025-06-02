@@ -2,9 +2,13 @@ import { userState } from '@/store/user-state';
 import { AddressKey, AddressType, UserInfoKey } from '@/types/enums';
 import { isUserInfo } from '@/types/guards';
 import type {
+  AddAddress,
+  Addresses,
   AddressInfo,
+  AddressWithId,
   PasswordBody,
   PasswordRequest,
+  UpdateUserAddress,
   UpdateUserInfo,
   UserInfo,
   UserInfoBody,
@@ -32,32 +36,31 @@ export default class TransformApiData {
     const shippingAddress = [];
 
     if (userInfo) {
-      const {
-        addresses,
-        billingAddressIds,
-        shippingAddressIds,
-        defaultBillingAddressId,
-        defaultShippingAddressId,
-      } = userInfo;
+      for (const address of userInfo.addresses) {
+        const { id, streetName, city, postalCode } = address;
 
-      for (const address of addresses) {
-        const addressId = address.id;
-        if (addressId) {
-          const { id, streetName, city, postalCode } = address;
+        const addressTransform = {
+          [AddressKey.COUNTRY]: 'Россия',
+          [AddressKey.CITY]: city,
+          [AddressKey.STREET]: streetName,
+          [AddressKey.POSTAL_CODE]: postalCode,
+          isDefault:
+            userInfo.defaultBillingAddressId === id || userInfo.defaultShippingAddressId === id,
+          id: id,
+        };
 
-          const addressTransform = {
-            [AddressKey.COUNTRY]: 'Россия',
-            [AddressKey.CITY]: city,
-            [AddressKey.STREET]: streetName,
-            [AddressKey.POSTAL_CODE]: postalCode,
-            isDefault: defaultBillingAddressId === id || defaultShippingAddressId === id,
-          };
-
-          if (billingAddressIds.includes(addressId)) {
+        if (userInfo.billingAddressIds.includes(id)) {
+          if (addressTransform.isDefault) {
+            billingAddress.unshift(addressTransform);
+          } else {
             billingAddress.push(addressTransform);
           }
+        }
 
-          if (shippingAddressIds.includes(addressId)) {
+        if (userInfo.shippingAddressIds.includes(id)) {
+          if (addressTransform.isDefault) {
+            shippingAddress.unshift(addressTransform);
+          } else {
             shippingAddress.push(addressTransform);
           }
         }
@@ -103,6 +106,83 @@ export default class TransformApiData {
         version: userInfo.version,
         currentPassword,
         newPassword,
+      };
+    }
+  }
+
+  public static transformUserUpdateAddress(body: AddressWithId): UpdateUserAddress | void {
+    const { id: addressId, city, postalCode, streetName } = body;
+    const userInfo = userState.getUserInfoState();
+
+    if (userInfo) {
+      return {
+        version: Number(userInfo.version),
+        actions: [
+          {
+            action: 'changeAddress',
+            addressId,
+            address: {
+              country: 'RU',
+              city,
+              postalCode,
+              streetName,
+            },
+          },
+        ],
+      };
+    }
+  }
+
+  public static transformUserDeleteAddress(addressId: string): UpdateUserInfo | void {
+    const userInfo = userState.getUserInfoState();
+
+    if (userInfo) {
+      return {
+        version: Number(userInfo.version),
+        actions: [
+          {
+            action: 'removeAddress',
+            addressId,
+          },
+        ],
+      };
+    }
+  }
+
+  public static transformUserSetAddress(addressId: string, action: string): UpdateUserInfo | void {
+    const userInfo = userState.getUserInfoState();
+
+    if (userInfo) {
+      return {
+        version: Number(userInfo.version),
+        actions: [
+          {
+            action,
+            addressId,
+          },
+        ],
+      };
+    }
+  }
+
+  public static transformUserAddAddress(body: Addresses): AddAddress | void {
+    const { city, postalCode, streetName } = body;
+    const userInfo = userState.getUserInfoState();
+
+    if (userInfo) {
+      return {
+        version: Number(userInfo.version),
+        actions: [
+          {
+            action: 'addAddress',
+            address: {
+              country: 'RU',
+              city,
+              postalCode,
+              streetName,
+            },
+          },
+        ],
       };
     }
   }

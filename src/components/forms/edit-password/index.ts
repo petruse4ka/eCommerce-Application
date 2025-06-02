@@ -7,7 +7,7 @@ import { BTN_TEXT } from '@/constants';
 import { INPUTS_EDIT_USER_PASSWORD } from '@/data';
 import { AUTHORIZATION_INPUTS_CONTAINER, FORM_PASSWORD } from '@/styles/forms/forms';
 import { AlertStatus, AlertText, ErrorMessages } from '@/types/enums';
-import { isErrorInfo, isPasswordInfo } from '@/types/guards';
+import { isErrorInfoPasswordChange, isPasswordInfo } from '@/types/guards';
 import type { PasswordBody } from '@/types/interfaces';
 import ApiErrors from '@/utils/api-errors';
 import ElementBuilder from '@/utils/element-builder';
@@ -117,7 +117,7 @@ export default class FormEditPassword extends BaseComponent {
           const parsed: unknown = JSON.parse(error.message);
           if (Array.isArray(parsed)) {
             for (const item of parsed) {
-              if (isErrorInfo(item)) {
+              if (isErrorInfoPasswordChange(item)) {
                 const errorInfo = ApiErrors.getErrorInfo(item.code);
 
                 if (errorInfo === AlertText.INVALID_CURRENT_PASSWORD) {

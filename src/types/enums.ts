@@ -96,6 +96,8 @@ export enum AlertText {
   ERROR_DEFAULT = 'Проблемы на сервере. Пожалуйста, попробуйте позже',
   CHANGE_SUCCESS = 'Данные успешно изменены',
   INVALID_CURRENT_PASSWORD = 'Текущий пароль не совпадает',
+  DELETE_ADDRESS_SUCCESS = 'Адрес успешно удален',
+  SET_DEFAULT_ADDRESS = 'Адрес успешно установлен по умолчанию',
 }
 
 export enum CheckboxText {
@@ -138,6 +140,7 @@ export enum AddressTypeText {
   SHIPPING = 'Адреса доставки',
   BILLING = 'Адреса для расчетов',
   DEFAULT = 'По умолчанию',
+  NONE = 'Адресов нет',
 }
 
 export enum AddressKey {

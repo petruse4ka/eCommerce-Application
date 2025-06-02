@@ -143,4 +143,13 @@ export const CUSTOM_BUTTON_STYLE = {
     'focus:outline-none',
     'cursor-pointer',
   ],
+  ICON_OUTLINE: [
+    'cursor-pointer',
+    'text-2xl',
+    'block',
+    'bg-accent',
+    'w-[40px]',
+    'h-[40px]',
+    'rounded-md',
+  ],
 };

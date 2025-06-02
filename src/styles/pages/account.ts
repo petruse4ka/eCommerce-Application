@@ -18,5 +18,5 @@ export const ACCOUNT_PAGE = {
     'flex-col',
     'sm:flex-row',
   ],
-  INFO_CONTAINER: ['flex', 'gap-7', 'lg:gap-5', 'xl:gap-15', 'flex-col', 'lg:flex-row'],
+  INFO_CONTAINER: ['flex', 'gap-7', 'lg:gap-5', 'xl:gap-15', 'flex-col', 'lg:flex-row', 'relative'],
 };

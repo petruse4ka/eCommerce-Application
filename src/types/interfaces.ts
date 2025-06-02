@@ -49,8 +49,10 @@ export interface AuthResponse {
   token_type: string;
 }
 
+export type AddressWithId = Addresses & { id: string };
+
 export interface Customer {
-  addresses: Addresses[];
+  addresses: AddressWithId[];
   authenticationMode: string;
   billingAddressIds: string[];
   createdAt: string;
@@ -93,7 +95,7 @@ export interface InputComponent {
 }
 
 export interface Addresses {
-  id?: string;
+  //id?: string;
   country: string;
   city: string;
   streetName: string;
@@ -127,6 +129,8 @@ export interface RegistrationBody {
   email: string;
   password: string;
   addresses: Addresses[];
+  shippingAddresses: number[];
+  billingAddresses: number[];
   defaultShippingAddress?: number;
   defaultBillingAddress?: number;
 }
@@ -364,6 +368,7 @@ export interface AddressInfo {
   [AddressKey.STREET]: string;
   [AddressKey.POSTAL_CODE]: string;
   isDefault: boolean;
+  id: string;
 }
 
 export interface UserInfo {
@@ -469,4 +474,31 @@ export interface FilterRequest {
 export interface UpdateUserInfo {
   version: number;
   actions: Record<string, string>[];
+}
+
+export interface UpdateUserAddress {
+  version: number;
+  actions: {
+    action: string;
+    addressId: string;
+    address: {
+      country: string;
+      city: string;
+      postalCode: string;
+      streetName: string;
+    };
+  }[];
+}
+
+export interface AddAddress {
+  version: number;
+  actions: {
+    action: string;
+    address: {
+      country: string;
+      city: string;
+      postalCode: string;
+      streetName: string;
+    };
+  }[];
 }

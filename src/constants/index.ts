@@ -119,6 +119,10 @@ export const BTN_TEXT = {
   LOGIN_REDIRECT: 'Перейти к авторизации',
   EDIT: 'Редактировать',
   SAVE_CHANGES: 'Сохранить изменения',
+  ADD_NEW_ADDRESS: 'Добавить новый адрес',
+  PEN: '\uD83D\uDD8A',
+  TRASH: '\uD83D\uDDD1',
+  STAR: '\u2606',
 };
 
 export const INTRO_TEXTS = {

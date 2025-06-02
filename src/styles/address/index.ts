@@ -15,7 +15,7 @@ export const ADDRESS = {
     'rounded-md',
   ],
   CARD: {
-    DEFAULT: ['rounded-md', 'p-2', 'flex', 'flex-col', 'gap-1'],
+    DEFAULT: ['rounded-md', 'p-2', 'flex', 'gap-1'],
     DEFAULT_TITLE: [
       'absolute',
       '-top-4.5',
@@ -31,6 +31,7 @@ export const ADDRESS = {
       'md:text-base',
     ],
     ACTIVE: ['bg-primary', 'relative'],
+    BTN_CONTAINER: ['flex', 'flex-col', 'gap-2'],
   },
   LINE: {
     CONTAINER: ['flex', 'gap-4', 'text-dark'],

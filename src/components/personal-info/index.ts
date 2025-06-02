@@ -62,7 +62,10 @@ export default class PersonalInfo extends BaseComponent {
       style: 'PRIMARY_PINK',
       textContent: BTN_TEXT.EDIT,
       callback: (): void => {
-        const form = new FormEditUserInfo(INPUTS_EDIT_USER_INFO_DATA, this.infoValue);
+        const form = new FormEditUserInfo({
+          data: INPUTS_EDIT_USER_INFO_DATA,
+          currentInputs: this.infoValue,
+        });
         const modal = new Modal({ title: ModalTitle.CHANGE, content: form });
         this.component.append(modal.getElement());
 

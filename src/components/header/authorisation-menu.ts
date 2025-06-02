@@ -1,3 +1,4 @@
+import API from '@/api';
 import accountIcon from '@/assets/icons/account.svg';
 import loginIcon from '@/assets/icons/login.svg';
 import logoutIcon from '@/assets/icons/logout.svg';
@@ -97,6 +98,7 @@ export default class AuthorizationMenu extends BaseComponent {
       menuItem.addEventListener('click', () => {
         if (item.name === AUTHORIZATION_MENU_TEXT.LOGOUT) {
           userState.setAuthorizationState(false);
+          void API.authentication();
           Alert.render({
             textContent: AlertText.LOGOUT_SUCCESS,
             status: AlertStatus.SUCCESS,

@@ -1,4 +1,5 @@
 import type {
+  Addresses,
   Category,
   CategoryResponse,
   ErrorInfo,
@@ -20,12 +21,35 @@ export function isErrorInfo(data: unknown): data is ErrorInfo {
   );
 }
 
+export function isErrorInfoItem(data: unknown): data is { code: string; field: string } {
+  return typeof data === 'object' && data !== null && 'code' in data && 'field' in data;
+}
+
+export function isErrorInfoPasswordChange(data: unknown): data is { code: string } {
+  return typeof data === 'object' && data !== null && 'code' in data;
+}
+
 export function isUserInfo(id: string, userInfo: UserInfoBody): id is keyof UserInfoBody {
   return id in userInfo;
 }
 
 export function isPasswordInfo(id: string, passwordInfo: PasswordBody): id is keyof PasswordBody {
   return id in passwordInfo;
+}
+
+export function isUserAddress(id: string, userAddress: Addresses): id is keyof Addresses {
+  return id in userAddress;
+}
+
+export function isAddresses(object: unknown): object is Addresses {
+  return (
+    typeof object === 'object' &&
+    object !== null &&
+    'country' in object &&
+    'city' in object &&
+    'streetName' in object &&
+    'postalCode' in object
+  );
 }
 
 export function isProductResponse(data: unknown): data is ProductResponse {
