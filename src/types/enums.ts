@@ -94,10 +94,13 @@ export enum AlertText {
   ACCOUNT_CREDENTIALS_ERROR = 'Учетная запись клиента с указанными учетными данными не найдена.',
   DUPLICATE_FIELD = 'Пользователь с такой почтой уже существует.',
   ERROR_DEFAULT = 'Проблемы на сервере. Пожалуйста, попробуйте позже',
-  CHANGE_SUCCESS = 'Данные успешно изменены',
+  CHANGE_SUCCESS = 'Данные пользователя успешно изменены',
   INVALID_CURRENT_PASSWORD = 'Текущий пароль не совпадает',
   DELETE_ADDRESS_SUCCESS = 'Адрес успешно удален',
+  CHANGE_ADDRESS_SUCCESS = 'Данные адреса успешно изменены',
   SET_DEFAULT_ADDRESS = 'Адрес успешно установлен по умолчанию',
+  ADD_ADDRESS_SUCCESS = 'Новый адрес добавлен',
+  CHANGE_PASSWORD_SUCCESS = 'Пароль успешно изменен',
 }
 
 export enum CheckboxText {
