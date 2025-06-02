@@ -6,12 +6,13 @@ import ElementBuilder from '@/utils/element-builder';
 export default class ModalSlider extends BaseComponent {
   private images: Image[];
   private imageElements: HTMLDivElement[];
-  private currentIndex = 0;
+  private currentIndex: number;
 
-  constructor(parameters: Image[]) {
+  constructor(parameters: Image[], currentIndex: number) {
     super({ tag: 'dialog', className: MODAL_SLIDER.SLIDER });
     this.images = parameters;
     this.imageElements = [];
+    this.currentIndex = currentIndex;
     this.render();
   }
 
@@ -52,7 +53,8 @@ export default class ModalSlider extends BaseComponent {
     if (this.images.length > 1) {
       this.component.append(leftArrow, rightArrow);
     }
-    this.showSlide(0);
+
+    this.showSlide(this.currentIndex);
   }
 
   private createArrow(isLeftArrow: boolean): HTMLElement {
