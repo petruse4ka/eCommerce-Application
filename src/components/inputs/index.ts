@@ -42,7 +42,7 @@ export default class Input {
       disabled: isDisabled,
       eventType: parameters.eventType,
     });
-    console.log(type);
+
     this.addEventListeners(type);
 
     this.label = new ElementBuilder({
