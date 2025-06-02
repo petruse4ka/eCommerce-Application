@@ -232,6 +232,11 @@ export interface ProductResponse {
   results: Product[];
 }
 
+export interface ProductApiResponse {
+  products: Products[];
+  productData: Product[];
+}
+
 export interface Product {
   id: string;
   key: string;
@@ -286,6 +291,13 @@ export interface Products {
 export interface Category {
   typeId: string;
   id: string;
+  name: {
+    [key: string]: string;
+  };
+  ancestors: Array<{
+    typeId: string;
+    id: string;
+  }>;
 }
 
 export interface ProductVariant {
@@ -437,6 +449,10 @@ export interface CategoryResponse {
   results: Array<{
     id: string;
     name: { [key: string]: string };
+    ancestors?: Array<{
+      typeId: string;
+      id: string;
+    }>;
   }>;
 }
 
