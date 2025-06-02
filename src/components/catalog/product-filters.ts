@@ -142,15 +142,11 @@ export default class ProductFilters extends BaseComponent {
     const container = this.filtersContainer.getElement();
     while (container.firstChild) container.firstChild.remove();
 
-    if (!this.filterConfigs) {
-      this.component.append(this.filtersContainer.getElement());
-      return;
-    }
-
     if (
-      this.filterConfigs.checkbox.length === 0 &&
-      this.filterConfigs.range.length === 0 &&
-      this.filterConfigs.dropdown.length === 0
+      !this.filterConfigs ||
+      (this.filterConfigs.checkbox.length === 0 &&
+        this.filterConfigs.range.length === 0 &&
+        this.filterConfigs.dropdown.length === 0)
     ) {
       const emptyFilters = new EmptyComponent(
         CATALOG_TEXTS.NO_FILTERS,

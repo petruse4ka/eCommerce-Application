@@ -111,6 +111,7 @@ export default class CatalogPage extends BaseComponent {
             }
 
             this.isLoading = false;
+            this.isLoadingCategories = false;
             this.render();
             return;
           }
@@ -124,8 +125,9 @@ export default class CatalogPage extends BaseComponent {
     } catch (error) {
       console.error('Error loading products:', error);
       this.isLoading = false;
-      productsState.updateProducts([]);
-      this.productFilters.updateFilters({ checkbox: [], range: [], dropdown: [] });
+      this.isLoadingCategories = false;
+      productsState.notifyError();
+      this.productFilters.updateFilters(null);
       this.selectedFilters.updateFilterConfigs({ checkbox: [], range: [], dropdown: [] });
       this.render();
     }
@@ -145,6 +147,7 @@ export default class CatalogPage extends BaseComponent {
       }
     } catch (error) {
       console.error('Error updating products:', error);
+      productsState.notifyError();
     } finally {
       this.isLoading = false;
       this.render();
