@@ -3,7 +3,7 @@ export const ACCOUNT_PAGE = {
   CONTAINER: [
     'grid',
     'grid-cols-1',
-    'md:grid-cols-4',
+    'xl:grid-cols-4',
     'gap-8',
     'px-4',
     'py-8',
@@ -11,6 +11,6 @@ export const ACCOUNT_PAGE = {
     'mx-auto',
     'w-full',
   ],
-  INFO_CONTAINER: ['md:col-span-3', 'flex', 'flex-col', 'gap-8'],
-  TABS_CONTAINER: ['md:col-span-1', 'flex', 'flex-col', 'gap-4'],
+  INFO_CONTAINER: ['xl:col-span-3', 'flex', 'flex-col', 'gap-8'],
+  TABS_CONTAINER: ['xl:col-span-1', 'flex', 'flex-col', 'gap-4'],
 };

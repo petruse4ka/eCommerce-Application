@@ -126,7 +126,7 @@ export enum DropdownOptions {
 }
 
 export enum TabAccount {
-  INFO = 'Персональная информация',
+  INFO = 'Личная информация',
   ADDRESSES = 'Адреса',
   CHANGE_PASS = 'Сменить пароль',
 }

@@ -41,7 +41,7 @@ export default class Tabs extends BaseComponent {
 
     const textSpan = new ElementBuilder({
       tag: 'span',
-      className: [],
+      className: TAB.NAME,
       textContent,
     }).getElement();
 
