@@ -16,17 +16,61 @@ export default class Categories extends BaseComponent {
 
     this.categories = categories;
     this.render();
+    filterState.subscribe(this.handleFilterChange);
   }
 
-  private createCategoryItem(category: Category, isInternalCategory = false): HTMLElement {
+  private static createAllCategoriesSelector(): HTMLElement {
     const item = new ElementBuilder({
       tag: 'li',
       className: CATEGORY_STYLES.ITEM,
     }).getElement();
 
-    const button = new ElementBuilder({
-      tag: 'button',
-      className: isInternalCategory ? CATEGORY_STYLES.BUTTON : CATEGORY_STYLES.BUTTON_MAIN,
+    const isActive = !filterState.getSelectedCategory();
+    const selectorClasses = isActive
+      ? [...CATEGORY_STYLES.SELECTOR_MAIN, ...CATEGORY_STYLES.ACTIVE]
+      : CATEGORY_STYLES.SELECTOR_MAIN;
+
+    const selector = new ElementBuilder({
+      tag: 'div',
+      className: selectorClasses,
+      textContent: CATALOG_TEXTS.ALL_CATEGORIES,
+      callback: (): void => {
+        filterState.setCategory(null);
+        filterState.setSubCategory(null);
+      },
+    }).getElement();
+
+    item.append(selector);
+    return item;
+  }
+
+  private static getSelectorClasses(isInternalCategory: boolean, isActive: boolean): string[] {
+    const defaultSelectorClass = isInternalCategory
+      ? CATEGORY_STYLES.SELECTOR
+      : CATEGORY_STYLES.SELECTOR_MAIN;
+    return isActive ? [...defaultSelectorClass, ...CATEGORY_STYLES.ACTIVE] : defaultSelectorClass;
+  }
+
+  private handleFilterChange = (): void => {
+    this.render();
+  };
+
+  private createCategoryItem(category: Category, isInternalCategory: boolean): HTMLElement {
+    const item = new ElementBuilder({
+      tag: 'li',
+      className: CATEGORY_STYLES.ITEM,
+    }).getElement();
+
+    const selectedCategory = filterState.getSelectedCategory();
+    const selectedSubCategory = filterState.getSelectedSubCategory();
+
+    const isActive = isInternalCategory
+      ? selectedSubCategory?.id === category.id
+      : selectedCategory?.id === category.id && !selectedSubCategory;
+
+    const selector = new ElementBuilder({
+      tag: 'div',
+      className: Categories.getSelectorClasses(isInternalCategory, isActive),
       textContent: category.name['ru'],
       callback: (): void => {
         if (isInternalCategory) {
@@ -47,12 +91,40 @@ export default class Categories extends BaseComponent {
       },
     }).getElement();
 
-    item.append(button);
-
+    item.append(selector);
     return item;
   }
 
+  private createSubCategoriesList(
+    mainCategory: Category,
+    internalCategories: Category[]
+  ): HTMLElement | null {
+    const subCategories = internalCategories.filter((category) =>
+      category.ancestors.some((ancestor) => ancestor.id === mainCategory.id)
+    );
+
+    if (subCategories.length === 0) {
+      return null;
+    }
+
+    const list = new ElementBuilder({
+      tag: 'ul',
+      className: CATEGORY_STYLES.INTERNAL_LIST,
+    }).getElement();
+
+    for (const subCategory of subCategories) {
+      const subItem = this.createCategoryItem(subCategory, true);
+      list.append(subItem);
+    }
+
+    return list;
+  }
+
   private render(): void {
+    while (this.component.firstChild) {
+      this.component.firstChild.remove();
+    }
+
     const title = new ElementBuilder({
       tag: 'h2',
       className: CATEGORY_STYLES.TITLE,
@@ -67,26 +139,14 @@ export default class Categories extends BaseComponent {
       className: CATEGORY_STYLES.LIST,
     }).getElement();
 
+    list.append(Categories.createAllCategoriesSelector());
+
     for (const mainCategory of mainCategories) {
-      const mainItem = this.createCategoryItem(mainCategory);
-      list.append(mainItem);
+      list.append(this.createCategoryItem(mainCategory, false));
 
-      const internalCats = internalCategories.filter((internalCategory) =>
-        internalCategory.ancestors.some((ancestor) => ancestor.id === mainCategory.id)
-      );
-
-      if (internalCats.length > 0) {
-        const internalList = new ElementBuilder({
-          tag: 'ul',
-          className: CATEGORY_STYLES.INTERNAL_LIST,
-        }).getElement();
-
-        for (const internalCategory of internalCats) {
-          const subItem = this.createCategoryItem(internalCategory, true);
-          internalList.append(subItem);
-        }
-
-        list.append(internalList);
+      const subCategoriesList = this.createSubCategoriesList(mainCategory, internalCategories);
+      if (subCategoriesList) {
+        list.append(subCategoriesList);
       }
     }
 

@@ -229,7 +229,8 @@ export const CATALOG_TEXTS = {
   SHORT_SEARCH_QUERY: 'Используйте более 2 символов для поиска',
   HOME: 'Главная',
   CATALOG: 'Каталог',
-} as const;
+  ALL_CATEGORIES: 'Все продукты',
+};
 
 export const PRODUCT_ATTRIBUTES = {
   WEIGHT: 'Вес',

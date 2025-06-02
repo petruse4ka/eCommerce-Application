@@ -17,15 +17,19 @@ export default class Breadcrumbs extends BaseComponent {
     filterState.subscribe(this.handleFilterChange);
   }
 
-  private static createDefaultItem(text: string, route: Route): HTMLElement {
+  private static createDefaultItem(text: string, route: Route, isDeepest: boolean): HTMLElement {
     const item = new ElementBuilder({
       tag: 'li',
       className: BREADCRUMB_STYLES.ITEM,
     }).getElement();
 
+    const isActive = isDeepest && !filterState.getSelectedCategory();
+
     const link = new ElementBuilder({
       tag: 'span',
-      className: BREADCRUMB_STYLES.LINK,
+      className: isActive
+        ? [...BREADCRUMB_STYLES.LINK, ...BREADCRUMB_STYLES.ACTIVE]
+        : BREADCRUMB_STYLES.LINK,
       textContent: text,
       callback: (): void => {
         globalThis.location.href = route;
@@ -36,21 +40,34 @@ export default class Breadcrumbs extends BaseComponent {
     return item;
   }
 
-  private static createCategoryItem(category: Category, isSubCategory = false): HTMLElement {
+  private static createCategoryItem(
+    category: Category,
+    isSubCategory: boolean,
+    isLast: boolean
+  ): HTMLElement {
     const item = new ElementBuilder({
       tag: 'li',
       className: BREADCRUMB_STYLES.ITEM,
     }).getElement();
 
     const selectedCategory = filterState.getSelectedCategory();
+    const selectedSubCategory = filterState.getSelectedSubCategory();
     const href =
       isSubCategory && selectedCategory
         ? `${Route.CATALOG}?category=${selectedCategory.id}&subcategory=${category.id}`
         : `${Route.CATALOG}?category=${category.id}`;
 
+    const isActive =
+      isLast &&
+      (isSubCategory
+        ? selectedSubCategory?.id === category.id
+        : selectedCategory?.id === category.id && !selectedSubCategory);
+
     const link = new ElementBuilder({
       tag: 'span',
-      className: BREADCRUMB_STYLES.LINK,
+      className: isActive
+        ? [...BREADCRUMB_STYLES.LINK, ...BREADCRUMB_STYLES.ACTIVE]
+        : BREADCRUMB_STYLES.LINK,
       textContent: category.name['ru'] || category.id,
       callback: (): void => {
         globalThis.location.href = href;
@@ -83,22 +100,30 @@ export default class Breadcrumbs extends BaseComponent {
       className: BREADCRUMB_STYLES.LIST,
     }).getElement();
 
-    const homeItem = Breadcrumbs.createDefaultItem(CATALOG_TEXTS.HOME, Route.HOME);
+    const homeItem = Breadcrumbs.createDefaultItem(CATALOG_TEXTS.HOME, Route.HOME, false);
     const separator = Breadcrumbs.createSeparator();
-    const catalogItem = Breadcrumbs.createDefaultItem(CATALOG_TEXTS.CATALOG, Route.CATALOG);
+    const catalogItem = Breadcrumbs.createDefaultItem(
+      CATALOG_TEXTS.CATALOG,
+      Route.CATALOG,
+      !filterState.getSelectedCategory()
+    );
 
     list.append(homeItem, separator, catalogItem);
 
     const selectedCategory = filterState.getSelectedCategory();
     if (selectedCategory) {
       const categorySeparator = Breadcrumbs.createSeparator();
-      const categoryItem = Breadcrumbs.createCategoryItem(selectedCategory);
+      const categoryItem = Breadcrumbs.createCategoryItem(
+        selectedCategory,
+        false,
+        !filterState.getSelectedSubCategory()
+      );
       list.append(categorySeparator, categoryItem);
 
       const selectedSubCategory = filterState.getSelectedSubCategory();
       if (selectedSubCategory) {
         const subCategorySeparator = Breadcrumbs.createSeparator();
-        const subCategoryItem = Breadcrumbs.createCategoryItem(selectedSubCategory, true);
+        const subCategoryItem = Breadcrumbs.createCategoryItem(selectedSubCategory, true, true);
         list.append(subCategorySeparator, subCategoryItem);
       }
     }
