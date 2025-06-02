@@ -2,6 +2,7 @@ import type {
   Addresses,
   CategoryResponse,
   ErrorInfo,
+  PasswordBody,
   ProductResponse,
   ProductTypeResponse,
   UserInfoBody,
@@ -13,12 +14,18 @@ export function isErrorInfo(data: unknown): data is ErrorInfo {
     data !== null &&
     'statusCode' in data &&
     'message' in data &&
-    'errors' in data
+    'errors' in data &&
+    'code' in data &&
+    'field' in data
   );
 }
 
 export function isUserInfo(id: string, userInfo: UserInfoBody): id is keyof UserInfoBody {
   return id in userInfo;
+}
+
+export function isPasswordInfo(id: string, passwordInfo: PasswordBody): id is keyof PasswordBody {
+  return id in passwordInfo;
 }
 
 export function isUserAddress(id: string, userAddress: Addresses): id is keyof Addresses {

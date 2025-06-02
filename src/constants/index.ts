@@ -12,6 +12,8 @@ export const DEFAULT_OPTIONS_COUNT = 5;
 
 export const DEFAULT_CURRENCY = '₽';
 
+export const MAX_DESCRIPTION_LENGTH = 150;
+
 export const LOADING_CONFIG = {
   MAX_ATTEMPTS: 10,
   DELAY: 500,
@@ -224,4 +226,26 @@ export const CATALOG_TEXTS = {
   CATEGORY: 'Категория',
   CATEGORY_ID: 'category',
   PROMO_TAG: 'Акция',
+  SHORT_SEARCH_QUERY: 'Используйте более 2 символов для поиска',
 };
+
+export const PRODUCT_ATTRIBUTES = {
+  WEIGHT: 'Вес',
+  FLAVORS: 'Вкус',
+  DIET: 'Диета',
+  TOPING: 'Глазурь',
+  FILLING: 'Начинка',
+};
+
+export const PRODUCT_TEXT = {
+  BASKET: 'В корзину',
+  TOTAL: 'Итого по данной позиции: ',
+  CURRENCY: DEFAULT_CURRENCY,
+  DESCRIPTION: 'Описание',
+  GRAMM: 'г',
+  ERROR_ADDRESS:
+    'Увы, этот десерт закончился, но загляните в каталог — там вас ждут другие вкусные находки!',
+  CATALOG: 'В каталог',
+};
+
+export const DEFAULT_QUANTITY_AMOUNT = 1;

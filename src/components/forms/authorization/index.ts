@@ -144,7 +144,7 @@ export default class FormAuthorization {
     this.showValidationError('password', isNotValidPassword);
 
     if (!isNotValidEmail && !isNotValidPassword) {
-      API.userSignInResponse(body).catch((error: ErrorInfo) => {
+      API.userSignInResponse({ userInfo: body, isLogin: true }).catch((error: ErrorInfo) => {
         const errorInfo = ApiErrors.getErrorInfo(error.message);
 
         Alert.render({

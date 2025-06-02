@@ -33,6 +33,7 @@ export enum ApiEndpoint {
   USER = '/customers/token',
   ME = '/me',
   PRODUCTS = '/products',
+  CHANGE_PASS = '/customers/password',
   PRODUCT_TYPES = '/product-types',
   CATEGORIES = '/categories',
 }
@@ -61,6 +62,7 @@ export enum ErrorMessages {
   POSTAL_CODE_FORMAT = 'Почтовый индекс должен состоять из 6 цифр',
   PASSWORD_LENGTH = '8 символов',
   INVALID_SPACE = 'Значение не должно содержать пробелы',
+  ERROR_REPEAT_PASSWORD = 'Новый пароль не совпадает',
 }
 
 export enum Route {
@@ -93,12 +95,19 @@ export enum AlertText {
   DUPLICATE_FIELD = 'Пользователь с такой почтой уже существует.',
   ERROR_DEFAULT = 'Проблемы на сервере. Пожалуйста, попробуйте позже',
   CHANGE_SUCCESS = 'Данные успешно изменены',
+  INVALID_CURRENT_PASSWORD = 'Текущий пароль не совпадает',
   DELETE_ADDRESS_SUCCESS = 'Адрес успешно удален',
 }
 
 export enum CheckboxText {
   DEFAULT_SAVE = 'Сохранить адрес по умолчанию',
   SAME_ADDRESSES = 'Использовать одинаковые адреса',
+}
+
+export enum DeliveryText {
+  PAY = 'Доставка от 400 руб. в день заказа с 12 до 21. Бесплатно при заказе на сумму от 2000 руб',
+  SELF_DELIVERY = 'Самовывоз - бесплатно через 3 часа после оплаты заказа',
+  ANONIM_PRESENT = 'Можем преподнести как анонимный подарок',
 }
 
 export enum FilterType {

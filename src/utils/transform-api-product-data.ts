@@ -1,4 +1,4 @@
-import type { ProductResponse, Products } from '@/types/interfaces';
+import type { Product, ProductResponse, Products, ProductVariantView } from '@/types/interfaces';
 
 export default class TransformApiProductsData {
   public static transformProducts(response: ProductResponse): Products[] {
@@ -19,6 +19,7 @@ export default class TransformApiProductsData {
         const priceDivider = 10 ** fractionDigits;
 
         products.push({
+          id: product.key,
           name: typeof nameAttribute?.value === 'string' ? nameAttribute.value : '',
           description:
             typeof descAttribute?.value === 'object' && 'ru' in descAttribute.value
@@ -30,10 +31,25 @@ export default class TransformApiProductsData {
             ? masterVariant.prices[0].discounted.value.centAmount / priceDivider
             : undefined,
           fractionDigits,
+          imagesCount: masterVariant.images?.length || 0,
         });
       }
     }
 
     return products;
+  }
+
+  public static transformProduct(response: Product): ProductVariantView {
+    if (response.masterData) {
+      const masterVariant = response.masterData.current.masterVariant;
+      const { attributes, prices, images } = masterVariant;
+
+      return {
+        attributes,
+        prices,
+        images,
+      };
+    }
+    return { attributes: [], prices: [], images: [] };
   }
 }

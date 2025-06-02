@@ -109,6 +109,19 @@ export interface UserInfoBody {
   email: string;
 }
 
+export interface PasswordBody {
+  newPassword: string;
+  currentPassword: string;
+  repeatNewPassword: string;
+}
+
+export interface PasswordRequest {
+  id: string;
+  version: number;
+  currentPassword: string;
+  newPassword: string;
+}
+
 export interface RegistrationBody {
   firstName: string;
   lastName: string;
@@ -140,12 +153,14 @@ export interface Packages {
 }
 
 export interface Products {
+  id: string;
   name: string;
   description: string;
   image: string;
   price: number;
   discountedPrice?: number;
   fractionDigits?: number;
+  imagesCount?: number;
 }
 
 export interface Guarantees {
@@ -223,6 +238,7 @@ export interface ProductResponse {
 
 export interface Product {
   id: string;
+  key: string;
   version: number;
   versionModifiedAt: string;
   lastMessageSequenceNumber: number;
@@ -271,6 +287,12 @@ export interface ProductVariant {
   id: number;
   sku: string;
   key: string;
+  prices: Price[];
+  images?: Image[];
+  attributes?: Attribute[];
+}
+
+export interface ProductVariantView {
   prices: Price[];
   images?: Image[];
   attributes?: Attribute[];
@@ -333,6 +355,17 @@ export interface UserInfo {
   [UserInfoKey.LAST_NAME]: string;
   [UserInfoKey.DATA_OF_BIRTH]: string;
   [UserInfoKey.EMAIL]: string;
+}
+
+export interface TitleProduct {
+  title: string;
+  description: string;
+}
+
+export interface PriceValue {
+  price: number;
+  oldPrice?: number;
+  code: string;
 }
 
 export interface ProductTypeResponse {

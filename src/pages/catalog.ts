@@ -101,7 +101,7 @@ export default class CatalogPage extends BaseComponent {
     this.render();
 
     const selectedFilters = filterState.getSelectedFilters();
-    const productsData = await CatalogAPI.getProductsWithFilters(selectedFilters);
+    const productsData = await CatalogAPI.getProducts(selectedFilters);
 
     if (productsData) {
       productsState.updateProducts(productsData.products);

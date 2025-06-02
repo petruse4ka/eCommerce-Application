@@ -1,14 +1,5 @@
 export const ADDRESS = {
-  CONTAINER: [
-    'border',
-    'border-accent',
-    'relative',
-    'rounded-md',
-    'px-4',
-    'pt-14',
-    'pb-5',
-    'hidden',
-  ],
+  CONTAINER: ['border', 'border-accent', 'relative', 'rounded-md', 'px-4', 'pt-14', 'pb-5'],
   TITLE: [
     'absolute',
     '-top-4',

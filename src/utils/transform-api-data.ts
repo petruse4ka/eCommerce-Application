@@ -4,6 +4,8 @@ import { isUserInfo } from '@/types/guards';
 import type {
   AddressInfo,
   AddressWithId,
+  PasswordBody,
+  PasswordRequest,
   UpdateUserAddress,
   UpdateUserInfo,
   UserInfo,
@@ -90,6 +92,20 @@ export default class TransformApiData {
       return {
         version: Number(userInfo.version),
         actions,
+      };
+    }
+  }
+
+  public static transformUserPasswordChange(body: PasswordBody): PasswordRequest | void {
+    const { currentPassword, newPassword } = body;
+    const userInfo = userState.getUserInfoState();
+
+    if (userInfo) {
+      return {
+        id: userInfo.id,
+        version: userInfo.version,
+        currentPassword,
+        newPassword,
       };
     }
   }
