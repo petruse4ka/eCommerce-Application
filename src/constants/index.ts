@@ -249,6 +249,7 @@ export const PRODUCT_TEXT = {
   ERROR_ADDRESS:
     'Увы, этот десерт закончился, но загляните в каталог — там вас ждут другие вкусные находки!',
   CATALOG: 'В каталог',
+  LOADING_PRODUCT: 'Загружаем продукт...',
 };
 
 export const DEFAULT_QUANTITY_AMOUNT = 1;
