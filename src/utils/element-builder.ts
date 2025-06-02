@@ -29,6 +29,14 @@ export default class ElementBuilder {
     }
   }
 
+  public replaceCssClasses(
+    removedClasses: ElementParameters['className'],
+    appliedClasses: ElementParameters['className']
+  ): void {
+    this.removeCssClasses(removedClasses);
+    this.applyCssClasses(appliedClasses);
+  }
+
   public applyCssClasses(className: ElementParameters['className']): void {
     if (className) {
       if (Array.isArray(className)) {
@@ -55,7 +63,7 @@ export default class ElementBuilder {
     }
   }
 
-  private applyTextContent(text?: string): void {
+  public applyTextContent(text?: string): void {
     if (text) {
       this.element.textContent = text;
     }

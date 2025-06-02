@@ -8,6 +8,35 @@ export const VALIDATE_CONST = {
   MAX_INPUT_LENGTH: 50,
 };
 
+export const DEFAULT_OPTIONS_COUNT = 5;
+
+export const DEFAULT_CURRENCY = '₽';
+
+export const MAX_DESCRIPTION_LENGTH = 150;
+
+export const LOADING_CONFIG = {
+  MAX_ATTEMPTS: 10,
+  DELAY: 500,
+};
+
+export const FILTER_RANGES = {
+  DEFAULT: {
+    MIN: 0,
+    MAX: 150,
+    STEP: 10,
+  },
+  PRICE: {
+    MIN: 0,
+    MAX: 100,
+    STEP: 10,
+  },
+  WEIGHT: {
+    MIN: 0,
+    MAX: 100,
+    STEP: 10,
+  },
+};
+
 export const SUBHEADER_PROMO_TEXT = {
   DELIVERY: 'Быстрая доставка',
   FRESH: 'Гарантия свежести',
@@ -24,6 +53,7 @@ export const AUTHORIZATION_MENU_TEXT = {
 
 export const MENU_TEXT = {
   HOME: 'Главная',
+  CATALOG: 'Каталог',
   ABOUT: 'О нас',
   CONTACTS: 'Контакты',
 };
@@ -48,8 +78,8 @@ export const FOOTER_TEXTS = {
 };
 
 export const AUTHORIZATION_MENU_ITEMS: MenuItem[] = [
-  { name: AUTHORIZATION_MENU_TEXT.LOGIN, route: Route.LOGIN },
   { name: AUTHORIZATION_MENU_TEXT.REGISTRATION, route: Route.REGISTRATION },
+  { name: AUTHORIZATION_MENU_TEXT.LOGIN, route: Route.LOGIN },
 ];
 
 export const UNAUTHORIZED_MENU_ITEMS: MenuItem[] = [
@@ -69,6 +99,7 @@ export const UNDER_CONSTRUCTION_TEXTS = {
 
 export const MENU_ITEMS: MenuItem[] = [
   { name: MENU_TEXT.HOME, route: Route.HOME },
+  { name: MENU_TEXT.CATALOG, route: Route.CATALOG },
   { name: MENU_TEXT.ABOUT, route: Route.ABOUT },
   { name: MENU_TEXT.CONTACTS, route: Route.CONTACTS },
 ];
@@ -86,6 +117,12 @@ export const BTN_TEXT = {
   REGISTRATION_REDIRECT: 'Перейти к регистрации',
   LOGIN_PAGE: 'Вход',
   LOGIN_REDIRECT: 'Перейти к авторизации',
+  EDIT: 'Редактировать',
+  SAVE_CHANGES: 'Сохранить изменения',
+  ADD_NEW_ADDRESS: 'Добавить новый адрес',
+  PEN: '\uD83D\uDD8A',
+  TRASH: '\uD83D\uDDD1',
+  STAR: '\u2606',
 };
 
 export const INTRO_TEXTS = {
@@ -151,8 +188,72 @@ export const GUARANTEES_TEXTS = {
     },
   },
 };
+
 export const FIELDSET_LABELS = {
   PERSONAL_DATA: 'Персональные данные',
   SHIPPING: 'Адрес доставки',
   BILLING: 'Расчетный адрес',
 };
+
+export const PAGE_TITLES = {
+  CATALOG: 'Каталог',
+};
+
+export const CATALOG_TEXTS = {
+  TOTAL_PRODUCTS: 'Всего товаров',
+  SORTY_BY: 'Сортировка',
+  SEARCH_PLACEHOLDER: 'Поиск...',
+  PRODUCT_TYPE_FILTER: 'Тип десерта',
+  TASTE_FILTER: 'Вкус',
+  DIET_FILTER: 'Диета',
+  FILLING_FILTER: 'Наполнитель',
+  TOPPING_FILTER: 'Глазурь',
+  PROMO_FILTER: 'Спецпредложение',
+  PRICE_FILTER: 'Цена',
+  WEIGHT_FILTER: 'Вес',
+  SHOW_MORE: 'Показать еще ↓',
+  SHOW_LESS: 'Скрыть ↑',
+  RANGE_FROM: 'от',
+  RANGE_TO: 'до',
+  CLEAR_ALL: 'Удалить все фильтры',
+  APPLIED_FILTERS: 'Выбранные фильтры',
+  NO_APPLIED_FILTERS:
+    'В данный момент ни один фильтр не выбран. Вы можете выбрать фильтры в списке снизу',
+  SHOW_FILTERS: 'Показать фильтры',
+  HIDE_FILTERS: 'Скрыть фильтры',
+  LOADING_PRODUCTS: 'Обновляем каталог...',
+  LOADING_FILTERS: 'Обновляем фильтры...',
+  NO_PRODUCTS: 'К сожалению, продуктов не найдено',
+  NO_FILTERS: 'Подходящие фильтры отсутствуют',
+  PRICE: 'Цена',
+  PRICE_ID: 'price',
+  CATEGORY: 'Категория',
+  CATEGORY_ID: 'category',
+  PROMO_TAG: 'Акция',
+  SHORT_SEARCH_QUERY: 'Используйте более 2 символов для поиска',
+  HOME: 'Главная',
+  CATALOG: 'Каталог',
+  ALL_CATEGORIES: 'Все продукты',
+};
+
+export const PRODUCT_ATTRIBUTES = {
+  WEIGHT: 'Вес',
+  FLAVORS: 'Вкус',
+  DIET: 'Диета',
+  TOPING: 'Глазурь',
+  FILLING: 'Начинка',
+};
+
+export const PRODUCT_TEXT = {
+  BASKET: 'В корзину',
+  TOTAL: 'Итого по данной позиции: ',
+  CURRENCY: DEFAULT_CURRENCY,
+  DESCRIPTION: 'Описание',
+  GRAMM: 'г',
+  ERROR_ADDRESS:
+    'Увы, этот десерт закончился, но загляните в каталог — там вас ждут другие вкусные находки!',
+  CATALOG: 'В каталог',
+  LOADING_PRODUCT: 'Загружаем продукт...',
+};
+
+export const DEFAULT_QUANTITY_AMOUNT = 1;

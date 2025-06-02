@@ -15,9 +15,12 @@ import readyIcon from '@/assets/images/packages/ready.png';
 import stampIcon from '@/assets/images/packages/stamp.png';
 import weddingIcon from '@/assets/images/packages/wedding.png';
 import wholesaleIcon from '@/assets/images/packages/wholesale.png';
+import anonimDeliveryIcon from '@/assets/images/product/anonimDeliveryIcon.png';
+import payDeliveryIcon from '@/assets/images/product/payDeliveryIcon.png';
+import selfDeliveryIcon from '@/assets/images/product/selfDeliveryIcon.png';
 import { FOOTER_TEXTS, GUARANTEES_TEXTS, PACKAGES_TEXTS, SUBHEADER_PROMO_TEXT } from '@/constants';
-import { CheckboxText, InputType } from '@/types/enums';
-import type { Guarantees, Packages } from '@/types/interfaces';
+import { CheckboxText, DeliveryText, InputType } from '@/types/enums';
+import type { Guarantees, Packages, SelectOption } from '@/types/interfaces';
 
 export const PROMO_ITEMS = [
   { ICON: fastDeliveryIcon, TEXT: SUBHEADER_PROMO_TEXT.DELIVERY },
@@ -64,7 +67,7 @@ export const INPUTS_REGISTRATION_DATA = [
   },
   {
     id: 'dateOfBirth',
-    labelText: 'День рождения',
+    labelText: 'Дата рождения',
     type: InputType.DATE,
     isRequired: true,
     callback: (): void => {},
@@ -122,6 +125,41 @@ export const INPUTS_ADDRESS_DATA = [
   },
 ];
 
+export const INPUTS_CHANGE_ADDRESS_DATA = [
+  {
+    id: 'country',
+    labelText: 'Страна',
+    placeholder: 'Россия',
+    type: InputType.TEXT,
+    isDisabled: true,
+    callback: (): void => {},
+  },
+  {
+    id: 'city',
+    labelText: 'Город',
+    placeholder: 'Укажите город',
+    type: InputType.TEXT,
+    isRequired: true,
+    callback: (): void => {},
+  },
+  {
+    id: 'streetName',
+    labelText: 'Улица',
+    placeholder: 'Укажите улицу',
+    type: InputType.TEXT,
+    isRequired: true,
+    callback: (): void => {},
+  },
+  {
+    id: 'postalCode',
+    labelText: 'Почтовый индекс',
+    placeholder: 'Укажите почтовый индекс',
+    type: InputType.TEXT,
+    isRequired: true,
+    callback: (): void => {},
+  },
+];
+
 export const CHECKBOXES_REGISTRATION_DATA = [
   {
     id: 'is-same-addresses',
@@ -148,6 +186,64 @@ export const INPUTS_AUTHORIZATION_DATA = [
   {
     id: 'password',
     labelText: 'Пароль',
+    placeholder: 'Укажите пароль',
+    type: InputType.PASSWORD,
+    isRequired: true,
+  },
+];
+
+export const INPUTS_EDIT_USER_INFO_DATA = [
+  {
+    id: 'firstName',
+    labelText: 'Имя',
+    placeholder: 'Укажите имя',
+    type: InputType.TEXT,
+    isRequired: true,
+    callback: (): void => {},
+  },
+  {
+    id: 'lastName',
+    labelText: 'Фамилия',
+    placeholder: 'Укажите фамилию',
+    type: InputType.TEXT,
+    isRequired: true,
+    callback: (): void => {},
+  },
+  {
+    id: 'dateOfBirth',
+    labelText: 'Дата рождения',
+    type: InputType.DATE,
+    isRequired: true,
+    callback: (): void => {},
+  },
+  {
+    id: 'email',
+    labelText: 'E-mail',
+    placeholder: 'Укажите e-mail',
+    type: InputType.EMAIL,
+    isRequired: true,
+    callback: (): void => {},
+  },
+];
+
+export const INPUTS_EDIT_USER_PASSWORD = [
+  {
+    id: 'currentPassword',
+    labelText: 'Текущий пароль',
+    placeholder: 'Укажите пароль',
+    type: InputType.PASSWORD,
+    isRequired: true,
+  },
+  {
+    id: 'newPassword',
+    labelText: 'Новый пароль',
+    placeholder: 'Укажите пароль',
+    type: InputType.PASSWORD,
+    isRequired: true,
+  },
+  {
+    id: 'repeatNewPassword',
+    labelText: 'Повторите новый пароль',
     placeholder: 'Укажите пароль',
     type: InputType.PASSWORD,
     isRequired: true,
@@ -204,4 +300,18 @@ export const GUARANTEES: Guarantees[] = [
     ...GUARANTEES_TEXTS.GUARANTEES.ANONYMOUS,
     image: anonymousIcon,
   },
+];
+
+export const SORTING_OPTIONS: SelectOption[] = [
+  { value: '', text: 'Выберите сортировку...' },
+  { value: 'price asc', text: 'Цена: по возрастанию' },
+  { value: 'price desc', text: 'Цена: по убыванию' },
+  { value: 'name.ru asc', text: 'Название: от А-Я' },
+  { value: 'name.ru desc', text: 'Название: от Я-А' },
+];
+
+export const DELIVERY_ITEMS = [
+  { ICON: payDeliveryIcon, TEXT: DeliveryText.PAY },
+  { ICON: selfDeliveryIcon, TEXT: DeliveryText.SELF_DELIVERY },
+  { ICON: anonimDeliveryIcon, TEXT: DeliveryText.ANONIM_PRESENT },
 ];

@@ -30,3 +30,5 @@ export const REDIRECT_LINK = [
   'duration-300',
   'ease-in-out',
 ];
+
+export const FORM_PASSWORD = [...FORM, 'max-w-[450px]'];

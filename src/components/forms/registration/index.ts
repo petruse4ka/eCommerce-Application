@@ -20,7 +20,7 @@ import { MACARON_CONTAINER } from '@/styles/pages/registration';
 import { AlertStatus, InputType } from '@/types/enums';
 import { Route } from '@/types/enums';
 import { AlertText } from '@/types/enums';
-import { isErrorInfo } from '@/types/guards';
+import { isErrorInfoItem } from '@/types/guards';
 import type { RegistrationBody } from '@/types/interfaces';
 import ApiErrors from '@/utils/api-errors';
 import ElementBuilder from '@/utils/element-builder';
@@ -297,7 +297,7 @@ export default class FormRegistration {
         const parsed: unknown = JSON.parse(error.message);
         if (Array.isArray(parsed)) {
           for (const item of parsed) {
-            if (isErrorInfo(item)) {
+            if (isErrorInfoItem(item)) {
               const errorInfo = ApiErrors.getErrorInfo(item.code);
               this.showValidationError(item.field, errorInfo);
               Alert.render({
@@ -347,23 +347,18 @@ export default class FormRegistration {
           streetName: this.formValue.get('shippingStreet') ?? '',
           postalCode: this.formValue.get('shippingPostalCode') ?? '',
         },
+        {
+          country: 'RU',
+          city: this.formValue.get('billingCity') ?? '',
+          streetName: this.formValue.get('billingStreet') ?? '',
+          postalCode: this.formValue.get('billingPostalCode') ?? '',
+        },
       ],
+      shippingAddresses: [0],
+      billingAddresses: [1],
       defaultShippingAddress: this.isDefaultAddressShipping ? 0 : undefined,
-      defaultBillingAddress: undefined,
+      defaultBillingAddress: this.isDefaultAddressBilling ? 1 : undefined,
     };
-
-    if (!this.isSameAddresses) {
-      body.addresses.push({
-        country: 'RU',
-        city: this.formValue.get('billingCity') ?? '',
-        streetName: this.formValue.get('billingStreet') ?? '',
-        postalCode: this.formValue.get('billingPostalCode') ?? '',
-      });
-    }
-
-    if (this.isDefaultAddressBilling) {
-      body.defaultBillingAddress = this.isSameAddresses ? 0 : 1;
-    }
 
     return body;
   }

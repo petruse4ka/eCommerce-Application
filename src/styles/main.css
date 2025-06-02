@@ -7,6 +7,7 @@
   /* Colors */
   --color-white: #fff;
   --color-gray: #ededf0;
+  --color-gray-light: #f6f6f6;
   --color-black: #1a1a2e;
   --color-pink: #ca5166;
   --color-dark: #2b1414;
@@ -15,7 +16,7 @@
   --color-accent-hover: #f45d82;
   --color-primary: #f7ebe5;
   --color-secondary: #4e9dd3;
-  --color-secondary-hover: #6aafdd;
+  --color-secondary-light: #6aafdd;
   --color-background: #e6e6e6;
   --color-peach: #ffdbc3;
   --color-peach-light: #ffdbc34d;
@@ -29,11 +30,12 @@
   --color-mint-light: #a8dcdf4d;
   --color-lilac: #c4c6ec;
   --color-lilac-light: #c4c6ec4d;
+  --color-success: #16e042;
 
   /* Animation */
   --animate-visible-right: animate-visible-right 1s ease-in-out;
   --animate-hidden-right: animate-hidden-right 1s ease-in-out forwards;
-  --animate-shaking-img: shaking-img 10s infinite ease-in-out;
+  --animate-shaking-img: shaking-img 12s infinite ease-in-out;
 
   @keyframes animate-visible-right {
     0% {
@@ -57,13 +59,11 @@
 
   @keyframes shaking-img {
     0% {
-      transform: rotate(0deg);
-      translate: 0;
+      transform: rotate(0deg) translate(0);
     }
 
     15% {
-      transform: rotate(5deg);
-      translate: 0 -50%;
+      transform: rotate(5deg) translate(-10%, 30%);
     }
 
     55% {
@@ -71,12 +71,17 @@
     }
 
     75% {
-      transform: rotate(18deg);
+      transform: rotate(18deg) translate(20%, -20%);
     }
 
     100% {
-      transform: rotate(0deg);
-      translate: 0;
+      transform: rotate(0deg) translateY(0);
     }
+  }
+}
+
+@layer utilities {
+  dialog::backdrop {
+    @apply bg-black/70;
   }
 }

@@ -11,6 +11,10 @@ export default class ApiErrors {
         return AlertText.DUPLICATE_FIELD;
       }
 
+      case 'InvalidCurrentPassword': {
+        return AlertText.INVALID_CURRENT_PASSWORD;
+      }
+
       default: {
         return AlertText.ERROR_DEFAULT;
       }

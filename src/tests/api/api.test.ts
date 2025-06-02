@@ -1,5 +1,3 @@
-import { describe, expect, test, vi } from 'vitest';
-
 import API from '@/api';
 
 describe('API', () => {
@@ -18,8 +16,11 @@ describe('API', () => {
     });
 
     const result = await API.userSignInResponse({
-      email: 'testmail@testdomain.ru',
-      password: '123qweQWE',
+      userInfo: {
+        email: 'testmail@testdomain.ru',
+        password: '123qweQWE',
+      },
+      isLogin: true,
     });
 
     expect(result).toBe('test-id');
@@ -36,8 +37,11 @@ describe('API', () => {
 
     await expect(
       API.userSignInResponse({
-        email: 'testmail@testdomain.ru',
-        password: '123qweQWE',
+        userInfo: {
+          email: 'testmail@testdomain.ru',
+          password: '123qweQWE',
+        },
+        isLogin: true,
       })
     ).rejects.toThrow('Invalid credentials');
   });

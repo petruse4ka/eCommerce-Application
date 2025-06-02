@@ -7,17 +7,23 @@ import type {
   AuthorizationBody,
   AuthResponse,
   CustomerResponse,
+  ErrorInfo,
   ErrorResponse,
   RegistrationBody,
 } from '@/types/interfaces';
+import ApiErrors from '@/utils/api-errors';
 
 const clientCredentials = btoa(
   import.meta.env['VITE_CTP_CLIENT_ID'] + ':' + import.meta.env['VITE_CTP_CLIENT_SECRET']
 );
 
 export default class API {
-  public static async userRegistration(body: RegistrationBody): Promise<string | void> {
-    const token = await this.authentication();
+  public static async userRegistration(bodyUser: RegistrationBody): Promise<string | void> {
+    let token = userState.getTokenState();
+
+    if (token === '') {
+      token = await this.authentication();
+    }
 
     return await fetch(
       `${import.meta.env['VITE_CTP_API_URL']}/${import.meta.env['VITE_CTP_PROJECT_KEY']}${ApiEndpoint.REGISTRATION}`,
@@ -27,7 +33,7 @@ export default class API {
           Authorization: `Bearer ${token}`,
           'Content-Type': ContentType.JSON,
         },
-        body: JSON.stringify(body),
+        body: JSON.stringify(bodyUser),
       }
     )
       .then((response) => response.json())
@@ -41,7 +47,14 @@ export default class API {
             visibleTime: 3000,
           });
 
-          userState.setAuthorizationState(true);
+          void API.userSignInResponse({
+            userInfo: {
+              email: bodyUser.email,
+              password: bodyUser.password,
+            },
+            isLogin: false,
+          });
+
           Router.followRoute(Route.HOME);
 
           return body.customer.id;
@@ -49,37 +62,68 @@ export default class API {
       });
   }
 
-  public static async userSignInResponse(body: AuthorizationBody): Promise<string | void> {
-    const token = await this.userAuthentication(body);
+  public static async userSignInResponse(body: {
+    userInfo: AuthorizationBody;
+    isLogin: boolean;
+  }): Promise<string | void> {
+    const { userInfo, isLogin } = body;
+    const token = await this.userAuthentication(userInfo);
 
+    if (token) {
+      return await fetch(
+        `${import.meta.env['VITE_CTP_API_URL']}/${import.meta.env['VITE_CTP_PROJECT_KEY']}${ApiEndpoint.LOGIN}`,
+        {
+          method: ApiMethods.POST,
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': ContentType.JSON,
+          },
+          body: JSON.stringify(userInfo),
+        }
+      )
+        .then((response) => response.json())
+        .then((body: CustomerResponse) => {
+          if (isLogin) {
+            Alert.render({
+              textContent: AlertText.AUTHORIZATION_SUCCESS,
+              status: AlertStatus.SUCCESS,
+              visibleTime: 3000,
+            });
+            Router.followRoute(Route.HOME);
+          }
+          userState.setUserInfoState(body.customer);
+          userState.setAuthorizationState(true);
+          return body.customer.id;
+        });
+    }
+  }
+
+  public static async authentication(): Promise<string> {
     return await fetch(
-      `${import.meta.env['VITE_CTP_API_URL']}/${import.meta.env['VITE_CTP_PROJECT_KEY']}${ApiEndpoint.LOGIN}`,
+      import.meta.env['VITE_CTP_AUTH_URL'] +
+        ApiEndpoint.OATH +
+        import.meta.env['VITE_CTP_PROJECT_KEY'] +
+        ApiEndpoint.AUTHENTICATION,
       {
         method: ApiMethods.POST,
         headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': ContentType.JSON,
+          Authorization: `Basic ${clientCredentials}`,
+          'Content-Type': ContentType.URLENCODED,
         },
-        body: JSON.stringify(body),
+        body: new URLSearchParams({
+          grant_type: 'client_credentials',
+        }),
       }
     )
-      .then((response) => {
-        Alert.render({
-          textContent: AlertText.AUTHORIZATION_SUCCESS,
-          status: AlertStatus.SUCCESS,
-          visibleTime: 3000,
-        });
-
-        return response.json();
-      })
-      .then((body: CustomerResponse) => {
-        userState.setAuthorizationState(true);
-        Router.followRoute(Route.HOME);
-        return body.customer.id;
+      .then((response) => response.json())
+      .then((body: AuthResponse) => {
+        const { access_token: token } = body;
+        userState.setTokenState(token);
+        return token;
       });
   }
 
-  private static async userAuthentication(body: AuthorizationBody): Promise<string> {
+  private static async userAuthentication(body: AuthorizationBody): Promise<string | void> {
     return await fetch(
       import.meta.env['VITE_CTP_AUTH_URL'] +
         ApiEndpoint.OATH +
@@ -103,23 +147,21 @@ export default class API {
         if ('error' in body) {
           throw new Error(body.error);
         } else {
-          return body.access_token;
+          const { access_token: token } = body;
+          userState.setTokenState(token);
+          return token;
         }
-      });
-  }
+      })
+      .catch((error: ErrorInfo) => {
+        const errorInfo = ApiErrors.getErrorInfo(error.message);
 
-  private static async authentication(): Promise<string> {
-    return await fetch(import.meta.env['VITE_CTP_AUTH_URL'] + ApiEndpoint.AUTHENTICATION, {
-      method: ApiMethods.POST,
-      headers: {
-        Authorization: `Basic ${clientCredentials}`,
-        'Content-Type': ContentType.URLENCODED,
-      },
-      body: new URLSearchParams({
-        grant_type: 'client_credentials',
-      }),
-    })
-      .then((response) => response.json())
-      .then((body: AuthResponse) => body.access_token);
+        Alert.render({
+          textContent: errorInfo,
+          status: AlertStatus.ERROR,
+          visibleTime: 4000,
+        });
+
+        throw new Error(error.message);
+      });
   }
 }

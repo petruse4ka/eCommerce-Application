@@ -1,13 +1,16 @@
+import API from '@/api';
 import BaseComponent from '@/components/base';
 import Footer from '@/components/footer/footer';
 import Header from '@/components/header/header';
 import AboutPage from '@/pages/about';
 import AccountPage from '@/pages/account';
+import CatalogPage from '@/pages/catalog';
 import ContactsPage from '@/pages/contacts';
 import DeliveryPage from '@/pages/delivery';
 import ErrorPage from '@/pages/errorpage';
 import HomePage from '@/pages/homepage';
 import LoginPage from '@/pages/login';
+import ProductPage from '@/pages/product';
 import RegistrationPage from '@/pages/registration';
 import ReturnsPage from '@/pages/returns';
 import TermsPage from '@/pages/terms';
@@ -21,6 +24,8 @@ export default class App extends BaseComponent {
   private footer: Footer;
   private homePage: HomePage = new HomePage();
   private loginPage: LoginPage = new LoginPage();
+  private catalogPage: CatalogPage = new CatalogPage();
+  private productPage: ProductPage = new ProductPage();
   private contactPage: ContactsPage = new ContactsPage();
   private aboutPage: AboutPage = new AboutPage();
   private registrationPage: RegistrationPage = new RegistrationPage();
@@ -43,6 +48,8 @@ export default class App extends BaseComponent {
     [Route.TERMS, this.termsPage],
     [Route.RETURNS, this.returnsPage],
     [Route.ACCOUNT, this.accountPage],
+    [Route.CATALOG, this.catalogPage],
+    [Route.PRODUCT, this.productPage],
   ]);
 
   constructor() {
@@ -62,6 +69,7 @@ export default class App extends BaseComponent {
     }
 
     this.render();
+    void API.authentication();
   }
 
   protected render(): void {
