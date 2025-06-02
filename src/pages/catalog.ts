@@ -27,6 +27,7 @@ export default class CatalogPage extends BaseComponent {
   private breadcrumbs: Breadcrumbs;
   private categories: Categories | null;
   private isLoading: boolean;
+  private isLoadingCategories: boolean;
   private productListLoader: LoaderOverlay;
   private filtersLoader: LoaderOverlay;
 
@@ -42,6 +43,7 @@ export default class CatalogPage extends BaseComponent {
     this.breadcrumbs = new Breadcrumbs();
     this.categories = null;
     this.isLoading = true;
+    this.isLoadingCategories = true;
     this.productListLoader = new LoaderOverlay({
       text: CATALOG_TEXTS.LOADING_PRODUCTS,
       className: CATALOG_STYLES.OVERLAY_PRODUCTS,
@@ -65,6 +67,8 @@ export default class CatalogPage extends BaseComponent {
         ancestors: category.ancestors,
       }));
       this.categories = new Categories(renderedCategories);
+      this.isLoadingCategories = false;
+      this.render();
     }
   }
 
@@ -131,16 +135,20 @@ export default class CatalogPage extends BaseComponent {
     this.isLoading = true;
     this.render();
 
-    const selectedFilters = filterState.getSelectedFilters();
-    const productsData = await CatalogAPI.getProducts(selectedFilters);
+    try {
+      const selectedFilters = filterState.getSelectedFilters();
+      const productsData = await CatalogAPI.getProducts(selectedFilters);
 
-    if (productsData) {
-      productsState.updateProducts(productsData.products);
-      this.productSorting.updateProductCount(productsData.products.length);
+      if (productsData) {
+        productsState.updateProducts(productsData.products);
+        this.productSorting.updateProductCount(productsData.products.length);
+      }
+    } catch (error) {
+      console.error('Error updating products:', error);
+    } finally {
+      this.isLoading = false;
+      this.render();
     }
-
-    this.isLoading = false;
-    this.render();
   };
 
   private render(): void {
@@ -169,7 +177,7 @@ export default class CatalogPage extends BaseComponent {
     if (this.categories) filtersSection.append(this.categories.getElement());
     filtersSection.append(this.productFilters.getElement());
 
-    if (this.isLoading) {
+    if (this.isLoadingCategories) {
       this.productFilters.getElement().append(this.filtersLoader.getElement());
     } else {
       this.filtersLoader.getElement().remove();

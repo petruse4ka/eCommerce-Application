@@ -8,6 +8,7 @@ import TransformApiProductsData from '@/utils/transform-api-product-data';
 
 export default class CatalogAPI {
   private static fractionDigits: number = 2;
+  private static currentProductRequest: AbortController | null = null;
 
   public static initialize(): void {
     productsState.subscribe(() => {
@@ -25,18 +26,13 @@ export default class CatalogAPI {
     const token = userState.getTokenState();
 
     try {
-      const queryParameters = CatalogAPI.handleFilters(filters);
-      const currentSort = filterState.getCurrentSort();
-      if (currentSort) queryParameters.append('sort', currentSort);
-
-      const searchQuery = filterState.getSearchQuery();
-      if (searchQuery) {
-        CatalogAPI.handleSearchQuery(queryParameters, searchQuery);
+      if (this.currentProductRequest) {
+        this.currentProductRequest.abort();
+        this.currentProductRequest = null;
       }
 
-      CatalogAPI.handleCategories(queryParameters);
-
-      queryParameters.append('limit', '500');
+      this.currentProductRequest = new AbortController();
+      const queryParameters = this.buildProductRequestQueryParameters(filters);
       const url = `${import.meta.env['VITE_CTP_API_URL']}/${import.meta.env['VITE_CTP_PROJECT_KEY']}/product-projections/search?${queryParameters.toString()}`;
 
       const response = await fetch(url, {
@@ -45,24 +41,29 @@ export default class CatalogAPI {
           Authorization: `Bearer ${token}`,
           'Content-Type': ContentType.JSON,
         },
+        signal: this.currentProductRequest.signal,
       });
 
-      if (!response.ok) {
-        throw new Error(`HTTP error: ${response.status}`);
-      }
+      if (this.currentProductRequest?.signal.aborted) return;
+
+      if (!response.ok) throw new Error(`HTTP error: ${response.status}`);
 
       const data: unknown = await response.json();
 
-      if (isProductResponse(data)) {
+      if (this.currentProductRequest?.signal.aborted) return;
+
+      if (isProductResponse(data))
         return {
           products: TransformApiProductsData.transformProducts(data),
           productData: data.results,
         };
-      }
 
       throw new Error('Invalid product response format');
     } catch (error) {
+      if (error instanceof Error && error.name === 'AbortError') return;
       console.error('Error fetching products:', error);
+    } finally {
+      if (this.currentProductRequest) this.currentProductRequest = null;
     }
   }
 
@@ -129,6 +130,19 @@ export default class CatalogAPI {
     } catch (error) {
       console.error('Error fetching categories:', error);
     }
+  }
+
+  private static buildProductRequestQueryParameters(filters: FilterRequest): URLSearchParams {
+    const queryParameters = CatalogAPI.handleFilters(filters);
+    const currentSort = filterState.getCurrentSort();
+    if (currentSort) queryParameters.append('sort', currentSort);
+
+    const searchQuery = filterState.getSearchQuery();
+    if (searchQuery) CatalogAPI.handleSearchQuery(queryParameters, searchQuery);
+
+    CatalogAPI.handleCategories(queryParameters);
+    queryParameters.append('limit', '500');
+    return queryParameters;
   }
 
   private static handleCategories(queryParameters: URLSearchParams): void {
