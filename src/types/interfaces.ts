@@ -97,7 +97,6 @@ export interface InputComponent {
 }
 
 export interface Addresses {
-  //id?: string;
   country: string;
   city: string;
   streetName: string;
