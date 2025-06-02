@@ -114,7 +114,6 @@ export default class AccountPage extends BaseComponent {
   }
 
   private createTabs(): void {
-    console.log(this.currentActive);
     const tab = new Tabs([
       {
         textContent: TabAccount.INFO,

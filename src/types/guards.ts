@@ -1,22 +1,11 @@
-
-import { FilterId } from './enums';
-import type { CategoryResponse, ErrorInfo, PasswordBody, ProductResponse, ProductTypeResponse, UserInfoBody } from './interfaces';
-
-export function isErrorInfo(object: unknown): object is { code: string; field: string } {
-  return typeof object === 'object' && object !== null && 'code' in object && 'field' in object;
-}
-
-export function isErrorItem(object: unknown): object is { code: string; field: string } {
-  return typeof object === 'object' && object !== null && 'code' in object;
-}
-
-export function isFilterId(id: string): id is FilterId {
-  for (const value of Object.values(FilterId)) {
-    if (value === id) return true;
-  }
-  return false;
-}
-
+import type {
+  CategoryResponse,
+  ErrorInfo,
+  PasswordBody,
+  ProductResponse,
+  ProductTypeResponse,
+  UserInfoBody,
+} from './interfaces';
 
 export function isErrorInfo(data: unknown): data is ErrorInfo {
   return (
@@ -24,7 +13,9 @@ export function isErrorInfo(data: unknown): data is ErrorInfo {
     data !== null &&
     'statusCode' in data &&
     'message' in data &&
-    'errors' in data
+    'errors' in data &&
+    'code' in data &&
+    'field' in data
   );
 }
 

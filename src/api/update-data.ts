@@ -80,7 +80,7 @@ export default class APIUpdateData {
               },
               isLogin: false,
             }).catch((error: ErrorInfo) => {
-              console.log(error);
+              console.error(error);
             });
 
             Alert.render({
