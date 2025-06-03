@@ -63,6 +63,8 @@ export default defineConfig(({ mode }) => {
           '**/components/footer**',
           '**/components/promo**',
           '**/components/overlay**',
+          '**/components/product**',
+          '**/components/catalog**',
           '**/data**',
         ],
       },
