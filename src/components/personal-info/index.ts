@@ -78,7 +78,7 @@ export default class PersonalInfo extends BaseComponent {
           currentInputs: this.infoValue,
           id: 'userInfo',
         });
-        const modal = new Modal({ title: ModalTitle.CHANGE, content: form });
+        const modal = new Modal({ title: ModalTitle.CHANGE_USER_INFO, content: form });
         this.component.append(modal.getElement());
 
         modal.showModal();

@@ -120,7 +120,7 @@ export const BTN_TEXT = {
   EDIT: 'Редактировать',
   DELETE: 'Удалить',
   SET_PRIMARY: 'Сделать по умолчанию',
-  DELETE_PRIMARY: 'Удалить по умолчанию',
+  DELETE_PRIMARY: 'Отменить по умолчанию',
   SAVE_CHANGES: 'Сохранить изменения',
   ADD_NEW_ADDRESS: 'Добавить новый адрес',
 };

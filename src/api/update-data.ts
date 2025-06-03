@@ -137,7 +137,7 @@ export default class APIUpdateData {
 
   public static async deleteAddress(
     id: string,
-    isAlertText: AlertText = AlertText.DELETE_ADDRESS_SUCCESS
+    AlertContent: AlertText = AlertText.DELETE_ADDRESS_SUCCESS
   ): Promise<void> {
     const token = userState.getTokenState();
 
@@ -160,7 +160,7 @@ export default class APIUpdateData {
           userState.setUserInfoState(body);
 
           Alert.render({
-            textContent: isAlertText,
+            textContent: AlertContent,
             status: AlertStatus.SUCCESS,
             visibleTime: 3000,
           });

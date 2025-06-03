@@ -173,10 +173,6 @@ export default class AddressList extends BaseComponent {
       this.createDefaultButton(id, isDefault, currentValue)
     );
 
-    // // if (!isDefault) {
-    // //   container.append(this.createDefaultButton(id));
-    // // }
-    // container.append(this.createDefaultButton(id, isDefault));
     return container;
   }
 

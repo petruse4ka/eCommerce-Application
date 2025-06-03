@@ -163,6 +163,7 @@ export enum UserInfoKey {
 
 export enum ModalTitle {
   CHANGE = 'Редактирование адреса',
+  CHANGE_USER_INFO = 'Редактирование личной информации',
   NEW = 'Новый адрес',
   CHANGE_PASSWORD = 'Смена пароля',
 }
