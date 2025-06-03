@@ -11,7 +11,7 @@ import FormEditUserInfo from '../forms/edit-info';
 import Modal from '../modal';
 
 export default class PersonalInfo extends BaseComponent {
-  public infoValue: ElementBuilder[];
+  public infoValue: string[];
   private userInfo: UserInfo | void;
 
   constructor(userInfo: UserInfo | void) {
@@ -61,7 +61,7 @@ export default class PersonalInfo extends BaseComponent {
       textContent: valueText,
     });
 
-    this.infoValue.push(value);
+    this.infoValue.push(valueText);
 
     container.append(title, value.getElement());
 
