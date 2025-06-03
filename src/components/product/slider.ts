@@ -18,6 +18,7 @@ export default class ProductSlider extends BaseComponent {
       tag: 'div',
       className: PRODUCT_STYLES.SLIDER_BIG_IMAGE,
       callback: (): void => {
+        globalThis.scrollTo({ top: 0 });
         const modal = new ModalSlider(images, this.currentIndex);
         document.body.append(modal.getElement());
         modal.showModal();
