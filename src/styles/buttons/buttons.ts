@@ -87,6 +87,7 @@ export const CUSTOM_BUTTON_STYLE = {
     'place-self-center',
   ],
   PRICE_QUANTITY: [
+    'cursor-pointer',
     'w-8',
     'h-8',
     'flex',
@@ -100,6 +101,7 @@ export const CUSTOM_BUTTON_STYLE = {
     'hover:bg-secondary-light',
     'hover:text-white',
     'active:bg-secondary',
+    'rounded-sm',
   ],
   CLEAR: [
     'hidden',
