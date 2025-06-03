@@ -18,11 +18,12 @@ export default class ProductQuantity extends BaseComponent {
       textContent: '-',
       callback: (): void => {
         let number = Number(quantityInput.textContent);
-        if (number <= DEFAULT_QUANTITY_AMOUNT) {
-          minusButton.setAttribute('disabled', 'true');
-        } else {
+        if (number > DEFAULT_QUANTITY_AMOUNT) {
           quantityInput.textContent = String(--number);
           element.textContent = `${PRODUCT_TEXT.TOTAL} ${String(price * number)} ${PRODUCT_TEXT.CURRENCY}`;
+        }
+        if (number === DEFAULT_QUANTITY_AMOUNT) {
+          minusButton.setAttribute('disabled', 'true');
         }
       },
     }).getElement();
@@ -33,10 +34,9 @@ export default class ProductQuantity extends BaseComponent {
       callback: (): void => {
         let number = Number(quantityInput.textContent);
         ++number;
-        if (minusButton.hasAttribute('disabled')) {
+        quantityInput.textContent = String(number);
+        if (number > DEFAULT_QUANTITY_AMOUNT) {
           minusButton.removeAttribute('disabled');
-        } else {
-          quantityInput.textContent = String(number);
         }
         element.textContent = `${PRODUCT_TEXT.TOTAL} ${String(price * number)} ${PRODUCT_TEXT.CURRENCY}`;
       },
