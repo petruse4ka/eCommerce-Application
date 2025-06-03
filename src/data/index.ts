@@ -303,7 +303,7 @@ export const GUARANTEES: Guarantees[] = [
 ];
 
 export const SORTING_OPTIONS: SelectOption[] = [
-  { value: '', text: 'Выберите сортировку...' },
+  { value: '', text: 'Без сортировки' },
   { value: 'price asc', text: 'Цена: по возрастанию' },
   { value: 'price desc', text: 'Цена: по убыванию' },
   { value: 'name.ru asc', text: 'Название: от А-Я' },
