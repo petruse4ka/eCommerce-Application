@@ -2,7 +2,7 @@ export const PERSONAL_INFO = {
   CONTAINER: [
     'flex',
     'flex-col',
-    'gap-3',
+    'gap-5',
     'justify-center',
     'p-3',
     'md:p-4',
@@ -11,9 +11,10 @@ export const PERSONAL_INFO = {
     'border',
     'border-orange',
   ],
+  TITLE: ['text-xl', 'font-semibold', 'text-dark', 'mb-2'],
   LINE: {
-    CONTAINER: ['flex', 'flex-col', 'md:flex-row', 'gap-4', 'text-dark'],
-    TITLE: ['font-semibold', 'text-base', 'w-[200px]'],
-    VALUE: ['text-base'],
+    CONTAINER: ['flex', 'flex-col', 'md:flex-row', 'gap-2', 'text-dark'],
+    TITLE: ['font-semibold', 'text-base', 'w-[200px]', 'shrink-0'],
+    VALUE: ['text-base', 'break-words', 'break-all'],
   },
 };

@@ -1,7 +1,7 @@
 import { BTN_TEXT } from '@/constants';
 import { INPUTS_EDIT_USER_INFO_DATA } from '@/data';
 import { PERSONAL_INFO } from '@/styles/personal';
-import { ModalTitle } from '@/types/enums';
+import { ModalTitle, TabAccount } from '@/types/enums';
 import type { UserInfo } from '@/types/interfaces';
 import ElementBuilder from '@/utils/element-builder';
 
@@ -23,6 +23,7 @@ export default class PersonalInfo extends BaseComponent {
     this.userInfo = userInfo;
     this.infoValue = [];
 
+    this.createTitle();
     if (this.userInfo) {
       for (const [key, value] of Object.entries(this.userInfo)) {
         this.createInfoElement(key, String(value));
@@ -30,6 +31,16 @@ export default class PersonalInfo extends BaseComponent {
     }
 
     this.createEditButton();
+  }
+
+  private createTitle(): void {
+    const title = new ElementBuilder({
+      tag: 'h3',
+      className: PERSONAL_INFO.TITLE,
+      textContent: TabAccount.INFO,
+    }).getElement();
+
+    this.component.append(title);
   }
 
   private createInfoElement(titleText: string, valueText: string): void {

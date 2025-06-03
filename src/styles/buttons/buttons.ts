@@ -15,6 +15,8 @@ const STANDARD_BUTTON_STYLE = [
   'disabled:cursor-not-allowed',
 ];
 
+export const DEFAULT_BUTTON_WITH_ICON = ['button', 'flex', 'items-center', 'gap-2'];
+
 export const CUSTOM_BUTTON_STYLE = {
   PRIMARY_PINK: [
     ...STANDARD_BUTTON_STYLE,
@@ -151,5 +153,24 @@ export const CUSTOM_BUTTON_STYLE = {
     'w-[40px]',
     'h-[40px]',
     'rounded-md',
+  ],
+  ADDRESS_PRIMARY: [
+    'flex',
+    'p-2',
+    'text-[14px]',
+    'border',
+    'rounded-[3px]',
+    'cursor-pointer',
+    'transition-all',
+    'duration-300',
+    'ease-in-out',
+    'disabled:bg-gray',
+    'disabled:border-gray',
+    'disabled:cursor-not-allowed',
+    'bg-white',
+    'text-dark',
+    'border-orange',
+    'hover:bg-accent-hover',
+    'hover:border-accent-hover',
   ],
 };
