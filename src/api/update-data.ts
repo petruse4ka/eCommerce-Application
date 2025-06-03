@@ -2,6 +2,7 @@ import Alert from '@/components/alert';
 import { userState } from '@/store/user-state';
 import { AlertStatus, AlertText, ApiEndpoint, ApiMethods, ContentType } from '@/types/enums';
 import type {
+  addAddressBody,
   Addresses,
   AddressWithId,
   Customer,
@@ -134,7 +135,10 @@ export default class APIUpdateData {
     }
   }
 
-  public static async deleteAddress(id: string): Promise<void> {
+  public static async deleteAddress(
+    id: string,
+    AlertContent: AlertText = AlertText.DELETE_ADDRESS_SUCCESS
+  ): Promise<void> {
     const token = userState.getTokenState();
 
     await fetch(
@@ -156,7 +160,7 @@ export default class APIUpdateData {
           userState.setUserInfoState(body);
 
           Alert.render({
-            textContent: AlertText.DELETE_ADDRESS_SUCCESS,
+            textContent: AlertContent,
             status: AlertStatus.SUCCESS,
             visibleTime: 3000,
           });
@@ -212,7 +216,11 @@ export default class APIUpdateData {
       });
   }
 
-  public static async userAddNewAddress(action: string, body: Addresses): Promise<void> {
+  public static async userAddNewAddress(
+    action: string,
+    body: Addresses,
+    isAlert: boolean = true
+  ): Promise<void> {
     const token = userState.getTokenState();
 
     await fetch(
@@ -236,7 +244,7 @@ export default class APIUpdateData {
 
           if (address !== undefined) {
             const id = address.id;
-            void APIUpdateData.addShippingOrBillingAddress(action, id);
+            void APIUpdateData.addShippingOrBillingAddress({ action, id, isAlert });
           }
         }
       })
@@ -251,7 +259,7 @@ export default class APIUpdateData {
       });
   }
 
-  public static async addShippingOrBillingAddress(action: string, id: string): Promise<void> {
+  public static async addShippingOrBillingAddress(parameters: addAddressBody): Promise<void> {
     const token = userState.getTokenState();
 
     await fetch(
@@ -262,7 +270,9 @@ export default class APIUpdateData {
           Authorization: `Bearer ${token}`,
           'Content-Type': ContentType.JSON,
         },
-        body: JSON.stringify(TransformApiData.transformUserSetAddress(id, action)),
+        body: JSON.stringify(
+          TransformApiData.transformUserSetAddress(parameters.id, parameters.action)
+        ),
       }
     )
       .then((response) => response.json())
@@ -271,16 +281,17 @@ export default class APIUpdateData {
           throw new Error(JSON.stringify(body.errors));
         } else {
           userState.setUserInfoState(body);
-          Alert.render({
-            textContent: AlertText.ADD_ADDRESS_SUCCESS,
-            status: AlertStatus.SUCCESS,
-            visibleTime: 3000,
-          });
+          if (parameters.isAlert) {
+            Alert.render({
+              textContent: AlertText.ADD_ADDRESS_SUCCESS,
+              status: AlertStatus.SUCCESS,
+              visibleTime: 3000,
+            });
+          }
         }
       })
       .catch((error) => {
         console.error(error);
-
         Alert.render({
           textContent: AlertText.ERROR_DEFAULT,
           status: AlertStatus.ERROR,
