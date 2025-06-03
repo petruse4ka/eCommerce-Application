@@ -242,6 +242,7 @@ export const PRODUCT_ATTRIBUTES = {
   DIET: 'Диета',
   TOPING: 'Глазурь',
   FILLING: 'Начинка',
+  UNIT: 'Единица измерения',
 };
 
 export const PRODUCT_TEXT = {
