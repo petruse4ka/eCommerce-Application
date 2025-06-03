@@ -15,6 +15,8 @@ const STANDARD_BUTTON_STYLE = [
   'disabled:cursor-not-allowed',
 ];
 
+export const DEFAULT_BUTTON_WITH_ICON = ['button', 'flex', 'items-center', 'gap-2'];
+
 export const CUSTOM_BUTTON_STYLE = {
   PRIMARY_PINK: [
     ...STANDARD_BUTTON_STYLE,
@@ -85,6 +87,7 @@ export const CUSTOM_BUTTON_STYLE = {
     'place-self-center',
   ],
   PRICE_QUANTITY: [
+    'cursor-pointer',
     'w-8',
     'h-8',
     'flex',
@@ -98,6 +101,7 @@ export const CUSTOM_BUTTON_STYLE = {
     'hover:bg-secondary-light',
     'hover:text-white',
     'active:bg-secondary',
+    'rounded-sm',
   ],
   CLEAR: [
     'hidden',
@@ -131,7 +135,7 @@ export const CUSTOM_BUTTON_STYLE = {
   ],
   HIDDEN: ['hidden'],
   VISIBLE: ['block'],
-  CLOSE: ['text-accent', 'font-bold', 'cursor-pointer', 'px-1'],
+  CLOSE: ['text-accent', 'font-bold', 'cursor-pointer', 'px-1', 'outline-none'],
   SEARCH_BUTTON: [
     'absolute',
     'right-2',
@@ -151,5 +155,24 @@ export const CUSTOM_BUTTON_STYLE = {
     'w-[40px]',
     'h-[40px]',
     'rounded-md',
+  ],
+  ADDRESS_PRIMARY: [
+    'flex',
+    'p-2',
+    'text-[14px]',
+    'border',
+    'rounded-[3px]',
+    'cursor-pointer',
+    'transition-all',
+    'duration-300',
+    'ease-in-out',
+    'disabled:bg-gray',
+    'disabled:border-gray',
+    'disabled:cursor-not-allowed',
+    'bg-white',
+    'text-dark',
+    'border-gray',
+    'hover:bg-accent-hover',
+    'hover:border-accent-hover',
   ],
 };

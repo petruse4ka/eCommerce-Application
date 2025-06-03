@@ -125,7 +125,7 @@ export default class APIUpdateData {
             });
 
             Alert.render({
-              textContent: AlertText.CHANGE_PASSWORD_SUCCESS,
+              textContent: AlertText.PASSWORD_CHANGE_SUCCESS,
               status: AlertStatus.SUCCESS,
               visibleTime: 3000,
             });

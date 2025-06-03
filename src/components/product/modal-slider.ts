@@ -2,6 +2,7 @@ import BaseComponent from '@/components/base';
 import MODAL_SLIDER from '@/styles/modal-slider';
 import type { Image } from '@/types/interfaces';
 import ElementBuilder from '@/utils/element-builder';
+import ImageBuilder from '@/utils/image-builder';
 
 export default class ModalSlider extends BaseComponent {
   private images: Image[];
@@ -14,6 +15,7 @@ export default class ModalSlider extends BaseComponent {
     this.imageElements = [];
     this.currentIndex = currentIndex;
     this.render();
+    this.addEventListeners();
   }
 
   public showModal(): void {
@@ -33,7 +35,13 @@ export default class ModalSlider extends BaseComponent {
         this.imageElements.push(frame);
       }
 
-      frame.style.backgroundImage = `url(${image.url})`;
+      const imageElement = new ImageBuilder({
+        source: image.url,
+        alt: 'Product image',
+        className: MODAL_SLIDER.SLIDER_IMAGE,
+      }).getElement();
+
+      frame.append(imageElement);
       this.component.append(frame);
     }
 
@@ -57,12 +65,26 @@ export default class ModalSlider extends BaseComponent {
     this.showSlide(this.currentIndex);
   }
 
+  private addEventListeners(): void {
+    this.component.addEventListener('mousedown', (event: MouseEvent) => {
+      const rect = this.component.getBoundingClientRect();
+      const isInDialog =
+        rect.top <= event.clientY &&
+        event.clientY <= rect.bottom &&
+        rect.left <= event.clientX &&
+        event.clientX <= rect.right;
+      if (!isInDialog) {
+        this.closeModal();
+      }
+    });
+  }
+
   private createArrow(isLeftArrow: boolean): HTMLElement {
     const className = isLeftArrow ? MODAL_SLIDER.LEFT_ARROW : MODAL_SLIDER.RIGHT_ARROW;
     const arrow = new BaseComponent({
       tag: 'div',
       className: [...MODAL_SLIDER.ARROW, ...className],
-      textContent: isLeftArrow ? '《' : '》',
+      textContent: isLeftArrow ? '˂' : '˃',
       callback: (): void => {
         if (isLeftArrow) {
           this.swipeLeft();

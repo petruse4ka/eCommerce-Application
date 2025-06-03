@@ -84,7 +84,7 @@ export default class ProductList extends BaseComponent {
         textContent: `${product.discountedPrice} ${DEFAULT_CURRENCY}`,
       }).getElement();
 
-      priceWrapper.append(originalPrice, discountedPrice);
+      priceWrapper.append(discountedPrice, originalPrice);
     } else {
       const regularPrice = new ElementBuilder({
         tag: 'span',

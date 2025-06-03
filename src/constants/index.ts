@@ -118,6 +118,8 @@ export const BTN_TEXT = {
   LOGIN_PAGE: 'Вход',
   LOGIN_REDIRECT: 'Перейти к авторизации',
   EDIT: 'Редактировать',
+  DELETE: 'Удалить',
+  SET_PRIMARY: 'Сделать Основным',
   SAVE_CHANGES: 'Сохранить изменения',
   ADD_NEW_ADDRESS: 'Добавить новый адрес',
   PEN: '\uD83D\uDD8A',
@@ -197,6 +199,7 @@ export const FIELDSET_LABELS = {
 
 export const PAGE_TITLES = {
   CATALOG: 'Каталог',
+  ACCOUNT: 'Личный Кабинет',
 };
 
 export const CATALOG_TEXTS = {

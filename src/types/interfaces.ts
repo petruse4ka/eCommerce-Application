@@ -1,4 +1,4 @@
-import type ElementBuilder from '@/utils/element-builder';
+import type { CUSTOM_BUTTON_STYLE } from '@/styles/buttons/buttons';
 
 import type { AddressKey, ButtonType, FilterType, InputType, Route, UserInfoKey } from './enums';
 
@@ -41,6 +41,18 @@ export interface LinkParameters extends ElementParameters {
 
 export interface ButtonParameters extends ElementParameters {
   type: ButtonType;
+}
+
+export interface customButtonParameters {
+  style: keyof typeof CUSTOM_BUTTON_STYLE;
+  textContent: string;
+  icon: {
+    source: string;
+    alt: string;
+    className?: string[];
+  };
+  textClassName?: string[];
+  callback: () => void;
 }
 
 export interface AuthResponse {
@@ -504,8 +516,9 @@ export interface AddAddress {
   }[];
 }
 
-export interface createButtonFormComponent {
-  id: string;
-  isDefault: boolean;
-  currentLine: ElementBuilder[];
+export interface TabInfo {
+  textContent: string;
+  isActive?: boolean;
+  callback: () => void;
+  icon?: HTMLElement;
 }
