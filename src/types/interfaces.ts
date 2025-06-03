@@ -519,7 +519,7 @@ export interface AddAddress {
 
 export interface TabInfo {
   textContent: string;
-  isActive: boolean;
+  isActive?: boolean;
   callback: () => void;
   icon?: HTMLElement;
 }

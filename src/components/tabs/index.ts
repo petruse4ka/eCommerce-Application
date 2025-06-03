@@ -22,7 +22,7 @@ export default class Tabs extends BaseComponent {
 
   private createTabItem(
     textContent: string,
-    isActive: boolean,
+    isActive: boolean | undefined,
     callback: () => void,
     icon?: HTMLElement
   ): void {
@@ -30,7 +30,9 @@ export default class Tabs extends BaseComponent {
       tag: 'div',
       className: isActive ? TAB.BUTTON_STYLE.ACTIVE : TAB.BUTTON_STYLE.DEFAULT,
       callback: (): void => {
-        this.toggleActive(tabItem);
+        if (isActive !== undefined) {
+          this.toggleActive(tabItem);
+        }
         callback();
       },
     });

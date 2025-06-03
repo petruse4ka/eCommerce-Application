@@ -31,4 +31,4 @@ export const REDIRECT_LINK = [
   'ease-in-out',
 ];
 
-export const FORM_PASSWORD = [...FORM, 'max-w-[450px]'];
+export const FORM_PASSWORD = [...FORM, 'w-full'];

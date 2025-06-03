@@ -15,6 +15,7 @@ import { getValidator } from '@/utils/validations';
 
 export default class FormEditPassword extends BaseComponent {
   private inputs: Map<string, Input>;
+  private callback: () => void;
 
   constructor() {
     super({
@@ -22,7 +23,12 @@ export default class FormEditPassword extends BaseComponent {
       className: FORM_PASSWORD,
     });
     this.inputs = new Map();
+    this.callback = (): void => {};
     this.render();
+  }
+
+  public setCallback(callback: () => void): void {
+    this.callback = callback;
   }
 
   private inputErrorHandler(value: string, type: string): boolean | void {
@@ -113,33 +119,36 @@ export default class FormEditPassword extends BaseComponent {
 
     if (this.isDataValidBeforeSending(body)) {
       if (body.newPassword === body.repeatNewPassword) {
-        APIUpdateData.changeUserPassword(body).catch((error: Error) => {
-          const parsed: unknown = JSON.parse(error.message);
-          if (Array.isArray(parsed)) {
-            for (const item of parsed) {
-              if (isErrorInfoPasswordChange(item)) {
-                const errorInfo = ApiErrors.getErrorInfo(item.code);
+        void APIUpdateData.changeUserPassword(body)
+          .catch((error: Error) => {
+            const parsed: unknown = JSON.parse(error.message);
+            if (Array.isArray(parsed)) {
+              for (const item of parsed) {
+                if (isErrorInfoPasswordChange(item)) {
+                  const errorInfo = ApiErrors.getErrorInfo(item.code);
 
-                if (errorInfo === AlertText.INVALID_CURRENT_PASSWORD) {
-                  this.showValidationError('currentPassword', errorInfo);
-                } else {
-                  const inputs = this.inputs.keys();
-                  for (const input of inputs) {
-                    this.showValidationError(input, ' ');
+                  if (errorInfo === AlertText.INVALID_CURRENT_PASSWORD) {
+                    this.showValidationError('currentPassword', errorInfo);
+                  } else {
+                    const inputs = this.inputs.keys();
+                    for (const input of inputs) {
+                      this.showValidationError(input, ' ');
+                    }
                   }
-                }
 
-                Alert.render({
-                  textContent: errorInfo,
-                  status: AlertStatus.ERROR,
-                  visibleTime: 3000,
-                });
+                  Alert.render({
+                    textContent: errorInfo,
+                    status: AlertStatus.ERROR,
+                    visibleTime: 3000,
+                  });
+                }
               }
             }
-          }
-        });
+          })
+          .then(() => {
+            this.callback();
+          });
       } else {
-        this.showValidationError('newPassword', ErrorMessages.ERROR_REPEAT_PASSWORD);
         this.showValidationError('repeatNewPassword', ErrorMessages.ERROR_REPEAT_PASSWORD);
       }
     }

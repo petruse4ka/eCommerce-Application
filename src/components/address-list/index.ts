@@ -107,7 +107,7 @@ export default class AddressList extends BaseComponent {
             ? 'addShippingAddressId'
             : 'addBillingAddressId';
         const form = new FormAddNewAddress(type);
-        const modal = new Modal({ title: ModalTitle.CHANGE, content: form });
+        const modal = new Modal({ title: ModalTitle.NEW, content: form });
         this.component.append(modal.getElement());
 
         modal.showModal();

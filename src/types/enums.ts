@@ -95,6 +95,7 @@ export enum AlertText {
   DUPLICATE_FIELD = 'Пользователь с такой почтой уже существует.',
   ERROR_DEFAULT = 'Проблемы на сервере. Пожалуйста, попробуйте позже',
   CHANGE_SUCCESS = 'Данные успешно изменены',
+  PASSWORD_CHANGE_SUCCESS = 'Пароль успешно изменен',
   INVALID_CURRENT_PASSWORD = 'Текущий пароль не совпадает',
   DELETE_ADDRESS_SUCCESS = 'Адрес успешно удален',
   SET_DEFAULT_ADDRESS = 'Адрес успешно установлен по умолчанию',
@@ -158,5 +159,7 @@ export enum UserInfoKey {
 }
 
 export enum ModalTitle {
-  CHANGE = 'Редактирование',
+  CHANGE = 'Редактирование адреса',
+  NEW = 'Новый адрес',
+  CHANGE_PASSWORD = 'Смена пароля',
 }

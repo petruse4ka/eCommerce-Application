@@ -6,13 +6,14 @@ import shieldEditIcon from '@/assets/icons/shield-edit.svg';
 import AddressList from '@/components/address-list';
 import BaseComponent from '@/components/base';
 import FormEditPassword from '@/components/forms/edit-password';
+import Modal from '@/components/modal';
 import PersonalInfo from '@/components/personal-info';
 import Tabs from '@/components/tabs';
 import { PAGE_TITLES } from '@/constants';
 import { userState } from '@/store/user-state';
 import { ACCOUNT_PAGE } from '@/styles/pages/account';
 import { TAB } from '@/styles/tab';
-import { AddressType, AddressTypeText, TabAccount } from '@/types/enums';
+import { AddressType, AddressTypeText, ModalTitle, TabAccount } from '@/types/enums';
 import ElementBuilder from '@/utils/element-builder';
 import ImageBuilder from '@/utils/image-builder';
 import TransformApiData from '@/utils/transform-api-data';
@@ -20,7 +21,6 @@ import TransformApiData from '@/utils/transform-api-data';
 export default class AccountPage extends BaseComponent {
   private infoContainer: HTMLElement;
   private addressesNode: HTMLElement[];
-  private changePasswordNode: HTMLElement;
   private userInfoNode: HTMLElement;
   private container: HTMLElement;
   private tabsContainer: HTMLElement;
@@ -50,8 +50,6 @@ export default class AccountPage extends BaseComponent {
     this.currentActive = 'userInfo';
 
     this.addressesNode = [];
-
-    this.changePasswordNode = new FormEditPassword().getElement();
 
     this.userInfoNode = new PersonalInfo(TransformApiData.transformUserInfo()).getElement();
     userState.subscribe(this.updateContent.bind(this));
@@ -95,7 +93,6 @@ export default class AccountPage extends BaseComponent {
     this.createTabs();
     this.createAddresses();
     this.createUserInfo();
-    this.createChangePassword();
 
     this.container.append(this.tabsContainer, this.infoContainer);
     this.component.append(title, this.container);
@@ -110,21 +107,20 @@ export default class AccountPage extends BaseComponent {
       this.tabsContainer.firstChild.remove();
     }
 
-    while (this.container.firstChild) {
-      this.container.firstChild.remove();
-    }
-
-    this.render();
+    this.createTabs();
+    this.createAddresses();
+    this.createUserInfo();
   }
 
-  private createChangePassword(): void {
-    this.changePasswordNode = new FormEditPassword().getElement();
+  private createUserInfo(): void {
+    const userInfo = TransformApiData.transformUserInfo();
+    this.userInfoNode = new PersonalInfo(userInfo).getElement();
 
-    if (this.currentActive !== 'changePassword') {
-      this.changePasswordNode.classList.add('hidden');
+    if (this.currentActive !== 'userInfo') {
+      this.userInfoNode.classList.add('hidden');
     }
 
-    this.infoContainer.append(this.changePasswordNode);
+    this.infoContainer.append(this.userInfoNode);
   }
 
   private createAddresses(): void {
@@ -152,15 +148,6 @@ export default class AccountPage extends BaseComponent {
     }
   }
 
-  private createUserInfo(): void {
-    this.userInfoNode = new PersonalInfo(TransformApiData.transformUserInfo()).getElement();
-    if (this.currentActive !== 'userInfo') {
-      this.userInfoNode.classList.add('hidden');
-    }
-
-    this.infoContainer.append(this.userInfoNode);
-  }
-
   private createTabs(): void {
     const { personalInfoIcon, addressesIcon, passwordIcon } = AccountPage.createTabIcons();
 
@@ -185,10 +172,11 @@ export default class AccountPage extends BaseComponent {
       },
       {
         textContent: TabAccount.CHANGE_PASS,
-        isActive: this.currentActive === 'changePassword',
         callback: (): void => {
-          this.visibleCurrentContent(this.changePasswordNode);
-          this.currentActive = 'changePassword';
+          const form = new FormEditPassword();
+          const modal = new Modal({ title: ModalTitle.CHANGE_PASSWORD, content: form });
+          this.component.append(modal.getElement());
+          modal.showModal();
         },
         icon: passwordIcon,
       },
@@ -198,7 +186,7 @@ export default class AccountPage extends BaseComponent {
   }
 
   private visibleCurrentContent(nodeVisible: HTMLElement | HTMLElement[]): void {
-    const allNode = [this.userInfoNode, ...this.addressesNode, this.changePasswordNode];
+    const allNode = [this.userInfoNode, ...this.addressesNode];
     for (const node of allNode) {
       node.classList.add('hidden');
     }
