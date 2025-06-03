@@ -2,11 +2,12 @@ import APIUpdateData from '@/api/update-data';
 import deleteIcon from '@/assets/icons/delete.svg';
 import editIcon from '@/assets/icons/edit.svg';
 import starIcon from '@/assets/icons/star.svg';
+import starOffIcon from '@/assets/icons/star-off-outline.svg';
 import { BTN_TEXT } from '@/constants';
 import { INPUTS_CHANGE_ADDRESS_DATA } from '@/data';
 import { ADDRESS } from '@/styles/address';
 import { CUSTOM_BUTTON_STYLE } from '@/styles/buttons/buttons';
-import { AddressTypeText, ModalTitle } from '@/types/enums';
+import { AddressTypeText, AlertText, ModalTitle } from '@/types/enums';
 import { ButtonType } from '@/types/enums';
 import type { AddressInfo } from '@/types/interfaces';
 import ButtonBuilder from '@/utils/button-builder';
@@ -19,7 +20,6 @@ import FormEditUserInfo from '../forms/edit-info';
 import Modal from '../modal';
 
 export default class AddressList extends BaseComponent {
-  public infoValue: ElementBuilder[];
   private addressType: string;
 
   constructor(titleContent: string, addressesInfo: AddressInfo[]) {
@@ -34,7 +34,6 @@ export default class AddressList extends BaseComponent {
         : 'setDefaultBillingAddress';
 
     this.createTitle(titleContent);
-    this.infoValue = [];
 
     if (addressesInfo.length > 0) {
       for (const address of addressesInfo) {
@@ -63,7 +62,31 @@ export default class AddressList extends BaseComponent {
     }).getElement();
   }
 
+  private static createAddressInfoLine(key: string, value: string): HTMLElement {
+    const line = new ElementBuilder({
+      tag: 'div',
+      className: ADDRESS.LINE.CONTAINER,
+    }).getElement();
+
+    const titleLine = new ElementBuilder({
+      tag: 'p',
+      className: ADDRESS.LINE.TITLE,
+      textContent: `${key}:`,
+    }).getElement();
+
+    const valueLine = new ElementBuilder({
+      tag: 'p',
+      className: ADDRESS.LINE.VALUE,
+      textContent: value,
+    });
+
+    line.append(titleLine, valueLine.getElement());
+
+    return line;
+  }
+
   public addCardItem(address: AddressInfo): void {
+    const currentValue: string[] = [];
     const card = new ElementBuilder({
       tag: 'div',
       className: ADDRESS.CARD.DEFAULT,
@@ -88,11 +111,12 @@ export default class AddressList extends BaseComponent {
     }
 
     for (const [key, value] of Object.entries(addressInfo)) {
-      const line = this.createAddressInfoLine(key, value);
+      currentValue.push(value);
+      const line = AddressList.createAddressInfoLine(key, value);
       cardInfo.append(line);
     }
 
-    card.append(cardInfo, this.createButtons(id, isDefault));
+    card.append(cardInfo, this.createButtons(id, isDefault, currentValue));
     this.component.append(card);
   }
 
@@ -127,30 +151,6 @@ export default class AddressList extends BaseComponent {
     this.component.append(info);
   }
 
-  private createAddressInfoLine(key: string, value: string): HTMLElement {
-    const line = new ElementBuilder({
-      tag: 'div',
-      className: ADDRESS.LINE.CONTAINER,
-    }).getElement();
-
-    const titleLine = new ElementBuilder({
-      tag: 'p',
-      className: ADDRESS.LINE.TITLE,
-      textContent: `${key}:`,
-    }).getElement();
-
-    const valueLine = new ElementBuilder({
-      tag: 'p',
-      className: ADDRESS.LINE.VALUE,
-      textContent: value,
-    });
-
-    line.append(titleLine, valueLine.getElement());
-    this.infoValue.push(valueLine);
-
-    return line;
-  }
-
   private createTitle(titleContent: string): void {
     const title = new ElementBuilder({
       tag: 'h3',
@@ -161,21 +161,26 @@ export default class AddressList extends BaseComponent {
     this.component.append(title);
   }
 
-  private createButtons(id: string, isDefault: boolean): HTMLElement {
+  private createButtons(id: string, isDefault: boolean, currentValue: string[]): HTMLElement {
     const container = new ElementBuilder({
       tag: 'div',
       className: ADDRESS.CARD.BTN_CONTAINER,
     }).getElement();
 
-    container.append(this.createEditButton(id), AddressList.createDeleteButton(id));
+    container.append(
+      this.createEditButton(id, currentValue),
+      AddressList.createDeleteButton(id),
+      this.createDefaultButton(id, isDefault, currentValue)
+    );
 
-    if (!isDefault) {
-      container.append(this.createDefaultButton(id));
-    }
+    // // if (!isDefault) {
+    // //   container.append(this.createDefaultButton(id));
+    // // }
+    // container.append(this.createDefaultButton(id, isDefault));
     return container;
   }
 
-  private createEditButton(id: string): HTMLElement {
+  private createEditButton(id: string, currentLine: string[]): HTMLElement {
     return new ButtonWithIcon({
       style: 'ADDRESS_PRIMARY',
       textContent: BTN_TEXT.EDIT,
@@ -188,7 +193,7 @@ export default class AddressList extends BaseComponent {
       callback: (): void => {
         const form = new FormEditUserInfo({
           data: INPUTS_CHANGE_ADDRESS_DATA,
-          currentInputs: this.infoValue,
+          currentInputs: currentLine,
           id,
         });
         const modal = new Modal({ title: ModalTitle.CHANGE, content: form });
@@ -199,18 +204,36 @@ export default class AddressList extends BaseComponent {
     }).getElement();
   }
 
-  private createDefaultButton(id: string): HTMLElement {
+  private createDefaultButton(id: string, isDefault: boolean, currentLine: string[]): HTMLElement {
     return new ButtonWithIcon({
       style: 'ADDRESS_PRIMARY',
-      textContent: BTN_TEXT.SET_PRIMARY,
+      textContent: isDefault ? BTN_TEXT.DELETE_PRIMARY : BTN_TEXT.SET_PRIMARY,
       icon: {
-        source: starIcon,
+        source: isDefault ? starOffIcon : starIcon,
         alt: 'Star icon',
         className: ADDRESS.CARD.ICON,
       },
       textClassName: ADDRESS.CARD.TEXT,
       callback: (): void => {
-        void APIUpdateData.setAddressDefault(id, this.addressType);
+        if (isDefault) {
+          const type =
+            this.addressType === 'setDefaultShippingAddress'
+              ? 'addShippingAddressId'
+              : 'addBillingAddressId';
+
+          const body = {
+            country: currentLine[0],
+            city: currentLine[1],
+            streetName: currentLine[2],
+            postalCode: currentLine[3],
+          };
+
+          void APIUpdateData.deleteAddress(id, AlertText.DELETE_DEFAULT_ADDRESS).then(() => {
+            void APIUpdateData.userAddNewAddress(type, body, false);
+          });
+        } else {
+          void APIUpdateData.setAddressDefault(id, this.addressType);
+        }
       },
     }).getElement();
   }

@@ -100,6 +100,7 @@ export enum AlertText {
   DELETE_ADDRESS_SUCCESS = 'Адрес успешно удален',
   CHANGE_ADDRESS_SUCCESS = 'Данные адреса успешно изменены',
   SET_DEFAULT_ADDRESS = 'Адрес успешно установлен по умолчанию',
+  DELETE_DEFAULT_ADDRESS = 'Адрес успешно удален по умолчанию',
   ADD_ADDRESS_SUCCESS = 'Новый адрес добавлен',
 }
 

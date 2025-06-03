@@ -522,3 +522,9 @@ export interface TabInfo {
   callback: () => void;
   icon?: HTMLElement;
 }
+
+export interface addAddressBody {
+  action: string;
+  id: string;
+  isAlert: boolean;
+}

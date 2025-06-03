@@ -13,11 +13,11 @@ export default class FormEditUserInfo {
   private form: HTMLElement;
   private INPUTS_DATA: InputComponent[];
   private inputs: Map<string, Input>;
-  private currentInputs: ElementBuilder[];
+  private currentInputs: string[];
   private callback: () => void;
   private id: string | undefined;
 
-  constructor(formInfo: { data: InputComponent[]; currentInputs: ElementBuilder[]; id?: string }) {
+  constructor(formInfo: { data: InputComponent[]; currentInputs: string[]; id?: string }) {
     this.INPUTS_DATA = formInfo.data;
     this.inputs = new Map();
     this.callback = (): void => {};
@@ -72,7 +72,7 @@ export default class FormEditUserInfo {
 
       const id = input.id.charAt(0).toLocaleLowerCase() + input.id.slice(1);
 
-      const value = this.currentInputs[index++].getElement().textContent;
+      const value = this.currentInputs[index++];
       if (typeof value === 'string') {
         const inputNode = new Input({
           id,
