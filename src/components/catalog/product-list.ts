@@ -14,6 +14,7 @@ import ImageBuilder from '@/utils/image-builder';
 export default class ProductList extends BaseComponent {
   private productsContainer: HTMLElement;
   private isLoading: boolean;
+  private hasError: boolean;
 
   constructor() {
     super({ tag: 'div', className: PRODUCT_LIST_STYLES.CONTAINER });
@@ -22,8 +23,10 @@ export default class ProductList extends BaseComponent {
       className: PRODUCT_LIST_STYLES.PRODUCTS_CONTAINER,
     }).getElement();
     this.isLoading = true;
+    this.hasError = false;
 
     productsState.subscribe(this.handleProductsChange);
+    productsState.subscribeError(this.handleError);
     this.updateProductList();
   }
 
@@ -81,7 +84,7 @@ export default class ProductList extends BaseComponent {
         textContent: `${product.discountedPrice} ${DEFAULT_CURRENCY}`,
       }).getElement();
 
-      priceWrapper.append(originalPrice, discountedPrice);
+      priceWrapper.append(discountedPrice, originalPrice);
     } else {
       const regularPrice = new ElementBuilder({
         tag: 'span',
@@ -154,6 +157,13 @@ export default class ProductList extends BaseComponent {
 
   private handleProductsChange = (): void => {
     this.isLoading = false;
+    this.hasError = false;
+    this.updateProductList();
+  };
+
+  private handleError = (): void => {
+    this.isLoading = false;
+    this.hasError = true;
     this.updateProductList();
   };
 
@@ -168,16 +178,30 @@ export default class ProductList extends BaseComponent {
 
     const products = productsState.getProducts();
 
-    if (!this.isLoading && products.length === 0) {
-      const emptyState = new EmptyComponent(
-        `${CATALOG_TEXTS.NO_PRODUCTS}`,
-        notFoundImage,
-        PRODUCT_LIST_STYLES.EMPTY_CATALOG_CONTAINER,
-        PRODUCT_LIST_STYLES.EMPTY_CATALOG_IMAGE,
-        PRODUCT_LIST_STYLES.EMPTY_CATALOG_TEXT
-      );
-      this.component.append(emptyState.getElement());
-      return;
+    if (!this.isLoading) {
+      if (this.hasError) {
+        const errorState = new EmptyComponent(
+          CATALOG_TEXTS.ERROR_LOADING_PRODUCTS,
+          notFoundImage,
+          PRODUCT_LIST_STYLES.EMPTY_CATALOG_CONTAINER,
+          PRODUCT_LIST_STYLES.EMPTY_CATALOG_IMAGE,
+          PRODUCT_LIST_STYLES.EMPTY_CATALOG_TEXT
+        );
+        this.component.append(errorState.getElement());
+        return;
+      }
+
+      if (products.length === 0) {
+        const emptyState = new EmptyComponent(
+          CATALOG_TEXTS.NO_PRODUCTS,
+          notFoundImage,
+          PRODUCT_LIST_STYLES.EMPTY_CATALOG_CONTAINER,
+          PRODUCT_LIST_STYLES.EMPTY_CATALOG_IMAGE,
+          PRODUCT_LIST_STYLES.EMPTY_CATALOG_TEXT
+        );
+        this.component.append(emptyState.getElement());
+        return;
+      }
     }
 
     this.component.append(this.productsContainer);

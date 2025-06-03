@@ -12,6 +12,7 @@ export const CATALOG_STYLES = {
     'p-4',
     'pb-10',
     'self-start',
+    'relative',
   ],
   PRODUCT_LIST_SECTION: ['xl:col-span-3', 'flex', 'flex-col', 'gap-7', 'min-h-[500px]'],
   PRODUCT_LIST_CONTAINER: ['relative', 'flex-grow'],

@@ -4,6 +4,7 @@ class ProductsState {
   private products: Products[] = [];
   private fractionDigits: number = 2;
   private subscribers: Array<() => void> = [];
+  private errorSubscribers: Array<() => void> = [];
 
   public getProducts(): Products[] {
     return this.products;
@@ -23,6 +24,16 @@ class ProductsState {
 
   public subscribe(callback: () => void): void {
     this.subscribers.push(callback);
+  }
+
+  public subscribeError(callback: () => void): void {
+    this.errorSubscribers.push(callback);
+  }
+
+  public notifyError(): void {
+    for (const subscriber of this.errorSubscribers) {
+      subscriber();
+    }
   }
 
   private notify(): void {

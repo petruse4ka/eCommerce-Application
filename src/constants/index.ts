@@ -118,6 +118,8 @@ export const BTN_TEXT = {
   LOGIN_PAGE: 'Вход',
   LOGIN_REDIRECT: 'Перейти к авторизации',
   EDIT: 'Редактировать',
+  DELETE: 'Удалить',
+  SET_PRIMARY: 'Сделать Основным',
   SAVE_CHANGES: 'Сохранить изменения',
   ADD_NEW_ADDRESS: 'Добавить новый адрес',
   PEN: '\uD83D\uDD8A',
@@ -197,6 +199,7 @@ export const FIELDSET_LABELS = {
 
 export const PAGE_TITLES = {
   CATALOG: 'Каталог',
+  ACCOUNT: 'Личный Кабинет',
 };
 
 export const CATALOG_TEXTS = {
@@ -223,7 +226,7 @@ export const CATALOG_TEXTS = {
   HIDE_FILTERS: 'Скрыть фильтры',
   LOADING_PRODUCTS: 'Обновляем каталог...',
   LOADING_FILTERS: 'Обновляем фильтры...',
-  NO_PRODUCTS: 'К сожалению, продуктов не найдено',
+  NO_PRODUCTS: 'К сожалению, по выбранным фильтрам в данной категории продуктов не найдено.',
   NO_FILTERS: 'Подходящие фильтры отсутствуют',
   PRICE: 'Цена',
   PRICE_ID: 'price',
@@ -234,6 +237,7 @@ export const CATALOG_TEXTS = {
   HOME: 'Главная',
   CATALOG: 'Каталог',
   ALL_CATEGORIES: 'Все продукты',
+  ERROR_LOADING_PRODUCTS: 'Произошла ошибка при загрузке продуктов. Пожалуйста, попробуйте позже.',
 };
 
 export const PRODUCT_ATTRIBUTES = {

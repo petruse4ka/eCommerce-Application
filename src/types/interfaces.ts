@@ -1,3 +1,5 @@
+import type { CUSTOM_BUTTON_STYLE } from '@/styles/buttons/buttons';
+
 import type { AddressKey, ButtonType, FilterType, InputType, Route, UserInfoKey } from './enums';
 
 export interface ElementParameters {
@@ -39,6 +41,18 @@ export interface LinkParameters extends ElementParameters {
 
 export interface ButtonParameters extends ElementParameters {
   type: ButtonType;
+}
+
+export interface customButtonParameters {
+  style: keyof typeof CUSTOM_BUTTON_STYLE;
+  textContent: string;
+  icon: {
+    source: string;
+    alt: string;
+    className?: string[];
+  };
+  textClassName?: string[];
+  callback: () => void;
 }
 
 export interface AuthResponse {
@@ -95,7 +109,6 @@ export interface InputComponent {
 }
 
 export interface Addresses {
-  //id?: string;
   country: string;
   city: string;
   streetName: string;
@@ -501,4 +514,11 @@ export interface AddAddress {
       streetName: string;
     };
   }[];
+}
+
+export interface TabInfo {
+  textContent: string;
+  isActive?: boolean;
+  callback: () => void;
+  icon?: HTMLElement;
 }

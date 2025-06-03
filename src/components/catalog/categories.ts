@@ -35,8 +35,7 @@ export default class Categories extends BaseComponent {
       className: selectorClasses,
       textContent: CATALOG_TEXTS.ALL_CATEGORIES,
       callback: (): void => {
-        filterState.setCategory(null);
-        filterState.setInternalCategory(null);
+        filterState.setCategoryAndInternalCategory(null, null);
       },
     }).getElement();
 

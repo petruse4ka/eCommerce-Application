@@ -6,7 +6,8 @@ import Input from '@/components/inputs';
 import { BTN_TEXT } from '@/constants';
 import { INPUTS_EDIT_USER_PASSWORD } from '@/data';
 import { AUTHORIZATION_INPUTS_CONTAINER, FORM_PASSWORD } from '@/styles/forms/forms';
-import { AlertStatus, AlertText, ErrorMessages } from '@/types/enums';
+import { HIDDEN } from '@/styles/inputs/inputs';
+import { AlertStatus, AlertText, ErrorMessages, InputType } from '@/types/enums';
 import { isErrorInfoPasswordChange, isPasswordInfo } from '@/types/guards';
 import type { PasswordBody } from '@/types/interfaces';
 import ApiErrors from '@/utils/api-errors';
@@ -15,6 +16,7 @@ import { getValidator } from '@/utils/validations';
 
 export default class FormEditPassword extends BaseComponent {
   private inputs: Map<string, Input>;
+  private callback: () => void;
 
   constructor() {
     super({
@@ -22,7 +24,12 @@ export default class FormEditPassword extends BaseComponent {
       className: FORM_PASSWORD,
     });
     this.inputs = new Map();
+    this.callback = (): void => {};
     this.render();
+  }
+
+  public setCallback(callback: () => void): void {
+    this.callback = callback;
   }
 
   private inputErrorHandler(value: string, type: string): boolean | void {
@@ -52,6 +59,14 @@ export default class FormEditPassword extends BaseComponent {
       tag: 'div',
       className: AUTHORIZATION_INPUTS_CONTAINER,
     }).getElement();
+
+    const inputEmailForAutocomplete = new Input({
+      id: 'email',
+      type: InputType.EMAIL,
+      labelText: '',
+      className: HIDDEN,
+    }).getElement();
+    container.append(inputEmailForAutocomplete);
 
     for (const input of INPUTS_EDIT_USER_PASSWORD) {
       const { id, labelText, placeholder, type, isRequired } = input;
@@ -113,33 +128,36 @@ export default class FormEditPassword extends BaseComponent {
 
     if (this.isDataValidBeforeSending(body)) {
       if (body.newPassword === body.repeatNewPassword) {
-        APIUpdateData.changeUserPassword(body).catch((error: Error) => {
-          const parsed: unknown = JSON.parse(error.message);
-          if (Array.isArray(parsed)) {
-            for (const item of parsed) {
-              if (isErrorInfoPasswordChange(item)) {
-                const errorInfo = ApiErrors.getErrorInfo(item.code);
+        void APIUpdateData.changeUserPassword(body)
+          .catch((error: Error) => {
+            const parsed: unknown = JSON.parse(error.message);
+            if (Array.isArray(parsed)) {
+              for (const item of parsed) {
+                if (isErrorInfoPasswordChange(item)) {
+                  const errorInfo = ApiErrors.getErrorInfo(item.code);
 
-                if (errorInfo === AlertText.INVALID_CURRENT_PASSWORD) {
-                  this.showValidationError('currentPassword', errorInfo);
-                } else {
-                  const inputs = this.inputs.keys();
-                  for (const input of inputs) {
-                    this.showValidationError(input, ' ');
+                  if (errorInfo === AlertText.INVALID_CURRENT_PASSWORD) {
+                    this.showValidationError('currentPassword', errorInfo);
+                  } else {
+                    const inputs = this.inputs.keys();
+                    for (const input of inputs) {
+                      this.showValidationError(input, ' ');
+                    }
                   }
-                }
 
-                Alert.render({
-                  textContent: errorInfo,
-                  status: AlertStatus.ERROR,
-                  visibleTime: 3000,
-                });
+                  Alert.render({
+                    textContent: errorInfo,
+                    status: AlertStatus.ERROR,
+                    visibleTime: 3000,
+                  });
+                }
               }
             }
-          }
-        });
+          })
+          .then(() => {
+            this.callback();
+          });
       } else {
-        this.showValidationError('newPassword', ErrorMessages.ERROR_REPEAT_PASSWORD);
         this.showValidationError('repeatNewPassword', ErrorMessages.ERROR_REPEAT_PASSWORD);
       }
     }

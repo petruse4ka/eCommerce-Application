@@ -4,7 +4,7 @@ import Button from '@/components/buttons';
 import Input from '@/components/inputs';
 import { BTN_TEXT } from '@/constants';
 import { INPUTS_CHANGE_ADDRESS_DATA } from '@/data';
-import { FORM_PASSWORD } from '@/styles/forms/forms';
+import { FORM } from '@/styles/forms/forms';
 import { isUserAddress } from '@/types/guards';
 import type { Addresses } from '@/types/interfaces';
 import { getValidator } from '@/utils/validations';
@@ -17,7 +17,7 @@ export default class FormAddNewAddress extends BaseComponent {
   constructor(action: string) {
     super({
       tag: 'form',
-      className: FORM_PASSWORD,
+      className: FORM,
     });
 
     this.action = action;

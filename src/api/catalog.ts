@@ -44,24 +44,11 @@ export default class CatalogAPI {
         signal: this.currentProductRequest.signal,
       });
 
-      if (this.currentProductRequest?.signal.aborted) return;
-
-      if (!response.ok) throw new Error(`HTTP error: ${response.status}`);
-
-      const data: unknown = await response.json();
-
-      if (this.currentProductRequest?.signal.aborted) return;
-
-      if (isProductResponse(data))
-        return {
-          products: TransformApiProductsData.transformProducts(data),
-          productData: data.results,
-        };
-
-      throw new Error('Invalid product response format');
+      return await this.handleProductResponse(response, this.currentProductRequest.signal);
     } catch (error) {
       if (error instanceof Error && error.name === 'AbortError') return;
       console.error('Error fetching products:', error);
+      productsState.notifyError();
     } finally {
       if (this.currentProductRequest) this.currentProductRequest = null;
     }
@@ -130,6 +117,35 @@ export default class CatalogAPI {
     } catch (error) {
       console.error('Error fetching categories:', error);
     }
+  }
+
+  private static async handleProductResponse(
+    response: Response,
+    signal: AbortSignal
+  ): Promise<{
+    products: Products[];
+    productData: Product[];
+  } | void> {
+    if (signal.aborted) return;
+
+    if (!response.ok) {
+      productsState.notifyError();
+      throw new Error(`HTTP error: ${response.status}`);
+    }
+
+    const data: unknown = await response.json();
+
+    if (signal.aborted) return;
+
+    if (!isProductResponse(data)) {
+      productsState.notifyError();
+      throw new Error('Invalid product response format');
+    }
+
+    return {
+      products: TransformApiProductsData.transformProducts(data),
+      productData: data.results,
+    };
   }
 
   private static buildProductRequestQueryParameters(filters: FilterRequest): URLSearchParams {

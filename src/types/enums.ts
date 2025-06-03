@@ -94,10 +94,13 @@ export enum AlertText {
   ACCOUNT_CREDENTIALS_ERROR = 'Учетная запись клиента с указанными учетными данными не найдена.',
   DUPLICATE_FIELD = 'Пользователь с такой почтой уже существует.',
   ERROR_DEFAULT = 'Проблемы на сервере. Пожалуйста, попробуйте позже',
-  CHANGE_SUCCESS = 'Данные успешно изменены',
+  CHANGE_SUCCESS = 'Данные пользователя успешно изменены',
+  PASSWORD_CHANGE_SUCCESS = 'Пароль успешно изменен',
   INVALID_CURRENT_PASSWORD = 'Текущий пароль не совпадает',
   DELETE_ADDRESS_SUCCESS = 'Адрес успешно удален',
+  CHANGE_ADDRESS_SUCCESS = 'Данные адреса успешно изменены',
   SET_DEFAULT_ADDRESS = 'Адрес успешно установлен по умолчанию',
+  ADD_ADDRESS_SUCCESS = 'Новый адрес добавлен',
 }
 
 export enum CheckboxText {
@@ -126,7 +129,7 @@ export enum DropdownOptions {
 }
 
 export enum TabAccount {
-  INFO = 'Персональная информация',
+  INFO = 'Личная информация',
   ADDRESSES = 'Адреса',
   CHANGE_PASS = 'Сменить пароль',
 }
@@ -158,5 +161,7 @@ export enum UserInfoKey {
 }
 
 export enum ModalTitle {
-  CHANGE = 'Редактирование',
+  CHANGE = 'Редактирование адреса',
+  NEW = 'Новый адрес',
+  CHANGE_PASSWORD = 'Смена пароля',
 }

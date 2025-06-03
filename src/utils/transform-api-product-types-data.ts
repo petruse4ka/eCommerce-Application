@@ -165,11 +165,12 @@ export default class TransformApiProductTypesData {
 
   private static createPriceFilter(products: Product[]): RangeFilter | null {
     const minPrice = FILTER_RANGES.PRICE.MIN;
-    let maxPrice = FILTER_RANGES.PRICE.MAX;
+    let maxPrice = FILTER_RANGES.PRICE.MIN;
 
     for (const product of products) {
-      if (product.masterData) {
-        const variant = product.masterData.current.masterVariant;
+      const variant = product.masterData?.current.masterVariant || product.masterVariant;
+
+      if (variant?.prices?.length) {
         for (const price of variant.prices) {
           const fractionDigits = price.value.fractionDigits || 2;
           const priceDivider = 10 ** fractionDigits;
@@ -177,6 +178,10 @@ export default class TransformApiProductTypesData {
           maxPrice = Math.max(maxPrice, amount);
         }
       }
+    }
+
+    if (maxPrice === FILTER_RANGES.PRICE.MIN) {
+      maxPrice = FILTER_RANGES.PRICE.MAX;
     }
 
     return {

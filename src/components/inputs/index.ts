@@ -65,7 +65,8 @@ export default class Input {
   }
 
   public static getAutocomplete(id: string): { autocomplete: string } | undefined {
-    if (id === 'password') return { autocomplete: 'current-password' };
+    if (id === 'password' || id === 'currentPassword') return { autocomplete: 'current-password' };
+    if (id === 'newPassword' || id === 'repeatNewPassword') return { autocomplete: 'new-password' };
     return id === 'email' ? { autocomplete: 'email' } : undefined;
   }
 
