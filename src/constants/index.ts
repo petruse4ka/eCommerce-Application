@@ -226,7 +226,7 @@ export const CATALOG_TEXTS = {
   HIDE_FILTERS: 'Скрыть фильтры',
   LOADING_PRODUCTS: 'Обновляем каталог...',
   LOADING_FILTERS: 'Обновляем фильтры...',
-  NO_PRODUCTS: 'К сожалению, продуктов не найдено',
+  NO_PRODUCTS: 'К сожалению, по выбранным фильтрам в данной категории продуктов не найдено.',
   NO_FILTERS: 'Подходящие фильтры отсутствуют',
   PRICE: 'Цена',
   PRICE_ID: 'price',
@@ -237,6 +237,7 @@ export const CATALOG_TEXTS = {
   HOME: 'Главная',
   CATALOG: 'Каталог',
   ALL_CATEGORIES: 'Все продукты',
+  ERROR_LOADING_PRODUCTS: 'Произошла ошибка при загрузке продуктов. Пожалуйста, попробуйте позже.',
 };
 
 export const PRODUCT_ATTRIBUTES = {

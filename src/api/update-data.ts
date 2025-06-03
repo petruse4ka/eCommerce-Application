@@ -76,7 +76,7 @@ export default class APIUpdateData {
           userState.setUserInfoState(body);
 
           Alert.render({
-            textContent: AlertText.CHANGE_SUCCESS,
+            textContent: AlertText.CHANGE_ADDRESS_SUCCESS,
             status: AlertStatus.SUCCESS,
             visibleTime: 3000,
           });
@@ -272,7 +272,7 @@ export default class APIUpdateData {
         } else {
           userState.setUserInfoState(body);
           Alert.render({
-            textContent: AlertText.CHANGE_SUCCESS,
+            textContent: AlertText.ADD_ADDRESS_SUCCESS,
             status: AlertStatus.SUCCESS,
             visibleTime: 3000,
           });

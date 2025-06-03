@@ -63,3 +63,5 @@ export const ERROR_MESSAGE_STYLE = [
   'text-left',
   'text-accent',
 ];
+
+export const HIDDEN = 'hidden';
