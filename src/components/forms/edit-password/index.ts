@@ -129,6 +129,9 @@ export default class FormEditPassword extends BaseComponent {
     if (this.isDataValidBeforeSending(body)) {
       if (body.newPassword === body.repeatNewPassword) {
         void APIUpdateData.changeUserPassword(body)
+          .then(() => {
+            this.callback();
+          })
           .catch((error: Error) => {
             const parsed: unknown = JSON.parse(error.message);
             if (Array.isArray(parsed)) {
@@ -153,9 +156,6 @@ export default class FormEditPassword extends BaseComponent {
                 }
               }
             }
-          })
-          .then(() => {
-            this.callback();
           });
       } else {
         this.showValidationError('repeatNewPassword', ErrorMessages.ERROR_REPEAT_PASSWORD);
