@@ -1,20 +1,20 @@
 import '@/styles/main.css';
 
 import BaseComponent from '@/components/base';
-
-import UnderConstructionPage from './underconstruction';
+import CartItem from '@/components/cart/cart-item';
+import { CART_PAGE } from '@/styles/pages/cart';
 
 export default class CartPage extends BaseComponent {
   constructor() {
     super({
-      tag: 'div',
-      className: '',
+      tag: 'main',
+      className: CART_PAGE.MAIN,
     });
     this.render();
   }
 
   private render(): void {
-    const underConstruction = new UnderConstructionPage();
-    this.component = underConstruction.getElement();
+    const cartItem = new CartItem();
+    this.component.append(cartItem.getElement());
   }
 }

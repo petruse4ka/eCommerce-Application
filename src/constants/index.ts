@@ -259,3 +259,8 @@ export const PRODUCT_TEXT = {
 };
 
 export const DEFAULT_QUANTITY_AMOUNT = 1;
+
+export const CART_TEXT = {
+  TITLE: 'Ваша корзина',
+  PRICE: 'Цена: ',
+};

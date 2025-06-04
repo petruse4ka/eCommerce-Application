@@ -175,4 +175,15 @@ export const CUSTOM_BUTTON_STYLE = {
     'hover:bg-accent-hover',
     'hover:border-accent-hover',
   ],
+  DELETE_CART_ITEM: [
+    'absolute',
+    'font-bold',
+    'top-0',
+    'right-0',
+    'cursor-pointer',
+    'p-1',
+    'text-dark',
+    'hover:text-accent',
+    'transition',
+  ],
 };
