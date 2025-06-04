@@ -42,7 +42,7 @@ export default class ShoppingCartIcon extends BaseComponent {
     this.component.append(cartIcon, this.itemsIndicator);
   }
 
-  private updateIndicator(count: number): void {
-    this.itemsIndicator.textContent = String(count);
+  private updateIndicator(): void {
+    this.itemsIndicator.textContent = String(cartState.getItemsCount());
   }
 }

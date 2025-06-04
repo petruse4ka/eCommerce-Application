@@ -24,9 +24,11 @@ describe('Cart state', () => {
 
     cartState.setItemsCount(3);
     expect(mockCallback).toHaveBeenCalledTimes(1);
+    expect(mockCallback).toHaveBeenCalledWith(3);
 
     cartState.setItemsCount(0);
     expect(mockCallback).toHaveBeenCalledTimes(2);
+    expect(mockCallback).toHaveBeenCalledWith(0);
   });
 
   test('should notify all subscribers on state change', () => {
