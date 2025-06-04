@@ -78,6 +78,7 @@ export enum Route {
   ACCOUNT = '#/account',
   CATALOG = '#/catalog',
   PRODUCT = '#/product',
+  CART = '#/cart',
 }
 
 export enum AlertStatus {
