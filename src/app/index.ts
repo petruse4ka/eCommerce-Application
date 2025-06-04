@@ -4,6 +4,7 @@ import Footer from '@/components/footer/footer';
 import Header from '@/components/header/header';
 import AboutPage from '@/pages/about';
 import AccountPage from '@/pages/account';
+import CartPage from '@/pages/cart';
 import CatalogPage from '@/pages/catalog';
 import ContactsPage from '@/pages/contacts';
 import DeliveryPage from '@/pages/delivery';
@@ -34,6 +35,7 @@ export default class App extends BaseComponent {
   private termsPage: TermsPage = new TermsPage();
   private returnsPage: ReturnsPage = new ReturnsPage();
   private accountPage: AccountPage = new AccountPage();
+  private cartPage: CartPage = new CartPage();
   private router: Router;
   private currentPage: BaseComponent;
 
@@ -50,6 +52,7 @@ export default class App extends BaseComponent {
     [Route.ACCOUNT, this.accountPage],
     [Route.CATALOG, this.catalogPage],
     [Route.PRODUCT, this.productPage],
+    [Route.CART, this.cartPage],
   ]);
 
   constructor() {
