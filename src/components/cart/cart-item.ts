@@ -1,4 +1,3 @@
-import productImage from '@/assets/images/macarons.jpg';
 import { CART_TEXT } from '@/constants';
 import { CART_ITEM } from '@/styles/cart/cart-item';
 import ElementBuilder from '@/utils/element-builder';
@@ -9,18 +8,26 @@ import Button from '../buttons';
 import ProductQuantity from '../product/quantity';
 
 export default class CartItem extends BaseComponent {
-  constructor() {
+  private productInfo: {
+    name: string;
+    img: string;
+    price: number;
+  };
+
+  constructor(product: { name: string; img: string; price: number }) {
     super({
       tag: 'article',
       className: CART_ITEM.CONTAINER,
     });
+
+    this.productInfo = product;
 
     this.render();
   }
 
   private render(): void {
     const productImg = new ImageBuilder({
-      source: productImage,
+      source: this.productInfo.img,
       alt: 'Product image',
       className: CART_ITEM.IMAGE,
     }).getElement();
@@ -28,7 +35,7 @@ export default class CartItem extends BaseComponent {
     const productName = new ElementBuilder({
       tag: 'p',
       className: CART_ITEM.INFO.NAME,
-      textContent: 'Название продукта',
+      textContent: this.productInfo.name,
     }).getElement();
 
     const priceContainer = new ElementBuilder({
@@ -40,7 +47,7 @@ export default class CartItem extends BaseComponent {
     const priceValue = new ElementBuilder({
       tag: 'span',
       className: CART_ITEM.PRICE.ACCENT,
-      textContent: '10 ₽',
+      textContent: `${this.productInfo.price} ₽`,
     }).getElement();
 
     priceContainer.append(priceValue);
@@ -51,7 +58,11 @@ export default class CartItem extends BaseComponent {
       callback: (): void => {},
     }).getElement();
 
-    const quantityInputBlock = new ProductQuantity(10, priceValue, '').getElement();
+    const quantityInputBlock = new ProductQuantity(
+      this.productInfo.price,
+      priceValue,
+      ''
+    ).getElement();
 
     this.component.append(
       productImg,
