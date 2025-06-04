@@ -1,11 +1,11 @@
-import cart from '@/assets/icons/cart.svg';
+import logo from '@/assets/logo/logo-main.svg';
 import BaseComponent from '@/components/base';
 import Router from '@/router';
 import { HEADER_STYLES } from '@/styles/header/header';
 import { Route } from '@/types/enums';
 import ImageBuilder from '@/utils/image-builder';
 
-export default class ShoppingCartIcon extends BaseComponent {
+export default class Logo extends BaseComponent {
   constructor() {
     super({ tag: 'div', className: '' });
 
@@ -19,8 +19,8 @@ export default class ShoppingCartIcon extends BaseComponent {
   protected render(): void {
     const logoElement = new ImageBuilder({
       className: HEADER_STYLES.LOGO,
-      source: cart,
-      alt: 'Cart Logo',
+      source: logo,
+      alt: 'Logo of the Macaron Shop',
     }).getElement();
 
     this.component.append(logoElement);
