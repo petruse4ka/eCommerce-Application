@@ -123,6 +123,7 @@ export const BTN_TEXT = {
   DELETE_PRIMARY: 'Отменить по умолчанию',
   SAVE_CHANGES: 'Сохранить изменения',
   ADD_NEW_ADDRESS: 'Добавить новый адрес',
+  CHECKOUT: 'Оформить заказ',
 };
 
 export const INTRO_TEXTS = {
@@ -263,4 +264,9 @@ export const DEFAULT_QUANTITY_AMOUNT = 1;
 export const CART_TEXT = {
   TITLE: 'Ваша корзина',
   PRICE: 'Цена: ',
+  TOTAL_TITLE: 'Итого',
+  PRODUCTS_PRICE: 'Стоимость товаров',
+  SALE: 'Скидка',
+  DELIVERY: 'Доставка',
+  TOTAL_RESULT: 'К оплате',
 };
