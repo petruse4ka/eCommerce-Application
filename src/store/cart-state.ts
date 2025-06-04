@@ -26,11 +26,10 @@ class CartState {
   public decrementItemsCount(itemCount: number): void {
     if (this.itemsCount > 0 && itemCount <= this.itemsCount) {
       this.itemsCount -= itemCount;
-      this.notify();
     } else {
       this.itemsCount = 0;
-      this.notify();
     }
+    this.notify();
   }
 
   public subscribe(callback: ActionHandler): void {
