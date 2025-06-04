@@ -20,7 +20,7 @@ export default class ShoppingCartIcon extends BaseComponent {
     const logoElement = new ImageBuilder({
       className: HEADER_STYLES.LOGO,
       source: cart,
-      alt: 'Cart Logo',
+      alt: 'Cart Icon',
     }).getElement();
 
     this.component.append(logoElement);
