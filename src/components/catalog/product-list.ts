@@ -11,6 +11,8 @@ import type { Products } from '@/types/interfaces';
 import ElementBuilder from '@/utils/element-builder';
 import ImageBuilder from '@/utils/image-builder';
 
+import Button from '../buttons';
+
 export default class ProductList extends BaseComponent {
   private productsContainer: HTMLElement;
   private isLoading: boolean;
@@ -110,7 +112,7 @@ export default class ProductList extends BaseComponent {
       tag: 'div',
       className: PRODUCT_LIST_STYLES.CARD,
       callback: (): void => {
-        globalThis.location.hash = `${Route.PRODUCT}/${product.id}`;
+        globalThis.location.hash = `${Route.PRODUCT}/${product.key}`;
       },
     }).getElement();
 
@@ -129,6 +131,21 @@ export default class ProductList extends BaseComponent {
       imageContainer.append(ProductList.createPromoTag());
     }
 
+    const addInCartButton = new Button({
+      style: 'PRIMARY_PINK',
+      textContent: 'В корзину',
+      callback: (): void => {},
+    }).getElement();
+
+    imageContainer.append(image);
+    const content = this.createContent(product);
+
+    card.append(imageContainer, content, addInCartButton);
+
+    return card;
+  }
+
+  private static createContent(product: Products): HTMLElement {
     const contentContainer = new ElementBuilder({
       tag: 'div',
       className: PRODUCT_LIST_STYLES.CONTENT_CONTAINER,
@@ -148,11 +165,9 @@ export default class ProductList extends BaseComponent {
 
     const priceContainer = ProductList.createPriceContainer(product);
 
-    imageContainer.append(image);
     contentContainer.append(title, description, priceContainer);
-    card.append(imageContainer, contentContainer);
 
-    return card;
+    return contentContainer;
   }
 
   private handleProductsChange = (): void => {
