@@ -2,10 +2,10 @@ import type { cartInfo } from '@/types/interfaces';
 import type { ActionHandler } from '@/types/types';
 
 class CartState {
-  private cartInfo: cartInfo = { id: '', version: 0 };
+  private cartInfo: cartInfo | null = null;
   private subscribers: ActionHandler[] = [];
 
-  public getCartInfo(): cartInfo {
+  public getCartInfo(): cartInfo | null {
     return this.cartInfo;
   }
 

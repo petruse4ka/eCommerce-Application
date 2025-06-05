@@ -151,6 +151,7 @@ export interface RegistrationBody {
 export interface AuthorizationBody {
   email: string;
   password: string;
+  anonymousId?: string;
 }
 
 export interface MenuItem {
@@ -167,6 +168,7 @@ export interface Packages {
 
 export interface Products {
   id: string;
+  key: string;
   name: string;
   description: string;
   image: string;
@@ -523,8 +525,67 @@ export interface TabInfo {
   icon?: HTMLElement;
 }
 
-export interface addAddressBody {
+export interface AddAddressBody {
   action: string;
   id: string;
   isAlert: boolean;
+}
+
+export interface cartInfo {
+  id: string;
+  version: number;
+}
+
+export interface cartResponse {
+  type: string;
+  id: string;
+  version: number;
+  versionModifiedAt: string;
+  lastMessageSequenceNumber: number;
+  createdAt: string;
+  lastModifiedAt: string;
+  lastModifiedBy: {
+    clientId: string;
+    isPlatformClient: boolean;
+    anonymousId: string;
+  };
+  createdBy: {
+    clientId: string;
+    isPlatformClient: boolean;
+    anonymousId: string;
+  };
+  lineItems: [];
+  cartState: string;
+  totalPrice: {
+    type: string;
+    currencyCode: string;
+    centAmount: number;
+    fractionDigits: number;
+  };
+  shippingMode: string;
+  shipping: [];
+  customLineItems: [];
+  discountCodes: [];
+  directDiscounts: [];
+  inventoryMode: string;
+  taxMode: string;
+  taxRoundingMode: string;
+  taxCalculationMode: string;
+  deleteDaysAfterLastModification: number;
+  refusedGifts: [];
+  origin: string;
+  itemShippingAddresses: [];
+  discountTypeCombination: {
+    type: string;
+  };
+}
+
+export interface AddProductBody {
+  version: number;
+  actions: {
+    action: string;
+    productId: string;
+    variantId: number;
+    quantity: number;
+  }[];
 }
