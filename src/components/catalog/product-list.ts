@@ -133,19 +133,7 @@ export default class ProductList extends BaseComponent {
       imageContainer.append(ProductList.createPromoTag());
     }
 
-    const addInCartButton = new Button({
-      style: 'PRIMARY_PINK',
-      textContent: 'В корзину',
-      callback: (): void => {
-        if (cartState.getCartInfo()) {
-          void APICart.addProductInCart(product.id);
-        } else {
-          void APICart.createCart().then(() => {
-            void APICart.addProductInCart(product.id);
-          });
-        }
-      },
-    }).getElement();
+    const addInCartButton = this.createAddProductBtn(product);
 
     imageContainer.append(image);
     const content = this.createContent(product);
@@ -153,6 +141,30 @@ export default class ProductList extends BaseComponent {
     card.append(imageContainer, content, addInCartButton);
 
     return card;
+  }
+
+  private static createAddProductBtn(product: Products): HTMLElement {
+    const button = new Button({
+      style: 'PRIMARY_PINK',
+      textContent: 'В корзину',
+      callback: (): void => {
+        button.textContent('Добавляем в корзину...');
+        button.disableButton();
+        if (cartState.getCartInfo()) {
+          void APICart.addProductInCart(product.id).then(() => {
+            button.textContent('Товар добавлен');
+          });
+        } else {
+          void APICart.createCart().then(() => {
+            void APICart.addProductInCart(product.id).then(() => {
+              button.textContent('Товар добавлен');
+            });
+          });
+        }
+      },
+    });
+
+    return button.getElement();
   }
 
   private static createContent(product: Products): HTMLElement {
