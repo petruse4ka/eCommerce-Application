@@ -1,9 +1,34 @@
+import { isActionHandler } from '@/types/guards';
 import type { cartInfo } from '@/types/interfaces';
-import type { ActionHandler } from '@/types/types';
+import type { ActionHandler, ActionWithArgumentHandler } from '@/types/types';
 
 class CartState {
+  private itemsCount: number = 0;
   private cartInfo: cartInfo | null = null;
-  private subscribers: ActionHandler[] = [];
+  private subscribers: ActionWithArgumentHandler<number>[] | ActionHandler[] = [];
+
+  public getItemsCount(): number {
+    return this.itemsCount;
+  }
+
+  public setItemsCount(count: number): void {
+    this.itemsCount = count;
+    this.notify();
+  }
+
+  public incrementItemsCount(itemCount: number): void {
+    this.itemsCount += itemCount;
+    this.notify();
+  }
+
+  public decrementItemsCount(itemCount: number): void {
+    if (this.itemsCount > 0 && itemCount <= this.itemsCount) {
+      this.itemsCount -= itemCount;
+    } else {
+      this.itemsCount = 0;
+    }
+    this.notify();
+  }
 
   public getCartInfo(): cartInfo | null {
     return this.cartInfo;
@@ -24,7 +49,11 @@ class CartState {
 
   private notify(): void {
     for (const callback of this.subscribers) {
-      callback();
+      if (isActionHandler(callback)) {
+        callback();
+      } else {
+        callback(this.itemsCount);
+      }
     }
   }
 }
