@@ -14,6 +14,8 @@ export const DEFAULT_CURRENCY = '₽';
 
 export const MAX_DESCRIPTION_LENGTH = 150;
 
+export const DEFAULT_PRODUCTS_PER_PAGE = 12;
+
 export const LOADING_CONFIG = {
   MAX_ATTEMPTS: 10,
   DELAY: 500,
@@ -236,6 +238,8 @@ export const CATALOG_TEXTS = {
   CATALOG: 'Каталог',
   ALL_CATEGORIES: 'Все продукты',
   ERROR_LOADING_PRODUCTS: 'Произошла ошибка при загрузке продуктов. Пожалуйста, попробуйте позже.',
+  PAGE: 'СТРАНИЦА',
+  OUT: 'ИЗ',
 };
 
 export const PRODUCT_ATTRIBUTES = {

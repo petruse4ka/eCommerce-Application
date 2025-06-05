@@ -1,4 +1,6 @@
+import { DEFAULT_PRODUCTS_PER_PAGE } from '@/constants';
 import { filterState } from '@/store/filter-state';
+import { paginatorState } from '@/store/paginator-state';
 import { productsState } from '@/store/products-state';
 import { userState } from '@/store/user-state';
 import { ApiEndpoint, ApiMethods, ContentType, FilterType } from '@/types/enums';
@@ -142,6 +144,9 @@ export default class CatalogAPI {
       throw new Error('Invalid product response format');
     }
 
+    const totalPages = Math.ceil(data.total / DEFAULT_PRODUCTS_PER_PAGE);
+    paginatorState.setTotalPages(totalPages);
+
     return {
       products: TransformApiProductsData.transformProducts(data),
       productData: data.results,
@@ -157,7 +162,12 @@ export default class CatalogAPI {
     if (searchQuery) CatalogAPI.handleSearchQuery(queryParameters, searchQuery);
 
     CatalogAPI.handleCategories(queryParameters);
-    queryParameters.append('limit', '500');
+    queryParameters.append('limit', DEFAULT_PRODUCTS_PER_PAGE.toString());
+
+    const currentPage = paginatorState.getCurrentPage();
+    const offset = (currentPage - 1) * DEFAULT_PRODUCTS_PER_PAGE;
+    queryParameters.append('offset', offset.toString());
+
     return queryParameters;
   }
 

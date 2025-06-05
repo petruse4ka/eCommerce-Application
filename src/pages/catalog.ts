@@ -4,6 +4,7 @@ import CatalogAPI from '@/api/catalog';
 import BaseComponent from '@/components/base';
 import Breadcrumbs from '@/components/breadcrumbs';
 import Categories from '@/components/catalog/categories';
+import Paginator from '@/components/catalog/paginator';
 import ProductFilters from '@/components/catalog/product-filters';
 import ProductList from '@/components/catalog/product-list';
 import ProductSorting from '@/components/catalog/product-sorting';
@@ -11,6 +12,7 @@ import SelectedFilters from '@/components/catalog/selected-filters';
 import LoaderOverlay from '@/components/overlay/loader-overlay';
 import { CATALOG_TEXTS, LOADING_CONFIG, PAGE_TITLES } from '@/constants';
 import { filterState } from '@/store/filter-state';
+import { paginatorState } from '@/store/paginator-state';
 import { productsState } from '@/store/products-state';
 import { userState } from '@/store/user-state';
 import { CATALOG_STYLES } from '@/styles/pages/catalog';
@@ -26,6 +28,7 @@ export default class CatalogPage extends BaseComponent {
   private selectedFilters: SelectedFilters;
   private breadcrumbs: Breadcrumbs;
   private categories: Categories | null;
+  private paginator: Paginator;
   private isLoading: boolean;
   private isLoadingCategories: boolean;
   private productListLoader: LoaderOverlay;
@@ -41,6 +44,7 @@ export default class CatalogPage extends BaseComponent {
     this.productFilters = new ProductFilters();
     this.selectedFilters = new SelectedFilters();
     this.breadcrumbs = new Breadcrumbs();
+    this.paginator = new Paginator();
     this.categories = null;
     this.isLoading = true;
     this.isLoadingCategories = true;
@@ -56,6 +60,9 @@ export default class CatalogPage extends BaseComponent {
     void this.loadProducts();
     filterState.subscribe(() => {
       void this.handleFilterChange();
+    });
+    paginatorState.subscribe(() => {
+      void this.handlePageChange();
     });
   }
 
@@ -154,6 +161,27 @@ export default class CatalogPage extends BaseComponent {
     }
   };
 
+  private handlePageChange = async (): Promise<void> => {
+    this.isLoading = true;
+    this.render();
+
+    try {
+      const selectedFilters = filterState.getSelectedFilters();
+      const productsData = await CatalogAPI.getProducts(selectedFilters);
+
+      if (productsData) {
+        productsState.updateProducts(productsData.products);
+        this.productSorting.updateProductCount(productsData.products.length);
+      }
+    } catch (error) {
+      console.error('Error updating products:', error);
+      productsState.notifyError();
+    } finally {
+      this.isLoading = false;
+      this.render();
+    }
+  };
+
   private render(): void {
     while (this.component.firstChild) this.component.firstChild.remove();
 
@@ -204,6 +232,6 @@ export default class CatalogPage extends BaseComponent {
     productListSection.append(this.productSorting.getElement(), productListContainer);
     catalogContainer.append(filtersSection, productListSection);
 
-    this.component.append(title, catalogContainer);
+    this.component.append(title, catalogContainer, this.paginator.getElement());
   }
 }
