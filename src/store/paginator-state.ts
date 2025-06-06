@@ -3,12 +3,14 @@ import type { ActionWithArgumentHandler } from '@/types/types';
 class PaginatorState {
   private currentPage: number;
   private totalPages: number;
-  private subscribers: ActionWithArgumentHandler<number>[];
+  private pageSubscribers: ActionWithArgumentHandler<number>[];
+  private totalPagesSubscribers: ActionWithArgumentHandler<number>[];
 
   constructor() {
     this.currentPage = 1;
     this.totalPages = 1;
-    this.subscribers = [];
+    this.pageSubscribers = [];
+    this.totalPagesSubscribers = [];
   }
 
   public getCurrentPage(): number {
@@ -27,7 +29,7 @@ class PaginatorState {
     } else {
       this.currentPage = currentPage;
     }
-    this.notify();
+    this.notifyPageChange();
   }
 
   public setTotalPages(totalPages: number): void {
@@ -38,22 +40,39 @@ class PaginatorState {
 
       if (this.currentPage > totalPages) {
         this.currentPage = totalPages;
+        this.notifyPageChange();
       }
     }
-    this.notify();
+    this.notifyTotalPagesChange();
   }
 
   public subscribe(callback: ActionWithArgumentHandler<number>): void {
-    this.subscribers.push(callback);
+    this.pageSubscribers.push(callback);
+  }
+
+  public subscribeToTotalPages(callback: ActionWithArgumentHandler<number>): void {
+    this.totalPagesSubscribers.push(callback);
   }
 
   public unsubscribe(callback: ActionWithArgumentHandler<number>): void {
-    this.subscribers = this.subscribers.filter((subscriber) => subscriber !== callback);
+    this.pageSubscribers = this.pageSubscribers.filter((subscriber) => subscriber !== callback);
   }
 
-  private notify(): void {
-    for (const callback of this.subscribers) {
+  public unsubscribeFromTotalPages(callback: ActionWithArgumentHandler<number>): void {
+    this.totalPagesSubscribers = this.totalPagesSubscribers.filter(
+      (subscriber) => subscriber !== callback
+    );
+  }
+
+  private notifyPageChange(): void {
+    for (const callback of this.pageSubscribers) {
       callback(this.currentPage);
+    }
+  }
+
+  private notifyTotalPagesChange(): void {
+    for (const callback of this.totalPagesSubscribers) {
+      callback(this.totalPages);
     }
   }
 }

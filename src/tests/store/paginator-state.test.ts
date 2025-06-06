@@ -4,6 +4,7 @@ beforeEach(() => {
   paginatorState.setCurrentPage(1);
   paginatorState.setTotalPages(10);
   paginatorState.unsubscribe(() => {});
+  paginatorState.unsubscribeFromTotalPages(() => {});
 });
 
 describe('Paginator state', () => {
@@ -30,7 +31,7 @@ describe('Paginator state', () => {
 });
 
 describe('Paginator state', () => {
-  test('should notify subscriber on each state change', () => {
+  test('should notify page subscribers on page change', () => {
     const mockCallback = vi.fn();
     paginatorState.subscribe(mockCallback);
 
@@ -43,7 +44,20 @@ describe('Paginator state', () => {
     expect(mockCallback).toHaveBeenCalledWith(1);
   });
 
-  test('should notify all subscribers on state change', () => {
+  test('should notify total pages subscribers on total pages change', () => {
+    const mockCallback = vi.fn();
+    paginatorState.subscribeToTotalPages(mockCallback);
+
+    paginatorState.setTotalPages(20);
+    expect(mockCallback).toHaveBeenCalledTimes(1);
+    expect(mockCallback).toHaveBeenCalledWith(20);
+
+    paginatorState.setTotalPages(-5);
+    expect(mockCallback).toHaveBeenCalledTimes(2);
+    expect(mockCallback).toHaveBeenCalledWith(1);
+  });
+
+  test('should notify all page subscribers on page change', () => {
     const mockFirstCallback = vi.fn();
     const mockSecondCallback = vi.fn();
 
@@ -54,5 +68,36 @@ describe('Paginator state', () => {
 
     expect(mockFirstCallback).toHaveBeenCalledTimes(1);
     expect(mockSecondCallback).toHaveBeenCalledTimes(1);
+  });
+});
+
+describe('Paginator state', () => {
+  test('should notify all total pages subscribers on total pages change', () => {
+    const mockFirstCallback = vi.fn();
+    const mockSecondCallback = vi.fn();
+
+    paginatorState.subscribeToTotalPages(mockFirstCallback);
+    paginatorState.subscribeToTotalPages(mockSecondCallback);
+
+    paginatorState.setTotalPages(15);
+
+    expect(mockFirstCallback).toHaveBeenCalledTimes(1);
+    expect(mockSecondCallback).toHaveBeenCalledTimes(1);
+  });
+
+  test('should not notify page subscribers on total pages change', () => {
+    const mockCallback = vi.fn();
+    paginatorState.subscribe(mockCallback);
+
+    paginatorState.setTotalPages(20);
+    expect(mockCallback).not.toHaveBeenCalled();
+  });
+
+  test('should not notify total pages subscribers on page change', () => {
+    const mockCallback = vi.fn();
+    paginatorState.subscribeToTotalPages(mockCallback);
+
+    paginatorState.setCurrentPage(2);
+    expect(mockCallback).not.toHaveBeenCalled();
   });
 });
