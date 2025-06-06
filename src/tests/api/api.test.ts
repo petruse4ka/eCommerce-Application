@@ -15,6 +15,15 @@ describe('API', () => {
       json: () => Promise.resolve({ customer: { id: 'test-id' } }),
     });
 
+    mockFetchRequest.mockResolvedValueOnce({
+      ok: true,
+      json: () =>
+        Promise.resolve({
+          id: 'mock-cart-id',
+          version: 1,
+        }),
+    });
+
     const result = await API.userSignInResponse({
       userInfo: {
         email: 'testmail@testdomain.ru',
@@ -25,7 +34,9 @@ describe('API', () => {
 
     expect(result).toBe('test-id');
   });
+});
 
+describe('API', () => {
   test('should handle failed login', async () => {
     const mockFetchRequest = vi.fn();
     globalThis.fetch = mockFetchRequest;

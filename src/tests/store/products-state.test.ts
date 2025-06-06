@@ -15,6 +15,7 @@ describe('ProductsState', () => {
       {
         name: 'Тестовый продукт',
         id: 'test-id',
+        key: 'test-key',
         description: 'Тестовое описание',
         image: 'test-image.jpg',
         price: 1000,

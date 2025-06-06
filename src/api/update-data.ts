@@ -2,7 +2,7 @@ import Alert from '@/components/alert';
 import { userState } from '@/store/user-state';
 import { AlertStatus, AlertText, ApiEndpoint, ApiMethods, ContentType } from '@/types/enums';
 import type {
-  addAddressBody,
+  AddAddressBody,
   Addresses,
   AddressWithId,
   Customer,
@@ -259,7 +259,7 @@ export default class APIUpdateData {
       });
   }
 
-  public static async addShippingOrBillingAddress(parameters: addAddressBody): Promise<void> {
+  public static async addShippingOrBillingAddress(parameters: AddAddressBody): Promise<void> {
     const token = userState.getTokenState();
 
     await fetch(

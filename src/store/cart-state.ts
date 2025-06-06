@@ -1,13 +1,10 @@
+import type { CartInfo } from '@/types/interfaces';
 import type { ActionWithArgumentHandler } from '@/types/types';
 
 class CartState {
-  private itemsCount: number;
-  private subscribers: ActionWithArgumentHandler<number>[];
-
-  constructor() {
-    this.itemsCount = 0;
-    this.subscribers = [];
-  }
+  private itemsCount: number = 0;
+  private cartInfo: CartInfo | null = null;
+  private subscribers: ActionWithArgumentHandler<number>[] = [];
 
   public getItemsCount(): number {
     return this.itemsCount;
@@ -32,6 +29,15 @@ class CartState {
     this.notify();
   }
 
+  public getCartInfo(): CartInfo | null {
+    return this.cartInfo;
+  }
+
+  public setCartInfo(cartInfo: CartInfo): void {
+    this.cartInfo = cartInfo;
+    this.notify();
+  }
+
   public subscribe(callback: ActionWithArgumentHandler<number>): void {
     this.subscribers.push(callback);
   }
@@ -42,7 +48,11 @@ class CartState {
 
   private notify(): void {
     for (const callback of this.subscribers) {
-      callback(this.itemsCount);
+      if (callback.length === 0) {
+        callback();
+      } else {
+        callback(this.itemsCount);
+      }
     }
   }
 }

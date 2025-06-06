@@ -29,4 +29,8 @@ export default class Button {
   public enableButton(): void {
     this.button.enableButton();
   }
+
+  public changeTextContent(text: string): void {
+    this.button.applyTextContent(text);
+  }
 }
