@@ -555,8 +555,6 @@ export interface CartItem {
   variant: ProductVariant;
   price: Price;
   quantity: number;
-  discountedPricePerQuantity: [];
-  perMethodTaxRate: [];
   addedAt: string;
   lastModifiedAt: string;
   totalPrice: {
@@ -609,6 +607,7 @@ export interface CartResponse {
   discountTypeCombination: {
     type: string;
   };
+  totalLineItemQuantity: number;
 }
 
 export interface AddProductBody {

@@ -31,6 +31,7 @@ export default class APICart {
             lineItems: TransformApiCartData.transformProductLine(body.lineItems),
           };
           cartState.setCartInfo(cartInfo);
+          cartState.setItemsCount(body.totalLineItemQuantity);
         }
       })
       .catch((error) => {
@@ -71,6 +72,7 @@ export default class APICart {
               lineItems: TransformApiCartData.transformProductLine(body.lineItems),
             };
             cartState.setCartInfo(cartInfo);
+            cartState.setItemsCount(body.totalLineItemQuantity);
           }
         })
         .catch((error) => {
@@ -110,6 +112,7 @@ export default class APICart {
               lineItems: TransformApiCartData.transformProductLine(body.lineItems),
             };
             cartState.setCartInfo(cartInfo);
+            cartState.setItemsCount(body.totalLineItemQuantity);
           }
         })
         .catch((error) => {
