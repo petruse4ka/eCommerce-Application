@@ -24,6 +24,7 @@ export default class CatalogAPI {
   public static async getProducts(filters: FilterRequest = {}): Promise<{
     products: Products[];
     productData: Product[];
+    total: number;
   } | void> {
     const token = userState.getTokenState();
 
@@ -34,6 +35,8 @@ export default class CatalogAPI {
       }
 
       this.currentProductRequest = new AbortController();
+      const signal = this.currentProductRequest.signal;
+
       const queryParameters = this.buildProductRequestQueryParameters(filters);
       const url = `${import.meta.env['VITE_CTP_API_URL']}/${import.meta.env['VITE_CTP_PROJECT_KEY']}/product-projections/search?${queryParameters.toString()}`;
 
@@ -43,10 +46,10 @@ export default class CatalogAPI {
           Authorization: `Bearer ${token}`,
           'Content-Type': ContentType.JSON,
         },
-        signal: this.currentProductRequest.signal,
+        signal,
       });
 
-      return await this.handleProductResponse(response, this.currentProductRequest.signal);
+      return await this.handleProductResponse(response, signal);
     } catch (error) {
       if (error instanceof Error && error.name === 'AbortError') return;
       console.error('Error fetching products:', error);
@@ -127,6 +130,7 @@ export default class CatalogAPI {
   ): Promise<{
     products: Products[];
     productData: Product[];
+    total: number;
   } | void> {
     if (signal.aborted) return;
 
@@ -150,6 +154,7 @@ export default class CatalogAPI {
     return {
       products: TransformApiProductsData.transformProducts(data),
       productData: data.results,
+      total: data.total,
     };
   }
 

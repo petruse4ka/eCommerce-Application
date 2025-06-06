@@ -136,7 +136,7 @@ export default class CatalogPage extends BaseComponent {
 
           if (productsData) {
             productsState.updateProducts(productsData.products);
-            this.productSorting.updateProductCount(productsData.products.length);
+            this.productSorting.updateProductCount(productsData.total);
 
             if (loadedProductTypes && loadedCategories) {
               this.handleProductTypes(loadedProductTypes, productsData, loadedCategories);
@@ -180,7 +180,7 @@ export default class CatalogPage extends BaseComponent {
 
       if (productsData) {
         productsState.updateProducts(productsData.products);
-        this.productSorting.updateProductCount(productsData.products.length);
+        this.productSorting.updateProductCount(productsData.total);
       }
     } catch (error) {
       console.error('Error updating products:', error);
@@ -202,7 +202,7 @@ export default class CatalogPage extends BaseComponent {
 
       if (productsData) {
         productsState.updateProducts(productsData.products);
-        this.productSorting.updateProductCount(productsData.products.length);
+        this.productSorting.updateProductCount(productsData.total);
       }
     } catch (error) {
       console.error('Error updating products:', error);
