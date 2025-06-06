@@ -30,7 +30,7 @@ export default class Button {
     this.button.enableButton();
   }
 
-  public textContent(text: string): void {
+  public changeTextContent(text: string): void {
     this.button.applyTextContent(text);
   }
 }

@@ -148,16 +148,16 @@ export default class ProductList extends BaseComponent {
       style: 'PRIMARY_PINK',
       textContent: 'В корзину',
       callback: (): void => {
-        button.textContent('Добавляем в корзину...');
+        button.changeTextContent('Добавляем в корзину...');
         button.disableButton();
         if (cartState.getCartInfo()) {
           void APICart.addProductInCart(product.id).then(() => {
-            button.textContent('Товар добавлен');
+            button.changeTextContent('Товар добавлен');
           });
         } else {
           void APICart.createCart().then(() => {
             void APICart.addProductInCart(product.id).then(() => {
-              button.textContent('Товар добавлен');
+              button.changeTextContent('Товар добавлен');
             });
           });
         }

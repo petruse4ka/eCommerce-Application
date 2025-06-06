@@ -1,8 +1,8 @@
-import type { cartInfo } from '@/types/interfaces';
+import type { CartInfo } from '@/types/interfaces';
 import { TransformApiCartData } from '@/utils/transform-api-cart-data';
 
 const body: {
-  cartInfo: cartInfo;
+  cartInfo: CartInfo;
   productId: string;
 } = {
   cartInfo: {

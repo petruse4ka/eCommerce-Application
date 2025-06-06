@@ -1,9 +1,9 @@
-import type { cartInfo } from '@/types/interfaces';
+import type { CartInfo } from '@/types/interfaces';
 import type { ActionWithArgumentHandler } from '@/types/types';
 
 class CartState {
   private itemsCount: number = 0;
-  private cartInfo: cartInfo | null = null;
+  private cartInfo: CartInfo | null = null;
   private subscribers: ActionWithArgumentHandler<number>[] = [];
 
   public getItemsCount(): number {
@@ -29,11 +29,11 @@ class CartState {
     this.notify();
   }
 
-  public getCartInfo(): cartInfo | null {
+  public getCartInfo(): CartInfo | null {
     return this.cartInfo;
   }
 
-  public setCartInfo(cartInfo: cartInfo): void {
+  public setCartInfo(cartInfo: CartInfo): void {
     this.cartInfo = cartInfo;
     this.notify();
   }

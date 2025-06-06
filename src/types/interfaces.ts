@@ -531,12 +531,12 @@ export interface AddAddressBody {
   isAlert: boolean;
 }
 
-export interface cartInfo {
+export interface CartInfo {
   id: string;
   version: number;
 }
 
-export interface cartResponse {
+export interface CartResponse {
   type: string;
   id: string;
   version: number;

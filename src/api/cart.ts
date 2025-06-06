@@ -2,7 +2,7 @@ import Alert from '@/components/alert';
 import { cartState } from '@/store/cart-state';
 import { userState } from '@/store/user-state';
 import { AlertStatus, AlertText, ApiEndpoint, ApiMethods, ContentType } from '@/types/enums';
-import type { cartResponse, ErrorResponse } from '@/types/interfaces';
+import type { CartResponse, ErrorResponse } from '@/types/interfaces';
 import { TransformApiCartData } from '@/utils/transform-api-cart-data';
 
 export default class APICart {
@@ -21,7 +21,7 @@ export default class APICart {
       }
     )
       .then((response) => response.json())
-      .then((body: cartResponse) => {
+      .then((body: CartResponse) => {
         if ('errors' in body) {
           throw new Error(JSON.stringify(body.errors));
         } else {
@@ -60,7 +60,7 @@ export default class APICart {
         }
       )
         .then((response) => response.json())
-        .then((body: cartResponse | ErrorResponse) => {
+        .then((body: CartResponse | ErrorResponse) => {
           if ('errors' in body) {
             throw new Error(JSON.stringify(body.errors));
           } else {
@@ -98,7 +98,7 @@ export default class APICart {
         }
       )
         .then((response) => response.json())
-        .then((body: cartResponse | ErrorResponse) => {
+        .then((body: CartResponse | ErrorResponse) => {
           if ('statusCode' in body) {
             void APICart.createCart();
           } else {

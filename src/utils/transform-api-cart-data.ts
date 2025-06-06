@@ -1,8 +1,8 @@
-import type { AddProductBody, cartInfo } from '@/types/interfaces';
+import type { AddProductBody, CartInfo } from '@/types/interfaces';
 
 export class TransformApiCartData {
   public static transformAddProduct(body: {
-    cartInfo: cartInfo;
+    cartInfo: CartInfo;
     productId: string;
   }): AddProductBody {
     return {
