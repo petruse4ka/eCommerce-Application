@@ -31,6 +31,7 @@ export default class Paginator extends BaseComponent {
     this.lastButton = Paginator.createLastButton();
 
     paginatorState.subscribe(this.updatePaginator.bind(this));
+    paginatorState.subscribeToTotalPages(this.updatePaginator.bind(this));
     this.render();
   }
 
@@ -92,6 +93,7 @@ export default class Paginator extends BaseComponent {
 
   public override remove(): void {
     paginatorState.unsubscribe(this.updatePaginator.bind(this));
+    paginatorState.unsubscribeFromTotalPages(this.updatePaginator.bind(this));
     super.remove();
   }
 
@@ -109,7 +111,7 @@ export default class Paginator extends BaseComponent {
     const currentPage = paginatorState.getCurrentPage();
     const totalPages = paginatorState.getTotalPages();
 
-    this.currentPage.textContent = `${CATALOG_TEXTS.PAGE} ${String(paginatorState.getCurrentPage())} ${CATALOG_TEXTS.OUT} ${String(paginatorState.getTotalPages())}`;
+    this.currentPage.textContent = `${CATALOG_TEXTS.PAGE} ${String(currentPage)} ${CATALOG_TEXTS.OUT} ${String(totalPages)}`;
 
     if (currentPage === 1) {
       this.firstButton.disableButton();

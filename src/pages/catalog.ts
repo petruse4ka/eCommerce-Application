@@ -66,6 +66,35 @@ export default class CatalogPage extends BaseComponent {
     });
   }
 
+  private static createProductListSection(
+    productList: ProductList,
+    productSorting: ProductSorting,
+    paginator: Paginator,
+    isLoading: boolean,
+    productListLoader: LoaderOverlay
+  ): HTMLElement {
+    const productListSection = new ElementBuilder({
+      tag: 'div',
+      className: CATALOG_STYLES.PRODUCT_LIST_SECTION,
+    }).getElement();
+
+    const productListContainer = new ElementBuilder({
+      tag: 'div',
+      className: CATALOG_STYLES.PRODUCT_LIST_CONTAINER,
+    }).getElement();
+
+    productListContainer.append(productList.getElement());
+    if (isLoading) productListContainer.append(productListLoader.getElement());
+
+    productListSection.append(
+      productSorting.getElement(),
+      productListContainer,
+      paginator.getElement()
+    );
+
+    return productListSection;
+  }
+
   private handleCategories(loadedCategories: CategoryResponse['results'] | null): void {
     if (loadedCategories && loadedCategories.every((category) => isCategory(category))) {
       const renderedCategories = loadedCategories.map((category) => ({
@@ -164,6 +193,7 @@ export default class CatalogPage extends BaseComponent {
   private handlePageChange = async (): Promise<void> => {
     this.isLoading = true;
     this.render();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 
     try {
       const selectedFilters = filterState.getSelectedFilters();
@@ -216,22 +246,16 @@ export default class CatalogPage extends BaseComponent {
       this.filtersLoader.getElement().remove();
     }
 
-    const productListSection = new ElementBuilder({
-      tag: 'div',
-      className: CATALOG_STYLES.PRODUCT_LIST_SECTION,
-    }).getElement();
+    const productListSection = CatalogPage.createProductListSection(
+      this.productList,
+      this.productSorting,
+      this.paginator,
+      this.isLoading,
+      this.productListLoader
+    );
 
-    const productListContainer = new ElementBuilder({
-      tag: 'div',
-      className: CATALOG_STYLES.PRODUCT_LIST_CONTAINER,
-    }).getElement();
-
-    productListContainer.append(this.productList.getElement());
-    if (this.isLoading) productListContainer.append(this.productListLoader.getElement());
-
-    productListSection.append(this.productSorting.getElement(), productListContainer);
     catalogContainer.append(filtersSection, productListSection);
 
-    this.component.append(title, catalogContainer, this.paginator.getElement());
+    this.component.append(title, catalogContainer);
   }
 }
