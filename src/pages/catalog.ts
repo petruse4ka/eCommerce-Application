@@ -194,7 +194,7 @@ export default class CatalogPage extends BaseComponent {
   private handlePageChange = async (): Promise<void> => {
     this.isLoading = true;
     this.render();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    this.productSorting.getElement().scrollIntoView({ behavior: 'smooth', block: 'start' });
 
     try {
       const selectedFilters = filterState.getSelectedFilters();
