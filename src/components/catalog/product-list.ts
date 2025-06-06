@@ -1,15 +1,19 @@
+import APICart from '@/api/cart';
 import cameraIcon from '@/assets/icons/camera.svg';
 import defaultProductImage from '@/assets/images/default-macaron.svg';
 import notFoundImage from '@/assets/images/not-found.svg';
 import BaseComponent from '@/components/base';
 import EmptyComponent from '@/components/base/empty';
 import { CATALOG_TEXTS, DEFAULT_CURRENCY, MAX_DESCRIPTION_LENGTH } from '@/constants';
+import { cartState } from '@/store/cart-state';
 import { productsState } from '@/store/products-state';
 import { PRODUCT_LIST_STYLES } from '@/styles/catalog/product-list';
 import { Route } from '@/types/enums';
 import type { Products } from '@/types/interfaces';
 import ElementBuilder from '@/utils/element-builder';
 import ImageBuilder from '@/utils/image-builder';
+
+import Button from '../buttons';
 
 export default class ProductList extends BaseComponent {
   private productsContainer: HTMLElement;
@@ -110,7 +114,7 @@ export default class ProductList extends BaseComponent {
       tag: 'div',
       className: PRODUCT_LIST_STYLES.CARD,
       callback: (): void => {
-        globalThis.location.hash = `${Route.PRODUCT}/${product.id}`;
+        globalThis.location.hash = `${Route.PRODUCT}/${product.key}`;
       },
     }).getElement();
 
@@ -129,6 +133,41 @@ export default class ProductList extends BaseComponent {
       imageContainer.append(ProductList.createPromoTag());
     }
 
+    const addInCartButton = this.createAddProductBtn(product);
+
+    imageContainer.append(image);
+    const content = this.createContent(product);
+
+    card.append(imageContainer, content, addInCartButton);
+
+    return card;
+  }
+
+  private static createAddProductBtn(product: Products): HTMLElement {
+    const button = new Button({
+      style: 'PRIMARY_PINK',
+      textContent: 'В корзину',
+      callback: (): void => {
+        button.changeTextContent('Добавляем в корзину...');
+        button.disableButton();
+        if (cartState.getCartInfo()) {
+          void APICart.addProductInCart(product.id).then(() => {
+            button.changeTextContent('Товар добавлен');
+          });
+        } else {
+          void APICart.createCart().then(() => {
+            void APICart.addProductInCart(product.id).then(() => {
+              button.changeTextContent('Товар добавлен');
+            });
+          });
+        }
+      },
+    });
+
+    return button.getElement();
+  }
+
+  private static createContent(product: Products): HTMLElement {
     const contentContainer = new ElementBuilder({
       tag: 'div',
       className: PRODUCT_LIST_STYLES.CONTENT_CONTAINER,
@@ -148,11 +187,9 @@ export default class ProductList extends BaseComponent {
 
     const priceContainer = ProductList.createPriceContainer(product);
 
-    imageContainer.append(image);
     contentContainer.append(title, description, priceContainer);
-    card.append(imageContainer, contentContainer);
 
-    return card;
+    return contentContainer;
   }
 
   private handleProductsChange = (): void => {

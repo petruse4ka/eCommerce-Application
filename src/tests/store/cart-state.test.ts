@@ -19,7 +19,9 @@ describe('Cart state', () => {
   });
 
   test('should notify subscriber on each state change', () => {
-    const mockCallback = vi.fn();
+    const mockCallback = vi.fn((itemsCount) => {
+      void itemsCount;
+    });
     cartState.subscribe(mockCallback);
 
     cartState.setItemsCount(3);
