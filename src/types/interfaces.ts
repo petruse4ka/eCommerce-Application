@@ -528,3 +528,15 @@ export interface addAddressBody {
   id: string;
   isAlert: boolean;
 }
+
+interface additionalPagesContentItem {
+  type: 'text' | 'subtitle';
+  content: string;
+}
+
+export interface additionalPagesData {
+  TITLE: string;
+  CONTENT: additionalPagesContentItem[];
+  IMAGE?: string | string[];
+  STAMP?: string;
+}
