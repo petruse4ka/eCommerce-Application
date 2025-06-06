@@ -40,9 +40,11 @@ export default class CartItem extends BaseComponent {
     if (this.productInfo.discountedPrice) {
       const priceOldValue = new ElementBuilder({
         tag: 'span',
-        className: CART_ITEM.PRICE.ACCENT,
-        textContent: `${this.productInfo.discountedPrice} ₽`,
+        className: CART_ITEM.PRICE.OLD,
+        textContent: `${this.productInfo.prices} ₽`,
       }).getElement();
+
+      priceValue.textContent = `${this.productInfo.discountedPrice} ₽`;
 
       priceContainer.append(priceOldValue);
     }
