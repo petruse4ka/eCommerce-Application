@@ -28,6 +28,7 @@ export default class APICart {
           const cartInfo = {
             id: body.id,
             version: body.version,
+            lineItems: TransformApiCartData.transformProductLine(body.lineItems),
           };
           cartState.setCartInfo(cartInfo);
         }
@@ -67,6 +68,7 @@ export default class APICart {
             const cartInfo = {
               id: body.id,
               version: body.version,
+              lineItems: TransformApiCartData.transformProductLine(body.lineItems),
             };
             cartState.setCartInfo(cartInfo);
           }
@@ -105,6 +107,7 @@ export default class APICart {
             const cartInfo = {
               id: body.id,
               version: body.version,
+              lineItems: TransformApiCartData.transformProductLine(body.lineItems),
             };
             cartState.setCartInfo(cartInfo);
           }

@@ -534,6 +534,37 @@ export interface AddAddressBody {
 export interface CartInfo {
   id: string;
   version: number;
+  lineItems: CartItemView[];
+}
+
+export interface CartItem {
+  id: string;
+  productId: string;
+  productKey: string;
+  name: {
+    ru: string;
+  };
+  productType: {
+    typeId: string;
+    id: string;
+    version: number;
+  };
+  productSlug: {
+    ru: string;
+  };
+  variant: ProductVariant;
+  price: Price;
+  quantity: number;
+  discountedPricePerQuantity: [];
+  perMethodTaxRate: [];
+  addedAt: string;
+  lastModifiedAt: string;
+  totalPrice: {
+    type: string;
+    currencyCode: string;
+    centAmount: number;
+    fractionDigits: number;
+  };
 }
 
 export interface CartResponse {
@@ -554,7 +585,7 @@ export interface CartResponse {
     isPlatformClient: boolean;
     anonymousId: string;
   };
-  lineItems: [];
+  lineItems: CartItem[];
   cartState: string;
   totalPrice: {
     type: string;
@@ -588,4 +619,15 @@ export interface AddProductBody {
     variantId: number;
     quantity: number;
   }[];
+}
+
+export interface CartItemView {
+  name: string;
+  prices: number;
+  discountedPrice?: number;
+  img: {
+    url: string;
+    alt: string | undefined;
+  };
+  quantity: number;
 }

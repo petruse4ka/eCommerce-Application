@@ -1,4 +1,4 @@
-import productImage from '@/assets/images/macarons.jpg';
+import { cartState } from '@/store/cart-state';
 import { CART_LIST } from '@/styles/cart/cart-list';
 
 import BaseComponent from '../base';
@@ -11,32 +11,23 @@ export default class CartList extends BaseComponent {
       className: CART_LIST.CONTAINER,
     });
 
+    cartState.subscribe(this.render.bind(this));
     this.render();
   }
 
   private render(): void {
-    const products = [
-      {
-        name: 'Продукт 1',
-        img: productImage,
-        price: 20,
-      },
-      {
-        name: 'Продукт 2',
-        img: productImage,
-        price: 30,
-      },
-      {
-        name: 'Продукт 3',
-        img: productImage,
-        price: 40,
-      },
-    ];
+    const products = cartState.getCartInfo()?.lineItems;
 
-    for (const product of products) {
-      const productNode = new CartItem(product).getElement();
+    while (this.component.firstChild) {
+      this.component.firstChild.remove();
+    }
 
-      this.component.append(productNode);
+    if (products) {
+      for (const product of products) {
+        const productNode = new CartItem(product).getElement();
+
+        this.component.append(productNode);
+      }
     }
   }
 }
