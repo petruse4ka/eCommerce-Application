@@ -32,6 +32,16 @@ class PaginatorState {
     this.notifyPageChange();
   }
 
+  public setCurrentPageWithoutNotification(currentPage: number): void {
+    if (currentPage < 1) {
+      this.currentPage = 1;
+    } else if (currentPage > this.totalPages) {
+      this.currentPage = this.totalPages;
+    } else {
+      this.currentPage = currentPage;
+    }
+  }
+
   public setTotalPages(totalPages: number): void {
     if (totalPages < 1) {
       this.totalPages = 1;

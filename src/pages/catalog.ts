@@ -171,6 +171,7 @@ export default class CatalogPage extends BaseComponent {
 
   private handleFilterChange = async (): Promise<void> => {
     this.isLoading = true;
+    paginatorState.setCurrentPageWithoutNotification(1);
     this.render();
 
     try {
