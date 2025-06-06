@@ -36,6 +36,8 @@ export enum ApiEndpoint {
   CHANGE_PASS = '/customers/password',
   PRODUCT_TYPES = '/product-types',
   CATEGORIES = '/categories',
+  CART = '/carts',
+  CART_CUSTOMER = `${CART}/customer-id`,
 }
 
 export enum ContentType {

@@ -8,6 +8,7 @@ import type {
   ProductTypeResponse,
   UserInfoBody,
 } from './interfaces';
+import type { ActionHandler, ActionWithArgumentHandler } from './types';
 
 export function isErrorInfo(data: unknown): data is ErrorInfo {
   return (
@@ -96,4 +97,10 @@ export function isCategory(object: unknown): object is Category {
     }
   }
   return false;
+}
+
+export function isActionHandler<T>(
+  callback: ActionWithArgumentHandler<T> | ActionHandler
+): callback is ActionHandler {
+  return callback.length === 0;
 }

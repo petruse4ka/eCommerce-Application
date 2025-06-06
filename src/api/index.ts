@@ -13,6 +13,8 @@ import type {
 } from '@/types/interfaces';
 import ApiErrors from '@/utils/api-errors';
 
+import APICart from './cart';
+
 const clientCredentials = btoa(
   import.meta.env['VITE_CTP_CLIENT_ID'] + ':' + import.meta.env['VITE_CTP_CLIENT_SECRET']
 );
@@ -68,6 +70,7 @@ export default class API {
   }): Promise<string | void> {
     const { userInfo, isLogin } = body;
     const token = await this.userAuthentication(userInfo);
+    const fetchBody = { ...userInfo };
 
     if (token) {
       return await fetch(
@@ -78,7 +81,7 @@ export default class API {
             Authorization: `Bearer ${token}`,
             'Content-Type': ContentType.JSON,
           },
-          body: JSON.stringify(userInfo),
+          body: JSON.stringify(fetchBody),
         }
       )
         .then((response) => response.json())
@@ -93,6 +96,7 @@ export default class API {
           }
           userState.setUserInfoState(body.customer);
           userState.setAuthorizationState(true);
+          void APICart.getCart();
           return body.customer.id;
         });
     }

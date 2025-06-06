@@ -84,7 +84,8 @@ describe('TransformApiProductsData', () => {
 
     expect(result).toHaveLength(1);
     expect(result[0]).toEqual({
-      id: 'test-key',
+      id: 'test-product-id',
+      key: 'test-key',
       name: 'Тестовый продукт',
       description: 'Тестовое описание',
       image: 'test-image.jpg',
