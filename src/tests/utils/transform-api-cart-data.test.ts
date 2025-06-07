@@ -8,6 +8,7 @@ const body: {
   cartInfo: {
     id: 'cart-id',
     version: 1,
+    lineItems: [],
   },
   productId: 'product-id',
 };

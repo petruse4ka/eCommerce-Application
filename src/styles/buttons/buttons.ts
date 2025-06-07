@@ -175,6 +175,17 @@ export const CUSTOM_BUTTON_STYLE = {
     'hover:bg-accent-hover',
     'hover:border-accent-hover',
   ],
+  DELETE_CART_ITEM: [
+    'absolute',
+    'font-bold',
+    'top-[5px]',
+    'right-3',
+    'cursor-pointer',
+    'p-1',
+    'text-background',
+    'hover:text-accent',
+    'transition',
+  ],
   PAGINATOR_PINK: [
     'p-2',
     'text-[14px]',
