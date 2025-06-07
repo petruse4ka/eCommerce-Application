@@ -31,7 +31,7 @@ export default class APICart {
             lineItems: TransformApiCartData.transformProductLine(body.lineItems),
           };
           cartState.setCartInfo(cartInfo);
-          cartState.setItemsCount(body.totalLineItemQuantity);
+          cartState.setItemsCount(body.totalLineItemQuantity ?? 0);
         }
       })
       .catch((error) => {

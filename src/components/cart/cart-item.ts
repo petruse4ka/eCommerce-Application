@@ -1,4 +1,4 @@
-import { CART_TEXT } from '@/constants';
+import { CART_TEXT, DEFAULT_CURRENCY } from '@/constants';
 import { CART_ITEM } from '@/styles/cart/cart-item';
 import type { CartItemView } from '@/types/interfaces';
 import ElementBuilder from '@/utils/element-builder';
@@ -32,7 +32,7 @@ export default class CartItem extends BaseComponent {
     const priceValue = new ElementBuilder({
       tag: 'span',
       className: CART_ITEM.PRICE.ACCENT,
-      textContent: `${this.productInfo.prices} ₽`,
+      textContent: `${this.productInfo.prices} ${DEFAULT_CURRENCY}`,
     }).getElement();
 
     priceContainer.append(priceValue);
@@ -41,10 +41,10 @@ export default class CartItem extends BaseComponent {
       const priceOldValue = new ElementBuilder({
         tag: 'span',
         className: CART_ITEM.PRICE.OLD,
-        textContent: `${this.productInfo.prices} ₽`,
+        textContent: `${this.productInfo.prices} ${DEFAULT_CURRENCY}`,
       }).getElement();
 
-      priceValue.textContent = `${this.productInfo.discountedPrice} ₽`;
+      priceValue.textContent = `${this.productInfo.discountedPrice} ${DEFAULT_CURRENCY}`;
 
       priceContainer.append(priceOldValue);
     }

@@ -75,7 +75,7 @@ export default class CartTotal extends BaseComponent {
 
     totalInfoContainer.append(productsPrice, sale, delivery);
 
-    const totalPrice = CartTotal.createTotalItem(CART_TEXT.TOTAL_RESULT, {
+    const totalPrice = CartTotal.createTotalItem(CART_TEXT.TOTAL_PRICE, {
       isDotted: false,
       isAccent: true,
     });

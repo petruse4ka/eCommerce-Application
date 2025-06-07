@@ -268,5 +268,5 @@ export const CART_TEXT = {
   PRODUCTS_PRICE: 'Стоимость товаров',
   SALE: 'Скидка',
   DELIVERY: 'Доставка',
-  TOTAL_RESULT: 'К оплате',
+  TOTAL_PRICE: 'К оплате',
 };
