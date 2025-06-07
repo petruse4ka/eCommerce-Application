@@ -589,3 +589,28 @@ export interface AddProductBody {
     quantity: number;
   }[];
 }
+
+export interface PersonalText {
+  name: string;
+  role: string;
+  description?: string[];
+}
+
+export interface PersonalImageBox {
+  frame: string;
+  photo: string;
+  hat?: string;
+}
+
+export interface Personal {
+  PersonalText: PersonalText;
+  PersonalImageBox: PersonalImageBox;
+}
+
+export interface About {
+  MARGO: Personal;
+  KONSTANTIN: Personal;
+  DANIIL: Personal;
+  OLGA: Personal;
+  text: string;
+}

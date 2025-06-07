@@ -1,8 +1,8 @@
 import '@/styles/main.css';
 
+import PersonalCard from '@/components/about/personal';
 import BaseComponent from '@/components/base';
-
-import UnderConstructionPage from './underconstruction';
+import { ABOUT } from '@/data';
 
 export default class AboutPage extends BaseComponent {
   constructor() {
@@ -10,11 +10,11 @@ export default class AboutPage extends BaseComponent {
       tag: 'div',
       className: '',
     });
+
     this.render();
   }
 
   private render(): void {
-    const underConstruction = new UnderConstructionPage();
-    this.component = underConstruction.getElement();
+    this.component.append(new PersonalCard(ABOUT.OLGA).getElement());
   }
 }

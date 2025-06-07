@@ -5,6 +5,9 @@ import handMade from '@/assets/icons/footer-love.svg';
 import freshProductsIcon from '@/assets/icons/fresh-products.svg';
 import naturalIngredients from '@/assets/icons/natural-ingredients.svg';
 import wholesaleSale from '@/assets/icons/wholesale-offer.svg';
+import OlgaFrame from '@/assets/images/about/dots-frame.png';
+import OlgaHat from '@/assets/images/about/olga-hat.png';
+import OlgaPhoto from '@/assets/images/about/olga-photo.png';
 import anonymousIcon from '@/assets/images/guarantees/anonymous.png';
 import deliveryIcon from '@/assets/images/guarantees/delivery.png';
 import ingerientsIcon from '@/assets/images/guarantees/ingredients.png';
@@ -20,7 +23,7 @@ import payDeliveryIcon from '@/assets/images/product/payDeliveryIcon.png';
 import selfDeliveryIcon from '@/assets/images/product/selfDeliveryIcon.png';
 import { FOOTER_TEXTS, GUARANTEES_TEXTS, PACKAGES_TEXTS, SUBHEADER_PROMO_TEXT } from '@/constants';
 import { CheckboxText, DeliveryText, InputType } from '@/types/enums';
-import type { Guarantees, Packages, SelectOption } from '@/types/interfaces';
+import type { About, Guarantees, Packages, SelectOption } from '@/types/interfaces';
 
 export const PROMO_ITEMS = [
   { ICON: fastDeliveryIcon, TEXT: SUBHEADER_PROMO_TEXT.DELIVERY },
@@ -315,3 +318,39 @@ export const DELIVERY_ITEMS = [
   { ICON: selfDeliveryIcon, TEXT: DeliveryText.SELF_DELIVERY },
   { ICON: anonimDeliveryIcon, TEXT: DeliveryText.ANONIM_PRESENT },
 ];
+
+export const ABOUT: About = {
+  MARGO: {
+    PersonalText: { name: 'Маргарита Малец', role: 'Муза и ангел-хранитель' },
+    PersonalImageBox: {
+      frame: OlgaFrame,
+      photo: OlgaPhoto,
+      hat: OlgaHat,
+    },
+  },
+  KONSTANTIN: {
+    PersonalText: { name: 'Константин', role: 'Шеф-кондитер' },
+    PersonalImageBox: {
+      frame: OlgaFrame,
+      photo: OlgaPhoto,
+      hat: OlgaHat,
+    },
+  },
+  DANIIL: {
+    PersonalText: { name: 'Даниил', role: 'Кондитер-технолог' },
+    PersonalImageBox: {
+      frame: OlgaFrame,
+      photo: OlgaPhoto,
+      hat: OlgaHat,
+    },
+  },
+  OLGA: {
+    PersonalText: { name: 'Ольга', role: 'Кондитер-оформитель' },
+    PersonalImageBox: {
+      frame: OlgaFrame,
+      photo: OlgaPhoto,
+      hat: OlgaHat,
+    },
+  },
+  text: '',
+};
