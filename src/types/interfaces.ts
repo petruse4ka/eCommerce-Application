@@ -329,6 +329,7 @@ export interface ProductVariant {
 }
 
 export interface ProductVariantView {
+  id: string;
   prices: Price[];
   images?: Image[];
   attributes?: Attribute[];

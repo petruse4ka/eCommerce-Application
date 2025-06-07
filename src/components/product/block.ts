@@ -7,12 +7,12 @@ import ProductAttributes from './attributes';
 import ProductPrices from './prices';
 
 export default class ProductWrappingBlock extends BaseComponent {
-  constructor(attributes: Attributes, prices: Price[]) {
+  constructor(attributes: Attributes, prices: Price[], productId: string) {
     super({ tag: 'div', className: PRODUCT_STYLES.WRAPPING_BLOCK });
     const productAttributs = new ProductAttributes(attributes);
     this.component.append(productAttributs.getElement());
 
-    const pricesBlock = new ProductPrices(prices);
+    const pricesBlock = new ProductPrices(prices, productId);
     this.component.append(pricesBlock.getElement());
   }
 }

@@ -133,7 +133,7 @@ export default class ProductPage extends BaseComponent {
         description: String(attributes['description']),
       });
       asideContainer.append(productTitle.getElement());
-      const block = new ProductWrappingBlock(attributes, productData.prices);
+      const block = new ProductWrappingBlock(attributes, productData.prices, productData.id);
       asideContainer.append(block.getElement());
 
       const delivery = new ProductDelivery();
