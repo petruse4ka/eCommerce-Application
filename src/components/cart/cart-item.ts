@@ -1,3 +1,4 @@
+import APICart from '@/api/cart';
 import { CART_TEXT, DEFAULT_CURRENCY } from '@/constants';
 import { CART_ITEM } from '@/styles/cart/cart-item';
 import type { CartItemView } from '@/types/interfaces';
@@ -78,7 +79,9 @@ export default class CartItem extends BaseComponent {
     const deleteButton = new Button({
       style: 'DELETE_CART_ITEM',
       textContent: 'X',
-      callback: (): void => {},
+      callback: (): void => {
+        void APICart.removeCartProduct(this.productInfo.id);
+      },
     }).getElement();
 
     this.component.append(deleteButton);
