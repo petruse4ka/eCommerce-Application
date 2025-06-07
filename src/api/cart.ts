@@ -29,7 +29,7 @@ export default class APICart {
             id: body.id,
             version: body.version,
           };
-          cartState.setCartInfo(cartInfo);
+          cartState.updateCart(cartInfo, TransformApiCartData.transformLineItems(body.lineItems));
         }
       })
       .catch((error) => {
@@ -68,7 +68,7 @@ export default class APICart {
               id: body.id,
               version: body.version,
             };
-            cartState.setCartInfo(cartInfo);
+            cartState.updateCart(cartInfo, TransformApiCartData.transformLineItems(body.lineItems));
           }
         })
         .catch((error) => {
@@ -106,7 +106,7 @@ export default class APICart {
               id: body.id,
               version: body.version,
             };
-            cartState.setCartInfo(cartInfo);
+            cartState.updateCart(cartInfo, TransformApiCartData.transformLineItems(body.lineItems));
           }
         })
         .catch((error) => {

@@ -554,7 +554,11 @@ export interface CartResponse {
     isPlatformClient: boolean;
     anonymousId: string;
   };
-  lineItems: [];
+  lineItems: Array<{
+    id: string;
+    productId: string;
+    quantity: number;
+  }>;
   cartState: string;
   totalPrice: {
     type: string;
@@ -578,6 +582,11 @@ export interface CartResponse {
   discountTypeCombination: {
     type: string;
   };
+}
+
+export interface CartLineItem {
+  productId: string;
+  quantity: number;
 }
 
 export interface AddProductBody {

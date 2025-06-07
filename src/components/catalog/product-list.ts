@@ -152,6 +152,7 @@ export default class ProductList extends BaseComponent {
         source: cartAddIcon,
         alt: 'Add to cart icon',
       },
+      productId: product.id,
       callback: async (): Promise<void> => {
         if (cartState.getCartInfo()) {
           await APICart.addProductInCart(product.id);

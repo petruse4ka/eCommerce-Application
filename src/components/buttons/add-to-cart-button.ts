@@ -1,6 +1,7 @@
 import cartAddIcon from '@/assets/icons/cart-add.svg';
 import cartAddedIcon from '@/assets/icons/cart-added.svg';
 import { CATALOG_TEXTS } from '@/constants';
+import { cartState } from '@/store/cart-state';
 import {
   BUTTON_ICON,
   BUTTON_ICON_CONTAINER,
@@ -19,8 +20,10 @@ export default class AddToCartButton {
   private iconContainer: HTMLElement;
   private textElement: HTMLElement;
   private currentIcon: HTMLElement;
+  private productId: string;
 
-  constructor(parameters: customButtonParameters) {
+  constructor(parameters: customButtonParameters & { productId: string }) {
+    this.productId = parameters.productId;
     this.button = new ButtonBuilder({
       type: ButtonType.BUTTON,
       className: ['button', ...CUSTOM_BUTTON_STYLE[parameters.style]],
@@ -28,7 +31,6 @@ export default class AddToCartButton {
         this.setLoadingState();
         try {
           await parameters.callback();
-          this.setSuccessState();
         } catch {
           this.setDefaultState();
         }
@@ -50,6 +52,9 @@ export default class AddToCartButton {
     this.iconContainer.append(this.currentIcon);
 
     this.button.getElement().append(this.iconContainer, this.textElement);
+
+    cartState.subscribe(this.updateState.bind(this));
+    this.updateState();
   }
 
   private static createIcon(source: string, alt: string): HTMLElement {
@@ -78,6 +83,16 @@ export default class AddToCartButton {
 
   public enableButton(): void {
     this.button.enableButton();
+  }
+
+  private updateState(): void {
+    const lineItems = cartState.getLineItems();
+    const isInCart = lineItems.some((item) => item.productId === this.productId);
+    if (isInCart) {
+      this.setSuccessState();
+    } else {
+      this.setDefaultState();
+    }
   }
 
   private setLoadingState(): void {

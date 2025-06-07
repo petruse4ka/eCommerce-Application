@@ -1,4 +1,4 @@
-import type { AddProductBody, CartInfo } from '@/types/interfaces';
+import type { AddProductBody, CartInfo, CartLineItem, CartResponse } from '@/types/interfaces';
 
 export class TransformApiCartData {
   public static transformAddProduct(body: {
@@ -16,5 +16,12 @@ export class TransformApiCartData {
         },
       ],
     };
+  }
+
+  public static transformLineItems(lineItems: CartResponse['lineItems']): CartLineItem[] {
+    return lineItems.map((item: { productId: string; quantity: number }) => ({
+      productId: item.productId,
+      quantity: item.quantity,
+    }));
   }
 }
