@@ -45,7 +45,7 @@ export interface ButtonParameters extends ElementParameters {
 
 export interface customButtonParameters {
   style: keyof typeof CUSTOM_BUTTON_STYLE;
-  textContent: string;
+  textContent?: string;
   icon: {
     source: string;
     alt: string;
