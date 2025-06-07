@@ -1,4 +1,11 @@
-import type { AddProductBody, CartInfo, CartItem, CartItemView } from '@/types/interfaces';
+import { cartState } from '@/store/cart-state';
+import type {
+  AddProductBody,
+  CartInfo,
+  CartItem,
+  CartItemView,
+  ProductQuantityTransform,
+} from '@/types/interfaces';
 
 export class TransformApiCartData {
   public static transformAddProduct(body: {
@@ -28,6 +35,7 @@ export class TransformApiCartData {
 
       if (images) {
         const itemBody = {
+          id: item.id,
           name: item.name.ru,
           prices: item.price.value.centAmount / priceDivider,
           discountedPrice: discount ? discount.value.centAmount / priceDivider : undefined,
@@ -43,5 +51,25 @@ export class TransformApiCartData {
     }
 
     return result;
+  }
+
+  public static transformProductQuantity(body: {
+    id: string;
+    quantity: number;
+  }): ProductQuantityTransform | void {
+    const cartInfo = cartState.getCartInfo();
+
+    if (cartInfo) {
+      return {
+        version: cartInfo.version,
+        actions: [
+          {
+            action: 'changeLineItemQuantity',
+            lineItemId: body.id,
+            quantity: body.quantity,
+          },
+        ],
+      };
+    }
   }
 }

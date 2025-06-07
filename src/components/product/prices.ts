@@ -67,7 +67,12 @@ export default class ProductPrices extends BaseComponent {
       textContent: `${PRODUCT_TEXT.TOTAL} ${actualPrice}`,
     }).getElement();
 
-    const quantityInputBlock = new ProductQuantity(prices.price, totalAmount, PRODUCT_TEXT.TOTAL);
+    const quantityInputBlock = new ProductQuantity({
+      price: prices.price,
+      element: totalAmount,
+      text: PRODUCT_TEXT.TOTAL,
+      count: 1,
+    });
 
     this.component.append(quantityInputBlock.getElement(), totalAmount, button);
   }

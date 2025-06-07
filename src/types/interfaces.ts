@@ -621,6 +621,7 @@ export interface AddProductBody {
 }
 
 export interface CartItemView {
+  id: string;
   name: string;
   prices: number;
   discountedPrice?: number;
@@ -629,4 +630,24 @@ export interface CartItemView {
     alt: string | undefined;
   };
   quantity: number;
+}
+
+export interface ProductQuantityParameters {
+  price: number;
+  element: HTMLElement;
+  text: string;
+  count: number;
+  secondElement?: HTMLElement;
+  callback?: (count: number) => void;
+}
+
+export interface ProductQuantityTransform {
+  version: number;
+  actions: [
+    {
+      action: string;
+      lineItemId: string;
+      quantity: number;
+    },
+  ];
 }
