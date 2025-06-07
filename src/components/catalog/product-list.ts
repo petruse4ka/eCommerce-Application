@@ -1,5 +1,6 @@
 import APICart from '@/api/cart';
 import cameraIcon from '@/assets/icons/camera.svg';
+import cartAddIcon from '@/assets/icons/cart-add.svg';
 import defaultProductImage from '@/assets/images/default-macaron.svg';
 import notFoundImage from '@/assets/images/not-found.svg';
 import BaseComponent from '@/components/base';
@@ -13,7 +14,7 @@ import type { Products } from '@/types/interfaces';
 import ElementBuilder from '@/utils/element-builder';
 import ImageBuilder from '@/utils/image-builder';
 
-import Button from '../buttons';
+import AddToCartButton from '../buttons/add-to-cart-button';
 
 export default class ProductList extends BaseComponent {
   private productsContainer: HTMLElement;
@@ -133,7 +134,7 @@ export default class ProductList extends BaseComponent {
       imageContainer.append(ProductList.createPromoTag());
     }
 
-    const addInCartButton = this.createAddProductBtn(product);
+    const addInCartButton = this.createAddProductButton(product);
 
     imageContainer.append(image);
     const content = this.createContent(product);
@@ -143,23 +144,20 @@ export default class ProductList extends BaseComponent {
     return card;
   }
 
-  private static createAddProductBtn(product: Products): HTMLElement {
-    const button = new Button({
-      style: 'PRIMARY_PINK',
-      textContent: 'В корзину',
-      callback: (): void => {
-        button.changeTextContent('Добавляем в корзину...');
-        button.disableButton();
+  private static createAddProductButton(product: Products): HTMLElement {
+    const button = new AddToCartButton({
+      style: 'ADD_TO_CART',
+      textContent: CATALOG_TEXTS.ADD_TO_CART,
+      icon: {
+        source: cartAddIcon,
+        alt: 'Add to cart icon',
+      },
+      callback: async (): Promise<void> => {
         if (cartState.getCartInfo()) {
-          void APICart.addProductInCart(product.id).then(() => {
-            button.changeTextContent('Товар добавлен');
-          });
+          await APICart.addProductInCart(product.id);
         } else {
-          void APICart.createCart().then(() => {
-            void APICart.addProductInCart(product.id).then(() => {
-              button.changeTextContent('Товар добавлен');
-            });
-          });
+          await APICart.createCart();
+          await APICart.addProductInCart(product.id);
         }
       },
     });

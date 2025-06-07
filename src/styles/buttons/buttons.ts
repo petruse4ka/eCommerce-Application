@@ -17,6 +17,10 @@ const STANDARD_BUTTON_STYLE = [
 
 export const DEFAULT_BUTTON_WITH_ICON = ['button', 'flex', 'items-center', 'gap-2'];
 
+export const BUTTON_ICON_CONTAINER = ['flex', 'items-center'];
+export const BUTTON_ICON = ['w-5', 'h-5'];
+export const BUTTON_TEXT = ['text-[14px]', 'font-semibold'];
+
 export const CUSTOM_BUTTON_STYLE = {
   PRIMARY_PINK: [
     ...STANDARD_BUTTON_STYLE,
@@ -192,5 +196,17 @@ export const CUSTOM_BUTTON_STYLE = {
     'text-white',
     'hover:bg-accent-hover',
     'hover:border-accent-hover',
+  ],
+  ADD_TO_CART: [
+    ...STANDARD_BUTTON_STYLE,
+    'bg-accent',
+    'text-white',
+    'border-accent',
+    'hover:bg-accent-hover',
+    'hover:border-accent-hover',
+    'active:bg-pink',
+    'flex',
+    'items-center',
+    'gap-2',
   ],
 };

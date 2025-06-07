@@ -6,7 +6,7 @@ export interface ElementParameters {
   tag: string;
   className: string | string[];
   textContent?: string;
-  callback?: (event: Event) => void;
+  callback?: (event: Event) => void | Promise<void>;
   eventType?: string;
   attributes?: Record<string, string>;
   id?: string;
@@ -52,7 +52,7 @@ export interface customButtonParameters {
     className?: string[];
   };
   textClassName?: string[];
-  callback: () => void;
+  callback: () => void | Promise<void>;
 }
 
 export interface AuthResponse {
