@@ -599,5 +599,4 @@ export interface additionalPagesData {
   TITLE: string;
   CONTENT: additionalPagesContentItem[];
   IMAGE?: string | string[];
-  STAMP?: string;
 }

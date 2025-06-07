@@ -7,16 +7,16 @@ import ElementBuilder from '@/utils/element-builder';
 import ImageBuilder from '@/utils/image-builder';
 
 export default class AdditionalPage extends BaseComponent {
-  constructor(parametres: additionalPagesData) {
+  constructor(parameteres: additionalPagesData) {
     super({
       tag: 'div',
       className: ADDITIONAL.MAIN_CONTAINER,
     });
 
-    this.render(parametres);
+    this.render(parameteres);
   }
 
-  private static getTitle(name: string): HTMLElement {
+  private static createTitle(name: string): HTMLElement {
     const title = new ElementBuilder({
       tag: 'h1',
       className: ADDITIONAL.TITLE,
@@ -26,17 +26,17 @@ export default class AdditionalPage extends BaseComponent {
     return title;
   }
 
-  private render(parametres: additionalPagesData): void {
+  private render(parameteres: additionalPagesData): void {
     const imageContainer = new ElementBuilder({
       tag: 'div',
       className: ADDITIONAL.IMAGE_CONTAINER,
     }).getElement();
 
-    if (parametres.IMAGE && typeof parametres.IMAGE === 'string') {
+    if (parameteres.IMAGE && typeof parameteres.IMAGE === 'string') {
       const image = new ImageBuilder({
         className: ADDITIONAL.IMAGE,
-        source: parametres.IMAGE,
-        alt: '',
+        source: parameteres.IMAGE,
+        alt: parameteres.TITLE,
       }).getElement();
       imageContainer.append(image);
     }
@@ -45,9 +45,9 @@ export default class AdditionalPage extends BaseComponent {
       tag: 'div',
       className: ADDITIONAL.TEXT_CONTAINER,
     }).getElement();
-    textContainer.append(AdditionalPage.getTitle(parametres.TITLE));
+    textContainer.append(AdditionalPage.createTitle(parameteres.TITLE));
 
-    for (const paragraph of parametres.CONTENT) {
+    for (const paragraph of parameteres.CONTENT) {
       const content = new ElementBuilder({
         tag: paragraph.type === 'text' ? 'p' : 'h3',
         className: paragraph.type === 'text' ? ADDITIONAL.PARAGRAPH : ADDITIONAL.SUBTITLE,
