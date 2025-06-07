@@ -7,15 +7,21 @@ beforeEach(() => {
 });
 
 describe('APICart', () => {
-  test('get cart', async () => {
+  it('get cart', async () => {
+    const updateCart = vi.spyOn(cartState, 'updateCart');
+
     globalThis.fetch = vi.fn().mockResolvedValueOnce({
       ok: true,
-      json: () => Promise.resolve({ id: 'cart-id', version: 1 }),
+      json: () =>
+        Promise.resolve({
+          id: 'cart-id',
+          version: 1,
+          lineItems: [],
+        }),
     });
 
-    const setCartInfo = vi.spyOn(cartState, 'setCartInfo');
     await expect(APICart.createCart()).resolves.toBeUndefined();
 
-    expect(setCartInfo).toHaveBeenCalledWith({ id: 'cart-id', version: 1 });
+    expect(updateCart).toHaveBeenCalledWith({ id: 'cart-id', version: 1 }, []);
   });
 });
