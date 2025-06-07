@@ -25,20 +25,6 @@ class CartState {
     this.notify();
   }
 
-  public incrementItemsCount(itemCount: number): void {
-    this.itemsCount += itemCount;
-    this.notify();
-  }
-
-  public decrementItemsCount(itemCount: number): void {
-    if (this.itemsCount > 0 && itemCount <= this.itemsCount) {
-      this.itemsCount -= itemCount;
-    } else {
-      this.itemsCount = 0;
-    }
-    this.notify();
-  }
-
   public getCartInfo(): CartInfo | null {
     return this.cartInfo;
   }
@@ -59,7 +45,6 @@ class CartState {
   public updateCart(cartInfo: CartInfo, lineItems: CartLineItem[]): void {
     this.cartInfo = cartInfo;
     this.lineItems = lineItems;
-    this.itemsCount = lineItems.reduce((sum, item) => sum + item.quantity, 0);
     this.notify();
   }
 
