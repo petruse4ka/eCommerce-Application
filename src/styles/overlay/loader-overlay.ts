@@ -9,5 +9,14 @@ export const LOADER_STYLES = {
     'rounded-full',
     'animate-spin',
   ],
+  LOADING_SPINNER_CART: [
+    'w-5',
+    'h-5',
+    'border-2',
+    'border-white',
+    'border-t-transparent',
+    'rounded-full',
+    'animate-spin',
+  ],
   LOADING_TEXT: ['mt-4', 'text-accent', 'text-base', 'font-semibold'],
 };

@@ -6,7 +6,6 @@ import {
   BUTTON_ICON_CONTAINER,
   BUTTON_TEXT,
   CUSTOM_BUTTON_STYLE,
-  DEFAULT_BUTTON_WITH_ICON,
 } from '@/styles/buttons/buttons';
 import { LOADER_STYLES } from '@/styles/overlay/loader-overlay';
 import { ButtonType } from '@/types/enums';
@@ -24,7 +23,7 @@ export default class AddToCartButton {
   constructor(parameters: customButtonParameters) {
     this.button = new ButtonBuilder({
       type: ButtonType.BUTTON,
-      className: [...DEFAULT_BUTTON_WITH_ICON, ...CUSTOM_BUTTON_STYLE[parameters.style]],
+      className: ['button', ...CUSTOM_BUTTON_STYLE[parameters.style]],
       callback: async (): Promise<void> => {
         this.setLoadingState();
         try {
@@ -64,7 +63,7 @@ export default class AddToCartButton {
   private static createLoader(): HTMLElement {
     const spinner = new ElementBuilder({
       tag: 'div',
-      className: LOADER_STYLES.LOADING_SPINNER,
+      className: LOADER_STYLES.LOADING_SPINNER_CART,
     }).getElement();
     return spinner;
   }
