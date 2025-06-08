@@ -1,6 +1,6 @@
 export const ABOUT_STYLE = {
   MAIN_CONTAINER: [
-    'bg-purple',
+    'bg-gray-light',
     'bg-[url(@/assets/images/about/night-cafe.jpg)]',
     'bg-bottom',
     'bg-no-repeat',
@@ -11,7 +11,8 @@ export const ABOUT_STYLE = {
   CONTAINER: [
     'w-full',
     'max-w-screen-xl',
-    'grid',
+    'flex',
+    'flex-col',
     'grid-cols-2',
     'grid-rows-4',
     'gap-4',
@@ -20,14 +21,14 @@ export const ABOUT_STYLE = {
     'py-10',
     'flex-grow',
   ],
-  IMAGE_CONTAINER: ['relative', 'flex-1', 'w-full'],
-  OLGA_PHOTO: ['relative', 'top-10', 'left-8'],
+  IMAGE_CONTAINER: ['relative', 'w-full'],
+  PERSONAL_CONTAINER: ['flex'],
+  ODD_CONTAINER: ['flex', 'flex-row-reverse'],
+  OLGA_PHOTO: ['relative'],
   OLGA_HAT: ['relative', '-top-108', 'left-48', 'rotate-15'],
-  OLGA_FRAME: ['relative'],
-  KONSTANTIN_PHOTO: ['relative', 'top-10', 'left-8'],
+  KONSTANTIN_PHOTO: ['relative'],
   KONSTANTIN_HAT: ['relative', '-top-114', 'left-54', 'rotate-10'],
-  KONSTANTIN_FRAME: ['relative'],
-  DANIIL_PHOTO: ['relative', 'top-10', 'left-8'],
+  DANIIL_PHOTO: ['relative'],
   DANIIL_HAT: ['relative', 'w-[190px]', '-top-95', 'left-28', '-rotate-1'],
   TEXT_CONTAINER: [
     'w-full',
@@ -39,7 +40,7 @@ export const ABOUT_STYLE = {
     'shadow-md',
     'rounded-lg',
   ],
-  DESCRIPTION: [],
+  NAME: ['font-bold', 'text-[18px]', 'my-4'],
   ROLE: ['text-purple', 'font-bold', 'text-[14px]', 'my-4'],
-  NAME: ['font-bold', 'text-[24px]', 'my-4'],
+  DESCRIPTION: [],
 };

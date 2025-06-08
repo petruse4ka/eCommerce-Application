@@ -660,7 +660,7 @@ export interface PersonalText {
 }
 
 export interface PersonalImageBox {
-  frame: {
+  frame?: {
     url: string;
     style: string[];
   };

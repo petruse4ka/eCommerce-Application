@@ -1,7 +1,6 @@
 import '@/styles/main.css';
 
-import PersonalCard from '@/components/about/personal';
-import PersonalDescription from '@/components/about/text';
+import Person from '@/components/about/personal';
 import BaseComponent from '@/components/base';
 import { ABOUT } from '@/data';
 import { ABOUT_STYLE } from '@/styles/about';
@@ -30,18 +29,15 @@ export default class AboutPage extends BaseComponent {
       className: ABOUT_STYLE.CONTAINER,
     }).getElement();
 
-    container.append(new PersonalCard(ABOUT.KONSTANTIN).getElement());
-    container.append(new PersonalDescription(ABOUT.KONSTANTIN).getElement());
-    container.append(new PersonalDescription(ABOUT.DANIIL).getElement());
-    container.append(new PersonalCard(ABOUT.DANIIL).getElement());
-    container.append(new PersonalCard(ABOUT.OLGA).getElement());
-    container.append(new PersonalDescription(ABOUT.OLGA).getElement());
+    container.append(new Person(ABOUT.KONSTANTIN, true).getElement());
+    container.append(new Person(ABOUT.DANIIL, false).getElement());
+    container.append(new Person(ABOUT.OLGA, true).getElement());
 
     this.component.append(container);
 
     const text = new ElementBuilder({
       tag: 'div',
-      className: '',
+      className: ABOUT_STYLE.TEXT_CONTAINER,
       textContent: ABOUT.text,
     }).getElement();
 

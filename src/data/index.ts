@@ -7,7 +7,6 @@ import naturalIngredients from '@/assets/icons/natural-ingredients.svg';
 import wholesaleSale from '@/assets/icons/wholesale-offer.svg';
 import DaniilPhoto from '@/assets/images/about/daniil.png';
 import DaniilHat from '@/assets/images/about/daniil-hat.png';
-import OlgaFrame from '@/assets/images/about/dots-frame.png';
 import KonstantinPhoto from '@/assets/images/about/kostya.png';
 import KonstantinHat from '@/assets/images/about/kostya-hat.png';
 import OlgaHat from '@/assets/images/about/olga-hat.png';
@@ -328,7 +327,6 @@ export const ABOUT: About = {
   MARGO: {
     PersonalText: { name: 'Маргарита Малец', role: 'Муза и ангел-хранитель' },
     PersonalImageBox: {
-      frame: { url: OlgaFrame, style: ABOUT_STYLE.OLGA_FRAME },
       photo: { url: OlgaPhoto, style: ABOUT_STYLE.OLGA_PHOTO },
       hat: { url: OlgaHat, style: ABOUT_STYLE.OLGA_HAT },
     },
@@ -341,7 +339,6 @@ export const ABOUT: About = {
         '<p class="mb-2">Константин – наш бессменный шеф-кондитер и гуру JavaScript! Держит в голове стратегический план, а руку - на пульсе текущей работы. Всегда готов стать рядом в сложной ситуации и спасти подгорающие эклеры или исправить баг в коде коллеги.</p><p class="mb-2"> Родился в Москве, живёт в Нидерландах, - магистр стратегического бизнеса с 15-летним опытом управления проектами, он знает, как превратить любое начинание в успех – будь то стартап, идеально пропечённый профитроль или учебный проект в RS School.</p><p class="mb-2"> В редкие свободные часы Константин покоряет виртуальные миры в компьютерных играх, дебажит код и с энтузиазмом поднимает бокал любимого пива (особенно по пятницам – потому что стратегия требует правильного планирования!).</p>',
     },
     PersonalImageBox: {
-      frame: { url: OlgaFrame, style: ABOUT_STYLE.KONSTANTIN_FRAME },
       photo: { url: KonstantinPhoto, style: ABOUT_STYLE.KONSTANTIN_PHOTO },
       hat: { url: KonstantinHat, style: ABOUT_STYLE.KONSTANTIN_HAT },
     },
@@ -349,15 +346,18 @@ export const ABOUT: About = {
   DANIIL: {
     PersonalText: { name: 'Даниил', role: 'Кондитер-технолог' },
     PersonalImageBox: {
-      frame: { url: OlgaFrame, style: ABOUT_STYLE.OLGA_FRAME },
       photo: { url: DaniilPhoto, style: ABOUT_STYLE.DANIIL_PHOTO },
       hat: { url: DaniilHat, style: ABOUT_STYLE.DANIIL_HAT },
     },
   },
   OLGA: {
-    PersonalText: { name: 'Ольга', role: 'Кондитер-оформитель', description: 'Ку-ку' },
+    PersonalText: {
+      name: 'Ольга',
+      role: 'Кондитер-оформитель',
+      description:
+        '<p class="mb-2">Ольга – кондитер-оформитель, всю профессиональную жизнь она искала гармонию между точностью кода и живым восприятием веб-страниц. Последние 13 лет преподавала JavaScript для веб-дизайнеров, и теперь её ученики работают в самых разных уголках мира – от Японии до Швеции, от EPAM до Google. Правда, её путь в IT прервался не по её желанию, но закрытая дверь – это просто повод поискать окно.</p><p class="mb-2">Юная минчанка, возраст которой всё ещё уступает сумме лет двух её коллег, с интересом учится у команды и вкладывает свои знания в проект. Путешествия и рисование вдохновляют её на новые идеи, а любовь к программированию помогает упорядочить творческий хаос. И пусть оформленные ею страницы не дарят аромата ванили и шоколада, удовольствие от их посещения не уступает наслаждению идеально украшенным эклером.</p>',
+    },
     PersonalImageBox: {
-      frame: { url: OlgaFrame, style: ABOUT_STYLE.OLGA_FRAME },
       photo: { url: OlgaPhoto, style: ABOUT_STYLE.OLGA_PHOTO },
       hat: { url: OlgaHat, style: ABOUT_STYLE.OLGA_HAT },
     },
