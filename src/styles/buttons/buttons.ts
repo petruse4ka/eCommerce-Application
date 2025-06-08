@@ -15,7 +15,7 @@ const STANDARD_BUTTON_STYLE = [
   'disabled:cursor-not-allowed',
 ];
 
-export const DEFAULT_BUTTON_WITH_ICON = ['button', 'flex', 'items-center', 'gap-2'];
+export const DEFAULT_BUTTON_WITH_ICON = ['button', 'items-center', 'gap-2'];
 
 export const CUSTOM_BUTTON_STYLE = {
   PRIMARY_PINK: [
@@ -172,6 +172,38 @@ export const CUSTOM_BUTTON_STYLE = {
     'bg-white',
     'text-dark',
     'border-gray',
+    'hover:bg-accent-hover',
+    'hover:border-accent-hover',
+  ],
+  DELETE_CART_ITEM: [
+    'flex-none',
+    'absolute',
+    'font-bold',
+    'top-[5px]',
+    'right-[5px]',
+    'cursor-pointer',
+    'p-1',
+    'text-background',
+    'hover:text-accent',
+    'transition',
+    'rounded-md',
+    'hover:bg-orange',
+  ],
+  PAGINATOR_PINK: [
+    'p-2',
+    'text-[14px]',
+    'border',
+    'border-accent',
+    'rounded-[3px]',
+    'cursor-pointer',
+    'transition-all',
+    'duration-300',
+    'ease-in-out',
+    'disabled:bg-gray',
+    'disabled:border-gray',
+    'disabled:cursor-not-allowed',
+    'bg-accent',
+    'text-white',
     'hover:bg-accent-hover',
     'hover:border-accent-hover',
   ],

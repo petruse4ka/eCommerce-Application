@@ -1,4 +1,6 @@
+import { DEFAULT_PRODUCTS_PER_PAGE } from '@/constants';
 import { filterState } from '@/store/filter-state';
+import { paginatorState } from '@/store/paginator-state';
 import { productsState } from '@/store/products-state';
 import { userState } from '@/store/user-state';
 import { ApiEndpoint, ApiMethods, ContentType, FilterType } from '@/types/enums';
@@ -22,6 +24,7 @@ export default class CatalogAPI {
   public static async getProducts(filters: FilterRequest = {}): Promise<{
     products: Products[];
     productData: Product[];
+    total: number;
   } | void> {
     const token = userState.getTokenState();
 
@@ -32,6 +35,8 @@ export default class CatalogAPI {
       }
 
       this.currentProductRequest = new AbortController();
+      const signal = this.currentProductRequest.signal;
+
       const queryParameters = this.buildProductRequestQueryParameters(filters);
       const url = `${import.meta.env['VITE_CTP_API_URL']}/${import.meta.env['VITE_CTP_PROJECT_KEY']}/product-projections/search?${queryParameters.toString()}`;
 
@@ -41,10 +46,10 @@ export default class CatalogAPI {
           Authorization: `Bearer ${token}`,
           'Content-Type': ContentType.JSON,
         },
-        signal: this.currentProductRequest.signal,
+        signal,
       });
 
-      return await this.handleProductResponse(response, this.currentProductRequest.signal);
+      return await this.handleProductResponse(response, signal);
     } catch (error) {
       if (error instanceof Error && error.name === 'AbortError') return;
       console.error('Error fetching products:', error);
@@ -125,6 +130,7 @@ export default class CatalogAPI {
   ): Promise<{
     products: Products[];
     productData: Product[];
+    total: number;
   } | void> {
     if (signal.aborted) return;
 
@@ -142,9 +148,13 @@ export default class CatalogAPI {
       throw new Error('Invalid product response format');
     }
 
+    const totalPages = Math.ceil(data.total / DEFAULT_PRODUCTS_PER_PAGE);
+    paginatorState.setTotalPages(totalPages);
+
     return {
       products: TransformApiProductsData.transformProducts(data),
       productData: data.results,
+      total: data.total,
     };
   }
 
@@ -157,7 +167,12 @@ export default class CatalogAPI {
     if (searchQuery) CatalogAPI.handleSearchQuery(queryParameters, searchQuery);
 
     CatalogAPI.handleCategories(queryParameters);
-    queryParameters.append('limit', '500');
+    queryParameters.append('limit', DEFAULT_PRODUCTS_PER_PAGE.toString());
+
+    const currentPage = paginatorState.getCurrentPage();
+    const offset = (currentPage - 1) * DEFAULT_PRODUCTS_PER_PAGE;
+    queryParameters.append('offset', offset.toString());
+
     return queryParameters;
   }
 
