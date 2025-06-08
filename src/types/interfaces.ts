@@ -55,6 +55,21 @@ export interface customButtonParameters {
   callback: () => void | Promise<void>;
 }
 
+export interface addToCartButtonParameters {
+  style: keyof typeof CUSTOM_BUTTON_STYLE;
+  textContent?: string;
+  productId: string;
+  callback?: () => void | Promise<void>;
+}
+
+export interface AddToCartStateParameters {
+  loading: boolean;
+  inCart: boolean;
+  text: string;
+  icon: string;
+  alt: string;
+}
+
 export interface AuthResponse {
   access_token: string;
   expires_in: number;

@@ -1,12 +1,9 @@
-import APICart from '@/api/cart';
 import cameraIcon from '@/assets/icons/camera.svg';
-import cartAddIcon from '@/assets/icons/cart-add.svg';
 import defaultProductImage from '@/assets/images/default-macaron.svg';
 import notFoundImage from '@/assets/images/not-found.svg';
 import BaseComponent from '@/components/base';
 import EmptyComponent from '@/components/base/empty';
 import { CATALOG_TEXTS, DEFAULT_CURRENCY, MAX_DESCRIPTION_LENGTH } from '@/constants';
-import { cartState } from '@/store/cart-state';
 import { productsState } from '@/store/products-state';
 import { PRODUCT_LIST_STYLES } from '@/styles/catalog/product-list';
 import { Route } from '@/types/enums';
@@ -147,20 +144,7 @@ export default class ProductList extends BaseComponent {
   private static createAddProductButton(product: Products): HTMLElement {
     const button = new AddToCartButton({
       style: 'ADD_TO_CART',
-      textContent: CATALOG_TEXTS.ADD_TO_CART,
-      icon: {
-        source: cartAddIcon,
-        alt: 'Add to cart icon',
-      },
       productId: product.id,
-      callback: async (): Promise<void> => {
-        if (cartState.getCartInfo()) {
-          await APICart.addProductInCart(product.id);
-        } else {
-          await APICart.createCart();
-          await APICart.addProductInCart(product.id);
-        }
-      },
     });
 
     return button.getElement();

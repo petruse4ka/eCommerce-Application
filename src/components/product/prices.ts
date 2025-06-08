@@ -1,9 +1,6 @@
-import APICart from '@/api/cart';
-import cartAddIcon from '@/assets/icons/cart-add.svg';
 import BaseComponent from '@/components/base';
 import AddToCartButton from '@/components/buttons/add-to-cart-button';
 import { DEFAULT_CURRENCY, PRODUCT_TEXT } from '@/constants';
-import { cartState } from '@/store/cart-state';
 import { PRODUCT_STYLES } from '@/styles/pages/product';
 import type { Price, PriceValue } from '@/types/interfaces';
 import ElementBuilder from '@/utils/element-builder';
@@ -42,20 +39,7 @@ export default class ProductPrices extends BaseComponent {
   private static createAddToCartButton(productId: string): HTMLElement {
     return new AddToCartButton({
       style: 'ADD_TO_CART',
-      textContent: PRODUCT_TEXT.BASKET,
       productId: productId,
-      icon: {
-        source: cartAddIcon,
-        alt: 'Add to cart icon',
-      },
-      callback: async (): Promise<void> => {
-        if (cartState.getCartInfo()) {
-          await APICart.addProductInCart(productId);
-        } else {
-          await APICart.createCart();
-          await APICart.addProductInCart(productId);
-        }
-      },
     }).getElement();
   }
 

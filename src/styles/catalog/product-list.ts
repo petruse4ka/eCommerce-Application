@@ -46,7 +46,7 @@ export const PRODUCT_LIST_STYLES = {
     'absolute',
     'top-2',
     'right-2',
-    'bg-secondary',
+    'bg-success',
     'text-white',
     'rounded-lg',
     'px-3',

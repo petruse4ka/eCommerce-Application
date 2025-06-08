@@ -15,11 +15,6 @@ class CartState {
     return this.lineItems;
   }
 
-  public setLineItems(lineItems: CartLineItem[]): void {
-    this.lineItems = lineItems;
-    this.notify();
-  }
-
   public setItemsCount(count: number): void {
     this.itemsCount = count;
     this.notify();
