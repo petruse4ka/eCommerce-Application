@@ -597,9 +597,18 @@ export interface PersonalText {
 }
 
 export interface PersonalImageBox {
-  frame: string;
-  photo: string;
-  hat?: string;
+  frame: {
+    url: string;
+    style: string[];
+  };
+  photo: {
+    url: string;
+    style: string[];
+  };
+  hat: {
+    url: string;
+    style: string[];
+  };
 }
 
 export interface Personal {

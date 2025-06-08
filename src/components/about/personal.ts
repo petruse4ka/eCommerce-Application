@@ -1,7 +1,6 @@
 //import { ABOUT } from '@/data';
 import { ABOUT_STYLE } from '@/styles/about';
 import type { Personal, PersonalImageBox, PersonalText } from '@/types/interfaces';
-import ElementBuilder from '@/utils/element-builder';
 import ImageBuilder from '@/utils/image-builder';
 
 import BaseComponent from '../base';
@@ -12,7 +11,7 @@ export default class PersonalCard extends BaseComponent {
   constructor(personal: Personal) {
     super({
       tag: 'div',
-      className: '',
+      className: ABOUT_STYLE.IMAGE_CONTAINER,
     });
     this.images = personal.PersonalImageBox;
     this.texts = personal.PersonalText;
@@ -20,34 +19,21 @@ export default class PersonalCard extends BaseComponent {
   }
 
   protected render(): void {
-    const copyrightContainer = new ElementBuilder({
-      tag: 'div',
-      className: ABOUT_STYLE.CONTAINER,
-    }).getElement();
-
     const imagePhoto = new ImageBuilder({
-      source: this.images.photo,
+      source: this.images.photo.url,
       alt: this.texts.name,
-      className: ABOUT_STYLE.OLGA_PHOTO,
+      className: this.images.photo.style,
     }).getElement();
 
-    /*const imageFrame = new ImageBuilder({
-      source: this.images.frame,
-      alt: this.texts.name,
-      className: ABOUT_STYLE.OLGA_FRAME,
-    }).getElement();*/
-
-    copyrightContainer.append(imagePhoto);
+    this.component.append(imagePhoto);
 
     if (this.images.hat) {
       const imageHat = new ImageBuilder({
-        source: this.images.hat,
+        source: this.images.hat.url,
         alt: this.texts.name,
-        className: ABOUT_STYLE.OLGA_HAT,
+        className: this.images.hat.style,
       }).getElement();
-      copyrightContainer.append(imageHat);
+      this.component.append(imageHat);
     }
-
-    this.component.append(copyrightContainer);
   }
 }

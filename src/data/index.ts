@@ -5,9 +5,13 @@ import handMade from '@/assets/icons/footer-love.svg';
 import freshProductsIcon from '@/assets/icons/fresh-products.svg';
 import naturalIngredients from '@/assets/icons/natural-ingredients.svg';
 import wholesaleSale from '@/assets/icons/wholesale-offer.svg';
+import DaniilPhoto from '@/assets/images/about/daniil.png';
+import DaniilHat from '@/assets/images/about/daniil-hat.png';
 import OlgaFrame from '@/assets/images/about/dots-frame.png';
+import KonstantinPhoto from '@/assets/images/about/kostya.png';
+import KonstantinHat from '@/assets/images/about/kostya-hat.png';
 import OlgaHat from '@/assets/images/about/olga-hat.png';
-import OlgaPhoto from '@/assets/images/about/olga-photo.png';
+import OlgaPhoto from '@/assets/images/about/olga-photo1.png';
 import anonymousIcon from '@/assets/images/guarantees/anonymous.png';
 import deliveryIcon from '@/assets/images/guarantees/delivery.png';
 import ingerientsIcon from '@/assets/images/guarantees/ingredients.png';
@@ -22,6 +26,7 @@ import anonimDeliveryIcon from '@/assets/images/product/anonimDeliveryIcon.png';
 import payDeliveryIcon from '@/assets/images/product/payDeliveryIcon.png';
 import selfDeliveryIcon from '@/assets/images/product/selfDeliveryIcon.png';
 import { FOOTER_TEXTS, GUARANTEES_TEXTS, PACKAGES_TEXTS, SUBHEADER_PROMO_TEXT } from '@/constants';
+import { ABOUT_STYLE } from '@/styles/about';
 import { CheckboxText, DeliveryText, InputType } from '@/types/enums';
 import type { About, Guarantees, Packages, SelectOption } from '@/types/interfaces';
 
@@ -323,33 +328,33 @@ export const ABOUT: About = {
   MARGO: {
     PersonalText: { name: 'Маргарита Малец', role: 'Муза и ангел-хранитель' },
     PersonalImageBox: {
-      frame: OlgaFrame,
-      photo: OlgaPhoto,
-      hat: OlgaHat,
+      frame: { url: OlgaFrame, style: ABOUT_STYLE.OLGA_FRAME },
+      photo: { url: OlgaPhoto, style: ABOUT_STYLE.OLGA_PHOTO },
+      hat: { url: OlgaHat, style: ABOUT_STYLE.OLGA_HAT },
     },
   },
   KONSTANTIN: {
     PersonalText: { name: 'Константин', role: 'Шеф-кондитер' },
     PersonalImageBox: {
-      frame: OlgaFrame,
-      photo: OlgaPhoto,
-      hat: OlgaHat,
+      frame: { url: OlgaFrame, style: ABOUT_STYLE.KONSTANTIN_FRAME },
+      photo: { url: KonstantinPhoto, style: ABOUT_STYLE.KONSTANTIN_PHOTO },
+      hat: { url: KonstantinHat, style: ABOUT_STYLE.KONSTANTIN_HAT },
     },
   },
   DANIIL: {
     PersonalText: { name: 'Даниил', role: 'Кондитер-технолог' },
     PersonalImageBox: {
-      frame: OlgaFrame,
-      photo: OlgaPhoto,
-      hat: OlgaHat,
+      frame: { url: OlgaFrame, style: ABOUT_STYLE.OLGA_FRAME },
+      photo: { url: DaniilPhoto, style: ABOUT_STYLE.DANIIL_PHOTO },
+      hat: { url: DaniilHat, style: ABOUT_STYLE.DANIIL_HAT },
     },
   },
   OLGA: {
-    PersonalText: { name: 'Ольга', role: 'Кондитер-оформитель' },
+    PersonalText: { name: 'Ольга', role: 'Кондитер-оформитель', description: ['Ку-ку'] },
     PersonalImageBox: {
-      frame: OlgaFrame,
-      photo: OlgaPhoto,
-      hat: OlgaHat,
+      frame: { url: OlgaFrame, style: ABOUT_STYLE.OLGA_FRAME },
+      photo: { url: OlgaPhoto, style: ABOUT_STYLE.OLGA_PHOTO },
+      hat: { url: OlgaHat, style: ABOUT_STYLE.OLGA_HAT },
     },
   },
   text: '',
