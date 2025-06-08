@@ -6,7 +6,7 @@ export interface ElementParameters {
   tag: string;
   className: string | string[];
   textContent?: string;
-  callback?: (event: Event) => void;
+  callback?: (event: Event) => void | Promise<void>;
   eventType?: string;
   attributes?: Record<string, string>;
   id?: string;
@@ -52,7 +52,22 @@ export interface customButtonParameters {
     className?: string[];
   };
   textClassName?: string[];
-  callback: () => void;
+  callback: () => void | Promise<void>;
+}
+
+export interface addToCartButtonParameters {
+  style: keyof typeof CUSTOM_BUTTON_STYLE;
+  textContent?: string;
+  productId: string;
+  callback?: () => void | Promise<void>;
+}
+
+export interface AddToCartStateParameters {
+  loading: boolean;
+  inCart: boolean;
+  text: string;
+  icon: string;
+  alt: string;
 }
 
 export interface AuthResponse {
@@ -329,6 +344,7 @@ export interface ProductVariant {
 }
 
 export interface ProductVariantView {
+  id: string;
   prices: Price[];
   images?: Image[];
   attributes?: Attribute[];
@@ -608,6 +624,16 @@ export interface CartResponse {
     type: string;
   };
   totalLineItemQuantity: number;
+}
+
+export interface CartLineItem {
+  productId: string;
+  quantity: number;
+}
+
+export interface CartLineItem {
+  productId: string;
+  quantity: number;
 }
 
 export interface AddProductBody {

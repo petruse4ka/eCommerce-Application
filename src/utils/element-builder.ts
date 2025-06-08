@@ -79,7 +79,7 @@ export default class ElementBuilder {
         if (!(this.element instanceof HTMLInputElement)) {
           event.preventDefault();
         }
-        callback(event);
+        void callback(event);
       });
     }
   }

@@ -1,13 +1,18 @@
-import type { CartInfo } from '@/types/interfaces';
+import type { CartInfo, CartLineItem } from '@/types/interfaces';
 import type { ActionWithArgumentHandler } from '@/types/types';
 
 class CartState {
   private itemsCount: number = 0;
   private cartInfo: CartInfo | null = null;
   private subscribers: ActionWithArgumentHandler<number>[] = [];
+  private lineItems: CartLineItem[] = [];
 
   public getItemsCount(): number {
     return this.itemsCount;
+  }
+
+  public getLineItems(): CartLineItem[] {
+    return this.lineItems;
   }
 
   public setItemsCount(count: number): void {
@@ -30,6 +35,12 @@ class CartState {
 
   public unsubscribe(callback: ActionWithArgumentHandler<number>): void {
     this.subscribers = this.subscribers.filter((subscriber) => subscriber !== callback);
+  }
+
+  public updateCart(cartInfo: CartInfo, lineItems: CartLineItem[]): void {
+    this.cartInfo = cartInfo;
+    this.lineItems = lineItems;
+    this.notify();
   }
 
   private notify(): void {
