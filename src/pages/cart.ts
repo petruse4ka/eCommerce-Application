@@ -3,12 +3,15 @@ import '@/styles/main.css';
 import notFoundImage from '@/assets/images/not-found.svg';
 import BaseComponent from '@/components/base';
 import EmptyComponent from '@/components/base/empty';
+import Button from '@/components/buttons';
 import CartList from '@/components/cart/cart-list';
 import CartTotal from '@/components/cart/cart-total';
 import { CART_TEXT } from '@/constants';
+import Router from '@/router';
 import { cartState } from '@/store/cart-state';
 import { userState } from '@/store/user-state';
 import { CART_PAGE } from '@/styles/pages/cart';
+import { Route } from '@/types/enums';
 import ElementBuilder from '@/utils/element-builder';
 
 export default class CartPage extends BaseComponent {
@@ -57,6 +60,15 @@ export default class CartPage extends BaseComponent {
         CART_PAGE.EMPTY_PRODUCT_TEXT
       ).getElement();
 
+      const returnButton = new Button({
+        style: 'PRIMARY_PINK',
+        textContent: CART_TEXT.CATALOG,
+        callback: (): void => {
+          Router.followRoute(Route.CATALOG);
+        },
+      }).getElement();
+
+      emptyState.append(returnButton);
       this.component.append(emptyState);
     }
   }
