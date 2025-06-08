@@ -85,19 +85,10 @@ export default class CartItem extends BaseComponent {
         alt: 'Garbage bin icon',
         className: ADDRESS.CARD.ICON,
       },
-      //textClassName: ADDRESS.CARD.TEXT,
       callback: (): void => {
         void APICart.removeCartProduct(this.productInfo.id);
       },
     }).getElement();
-
-    // const deleteButton = new Button({
-    //   style: 'DELETE_CART_ITEM',
-    //   textContent: 'X',
-    //   callback: (): void => {
-    //     void APICart.removeCartProduct(this.productInfo.id);
-    //   },
-    // }).getElement();
 
     this.component.append(deleteButton);
   }
