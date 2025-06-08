@@ -1,4 +1,13 @@
 export const ABOUT_STYLE = {
+  MAIN_CONTAINER: [
+    'bg-purple',
+    'bg-[url(@/assets/images/about/night-cafe.jpg)]',
+    'bg-bottom',
+    'bg-no-repeat',
+    'bg-contain',
+    // 'bg-size-[500px_auto]',
+  ],
+  TITLE: ['text-3xl', 'font-semibold', 'text-center', 'text-purple', 'my-6'],
   CONTAINER: [
     'w-full',
     'max-w-screen-xl',
@@ -11,7 +20,7 @@ export const ABOUT_STYLE = {
     'py-10',
     'flex-grow',
   ],
-  IMAGE_CONTAINER: ['relative', 'flex-1', 'mt-50', 'h-full', 'w-full'],
+  IMAGE_CONTAINER: ['relative', 'flex-1', 'w-full'],
   OLGA_PHOTO: ['relative', 'top-10', 'left-8'],
   OLGA_HAT: ['relative', '-top-108', 'left-48', 'rotate-15'],
   OLGA_FRAME: ['relative'],
@@ -20,8 +29,17 @@ export const ABOUT_STYLE = {
   KONSTANTIN_FRAME: ['relative'],
   DANIIL_PHOTO: ['relative', 'top-10', 'left-8'],
   DANIIL_HAT: ['relative', 'w-[190px]', '-top-95', 'left-28', '-rotate-1'],
-  TEXT_CONTAINER: [],
+  TEXT_CONTAINER: [
+    'w-full',
+    'p-4',
+    'bg-white',
+    'border',
+    'border-solid',
+    'border-primary',
+    'shadow-md',
+    'rounded-lg',
+  ],
   DESCRIPTION: [],
-  ROLE: [],
-  NAME: [],
+  ROLE: ['text-purple', 'font-bold', 'text-[14px]', 'my-4'],
+  NAME: ['font-bold', 'text-[24px]', 'my-4'],
 };

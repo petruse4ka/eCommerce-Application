@@ -30,8 +30,11 @@ export default class PersonalDescription extends BaseComponent {
     const description = new BaseComponent({
       tag: 'div',
       className: ABOUT_STYLE.DESCRIPTION,
-      textContent: String(this.texts.description),
     }).getElement();
+
+    if (this.texts.description) {
+      description.insertAdjacentHTML('afterbegin', this.texts.description);
+    }
 
     this.component.append(name, role, description);
   }

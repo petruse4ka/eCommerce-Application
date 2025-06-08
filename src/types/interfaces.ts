@@ -656,7 +656,7 @@ export interface additionalPagesData {
 export interface PersonalText {
   name: string;
   role: string;
-  description?: string[];
+  description?: string;
 }
 
 export interface PersonalImageBox {
@@ -684,5 +684,6 @@ export interface About {
   KONSTANTIN: Personal;
   DANIIL: Personal;
   OLGA: Personal;
+  title: string;
   text: string;
 }
