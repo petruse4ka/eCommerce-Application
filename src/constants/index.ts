@@ -277,3 +277,5 @@ export const CART_TEXT = {
   EMPTY: 'Пока здесь пусто, но всё впереди!\nНайдите то, что вам действительно нужно.',
   CATALOG: 'В каталог',
 };
+
+export const PROMO_CODE_TEXT = 'SALE10 - промокод на первую покупку';
