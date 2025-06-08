@@ -641,3 +641,14 @@ export interface RemoveCartItem {
     },
   ];
 }
+
+interface additionalPagesContentItem {
+  type: 'text' | 'subtitle';
+  content: string;
+}
+
+export interface additionalPagesData {
+  TITLE: string;
+  CONTENT: additionalPagesContentItem[];
+  IMAGE?: string | string[];
+}
