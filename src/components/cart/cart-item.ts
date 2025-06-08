@@ -1,11 +1,14 @@
+import APICart from '@/api/cart';
+import deleteIcon from '@/assets/icons/delete.svg';
 import { CART_TEXT, DEFAULT_CURRENCY } from '@/constants';
+import { ADDRESS } from '@/styles/address';
 import { CART_ITEM } from '@/styles/cart/cart-item';
 import type { CartItemView } from '@/types/interfaces';
 import ElementBuilder from '@/utils/element-builder';
 import ImageBuilder from '@/utils/image-builder';
 
 import BaseComponent from '../base';
-import Button from '../buttons';
+import ButtonWithIcon from '../buttons/button-with-icon';
 import ProductQuantity from '../product/quantity';
 
 export default class CartItem extends BaseComponent {
@@ -75,10 +78,16 @@ export default class CartItem extends BaseComponent {
 
     this.createPriceAndQuantity();
 
-    const deleteButton = new Button({
+    const deleteButton = new ButtonWithIcon({
       style: 'DELETE_CART_ITEM',
-      textContent: 'X',
-      callback: (): void => {},
+      icon: {
+        source: deleteIcon,
+        alt: 'Garbage bin icon',
+        className: ADDRESS.CARD.ICON,
+      },
+      callback: (): void => {
+        void APICart.removeCartProduct(this.productInfo.id);
+      },
     }).getElement();
 
     this.component.append(deleteButton);

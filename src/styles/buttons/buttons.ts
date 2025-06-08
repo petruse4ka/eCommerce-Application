@@ -15,7 +15,7 @@ const STANDARD_BUTTON_STYLE = [
   'disabled:cursor-not-allowed',
 ];
 
-export const DEFAULT_BUTTON_WITH_ICON = ['button', 'flex', 'items-center', 'gap-2'];
+export const DEFAULT_BUTTON_WITH_ICON = ['button', 'items-center', 'gap-2'];
 
 export const BUTTON_ICON_CONTAINER = ['flex', 'items-center'];
 export const BUTTON_ICON = ['w-5', 'h-5'];
@@ -180,15 +180,18 @@ export const CUSTOM_BUTTON_STYLE = {
     'hover:border-accent-hover',
   ],
   DELETE_CART_ITEM: [
+    'flex-none',
     'absolute',
     'font-bold',
     'top-[5px]',
-    'right-3',
+    'right-[5px]',
     'cursor-pointer',
     'p-1',
     'text-background',
     'hover:text-accent',
     'transition',
+    'rounded-md',
+    'hover:bg-orange',
   ],
   PAGINATOR_PINK: [
     'p-2',

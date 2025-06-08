@@ -11,7 +11,6 @@ export default class CartList extends BaseComponent {
       className: CART_LIST.CONTAINER,
     });
 
-    cartState.subscribe(this.render.bind(this));
     this.render();
   }
 

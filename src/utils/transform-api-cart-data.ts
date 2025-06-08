@@ -1,3 +1,4 @@
+import { cartState } from '@/store/cart-state';
 import type {
   AddProductBody,
   CartInfo,
@@ -5,6 +6,7 @@ import type {
   CartItemView,
   CartLineItem,
   CartResponse,
+  RemoveCartItem,
 } from '@/types/interfaces';
 
 export class TransformApiCartData {
@@ -42,6 +44,7 @@ export class TransformApiCartData {
 
       if (images) {
         const itemBody = {
+          id: item.id,
           name: item.name.ru,
           prices: item.price.value.centAmount / priceDivider,
           discountedPrice: discount ? discount.value.centAmount / priceDivider : undefined,
@@ -57,5 +60,21 @@ export class TransformApiCartData {
     }
 
     return result;
+  }
+
+  public static transformProductLineDelete(id: string): RemoveCartItem | void {
+    const cartInfo = cartState.getCartInfo();
+
+    if (cartInfo) {
+      return {
+        version: cartInfo.version,
+        actions: [
+          {
+            action: 'removeLineItem',
+            lineItemId: id,
+          },
+        ],
+      };
+    }
   }
 }
