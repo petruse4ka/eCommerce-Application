@@ -105,6 +105,7 @@ export enum AlertText {
   SET_DEFAULT_ADDRESS = 'Адрес успешно установлен по умолчанию',
   DELETE_DEFAULT_ADDRESS = 'Адрес успешно удален по умолчанию',
   ADD_ADDRESS_SUCCESS = 'Новый адрес добавлен',
+  REMOVE_CART_ITEM = 'Товар удален из корзины',
 }
 
 export enum CheckboxText {
