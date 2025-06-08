@@ -72,7 +72,7 @@ export default class APICart {
               lineItems: TransformApiCartData.transformProductLine(body.lineItems),
             };
             cartState.setCartInfo(cartInfo);
-            cartState.setItemsCount(body.totalLineItemQuantity);
+            cartState.setItemsCount(body.totalLineItemQuantity ?? 0);
           }
         })
         .catch((error) => {
@@ -112,7 +112,49 @@ export default class APICart {
               lineItems: TransformApiCartData.transformProductLine(body.lineItems),
             };
             cartState.setCartInfo(cartInfo);
-            cartState.setItemsCount(body.totalLineItemQuantity);
+            cartState.setItemsCount(body.totalLineItemQuantity ?? 0);
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+
+          Alert.render({
+            textContent: AlertText.ERROR_DEFAULT,
+            status: AlertStatus.ERROR,
+            visibleTime: 3000,
+          });
+        });
+    }
+  }
+
+  public static async removeCartProduct(id: string): Promise<void> {
+    const token = userState.getTokenState();
+    const cartInfo = cartState.getCartInfo();
+
+    if (cartInfo) {
+      await fetch(
+        `${import.meta.env['VITE_CTP_API_URL']}/${import.meta.env['VITE_CTP_PROJECT_KEY']}/me${ApiEndpoint.CART}/${cartInfo.id}`,
+        {
+          method: ApiMethods.POST,
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': ContentType.JSON,
+          },
+          body: JSON.stringify(TransformApiCartData.transformProductLineDelete(id)),
+        }
+      )
+        .then((response) => response.json())
+        .then((body: CartResponse | ErrorResponse) => {
+          if ('errors' in body) {
+            throw new Error(JSON.stringify(body.errors));
+          } else {
+            const cartInfo = {
+              id: body.id,
+              version: body.version,
+              lineItems: TransformApiCartData.transformProductLine(body.lineItems),
+            };
+            cartState.setCartInfo(cartInfo);
+            cartState.setItemsCount(body.totalLineItemQuantity ?? 0);
           }
         })
         .catch((error) => {
@@ -155,7 +197,7 @@ export default class APICart {
             };
 
             cartState.setCartInfo(cartInfo);
-            cartState.setItemsCount(body.totalLineItemQuantity);
+            cartState.setItemsCount(body.totalLineItemQuantity ?? 0);
           }
         })
         .catch((error) => {

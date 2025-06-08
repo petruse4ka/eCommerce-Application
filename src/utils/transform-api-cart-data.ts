@@ -5,6 +5,7 @@ import type {
   CartItem,
   CartItemView,
   ProductQuantityTransform,
+  RemoveCartItem,
 } from '@/types/interfaces';
 
 export class TransformApiCartData {
@@ -67,6 +68,22 @@ export class TransformApiCartData {
             action: 'changeLineItemQuantity',
             lineItemId: body.id,
             quantity: body.quantity,
+          },
+        ],
+      };
+    }
+  }
+
+  public static transformProductLineDelete(id: string): RemoveCartItem | void {
+    const cartInfo = cartState.getCartInfo();
+
+    if (cartInfo) {
+      return {
+        version: cartInfo.version,
+        actions: [
+          {
+            action: 'removeLineItem',
+            lineItemId: id,
           },
         ],
       };

@@ -45,7 +45,7 @@ export interface ButtonParameters extends ElementParameters {
 
 export interface customButtonParameters {
   style: keyof typeof CUSTOM_BUTTON_STYLE;
-  textContent: string;
+  textContent?: string;
   icon: {
     source: string;
     alt: string;
@@ -648,6 +648,16 @@ export interface ProductQuantityTransform {
       action: string;
       lineItemId: string;
       quantity: number;
+    },
+  ];
+}
+
+export interface RemoveCartItem {
+  version: number;
+  actions: [
+    {
+      action: string;
+      lineItemId: string;
     },
   ];
 }
