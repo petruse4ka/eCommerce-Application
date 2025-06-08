@@ -77,12 +77,17 @@ const body = {
       },
     },
   ],
+  totalPrice: {
+    type: 'centPrecision',
+    currencyCode: 'RUB',
+    centAmount: 6500,
+    fractionDigits: 2,
+  },
 };
 
 describe('APICart', () => {
   test('get cart', async () => {
     const bodyTransform = TransformApiCartData.transformProductLine(body.lineItems);
-    console.log(bodyTransform);
 
     globalThis.fetch = vi.fn().mockResolvedValueOnce({
       ok: true,
@@ -96,6 +101,8 @@ describe('APICart', () => {
       version: 1,
       id: 'cart-id',
       lineItems: bodyTransform,
+      totalPrice: 65,
+      totalDiscountPrice: 0,
     });
   });
 });
