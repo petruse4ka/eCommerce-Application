@@ -1,5 +1,5 @@
 export const CART_PAGE = {
-  MAIN: ['bg-gray-light', 'flex-grow'],
+  MAIN: ['bg-gray-light', 'flex-grow', 'relative', 'min-h-[500px]'],
   CONTAINER: [
     'max-w-[1440px]',
     'container',
@@ -10,5 +10,26 @@ export const CART_PAGE = {
     'lg:grid-cols-[2fr_1fr]',
     'gap-3',
     'items-start',
+  ],
+  EMPTY_PRODUCT_CONTAINER: [
+    'flex',
+    'flex-col',
+    'items-center',
+    'justify-center',
+    'gap-6',
+    'absolute',
+    'inset-0',
+    'z-10',
+    'px-4',
+    'min-h-[300px]',
+  ],
+  EMPTY_PRODUCT_IMAGE: ['w-[250px]'],
+  EMPTY_PRODUCT_TEXT: [
+    'text-accent',
+    'text-l',
+    'sm:text-xl',
+    'font-semibold',
+    'text-center',
+    'whitespace-pre-line',
   ],
 };
