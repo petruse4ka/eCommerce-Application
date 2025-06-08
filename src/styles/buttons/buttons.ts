@@ -207,4 +207,14 @@ export const CUSTOM_BUTTON_STYLE = {
     'hover:bg-accent-hover',
     'hover:border-accent-hover',
   ],
+  PROMO_CODE_SUBMIT: [
+    'h-[52px]',
+    'bg-accent',
+    'rounded-[3px]',
+    'cursor-pointer',
+    'transition-all',
+    'text-white',
+    'hover:bg-accent-hover',
+    'active:bg-pink',
+  ],
 };

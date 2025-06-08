@@ -4,6 +4,7 @@ import ElementBuilder from '@/utils/element-builder';
 
 import BaseComponent from '../base';
 import Button from '../buttons';
+import FormPromoCode from '../forms/promo-code';
 
 export default class CartTotal extends BaseComponent {
   constructor() {
@@ -80,12 +81,14 @@ export default class CartTotal extends BaseComponent {
       isAccent: true,
     });
 
+    const formPromo = new FormPromoCode().getElement();
+
     const checkoutButton = new Button({
       style: 'PRICE_BUTTON',
       textContent: BTN_TEXT.CHECKOUT,
       callback: (): void => {},
     }).getElement();
 
-    this.component.append(title, totalInfoContainer, totalPrice, checkoutButton);
+    this.component.append(title, totalInfoContainer, totalPrice, formPromo, checkoutButton);
   }
 }

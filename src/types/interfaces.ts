@@ -100,7 +100,7 @@ export interface InputComponent {
   id: string;
   type: InputType;
   callback?: (event: Event) => void;
-  labelText: string;
+  labelText?: string;
   isRequired?: boolean;
   isDisabled?: boolean;
   value?: string;
