@@ -9,6 +9,8 @@ const body: {
     id: 'cart-id',
     version: 1,
     lineItems: [],
+    totalPrice: 0,
+    totalDiscountPrice: 0,
   },
   productId: 'product-id',
 };

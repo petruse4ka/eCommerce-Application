@@ -106,6 +106,7 @@ export enum AlertText {
   DELETE_DEFAULT_ADDRESS = 'Адрес успешно удален по умолчанию',
   ADD_ADDRESS_SUCCESS = 'Новый адрес добавлен',
   REMOVE_CART_ITEM = 'Товар удален из корзины',
+  DISCOUNT_CODE_NON = 'Такого промокода нет',
 }
 
 export enum CheckboxText {

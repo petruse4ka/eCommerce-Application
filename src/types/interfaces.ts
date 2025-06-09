@@ -115,7 +115,7 @@ export interface InputComponent {
   id: string;
   type: InputType;
   callback?: (event: Event) => void;
-  labelText: string;
+  labelText?: string;
   isRequired?: boolean;
   isDisabled?: boolean;
   value?: string;
@@ -551,6 +551,8 @@ export interface CartInfo {
   id: string;
   version: number;
   lineItems: CartItemView[];
+  totalPrice: number;
+  totalDiscountPrice: number;
 }
 
 export interface CartItem {
@@ -624,6 +626,24 @@ export interface CartResponse {
     type: string;
   };
   totalLineItemQuantity: number;
+  discountOnTotalPrice?: {
+    discountedAmount: {
+      type: string;
+      currencyCode: string;
+      centAmount: number;
+      fractionDigits: number;
+    };
+  };
+}
+
+export interface CartLineItem {
+  productId: string;
+  quantity: number;
+}
+
+export interface CartLineItem {
+  productId: string;
+  quantity: number;
 }
 
 export interface CartLineItem {
@@ -697,4 +717,14 @@ export interface additionalPagesData {
   TITLE: string;
   CONTENT: additionalPagesContentItem[];
   IMAGE?: string | string[];
+}
+
+export interface AddDiscountCode {
+  version: number;
+  actions: [
+    {
+      action: string;
+      code: string;
+    },
+  ];
 }

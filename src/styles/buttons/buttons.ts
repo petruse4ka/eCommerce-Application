@@ -240,4 +240,14 @@ export const CUSTOM_BUTTON_STYLE = {
     'items-center',
     'gap-2',
   ],
+  PROMO_CODE_SUBMIT: [
+    'h-[52px]',
+    'bg-accent',
+    'rounded-[3px]',
+    'cursor-pointer',
+    'transition-all',
+    'text-white',
+    'hover:bg-accent-hover',
+    'active:bg-pink',
+  ],
 };

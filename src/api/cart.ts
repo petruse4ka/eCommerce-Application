@@ -21,16 +21,14 @@ export default class APICart {
       }
     )
       .then((response) => response.json())
-      .then((body: CartResponse) => {
+      .then((body: CartResponse | ErrorResponse) => {
         if ('errors' in body) {
           throw new Error(JSON.stringify(body.errors));
         } else {
-          const cartInfo = {
-            id: body.id,
-            version: body.version,
-            lineItems: TransformApiCartData.transformProductLine(body.lineItems),
-          };
-          cartState.updateCart(cartInfo, TransformApiCartData.transformLineItems(body.lineItems));
+          const cartInfo = TransformApiCartData.transformCartState(body);
+          if (cartInfo) {
+            cartState.updateCart(cartInfo, TransformApiCartData.transformLineItems(body.lineItems));
+          }
           cartState.setItemsCount(body.totalLineItemQuantity ?? 0);
         }
       })
@@ -66,12 +64,13 @@ export default class APICart {
           if ('errors' in body) {
             throw new Error(JSON.stringify(body.errors));
           } else {
-            const cartInfo = {
-              id: body.id,
-              version: body.version,
-              lineItems: TransformApiCartData.transformProductLine(body.lineItems),
-            };
-            cartState.updateCart(cartInfo, TransformApiCartData.transformLineItems(body.lineItems));
+            const cartInfo = TransformApiCartData.transformCartState(body);
+            if (cartInfo) {
+              cartState.updateCart(
+                cartInfo,
+                TransformApiCartData.transformLineItems(body.lineItems)
+              );
+            }
             cartState.setItemsCount(body.totalLineItemQuantity);
           }
         })
@@ -106,12 +105,13 @@ export default class APICart {
           if ('statusCode' in body) {
             void APICart.createCart();
           } else {
-            const cartInfo = {
-              id: body.id,
-              version: body.version,
-              lineItems: TransformApiCartData.transformProductLine(body.lineItems),
-            };
-            cartState.updateCart(cartInfo, TransformApiCartData.transformLineItems(body.lineItems));
+            const cartInfo = TransformApiCartData.transformCartState(body);
+            if (cartInfo) {
+              cartState.updateCart(
+                cartInfo,
+                TransformApiCartData.transformLineItems(body.lineItems)
+              );
+            }
             cartState.setItemsCount(body.totalLineItemQuantity);
           }
         })
@@ -148,12 +148,10 @@ export default class APICart {
           if ('errors' in body) {
             throw new Error(JSON.stringify(body.errors));
           } else {
-            const cartInfo = {
-              id: body.id,
-              version: body.version,
-              lineItems: TransformApiCartData.transformProductLine(body.lineItems),
-            };
-            cartState.setCartInfo(cartInfo);
+            const cartInfo = TransformApiCartData.transformCartState(body);
+            if (cartInfo) {
+              cartState.setCartInfo(cartInfo);
+            }
             cartState.setItemsCount(body.totalLineItemQuantity ?? 0);
           }
         })
@@ -190,11 +188,7 @@ export default class APICart {
           if ('errors' in body) {
             throw new Error(JSON.stringify(body.errors));
           } else {
-            const cartInfo = {
-              id: body.id,
-              version: body.version,
-              lineItems: TransformApiCartData.transformProductLine(body.lineItems),
-            };
+            const cartInfo = TransformApiCartData.transformCartState(body);
 
             cartState.setCartInfo(cartInfo);
             cartState.setItemsCount(body.totalLineItemQuantity ?? 0);
@@ -208,6 +202,36 @@ export default class APICart {
             status: AlertStatus.ERROR,
             visibleTime: 3000,
           });
+        });
+    }
+  }
+
+  public static async addPromoCode(code: string): Promise<void> {
+    const token = userState.getTokenState();
+    const cartInfo = cartState.getCartInfo();
+
+    if (cartInfo) {
+      await fetch(
+        `${import.meta.env['VITE_CTP_API_URL']}/${import.meta.env['VITE_CTP_PROJECT_KEY']}/me${ApiEndpoint.CART}/${cartInfo.id}`,
+        {
+          method: ApiMethods.POST,
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': ContentType.JSON,
+          },
+          body: JSON.stringify(TransformApiCartData.transformAddDiscountCode(code)),
+        }
+      )
+        .then((response) => response.json())
+        .then((body: CartResponse | ErrorResponse) => {
+          if ('errors' in body) {
+            throw new Error(JSON.stringify(body.errors[0]));
+          } else {
+            const cartInfo = TransformApiCartData.transformCartState(body);
+            if (cartInfo) {
+              cartState.setCartInfo(cartInfo);
+            }
+          }
         });
     }
   }

@@ -15,6 +15,10 @@ export default class ApiErrors {
         return AlertText.INVALID_CURRENT_PASSWORD;
       }
 
+      case 'DiscountCodeNonApplicable': {
+        return AlertText.DISCOUNT_CODE_NON;
+      }
+
       default: {
         return AlertText.ERROR_DEFAULT;
       }
