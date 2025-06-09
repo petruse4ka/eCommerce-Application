@@ -188,11 +188,7 @@ export default class APICart {
           if ('errors' in body) {
             throw new Error(JSON.stringify(body.errors));
           } else {
-            const cartInfo = {
-              id: body.id,
-              version: body.version,
-              lineItems: TransformApiCartData.transformProductLine(body.lineItems),
-            };
+            const cartInfo = TransformApiCartData.transformCartState(body);
 
             cartState.setCartInfo(cartInfo);
             cartState.setItemsCount(body.totalLineItemQuantity ?? 0);
