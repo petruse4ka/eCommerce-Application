@@ -30,6 +30,11 @@ export default class Paginator extends BaseComponent {
     this.nextButton = Paginator.createNextButton();
     this.lastButton = Paginator.createLastButton();
 
+    this.firstButton.disableButton();
+    this.prevButton.disableButton();
+    this.nextButton.disableButton();
+    this.lastButton.disableButton();
+
     paginatorState.subscribe(this.updatePaginator.bind(this));
     paginatorState.subscribeToTotalPages(this.updatePaginator.bind(this));
     this.render();
