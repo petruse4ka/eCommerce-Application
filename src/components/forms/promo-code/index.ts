@@ -3,7 +3,7 @@ import Alert from '@/components/alert';
 import BaseComponent from '@/components/base';
 import Button from '@/components/buttons';
 import Input from '@/components/inputs';
-import { BTN_TEXT } from '@/constants';
+import { BTN_TEXT, PROMO_PLACEHOLDER } from '@/constants';
 import { FORM_PROMO_CODE } from '@/styles/forms/forms';
 import { AlertStatus, AlertText, InputType } from '@/types/enums';
 import { isErrorInfoPasswordChange } from '@/types/guards';
@@ -24,7 +24,7 @@ export default class FormPromoCode extends BaseComponent {
     const input = new Input({
       id: 'promoCode',
       type: InputType.TEXT,
-      placeholder: 'Введите промокод',
+      placeholder: PROMO_PLACEHOLDER,
       callback: (): void => {
         input.clearError();
       },
@@ -39,16 +39,14 @@ export default class FormPromoCode extends BaseComponent {
           if (isErrorInfoPasswordChange(parsedError)) {
             const errorInfo = ApiErrors.getErrorInfo(parsedError.code);
 
-            Alert.render({
-              textContent: errorInfo,
-              status: AlertStatus.ERROR,
-              visibleTime: 4000,
-            });
-
             if (errorInfo === AlertText.DISCOUNT_CODE_NON) {
               input.setError(errorInfo);
             } else {
-              input.setError('');
+              Alert.render({
+                textContent: errorInfo,
+                status: AlertStatus.ERROR,
+                visibleTime: 4000,
+              });
             }
           }
         });

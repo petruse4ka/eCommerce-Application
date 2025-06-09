@@ -279,3 +279,5 @@ export const CART_TEXT = {
 };
 
 export const PROMO_CODE_TEXT = 'SALE10 - промокод на первую покупку';
+
+export const PROMO_PLACEHOLDER = 'Введите промокод';
