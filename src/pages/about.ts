@@ -4,7 +4,7 @@ import RSLogo from '@/assets/images/about/RSSCHOOL.webp';
 import Person from '@/components/about/personal';
 import BaseComponent from '@/components/base';
 import { ABOUT, SCHOOL_URL } from '@/data';
-import { ABOUT_STYLE } from '@/styles/about';
+import { ABOUT_STYLE } from '@/styles/pages/about';
 import ElementBuilder from '@/utils/element-builder';
 import ImageBuilder from '@/utils/image-builder';
 import LinkBuilder from '@/utils/link-builder';

@@ -1,4 +1,4 @@
-import { ABOUT_STYLE } from '@/styles/about';
+import { ABOUT_STYLE } from '@/styles/pages/about';
 import type { Personal, PersonalImageBox, PersonalText } from '@/types/interfaces';
 import ImageBuilder from '@/utils/image-builder';
 
@@ -50,7 +50,7 @@ class PersonalDescription extends BaseComponent {
 
   protected render(): void {
     const name = new BaseComponent({
-      tag: 'div',
+      tag: 'h3',
       className: ABOUT_STYLE.NAME,
       textContent: this.texts.name,
     }).getElement();

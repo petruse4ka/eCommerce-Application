@@ -1,15 +1,5 @@
 export const ABOUT_STYLE = {
-  MAIN_CONTAINER: [
-    'bg-gray-light',
-    'px-3',
-    'md:px-4',
-    /*'bg-[url(@/assets/images/about/cafe.png)]',
-    'pb-120',
-    'bg-bottom',
-    'bg-no-repeat',
-    'bg-contain',
-    'bg-size-[auto]',*/
-  ],
+  MAIN_CONTAINER: ['bg-gray-light', 'px-3', 'md:px-4'],
   TITLE: ['text-3xl', 'font-semibold', 'text-center', 'text-purple', 'my-6'],
   CONTAINER: [
     'w-full',
@@ -31,13 +21,10 @@ export const ABOUT_STYLE = {
   ],
   PERSONAL_CONTAINER: ['flex', 'flex-col', 'lg:flex-row'],
   ODD_CONTAINER: ['flex', 'flex-col', 'lg:flex-row-reverse'],
-  OLGA_PHOTO: ['relative'],
+  PHOTO: ['min-w-[300px]'],
   OLGA_HAT: ['relative', 'hidden', 'lg:block', '-top-90', 'left-26', 'rotate-15'],
-  KONSTANTIN_PHOTO: ['relative'],
   KONSTANTIN_HAT: ['relative', 'hidden', 'lg:block', '-top-92', 'left-32', 'rotate-12'],
-  DANIIL_PHOTO: ['relative'],
   DANIIL_HAT: ['relative', 'hidden', 'lg:block', '-top-100', 'left-10', 'rotate-1', 'w-[220px]'],
-  MARGO_PHOTO: ['relative'],
   MARGO_FRAME: ['relative', 'hidden', 'w-[400px]', 'lg:block', '-top-93', 'left-17', '-rotate-10'],
   TEXT_CONTAINER: [
     'w-full',
@@ -54,7 +41,7 @@ export const ABOUT_STYLE = {
     'mx-auto',
     'mb-4',
     'p-4',
-    'bg-purple',
+    'bg-secondary',
     'text-white',
     'border',
     'border-solid',
@@ -64,7 +51,7 @@ export const ABOUT_STYLE = {
   ],
   IMAGE: ['mx-auto'],
   RSSCHOOL: ['max-w-screen-xl', 'mx-auto', 'flex', 'justify-end'],
-  NAME: ['font-bold', 'text-[18px]', 'my-4'],
-  ROLE: ['text-purple', 'font-bold', 'text-[14px]', 'my-4'],
+  NAME: ['font-bold', 'text-[20px]', 'my-2'],
+  ROLE: ['bg-secondary', 'text-white', 'px-2', 'font-bold', 'text-[14px]', 'mb-6', 'w-fit'],
   DESCRIPTION: [],
 };
