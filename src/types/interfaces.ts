@@ -660,15 +660,11 @@ export interface PersonalText {
 }
 
 export interface PersonalImageBox {
-  frame?: {
-    url: string;
-    style: string[];
-  };
   photo: {
     url: string;
     style: string[];
   };
-  hat: {
+  hat?: {
     url: string;
     style: string[];
   };
@@ -686,4 +682,5 @@ export interface About {
   OLGA: Personal;
   title: string;
   text: string;
+  image: string;
 }

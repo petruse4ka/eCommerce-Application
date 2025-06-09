@@ -5,12 +5,14 @@ import handMade from '@/assets/icons/footer-love.svg';
 import freshProductsIcon from '@/assets/icons/fresh-products.svg';
 import naturalIngredients from '@/assets/icons/natural-ingredients.svg';
 import wholesaleSale from '@/assets/icons/wholesale-offer.svg';
+import cafe from '@/assets/images/about/cafe.png';
 import DaniilPhoto from '@/assets/images/about/daniil.png';
-import DaniilHat from '@/assets/images/about/daniil-hat.png';
+import DaniilHat from '@/assets/images/about/hat2.png';
+import KonstantinHat from '@/assets/images/about/hat7.png';
+import OlgaHat from '@/assets/images/about/hat8.png';
 import KonstantinPhoto from '@/assets/images/about/kostya.png';
-import KonstantinHat from '@/assets/images/about/kostya-hat.png';
-import OlgaHat from '@/assets/images/about/olga-hat.png';
-import OlgaPhoto from '@/assets/images/about/olga-photo1.png';
+import MargoPhoto from '@/assets/images/about/margarita.png';
+import OlgaPhoto from '@/assets/images/about/olga-photo.png';
 import anonymousIcon from '@/assets/images/guarantees/anonymous.png';
 import deliveryIcon from '@/assets/images/guarantees/delivery.png';
 import ingerientsIcon from '@/assets/images/guarantees/ingredients.png';
@@ -324,13 +326,6 @@ export const DELIVERY_ITEMS = [
 ];
 
 export const ABOUT: About = {
-  MARGO: {
-    PersonalText: { name: 'Маргарита Малец', role: 'Муза и ангел-хранитель' },
-    PersonalImageBox: {
-      photo: { url: OlgaPhoto, style: ABOUT_STYLE.OLGA_PHOTO },
-      hat: { url: OlgaHat, style: ABOUT_STYLE.OLGA_HAT },
-    },
-  },
   KONSTANTIN: {
     PersonalText: {
       name: 'Константин Петров',
@@ -344,7 +339,12 @@ export const ABOUT: About = {
     },
   },
   DANIIL: {
-    PersonalText: { name: 'Даниил', role: 'Кондитер-технолог' },
+    PersonalText: {
+      name: 'Даниил Бивер',
+      role: 'Кондитер-технолог',
+      description:
+        '<p class="mb-2">Программный код и крем на эклер — одинаково хороши, когда за дело берётся петербуржец Даниил. С высшим образованием по фундаментальной информатике и трёхлетним коммерческим опытом HTML-верстальщика, он уверенно чувствует себя не только у плиты, но и в логике взаимодействия сложных API.</p><p class="mb-2">Он работает не с визуалом, а с начинкой — авторизовать пользователя, применить промокод, пересчитать корзину... При этом даже под давлением сохраняет хладнокровие, как заварной крем — стабильную текстуру. В каждом проекте он оставляет частичку инженерной точности и немного сладкой магии и умеет сделать это в нужное время, в правильной последовательности и обязательно с любовью к деталям. </p><p class="mb-2">Когда-то он увлекался пошивом сумок и футболок, и этот опыт научил его главному: если строчка легла криво – переделывай, пока не станет идеально. Этот принцип он успешно применяет и в программировании, только теперь вместо ткани – строки кода, а вместо иглы – строгий линтер, который не прощает ошибок. </p>',
+    },
     PersonalImageBox: {
       photo: { url: DaniilPhoto, style: ABOUT_STYLE.DANIIL_PHOTO },
       hat: { url: DaniilHat, style: ABOUT_STYLE.DANIIL_HAT },
@@ -352,16 +352,28 @@ export const ABOUT: About = {
   },
   OLGA: {
     PersonalText: {
-      name: 'Ольга',
+      name: 'Ольга Поклонская',
       role: 'Кондитер-оформитель',
       description:
-        '<p class="mb-2">Ольга – кондитер-оформитель, всю профессиональную жизнь она искала гармонию между точностью кода и живым восприятием веб-страниц. Последние 13 лет преподавала JavaScript для веб-дизайнеров, и теперь её ученики работают в самых разных уголках мира – от Японии до Швеции, от EPAM до Google. Правда, её путь в IT прервался не по её желанию, но закрытая дверь – это просто повод поискать окно.</p><p class="mb-2">Юная минчанка, возраст которой всё ещё уступает сумме лет двух её коллег, с интересом учится у команды и вкладывает свои знания в проект. Путешествия и рисование вдохновляют её на новые идеи, а любовь к программированию помогает упорядочить творческий хаос. И пусть оформленные ею страницы не дарят аромата ванили и шоколада, удовольствие от их посещения не уступает наслаждению идеально украшенным эклером.</p>',
+        '<p class="mb-2">Ольга – кондитер-оформитель, мастер эстетики и здравого смысла. Всю профессиональную жизнь она искала гармонию между точностью кода и живым восприятием веб-страниц. Последние 13 лет преподавала JavaScript для веб-дизайнеров, и теперь её ученики работают в самых разных уголках мира – от Японии до Швеции, от EPAM до Google. Правда, её путь в IT прервался не по её желанию, но закрытая дверь – это просто повод поискать окно.</p><p class="mb-2">Юная минчанка, возраст которой всё ещё уступает сумме лет двух её коллег, с интересом учится у команды и вкладывает свои знания в проект. Путешествия и рисование вдохновляют её на новые идеи, а любовь к программированию помогает упорядочить творческий хаос. И пусть оформленные ею страницы не дарят аромата ванили и шоколада, удовольствие от их посещения не уступает наслаждению идеально украшенным эклером.</p>',
     },
     PersonalImageBox: {
       photo: { url: OlgaPhoto, style: ABOUT_STYLE.OLGA_PHOTO },
       hat: { url: OlgaHat, style: ABOUT_STYLE.OLGA_HAT },
     },
   },
+  MARGO: {
+    PersonalText: {
+      name: 'Маргарита Малец',
+      role: 'Генеральный директор по подбору персонала и вдохновению',
+      description:
+        '<p class="mb-2">Маргарита - наш ментор, она же наша муза, она же наш ангел-хранитель, она же верит в нас даже тогда, когда мы сами не знаем, стоит ли верить... Список эпитетов можно продолжать бесконечно, но суть одна: <strong>"Спасибо, Маргарита!"</strong></p>',
+    },
+    PersonalImageBox: {
+      photo: { url: MargoPhoto, style: ABOUT_STYLE.MARGO_PHOTO },
+    },
+  },
   title: 'Наша команда',
   text: 'Наш рецепт успеха? Добрая щепотка упорства, сладкий джем творчества, немного бессонницы при завершении очередного спринта и парочка асинхронных функций, чтобы всё работало без сбоев. Так что, если вы ищете идеальное сочетание вкуса, логики и лёгкой иронии, добро пожаловать в нашу кондитерскую (и фронтенд) вселенную!',
+  image: cafe,
 };

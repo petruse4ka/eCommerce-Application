@@ -1,15 +1,18 @@
 import '@/styles/main.css';
 
+import RSLogo from '@/assets/images/about/RSSCHOOL.webp';
 import Person from '@/components/about/personal';
 import BaseComponent from '@/components/base';
-import { ABOUT } from '@/data';
+import { ABOUT, SCHOOL_URL } from '@/data';
 import { ABOUT_STYLE } from '@/styles/about';
 import ElementBuilder from '@/utils/element-builder';
+import ImageBuilder from '@/utils/image-builder';
+import LinkBuilder from '@/utils/link-builder';
 
 export default class AboutPage extends BaseComponent {
   constructor() {
     super({
-      tag: 'div',
+      tag: 'main',
       className: ABOUT_STYLE.MAIN_CONTAINER,
     });
     const title = new ElementBuilder({
@@ -23,12 +26,30 @@ export default class AboutPage extends BaseComponent {
     this.render();
   }
 
+  private static createCopyrightLink(): HTMLElement {
+    const copyrightLink = new LinkBuilder({
+      href: SCHOOL_URL,
+      target: '_blank',
+      className: ABOUT_STYLE.RSSCHOOL,
+    }).getElement();
+
+    const logo = new ImageBuilder({
+      source: RSLogo,
+      alt: 'RS School Logo',
+      className: '',
+    }).getElement();
+
+    copyrightLink.append(logo);
+    return copyrightLink;
+  }
+
   private render(): void {
     const container = new ElementBuilder({
       tag: 'div',
       className: ABOUT_STYLE.CONTAINER,
     }).getElement();
 
+    container.append(new Person(ABOUT.MARGO, false).getElement());
     container.append(new Person(ABOUT.KONSTANTIN, true).getElement());
     container.append(new Person(ABOUT.DANIIL, false).getElement());
     container.append(new Person(ABOUT.OLGA, true).getElement());
@@ -37,10 +58,20 @@ export default class AboutPage extends BaseComponent {
 
     const text = new ElementBuilder({
       tag: 'div',
-      className: ABOUT_STYLE.TEXT_CONTAINER,
+      className: ABOUT_STYLE.FINALLY_CONTAINER,
       textContent: ABOUT.text,
     }).getElement();
 
     this.component.append(text);
+
+    const cafe = new ImageBuilder({
+      source: ABOUT.image,
+      alt: ABOUT.title,
+      className: ABOUT_STYLE.IMAGE,
+    }).getElement();
+    this.component.append(cafe);
+
+    const copyrightLink = AboutPage.createCopyrightLink();
+    this.component.append(copyrightLink);
   }
 }

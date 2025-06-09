@@ -1,4 +1,3 @@
-//import { ABOUT } from '@/data';
 import { ABOUT_STYLE } from '@/styles/about';
 import type { Personal, PersonalImageBox, PersonalText } from '@/types/interfaces';
 import ImageBuilder from '@/utils/image-builder';
