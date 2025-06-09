@@ -25,7 +25,7 @@ export const CUSTOM_BUTTON_STYLE = {
   PRIMARY_PINK: [
     ...STANDARD_BUTTON_STYLE,
     'bg-accent',
-    'text-white',
+    'text-white-permanent',
     'border-accent',
     'hover:bg-accent-hover',
     'hover:border-accent-hover',
@@ -241,7 +241,7 @@ export const CUSTOM_BUTTON_STYLE = {
     'mt-2',
     'mb-4',
     'bg-accent',
-    'text-white',
+    'text-white-permanent',
     'border-accent',
     'hover:bg-accent-hover',
     'hover:border-accent-hover',

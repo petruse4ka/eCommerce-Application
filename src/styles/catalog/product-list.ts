@@ -34,7 +34,7 @@ export const PRODUCT_LIST_STYLES = {
     'mt-auto',
     'pt-5',
     'border-t',
-    'border-orange-light',
+    'border-primary',
   ],
   PRICE_WRAPPER: ['flex', 'items-center', 'gap-4'],
   ORIGINAL_PRICE: ['text-dark', 'line-through', 'text-sm'],
