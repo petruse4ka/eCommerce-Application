@@ -89,6 +89,8 @@ export const CUSTOM_BUTTON_STYLE = {
     'lg:col-span-2',
     'w-[200px]',
     'place-self-center',
+    'text-[14px]',
+    'w-full',
   ],
   PRICE_QUANTITY: [
     'cursor-pointer',
@@ -249,5 +251,7 @@ export const CUSTOM_BUTTON_STYLE = {
     'text-white',
     'hover:bg-accent-hover',
     'active:bg-pink',
+    'font-bold',
+    'text-[14px]',
   ],
 };
