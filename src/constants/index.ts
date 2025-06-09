@@ -240,8 +240,11 @@ export const CATALOG_TEXTS = {
   CATALOG: 'Каталог',
   ALL_CATEGORIES: 'Все продукты',
   ERROR_LOADING_PRODUCTS: 'Произошла ошибка при загрузке продуктов. Пожалуйста, попробуйте позже.',
-  PAGE: 'СТРАНИЦА',
-  OUT: 'ИЗ',
+  PAGE: 'Страница',
+  OUT: 'из',
+  ADD_TO_CART: 'В корзину',
+  ADDING_TO_CART: 'Кладем в корзину...',
+  ADDED_TO_CART: 'Товар в корзине',
 };
 
 export const PRODUCT_ATTRIBUTES = {
@@ -268,7 +271,7 @@ export const DEFAULT_QUANTITY_AMOUNT = 1;
 
 export const CART_TEXT = {
   TITLE: 'Ваша корзина',
-  PRICE: 'Цена: ',
+  PRICE: 'Стоимость: ',
   TOTAL_TITLE: 'Итого',
   PRODUCTS_PRICE: 'Стоимость товаров',
   SALE: 'Скидка',

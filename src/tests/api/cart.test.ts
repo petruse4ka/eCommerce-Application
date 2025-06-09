@@ -88,21 +88,24 @@ const body = {
 describe('APICart', () => {
   test('get cart', async () => {
     const bodyTransform = TransformApiCartData.transformProductLine(body.lineItems);
+    const updateCart = vi.spyOn(cartState, 'updateCart');
 
     globalThis.fetch = vi.fn().mockResolvedValueOnce({
       ok: true,
       json: () => Promise.resolve(body),
     });
 
-    const setCartInfo = vi.spyOn(cartState, 'setCartInfo');
     await expect(APICart.createCart()).resolves.toBeUndefined();
 
-    expect(setCartInfo).toHaveBeenCalledWith({
-      version: 1,
-      id: 'cart-id',
-      lineItems: bodyTransform,
-      totalPrice: 65,
-      totalDiscountPrice: 0,
-    });
+    expect(updateCart).toHaveBeenCalledWith(
+      {
+        version: 1,
+        id: 'cart-id',
+        lineItems: bodyTransform,
+        totalPrice: 65,
+        totalDiscountPrice: 0,
+      },
+      TransformApiCartData.transformLineItems(body.lineItems)
+    );
   });
 });

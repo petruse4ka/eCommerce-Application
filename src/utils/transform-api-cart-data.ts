@@ -5,7 +5,9 @@ import type {
   CartInfo,
   CartItem,
   CartItemView,
+  CartLineItem,
   CartResponse,
+  ProductQuantityTransform,
   RemoveCartItem,
 } from '@/types/interfaces';
 
@@ -25,6 +27,13 @@ export class TransformApiCartData {
         },
       ],
     };
+  }
+
+  public static transformLineItems(lineItems: CartResponse['lineItems']): CartLineItem[] {
+    return lineItems.map((item: { productId: string; quantity: number }) => ({
+      productId: item.productId,
+      quantity: item.quantity,
+    }));
   }
 
   public static transformProductLine(productLine: CartItem[]): CartItemView[] {
@@ -53,6 +62,26 @@ export class TransformApiCartData {
     }
 
     return result;
+  }
+
+  public static transformProductQuantity(body: {
+    id: string;
+    quantity: number;
+  }): ProductQuantityTransform | void {
+    const cartInfo = cartState.getCartInfo();
+
+    if (cartInfo) {
+      return {
+        version: cartInfo.version,
+        actions: [
+          {
+            action: 'changeLineItemQuantity',
+            lineItemId: body.id,
+            quantity: body.quantity,
+          },
+        ],
+      };
+    }
   }
 
   public static transformProductLineDelete(id: string): RemoveCartItem | void {
