@@ -30,7 +30,7 @@ export default class APICart {
             version: body.version,
             lineItems: TransformApiCartData.transformProductLine(body.lineItems),
           };
-          cartState.setCartInfo(cartInfo);
+          cartState.updateCart(cartInfo, TransformApiCartData.transformLineItems(body.lineItems));
           cartState.setItemsCount(body.totalLineItemQuantity ?? 0);
         }
       })
@@ -71,8 +71,8 @@ export default class APICart {
               version: body.version,
               lineItems: TransformApiCartData.transformProductLine(body.lineItems),
             };
-            cartState.setCartInfo(cartInfo);
-            cartState.setItemsCount(body.totalLineItemQuantity ?? 0);
+            cartState.updateCart(cartInfo, TransformApiCartData.transformLineItems(body.lineItems));
+            cartState.setItemsCount(body.totalLineItemQuantity);
           }
         })
         .catch((error) => {
@@ -111,8 +111,8 @@ export default class APICart {
               version: body.version,
               lineItems: TransformApiCartData.transformProductLine(body.lineItems),
             };
-            cartState.setCartInfo(cartInfo);
-            cartState.setItemsCount(body.totalLineItemQuantity ?? 0);
+            cartState.updateCart(cartInfo, TransformApiCartData.transformLineItems(body.lineItems));
+            cartState.setItemsCount(body.totalLineItemQuantity);
           }
         })
         .catch((error) => {

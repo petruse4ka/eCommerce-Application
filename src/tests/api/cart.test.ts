@@ -82,6 +82,7 @@ const body = {
 describe('APICart', () => {
   test('get cart', async () => {
     const bodyTransform = TransformApiCartData.transformProductLine(body.lineItems);
+    const updateCart = vi.spyOn(cartState, 'updateCart');
     console.log(bodyTransform);
 
     globalThis.fetch = vi.fn().mockResolvedValueOnce({
@@ -89,13 +90,15 @@ describe('APICart', () => {
       json: () => Promise.resolve(body),
     });
 
-    const setCartInfo = vi.spyOn(cartState, 'setCartInfo');
     await expect(APICart.createCart()).resolves.toBeUndefined();
 
-    expect(setCartInfo).toHaveBeenCalledWith({
-      version: 1,
-      id: 'cart-id',
-      lineItems: bodyTransform,
-    });
+    expect(updateCart).toHaveBeenCalledWith(
+      {
+        id: 'cart-id',
+        version: 1,
+        lineItems: bodyTransform,
+      },
+      TransformApiCartData.transformLineItems(body.lineItems)
+    );
   });
 });

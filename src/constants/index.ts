@@ -239,8 +239,11 @@ export const CATALOG_TEXTS = {
   CATALOG: 'Каталог',
   ALL_CATEGORIES: 'Все продукты',
   ERROR_LOADING_PRODUCTS: 'Произошла ошибка при загрузке продуктов. Пожалуйста, попробуйте позже.',
-  PAGE: 'СТРАНИЦА',
-  OUT: 'ИЗ',
+  PAGE: 'Страница',
+  OUT: 'из',
+  ADD_TO_CART: 'В корзину',
+  ADDING_TO_CART: 'Кладем в корзину...',
+  ADDED_TO_CART: 'Товар в корзине',
 };
 
 export const PRODUCT_ATTRIBUTES = {

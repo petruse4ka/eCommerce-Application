@@ -5,6 +5,8 @@ import type {
   CartItem,
   CartItemView,
   ProductQuantityTransform,
+  CartLineItem,
+  CartResponse,
   RemoveCartItem,
 } from '@/types/interfaces';
 
@@ -24,6 +26,13 @@ export class TransformApiCartData {
         },
       ],
     };
+  }
+
+  public static transformLineItems(lineItems: CartResponse['lineItems']): CartLineItem[] {
+    return lineItems.map((item: { productId: string; quantity: number }) => ({
+      productId: item.productId,
+      quantity: item.quantity,
+    }));
   }
 
   public static transformProductLine(productLine: CartItem[]): CartItemView[] {
