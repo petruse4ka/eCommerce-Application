@@ -32,3 +32,5 @@ export const REDIRECT_LINK = [
 ];
 
 export const FORM_PASSWORD = [...FORM, 'w-full'];
+
+export const FORM_PROMO_CODE = ['grid', 'grid-cols-[2fr_1fr]', 'gap-1'];

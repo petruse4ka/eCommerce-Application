@@ -46,11 +46,12 @@ export default class TransformApiProductsData {
       const { attributes, prices, images } = masterVariant;
 
       return {
+        id: response.id,
         attributes,
         prices,
         images,
       };
     }
-    return { attributes: [], prices: [], images: [] };
+    return { id: '', attributes: [], prices: [], images: [] };
   }
 }

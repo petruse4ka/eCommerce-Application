@@ -17,6 +17,10 @@ const STANDARD_BUTTON_STYLE = [
 
 export const DEFAULT_BUTTON_WITH_ICON = ['button', 'items-center', 'gap-2'];
 
+export const BUTTON_ICON_CONTAINER = ['flex', 'items-center'];
+export const BUTTON_ICON = ['w-5', 'h-5'];
+export const BUTTON_TEXT = ['text-[14px]', 'font-semibold'];
+
 export const CUSTOM_BUTTON_STYLE = {
   PRIMARY_PINK: [
     ...STANDARD_BUTTON_STYLE,
@@ -206,5 +210,44 @@ export const CUSTOM_BUTTON_STYLE = {
     'text-white',
     'hover:bg-accent-hover',
     'hover:border-accent-hover',
+  ],
+  ADD_TO_CART: [
+    'min-w-[234px]',
+    'px-8',
+    'py-4',
+    'font-semibold',
+    'text-[14px]',
+    'border',
+    'rounded-[3px]',
+    'cursor-pointer',
+    'transition-all',
+    'duration-300',
+    'ease-in-out',
+    'disabled:bg-red',
+    'disabled:border-red',
+    'disabled:cursor-not-allowed',
+    'mx-2',
+    'mt-2',
+    'mb-4',
+    'bg-accent',
+    'text-white',
+    'border-accent',
+    'hover:bg-accent-hover',
+    'hover:border-accent-hover',
+    'active:bg-pink',
+    'flex',
+    'justify-center',
+    'items-center',
+    'gap-2',
+  ],
+  PROMO_CODE_SUBMIT: [
+    'h-[52px]',
+    'bg-accent',
+    'rounded-[3px]',
+    'cursor-pointer',
+    'transition-all',
+    'text-white',
+    'hover:bg-accent-hover',
+    'active:bg-pink',
   ],
 };

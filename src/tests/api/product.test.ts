@@ -67,6 +67,7 @@ const mockResponse: Product = {
 };
 
 const transformedResponse: ProductVariantView = {
+  id: 'test-product-id',
   attributes: [
     { name: 'name', value: 'Тестовый продукт' },
     { name: 'description', value: { ru: 'Тестовое описание' } },
