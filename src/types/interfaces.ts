@@ -658,6 +658,26 @@ export interface CartItemView {
   quantity: number;
 }
 
+export interface ProductQuantityParameters {
+  price: number;
+  element: HTMLElement;
+  text: string;
+  count: number;
+  secondElement?: HTMLElement;
+  callback?: (count: number) => void;
+}
+
+export interface ProductQuantityTransform {
+  version: number;
+  actions: [
+    {
+      action: string;
+      lineItemId: string;
+      quantity: number;
+    },
+  ];
+}
+
 export interface RemoveCartItem {
   version: number;
   actions: [

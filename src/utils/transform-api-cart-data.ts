@@ -4,6 +4,7 @@ import type {
   CartInfo,
   CartItem,
   CartItemView,
+  ProductQuantityTransform,
   CartLineItem,
   CartResponse,
   RemoveCartItem,
@@ -60,6 +61,26 @@ export class TransformApiCartData {
     }
 
     return result;
+  }
+
+  public static transformProductQuantity(body: {
+    id: string;
+    quantity: number;
+  }): ProductQuantityTransform | void {
+    const cartInfo = cartState.getCartInfo();
+
+    if (cartInfo) {
+      return {
+        version: cartInfo.version,
+        actions: [
+          {
+            action: 'changeLineItemQuantity',
+            lineItemId: body.id,
+            quantity: body.quantity,
+          },
+        ],
+      };
+    }
   }
 
   public static transformProductLineDelete(id: string): RemoveCartItem | void {
