@@ -9,9 +9,10 @@ export const SUBHEADER_STYLES = {
     'px-3',
     'md:px-4',
   ],
-  PROMO: ['hidden', 'lg:flex', 'flex-row', 'items-start', 'gap-4', 'lg:gap-8', 'xl:gap-12'],
+  PROMO: ['hidden', 'lg:flex', 'flex-row', 'items-center', 'gap-4', 'lg:gap-8', 'xl:gap-12'],
   PROMO_ITEM: ['flex', 'items-center', 'gap-1.5', 'md:gap-2'],
   PROMO_ICON: ['w-4', 'h-4', 'md:w-5', 'md:h-5'],
+  PROMO_TEXT: ['text-dark'],
   AUTHORIZATION_MENU: [
     'flex',
     'w-full',

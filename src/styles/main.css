@@ -4,6 +4,7 @@
 @theme {
   --font-montserrat: 'Montserrat', sans-serif;
   --color-white: #fff;
+  --color-white-permanent: #fff;
   --color-gray: #ededf0;
   --color-gray-medium: #f7f4f4;
   --color-gray-light: #f6f6f6;
@@ -40,7 +41,7 @@
   --color-purple-dark: #6b4dff;
   --color-accent-dark: #ff4d6d;
   --color-accent-hover-dark: #ff6b8b;
-  --color-primary-dark: #2d2d3a;
+  --color-primary-dark: #5b5b7e;
   --color-secondary-dark: #4d9dff;
   --color-secondary-light-dark: #6bb5ff;
   --color-background-dark: #1a1a2e;
