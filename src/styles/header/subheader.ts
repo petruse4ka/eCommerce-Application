@@ -41,4 +41,6 @@ export const SUBHEADER_STYLES = {
     'gap-2',
   ],
   AUTHORIZATION_ITEM_ICON: ['w-6', 'h-6'],
+  THEME_ICON: ['w-5', 'h-5'],
+  THEME_TEXT: ['hidden'],
 };

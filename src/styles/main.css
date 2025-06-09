@@ -3,8 +3,6 @@
 
 @theme {
   --font-montserrat: 'Montserrat', sans-serif;
-
-  /* Colors */
   --color-white: #fff;
   --color-gray: #ededf0;
   --color-gray-medium: #f7f4f4;
@@ -32,11 +30,68 @@
   --color-lilac: #c4c6ec;
   --color-lilac-light: #c4c6ec4d;
   --color-success: #67d47e;
+  --color-white-dark: #1a1a2e;
+  --color-gray-dark: #2d2d3a;
+  --color-gray-medium-dark: #3d3d4a;
+  --color-gray-light-dark: #4d4d5a;
+  --color-black-dark: #fff;
+  --color-pink-dark: #ff6b81;
+  --color-dark-dark: #fff;
+  --color-purple-dark: #6b4dff;
+  --color-accent-dark: #ff4d6d;
+  --color-accent-hover-dark: #ff6b8b;
+  --color-primary-dark: #2d2d3a;
+  --color-secondary-dark: #4d9dff;
+  --color-secondary-light-dark: #6bb5ff;
+  --color-background-dark: #1a1a2e;
+  --color-peach-dark: #ff9b6b;
+  --color-peach-light-dark: #ff9b6b4d;
+  --color-red-dark: #ff6b6b;
+  --color-red-light-dark: #ff6b6b4d;
+  --color-green-dark: #6bff6b;
+  --color-green-light-dark: #6bff6b4d;
+  --color-orange-dark: #ff9b6b;
+  --color-orange-light-dark: #ff9b6b4d;
+  --color-mint-dark: #6bff9b;
+  --color-mint-light-dark: #6bff9b4d;
+  --color-lilac-dark: #9b6bff;
+  --color-lilac-light-dark: #9b6bff4d;
+  --color-success-dark: #16e042;
 
   /* Animation */
   --animate-visible-right: animate-visible-right 1s ease-in-out;
   --animate-hidden-right: animate-hidden-right 1s ease-in-out forwards;
   --animate-shaking-img: shaking-img 12s infinite ease-in-out;
+}
+
+:root.dark {
+  --color-white: var(--color-white-dark);
+  --color-gray: var(--color-gray-dark);
+  --color-gray-medium: var(--color-gray-medium-dark);
+  --color-gray-light: var(--color-gray-light-dark);
+  --color-black: var(--color-black-dark);
+  --color-pink: var(--color-pink-dark);
+  --color-dark: var(--color-dark-dark);
+  --color-purple: var(--color-purple-dark);
+  --color-accent: var(--color-accent-dark);
+  --color-accent-hover: var(--color-accent-hover-dark);
+  --color-primary: var(--color-primary-dark);
+  --color-secondary: var(--color-secondary-dark);
+  --color-secondary-light: var(--color-secondary-light-dark);
+  --color-background: var(--color-background-dark);
+  --color-peach: var(--color-peach-dark);
+  --color-peach-light: var(--color-peach-light-dark);
+  --color-red: var(--color-red-dark);
+  --color-red-light: var(--color-red-light-dark);
+  --color-green: var(--color-green-dark);
+  --color-green-light: var(--color-green-light-dark);
+  --color-orange: var(--color-orange-dark);
+  --color-orange-light: var(--color-orange-light-dark);
+  --color-mint: var(--color-mint-dark);
+  --color-mint-light: var(--color-mint-light-dark);
+  --color-lilac: var(--color-lilac-dark);
+  --color-lilac-light: var(--color-lilac-light-dark);
+  --color-success: var(--color-success-dark);
 
   @keyframes animate-visible-right {
     0% {

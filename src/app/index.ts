@@ -60,6 +60,11 @@ export default class App extends BaseComponent {
     this.header = new Header();
     this.footer = new Footer();
 
+    const isDark = localStorage.getItem('great-js-minds-ecommerce-theme') === 'dark';
+    if (isDark) {
+      document.documentElement.classList.add('dark');
+    }
+
     const defaultRoute = this.router.getDefaultRoute();
 
     if (defaultRoute === Route.ACCOUNT && !userState.getAuthorizationState()) {

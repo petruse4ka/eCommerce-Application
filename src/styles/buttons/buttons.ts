@@ -160,6 +160,16 @@ export const CUSTOM_BUTTON_STYLE = {
     'h-[40px]',
     'rounded-md',
   ],
+  SUBHEADER_ICON_OUTLINE: [
+    'cursor-pointer',
+    'flex',
+    'items-center',
+    'justify-center',
+    'bg-accent',
+    'w-[30px]',
+    'h-[30px]',
+    'rounded-md',
+  ],
   ADDRESS_PRIMARY: [
     'flex',
     'p-2',
