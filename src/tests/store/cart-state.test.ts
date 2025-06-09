@@ -3,7 +3,7 @@ import { cartState } from '@/store/cart-state';
 describe('Cart state', () => {
   beforeEach(() => {
     cartState.setItemsCount(0);
-    cartState.unsubscribe(() => {});
+    cartState.unsubscribe('itemsCount', () => {});
   });
 
   test('should be 0 at initialization', () => {
@@ -22,7 +22,7 @@ describe('Cart state', () => {
     const mockCallback = vi.fn((itemsCount) => {
       void itemsCount;
     });
-    cartState.subscribe(mockCallback);
+    cartState.subscribe('itemsCount', mockCallback);
 
     cartState.setItemsCount(3);
     expect(mockCallback).toHaveBeenCalledTimes(1);
@@ -37,8 +37,8 @@ describe('Cart state', () => {
     const mockFirstCallback = vi.fn();
     const mockSecondCallback = vi.fn();
 
-    cartState.subscribe(mockFirstCallback);
-    cartState.subscribe(mockSecondCallback);
+    cartState.subscribe('itemsCount', mockFirstCallback);
+    cartState.subscribe('itemsCount', mockSecondCallback);
 
     cartState.setItemsCount(2);
 

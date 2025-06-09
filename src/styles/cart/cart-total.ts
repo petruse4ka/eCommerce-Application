@@ -8,6 +8,7 @@ export const CART_TOTAL = {
     'flex',
     'flex-col',
     'gap-5',
+    'relative',
   ],
   TITLE: ['font-bold', 'text-xl'],
   ITEM: {
@@ -21,4 +22,5 @@ export const CART_TOTAL = {
     },
     DOTTED: ['flex-grow', 'border-b', 'border-dotted', 'border-gray-400', 'mx-2'],
   },
+  LOADER: ['absolute', 'p-3', 'w-full', 'h-full', 'bg-gray/80', 'top-0', 'left-0'],
 };

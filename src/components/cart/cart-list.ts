@@ -5,11 +5,24 @@ import BaseComponent from '../base';
 import CartItem from './cart-item';
 
 export default class CartList extends BaseComponent {
-  constructor() {
+  private callback: (isLoading: boolean) => void;
+  constructor(callback: (isLoading: boolean) => void) {
     super({
       tag: 'section',
       className: CART_LIST.CONTAINER,
     });
+
+    this.callback = (isLoading: boolean): void => {
+      callback(isLoading);
+    };
+
+    this.render();
+  }
+
+  public updateInfo(): void {
+    while (this.component.firstChild) {
+      this.component.firstChild.remove();
+    }
 
     this.render();
   }
@@ -17,13 +30,9 @@ export default class CartList extends BaseComponent {
   private render(): void {
     const products = cartState.getCartInfo()?.lineItems;
 
-    while (this.component.firstChild) {
-      this.component.firstChild.remove();
-    }
-
     if (products) {
       for (const product of products) {
-        const productNode = new CartItem(product).getElement();
+        const productNode = new CartItem(product, this.callback).getElement();
 
         this.component.append(productNode);
       }

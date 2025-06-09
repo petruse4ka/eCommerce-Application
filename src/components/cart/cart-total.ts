@@ -6,10 +6,12 @@ import ElementBuilder from '@/utils/element-builder';
 import BaseComponent from '../base';
 import Button from '../buttons';
 import FormPromoCode from '../forms/promo-code';
+import LoaderOverlay from '../overlay/loader-overlay';
 
 export default class CartTotal extends BaseComponent {
   private totalPrice: number;
   private totalDiscountPrice: number;
+  private productLoader: HTMLElement;
 
   constructor() {
     super({
@@ -21,6 +23,13 @@ export default class CartTotal extends BaseComponent {
 
     this.totalPrice = cartInfo?.totalPrice ?? 0;
     this.totalDiscountPrice = cartInfo?.totalDiscountPrice ?? 0;
+
+    this.productLoader = new LoaderOverlay({
+      text: CART_TEXT.LOADING_TOTAL,
+      className: CART_TOTAL.LOADER,
+    }).getElement();
+
+    this.component.append(this.productLoader);
 
     this.render();
   }
@@ -60,6 +69,23 @@ export default class CartTotal extends BaseComponent {
     }
 
     return container;
+  }
+
+  public updateInfo(isLoading: boolean): void {
+    if (isLoading) {
+      this.component.append(this.productLoader);
+    } else {
+      while (this.component.firstChild) {
+        this.component.firstChild.remove();
+      }
+
+      const cartInfo = cartState.getCartInfo();
+
+      this.totalPrice = cartInfo?.totalPrice ?? 0;
+      this.totalDiscountPrice = cartInfo?.totalDiscountPrice ?? 0;
+
+      this.render();
+    }
   }
 
   private render(): void {

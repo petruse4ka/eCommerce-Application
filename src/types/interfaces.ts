@@ -684,7 +684,7 @@ export interface ProductQuantityParameters {
   text: string;
   count: number;
   secondElement?: HTMLElement;
-  callback?: (count: number) => void;
+  callback?: (count: number) => Promise<boolean>;
 }
 
 export interface ProductQuantityTransform {

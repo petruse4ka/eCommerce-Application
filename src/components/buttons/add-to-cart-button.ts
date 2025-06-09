@@ -59,7 +59,7 @@ export default class AddToCartButton {
 
     this.button.getElement().append(this.iconContainer, this.textElement);
 
-    cartState.subscribe(this.updateState.bind(this));
+    cartState.subscribe('updateCartLine', this.updateState.bind(this));
     this.updateState();
   }
 

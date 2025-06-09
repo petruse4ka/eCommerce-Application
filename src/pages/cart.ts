@@ -9,13 +9,15 @@ import CartTotal from '@/components/cart/cart-total';
 import { CART_TEXT } from '@/constants';
 import Router from '@/router';
 import { cartState } from '@/store/cart-state';
-import { userState } from '@/store/user-state';
 import { CART_PAGE } from '@/styles/pages/cart';
 import { Route } from '@/types/enums';
 import ElementBuilder from '@/utils/element-builder';
 
 export default class CartPage extends BaseComponent {
   private container: HTMLElement;
+  private cartTotal: CartTotal;
+  private cartList: CartList;
+
   constructor() {
     super({
       tag: 'main',
@@ -27,29 +29,29 @@ export default class CartPage extends BaseComponent {
       className: CART_PAGE.CONTAINER,
     }).getElement();
 
-    userState.subscribe(this.render.bind(this));
+    this.cartTotal = new CartTotal();
+    this.cartList = new CartList(this.cartTotal.updateInfo.bind(this.cartTotal));
 
-    cartState.subscribe(this.render.bind(this));
+    cartState.subscribe('updateCartLine', this.updateInfo.bind(this));
+
+    this.render();
+  }
+
+  private updateInfo(): void {
+    while (this.component.firstChild) {
+      this.component.firstChild.remove();
+    }
 
     this.render();
   }
 
   private render(): void {
-    while (this.container.firstChild) {
-      this.container.firstChild.remove();
-    }
-
-    while (this.component.firstChild) {
-      this.component.firstChild.remove();
-    }
-
     const total = cartState.getItemsCount();
 
     if (total) {
-      const cartList = new CartList();
-      const cartTotal = new CartTotal();
-
-      this.container.append(cartList.getElement(), cartTotal.getElement());
+      this.cartList.updateInfo();
+      this.cartTotal.updateInfo(false);
+      this.container.append(this.cartList.getElement(), this.cartTotal.getElement());
       this.component.append(this.container);
     } else {
       const emptyState = new EmptyComponent(

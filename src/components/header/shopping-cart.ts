@@ -23,12 +23,12 @@ export default class ShoppingCartIcon extends BaseComponent {
       Router.followRoute(Route.CART);
     });
 
-    cartState.subscribe(this.updateIndicator.bind(this));
+    cartState.subscribe('itemsCount', this.updateIndicator.bind(this));
     this.render();
   }
 
   public override remove(): void {
-    cartState.unsubscribe(this.updateIndicator.bind(this));
+    cartState.unsubscribe('itemsCount', this.updateIndicator.bind(this));
     super.remove();
   }
 

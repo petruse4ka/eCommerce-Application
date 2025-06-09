@@ -25,11 +25,10 @@ export default class APICart {
         if ('errors' in body) {
           throw new Error(JSON.stringify(body.errors));
         } else {
-          const cartInfo = TransformApiCartData.transformCartState(body);
-          if (cartInfo) {
-            cartState.updateCart(cartInfo, TransformApiCartData.transformLineItems(body.lineItems));
-          }
           cartState.setItemsCount(body.totalLineItemQuantity ?? 0);
+          const cartInfo = TransformApiCartData.transformCartState(body);
+          cartState.setCartInfo(cartInfo);
+          cartState.updateCartLine(TransformApiCartData.transformLineItems(body.lineItems));
         }
       })
       .catch((error) => {
@@ -64,14 +63,10 @@ export default class APICart {
           if ('errors' in body) {
             throw new Error(JSON.stringify(body.errors));
           } else {
-            const cartInfo = TransformApiCartData.transformCartState(body);
-            if (cartInfo) {
-              cartState.updateCart(
-                cartInfo,
-                TransformApiCartData.transformLineItems(body.lineItems)
-              );
-            }
             cartState.setItemsCount(body.totalLineItemQuantity);
+            const cartInfo = TransformApiCartData.transformCartState(body);
+            cartState.setCartInfo(cartInfo);
+            cartState.updateCartLine(TransformApiCartData.transformLineItems(body.lineItems));
           }
         })
         .catch((error) => {
@@ -106,13 +101,9 @@ export default class APICart {
             void APICart.createCart();
           } else {
             const cartInfo = TransformApiCartData.transformCartState(body);
-            if (cartInfo) {
-              cartState.updateCart(
-                cartInfo,
-                TransformApiCartData.transformLineItems(body.lineItems)
-              );
-            }
             cartState.setItemsCount(body.totalLineItemQuantity);
+            cartState.setCartInfo(cartInfo);
+            cartState.updateCartLine(TransformApiCartData.transformLineItems(body.lineItems));
           }
         })
         .catch((error) => {
@@ -148,11 +139,12 @@ export default class APICart {
           if ('errors' in body) {
             throw new Error(JSON.stringify(body.errors));
           } else {
+            cartState.setItemsCount(body.totalLineItemQuantity ?? 0);
             const cartInfo = TransformApiCartData.transformCartState(body);
             if (cartInfo) {
               cartState.setCartInfo(cartInfo);
             }
-            cartState.setItemsCount(body.totalLineItemQuantity ?? 0);
+            cartState.updateCartLine(TransformApiCartData.transformLineItems(body.lineItems));
           }
         })
         .catch((error) => {
@@ -167,12 +159,15 @@ export default class APICart {
     }
   }
 
-  public static async changeProductQuantity(body: { id: string; quantity: number }): Promise<void> {
+  public static async changeProductQuantity(body: {
+    id: string;
+    quantity: number;
+  }): Promise<boolean> {
     const token = userState.getTokenState();
     const cartInfo = cartState.getCartInfo();
 
     if (cartInfo) {
-      await fetch(
+      return fetch(
         `${import.meta.env['VITE_CTP_API_URL']}/${import.meta.env['VITE_CTP_PROJECT_KEY']}/me${ApiEndpoint.CART}/${cartInfo.id}`,
         {
           method: ApiMethods.POST,
@@ -188,10 +183,10 @@ export default class APICart {
           if ('errors' in body) {
             throw new Error(JSON.stringify(body.errors));
           } else {
-            const cartInfo = TransformApiCartData.transformCartState(body);
-
-            cartState.setCartInfo(cartInfo);
             cartState.setItemsCount(body.totalLineItemQuantity ?? 0);
+            cartState.setCartInfo(TransformApiCartData.transformCartState(body));
+
+            return true;
           }
         })
         .catch((error) => {
@@ -202,8 +197,12 @@ export default class APICart {
             status: AlertStatus.ERROR,
             visibleTime: 3000,
           });
+
+          return false;
         });
     }
+
+    return false;
   }
 
   public static async addPromoCode(code: string): Promise<void> {
