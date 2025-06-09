@@ -201,6 +201,7 @@ export const FIELDSET_LABELS = {
 export const PAGE_TITLES = {
   CATALOG: 'Каталог',
   ACCOUNT: 'Личный Кабинет',
+  REGISTRATION: 'Регистрация',
 };
 
 export const CATALOG_TEXTS = {

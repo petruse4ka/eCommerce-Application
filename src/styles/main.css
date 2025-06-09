@@ -9,11 +9,13 @@
   --color-gray-medium: #f7f4f4;
   --color-gray-light: #f6f6f6;
   --color-black: #1a1a2e;
+  --color-black-permanent: #1a1a2e;
   --color-pink: #ca5166;
   --color-dark: #2b1414;
   --color-purple: #49387a;
   --color-accent: #e7426a;
   --color-accent-hover: #f45d82;
+  --color-bright: #ca5166;
   --color-primary: #f7ebe5;
   --color-secondary: #4e9dd3;
   --color-secondary-light: #6aafdd;
@@ -40,7 +42,8 @@
   --color-dark-dark: #fff;
   --color-purple-dark: #6b4dff;
   --color-accent-dark: #ff4d6d;
-  --color-accent-hover-dark: #ff6b8b;
+  --color-accent-hover-dark: #f45d82;
+  --color-bright-dark: #2d2d3a;
   --color-primary-dark: #5b5b7e;
   --color-secondary-dark: #4d9dff;
   --color-secondary-light-dark: #6bb5ff;
@@ -76,6 +79,7 @@
   --color-purple: var(--color-purple-dark);
   --color-accent: var(--color-accent-dark);
   --color-accent-hover: var(--color-accent-hover-dark);
+  --color-bright: var(--color-bright-dark);
   --color-primary: var(--color-primary-dark);
   --color-secondary: var(--color-secondary-dark);
   --color-secondary-light: var(--color-secondary-light-dark);
