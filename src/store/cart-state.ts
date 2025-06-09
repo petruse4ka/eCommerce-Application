@@ -43,6 +43,13 @@ class CartState {
     this.notify();
   }
 
+  public clearCartState(): void {
+    this.cartInfo = null;
+    this.lineItems = [];
+    this.itemsCount = 0;
+    this.notify();
+  }
+
   private notify(): void {
     for (const callback of this.subscribers) {
       if (callback.length === 0) {

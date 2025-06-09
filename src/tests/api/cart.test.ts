@@ -83,7 +83,6 @@ describe('APICart', () => {
   test('get cart', async () => {
     const bodyTransform = TransformApiCartData.transformProductLine(body.lineItems);
     const updateCart = vi.spyOn(cartState, 'updateCart');
-    console.log(bodyTransform);
 
     globalThis.fetch = vi.fn().mockResolvedValueOnce({
       ok: true,

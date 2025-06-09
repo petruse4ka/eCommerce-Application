@@ -211,4 +211,38 @@ export default class APICart {
         });
     }
   }
+
+  public static async deleteCart(): Promise<void> {
+    const token = userState.getTokenState();
+    const cartInfo = cartState.getCartInfo();
+
+    if (cartInfo) {
+      await fetch(
+        `${import.meta.env['VITE_CTP_API_URL']}/${import.meta.env['VITE_CTP_PROJECT_KEY']}/me${ApiEndpoint.CART}/${cartInfo.id}?version=${cartInfo.version}`,
+        {
+          method: ApiMethods.DELETE,
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+        .then((response) => response.json())
+        .then((body: CartResponse) => {
+          if ('errors' in body) {
+            throw new Error(JSON.stringify(body.errors));
+          } else {
+            cartState.clearCartState();
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+
+          Alert.render({
+            textContent: AlertText.ERROR_DEFAULT,
+            status: AlertStatus.ERROR,
+            visibleTime: 3000,
+          });
+        });
+    }
+  }
 }

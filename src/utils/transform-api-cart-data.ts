@@ -4,9 +4,9 @@ import type {
   CartInfo,
   CartItem,
   CartItemView,
-  ProductQuantityTransform,
   CartLineItem,
   CartResponse,
+  ProductQuantityTransform,
   RemoveCartItem,
 } from '@/types/interfaces';
 
