@@ -91,4 +91,8 @@
   body {
     @apply min-h-screen bg-gray-light;
   }
+
+  h1 {
+    @apply text-purple;
+  }
 }
