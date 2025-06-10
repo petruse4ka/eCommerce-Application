@@ -34,6 +34,15 @@ export interface ImageParameters extends ElementParameters {
   height?: string;
 }
 
+export interface SVGParameters extends ElementParameters {
+  source: string;
+  width?: number;
+  height?: number;
+  fill?: string;
+  stroke?: string;
+  viewBox?: string;
+}
+
 export interface LinkParameters extends ElementParameters {
   href: string;
   target: '_blank' | '_self';
