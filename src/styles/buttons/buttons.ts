@@ -250,4 +250,15 @@ export const CUSTOM_BUTTON_STYLE = {
     'hover:bg-accent-hover',
     'active:bg-pink',
   ],
+  CLEAR_CART: [
+    ...STANDARD_BUTTON_STYLE,
+    'bg-accent',
+    'text-white',
+    'border-accent',
+    'hover:bg-accent-hover',
+    'hover:border-accent-hover',
+    'active:bg-pink',
+    'm-2',
+    'self-center',
+  ],
 };

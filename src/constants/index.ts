@@ -127,6 +127,7 @@ export const BTN_TEXT = {
   ADD_NEW_ADDRESS: 'Добавить новый адрес',
   CHECKOUT: 'Оформить заказ',
   APPLY: 'Применить',
+  CLEAR_CART: 'Очистить корзину',
 };
 
 export const INTRO_TEXTS = {
