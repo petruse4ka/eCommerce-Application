@@ -4,6 +4,8 @@ import BaseComponent from '@/components/base';
 import Guarantees from '@/components/promo/guarantees';
 import Intro from '@/components/promo/intro';
 import Packages from '@/components/promo/packages';
+import PromoCodeInfo from '@/components/promo-code-info';
+import { PROMO_CODE_TEXT } from '@/constants';
 import { CONTAINER, MAIN_CONTAINER } from '@/styles/pages/homepage';
 import ElementBuilder from '@/utils/element-builder';
 
@@ -24,8 +26,14 @@ export default class HomePage extends BaseComponent {
 
     const intro = new Intro();
     const packages = new Packages();
+    const promoCodeInfo = new PromoCodeInfo(PROMO_CODE_TEXT);
     const guarantees = new Guarantees();
-    mainContainer.append(intro.getElement(), packages.getElement(), guarantees.getElement());
+    mainContainer.append(
+      intro.getElement(),
+      packages.getElement(),
+      promoCodeInfo.getElement(),
+      guarantees.getElement()
+    );
     this.component.append(mainContainer);
   }
 }

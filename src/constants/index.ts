@@ -126,6 +126,7 @@ export const BTN_TEXT = {
   SAVE_CHANGES: 'Сохранить изменения',
   ADD_NEW_ADDRESS: 'Добавить новый адрес',
   CHECKOUT: 'Оформить заказ',
+  APPLY: 'Применить',
   CLEAR_CART: 'Очистить корзину',
 };
 
@@ -280,3 +281,7 @@ export const CART_TEXT = {
   EMPTY: 'Пока здесь пусто, но всё впереди!\nНайдите то, что вам действительно нужно.',
   CATALOG: 'В каталог',
 };
+
+export const PROMO_CODE_TEXT = 'SALE10 - промокод на первую покупку';
+
+export const PROMO_PLACEHOLDER = 'Введите промокод';

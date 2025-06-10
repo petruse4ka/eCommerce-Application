@@ -77,6 +77,12 @@ const body = {
       },
     },
   ],
+  totalPrice: {
+    type: 'centPrecision',
+    currencyCode: 'RUB',
+    centAmount: 6500,
+    fractionDigits: 2,
+  },
 };
 
 describe('APICart', () => {
@@ -93,9 +99,11 @@ describe('APICart', () => {
 
     expect(updateCart).toHaveBeenCalledWith(
       {
-        id: 'cart-id',
         version: 1,
+        id: 'cart-id',
         lineItems: bodyTransform,
+        totalPrice: 65,
+        totalDiscountPrice: 0,
       },
       TransformApiCartData.transformLineItems(body.lineItems)
     );

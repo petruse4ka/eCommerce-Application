@@ -1,5 +1,6 @@
 import { cartState } from '@/store/cart-state';
 import type {
+  AddDiscountCode,
   AddProductBody,
   CartInfo,
   CartItem,
@@ -97,5 +98,38 @@ export class TransformApiCartData {
         ],
       };
     }
+  }
+
+  public static transformAddDiscountCode(code: string): AddDiscountCode | void {
+    const cartInfo = cartState.getCartInfo();
+
+    if (cartInfo) {
+      return {
+        version: cartInfo.version,
+        actions: [
+          {
+            action: 'addDiscountCode',
+            code,
+          },
+        ],
+      };
+    }
+  }
+
+  public static transformCartState(body: CartResponse): CartInfo {
+    const priceDivider = 10 ** body.totalPrice.fractionDigits;
+    const totalDiscount = body.discountOnTotalPrice;
+
+    const result = {
+      id: body.id,
+      version: body.version,
+      lineItems: TransformApiCartData.transformProductLine(body.lineItems),
+      totalPrice: body.totalPrice.centAmount / priceDivider,
+      totalDiscountPrice: totalDiscount
+        ? totalDiscount.discountedAmount.centAmount / priceDivider
+        : 0,
+    };
+
+    return result;
   }
 }
