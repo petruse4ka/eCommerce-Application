@@ -249,6 +249,6 @@ export const CUSTOM_BUTTON_STYLE = {
     'hover:border-accent-hover',
     'active:bg-pink',
     'm-2',
-    'self-end',
+    'self-center',
   ],
 };
