@@ -11,6 +11,7 @@ import {
   UNAUTHORIZED_MENU_ITEMS,
 } from '@/constants';
 import Router from '@/router';
+import { cartState } from '@/store/cart-state';
 import { userState } from '@/store/user-state';
 import { SUBHEADER_STYLES } from '@/styles/header/subheader';
 import { AlertStatus, AlertText } from '@/types/enums';
@@ -104,6 +105,8 @@ export default class AuthorizationMenu extends BaseComponent {
             status: AlertStatus.SUCCESS,
             visibleTime: 3000,
           });
+
+          cartState.clearCartState();
         }
         Router.followRoute(item.route);
       });

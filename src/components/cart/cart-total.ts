@@ -13,6 +13,7 @@ export default class CartTotal extends BaseComponent {
   private totalDiscountPrice: number;
   private discountCode: string | null;
   private productLoader: HTMLElement;
+  private formPromo: HTMLElement;
 
   constructor() {
     super({
@@ -30,6 +31,8 @@ export default class CartTotal extends BaseComponent {
       text: CART_TEXT.LOADING_TOTAL,
       className: CART_TOTAL.LOADER,
     }).getElement();
+
+    this.formPromo = new FormPromoCode(this.updateInfo.bind(this)).getElement();
 
     this.component.append(this.productLoader);
 
@@ -85,6 +88,7 @@ export default class CartTotal extends BaseComponent {
 
       this.totalPrice = cartInfo?.totalPrice ?? 0;
       this.totalDiscountPrice = cartInfo?.totalDiscountPrice ?? 0;
+      this.discountCode = cartInfo?.discountCode ?? null;
 
       this.render();
     }
@@ -149,7 +153,7 @@ export default class CartTotal extends BaseComponent {
       }
     );
 
-    const formPromo = new FormPromoCode().getElement();
+    // const formPromo = new FormPromoCode(this.updateInfo.bind(this)).getElement();
 
     const checkoutButton = new Button({
       style: 'PRICE_BUTTON',
@@ -157,6 +161,6 @@ export default class CartTotal extends BaseComponent {
       callback: (): void => {},
     }).getElement();
 
-    this.component.append(title, totalInfo, totalPrice, formPromo, checkoutButton);
+    this.component.append(title, totalInfo, totalPrice, this.formPromo, checkoutButton);
   }
 }

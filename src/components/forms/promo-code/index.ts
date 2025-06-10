@@ -11,11 +11,15 @@ import type { ErrorInfo } from '@/types/interfaces';
 import ApiErrors from '@/utils/api-errors';
 
 export default class FormPromoCode extends BaseComponent {
-  constructor() {
+  private callback: (isLoading: boolean) => void;
+
+  constructor(callback: (isLoading: boolean) => void) {
     super({
       tag: 'form',
       className: FORM_PROMO_CODE,
     });
+
+    this.callback = callback;
 
     this.render();
   }
@@ -34,22 +38,27 @@ export default class FormPromoCode extends BaseComponent {
       style: 'PROMO_CODE_SUBMIT',
       textContent: BTN_TEXT.APPLY,
       callback: (): void => {
-        APICart.addPromoCode(input.getValue()).catch((error: ErrorInfo) => {
-          const parsedError: unknown = JSON.parse(error.message);
-          if (isErrorInfoPasswordChange(parsedError)) {
-            const errorInfo = ApiErrors.getErrorInfo(parsedError.code);
+        this.callback(true);
+        APICart.addPromoCode(input.getValue())
+          .catch((error: ErrorInfo) => {
+            const parsedError: unknown = JSON.parse(error.message);
+            if (isErrorInfoPasswordChange(parsedError)) {
+              const errorInfo = ApiErrors.getErrorInfo(parsedError.code);
 
-            if (errorInfo === AlertText.DISCOUNT_CODE_NON) {
-              input.setError(errorInfo);
-            } else {
-              Alert.render({
-                textContent: errorInfo,
-                status: AlertStatus.ERROR,
-                visibleTime: 4000,
-              });
+              if (errorInfo === AlertText.DISCOUNT_CODE_NON) {
+                input.setError(errorInfo);
+              } else {
+                Alert.render({
+                  textContent: errorInfo,
+                  status: AlertStatus.ERROR,
+                  visibleTime: 4000,
+                });
+              }
             }
-          }
-        });
+          })
+          .finally(() => {
+            this.callback(false);
+          });
       },
     }).getElement();
 
