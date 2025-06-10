@@ -84,7 +84,7 @@ export default class ModalSlider extends BaseComponent {
     const arrow = new BaseComponent({
       tag: 'div',
       className: [...MODAL_SLIDER.ARROW, ...className],
-      textContent: isLeftArrow ? '˂' : '˃',
+      textContent: isLeftArrow ? '❮' : '❯',
       callback: (): void => {
         if (isLeftArrow) {
           this.swipeLeft();

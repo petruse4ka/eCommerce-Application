@@ -21,7 +21,7 @@ const ADDITIONAL = {
     'lg:p-8',
     'text-base',
     'leading-normal',
-    'text-black',
+    'text-dark',
     'flex-grow',
   ],
   SUBTITLE: ['font-semibold', 'text-xl', 'mb-4', 'mt-6'],
