@@ -1,3 +1,4 @@
+import APICart from '@/api/cart';
 import { cartState } from '@/store/cart-state';
 import type {
   AddDiscountCode,
@@ -116,9 +117,15 @@ export class TransformApiCartData {
     }
   }
 
-  public static transformCartState(body: CartResponse): CartInfo {
+  public static async transformCartState(body: CartResponse): Promise<CartInfo> {
     const priceDivider = 10 ** body.totalPrice.fractionDigits;
     const totalDiscount = body.discountOnTotalPrice;
+
+    const discounts = body.discountCodes;
+    let discountCode = null;
+    if (discounts.length > 0) {
+      discountCode = await APICart.getDiscountCodeInfo(body.discountCodes[0].discountCode.id);
+    }
 
     const result = {
       id: body.id,
@@ -128,6 +135,7 @@ export class TransformApiCartData {
       totalDiscountPrice: totalDiscount
         ? totalDiscount.discountedAmount.centAmount / priceDivider
         : 0,
+      discountCode: discountCode ?? null,
     };
 
     return result;

@@ -2,7 +2,7 @@ import Alert from '@/components/alert';
 import { cartState } from '@/store/cart-state';
 import { userState } from '@/store/user-state';
 import { AlertStatus, AlertText, ApiEndpoint, ApiMethods, ContentType } from '@/types/enums';
-import type { CartResponse, ErrorResponse } from '@/types/interfaces';
+import type { CartResponse, DiscountCodeResponse, ErrorResponse } from '@/types/interfaces';
 import { TransformApiCartData } from '@/utils/transform-api-cart-data';
 
 export default class APICart {
@@ -21,11 +21,11 @@ export default class APICart {
       }
     )
       .then((response) => response.json())
-      .then((body: CartResponse | ErrorResponse) => {
+      .then(async (body: CartResponse | ErrorResponse) => {
         if ('errors' in body) {
           throw new Error(JSON.stringify(body.errors));
         } else {
-          const cartInfo = TransformApiCartData.transformCartState(body);
+          const cartInfo = await TransformApiCartData.transformCartState(body);
           if (cartInfo) {
             cartState.updateCart(cartInfo, TransformApiCartData.transformLineItems(body.lineItems));
           }
@@ -60,11 +60,11 @@ export default class APICart {
         }
       )
         .then((response) => response.json())
-        .then((body: CartResponse | ErrorResponse) => {
+        .then(async (body: CartResponse | ErrorResponse) => {
           if ('errors' in body) {
             throw new Error(JSON.stringify(body.errors));
           } else {
-            const cartInfo = TransformApiCartData.transformCartState(body);
+            const cartInfo = await TransformApiCartData.transformCartState(body);
             if (cartInfo) {
               cartState.updateCart(
                 cartInfo,
@@ -101,11 +101,11 @@ export default class APICart {
         }
       )
         .then((response) => response.json())
-        .then((body: CartResponse | ErrorResponse) => {
+        .then(async (body: CartResponse | ErrorResponse) => {
           if ('statusCode' in body) {
             void APICart.createCart();
           } else {
-            const cartInfo = TransformApiCartData.transformCartState(body);
+            const cartInfo = await TransformApiCartData.transformCartState(body);
             if (cartInfo) {
               cartState.updateCart(
                 cartInfo,
@@ -144,11 +144,11 @@ export default class APICart {
         }
       )
         .then((response) => response.json())
-        .then((body: CartResponse | ErrorResponse) => {
+        .then(async (body: CartResponse | ErrorResponse) => {
           if ('errors' in body) {
             throw new Error(JSON.stringify(body.errors));
           } else {
-            const cartInfo = TransformApiCartData.transformCartState(body);
+            const cartInfo = await TransformApiCartData.transformCartState(body);
             if (cartInfo) {
               cartState.setCartInfo(cartInfo);
             }
@@ -184,11 +184,11 @@ export default class APICart {
         }
       )
         .then((response) => response.json())
-        .then((body: CartResponse | ErrorResponse) => {
+        .then(async (body: CartResponse | ErrorResponse) => {
           if ('errors' in body) {
             throw new Error(JSON.stringify(body.errors));
           } else {
-            const cartInfo = TransformApiCartData.transformCartState(body);
+            const cartInfo = await TransformApiCartData.transformCartState(body);
 
             cartState.setCartInfo(cartInfo);
             cartState.setItemsCount(body.totalLineItemQuantity ?? 0);
@@ -223,11 +223,11 @@ export default class APICart {
         }
       )
         .then((response) => response.json())
-        .then((body: CartResponse | ErrorResponse) => {
+        .then(async (body: CartResponse | ErrorResponse) => {
           if ('errors' in body) {
             throw new Error(JSON.stringify(body.errors[0]));
           } else {
-            const cartInfo = TransformApiCartData.transformCartState(body);
+            const cartInfo = await TransformApiCartData.transformCartState(body);
             if (cartInfo) {
               cartState.setCartInfo(cartInfo);
             }
@@ -268,5 +268,35 @@ export default class APICart {
           });
         });
     }
+  }
+
+  public static getDiscountCodeInfo(codeId: string): Promise<string | void> {
+    const token = userState.getTokenState();
+
+    return fetch(
+      `${import.meta.env['VITE_CTP_API_URL']}/${import.meta.env['VITE_CTP_PROJECT_KEY']}/discount-codes/${codeId}`,
+      {
+        method: ApiMethods.GET,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    )
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((body: DiscountCodeResponse) => body.code)
+      .catch((error) => {
+        console.error(error);
+
+        Alert.render({
+          textContent: AlertText.ERROR_DEFAULT,
+          status: AlertStatus.ERROR,
+          visibleTime: 3000,
+        });
+      });
   }
 }

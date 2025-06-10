@@ -10,6 +10,7 @@ import FormPromoCode from '../forms/promo-code';
 export default class CartTotal extends BaseComponent {
   private totalPrice: number;
   private totalDiscountPrice: number;
+  private discountCode: string | null;
 
   constructor() {
     super({
@@ -21,13 +22,14 @@ export default class CartTotal extends BaseComponent {
 
     this.totalPrice = cartInfo?.totalPrice ?? 0;
     this.totalDiscountPrice = cartInfo?.totalDiscountPrice ?? 0;
+    this.discountCode = cartInfo?.discountCode ?? null;
 
     this.render();
   }
 
   private static createTotalItem(
     textContent: string,
-    price: number,
+    price: string,
     style: { isDotted: boolean; isAccent: boolean }
   ): HTMLElement {
     const { isDotted, isAccent } = style;
@@ -45,7 +47,7 @@ export default class CartTotal extends BaseComponent {
     const value = new ElementBuilder({
       tag: 'p',
       className: isAccent ? CART_TOTAL.ITEM.TEXT.ACCENT : CART_TOTAL.ITEM.TEXT.DEFAULT,
-      textContent: `${price} ${DEFAULT_CURRENCY}`,
+      textContent: price,
     }).getElement();
 
     if (isDotted) {
@@ -62,13 +64,7 @@ export default class CartTotal extends BaseComponent {
     return container;
   }
 
-  private render(): void {
-    const title = new ElementBuilder({
-      tag: 'h4',
-      className: CART_TOTAL.TITLE,
-      textContent: CART_TEXT.TOTAL_TITLE,
-    }).getElement();
-
+  private createTotalInfo(): HTMLElement {
     const totalInfoContainer = new ElementBuilder({
       tag: 'div',
       className: '',
@@ -76,27 +72,56 @@ export default class CartTotal extends BaseComponent {
 
     const productsPrice = CartTotal.createTotalItem(
       CART_TEXT.PRODUCTS_PRICE,
-      this.totalPrice + this.totalDiscountPrice,
+      `${(this.totalPrice + this.totalDiscountPrice).toFixed(2)} ${DEFAULT_CURRENCY}`,
       {
         isDotted: true,
         isAccent: false,
       }
     );
-    const sale = CartTotal.createTotalItem(CART_TEXT.SALE, this.totalDiscountPrice, {
-      isDotted: true,
-      isAccent: false,
-    });
-    const delivery = CartTotal.createTotalItem(CART_TEXT.DELIVERY, 0, {
-      isDotted: true,
-      isAccent: false,
-    });
+    const sale = CartTotal.createTotalItem(
+      CART_TEXT.SALE,
+      `${this.totalDiscountPrice.toFixed(2)} ${DEFAULT_CURRENCY}`,
+      {
+        isDotted: true,
+        isAccent: false,
+      }
+    );
 
-    totalInfoContainer.append(productsPrice, sale, delivery);
+    totalInfoContainer.append(productsPrice, sale);
 
-    const totalPrice = CartTotal.createTotalItem(CART_TEXT.TOTAL_PRICE, this.totalPrice, {
-      isDotted: false,
-      isAccent: true,
-    });
+    if (this.discountCode) {
+      const codeInfo = CartTotal.createTotalItem(
+        CART_TEXT.PROMO_CODE_APPLY,
+        `${this.discountCode}`,
+        {
+          isDotted: true,
+          isAccent: false,
+        }
+      );
+
+      totalInfoContainer.append(codeInfo);
+    }
+
+    return totalInfoContainer;
+  }
+
+  private render(): void {
+    const title = new ElementBuilder({
+      tag: 'h4',
+      className: CART_TOTAL.TITLE,
+      textContent: CART_TEXT.TOTAL_TITLE,
+    }).getElement();
+
+    const totalInfo = this.createTotalInfo();
+
+    const totalPrice = CartTotal.createTotalItem(
+      CART_TEXT.TOTAL_PRICE,
+      `${this.totalPrice} ${DEFAULT_CURRENCY}`,
+      {
+        isDotted: false,
+        isAccent: true,
+      }
+    );
 
     const formPromo = new FormPromoCode().getElement();
 
@@ -106,6 +131,6 @@ export default class CartTotal extends BaseComponent {
       callback: (): void => {},
     }).getElement();
 
-    this.component.append(title, totalInfoContainer, totalPrice, formPromo, checkoutButton);
+    this.component.append(title, totalInfo, totalPrice, formPromo, checkoutButton);
   }
 }
