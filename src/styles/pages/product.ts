@@ -123,7 +123,7 @@ export const PRODUCT_STYLES = {
     'lg:flex-col',
     'items-start',
   ],
-  SLIDER_IMAGE: ['max-w-full', 'max-h-full', 'object-contain'],
+  SLIDER_IMAGE: ['max-w-full', 'max-h-full', 'object-contain', 'rounded-lg'],
   SLIDER_BIG_IMAGE: [
     'w-full',
     'p-3',
