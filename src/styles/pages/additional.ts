@@ -1,5 +1,5 @@
 const ADDITIONAL = {
-  TITLE: ['text-purple', 'font-semibold', 'text-3xl', 'my-6'],
+  TITLE: ['text-secondary', 'font-semibold', 'text-3xl', 'my-6'],
   MAIN_CONTAINER: [
     'max-w-[1440px]',
     'mx-auto',

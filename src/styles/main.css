@@ -36,11 +36,11 @@
   --color-white-dark: #1a1a2e;
   --color-gray-dark: #2d2d3a;
   --color-gray-medium-dark: #3d3d4a;
-  --color-gray-light-dark: #4d4d5a;
+  --color-gray-light-dark: #242436;
   --color-black-dark: #fff;
   --color-pink-dark: #ff6b81;
   --color-dark-dark: #fff;
-  --color-purple-dark: #49387a;
+  --color-purple-dark: #4e3c83;
   --color-accent-dark: #ff4d6d;
   --color-accent-hover-dark: #f45d82;
   --color-bright-dark: #2d2d3a;
@@ -143,6 +143,6 @@
 
 @layer utilities {
   dialog::backdrop {
-    @apply bg-black/70;
+    @apply bg-black/90;
   }
 }
