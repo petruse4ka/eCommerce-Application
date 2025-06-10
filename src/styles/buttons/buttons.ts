@@ -50,10 +50,9 @@ export const CUSTOM_BUTTON_STYLE = {
   SECONDARY_BLUE_DARK: [
     ...STANDARD_BUTTON_STYLE,
     'bg-transparent',
-    'text-white',
+    'text-white-permanent',
     'border-secondary',
     'hover:bg-secondary-light',
-    'hover:text-white',
   ],
   SECONDARY_PINK_FILTER: [
     'min-w-[200px]',
