@@ -9,9 +9,9 @@ import FormPromoCode from '../forms/promo-code';
 import LoaderOverlay from '../overlay/loader-overlay';
 
 export default class CartTotal extends BaseComponent {
-  private totalPrice: number;
-  private totalDiscountPrice: number;
-  private discountCode: string | null;
+  private totalPrice: number = 0;
+  private totalDiscountPrice: number = 0;
+  private discountCode: string | null = null;
   private productLoader: HTMLElement;
   private formPromo: HTMLElement;
 
@@ -21,18 +21,14 @@ export default class CartTotal extends BaseComponent {
       className: CART_TOTAL.CONTAINER,
     });
 
-    const cartInfo = cartState.getCartInfo();
-
-    this.totalPrice = cartInfo?.totalPrice ?? 0;
-    this.totalDiscountPrice = cartInfo?.totalDiscountPrice ?? 0;
-    this.discountCode = cartInfo?.discountCode ?? null;
+    this.updateInfo();
 
     this.productLoader = new LoaderOverlay({
       text: CART_TEXT.LOADING_TOTAL,
       className: CART_TOTAL.LOADER,
     }).getElement();
 
-    this.formPromo = new FormPromoCode(this.updateInfo.bind(this)).getElement();
+    this.formPromo = new FormPromoCode(this.updateView.bind(this)).getElement();
 
     this.component.append(this.productLoader);
 
@@ -76,7 +72,7 @@ export default class CartTotal extends BaseComponent {
     return container;
   }
 
-  public updateInfo(isLoading: boolean): void {
+  public updateView(isLoading: boolean): void {
     if (isLoading) {
       this.component.append(this.productLoader);
     } else {
@@ -84,14 +80,18 @@ export default class CartTotal extends BaseComponent {
         this.component.firstChild.remove();
       }
 
-      const cartInfo = cartState.getCartInfo();
-
-      this.totalPrice = cartInfo?.totalPrice ?? 0;
-      this.totalDiscountPrice = cartInfo?.totalDiscountPrice ?? 0;
-      this.discountCode = cartInfo?.discountCode ?? null;
+      this.updateInfo();
 
       this.render();
     }
+  }
+
+  private updateInfo(): void {
+    const cartInfo = cartState.getCartInfo();
+
+    this.totalPrice = cartInfo?.totalPrice ?? 0;
+    this.totalDiscountPrice = cartInfo?.totalDiscountPrice ?? 0;
+    this.discountCode = cartInfo?.discountCode ?? null;
   }
 
   private createTotalInfo(): HTMLElement {
@@ -152,8 +152,6 @@ export default class CartTotal extends BaseComponent {
         isAccent: true,
       }
     );
-
-    // const formPromo = new FormPromoCode(this.updateInfo.bind(this)).getElement();
 
     const checkoutButton = new Button({
       style: 'PRICE_BUTTON',

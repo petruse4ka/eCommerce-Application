@@ -1,3 +1,4 @@
+import { CartStateKey } from '@/types/enums';
 import type { CartInfo, CartLineItem } from '@/types/interfaces';
 import type { ActionWithArgumentHandler } from '@/types/types';
 
@@ -17,7 +18,7 @@ class CartState {
 
   public setItemsCount(count: number): void {
     this.itemsCount = count;
-    this.notify('itemsCount');
+    this.notify(CartStateKey.ITEMS_COUNT);
   }
 
   public getCartInfo(): CartInfo | null {
@@ -26,7 +27,7 @@ class CartState {
 
   public setCartInfo(cartInfo: CartInfo): void {
     this.cartInfo = cartInfo;
-    this.notify('cartInfo');
+    this.notify(CartStateKey.CART_INFO);
   }
 
   public subscribe(key: string, callback: ActionWithArgumentHandler<number>): void {
@@ -50,16 +51,16 @@ class CartState {
 
   public updateCartLine(lineItems: CartLineItem[]): void {
     this.lineItems = lineItems;
-    this.notify('updateCartLine');
+    this.notify(CartStateKey.UPDATE_CART_LINE);
   }
 
   public clearCartState(): void {
     this.cartInfo = null;
     this.lineItems = [];
     this.itemsCount = 0;
-    this.notify('cartInfo');
-    this.notify('updateCartLine');
-    this.notify('itemsCount');
+    this.notify(CartStateKey.CART_INFO);
+    this.notify(CartStateKey.UPDATE_CART_LINE);
+    this.notify(CartStateKey.ITEMS_COUNT);
   }
 
   private notify(key: string): void {

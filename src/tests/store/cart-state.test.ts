@@ -1,9 +1,10 @@
 import { cartState } from '@/store/cart-state';
+import { CartStateKey } from '@/types/enums';
 
 describe('Cart state', () => {
   beforeEach(() => {
     cartState.setItemsCount(0);
-    cartState.unsubscribe('itemsCount', () => {});
+    cartState.unsubscribe(CartStateKey.ITEMS_COUNT, () => {});
   });
 
   test('should be 0 at initialization', () => {
@@ -22,7 +23,7 @@ describe('Cart state', () => {
     const mockCallback = vi.fn((itemsCount) => {
       void itemsCount;
     });
-    cartState.subscribe('itemsCount', mockCallback);
+    cartState.subscribe(CartStateKey.ITEMS_COUNT, mockCallback);
 
     cartState.setItemsCount(3);
     expect(mockCallback).toHaveBeenCalledTimes(1);
@@ -37,8 +38,8 @@ describe('Cart state', () => {
     const mockFirstCallback = vi.fn();
     const mockSecondCallback = vi.fn();
 
-    cartState.subscribe('itemsCount', mockFirstCallback);
-    cartState.subscribe('itemsCount', mockSecondCallback);
+    cartState.subscribe(CartStateKey.ITEMS_COUNT, mockFirstCallback);
+    cartState.subscribe(CartStateKey.ITEMS_COUNT, mockSecondCallback);
 
     cartState.setItemsCount(2);
 

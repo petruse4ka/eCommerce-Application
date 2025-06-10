@@ -10,7 +10,7 @@ import { CART_TEXT } from '@/constants';
 import Router from '@/router';
 import { cartState } from '@/store/cart-state';
 import { CART_PAGE } from '@/styles/pages/cart';
-import { Route } from '@/types/enums';
+import { CartStateKey, Route } from '@/types/enums';
 import ElementBuilder from '@/utils/element-builder';
 
 export default class CartPage extends BaseComponent {
@@ -30,9 +30,9 @@ export default class CartPage extends BaseComponent {
     }).getElement();
 
     this.cartTotal = new CartTotal();
-    this.cartList = new CartList(this.cartTotal.updateInfo.bind(this.cartTotal));
+    this.cartList = new CartList(this.cartTotal.updateView.bind(this.cartTotal));
 
-    cartState.subscribe('updateCartLine', this.updateInfo.bind(this));
+    cartState.subscribe(CartStateKey.UPDATE_CART_LINE, this.updateInfo.bind(this));
 
     this.render();
   }
@@ -50,7 +50,7 @@ export default class CartPage extends BaseComponent {
 
     if (total) {
       this.cartList.updateInfo();
-      this.cartTotal.updateInfo(false);
+      this.cartTotal.updateView(false);
       this.container.append(this.cartList.getElement(), this.cartTotal.getElement());
       this.component.append(this.container);
     } else {
