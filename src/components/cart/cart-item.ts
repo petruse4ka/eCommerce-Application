@@ -55,8 +55,6 @@ export default class CartItem extends BaseComponent {
         });
         this.callback(false);
 
-        console.log(fetchResult);
-
         return fetchResult;
       },
     });
@@ -88,13 +86,15 @@ export default class CartItem extends BaseComponent {
         alt: 'Garbage bin icon',
         className: ADDRESS.CARD.ICON,
       },
-      callback: (): void => {
+      callback: async (): Promise<void> => {
         this.callback(true);
-        void APICart.removeCartProduct(this.productInfo.id);
+        deleteButton.disableButton();
+        await APICart.removeCartProduct(this.productInfo.id);
+        deleteButton.enableButton();
         this.callback(false);
       },
-    }).getElement();
+    });
 
-    this.component.append(deleteButton);
+    this.component.append(deleteButton.getElement());
   }
 }

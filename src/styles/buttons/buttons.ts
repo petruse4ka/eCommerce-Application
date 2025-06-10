@@ -249,5 +249,6 @@ export const CUSTOM_BUTTON_STYLE = {
     'text-white',
     'hover:bg-accent-hover',
     'active:bg-pink',
+    'transition-all',
   ],
 };
