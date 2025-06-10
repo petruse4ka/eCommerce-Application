@@ -53,6 +53,15 @@ class CartState {
     this.notify('updateCartLine');
   }
 
+  public clearCartState(): void {
+    this.cartInfo = null;
+    this.lineItems = [];
+    this.itemsCount = 0;
+    this.notify('cartInfo');
+    this.notify('updateCartLine');
+    this.notify('itemsCount');
+  }
+
   private notify(key: string): void {
     const callbacks = this.subscribers.get(key);
 

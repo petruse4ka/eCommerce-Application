@@ -553,6 +553,7 @@ export interface CartInfo {
   lineItems: CartItemView[];
   totalPrice: number;
   totalDiscountPrice: number;
+  discountCode: string | null;
 }
 
 export interface CartItem {
@@ -612,7 +613,18 @@ export interface CartResponse {
   shippingMode: string;
   shipping: [];
   customLineItems: [];
-  discountCodes: [];
+  discountCodes: [
+    {
+      discountCode: {
+        typeId: string;
+        id: string;
+        obj?: {
+          code: string;
+        };
+      };
+      state: string;
+    },
+  ];
   directDiscounts: [];
   inventoryMode: string;
   taxMode: string;
@@ -633,6 +645,15 @@ export interface CartResponse {
       centAmount: number;
       fractionDigits: number;
     };
+  };
+}
+
+export interface DiscountCodeResponse {
+  id: string;
+  version: number;
+  code: string;
+  name: {
+    ru: string;
   };
 }
 

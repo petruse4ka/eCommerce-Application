@@ -1,7 +1,10 @@
+import APICart from '@/api/cart';
+import { BTN_TEXT } from '@/constants';
 import { cartState } from '@/store/cart-state';
 import { CART_LIST } from '@/styles/cart/cart-list';
 
 import BaseComponent from '../base';
+import Button from '../buttons';
 import CartItem from './cart-item';
 
 export default class CartList extends BaseComponent {
@@ -37,5 +40,15 @@ export default class CartList extends BaseComponent {
         this.component.append(productNode);
       }
     }
+
+    const clearButton = new Button({
+      style: 'CLEAR_CART',
+      textContent: BTN_TEXT.CLEAR_CART,
+      callback: (): void => {
+        void APICart.deleteCart();
+      },
+    }).getElement();
+
+    this.component.append(clearButton);
   }
 }

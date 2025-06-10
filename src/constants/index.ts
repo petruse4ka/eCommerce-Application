@@ -127,6 +127,7 @@ export const BTN_TEXT = {
   ADD_NEW_ADDRESS: 'Добавить новый адрес',
   CHECKOUT: 'Оформить заказ',
   APPLY: 'Применить',
+  CLEAR_CART: 'Очистить корзину',
 };
 
 export const INTRO_TEXTS = {
@@ -279,6 +280,7 @@ export const CART_TEXT = {
   TOTAL_PRICE: 'К оплате',
   EMPTY: 'Пока здесь пусто, но всё впереди!\nНайдите то, что вам действительно нужно.',
   CATALOG: 'В каталог',
+  PROMO_CODE_APPLY: 'Применен промокод',
   LOADING_TOTAL: 'Обновляем стоимость...',
 };
 

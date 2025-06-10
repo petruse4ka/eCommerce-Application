@@ -83,6 +83,7 @@ const body = {
     centAmount: 6500,
     fractionDigits: 2,
   },
+  discountCodes: [],
 };
 
 describe('APICart', () => {
@@ -104,6 +105,7 @@ describe('APICart', () => {
       lineItems: bodyTransform,
       totalPrice: 65,
       totalDiscountPrice: 0,
+      discountCode: null,
     });
 
     expect(updateCartLine).toHaveBeenCalledWith(

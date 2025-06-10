@@ -11,6 +11,7 @@ const body: {
     lineItems: [],
     totalPrice: 0,
     totalDiscountPrice: 0,
+    discountCode: null,
   },
   productId: 'product-id',
 };
