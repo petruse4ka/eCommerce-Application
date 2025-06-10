@@ -49,12 +49,18 @@ export default class SubHeader extends BaseComponent {
       className: SUBHEADER_STYLES.SUBHEADER_CONTAINER,
     }).getElement();
 
+    const settingsContainer = new ElementBuilder({
+      tag: 'div',
+      className: SUBHEADER_STYLES.SETTINGS_CONTAINER,
+    }).getElement();
+
     const promo = new Promo();
     const authorizationMenu = new AuthorizationMenu();
 
+    settingsContainer.append(this.themeButton.getElement());
     subheaderContainer.append(
+      settingsContainer,
       promo.getElement(),
-      this.themeButton.getElement(),
       authorizationMenu.getElement()
     );
     this.component.append(subheaderContainer);

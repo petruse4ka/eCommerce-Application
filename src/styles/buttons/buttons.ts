@@ -164,11 +164,8 @@ export const CUSTOM_BUTTON_STYLE = {
     'flex',
     'items-center',
     'justify-center',
-    'bg-accent',
     'w-[30px]',
     'h-[30px]',
-    'rounded-md',
-    'hover:bg-accent-hover',
   ],
   ADDRESS_PRIMARY: [
     'flex',

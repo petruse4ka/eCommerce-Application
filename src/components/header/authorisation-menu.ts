@@ -48,7 +48,7 @@ export default class AuthorizationMenu extends BaseComponent {
   private createUnauthorizedMenu(): void {
     for (const item of AUTHORIZATION_MENU_ITEMS) {
       const menuItem = new ElementBuilder({
-        tag: 'span',
+        tag: 'div',
         className: SUBHEADER_STYLES.AUTHORIZATION_ITEM,
       }).getElement();
 
@@ -60,7 +60,7 @@ export default class AuthorizationMenu extends BaseComponent {
 
       const text = new ElementBuilder({
         tag: 'span',
-        className: SUBHEADER_STYLES.AUTHORIZATION_ITEM,
+        className: SUBHEADER_STYLES.AUTHORIZATION_ITEM_TEXT,
         textContent: item.name,
       }).getElement();
 
@@ -89,7 +89,7 @@ export default class AuthorizationMenu extends BaseComponent {
 
       const text = new ElementBuilder({
         tag: 'span',
-        className: SUBHEADER_STYLES.AUTHORIZATION_ITEM,
+        className: SUBHEADER_STYLES.AUTHORIZATION_ITEM_TEXT,
         textContent: item.name,
       }).getElement();
 

@@ -66,37 +66,6 @@
   --animate-visible-right: animate-visible-right 1s ease-in-out;
   --animate-hidden-right: animate-hidden-right 1s ease-in-out forwards;
   --animate-shaking-img: shaking-img 12s infinite ease-in-out;
-}
-
-:root.dark {
-  --color-white: var(--color-white-dark);
-  --color-gray: var(--color-gray-dark);
-  --color-gray-medium: var(--color-gray-medium-dark);
-  --color-gray-light: var(--color-gray-light-dark);
-  --color-black: var(--color-black-dark);
-  --color-pink: var(--color-pink-dark);
-  --color-dark: var(--color-dark-dark);
-  --color-purple: var(--color-purple-dark);
-  --color-accent: var(--color-accent-dark);
-  --color-accent-hover: var(--color-accent-hover-dark);
-  --color-bright: var(--color-bright-dark);
-  --color-primary: var(--color-primary-dark);
-  --color-secondary: var(--color-secondary-dark);
-  --color-secondary-light: var(--color-secondary-light-dark);
-  --color-background: var(--color-background-dark);
-  --color-peach: var(--color-peach-dark);
-  --color-peach-light: var(--color-peach-light-dark);
-  --color-red: var(--color-red-dark);
-  --color-red-light: var(--color-red-light-dark);
-  --color-green: var(--color-green-dark);
-  --color-green-light: var(--color-green-light-dark);
-  --color-orange: var(--color-orange-dark);
-  --color-orange-light: var(--color-orange-light-dark);
-  --color-mint: var(--color-mint-dark);
-  --color-mint-light: var(--color-mint-light-dark);
-  --color-lilac: var(--color-lilac-dark);
-  --color-lilac-light: var(--color-lilac-light-dark);
-  --color-success: var(--color-success-dark);
 
   @keyframes animate-visible-right {
     0% {
@@ -139,6 +108,37 @@
       transform: rotate(0deg) translateY(0);
     }
   }
+}
+
+:root.dark {
+  --color-white: var(--color-white-dark);
+  --color-gray: var(--color-gray-dark);
+  --color-gray-medium: var(--color-gray-medium-dark);
+  --color-gray-light: var(--color-gray-light-dark);
+  --color-black: var(--color-black-dark);
+  --color-pink: var(--color-pink-dark);
+  --color-dark: var(--color-dark-dark);
+  --color-purple: var(--color-purple-dark);
+  --color-accent: var(--color-accent-dark);
+  --color-accent-hover: var(--color-accent-hover-dark);
+  --color-bright: var(--color-bright-dark);
+  --color-primary: var(--color-primary-dark);
+  --color-secondary: var(--color-secondary-dark);
+  --color-secondary-light: var(--color-secondary-light-dark);
+  --color-background: var(--color-background-dark);
+  --color-peach: var(--color-peach-dark);
+  --color-peach-light: var(--color-peach-light-dark);
+  --color-red: var(--color-red-dark);
+  --color-red-light: var(--color-red-light-dark);
+  --color-green: var(--color-green-dark);
+  --color-green-light: var(--color-green-light-dark);
+  --color-orange: var(--color-orange-dark);
+  --color-orange-light: var(--color-orange-light-dark);
+  --color-mint: var(--color-mint-dark);
+  --color-mint-light: var(--color-mint-light-dark);
+  --color-lilac: var(--color-lilac-dark);
+  --color-lilac-light: var(--color-lilac-light-dark);
+  --color-success: var(--color-success-dark);
 }
 
 @layer utilities {
