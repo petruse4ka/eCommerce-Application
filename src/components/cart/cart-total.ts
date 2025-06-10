@@ -72,7 +72,7 @@ export default class CartTotal extends BaseComponent {
 
     const productsPrice = CartTotal.createTotalItem(
       CART_TEXT.PRODUCTS_PRICE,
-      `${this.totalPrice + this.totalDiscountPrice} ${DEFAULT_CURRENCY}`,
+      `${(this.totalPrice + this.totalDiscountPrice).toFixed(2)} ${DEFAULT_CURRENCY}`,
       {
         isDotted: true,
         isAccent: false,
@@ -80,7 +80,7 @@ export default class CartTotal extends BaseComponent {
     );
     const sale = CartTotal.createTotalItem(
       CART_TEXT.SALE,
-      `${this.totalDiscountPrice} ${DEFAULT_CURRENCY}`,
+      `${this.totalDiscountPrice.toFixed(2)} ${DEFAULT_CURRENCY}`,
       {
         isDotted: true,
         isAccent: false,
