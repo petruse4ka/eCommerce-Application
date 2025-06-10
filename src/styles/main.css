@@ -143,6 +143,6 @@
 
 @layer utilities {
   dialog::backdrop {
-    @apply bg-black/90;
+    @apply bg-black/70;
   }
 }

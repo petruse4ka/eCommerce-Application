@@ -9,7 +9,7 @@ export const PERSONAL_INFO = {
     'bg-white',
     'rounded-md',
     'border',
-    'border-orange',
+    'border-primary',
   ],
   TITLE: ['text-xl', 'font-semibold', 'text-dark', 'mb-2'],
   LINE: {

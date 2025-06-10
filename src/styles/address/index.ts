@@ -8,7 +8,7 @@ export const ADDRESS = {
     'bg-white',
     'rounded-md',
     'border',
-    'border-orange',
+    'border-primary',
   ],
   TITLE: ['text-xl', 'font-semibold', 'text-dark', 'mb-2'],
   CARD: {
@@ -21,7 +21,7 @@ export const ADDRESS = {
       'bg-white',
       'rounded-md',
       'border',
-      'border-orange',
+      'border-primary',
     ],
     DEFAULT_TITLE: ['text-sm', 'font-semibold', 'text-accent', 'mb-2'],
     ACTIVE: ['bg-orange-light'],
