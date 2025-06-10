@@ -169,7 +169,7 @@ export const PACKAGES_TEXTS = {
 };
 
 export const GUARANTEES_TEXTS = {
-  TITLE: 'Мы обо всем позаботилсь',
+  TITLE: 'Мы обо всем позаботились',
   GUARANTEES: {
     INGREDIENTS: {
       title: 'Лучшие ингредиенты',

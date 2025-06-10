@@ -1,6 +1,7 @@
 import type { CUSTOM_BUTTON_STYLE } from '@/styles/buttons/buttons';
 
 import type { AddressKey, ButtonType, FilterType, InputType, Route, UserInfoKey } from './enums';
+import type { Crewman } from './types';
 
 export interface ElementParameters {
   tag: string;
@@ -748,4 +749,37 @@ export interface AddDiscountCode {
       code: string;
     },
   ];
+}
+
+export interface PersonalText {
+  name: string;
+  role: string;
+  description?: string;
+  github: Crewman;
+}
+
+export interface PersonalImageBox {
+  photo: {
+    url: string;
+    style: string[];
+  };
+  hat?: {
+    url: string;
+    style: string[];
+  };
+}
+
+export interface Personal {
+  PersonalText: PersonalText;
+  PersonalImageBox: PersonalImageBox;
+}
+
+export interface About {
+  MARGO: Personal;
+  KONSTANTIN: Personal;
+  DANIIL: Personal;
+  OLGA: Personal;
+  title: string;
+  text: string;
+  image: string;
 }

@@ -63,7 +63,7 @@ const MODAL_SLIDER = {
     'items-center',
     'text-3xl',
     'font-bold',
-    'bg-gray/50',
+    'bg-white/50',
     'select-none',
     'cursor-pointer',
     'hover:text-secondary',
