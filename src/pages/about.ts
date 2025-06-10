@@ -1,6 +1,6 @@
 import '@/styles/main.css';
 
-import RSLogo from '@/assets/images/about/RSSCHOOL.webp';
+import RSLogo from '@/assets/images/about/rsschool.png';
 import Person from '@/components/about/personal';
 import BaseComponent from '@/components/base';
 import { ABOUT, SCHOOL_URL } from '@/data';
@@ -30,13 +30,13 @@ export default class AboutPage extends BaseComponent {
     const copyrightLink = new LinkBuilder({
       href: SCHOOL_URL,
       target: '_blank',
-      className: ABOUT_STYLE.RSSCHOOL,
+      className: ABOUT_STYLE.RSSCHOOL_LINK,
     }).getElement();
 
     const logo = new ImageBuilder({
       source: RSLogo,
       alt: 'RS School Logo',
-      className: '',
+      className: ABOUT_STYLE.RSLOGO,
     }).getElement();
 
     copyrightLink.append(logo);
@@ -64,14 +64,14 @@ export default class AboutPage extends BaseComponent {
 
     this.component.append(text);
 
+    const copyrightLink = AboutPage.createCopyrightLink();
+    this.component.append(copyrightLink);
+
     const cafe = new ImageBuilder({
       source: ABOUT.image,
       alt: ABOUT.title,
       className: ABOUT_STYLE.IMAGE,
     }).getElement();
     this.component.append(cafe);
-
-    const copyrightLink = AboutPage.createCopyrightLink();
-    this.component.append(copyrightLink);
   }
 }
