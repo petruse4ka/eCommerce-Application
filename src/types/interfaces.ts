@@ -36,11 +36,7 @@ export interface ImageParameters extends ElementParameters {
 
 export interface SVGParameters extends ElementParameters {
   source: string;
-  width?: number;
-  height?: number;
-  fill?: string;
-  stroke?: string;
-  viewBox?: string;
+  classNameIcon: string | string[];
 }
 
 export interface LinkParameters extends ElementParameters {
@@ -57,8 +53,7 @@ export interface customButtonParameters {
   textContent?: string;
   icon: {
     source: string;
-    alt: string;
-    className?: string[];
+    classNameIcon: string[];
   };
   textClassName?: string[];
   callback: () => void | Promise<void>;

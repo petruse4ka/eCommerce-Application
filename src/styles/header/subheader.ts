@@ -32,6 +32,6 @@ export const SUBHEADER_STYLES = {
   ],
   AUTHORIZATION_ITEM_ICON: ['w-6', 'h-6'],
   AUTHORIZATION_ITEM_TEXT: ['hidden', 'md:block'],
-  THEME_ICON: ['w-6', 'h-6'],
+  THEME_ICON: ['w-6', 'h-6', 'fill-accent', 'hover:fill-accent-hover'],
   THEME_TEXT: ['hidden'],
 };
