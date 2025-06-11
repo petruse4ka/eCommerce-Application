@@ -1,8 +1,4 @@
 import APIUpdateData from '@/api/update-data';
-import deleteIcon from '@/assets/icons/delete.svg';
-import editIcon from '@/assets/icons/edit.svg';
-import starIcon from '@/assets/icons/star.svg';
-import starOffIcon from '@/assets/icons/star-off-outline.svg';
 import { BTN_TEXT } from '@/constants';
 import { INPUTS_CHANGE_ADDRESS_DATA } from '@/data';
 import { ADDRESS } from '@/styles/address';
@@ -20,6 +16,15 @@ import FormEditUserInfo from '../forms/edit-info';
 import Modal from '../modal';
 
 export default class AddressList extends BaseComponent {
+  private static readonly DELETE_ICON =
+    'M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19M8,9H16V19H8V9M15.5,4L14.5,3H9.5L8.5,4H5V6H19V4H15.5Z';
+  private static readonly EDIT_ICON =
+    'M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z';
+  private static readonly STAR_ICON =
+    'M12,15.39L8.24,17.66L9.23,13.38L5.91,10.5L10.29,10.13L12,6.09L13.71,10.13L18.09,10.5L14.77,13.38L15.76,17.66M22,9.24L14.81,8.63L12,2L9.19,8.63L2,9.24L7.45,13.97L5.82,21L12,17.27L18.18,21L16.54,13.97L22,9.24Z';
+  private static readonly STAR_OFF_ICON =
+    'M22.1 21.5L2.4 1.7L1.1 3L6.9 8.8L2 9.2L7.5 14L5.9 21L12.1 17.3L18.3 21L18 19.8L20.9 22.7L22.1 21.5M15.8 17.7L12 15.4L8.2 17.7L9.2 13.4L5.9 10.5L8.4 10.3L15.8 17.7M11.2 8L10 6.8L12 2L14.8 8.6L22 9.2L16.9 13.6L15.8 12.5L18.2 10.5L13.8 10.1L12.1 6.1L11.2 8Z';
+
   private addressType: string;
 
   constructor(titleContent: string, addressesInfo: AddressInfo[]) {
@@ -51,9 +56,8 @@ export default class AddressList extends BaseComponent {
       style: 'ADDRESS_PRIMARY',
       textContent: BTN_TEXT.DELETE,
       icon: {
-        source: deleteIcon,
-        alt: 'Garbage bin icon',
-        className: ADDRESS.CARD.ICON,
+        source: AddressList.DELETE_ICON,
+        classNameIcon: ADDRESS.CARD.ICON,
       },
       textClassName: ADDRESS.CARD.TEXT,
       callback: (): void => {
@@ -181,9 +185,8 @@ export default class AddressList extends BaseComponent {
       style: 'ADDRESS_PRIMARY',
       textContent: BTN_TEXT.EDIT,
       icon: {
-        source: editIcon,
-        alt: 'Pencil icon',
-        className: ADDRESS.CARD.ICON,
+        source: AddressList.EDIT_ICON,
+        classNameIcon: ADDRESS.CARD.ICON,
       },
       textClassName: ADDRESS.CARD.TEXT,
       callback: (): void => {
@@ -205,9 +208,8 @@ export default class AddressList extends BaseComponent {
       style: 'ADDRESS_PRIMARY',
       textContent: isDefault ? BTN_TEXT.DELETE_PRIMARY : BTN_TEXT.SET_PRIMARY,
       icon: {
-        source: isDefault ? starOffIcon : starIcon,
-        alt: 'Star icon',
-        className: ADDRESS.CARD.ICON,
+        source: isDefault ? AddressList.STAR_OFF_ICON : AddressList.STAR_ICON,
+        classNameIcon: ADDRESS.CARD.ICON,
       },
       textClassName: ADDRESS.CARD.TEXT,
       callback: (): void => {

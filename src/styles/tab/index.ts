@@ -31,11 +31,12 @@ export const TAB = {
     'w-full',
     'justify-between',
     'xl:justify-start',
+    'group',
   ],
   BUTTON_STYLE: {
     DEFAULT: [...TAB_BUTTON, 'bg-white', 'border-primary'],
     ACTIVE: [...TAB_BUTTON, 'bg-accent', 'border-accent'],
   },
-  ICON: ['w-8', 'h-8'],
+  ICON: ['w-8', 'h-8', 'fill-black'],
   NAME: ['hidden', 'md:block'],
 };

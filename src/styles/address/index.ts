@@ -35,7 +35,7 @@ export const ADDRESS = {
       'md:min-w-[200px]',
     ],
     CARD_INFO: ['flex', 'flex-col', 'gap-4', 'flex-grow'],
-    ICON: ['w-5', 'h-5'],
+    ICON: ['w-6', 'h-6', 'fill-black'],
     TEXT: ['text-sm', 'md:block', 'hidden'],
   },
   LINE: {
