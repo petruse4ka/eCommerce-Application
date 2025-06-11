@@ -3,28 +3,19 @@ import type { SVGParameters } from '@/types/interfaces';
 import ElementBuilder from './element-builder';
 
 export default class SVGBuilder extends ElementBuilder {
+  private svgElement: SVGSVGElement;
+
   constructor(parameters: Omit<SVGParameters, 'tag'>) {
-    super({ ...parameters, tag: 'svg' });
-    this.applySVGAttributes(parameters);
+    super({ ...parameters, tag: 'div' });
+    this.svgElement = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    this.applyPath(parameters);
   }
 
-  private applySVGAttributes(parameters: Omit<SVGParameters, 'tag'>): void {
-    if (this.element instanceof SVGElement) {
-      if (parameters.width) {
-        this.element.setAttribute('width', parameters.width.toString());
-      }
-      if (parameters.height) {
-        this.element.setAttribute('height', parameters.height.toString());
-      }
-      this.element.setAttribute('viewBox', parameters.viewBox || '0 0 24 24');
-      if (parameters.fill) {
-        this.element.setAttribute('fill', parameters.fill);
-      }
-      if (parameters.stroke) {
-        this.element.setAttribute('stroke', parameters.stroke);
-      }
+  private applyPath(parameters: Omit<SVGParameters, 'tag'>): void {
+    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    path.setAttribute('d', parameters.source);
 
-      this.element.textContent = parameters.source;
-    }
+    this.svgElement.append(path);
+    this.element.append(this.svgElement);
   }
 }
