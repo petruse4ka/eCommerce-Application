@@ -11,6 +11,13 @@ export default class SVGBuilder extends ElementBuilder {
     if (parameters.classNameIcon) {
       this.applySvgCssClasses(parameters.classNameIcon);
     }
+    if (parameters.iconSize) {
+      this.svgElement.setAttribute('width', `${parameters.iconSize}`);
+      this.svgElement.setAttribute('height', `${parameters.iconSize}`);
+    }
+    if (parameters.viewBox) {
+      this.svgElement.setAttribute('viewBox', parameters.viewBox);
+    }
     this.applyPath(parameters);
   }
 

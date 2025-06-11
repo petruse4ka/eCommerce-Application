@@ -69,7 +69,14 @@ export const HEADER_STYLES = {
     'group',
     'z-15',
   ],
-  CART_ICON: ['w-8'],
+  CART_ICON: [
+    'w-10',
+    'h-10',
+    'fill-black',
+    'group-hover:fill-accent-hover',
+    'transition',
+    'duration-300',
+  ],
   CART_INDICATOR: [
     'absolute',
     '-bottom-2',

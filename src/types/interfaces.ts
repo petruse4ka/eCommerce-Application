@@ -37,6 +37,8 @@ export interface ImageParameters extends ElementParameters {
 export interface SVGParameters extends ElementParameters {
   source: string;
   classNameIcon: string | string[];
+  iconSize?: number;
+  viewBox?: string;
 }
 
 export interface LinkParameters extends ElementParameters {
