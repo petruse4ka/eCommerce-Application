@@ -1,4 +1,3 @@
-import cameraIcon from '@/assets/icons/camera.svg';
 import defaultProductImage from '@/assets/images/default-macaron.svg';
 import notFoundImage from '@/assets/images/not-found.svg';
 import BaseComponent from '@/components/base';
@@ -10,10 +9,14 @@ import { Route } from '@/types/enums';
 import type { Products } from '@/types/interfaces';
 import ElementBuilder from '@/utils/element-builder';
 import ImageBuilder from '@/utils/image-builder';
+import SVGBuilder from '@/utils/svg-builder';
 
 import AddToCartButton from '../buttons/add-to-cart-button';
 
 export default class ProductList extends BaseComponent {
+  private static readonly CAMERA_ICON =
+    'M4,4H7L9,2H15L17,4H20A2,2 0 0,1 22,6V18A2,2 0 0,1 20,20H4A2,2 0 0,1 2,18V6A2,2 0 0,1 4,4M12,7A5,5 0 0,0 7,12A5,5 0 0,0 12,17A5,5 0 0,0 17,12A5,5 0 0,0 12,7M12,9A3,3 0 0,1 15,12A3,3 0 0,1 12,15A3,3 0 0,1 9,12A3,3 0 0,1 12,9Z';
+
   private productsContainer: HTMLElement;
   private isLoading: boolean;
   private hasError: boolean;
@@ -46,10 +49,12 @@ export default class ProductList extends BaseComponent {
       className: PRODUCT_LIST_STYLES.PHOTO_COUNTER,
     }).getElement();
 
-    const icon = new ImageBuilder({
-      source: cameraIcon,
-      alt: 'Camera icon',
-      className: PRODUCT_LIST_STYLES.CAMERA_ICON,
+    const icon = new SVGBuilder({
+      source: ProductList.CAMERA_ICON,
+      className: [],
+      classNameIcon: PRODUCT_LIST_STYLES.CAMERA_ICON,
+      viewBox: '0 0 24 24',
+      iconSize: 24,
     }).getElement();
 
     const photoCount = new ElementBuilder({

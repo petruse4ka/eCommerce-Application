@@ -1,7 +1,3 @@
-import first from '@/assets/icons/first.svg';
-import last from '@/assets/icons/last.svg';
-import next from '@/assets/icons/next.svg';
-import previous from '@/assets/icons/previous.svg';
 import BaseComponent from '@/components/base';
 import ButtonWithIcon from '@/components/buttons/button-with-icon';
 import { CATALOG_TEXTS } from '@/constants';
@@ -10,6 +6,14 @@ import { PAGINATOR_STYLES } from '@/styles/catalog/paginator';
 import ElementBuilder from '@/utils/element-builder';
 
 export default class Paginator extends BaseComponent {
+  private static readonly FIRST_ICON =
+    'M18.41,16.59L13.82,12L18.41,7.41L17,6L11,12L17,18L18.41,16.59M6,6H8V18H6V6Z';
+  private static readonly LAST_ICON =
+    'M5.59,7.41L10.18,12L5.59,16.59L7,18L13,12L7,6L5.59,7.41M16,6H18V18H16V6Z';
+  private static readonly NEXT_ICON = 'M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z';
+  private static readonly PREVIOUS_ICON =
+    'M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z';
+
   private currentPage: HTMLElement;
   private firstButton: ButtonWithIcon;
   private prevButton: ButtonWithIcon;
@@ -46,9 +50,8 @@ export default class Paginator extends BaseComponent {
       textContent: '',
       textClassName: PAGINATOR_STYLES.TEXT,
       icon: {
-        source: first,
-        alt: 'First page icon',
-        className: PAGINATOR_STYLES.ICON,
+        source: Paginator.FIRST_ICON,
+        classNameIcon: PAGINATOR_STYLES.ICON,
       },
       callback: (): void => paginatorState.setCurrentPage(1),
     });
@@ -60,9 +63,8 @@ export default class Paginator extends BaseComponent {
       textContent: '',
       textClassName: PAGINATOR_STYLES.TEXT,
       icon: {
-        source: previous,
-        alt: 'Previous page icon',
-        className: PAGINATOR_STYLES.ICON,
+        source: Paginator.PREVIOUS_ICON,
+        classNameIcon: PAGINATOR_STYLES.ICON,
       },
       callback: (): void => paginatorState.setCurrentPage(paginatorState.getCurrentPage() - 1),
     });
@@ -74,9 +76,8 @@ export default class Paginator extends BaseComponent {
       textContent: '',
       textClassName: PAGINATOR_STYLES.TEXT,
       icon: {
-        source: next,
-        alt: 'Next page icon',
-        className: PAGINATOR_STYLES.ICON,
+        source: Paginator.NEXT_ICON,
+        classNameIcon: PAGINATOR_STYLES.ICON,
       },
       callback: (): void => paginatorState.setCurrentPage(paginatorState.getCurrentPage() + 1),
     });
@@ -88,9 +89,8 @@ export default class Paginator extends BaseComponent {
       textContent: '',
       textClassName: PAGINATOR_STYLES.TEXT,
       icon: {
-        source: last,
-        alt: 'Last page icon',
-        className: PAGINATOR_STYLES.ICON,
+        source: Paginator.LAST_ICON,
+        classNameIcon: PAGINATOR_STYLES.ICON,
       },
       callback: (): void => paginatorState.setCurrentPage(paginatorState.getTotalPages()),
     });
