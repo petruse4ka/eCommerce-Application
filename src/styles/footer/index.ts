@@ -65,8 +65,16 @@ export const FOOTER_STYLES = {
     'transition-all',
     'duration-300',
     'ease-in-out',
+    'group',
   ],
-  TEAM_ICON: ['w-5', 'h-5'],
+  TEAM_ICON: [
+    'w-6',
+    'h-6',
+    'fill-secondary',
+    'group-hover:fill-accent-hover',
+    'transition',
+    'duration-300',
+  ],
   COPYRIGHT: ['bg-primary', 'w-full', 'mt-10', 'py-6'],
   COPYRIGHT_CONTAINER: [
     'max-w-[1440px]',
