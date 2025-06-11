@@ -40,7 +40,6 @@ class CartState {
   public updateCart(cartInfo: CartInfo, lineItems: CartLineItem[]): void {
     this.cartInfo = cartInfo;
     this.lineItems = lineItems;
-    console.log('lineItems', lineItems);
     this.notify();
   }
 
