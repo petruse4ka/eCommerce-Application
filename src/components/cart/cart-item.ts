@@ -82,8 +82,7 @@ export default class CartItem extends BaseComponent {
       style: 'DELETE_CART_ITEM',
       icon: {
         source: deleteIcon,
-        alt: 'Garbage bin icon',
-        className: ADDRESS.CARD.ICON,
+        classNameIcon: ADDRESS.CARD.ICON,
       },
       callback: (): void => {
         void APICart.removeCartProduct(this.productInfo.id);
