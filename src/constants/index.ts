@@ -258,6 +258,7 @@ export const PRODUCT_ATTRIBUTES = {
 
 export const PRODUCT_TEXT = {
   BASKET: 'В корзину',
+  REMOVE: 'Убрать из корзины',
   TOTAL: 'Итого по данной позиции: ',
   CURRENCY: DEFAULT_CURRENCY,
   DESCRIPTION: 'Описание',

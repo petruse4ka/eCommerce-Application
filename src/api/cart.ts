@@ -132,6 +132,7 @@ export default class APICart {
     const cartInfo = cartState.getCartInfo();
 
     if (cartInfo) {
+      console.log(JSON.stringify(TransformApiCartData.transformProductLineDelete(id)));
       await fetch(
         `${import.meta.env['VITE_CTP_API_URL']}/${import.meta.env['VITE_CTP_PROJECT_KEY']}/me${ApiEndpoint.CART}/${cartInfo.id}`,
         {

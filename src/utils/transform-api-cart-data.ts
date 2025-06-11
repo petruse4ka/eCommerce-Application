@@ -39,7 +39,7 @@ export class TransformApiCartData {
 
   public static transformProductLine(productLine: CartItem[]): CartItemView[] {
     const result: CartItemView[] = [];
-
+    console.log(productLine);
     for (const item of productLine) {
       const { images } = item.variant;
       const priceDivider = 10 ** item.price.value.fractionDigits;
@@ -48,6 +48,7 @@ export class TransformApiCartData {
       if (images) {
         const itemBody = {
           id: item.id,
+          productId: item.productId,
           name: item.name.ru,
           prices: item.price.value.centAmount / priceDivider,
           discountedPrice: discount ? discount.value.centAmount / priceDivider : undefined,
@@ -126,7 +127,7 @@ export class TransformApiCartData {
     if (discounts.length > 0) {
       discountCode = await APICart.getDiscountCodeInfo(body.discountCodes[0].discountCode.id);
     }
-
+    console.log(TransformApiCartData.transformProductLine(body.lineItems));
     const result = {
       id: body.id,
       version: body.version,
