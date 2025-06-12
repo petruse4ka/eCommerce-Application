@@ -24,7 +24,7 @@ const STANDARD_INPUT_STYLE = [
 export const CUSTOM_INPUT_STYLE = {
   INPUT_DEFAULT: [...STANDARD_INPUT_STYLE],
   INPUT_PASSWORD: [...STANDARD_INPUT_STYLE, 'pr-10'],
-  INPUT_ERROR: [...STANDARD_INPUT_STYLE, 'border-accent', 'placeholder-accent', 'text-accent'],
+  INPUT_ERROR: [...STANDARD_INPUT_STYLE, '!border-accent', '!placeholder-accent', 'text-accent'],
 };
 
 export const CHECKBOX_CONTAINER_STYLE = ['flex', 'gap-2', 'justify-start'];

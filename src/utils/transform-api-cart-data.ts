@@ -1,11 +1,14 @@
+import APICart from '@/api/cart';
 import { cartState } from '@/store/cart-state';
 import type {
+  AddDiscountCode,
   AddProductBody,
   CartInfo,
   CartItem,
   CartItemView,
   CartLineItem,
   CartResponse,
+  ProductQuantityTransform,
   RemoveCartItem,
 } from '@/types/interfaces';
 
@@ -62,6 +65,26 @@ export class TransformApiCartData {
     return result;
   }
 
+  public static transformProductQuantity(body: {
+    id: string;
+    quantity: number;
+  }): ProductQuantityTransform | void {
+    const cartInfo = cartState.getCartInfo();
+
+    if (cartInfo) {
+      return {
+        version: cartInfo.version,
+        actions: [
+          {
+            action: 'changeLineItemQuantity',
+            lineItemId: body.id,
+            quantity: body.quantity,
+          },
+        ],
+      };
+    }
+  }
+
   public static transformProductLineDelete(id: string): RemoveCartItem | void {
     const cartInfo = cartState.getCartInfo();
 
@@ -76,5 +99,45 @@ export class TransformApiCartData {
         ],
       };
     }
+  }
+
+  public static transformAddDiscountCode(code: string): AddDiscountCode | void {
+    const cartInfo = cartState.getCartInfo();
+
+    if (cartInfo) {
+      return {
+        version: cartInfo.version,
+        actions: [
+          {
+            action: 'addDiscountCode',
+            code,
+          },
+        ],
+      };
+    }
+  }
+
+  public static async transformCartState(body: CartResponse): Promise<CartInfo> {
+    const priceDivider = 10 ** body.totalPrice.fractionDigits;
+    const totalDiscount = body.discountOnTotalPrice;
+
+    const discounts = body.discountCodes;
+    let discountCode = null;
+    if (discounts.length > 0) {
+      discountCode = await APICart.getDiscountCodeInfo(body.discountCodes[0].discountCode.id);
+    }
+
+    const result = {
+      id: body.id,
+      version: body.version,
+      lineItems: TransformApiCartData.transformProductLine(body.lineItems),
+      totalPrice: body.totalPrice.centAmount / priceDivider,
+      totalDiscountPrice: totalDiscount
+        ? totalDiscount.discountedAmount.centAmount / priceDivider
+        : 0,
+      discountCode: discountCode ?? null,
+    };
+
+    return result;
   }
 }

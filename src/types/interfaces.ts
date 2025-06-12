@@ -1,6 +1,7 @@
 import type { CUSTOM_BUTTON_STYLE } from '@/styles/buttons/buttons';
 
 import type { AddressKey, ButtonType, FilterType, InputType, Route, UserInfoKey } from './enums';
+import type { Crewman } from './types';
 
 export interface ElementParameters {
   tag: string;
@@ -121,7 +122,7 @@ export interface InputComponent {
   id: string;
   type: InputType;
   callback?: (event: Event) => void;
-  labelText: string;
+  labelText?: string;
   isRequired?: boolean;
   isDisabled?: boolean;
   value?: string;
@@ -557,6 +558,9 @@ export interface CartInfo {
   id: string;
   version: number;
   lineItems: CartItemView[];
+  totalPrice: number;
+  totalDiscountPrice: number;
+  discountCode: string | null;
 }
 
 export interface CartItem {
@@ -616,7 +620,18 @@ export interface CartResponse {
   shippingMode: string;
   shipping: [];
   customLineItems: [];
-  discountCodes: [];
+  discountCodes: [
+    {
+      discountCode: {
+        typeId: string;
+        id: string;
+        obj?: {
+          code: string;
+        };
+      };
+      state: string;
+    },
+  ];
   directDiscounts: [];
   inventoryMode: string;
   taxMode: string;
@@ -630,6 +645,33 @@ export interface CartResponse {
     type: string;
   };
   totalLineItemQuantity: number;
+  discountOnTotalPrice?: {
+    discountedAmount: {
+      type: string;
+      currencyCode: string;
+      centAmount: number;
+      fractionDigits: number;
+    };
+  };
+}
+
+export interface DiscountCodeResponse {
+  id: string;
+  version: number;
+  code: string;
+  name: {
+    ru: string;
+  };
+}
+
+export interface CartLineItem {
+  productId: string;
+  quantity: number;
+}
+
+export interface CartLineItem {
+  productId: string;
+  quantity: number;
 }
 
 export interface CartLineItem {
@@ -664,6 +706,26 @@ export interface CartItemView {
   quantity: number;
 }
 
+export interface ProductQuantityParameters {
+  price: number;
+  element: HTMLElement;
+  text: string;
+  count: number;
+  secondElement?: HTMLElement;
+  callback?: (count: number) => void;
+}
+
+export interface ProductQuantityTransform {
+  version: number;
+  actions: [
+    {
+      action: string;
+      lineItemId: string;
+      quantity: number;
+    },
+  ];
+}
+
 export interface RemoveCartItem {
   version: number;
   actions: [
@@ -683,4 +745,47 @@ export interface additionalPagesData {
   TITLE: string;
   CONTENT: additionalPagesContentItem[];
   IMAGE?: string | string[];
+}
+
+export interface AddDiscountCode {
+  version: number;
+  actions: [
+    {
+      action: string;
+      code: string;
+    },
+  ];
+}
+
+export interface PersonalText {
+  name: string;
+  role: string;
+  description?: string;
+  github: Crewman;
+}
+
+export interface PersonalImageBox {
+  photo: {
+    url: string;
+    style: string[];
+  };
+  hat?: {
+    url: string;
+    style: string[];
+  };
+}
+
+export interface Personal {
+  PersonalText: PersonalText;
+  PersonalImageBox: PersonalImageBox;
+}
+
+export interface About {
+  MARGO: Personal;
+  KONSTANTIN: Personal;
+  DANIIL: Personal;
+  OLGA: Personal;
+  title: string;
+  text: string;
+  image: string;
 }

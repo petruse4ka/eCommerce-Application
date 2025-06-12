@@ -1,6 +1,6 @@
 import APICart from '@/api/cart';
 import deleteIcon from '@/assets/icons/delete.svg';
-import { CART_TEXT, DEFAULT_CURRENCY } from '@/constants';
+import { CART_TEXT } from '@/constants';
 import { ADDRESS } from '@/styles/address';
 import { CART_ITEM } from '@/styles/cart/cart-item';
 import type { CartItemView } from '@/types/interfaces';
@@ -35,30 +35,21 @@ export default class CartItem extends BaseComponent {
     const priceValue = new ElementBuilder({
       tag: 'span',
       className: CART_ITEM.PRICE.ACCENT,
-      textContent: `${this.productInfo.prices} ${DEFAULT_CURRENCY}`,
     }).getElement();
 
     priceContainer.append(priceValue);
 
-    if (this.productInfo.discountedPrice) {
-      const priceOldValue = new ElementBuilder({
-        tag: 'span',
-        className: CART_ITEM.PRICE.OLD,
-        textContent: `${this.productInfo.prices} ${DEFAULT_CURRENCY}`,
-      }).getElement();
+    const quantityInputBlock = new ProductQuantity({
+      price: this.productInfo.discountedPrice ?? this.productInfo.prices,
+      element: priceValue,
+      text: '',
+      count: this.productInfo.quantity,
+      callback: (count: number): void => {
+        void APICart.changeProductQuantity({ id: this.productInfo.id, quantity: count });
+      },
+    });
 
-      priceValue.textContent = `${this.productInfo.discountedPrice} ${DEFAULT_CURRENCY}`;
-
-      priceContainer.append(priceOldValue);
-    }
-
-    const quantityInputBlock = new ProductQuantity(
-      this.productInfo.prices,
-      priceValue,
-      ''
-    ).getElement();
-
-    this.component.append(quantityInputBlock, priceContainer);
+    this.component.append(quantityInputBlock.getElement(), priceContainer);
   }
 
   private render(): void {

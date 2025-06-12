@@ -126,6 +126,8 @@ export const BTN_TEXT = {
   SAVE_CHANGES: 'Сохранить изменения',
   ADD_NEW_ADDRESS: 'Добавить новый адрес',
   CHECKOUT: 'Оформить заказ',
+  APPLY: 'Применить',
+  CLEAR_CART: 'Очистить корзину',
 };
 
 export const INTRO_TEXTS = {
@@ -167,7 +169,7 @@ export const PACKAGES_TEXTS = {
 };
 
 export const GUARANTEES_TEXTS = {
-  TITLE: 'Мы обо всем позаботилсь',
+  TITLE: 'Мы обо всем позаботились',
   GUARANTEES: {
     INGREDIENTS: {
       title: 'Лучшие ингредиенты',
@@ -271,7 +273,7 @@ export const DEFAULT_QUANTITY_AMOUNT = 1;
 
 export const CART_TEXT = {
   TITLE: 'Ваша корзина',
-  PRICE: 'Цена: ',
+  PRICE: 'Стоимость: ',
   TOTAL_TITLE: 'Итого',
   PRODUCTS_PRICE: 'Стоимость товаров',
   SALE: 'Скидка',
@@ -279,4 +281,9 @@ export const CART_TEXT = {
   TOTAL_PRICE: 'К оплате',
   EMPTY: 'Пока здесь пусто, но всё впереди!\nНайдите то, что вам действительно нужно.',
   CATALOG: 'В каталог',
+  PROMO_CODE_APPLY: 'Применен промокод',
 };
+
+export const PROMO_CODE_TEXT = 'SALE10 - промокод на первую покупку';
+
+export const PROMO_PLACEHOLDER = 'Введите промокод';
