@@ -60,9 +60,18 @@ export default class App extends BaseComponent {
     this.header = new Header();
     this.footer = new Footer();
 
-    const isDark = localStorage.getItem('great-js-minds-ecommerce-theme') === 'dark';
-    if (isDark) {
-      document.documentElement.classList.add('dark');
+    const savedTheme = localStorage.getItem('great-js-minds-ecommerce-theme');
+    if (savedTheme) {
+      if (savedTheme === 'dark') {
+        document.documentElement.classList.add('dark');
+      }
+    } else {
+      if (globalThis.matchMedia && globalThis.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.documentElement.classList.add('dark');
+        localStorage.setItem('great-js-minds-ecommerce-theme', 'dark');
+      } else {
+        localStorage.setItem('great-js-minds-ecommerce-theme', 'light');
+      }
     }
 
     const defaultRoute = this.router.getDefaultRoute();

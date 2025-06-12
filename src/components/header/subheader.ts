@@ -29,15 +29,18 @@ export default class SubHeader extends BaseComponent {
       },
       textClassName: SUBHEADER_STYLES.THEME_TEXT,
       callback: (): void => {
-        const isDark = document.documentElement.classList.contains('dark');
+        const savedTheme = localStorage.getItem('great-js-minds-ecommerce-theme');
+        const isDark = savedTheme
+          ? savedTheme === 'dark'
+          : globalThis.matchMedia('(prefers-color-scheme: dark)').matches;
 
         if (isDark) {
           document.documentElement.classList.remove('dark');
+          localStorage.setItem('great-js-minds-ecommerce-theme', 'light');
         } else {
           document.documentElement.classList.add('dark');
+          localStorage.setItem('great-js-minds-ecommerce-theme', 'dark');
         }
-
-        localStorage.setItem('great-js-minds-ecommerce-theme', isDark ? 'light' : 'dark');
       },
     });
   }
