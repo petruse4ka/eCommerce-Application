@@ -35,7 +35,5 @@ export const PROMO_CODE_INFO_GRADIENT = [
   'text-sm',
   'sm:text-lg',
   'md:text-xl',
-  'md:justify-start',
-  'md:px-10',
   'shadow-md',
 ];
