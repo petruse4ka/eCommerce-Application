@@ -74,6 +74,7 @@ export const PRODUCT_STYLES = {
     'border',
     'border-solid',
     'border-transparent',
+    'text-black',
   ],
   QUANTITY_MESSAGE: ['font-semibold', 'pt-2', 'text-center', 'lg:text-left'],
   DELIVERY_CONTAINER: [
