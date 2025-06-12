@@ -38,7 +38,7 @@ export default class ProductQuantity extends BaseComponent {
           if (resultCallback) {
             if (this.count > DEFAULT_QUANTITY_AMOUNT) {
               quantityInput.textContent = String(this.count);
-              element.textContent = `${text} ${String(price * this.count)} ${PRODUCT_TEXT.CURRENCY}`;
+              element.textContent = `${text} ${(price * this.count).toFixed(2)} ${PRODUCT_TEXT.CURRENCY}`;
             }
             if (this.count === DEFAULT_QUANTITY_AMOUNT) {
               minusButton.setAttribute('disabled', 'true');
@@ -60,7 +60,7 @@ export default class ProductQuantity extends BaseComponent {
             if (this.count > DEFAULT_QUANTITY_AMOUNT) {
               minusButton.removeAttribute('disabled');
             }
-            element.textContent = `${text} ${String(price * this.count)} ${PRODUCT_TEXT.CURRENCY}`;
+            element.textContent = `${text} ${(price * this.count).toFixed(2)} ${PRODUCT_TEXT.CURRENCY}`;
           }
         }
       },
@@ -68,7 +68,7 @@ export default class ProductQuantity extends BaseComponent {
 
     const quantityInput = this.createQuantityInput();
 
-    element.textContent = `${text} ${String(price * this.count)} ${PRODUCT_TEXT.CURRENCY}`;
+    element.textContent = `${text} ${(price * this.count).toFixed(2)} ${PRODUCT_TEXT.CURRENCY}`;
     this.component.append(minusButton, quantityInput, plusButton);
   }
 }

@@ -7,7 +7,7 @@ import { BTN_TEXT } from '@/constants';
 import { INPUTS_EDIT_USER_PASSWORD } from '@/data';
 import { AUTHORIZATION_INPUTS_CONTAINER, FORM_PASSWORD } from '@/styles/forms/forms';
 import { HIDDEN } from '@/styles/inputs/inputs';
-import { AlertStatus, AlertText, ErrorMessages, InputType } from '@/types/enums';
+import { AlertStatus, AlertText, AlertTime, ErrorMessages, InputType } from '@/types/enums';
 import { isErrorInfoPasswordChange, isPasswordInfo } from '@/types/guards';
 import type { PasswordBody } from '@/types/interfaces';
 import ApiErrors from '@/utils/api-errors';
@@ -151,7 +151,7 @@ export default class FormEditPassword extends BaseComponent {
                   Alert.render({
                     textContent: errorInfo,
                     status: AlertStatus.ERROR,
-                    visibleTime: 3000,
+                    visibleTime: AlertTime.DEFAULT,
                   });
                 }
               }

@@ -178,3 +178,7 @@ export enum CartStateKey {
   UPDATE_CART_LINE = 'updateCartLine',
   ITEMS_COUNT = 'itemsCount',
 }
+
+export enum AlertTime {
+  DEFAULT = 3000,
+}

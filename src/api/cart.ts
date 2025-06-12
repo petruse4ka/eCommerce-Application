@@ -1,7 +1,14 @@
 import Alert from '@/components/alert';
 import { cartState } from '@/store/cart-state';
 import { userState } from '@/store/user-state';
-import { AlertStatus, AlertText, ApiEndpoint, ApiMethods, ContentType } from '@/types/enums';
+import {
+  AlertStatus,
+  AlertText,
+  AlertTime,
+  ApiEndpoint,
+  ApiMethods,
+  ContentType,
+} from '@/types/enums';
 import type { CartResponse, DiscountCodeResponse, ErrorResponse } from '@/types/interfaces';
 import { TransformApiCartData } from '@/utils/transform-api-cart-data';
 
@@ -31,14 +38,8 @@ export default class APICart {
           cartState.updateCartLine(TransformApiCartData.transformLineItems(body.lineItems));
         }
       })
-      .catch((error) => {
-        console.error(error);
-
-        Alert.render({
-          textContent: AlertText.ERROR_DEFAULT,
-          status: AlertStatus.ERROR,
-          visibleTime: 3000,
-        });
+      .catch((error: Error) => {
+        this.alertError(error);
       });
   }
 
@@ -69,14 +70,8 @@ export default class APICart {
             cartState.updateCartLine(TransformApiCartData.transformLineItems(body.lineItems));
           }
         })
-        .catch((error) => {
-          console.error(error);
-
-          Alert.render({
-            textContent: AlertText.ERROR_DEFAULT,
-            status: AlertStatus.ERROR,
-            visibleTime: 3000,
-          });
+        .catch((error: Error) => {
+          this.alertError(error);
         });
     }
   }
@@ -106,14 +101,8 @@ export default class APICart {
             cartState.updateCartLine(TransformApiCartData.transformLineItems(body.lineItems));
           }
         })
-        .catch((error) => {
-          console.error(error);
-
-          Alert.render({
-            textContent: AlertText.ERROR_DEFAULT,
-            status: AlertStatus.ERROR,
-            visibleTime: 3000,
-          });
+        .catch((error: Error) => {
+          this.alertError(error);
         });
     }
   }
@@ -147,14 +136,8 @@ export default class APICart {
             cartState.updateCartLine(TransformApiCartData.transformLineItems(body.lineItems));
           }
         })
-        .catch((error) => {
-          console.error(error);
-
-          Alert.render({
-            textContent: AlertText.ERROR_DEFAULT,
-            status: AlertStatus.ERROR,
-            visibleTime: 3000,
-          });
+        .catch((error: Error) => {
+          this.alertError(error);
         });
     }
   }
@@ -175,6 +158,7 @@ export default class APICart {
             Authorization: `Bearer ${token}`,
             'Content-Type': ContentType.JSON,
           },
+
           body: JSON.stringify(TransformApiCartData.transformProductQuantity(body)),
         }
       )
@@ -189,14 +173,9 @@ export default class APICart {
             return true;
           }
         })
-        .catch((error) => {
-          console.error(error);
-
-          Alert.render({
-            textContent: AlertText.ERROR_DEFAULT,
-            status: AlertStatus.ERROR,
-            visibleTime: 3000,
-          });
+        .catch((error: Error) => {
+          if (error instanceof Error && error.name === 'AbortError') return false;
+          this.alertError(error);
 
           return false;
         });
@@ -257,14 +236,8 @@ export default class APICart {
             cartState.clearCartState();
           }
         })
-        .catch((error) => {
-          console.error(error);
-
-          Alert.render({
-            textContent: AlertText.ERROR_DEFAULT,
-            status: AlertStatus.ERROR,
-            visibleTime: 3000,
-          });
+        .catch((error: Error) => {
+          this.alertError(error);
         });
     }
   }
@@ -288,14 +261,18 @@ export default class APICart {
         return response.json();
       })
       .then((body: DiscountCodeResponse) => body.code)
-      .catch((error) => {
-        console.error(error);
-
-        Alert.render({
-          textContent: AlertText.ERROR_DEFAULT,
-          status: AlertStatus.ERROR,
-          visibleTime: 3000,
-        });
+      .catch((error: Error) => {
+        this.alertError(error);
       });
+  }
+
+  private static alertError(error: Error): void {
+    console.error(error);
+
+    Alert.render({
+      textContent: AlertText.ERROR_DEFAULT,
+      status: AlertStatus.ERROR,
+      visibleTime: AlertTime.DEFAULT,
+    });
   }
 }

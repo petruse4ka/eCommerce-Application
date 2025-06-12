@@ -20,7 +20,7 @@ export const CART_TOTAL = {
       DEFAULT: ['text-l'],
       ACCENT: ['text-xl', 'font-bold'],
     },
-    DOTTED: ['flex-grow', 'border-b', 'border-dotted', 'border-gray-400', 'mx-2'],
+    DOTTED: ['flex-grow', 'border-b', 'border-dotted', 'border-gray', 'mx-2'],
   },
   LOADER: ['absolute', 'p-3', 'w-full', 'h-full', 'bg-gray/80', 'top-0', 'left-0'],
 };

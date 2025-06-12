@@ -6,7 +6,7 @@ import { BTN_TEXT } from '@/constants';
 import { INPUTS_AUTHORIZATION_DATA } from '@/data';
 import Router from '@/router';
 import { AUTHORIZATION_INPUTS_CONTAINER, FORM, REDIRECT_LINK } from '@/styles/forms/forms';
-import { Route } from '@/types/enums';
+import { AlertTime, Route } from '@/types/enums';
 import { AlertStatus } from '@/types/enums';
 import type { AuthorizationBody, ErrorInfo, InputComponent } from '@/types/interfaces';
 import ApiErrors from '@/utils/api-errors';
@@ -150,7 +150,7 @@ export default class FormAuthorization {
         Alert.render({
           textContent: errorInfo,
           status: AlertStatus.ERROR,
-          visibleTime: 4000,
+          visibleTime: AlertTime.DEFAULT,
         });
 
         const inputs = this.inputs.keys();

@@ -5,7 +5,7 @@ import Button from '@/components/buttons';
 import Input from '@/components/inputs';
 import { BTN_TEXT, PROMO_PLACEHOLDER } from '@/constants';
 import { FORM_PROMO_CODE } from '@/styles/forms/forms';
-import { AlertStatus, AlertText, InputType } from '@/types/enums';
+import { AlertStatus, AlertText, AlertTime, InputType } from '@/types/enums';
 import { isErrorInfoPasswordChange } from '@/types/guards';
 import type { ErrorInfo } from '@/types/interfaces';
 import ApiErrors from '@/utils/api-errors';
@@ -51,7 +51,7 @@ export default class FormPromoCode extends BaseComponent {
                 Alert.render({
                   textContent: errorInfo,
                   status: AlertStatus.ERROR,
-                  visibleTime: 4000,
+                  visibleTime: AlertTime.DEFAULT,
                 });
               }
             }
