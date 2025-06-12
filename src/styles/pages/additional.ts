@@ -25,7 +25,7 @@ const ADDITIONAL = {
     'flex-grow',
   ],
   SUBTITLE: ['font-semibold', 'text-xl', 'mb-4', 'mt-6'],
-  PARAGRAPH: ['mb-2'],
+  PARAGRAPH: ['mb-2', 'text-black'],
   IMAGE_CONTAINER: ['p-8', 'min-w-1/3'],
   IMAGE: ['w-auto', 'mt-10'],
 };
