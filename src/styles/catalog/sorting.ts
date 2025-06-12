@@ -12,11 +12,11 @@ export const SORTING_STYLES = {
     'py-4',
     'border',
     'border-primary',
-    'bg-purple',
+    'bg-orange',
     'rounded-lg',
   ],
   PRODUCT_COUNTER: [
-    'text-white',
+    'text-dark',
     'text-sm',
     'w-full',
     'text-center',

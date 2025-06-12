@@ -1,12 +1,11 @@
 import BaseComponent from '@/components/base';
 import AddToCartButton from '@/components/buttons/add-to-cart-button';
-import { DEFAULT_CURRENCY, PRODUCT_TEXT } from '@/constants';
+import { DEFAULT_CURRENCY } from '@/constants';
 import { PRODUCT_STYLES } from '@/styles/pages/product';
 import type { Price, PriceValue } from '@/types/interfaces';
 import ElementBuilder from '@/utils/element-builder';
 
 import ProductList from '../catalog/product-list';
-import ProductQuantity from './quantity';
 
 export default class ProductPrices extends BaseComponent {
   private productId: string;
@@ -67,19 +66,6 @@ export default class ProductPrices extends BaseComponent {
 
     const button = ProductPrices.createAddToCartButton(this.productId);
 
-    const totalAmount = new ElementBuilder({
-      tag: 'div',
-      className: PRODUCT_STYLES.QUANTITY_MESSAGE,
-      textContent: `${PRODUCT_TEXT.TOTAL} ${actualPrice}`,
-    }).getElement();
-
-    const quantityInputBlock = new ProductQuantity({
-      price: prices.price,
-      element: totalAmount,
-      text: PRODUCT_TEXT.TOTAL,
-      count: 1,
-    });
-
-    this.component.append(quantityInputBlock.getElement(), totalAmount, button);
+    this.component.append(button);
   }
 }
