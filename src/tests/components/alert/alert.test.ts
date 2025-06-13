@@ -1,12 +1,12 @@
 import Alert from '@/components/alert';
-import { AlertStatus } from '@/types/enums';
+import { AlertStatus, AlertTime } from '@/types/enums';
 
 describe('Alert', () => {
   test('should render alert with message and success status', () => {
     Alert.render({
       textContent: 'Test message',
       status: AlertStatus.SUCCESS,
-      visibleTime: 3000,
+      visibleTime: AlertTime.DEFAULT,
     });
 
     const alert = document.body.firstElementChild;

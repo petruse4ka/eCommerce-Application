@@ -85,4 +85,6 @@ export const ABOUT_STYLE = {
   NAME: ['font-bold', 'text-[26px]', 'my-2', 'px-1', 'bg-orange'],
   ROLE: ['font-bold', 'text-[10px]', 'text-dark', 'mb-6', 'w-fit', 'uppercase'],
   DESCRIPTION: ['mb-4'],
+  DESCRIPTION_PARAGRAPH: ['mb-2'],
+  DESCRIPTION_THANKS: ['font-bold', 'text-accent', 'my-10', 'text-[20px]', 'text-center'],
 };

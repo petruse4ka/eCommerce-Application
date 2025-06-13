@@ -1,7 +1,7 @@
 import '@/styles/main.css';
 
 import RSLogo from '@/assets/images/about/rsschool.png';
-import Person from '@/components/about/personal';
+import Person from '@/components/about';
 import BaseComponent from '@/components/base';
 import { ABOUT, SCHOOL_URL } from '@/data';
 import { ABOUT_STYLE } from '@/styles/pages/about';

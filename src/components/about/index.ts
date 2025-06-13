@@ -69,8 +69,19 @@ export default class Person extends BaseComponent {
       className: ABOUT_STYLE.DESCRIPTION,
     }).getElement();
 
-    if (texts.description) {
-      description.insertAdjacentHTML('afterbegin', texts.description);
+    if (Array.isArray(texts.description)) {
+      for (const paragraph of texts.description) {
+        const currentStyle = /Спасибо/.test(paragraph)
+          ? ABOUT_STYLE.DESCRIPTION_THANKS
+          : ABOUT_STYLE.DESCRIPTION_PARAGRAPH;
+
+        const p = new BaseComponent({
+          tag: 'p',
+          className: currentStyle,
+          textContent: paragraph,
+        }).getElement();
+        description.append(p);
+      }
     }
 
     const gitHubLink = Team.createGithubLink(texts.github);
