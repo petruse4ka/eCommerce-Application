@@ -76,8 +76,13 @@ export default class API {
     isLogin: boolean;
   }): Promise<string | void> {
     const { userInfo, isLogin } = body;
-    const token = await this.userAuthentication(userInfo);
+    // const token = await this.userAuthentication(userInfo);
+    const token = userState.getTokenState();
+    //const token = await this.userAuthentication(userInfo)
+    console.log('LOGIN', token);
+    await this.userAuthentication(userInfo);
     const fetchBody = { ...userInfo };
+    console.log('LOGIN', userState.getTokenState());
 
     if (token) {
       return await fetch(
@@ -134,7 +139,7 @@ export default class API {
       });
   }
 
-  private static async userAuthentication(body: AuthorizationBody): Promise<string | void> {
+  public static async userAuthentication(body: AuthorizationBody): Promise<string | void> {
     return await fetch(
       import.meta.env['VITE_CTP_AUTH_URL'] +
         ApiEndpoint.OATH +
