@@ -1,10 +1,7 @@
 import APIUpdateData from '@/api/update-data';
-import deleteIcon from '@/assets/icons/delete.svg';
-import editIcon from '@/assets/icons/edit.svg';
-import starIcon from '@/assets/icons/star.svg';
-import starOffIcon from '@/assets/icons/star-off-outline.svg';
 import { BTN_TEXT } from '@/constants';
 import { INPUTS_CHANGE_ADDRESS_DATA } from '@/data';
+import { SVG_ICONS } from '@/data';
 import { ADDRESS } from '@/styles/address';
 import { CUSTOM_BUTTON_STYLE } from '@/styles/buttons/buttons';
 import { AddressTypeText, AlertText, ModalTitle } from '@/types/enums';
@@ -51,9 +48,8 @@ export default class AddressList extends BaseComponent {
       style: 'ADDRESS_PRIMARY',
       textContent: BTN_TEXT.DELETE,
       icon: {
-        source: deleteIcon,
-        alt: 'Garbage bin icon',
-        className: ADDRESS.CARD.ICON,
+        source: SVG_ICONS.DELETE_ICON,
+        classNameIcon: ADDRESS.CARD.ICON,
       },
       textClassName: ADDRESS.CARD.TEXT,
       callback: (): void => {
@@ -181,9 +177,8 @@ export default class AddressList extends BaseComponent {
       style: 'ADDRESS_PRIMARY',
       textContent: BTN_TEXT.EDIT,
       icon: {
-        source: editIcon,
-        alt: 'Pencil icon',
-        className: ADDRESS.CARD.ICON,
+        source: SVG_ICONS.EDIT_ICON,
+        classNameIcon: ADDRESS.CARD.ICON,
       },
       textClassName: ADDRESS.CARD.TEXT,
       callback: (): void => {
@@ -205,9 +200,8 @@ export default class AddressList extends BaseComponent {
       style: 'ADDRESS_PRIMARY',
       textContent: isDefault ? BTN_TEXT.DELETE_PRIMARY : BTN_TEXT.SET_PRIMARY,
       icon: {
-        source: isDefault ? starOffIcon : starIcon,
-        alt: 'Star icon',
-        className: ADDRESS.CARD.ICON,
+        source: isDefault ? SVG_ICONS.STAR_OFF_ICON : SVG_ICONS.STAR_ICON,
+        classNameIcon: ADDRESS.CARD.ICON,
       },
       textClassName: ADDRESS.CARD.TEXT,
       callback: (): void => {

@@ -20,6 +20,7 @@ export default class ProductFilters extends BaseComponent {
   private isFiltersVisible: boolean;
   private filterConfigs: FilterConfigs | null;
   private filtersContainer: ElementBuilder;
+  private toggleButton: HTMLElement;
 
   constructor() {
     super({ tag: 'div', className: FILTERS_STYLES.WRAPPER });
@@ -36,7 +37,22 @@ export default class ProductFilters extends BaseComponent {
       className: FILTERS_STYLES.CONTAINER,
     });
 
-    this.component.append(this.filtersContainer.getElement());
+    this.toggleButton = new Button({
+      style: 'TOGGLE_FILTERS',
+      textContent: CATALOG_TEXTS.SHOW_FILTERS,
+      callback: (): void => {
+        this.isFiltersVisible = !this.isFiltersVisible;
+        if (this.isFiltersVisible) {
+          this.filtersContainer.removeCssClasses(FILTERS_STYLES.HIDDEN);
+          this.toggleButton.textContent = CATALOG_TEXTS.HIDE_FILTERS;
+        } else {
+          this.filtersContainer.applyCssClasses(FILTERS_STYLES.HIDDEN);
+          this.toggleButton.textContent = CATALOG_TEXTS.SHOW_FILTERS;
+        }
+      },
+    }).getElement();
+
+    this.component.append(this.toggleButton, this.filtersContainer.getElement());
   }
 
   private static createFilterTitle(title: string): HTMLElement {
@@ -119,23 +135,6 @@ export default class ProductFilters extends BaseComponent {
     this.updateFiltersContent();
   }
 
-  private createToggleButton(): HTMLElement {
-    return new Button({
-      style: 'TOGGLE_FILTERS',
-      textContent: CATALOG_TEXTS.SHOW_FILTERS,
-      callback: (): void => {
-        this.isFiltersVisible = !this.isFiltersVisible;
-        if (this.isFiltersVisible) {
-          this.filtersContainer.removeCssClasses(FILTERS_STYLES.HIDDEN);
-          this.component.querySelector('button')!.textContent = CATALOG_TEXTS.HIDE_FILTERS;
-        } else {
-          this.filtersContainer.applyCssClasses(FILTERS_STYLES.HIDDEN);
-          this.component.querySelector('button')!.textContent = CATALOG_TEXTS.SHOW_FILTERS;
-        }
-      },
-    }).getElement();
-  }
-
   private updateFiltersContent(): void {
     while (this.component.firstChild) this.component.firstChild.remove();
 
@@ -159,8 +158,7 @@ export default class ProductFilters extends BaseComponent {
       return;
     }
 
-    const toggleButton = this.createToggleButton();
-    this.component.append(toggleButton);
+    this.component.append(this.toggleButton);
 
     const filters = this.createFilters();
     filterState.subscribe(this.handleFilterChange);

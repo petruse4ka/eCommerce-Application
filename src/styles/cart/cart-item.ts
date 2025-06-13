@@ -11,11 +11,11 @@ export const CART_ITEM = {
   ],
   IMAGE: ['w-[80px]', 'h-[80px]', 'object-contain', 'm-auto', 'm-[0px]'],
   INFO: {
-    NAME: ['text-l', 'font-bold', 'md:pl-5'],
+    NAME: ['text-l', 'font-bold', 'md:pl-5', 'text-black'],
   },
   PRICE: {
-    DEFAULT: ['font-bold', 'text-left', 'md:text-right', 'md:pr-5'],
+    DEFAULT: ['font-bold', 'text-left', 'md:text-right', 'md:pr-5', 'text-black'],
     ACCENT: ['text-accent'],
-    OLD: ['text-gray', 'line-through', 'block'],
+    OLD: ['text-gray-medium', 'line-through', 'block'],
   },
 };

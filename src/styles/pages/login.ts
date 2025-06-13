@@ -7,7 +7,7 @@ export const CONTAINER = [
   'py-10',
   'px-3',
   'sm:px-10',
-  'bg-pink',
+  'bg-bright',
   'bg-[url(@/assets/images/bg-macarons.png)]',
   'bg-top',
   'bg-no-repeat',
@@ -31,4 +31,4 @@ export const FORM_CONTAINER = [
   'sm:px-10',
 ];
 
-export const TITLE = ['text-3xl', 'font-bold', 'text-center'];
+export const TITLE = ['text-3xl', 'font-bold', 'text-center', 'text-black'];
