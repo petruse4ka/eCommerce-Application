@@ -13,12 +13,15 @@ import ProductQuantity from '../product/quantity';
 
 export default class CartItem extends BaseComponent {
   private productInfo: CartItemView;
+  private callback: (isLoading: boolean) => void;
 
-  constructor(product: CartItemView) {
+  constructor(product: CartItemView, callback: (isLoading: boolean) => void) {
     super({
       tag: 'article',
       className: CART_ITEM.CONTAINER,
     });
+
+    this.callback = callback;
 
     this.productInfo = product;
 
@@ -44,8 +47,15 @@ export default class CartItem extends BaseComponent {
       element: priceValue,
       text: '',
       count: this.productInfo.quantity,
-      callback: (count: number): void => {
-        void APICart.changeProductQuantity({ id: this.productInfo.id, quantity: count });
+      callback: async (count: number): Promise<boolean> => {
+        this.callback(true);
+        const fetchResult = await APICart.changeProductQuantity({
+          id: this.productInfo.id,
+          quantity: count,
+        });
+        this.callback(false);
+
+        return fetchResult;
       },
     });
 
@@ -76,11 +86,15 @@ export default class CartItem extends BaseComponent {
         alt: 'Garbage bin icon',
         className: ADDRESS.CARD.ICON,
       },
-      callback: (): void => {
-        void APICart.removeCartProduct(this.productInfo.id);
+      callback: async (): Promise<void> => {
+        this.callback(true);
+        deleteButton.disableButton();
+        await APICart.removeCartProduct(this.productInfo.id);
+        deleteButton.enableButton();
+        this.callback(false);
       },
-    }).getElement();
+    });
 
-    this.component.append(deleteButton);
+    this.component.append(deleteButton.getElement());
   }
 }

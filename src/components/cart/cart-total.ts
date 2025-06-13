@@ -6,11 +6,14 @@ import ElementBuilder from '@/utils/element-builder';
 import BaseComponent from '../base';
 import Button from '../buttons';
 import FormPromoCode from '../forms/promo-code';
+import LoaderOverlay from '../overlay/loader-overlay';
 
 export default class CartTotal extends BaseComponent {
-  private totalPrice: number;
-  private totalDiscountPrice: number;
-  private discountCode: string | null;
+  private totalPrice: number = 0;
+  private totalDiscountPrice: number = 0;
+  private discountCode: string | null = null;
+  private productLoader: HTMLElement;
+  private formPromo: HTMLElement;
 
   constructor() {
     super({
@@ -18,11 +21,16 @@ export default class CartTotal extends BaseComponent {
       className: CART_TOTAL.CONTAINER,
     });
 
-    const cartInfo = cartState.getCartInfo();
+    this.updateInfo();
 
-    this.totalPrice = cartInfo?.totalPrice ?? 0;
-    this.totalDiscountPrice = cartInfo?.totalDiscountPrice ?? 0;
-    this.discountCode = cartInfo?.discountCode ?? null;
+    this.productLoader = new LoaderOverlay({
+      text: CART_TEXT.LOADING_TOTAL,
+      className: CART_TOTAL.LOADER,
+    }).getElement();
+
+    this.formPromo = new FormPromoCode(this.updateView.bind(this)).getElement();
+
+    this.component.append(this.productLoader);
 
     this.render();
   }
@@ -62,6 +70,28 @@ export default class CartTotal extends BaseComponent {
     }
 
     return container;
+  }
+
+  public updateView(isLoading: boolean): void {
+    if (isLoading) {
+      this.component.append(this.productLoader);
+    } else {
+      while (this.component.firstChild) {
+        this.component.firstChild.remove();
+      }
+
+      this.updateInfo();
+
+      this.render();
+    }
+  }
+
+  private updateInfo(): void {
+    const cartInfo = cartState.getCartInfo();
+
+    this.totalPrice = cartInfo?.totalPrice ?? 0;
+    this.totalDiscountPrice = cartInfo?.totalDiscountPrice ?? 0;
+    this.discountCode = cartInfo?.discountCode ?? null;
   }
 
   private createTotalInfo(): HTMLElement {
@@ -123,14 +153,12 @@ export default class CartTotal extends BaseComponent {
       }
     );
 
-    const formPromo = new FormPromoCode().getElement();
-
     const checkoutButton = new Button({
       style: 'PRICE_BUTTON',
       textContent: BTN_TEXT.CHECKOUT,
       callback: (): void => {},
     }).getElement();
 
-    this.component.append(title, totalInfo, totalPrice, formPromo, checkoutButton);
+    this.component.append(title, totalInfo, totalPrice, this.formPromo, checkoutButton);
   }
 }

@@ -11,9 +11,10 @@ import {
   UNAUTHORIZED_MENU_ITEMS,
 } from '@/constants';
 import Router from '@/router';
+import { cartState } from '@/store/cart-state';
 import { userState } from '@/store/user-state';
 import { SUBHEADER_STYLES } from '@/styles/header/subheader';
-import { AlertStatus, AlertText } from '@/types/enums';
+import { AlertStatus, AlertText, AlertTime } from '@/types/enums';
 import ElementBuilder from '@/utils/element-builder';
 import ImageBuilder from '@/utils/image-builder';
 
@@ -102,8 +103,10 @@ export default class AuthorizationMenu extends BaseComponent {
           Alert.render({
             textContent: AlertText.LOGOUT_SUCCESS,
             status: AlertStatus.SUCCESS,
-            visibleTime: 3000,
+            visibleTime: AlertTime.DEFAULT,
           });
+
+          cartState.clearCartState();
         }
         Router.followRoute(item.route);
       });
