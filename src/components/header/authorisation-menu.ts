@@ -8,9 +8,10 @@ import {
 } from '@/constants';
 import { SVG_ICONS } from '@/data';
 import Router from '@/router';
+import { cartState } from '@/store/cart-state';
 import { userState } from '@/store/user-state';
 import { SUBHEADER_STYLES } from '@/styles/header/subheader';
-import { AlertStatus, AlertText } from '@/types/enums';
+import { AlertStatus, AlertText, AlertTime } from '@/types/enums';
 import ElementBuilder from '@/utils/element-builder';
 import SVGBuilder from '@/utils/svg-builder';
 
@@ -105,8 +106,10 @@ export default class AuthorizationMenu extends BaseComponent {
           Alert.render({
             textContent: AlertText.LOGOUT_SUCCESS,
             status: AlertStatus.SUCCESS,
-            visibleTime: 3000,
+            visibleTime: AlertTime.DEFAULT,
           });
+
+          cartState.clearCartState();
         }
         Router.followRoute(item.route);
       });

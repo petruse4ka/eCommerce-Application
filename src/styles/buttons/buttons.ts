@@ -272,5 +272,6 @@ export const CUSTOM_BUTTON_STYLE = {
     'active:bg-pink',
     'm-2',
     'self-center',
+    'transition-all',
   ],
 };

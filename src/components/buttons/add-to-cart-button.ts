@@ -10,7 +10,7 @@ import {
   CUSTOM_BUTTON_STYLE,
 } from '@/styles/buttons/buttons';
 import { LOADER_STYLES } from '@/styles/overlay/loader-overlay';
-import { ButtonType } from '@/types/enums';
+import { ButtonType, CartStateKey } from '@/types/enums';
 import type { addToCartButtonParameters, AddToCartStateParameters } from '@/types/interfaces';
 import ButtonBuilder from '@/utils/button-builder';
 import ElementBuilder from '@/utils/element-builder';
@@ -59,7 +59,7 @@ export default class AddToCartButton {
 
     this.button.getElement().append(this.iconContainer, this.textElement);
 
-    cartState.subscribe(this.updateState.bind(this));
+    cartState.subscribe(CartStateKey.UPDATE_CART_LINE, this.updateState.bind(this));
     this.updateState();
   }
 

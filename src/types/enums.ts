@@ -172,3 +172,13 @@ export enum ModalTitle {
   NEW = 'Новый адрес',
   CHANGE_PASSWORD = 'Смена пароля',
 }
+
+export enum CartStateKey {
+  CART_INFO = 'cartInfo',
+  UPDATE_CART_LINE = 'updateCartLine',
+  ITEMS_COUNT = 'itemsCount',
+}
+
+export enum AlertTime {
+  DEFAULT = 3000,
+}
