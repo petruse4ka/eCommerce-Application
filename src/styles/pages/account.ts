@@ -1,5 +1,5 @@
 export const ACCOUNT_PAGE = {
-  MAIN: ['flex', 'flex-col', 'px-4', 'py-10', 'flex-grow', 'bg-white'],
+  MAIN: ['flex', 'flex-col', 'px-4', 'py-10', 'flex-grow'],
   TITLE: [
     'text-3xl',
     'max-w-[1440px]',

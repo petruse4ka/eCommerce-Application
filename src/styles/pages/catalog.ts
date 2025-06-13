@@ -1,5 +1,5 @@
 export const CATALOG_STYLES = {
-  PAGE_CONTAINER: ['px-4', 'py-10', 'flex-grow', 'bg-white'],
+  PAGE_CONTAINER: ['px-4', 'py-10', 'flex-grow'],
   TITLE: ['text-3xl', 'text-center', 'font-semibold', 'text-black', 'mb-9'],
   CATALOG_CONTAINER: [
     'grid',

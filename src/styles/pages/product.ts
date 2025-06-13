@@ -29,7 +29,7 @@ export const PRODUCT_STYLES = {
   IMAGE: ['w-full', 'border', 'border-solid', 'border-primary', 'shadow-md', 'rounded-lg'],
   ASIDE: ['w-full', 'xl:w-2/3', 'flex', 'flex-col', 'gap-2'],
   TITLE_CONTAINER: ['flex', 'flex-col', 'gap-2', 'items-start', 'pb-4', 'rounded-lg', 'mr-5'],
-  TITLE: ['text-2xl', 'md:text-3xl', 'pb-4', 'font-semibold', 'text-left', 'text-accent'],
+  TITLE: ['text-2xl', 'md:text-3xl', 'pb-4', 'font-semibold', 'text-left'],
   DESCRIPTION: [],
   PARAMETER_NAME: ['font-semibold', 'pt-2', 'inline', 'mr-2'],
   PARAMETER_DESCRIPTION: ['inline', 'leading-[1.4]'],

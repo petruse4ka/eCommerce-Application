@@ -1,5 +1,5 @@
 export const FOOTER_STYLES = {
-  FOOTER: ['bg-gray', 'pt-15', 'border-t', 'border-primary'],
+  FOOTER: ['bg-white', 'pt-15', 'border-t', 'border-primary'],
   FOOTER_CONTAINER: [
     'max-w-[1440px]',
     'mx-auto',

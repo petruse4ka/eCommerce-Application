@@ -19,6 +19,7 @@ const STANDARD_INPUT_STYLE = [
   'pr-2',
   'w-full',
   '[&::-webkit-calendar-picker-indicator]:[filter:invert(0.4)_sepia(1)_saturate(20)_hue-rotate(320deg)_brightness(0.9)_contrast(0.9)]',
+  'cursor-text',
 ];
 
 export const CUSTOM_INPUT_STYLE = {
