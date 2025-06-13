@@ -74,7 +74,7 @@ export default class API {
   public static async userSignInResponse(body: {
     userInfo: AuthorizationBody;
     isLogin: boolean;
-  }): Promise<string | void> {
+  }): Promise<void> {
     const { userInfo, isLogin } = body;
     const token = userState.getTokenState();
     await this.userAuthentication(userInfo);
@@ -105,7 +105,6 @@ export default class API {
           userState.setUserInfoState(body.customer);
           userState.setAuthorizationState(true);
           void APICart.getCart();
-          return body.customer.id;
         });
     }
   }
