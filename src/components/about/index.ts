@@ -9,11 +9,17 @@ export default class Person extends BaseComponent {
   constructor(parameters: Personal, reverse: boolean) {
     super({
       tag: 'div',
-      className: reverse ? ABOUT_STYLE.PERSONAL_CONTAINER : ABOUT_STYLE.ODD_CONTAINER,
+      className: ABOUT_STYLE.PERSONAL_CONTAINER,
     });
 
-    this.component.append(Person.PersonalPhoto(parameters));
-    this.component.append(Person.PersonalDescription(parameters));
+    const addContainer = new BaseComponent({
+      tag: 'div',
+      className: reverse ? ABOUT_STYLE.ADD_CONTAINER : ABOUT_STYLE.ODD_CONTAINER,
+    }).getElement();
+
+    addContainer.append(Person.PersonalPhoto(parameters));
+    addContainer.append(Person.PersonalDescription(parameters));
+    this.component.append(addContainer);
   }
 
   private static PersonalPhoto(personal: Personal): HTMLElement {
@@ -28,7 +34,7 @@ export default class Person extends BaseComponent {
     const imagePhoto = new ImageBuilder({
       source: images.photo.url,
       alt: texts.name,
-      className: images.photo.style,
+      className: '',
     }).getElement();
 
     photoContainer.append(imagePhoto);
@@ -70,21 +76,23 @@ export default class Person extends BaseComponent {
     }).getElement();
 
     if (Array.isArray(texts.description)) {
-      for (const paragraph of texts.description) {
-        const currentStyle = /Спасибо/.test(paragraph)
-          ? ABOUT_STYLE.DESCRIPTION_THANKS
-          : ABOUT_STYLE.DESCRIPTION_PARAGRAPH;
+      //for (const paragraph of texts.description) {
+      const paragraph = texts.description[0];
+      const currentStyle = /Спасибо/.test(paragraph)
+        ? ABOUT_STYLE.DESCRIPTION_THANKS
+        : ABOUT_STYLE.DESCRIPTION_PARAGRAPH;
 
-        const p = new BaseComponent({
-          tag: 'p',
-          className: currentStyle,
-          textContent: paragraph,
-        }).getElement();
-        description.append(p);
-      }
+      const p = new BaseComponent({
+        tag: 'p',
+        className: currentStyle,
+        textContent: paragraph.slice(0, 150) + '...',
+      }).getElement();
+      description.append(p);
+      // }
     }
 
     const gitHubLink = Team.createGithubLink(texts.github);
+    gitHubLink.classList.add(...ABOUT_STYLE.GIT);
 
     textContainer.append(name, role, description, gitHubLink);
     return textContainer;
