@@ -297,3 +297,9 @@ export const TRANSLATIONS = {
   [Language.RUSSIAN]: ru,
   [Language.DUTCH]: nl,
 };
+
+export const LANGUAGES = {
+  [Language.ENGLISH]: 'English',
+  [Language.RUSSIAN]: 'Русский',
+  [Language.DUTCH]: 'Nederlands',
+};

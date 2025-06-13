@@ -1,6 +1,14 @@
 import type { CUSTOM_BUTTON_STYLE } from '@/styles/buttons/buttons';
 
-import type { AddressKey, ButtonType, FilterType, InputType, Route, UserInfoKey } from './enums';
+import type {
+  AddressKey,
+  ButtonType,
+  FilterType,
+  InputType,
+  Language,
+  Route,
+  UserInfoKey,
+} from './enums';
 import type { Crewman } from './types';
 
 export interface ElementParameters {
@@ -788,4 +796,10 @@ export interface About {
   title: string;
   text: string;
   image: string;
+}
+
+export interface LanguageChangeEvent extends CustomEvent {
+  detail: {
+    language: Language;
+  };
 }
