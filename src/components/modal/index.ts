@@ -3,14 +3,14 @@ import ElementBuilder from '@/utils/element-builder';
 
 import BaseComponent from '../base';
 import Button from '../buttons';
-import type FormAddNewAddress from '../forms/add-new-address';
-import type FormEditUserInfo from '../forms/edit-info';
-import type FormEditPassword from '../forms/edit-password';
+import FormAddNewAddress from '../forms/add-new-address';
+import FormEditUserInfo from '../forms/edit-info';
+import FormEditPassword from '../forms/edit-password';
 
 export default class Modal extends BaseComponent {
   constructor(parameters: {
     title: string;
-    content: FormEditUserInfo | FormAddNewAddress | FormEditPassword;
+    content: FormEditUserInfo | FormAddNewAddress | FormEditPassword | ElementBuilder;
   }) {
     super({
       tag: 'dialog',
@@ -18,7 +18,13 @@ export default class Modal extends BaseComponent {
       attributes: { 'aria-label': parameters.title },
     });
 
-    parameters.content.setCallback(this.closeModal.bind(this));
+    if (
+      parameters.content instanceof FormEditUserInfo ||
+      parameters.content instanceof FormAddNewAddress ||
+      parameters.content instanceof FormEditPassword
+    ) {
+      parameters.content.setCallback(this.closeModal.bind(this));
+    }
     this.createHeader(parameters.title);
     this.createContent(parameters.content);
     this.addEventListeners();
@@ -76,7 +82,9 @@ export default class Modal extends BaseComponent {
     this.component.append(container);
   }
 
-  private createContent(content: FormEditUserInfo | FormAddNewAddress | FormEditPassword): void {
+  private createContent(
+    content: FormEditUserInfo | FormAddNewAddress | FormEditPassword | ElementBuilder
+  ): void {
     const container = new ElementBuilder({
       tag: 'div',
       className: MODAL.CONTENT.CONTAINER,

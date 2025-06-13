@@ -1,11 +1,18 @@
+import APICart from '@/api/cart';
+import cuteImage from '@/assets/images/cute.png';
 import { BTN_TEXT, CART_TEXT, DEFAULT_CURRENCY } from '@/constants';
+import Router from '@/router';
 import { cartState } from '@/store/cart-state';
 import { CART_TOTAL } from '@/styles/cart/cart-total';
+import { MODAL } from '@/styles/modal';
+import { ModalTitle, Route } from '@/types/enums';
 import ElementBuilder from '@/utils/element-builder';
+import ImageBuilder from '@/utils/image-builder';
 
 import BaseComponent from '../base';
 import Button from '../buttons';
 import FormPromoCode from '../forms/promo-code';
+import Modal from '../modal';
 import LoaderOverlay from '../overlay/loader-overlay';
 
 export default class CartTotal extends BaseComponent {
@@ -135,6 +142,42 @@ export default class CartTotal extends BaseComponent {
     return totalInfoContainer;
   }
 
+  private checkoutModal(): void {
+    const content = new ElementBuilder({
+      tag: 'div',
+      className: MODAL.CONTENT.CHECKOUT_PAGE.CONTAINER,
+    });
+
+    const img = new ImageBuilder({
+      className: '',
+      source: cuteImage,
+      alt: 'cute macaron',
+    }).getElement();
+
+    const text = new ElementBuilder({
+      tag: 'p',
+      className: MODAL.CONTENT.CHECKOUT_PAGE.TITLE,
+      textContent: CART_TEXT.MODAL_TEXT,
+    }).getElement();
+
+    const modal = new Modal({ title: ModalTitle.CHECKOUT_CART, content });
+
+    const buttonFinish = new Button({
+      style: 'PRICE_BUTTON',
+      textContent: BTN_TEXT.FINISH_CART,
+      callback: (): void => {
+        modal.closeModal();
+        void APICart.deleteCart();
+        Router.followRoute(Route.HOME);
+      },
+    }).getElement();
+
+    content.getElement().append(img, text, buttonFinish);
+
+    this.component.append(modal.getElement());
+    modal.showModal();
+  }
+
   private render(): void {
     const title = new ElementBuilder({
       tag: 'h4',
@@ -156,7 +199,9 @@ export default class CartTotal extends BaseComponent {
     const checkoutButton = new Button({
       style: 'PRICE_BUTTON',
       textContent: BTN_TEXT.CHECKOUT,
-      callback: (): void => {},
+      callback: (): void => {
+        this.checkoutModal();
+      },
     }).getElement();
 
     this.component.append(title, totalInfo, totalPrice, this.formPromo, checkoutButton);

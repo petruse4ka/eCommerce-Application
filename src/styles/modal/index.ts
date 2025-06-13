@@ -24,5 +24,9 @@ export const MODAL = {
   },
   CONTENT: {
     CONTAINER: ['p-4'],
+    CHECKOUT_PAGE: {
+      CONTAINER: ['flex', 'flex-col', 'items-center', 'gap-5'],
+      TITLE: ['text-center', 'text-xl', 'font-bold'],
+    },
   },
 };
