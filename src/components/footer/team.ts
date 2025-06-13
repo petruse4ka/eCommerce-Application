@@ -1,12 +1,12 @@
-import githubIcon from '@/assets/icons/github.svg';
 import BaseComponent from '@/components/base';
 import { FOOTER_TEXTS } from '@/constants';
 import { TEAM } from '@/data';
+import { SVG_ICONS } from '@/data';
 import { FOOTER_STYLES } from '@/styles/footer';
 import type { Crewman } from '@/types/types';
 import ElementBuilder from '@/utils/element-builder';
-import ImageBuilder from '@/utils/image-builder';
 import LinkBuilder from '@/utils/link-builder';
+import SVGBuilder from '@/utils/svg-builder';
 
 export default class Team extends BaseComponent {
   constructor() {
@@ -21,10 +21,10 @@ export default class Team extends BaseComponent {
       className: FOOTER_STYLES.TEAM_LINK,
     }).getElement();
 
-    const icon = new ImageBuilder({
-      source: githubIcon,
-      alt: 'GitHub Icon',
-      className: FOOTER_STYLES.TEAM_ICON,
+    const icon = new SVGBuilder({
+      source: SVG_ICONS.GITHUB_ICON,
+      className: [],
+      classNameIcon: FOOTER_STYLES.TEAM_ICON,
     }).getElement();
 
     const name = new ElementBuilder({

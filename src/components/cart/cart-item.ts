@@ -83,8 +83,7 @@ export default class CartItem extends BaseComponent {
       style: 'DELETE_CART_ITEM',
       icon: {
         source: deleteIcon,
-        alt: 'Garbage bin icon',
-        className: ADDRESS.CARD.ICON,
+        classNameIcon: ADDRESS.CARD.ICON,
       },
       callback: async (): Promise<void> => {
         this.callback(true);

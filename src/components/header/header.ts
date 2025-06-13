@@ -4,6 +4,7 @@ import ElementBuilder from '@/utils/element-builder';
 
 import Logo from './logo';
 import MainMenu from './main-menu';
+import PromoHeader from './promo-header';
 import ShoppingCartIcon from './shopping-cart';
 import SubHeader from './subheader';
 
@@ -20,6 +21,7 @@ export default class Header extends BaseComponent {
   }
 
   protected render(): void {
+    const promoHeader = new PromoHeader();
     const headerContainer = new ElementBuilder({
       tag: 'div',
       className: HEADER_STYLES.HEADER_CONTAINER,
@@ -30,6 +32,6 @@ export default class Header extends BaseComponent {
     const shoppingCart = new ShoppingCartIcon();
 
     headerContainer.append(logo.getElement(), mainMenu.getElement(), shoppingCart.getElement());
-    this.component.append(this.subHeader.getElement(), headerContainer);
+    this.component.append(promoHeader.getElement(), this.subHeader.getElement(), headerContainer);
   }
 }

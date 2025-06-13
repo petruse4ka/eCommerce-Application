@@ -14,9 +14,9 @@ const TAB_BUTTON = [
   'w-full',
   'rounded-md',
   'border',
-  'border-orange',
   'text-dark',
   'hover:bg-accent-hover',
+  'hover:border-accent-hover',
   'cursor-pointer',
 ];
 
@@ -31,11 +31,12 @@ export const TAB = {
     'w-full',
     'justify-between',
     'xl:justify-start',
+    'group',
   ],
   BUTTON_STYLE: {
-    DEFAULT: [...TAB_BUTTON, 'bg-white'],
-    ACTIVE: [...TAB_BUTTON, 'bg-orange'],
+    DEFAULT: [...TAB_BUTTON, 'bg-white', 'border-primary'],
+    ACTIVE: [...TAB_BUTTON, 'bg-accent', 'border-accent'],
   },
-  ICON: ['w-8', 'h-8'],
+  ICON: ['w-8', 'h-8', 'fill-black'],
   NAME: ['hidden', 'md:block'],
 };

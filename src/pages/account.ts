@@ -1,8 +1,5 @@
 import '@/styles/main.css';
 
-import accountEditIcon from '@/assets/icons/account-edit.svg';
-import homeEditIcon from '@/assets/icons/home-edit.svg';
-import shieldEditIcon from '@/assets/icons/shield-edit.svg';
 import AddressList from '@/components/address-list';
 import BaseComponent from '@/components/base';
 import FormEditPassword from '@/components/forms/edit-password';
@@ -10,12 +7,13 @@ import Modal from '@/components/modal';
 import PersonalInfo from '@/components/personal-info';
 import Tabs from '@/components/tabs';
 import { PAGE_TITLES } from '@/constants';
+import { SVG_ICONS } from '@/data';
 import { userState } from '@/store/user-state';
 import { ACCOUNT_PAGE } from '@/styles/pages/account';
 import { TAB } from '@/styles/tab';
 import { AddressType, AddressTypeText, ModalTitle, TabAccount } from '@/types/enums';
 import ElementBuilder from '@/utils/element-builder';
-import ImageBuilder from '@/utils/image-builder';
+import SVGBuilder from '@/utils/svg-builder';
 import TransformApiData from '@/utils/transform-api-data';
 
 export default class AccountPage extends BaseComponent {
@@ -62,22 +60,28 @@ export default class AccountPage extends BaseComponent {
     addressesIcon: HTMLElement;
     passwordIcon: HTMLElement;
   } {
-    const personalInfoIcon = new ImageBuilder({
-      source: accountEditIcon,
-      alt: 'Personal Info',
-      className: TAB.ICON,
+    const personalInfoIcon = new SVGBuilder({
+      source: SVG_ICONS.ACCOUNT_EDIT_ICON,
+      className: [],
+      classNameIcon: TAB.ICON,
+      viewBox: '0 0 24 24',
+      iconSize: 24,
     }).getElement();
 
-    const addressesIcon = new ImageBuilder({
-      source: homeEditIcon,
-      alt: 'Addresses',
-      className: TAB.ICON,
+    const addressesIcon = new SVGBuilder({
+      source: SVG_ICONS.HOME_EDIT_ICON,
+      className: [],
+      classNameIcon: TAB.ICON,
+      viewBox: '0 0 24 24',
+      iconSize: 24,
     }).getElement();
 
-    const passwordIcon = new ImageBuilder({
-      source: shieldEditIcon,
-      alt: 'Change Password',
-      className: TAB.ICON,
+    const passwordIcon = new SVGBuilder({
+      source: SVG_ICONS.SHIELD_EDIT_ICON,
+      className: [],
+      classNameIcon: TAB.ICON,
+      viewBox: '0 0 24 24',
+      iconSize: 24,
     }).getElement();
 
     return { personalInfoIcon, addressesIcon, passwordIcon };

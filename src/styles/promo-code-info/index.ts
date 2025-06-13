@@ -19,3 +19,21 @@ export const PROMO_CODE_INFO = [
   'border',
   'border-peach',
 ];
+
+export const PROMO_CODE_INFO_GRADIENT = [
+  'flex',
+  'items-center',
+  'w-full',
+  'bg-gradient-to-br',
+  'from-accent',
+  'to-accent-hover',
+  'rounded-md',
+  'font-bold',
+  'h-[60px]',
+  'justify-center',
+  'text-white-permanent',
+  'text-sm',
+  'sm:text-lg',
+  'md:text-xl',
+  'shadow-md',
+];

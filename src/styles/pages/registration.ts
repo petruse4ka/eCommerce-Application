@@ -3,7 +3,7 @@ export const CONTAINER = [
   'relative',
   'flex',
   'justify-center',
-  'bg-pink',
+  'bg-bright',
   'bg-[url(@/assets/images/bg-macarons.png)]',
   'bg-top',
   'bg-no-repeat',
@@ -35,4 +35,4 @@ export const MACARON_CONTAINER = [
   'bg-no-repeat',
 ];
 
-export const TITLE = ['text-3xl', 'font-bold', 'text-center'];
+export const TITLE = ['text-3xl', 'font-bold', 'text-center', 'text-black'];
