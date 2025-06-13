@@ -172,3 +172,9 @@ export enum ModalTitle {
   NEW = 'Новый адрес',
   CHANGE_PASSWORD = 'Смена пароля',
 }
+
+export enum Language {
+  ENGLISH = 'en',
+  RUSSIAN = 'ru',
+  DUTCH = 'nl',
+}

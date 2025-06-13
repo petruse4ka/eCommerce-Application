@@ -1,3 +1,4 @@
+import { Language } from './enums';
 import type {
   Addresses,
   Category,
@@ -103,4 +104,9 @@ export function isActionHandler<T>(
   callback: ActionWithArgumentHandler<T> | ActionHandler
 ): callback is ActionHandler {
   return callback.length === 0;
+}
+
+export function isValidLanguage(lang: string | null): lang is Language {
+  if (!lang) return false;
+  return Object.values(Language).includes(lang);
 }

@@ -1,4 +1,8 @@
+import { en } from '@/locales/en';
+import { nl } from '@/locales/nl';
+import { ru } from '@/locales/ru';
 import { Route } from '@/types/enums';
+import { Language } from '@/types/enums';
 import type { MenuItem } from '@/types/interfaces';
 
 export const VALIDATE_CONST = {
@@ -287,3 +291,9 @@ export const CART_TEXT = {
 export const PROMO_CODE_TEXT = 'SALE10 - промокод на первую покупку';
 
 export const PROMO_PLACEHOLDER = 'Введите промокод';
+
+export const TRANSLATIONS = {
+  [Language.ENGLISH]: en,
+  [Language.RUSSIAN]: ru,
+  [Language.DUTCH]: nl,
+};
