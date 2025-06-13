@@ -1,7 +1,14 @@
 import Alert from '@/components/alert';
 import Router from '@/router';
 import { userState } from '@/store/user-state';
-import { AlertStatus, AlertText, ApiEndpoint, ApiMethods, ContentType } from '@/types/enums';
+import {
+  AlertStatus,
+  AlertText,
+  AlertTime,
+  ApiEndpoint,
+  ApiMethods,
+  ContentType,
+} from '@/types/enums';
 import { Route } from '@/types/enums';
 import type {
   AuthorizationBody,
@@ -46,7 +53,7 @@ export default class API {
           Alert.render({
             textContent: AlertText.REGISTRATION_SUCCESS,
             status: AlertStatus.SUCCESS,
-            visibleTime: 3000,
+            visibleTime: AlertTime.DEFAULT,
           });
 
           void API.userSignInResponse({
@@ -90,7 +97,7 @@ export default class API {
             Alert.render({
               textContent: AlertText.AUTHORIZATION_SUCCESS,
               status: AlertStatus.SUCCESS,
-              visibleTime: 3000,
+              visibleTime: AlertTime.DEFAULT,
             });
             Router.followRoute(Route.HOME);
           }
@@ -162,7 +169,7 @@ export default class API {
         Alert.render({
           textContent: errorInfo,
           status: AlertStatus.ERROR,
-          visibleTime: 4000,
+          visibleTime: AlertTime.DEFAULT,
         });
 
         throw new Error(error.message);

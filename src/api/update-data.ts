@@ -1,6 +1,13 @@
 import Alert from '@/components/alert';
 import { userState } from '@/store/user-state';
-import { AlertStatus, AlertText, ApiEndpoint, ApiMethods, ContentType } from '@/types/enums';
+import {
+  AlertStatus,
+  AlertText,
+  AlertTime,
+  ApiEndpoint,
+  ApiMethods,
+  ContentType,
+} from '@/types/enums';
 import type {
   AddAddressBody,
   Addresses,
@@ -40,7 +47,7 @@ export default class APIUpdateData {
           Alert.render({
             textContent: AlertText.CHANGE_SUCCESS,
             status: AlertStatus.SUCCESS,
-            visibleTime: 3000,
+            visibleTime: AlertTime.DEFAULT,
           });
         }
       })
@@ -50,7 +57,7 @@ export default class APIUpdateData {
         Alert.render({
           textContent: AlertText.ERROR_DEFAULT,
           status: AlertStatus.ERROR,
-          visibleTime: 3000,
+          visibleTime: AlertTime.DEFAULT,
         });
       });
   }
@@ -79,7 +86,7 @@ export default class APIUpdateData {
           Alert.render({
             textContent: AlertText.CHANGE_ADDRESS_SUCCESS,
             status: AlertStatus.SUCCESS,
-            visibleTime: 3000,
+            visibleTime: AlertTime.DEFAULT,
           });
         }
       })
@@ -89,7 +96,7 @@ export default class APIUpdateData {
         Alert.render({
           textContent: AlertText.ERROR_DEFAULT,
           status: AlertStatus.ERROR,
-          visibleTime: 3000,
+          visibleTime: AlertTime.DEFAULT,
         });
       });
   }
@@ -128,7 +135,7 @@ export default class APIUpdateData {
             Alert.render({
               textContent: AlertText.PASSWORD_CHANGE_SUCCESS,
               status: AlertStatus.SUCCESS,
-              visibleTime: 3000,
+              visibleTime: AlertTime.DEFAULT,
             });
           }
         });
@@ -162,7 +169,7 @@ export default class APIUpdateData {
           Alert.render({
             textContent: AlertContent,
             status: AlertStatus.SUCCESS,
-            visibleTime: 3000,
+            visibleTime: AlertTime.DEFAULT,
           });
         }
       })
@@ -172,7 +179,7 @@ export default class APIUpdateData {
         Alert.render({
           textContent: AlertText.ERROR_DEFAULT,
           status: AlertStatus.ERROR,
-          visibleTime: 3000,
+          visibleTime: AlertTime.DEFAULT,
         });
       });
   }
@@ -201,7 +208,7 @@ export default class APIUpdateData {
           Alert.render({
             textContent: AlertText.SET_DEFAULT_ADDRESS,
             status: AlertStatus.SUCCESS,
-            visibleTime: 3000,
+            visibleTime: AlertTime.DEFAULT,
           });
         }
       })
@@ -211,7 +218,7 @@ export default class APIUpdateData {
         Alert.render({
           textContent: AlertText.ERROR_DEFAULT,
           status: AlertStatus.ERROR,
-          visibleTime: 3000,
+          visibleTime: AlertTime.DEFAULT,
         });
       });
   }
@@ -254,7 +261,7 @@ export default class APIUpdateData {
         Alert.render({
           textContent: AlertText.ERROR_DEFAULT,
           status: AlertStatus.ERROR,
-          visibleTime: 3000,
+          visibleTime: AlertTime.DEFAULT,
         });
       });
   }
@@ -285,7 +292,7 @@ export default class APIUpdateData {
             Alert.render({
               textContent: AlertText.ADD_ADDRESS_SUCCESS,
               status: AlertStatus.SUCCESS,
-              visibleTime: 3000,
+              visibleTime: AlertTime.DEFAULT,
             });
           }
         }
@@ -295,7 +302,7 @@ export default class APIUpdateData {
         Alert.render({
           textContent: AlertText.ERROR_DEFAULT,
           status: AlertStatus.ERROR,
-          visibleTime: 3000,
+          visibleTime: AlertTime.DEFAULT,
         });
       });
   }

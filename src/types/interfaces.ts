@@ -707,7 +707,7 @@ export interface ProductQuantityParameters {
   text: string;
   count: number;
   secondElement?: HTMLElement;
-  callback?: (count: number) => void;
+  callback?: (count: number) => Promise<boolean>;
 }
 
 export interface ProductQuantityTransform {
@@ -755,7 +755,7 @@ export interface AddDiscountCode {
 export interface PersonalText {
   name: string;
   role: string;
-  description?: string;
+  description?: string[];
   github: Crewman;
 }
 

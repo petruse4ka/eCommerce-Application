@@ -1,10 +1,11 @@
+import { CartStateKey } from '@/types/enums';
 import type { CartInfo, CartLineItem } from '@/types/interfaces';
 import type { ActionWithArgumentHandler } from '@/types/types';
 
 class CartState {
   private itemsCount: number = 0;
   private cartInfo: CartInfo | null = null;
-  private subscribers: ActionWithArgumentHandler<number>[] = [];
+  private subscribers: Map<string, ActionWithArgumentHandler<number>[]> = new Map();
   private lineItems: CartLineItem[] = [];
 
   public getItemsCount(): number {
@@ -17,7 +18,7 @@ class CartState {
 
   public setItemsCount(count: number): void {
     this.itemsCount = count;
-    this.notify();
+    this.notify(CartStateKey.ITEMS_COUNT);
   }
 
   public getCartInfo(): CartInfo | null {
@@ -26,36 +27,52 @@ class CartState {
 
   public setCartInfo(cartInfo: CartInfo): void {
     this.cartInfo = cartInfo;
-    this.notify();
+    this.notify(CartStateKey.CART_INFO);
   }
 
-  public subscribe(callback: ActionWithArgumentHandler<number>): void {
-    this.subscribers.push(callback);
+  public subscribe(key: string, callback: ActionWithArgumentHandler<number>): void {
+    const callbacks = this.subscribers.get(key);
+
+    if (callbacks) {
+      callbacks.push(callback);
+      this.subscribers.set(key, callbacks);
+    } else {
+      this.subscribers.set(key, [callback]);
+    }
   }
 
-  public unsubscribe(callback: ActionWithArgumentHandler<number>): void {
-    this.subscribers = this.subscribers.filter((subscriber) => subscriber !== callback);
+  public unsubscribe(key: string, callback: ActionWithArgumentHandler<number>): void {
+    const callbacks = this.subscribers.get(key);
+    if (callbacks) {
+      const subscribers = callbacks.filter((subscriber) => subscriber !== callback);
+      this.subscribers.set(key, subscribers);
+    }
   }
 
-  public updateCart(cartInfo: CartInfo, lineItems: CartLineItem[]): void {
-    this.cartInfo = cartInfo;
+  public updateCartLine(lineItems: CartLineItem[]): void {
     this.lineItems = lineItems;
-    this.notify();
+    this.notify(CartStateKey.UPDATE_CART_LINE);
   }
 
   public clearCartState(): void {
     this.cartInfo = null;
     this.lineItems = [];
     this.itemsCount = 0;
-    this.notify();
+    this.notify(CartStateKey.CART_INFO);
+    this.notify(CartStateKey.UPDATE_CART_LINE);
+    this.notify(CartStateKey.ITEMS_COUNT);
   }
 
-  private notify(): void {
-    for (const callback of this.subscribers) {
-      if (callback.length === 0) {
-        callback();
-      } else {
-        callback(this.itemsCount);
+  private notify(key: string): void {
+    const callbacks = this.subscribers.get(key);
+
+    if (callbacks) {
+      for (const callback of callbacks) {
+        if (callback.length === 0) {
+          callback();
+        } else {
+          callback(this.itemsCount);
+        }
       }
     }
   }
