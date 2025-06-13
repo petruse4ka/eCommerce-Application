@@ -106,7 +106,6 @@ export function isActionHandler<T>(
   return callback.length === 0;
 }
 
-export function isValidLanguage(lang: string | null): lang is Language {
-  if (!lang) return false;
-  return Object.values(Language).includes(lang);
+export function isValidLanguage(lang: string): lang is Language {
+  return lang === Language.ENGLISH || lang === Language.RUSSIAN || lang === Language.DUTCH;
 }
