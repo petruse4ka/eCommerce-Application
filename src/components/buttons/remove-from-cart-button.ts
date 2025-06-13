@@ -76,10 +76,14 @@ export default class RemoveFromCartButton {
   }
 
   private updateState(): void {
-    const lineItems = cartState.getLineItems();
-    const isInCart = lineItems.some((item) => item.productId === this.productId);
-    if (isInCart) {
-      this.showRemoveButton();
+    const lineItems = cartState.getCartInfo()?.lineItems;
+    if (Array.isArray(lineItems)) {
+      const isInCart = lineItems.some((item) => item.productId === this.productId);
+      if (isInCart) {
+        this.showRemoveButton();
+      } else {
+        this.hiddenRemoveButton();
+      }
     } else {
       this.hiddenRemoveButton();
     }
