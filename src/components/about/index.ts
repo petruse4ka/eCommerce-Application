@@ -85,6 +85,10 @@ export default class Person extends BaseComponent {
       className: ABOUT_STYLE.DESCRIPTION,
     }).getElement();
 
+    description.addEventListener('mouseleave', function () {
+      this.scrollTo(0, 0);
+    });
+
     for (const paragraph of text) {
       const currentStyle = /Спасибо/.test(paragraph)
         ? ABOUT_STYLE.DESCRIPTION_THANKS
