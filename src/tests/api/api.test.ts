@@ -1,4 +1,5 @@
 import API from '@/api';
+import { userState } from '@/store/user-state';
 
 describe('API', () => {
   test('should handle successful login', async () => {
@@ -24,7 +25,10 @@ describe('API', () => {
         }),
     });
 
-    const result = await API.userSignInResponse({
+    vi.spyOn(userState, 'getTokenState').mockReturnValue('mock-token');
+    const setAuth = vi.spyOn(userState, 'setAuthorizationState').mockImplementation(() => {});
+
+    await API.userSignInResponse({
       userInfo: {
         email: 'testmail@testdomain.ru',
         password: '123qweQWE',
@@ -32,7 +36,8 @@ describe('API', () => {
       isLogin: true,
     });
 
-    expect(result).toBe('test-id');
+    expect(setAuth).toHaveBeenCalledTimes(1);
+    expect(setAuth).toHaveBeenCalledWith(true);
   });
 });
 
