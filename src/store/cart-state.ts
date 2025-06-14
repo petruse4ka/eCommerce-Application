@@ -17,7 +17,7 @@ class CartState {
   }
 
   public setItemsCount(count: number): void {
-    this.itemsCount = count;
+    this.itemsCount = count ?? 0;
     this.notify(CartStateKey.ITEMS_COUNT);
   }
 

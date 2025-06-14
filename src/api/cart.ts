@@ -32,7 +32,7 @@ export default class APICart {
         if ('errors' in body) {
           throw new Error(JSON.stringify(body.errors));
         } else {
-          cartState.setItemsCount(body.totalLineItemQuantity ?? 0);
+          cartState.setItemsCount(body.totalLineItemQuantity);
           const cartInfo = await TransformApiCartData.transformCartState(body);
           cartState.setCartInfo(cartInfo);
           cartState.updateCartLine(TransformApiCartData.transformLineItems(body.lineItems));
@@ -130,7 +130,7 @@ export default class APICart {
           if ('errors' in body) {
             throw new Error(JSON.stringify(body.errors));
           } else {
-            cartState.setItemsCount(body.totalLineItemQuantity ?? 0);
+            cartState.setItemsCount(body.totalLineItemQuantity);
             const cartInfo = await TransformApiCartData.transformCartState(body);
             if (cartInfo) {
               cartState.setCartInfo(cartInfo);
@@ -169,7 +169,7 @@ export default class APICart {
           if ('errors' in body) {
             throw new Error(JSON.stringify(body.errors));
           } else {
-            cartState.setItemsCount(body.totalLineItemQuantity ?? 0);
+            cartState.setItemsCount(body.totalLineItemQuantity);
             cartState.setCartInfo(await TransformApiCartData.transformCartState(body));
 
             return true;
