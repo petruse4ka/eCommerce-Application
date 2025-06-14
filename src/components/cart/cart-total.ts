@@ -1,10 +1,11 @@
 import APICart from '@/api/cart';
-import cuteImage from '@/assets/images/cute.png';
+import macaronAstonaut from '@/assets/images/astronaut.png';
 import { BTN_TEXT, CART_TEXT, DEFAULT_CURRENCY } from '@/constants';
 import Router from '@/router';
 import { cartState } from '@/store/cart-state';
 import { CART_TOTAL } from '@/styles/cart/cart-total';
 import { MODAL } from '@/styles/modal';
+import { ASTRONAUT_STYLE, MAIN_CONTAINER } from '@/styles/pages/underconstruction';
 import { ModalTitle, Route } from '@/types/enums';
 import ElementBuilder from '@/utils/element-builder';
 import ImageBuilder from '@/utils/image-builder';
@@ -148,11 +149,18 @@ export default class CartTotal extends BaseComponent {
       className: MODAL.CONTENT.CHECKOUT_PAGE.CONTAINER,
     });
 
-    const img = new ImageBuilder({
-      className: '',
-      source: cuteImage,
-      alt: 'cute macaron',
+    const imageContainer = new ElementBuilder({
+      tag: 'div',
+      className: MAIN_CONTAINER,
     }).getElement();
+
+    const img = new ImageBuilder({
+      className: ASTRONAUT_STYLE,
+      source: macaronAstonaut,
+      alt: 'astronaut macaron',
+    }).getElement();
+
+    imageContainer.append(img);
 
     const text = new ElementBuilder({
       tag: 'p',
@@ -172,7 +180,7 @@ export default class CartTotal extends BaseComponent {
       },
     }).getElement();
 
-    content.getElement().append(img, text, buttonFinish);
+    content.getElement().append(imageContainer, text, buttonFinish);
 
     this.component.append(modal.getElement());
     modal.showModal();

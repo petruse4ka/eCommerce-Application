@@ -2,7 +2,7 @@ export const MODAL = {
   COMPONENT: [
     'm-auto',
     'rounded-md',
-    'bg-white',
+    'bg-gray-light',
     'border',
     'border-orange',
     'shadow-lg',
