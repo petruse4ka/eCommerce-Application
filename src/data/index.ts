@@ -30,6 +30,10 @@ import { FOOTER_TEXTS, GUARANTEES_TEXTS, PACKAGES_TEXTS, SUBHEADER_PROMO_TEXT } 
 import { ABOUT_STYLE } from '@/styles/pages/about';
 import { CheckboxText, DeliveryText, InputType } from '@/types/enums';
 import type { About, Guarantees, Packages, SelectOption } from '@/types/interfaces';
+import { LanguageSelector } from '@/utils/language-selector';
+
+const languageSelector = LanguageSelector.getInstance();
+const locale = languageSelector.translations;
 
 export const PROMO_ITEMS = [
   { ICON: fastDeliveryIcon, TEXT: SUBHEADER_PROMO_TEXT.DELIVERY },
@@ -60,39 +64,39 @@ export const SCHOOL_URL = 'https://rs.school/';
 export const INPUTS_REGISTRATION_DATA = [
   {
     id: 'firstName',
-    labelText: 'Имя',
-    placeholder: 'Укажите имя',
+    labelText: locale.dataRegistrationFirstName,
+    placeholder: locale.dataRegistrationFirstNamePlaceholder,
     type: InputType.TEXT,
     isRequired: true,
     callback: (): void => {},
   },
   {
     id: 'lastName',
-    labelText: 'Фамилия',
-    placeholder: 'Укажите фамилию',
+    labelText: locale.dataRegistrationLastName,
+    placeholder: locale.dataRegistrationLastNamePlaceholder,
     type: InputType.TEXT,
     isRequired: true,
     callback: (): void => {},
   },
   {
     id: 'dateOfBirth',
-    labelText: 'Дата рождения',
+    labelText: locale.dataRegistrationBirthDate,
     type: InputType.DATE,
     isRequired: true,
     callback: (): void => {},
   },
   {
     id: 'email',
-    labelText: 'E-mail',
-    placeholder: 'Укажите e-mail',
+    labelText: locale.dataRegistrationEmail,
+    placeholder: locale.dataRegistrationEmailPlaceholder,
     type: InputType.EMAIL,
     isRequired: true,
     callback: (): void => {},
   },
   {
     id: 'password',
-    labelText: 'Пароль',
-    placeholder: 'Укажите пароль',
+    labelText: locale.dataRegistrationPassword,
+    placeholder: locale.dataRegistrationPasswordPlaceholder,
     type: InputType.PASSWORD,
     isRequired: true,
     callback: (): void => {},
@@ -102,32 +106,32 @@ export const INPUTS_REGISTRATION_DATA = [
 export const INPUTS_ADDRESS_DATA = [
   {
     id: 'Country',
-    labelText: 'Страна',
-    placeholder: 'Россия',
+    labelText: locale.dataAddressCountry,
+    placeholder: locale.dataAddressCountryPlaceholder,
     type: InputType.TEXT,
     isDisabled: true,
     callback: (): void => {},
   },
   {
     id: 'City',
-    labelText: 'Город',
-    placeholder: 'Укажите город',
+    labelText: locale.dataAddressCity,
+    placeholder: locale.dataAddressCityPlaceholder,
     type: InputType.TEXT,
     isRequired: true,
     callback: (): void => {},
   },
   {
     id: 'Street',
-    labelText: 'Улица',
-    placeholder: 'Укажите улицу',
+    labelText: locale.dataAddressStreet,
+    placeholder: locale.dataAddressStreetPlaceholder,
     type: InputType.TEXT,
     isRequired: true,
     callback: (): void => {},
   },
   {
     id: 'PostalCode',
-    labelText: 'Почтовый индекс',
-    placeholder: 'Укажите почтовый индекс',
+    labelText: locale.dataAddressPostalCode,
+    placeholder: locale.dataAddressPostalCodePlaceholder,
     type: InputType.TEXT,
     isRequired: true,
     callback: (): void => {},
@@ -137,32 +141,32 @@ export const INPUTS_ADDRESS_DATA = [
 export const INPUTS_CHANGE_ADDRESS_DATA = [
   {
     id: 'country',
-    labelText: 'Страна',
-    placeholder: 'Россия',
+    labelText: locale.dataAddressCountry,
+    placeholder: locale.dataAddressCountryPlaceholder,
     type: InputType.TEXT,
     isDisabled: true,
     callback: (): void => {},
   },
   {
     id: 'city',
-    labelText: 'Город',
-    placeholder: 'Укажите город',
+    labelText: locale.dataAddressCity,
+    placeholder: locale.dataAddressCityPlaceholder,
     type: InputType.TEXT,
     isRequired: true,
     callback: (): void => {},
   },
   {
     id: 'streetName',
-    labelText: 'Улица',
-    placeholder: 'Укажите улицу',
+    labelText: locale.dataAddressStreet,
+    placeholder: locale.dataAddressStreetPlaceholder,
     type: InputType.TEXT,
     isRequired: true,
     callback: (): void => {},
   },
   {
     id: 'postalCode',
-    labelText: 'Почтовый индекс',
-    placeholder: 'Укажите почтовый индекс',
+    labelText: locale.dataAddressPostalCode,
+    placeholder: locale.dataAddressPostalCodePlaceholder,
     type: InputType.TEXT,
     isRequired: true,
     callback: (): void => {},
@@ -187,15 +191,15 @@ export const CHECKBOXES_REGISTRATION_DATA = [
 export const INPUTS_AUTHORIZATION_DATA = [
   {
     id: 'email',
-    labelText: 'E-mail',
-    placeholder: 'Укажите e-mail',
+    labelText: locale.dataRegistrationEmail,
+    placeholder: locale.dataRegistrationEmailPlaceholder,
     type: InputType.EMAIL,
     isRequired: true,
   },
   {
     id: 'password',
-    labelText: 'Пароль',
-    placeholder: 'Укажите пароль',
+    labelText: locale.dataRegistrationPassword,
+    placeholder: locale.dataRegistrationPasswordPlaceholder,
     type: InputType.PASSWORD,
     isRequired: true,
   },
@@ -204,31 +208,31 @@ export const INPUTS_AUTHORIZATION_DATA = [
 export const INPUTS_EDIT_USER_INFO_DATA = [
   {
     id: 'firstName',
-    labelText: 'Имя',
-    placeholder: 'Укажите имя',
+    labelText: locale.dataRegistrationFirstName,
+    placeholder: locale.dataRegistrationFirstNamePlaceholder,
     type: InputType.TEXT,
     isRequired: true,
     callback: (): void => {},
   },
   {
     id: 'lastName',
-    labelText: 'Фамилия',
-    placeholder: 'Укажите фамилию',
+    labelText: locale.dataRegistrationLastName,
+    placeholder: locale.dataRegistrationLastNamePlaceholder,
     type: InputType.TEXT,
     isRequired: true,
     callback: (): void => {},
   },
   {
     id: 'dateOfBirth',
-    labelText: 'Дата рождения',
+    labelText: locale.dataRegistrationBirthDate,
     type: InputType.DATE,
     isRequired: true,
     callback: (): void => {},
   },
   {
     id: 'email',
-    labelText: 'E-mail',
-    placeholder: 'Укажите e-mail',
+    labelText: locale.dataRegistrationEmail,
+    placeholder: locale.dataRegistrationEmailPlaceholder,
     type: InputType.EMAIL,
     isRequired: true,
     callback: (): void => {},
@@ -238,22 +242,22 @@ export const INPUTS_EDIT_USER_INFO_DATA = [
 export const INPUTS_EDIT_USER_PASSWORD = [
   {
     id: 'currentPassword',
-    labelText: 'Текущий пароль',
-    placeholder: 'Укажите пароль',
+    labelText: locale.dataRegistrationCurrentPassword,
+    placeholder: locale.dataRegistrationPasswordPlaceholder,
     type: InputType.PASSWORD,
     isRequired: true,
   },
   {
     id: 'newPassword',
-    labelText: 'Новый пароль',
-    placeholder: 'Укажите пароль',
+    labelText: locale.dataRegistrationNewPassword,
+    placeholder: locale.dataRegistrationPasswordPlaceholder,
     type: InputType.PASSWORD,
     isRequired: true,
   },
   {
     id: 'repeatNewPassword',
-    labelText: 'Повторите новый пароль',
-    placeholder: 'Укажите пароль',
+    labelText: locale.dataRegistrationRepeatNewPassword,
+    placeholder: locale.dataRegistrationPasswordPlaceholder,
     type: InputType.PASSWORD,
     isRequired: true,
   },
@@ -322,11 +326,11 @@ export const GUARANTEES: Guarantees[] = [
 ];
 
 export const SORTING_OPTIONS: SelectOption[] = [
-  { value: '', text: 'Без сортировки' },
-  { value: 'price asc', text: 'Цена: по возрастанию' },
-  { value: 'price desc', text: 'Цена: по убыванию' },
-  { value: 'name.ru asc', text: 'Название: от А-Я' },
-  { value: 'name.ru desc', text: 'Название: от Я-А' },
+  { value: '', text: locale.dataSortingNoSort },
+  { value: 'price asc', text: locale.dataSortingPriceAsc },
+  { value: 'price desc', text: locale.dataSortingPriceDesc },
+  { value: 'name.ru asc', text: locale.dataSortingNameAsc },
+  { value: 'name.ru desc', text: locale.dataSortingNameDesc },
 ];
 
 export const DELIVERY_ITEMS = [
