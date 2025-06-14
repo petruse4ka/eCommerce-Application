@@ -43,6 +43,11 @@ export default class CartTotal extends BaseComponent {
     this.render();
   }
 
+  private static closeCart(): void {
+    void APICart.deleteCart();
+    Router.followRoute(Route.HOME);
+  }
+
   private static createTotalItem(
     textContent: string,
     price: string,
@@ -168,15 +173,18 @@ export default class CartTotal extends BaseComponent {
       textContent: CART_TEXT.MODAL_TEXT,
     }).getElement();
 
-    const modal = new Modal({ title: ModalTitle.CHECKOUT_CART, content });
+    const modal = new Modal({
+      title: ModalTitle.CHECKOUT_CART,
+      content,
+      callback: CartTotal.closeCart.bind(CartTotal),
+    });
 
     const buttonFinish = new Button({
       style: 'PRICE_BUTTON',
       textContent: BTN_TEXT.FINISH_CART,
       callback: (): void => {
         modal.closeModal();
-        void APICart.deleteCart();
-        Router.followRoute(Route.HOME);
+        CartTotal.closeCart();
       },
     }).getElement();
 

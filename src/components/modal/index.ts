@@ -8,15 +8,19 @@ import FormEditUserInfo from '../forms/edit-info';
 import FormEditPassword from '../forms/edit-password';
 
 export default class Modal extends BaseComponent {
+  private callback: (() => void) | undefined;
   constructor(parameters: {
     title: string;
     content: FormEditUserInfo | FormAddNewAddress | FormEditPassword | ElementBuilder;
+    callback?: () => void;
   }) {
     super({
       tag: 'dialog',
       className: MODAL.COMPONENT,
       attributes: { 'aria-label': parameters.title },
     });
+
+    this.callback = parameters.callback;
 
     if (
       parameters.content instanceof FormEditUserInfo ||
@@ -41,6 +45,10 @@ export default class Modal extends BaseComponent {
     if (this.component instanceof HTMLDialogElement) {
       this.component.close();
       document.body.style.overflow = '';
+    }
+
+    if (this.callback) {
+      this.callback();
     }
 
     this.component.remove();
