@@ -142,7 +142,7 @@ export default class AddressList extends BaseComponent {
   private createClearAddressInfo(): void {
     const info = new ElementBuilder({
       tag: 'div',
-      className: '',
+      className: ADDRESS.NONE,
       textContent: ADDRESS_TYPE_TEXT.NONE,
     }).getElement();
 
