@@ -31,12 +31,7 @@ export default class AddToCartButton {
       callback: async (): Promise<void> => {
         this.setLoadingState();
         try {
-          if (cartState.getCartInfo()) {
-            await APICart.addProductInCart(this.productId);
-          } else {
-            await APICart.createCart();
-            await APICart.addProductInCart(this.productId);
-          }
+          await APICart.addProductInCart(this.productId);
         } catch {
           this.setDefaultState();
         }

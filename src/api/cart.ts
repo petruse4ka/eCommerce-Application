@@ -104,6 +104,8 @@ export default class APICart {
         .catch((error: Error) => {
           this.alertError(error);
         });
+    } else {
+      void APICart.createCart();
     }
   }
 
