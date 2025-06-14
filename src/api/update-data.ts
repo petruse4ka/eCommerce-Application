@@ -118,15 +118,17 @@ export default class APIUpdateData {
         }
       )
         .then((response) => response.json())
-        .then((body: Customer | ErrorResponse) => {
+        .then(async (body: Customer | ErrorResponse) => {
           if ('errors' in body) {
             throw new Error(JSON.stringify(body.errors));
           } else {
+            const userInfo = {
+              email: body.email,
+              password: bodyUser.newPassword,
+            };
+            await API.userAuthentication(userInfo);
             API.userSignInResponse({
-              userInfo: {
-                email: body.email,
-                password: bodyUser.newPassword,
-              },
+              userInfo,
               isLogin: false,
             }).catch((error: ErrorInfo) => {
               console.error(error);
