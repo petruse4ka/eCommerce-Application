@@ -2,7 +2,7 @@ import Alert from '@/components/alert';
 import { ALERT_TEXT } from '@/constants';
 import Router from '@/router';
 import { userState } from '@/store/user-state';
-import { AlertStatus, ApiEndpoint, ApiMethods, ContentType } from '@/types/enums';
+import { AlertStatus, AlertTime, ApiEndpoint, ApiMethods, ContentType } from '@/types/enums';
 import { Route } from '@/types/enums';
 import type {
   AuthorizationBody,
@@ -47,7 +47,7 @@ export default class API {
           Alert.render({
             textContent: ALERT_TEXT.REGISTRATION_SUCCESS,
             status: AlertStatus.SUCCESS,
-            visibleTime: 3000,
+            visibleTime: AlertTime.DEFAULT,
           });
 
           void API.userSignInResponse({
@@ -68,9 +68,10 @@ export default class API {
   public static async userSignInResponse(body: {
     userInfo: AuthorizationBody;
     isLogin: boolean;
-  }): Promise<string | void> {
+  }): Promise<void> {
     const { userInfo, isLogin } = body;
-    const token = await this.userAuthentication(userInfo);
+    const token = userState.getTokenState();
+    await this.userAuthentication(userInfo);
     const fetchBody = { ...userInfo };
 
     if (token) {
@@ -91,14 +92,13 @@ export default class API {
             Alert.render({
               textContent: ALERT_TEXT.AUTHORIZATION_SUCCESS,
               status: AlertStatus.SUCCESS,
-              visibleTime: 3000,
+              visibleTime: AlertTime.DEFAULT,
             });
             Router.followRoute(Route.HOME);
           }
           userState.setUserInfoState(body.customer);
           userState.setAuthorizationState(true);
           void APICart.getCart();
-          return body.customer.id;
         });
     }
   }
@@ -128,7 +128,7 @@ export default class API {
       });
   }
 
-  private static async userAuthentication(body: AuthorizationBody): Promise<string | void> {
+  public static async userAuthentication(body: AuthorizationBody): Promise<string | void> {
     return await fetch(
       import.meta.env['VITE_CTP_AUTH_URL'] +
         ApiEndpoint.OATH +
@@ -163,7 +163,7 @@ export default class API {
         Alert.render({
           textContent: errorInfo,
           status: AlertStatus.ERROR,
-          visibleTime: 4000,
+          visibleTime: AlertTime.DEFAULT,
         });
 
         throw new Error(error.message);

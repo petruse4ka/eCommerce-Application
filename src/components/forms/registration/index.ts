@@ -18,7 +18,7 @@ import {
 } from '@/styles/forms/forms';
 import { CHECKBOX_CONTAINER_STYLE } from '@/styles/inputs/inputs';
 import { MACARON_CONTAINER } from '@/styles/pages/registration';
-import { AlertStatus, InputType } from '@/types/enums';
+import { AlertStatus, AlertTime, InputType } from '@/types/enums';
 import { Route } from '@/types/enums';
 import { isErrorInfoItem } from '@/types/guards';
 import type { RegistrationBody } from '@/types/interfaces';
@@ -303,13 +303,13 @@ export default class FormRegistration {
               Alert.render({
                 textContent: errorInfo,
                 status: AlertStatus.ERROR,
-                visibleTime: 3000,
+                visibleTime: AlertTime.DEFAULT,
               });
             } else {
               Alert.render({
                 textContent: ALERT_TEXT.ERROR_DEFAULT,
                 status: AlertStatus.ERROR,
-                visibleTime: 3000,
+                visibleTime: AlertTime.DEFAULT,
               });
             }
           }

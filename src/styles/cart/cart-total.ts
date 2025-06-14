@@ -8,6 +8,7 @@ export const CART_TOTAL = {
     'flex',
     'flex-col',
     'gap-5',
+    'relative',
   ],
   TITLE: ['font-bold', 'text-xl', 'text-black'],
   ITEM: {
@@ -19,6 +20,7 @@ export const CART_TOTAL = {
       DEFAULT: ['text-l', 'text-black'],
       ACCENT: ['text-xl', 'font-bold', 'text-black'],
     },
-    DOTTED: ['flex-grow', 'border-b', 'border-dotted', 'border-gray-400', 'mx-2'],
+    DOTTED: ['flex-grow', 'border-b', 'border-dotted', 'border-gray', 'mx-2'],
   },
+  LOADER: ['absolute', 'p-3', 'w-full', 'h-full', 'bg-gray/80', 'top-0', 'left-0'],
 };

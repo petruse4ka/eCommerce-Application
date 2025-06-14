@@ -89,7 +89,8 @@ const body = {
 describe('APICart', () => {
   test('get cart', async () => {
     const bodyTransform = TransformApiCartData.transformProductLine(body.lineItems);
-    const updateCart = vi.spyOn(cartState, 'updateCart');
+    const updateCart = vi.spyOn(cartState, 'setCartInfo');
+    const updateCartLine = vi.spyOn(cartState, 'updateCartLine');
 
     globalThis.fetch = vi.fn().mockResolvedValueOnce({
       ok: true,
@@ -98,15 +99,16 @@ describe('APICart', () => {
 
     await expect(APICart.createCart()).resolves.toBeUndefined();
 
-    expect(updateCart).toHaveBeenCalledWith(
-      {
-        version: 1,
-        id: 'cart-id',
-        lineItems: bodyTransform,
-        totalPrice: 65,
-        totalDiscountPrice: 0,
-        discountCode: null,
-      },
+    expect(updateCart).toHaveBeenCalledWith({
+      version: 1,
+      id: 'cart-id',
+      lineItems: bodyTransform,
+      totalPrice: 65,
+      totalDiscountPrice: 0,
+      discountCode: null,
+    });
+
+    expect(updateCartLine).toHaveBeenCalledWith(
       TransformApiCartData.transformLineItems(body.lineItems)
     );
   });

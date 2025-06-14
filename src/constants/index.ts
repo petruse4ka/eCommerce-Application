@@ -133,6 +133,7 @@ export const BTN_TEXT = {
   CHECKOUT: locale.btnCheckout,
   APPLY: locale.btnApply,
   CLEAR_CART: locale.btnClearCart,
+  FINISH_CART: locale.btnFinishCart,
 };
 
 export const INTRO_TEXTS = {
@@ -265,6 +266,7 @@ export const PRODUCT_TEXT = {
   ERROR_ADDRESS: locale.productTextErrorAddress,
   CATALOG: locale.productTextCatalog,
   LOADING_PRODUCT: locale.productTextLoadingProduct,
+  REMOVE: locale.productTextRemove,
 };
 
 export const DEFAULT_QUANTITY_AMOUNT = 1;
@@ -280,6 +282,8 @@ export const CART_TEXT = {
   EMPTY: locale.cartTextEmpty,
   CATALOG: locale.cartTextCatalog,
   PROMO_CODE_APPLY: locale.cartTextPromoCodeApply,
+  LOADING_TOTAL: locale.cartTextLoadingTotal,
+  MODAL_TEXT: locale.cartTextModalText,
 };
 
 export const PROMO_CODE_TEXT = locale.promoCodeText;
@@ -370,6 +374,7 @@ export const MODAL_TITLE = {
   CHANGE_USER_INFO: locale.modalTitleChangeUserInfo,
   NEW: locale.modalTitleNew,
   CHANGE_PASSWORD: locale.modalTitleChangePassword,
+  CHECKOUT_CART: locale.modalTitleCheckoutCart,
 };
 
 export const ADDRESS_KEY = {

@@ -153,6 +153,6 @@
   }
 
   h1 {
-    @apply text-pink;
+    @apply text-black;
   }
 }

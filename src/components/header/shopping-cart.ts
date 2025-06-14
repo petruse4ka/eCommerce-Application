@@ -3,7 +3,7 @@ import { SVG_ICONS } from '@/data';
 import Router from '@/router';
 import { cartState } from '@/store/cart-state';
 import { HEADER_STYLES } from '@/styles/header/header';
-import { Route } from '@/types/enums';
+import { CartStateKey, Route } from '@/types/enums';
 import ElementBuilder from '@/utils/element-builder';
 import SVGBuilder from '@/utils/svg-builder';
 
@@ -23,12 +23,12 @@ export default class ShoppingCartIcon extends BaseComponent {
       Router.followRoute(Route.CART);
     });
 
-    cartState.subscribe(this.updateIndicator.bind(this));
+    cartState.subscribe(CartStateKey.ITEMS_COUNT, this.updateIndicator.bind(this));
     this.render();
   }
 
   public override remove(): void {
-    cartState.unsubscribe(this.updateIndicator.bind(this));
+    cartState.unsubscribe(CartStateKey.ITEMS_COUNT, this.updateIndicator.bind(this));
     super.remove();
   }
 

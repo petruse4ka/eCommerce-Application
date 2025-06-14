@@ -1,11 +1,11 @@
 import BaseComponent from '@/components/base';
 import AddToCartButton from '@/components/buttons/add-to-cart-button';
+import RemoveFromCartButton from '@/components/buttons/remove-from-cart-button';
+import ProductList from '@/components/catalog/product-list';
 import { DEFAULT_CURRENCY } from '@/constants';
 import { PRODUCT_STYLES } from '@/styles/pages/product';
 import type { Price, PriceValue } from '@/types/interfaces';
 import ElementBuilder from '@/utils/element-builder';
-
-import ProductList from '../catalog/product-list';
 
 export default class ProductPrices extends BaseComponent {
   private productId: string;
@@ -42,6 +42,13 @@ export default class ProductPrices extends BaseComponent {
     }).getElement();
   }
 
+  private static createRemoveFromCartButton(productId: string): HTMLElement {
+    return new RemoveFromCartButton({
+      style: 'REMOVE_FROM_CART',
+      productId: productId,
+    }).getElement();
+  }
+
   protected render(prices: PriceValue): void {
     const actualPrice = `${prices.price.toFixed(2)}${DEFAULT_CURRENCY}`;
     const noActualPrice = prices.oldPrice ? `${prices.oldPrice.toFixed(2)}${DEFAULT_CURRENCY}` : '';
@@ -65,7 +72,9 @@ export default class ProductPrices extends BaseComponent {
     this.component.append(oldPrice);
 
     const button = ProductPrices.createAddToCartButton(this.productId);
+    const deleteButton = ProductPrices.createRemoveFromCartButton(this.productId);
 
     this.component.append(button);
+    this.component.append(deleteButton);
   }
 }

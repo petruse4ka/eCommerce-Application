@@ -86,3 +86,13 @@ export enum Language {
   RUSSIAN = 'ru',
   DUTCH = 'nl',
 }
+
+export enum CartStateKey {
+  CART_INFO = 'cartInfo',
+  UPDATE_CART_LINE = 'updateCartLine',
+  ITEMS_COUNT = 'itemsCount',
+}
+
+export enum AlertTime {
+  DEFAULT = 3000,
+}

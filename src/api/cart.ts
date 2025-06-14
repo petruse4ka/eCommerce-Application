@@ -2,7 +2,7 @@ import Alert from '@/components/alert';
 import { ALERT_TEXT } from '@/constants';
 import { cartState } from '@/store/cart-state';
 import { userState } from '@/store/user-state';
-import { AlertStatus, ApiEndpoint, ApiMethods, ContentType } from '@/types/enums';
+import { AlertStatus, AlertTime, ApiEndpoint, ApiMethods, ContentType } from '@/types/enums';
 import type { CartResponse, DiscountCodeResponse, ErrorResponse } from '@/types/interfaces';
 import { TransformApiCartData } from '@/utils/transform-api-cart-data';
 
@@ -26,21 +26,14 @@ export default class APICart {
         if ('errors' in body) {
           throw new Error(JSON.stringify(body.errors));
         } else {
-          const cartInfo = await TransformApiCartData.transformCartState(body);
-          if (cartInfo) {
-            cartState.updateCart(cartInfo, TransformApiCartData.transformLineItems(body.lineItems));
-          }
           cartState.setItemsCount(body.totalLineItemQuantity ?? 0);
+          const cartInfo = await TransformApiCartData.transformCartState(body);
+          cartState.setCartInfo(cartInfo);
+          cartState.updateCartLine(TransformApiCartData.transformLineItems(body.lineItems));
         }
       })
-      .catch((error) => {
-        console.error(error);
-
-        Alert.render({
-          textContent: ALERT_TEXT.ERROR_DEFAULT,
-          status: AlertStatus.ERROR,
-          visibleTime: 3000,
-        });
+      .catch((error: Error) => {
+        this.alertError(error);
       });
   }
 
@@ -65,24 +58,14 @@ export default class APICart {
           if ('errors' in body) {
             throw new Error(JSON.stringify(body.errors));
           } else {
-            const cartInfo = await TransformApiCartData.transformCartState(body);
-            if (cartInfo) {
-              cartState.updateCart(
-                cartInfo,
-                TransformApiCartData.transformLineItems(body.lineItems)
-              );
-            }
             cartState.setItemsCount(body.totalLineItemQuantity);
+            const cartInfo = await TransformApiCartData.transformCartState(body);
+            cartState.setCartInfo(cartInfo);
+            cartState.updateCartLine(TransformApiCartData.transformLineItems(body.lineItems));
           }
         })
-        .catch((error) => {
-          console.error(error);
-
-          Alert.render({
-            textContent: ALERT_TEXT.ERROR_DEFAULT,
-            status: AlertStatus.ERROR,
-            visibleTime: 3000,
-          });
+        .catch((error: Error) => {
+          this.alertError(error);
         });
     }
   }
@@ -107,23 +90,13 @@ export default class APICart {
             void APICart.createCart();
           } else {
             const cartInfo = await TransformApiCartData.transformCartState(body);
-            if (cartInfo) {
-              cartState.updateCart(
-                cartInfo,
-                TransformApiCartData.transformLineItems(body.lineItems)
-              );
-            }
             cartState.setItemsCount(body.totalLineItemQuantity);
+            cartState.setCartInfo(cartInfo);
+            cartState.updateCartLine(TransformApiCartData.transformLineItems(body.lineItems));
           }
         })
-        .catch((error) => {
-          console.error(error);
-
-          Alert.render({
-            textContent: ALERT_TEXT.ERROR_DEFAULT,
-            status: AlertStatus.ERROR,
-            visibleTime: 3000,
-          });
+        .catch((error: Error) => {
+          this.alertError(error);
         });
     }
   }
@@ -149,31 +122,29 @@ export default class APICart {
           if ('errors' in body) {
             throw new Error(JSON.stringify(body.errors));
           } else {
+            cartState.setItemsCount(body.totalLineItemQuantity ?? 0);
             const cartInfo = await TransformApiCartData.transformCartState(body);
             if (cartInfo) {
               cartState.setCartInfo(cartInfo);
             }
-            cartState.setItemsCount(body.totalLineItemQuantity ?? 0);
+            cartState.updateCartLine(TransformApiCartData.transformLineItems(body.lineItems));
           }
         })
-        .catch((error) => {
-          console.error(error);
-
-          Alert.render({
-            textContent: ALERT_TEXT.ERROR_DEFAULT,
-            status: AlertStatus.ERROR,
-            visibleTime: 3000,
-          });
+        .catch((error: Error) => {
+          this.alertError(error);
         });
     }
   }
 
-  public static async changeProductQuantity(body: { id: string; quantity: number }): Promise<void> {
+  public static async changeProductQuantity(body: {
+    id: string;
+    quantity: number;
+  }): Promise<boolean> {
     const token = userState.getTokenState();
     const cartInfo = cartState.getCartInfo();
 
     if (cartInfo) {
-      await fetch(
+      return fetch(
         `${import.meta.env['VITE_CTP_API_URL']}/${import.meta.env['VITE_CTP_PROJECT_KEY']}/me${ApiEndpoint.CART}/${cartInfo.id}`,
         {
           method: ApiMethods.POST,
@@ -181,6 +152,7 @@ export default class APICart {
             Authorization: `Bearer ${token}`,
             'Content-Type': ContentType.JSON,
           },
+
           body: JSON.stringify(TransformApiCartData.transformProductQuantity(body)),
         }
       )
@@ -189,22 +161,21 @@ export default class APICart {
           if ('errors' in body) {
             throw new Error(JSON.stringify(body.errors));
           } else {
-            const cartInfo = await TransformApiCartData.transformCartState(body);
-
-            cartState.setCartInfo(cartInfo);
             cartState.setItemsCount(body.totalLineItemQuantity ?? 0);
+            cartState.setCartInfo(await TransformApiCartData.transformCartState(body));
+
+            return true;
           }
         })
-        .catch((error) => {
-          console.error(error);
+        .catch((error: Error) => {
+          if (error instanceof Error && error.name === 'AbortError') return false;
+          this.alertError(error);
 
-          Alert.render({
-            textContent: ALERT_TEXT.ERROR_DEFAULT,
-            status: AlertStatus.ERROR,
-            visibleTime: 3000,
-          });
+          return false;
         });
     }
+
+    return false;
   }
 
   public static async addPromoCode(code: string): Promise<void> {
@@ -259,14 +230,8 @@ export default class APICart {
             cartState.clearCartState();
           }
         })
-        .catch((error) => {
-          console.error(error);
-
-          Alert.render({
-            textContent: ALERT_TEXT.ERROR_DEFAULT,
-            status: AlertStatus.ERROR,
-            visibleTime: 3000,
-          });
+        .catch((error: Error) => {
+          this.alertError(error);
         });
     }
   }
@@ -290,14 +255,18 @@ export default class APICart {
         return response.json();
       })
       .then((body: DiscountCodeResponse) => body.code)
-      .catch((error) => {
-        console.error(error);
-
-        Alert.render({
-          textContent: ALERT_TEXT.ERROR_DEFAULT,
-          status: AlertStatus.ERROR,
-          visibleTime: 3000,
-        });
+      .catch((error: Error) => {
+        this.alertError(error);
       });
+  }
+
+  private static alertError(error: Error): void {
+    console.error(error);
+
+    Alert.render({
+      textContent: ALERT_TEXT.ERROR_DEFAULT,
+      status: AlertStatus.ERROR,
+      visibleTime: AlertTime.DEFAULT,
+    });
   }
 }
