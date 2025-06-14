@@ -49,10 +49,10 @@ export default class AboutPage extends BaseComponent {
       className: ABOUT_STYLE.CONTAINER,
     }).getElement();
 
-    container.append(new Person(ABOUT.MARGO, true).getElement());
     container.append(new Person(ABOUT.KONSTANTIN, true).getElement());
     container.append(new Person(ABOUT.DANIIL, true).getElement());
     container.append(new Person(ABOUT.OLGA, true).getElement());
+    container.append(new Person(ABOUT.MARGO, true).getElement());
 
     this.component.append(container);
 

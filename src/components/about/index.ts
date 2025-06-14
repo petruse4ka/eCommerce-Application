@@ -70,31 +70,33 @@ export default class Person extends BaseComponent {
       textContent: texts.role,
     }).getElement();
 
-    const description = new BaseComponent({
-      tag: 'div',
-      className: ABOUT_STYLE.DESCRIPTION,
-    }).getElement();
-
-    if (Array.isArray(texts.description)) {
-      //for (const paragraph of texts.description) {
-      const paragraph = texts.description[0];
-      const currentStyle = /Спасибо/.test(paragraph)
-        ? ABOUT_STYLE.DESCRIPTION_THANKS
-        : ABOUT_STYLE.DESCRIPTION_PARAGRAPH;
-
-      const p = new BaseComponent({
-        tag: 'p',
-        className: currentStyle,
-        textContent: paragraph.slice(0, 150) + '...',
-      }).getElement();
-      description.append(p);
-      // }
-    }
+    const description = texts.description ? this.createDescription(texts.description) : '';
 
     const gitHubLink = Team.createGithubLink(texts.github);
     gitHubLink.classList.add(...ABOUT_STYLE.GIT);
 
     textContainer.append(name, role, description, gitHubLink);
     return textContainer;
+  }
+
+  private static createDescription(text: string[]): HTMLElement {
+    const description = new BaseComponent({
+      tag: 'div',
+      className: ABOUT_STYLE.DESCRIPTION,
+    }).getElement();
+
+    for (const paragraph of text) {
+      const currentStyle = /Спасибо/.test(paragraph)
+        ? ABOUT_STYLE.DESCRIPTION_THANKS
+        : ABOUT_STYLE.DESCRIPTION_PARAGRAPH;
+
+      const fullText = new BaseComponent({
+        tag: 'p',
+        className: currentStyle,
+        textContent: paragraph,
+      }).getElement();
+      description.append(fullText);
+    }
+    return description;
   }
 }
