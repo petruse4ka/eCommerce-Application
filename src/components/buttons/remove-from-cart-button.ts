@@ -1,5 +1,5 @@
 import APICart from '@/api/cart';
-import cartRemoveIcon from '@/assets/icons/cart-remove.svg';
+import cartRemoveIcon from '@/assets/icons/cart-remove-accent.svg';
 import { PRODUCT_TEXT } from '@/constants';
 import { cartState } from '@/store/cart-state';
 import {
@@ -44,7 +44,7 @@ export default class RemoveFromCartButton {
 
     this.textElement = new ElementBuilder({
       tag: 'span',
-      className: BUTTON_TEXT,
+      className: [...BUTTON_TEXT, 'text-accent'],
       textContent: PRODUCT_TEXT.REMOVE,
     }).getElement();
     const icon = RemoveFromCartButton.createIcon();
