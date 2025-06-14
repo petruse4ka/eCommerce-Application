@@ -27,26 +27,38 @@ export default class ProductQuantity extends BaseComponent {
     }).getElement();
   }
 
+  private updateContent(
+    quantityInput: HTMLElement,
+    price: number,
+    element: HTMLElement,
+    text: string
+  ): void {
+    quantityInput.textContent = String(this.count);
+    element.textContent = `${text} ${(price * this.count).toFixed(2)} ${PRODUCT_TEXT.CURRENCY}`;
+  }
+
   private render(price: number, element: HTMLElement, text: string): void {
     const minusButton = new Button({
       style: 'PRICE_QUANTITY',
       textContent: '-',
       callback: async (): Promise<void> => {
         if (this.callback) {
-          const resultCallback = await this.callback(--this.count);
-
-          if (resultCallback) {
-            if (this.count > DEFAULT_QUANTITY_AMOUNT) {
-              quantityInput.textContent = String(this.count);
-              element.textContent = `${text} ${(price * this.count).toFixed(2)} ${PRODUCT_TEXT.CURRENCY}`;
+          if (this.count > DEFAULT_QUANTITY_AMOUNT) {
+            const resultCallback = await this.callback(--this.count);
+            if (resultCallback) {
+              this.updateContent(quantityInput, price, element, text);
             }
-            if (this.count === DEFAULT_QUANTITY_AMOUNT) {
-              minusButton.setAttribute('disabled', 'true');
-            }
+          }
+          if (this.count === DEFAULT_QUANTITY_AMOUNT) {
+            minusButton.disableButton();
           }
         }
       },
-    }).getElement();
+    });
+
+    if (this.count === DEFAULT_QUANTITY_AMOUNT) {
+      minusButton.disableButton();
+    }
 
     const plusButton = new Button({
       style: 'PRICE_QUANTITY',
@@ -56,11 +68,10 @@ export default class ProductQuantity extends BaseComponent {
           const resultCallback = await this.callback(++this.count);
 
           if (resultCallback) {
-            quantityInput.textContent = String(this.count);
             if (this.count > DEFAULT_QUANTITY_AMOUNT) {
-              minusButton.removeAttribute('disabled');
+              minusButton.enableButton();
             }
-            element.textContent = `${text} ${(price * this.count).toFixed(2)} ${PRODUCT_TEXT.CURRENCY}`;
+            this.updateContent(quantityInput, price, element, text);
           }
         }
       },
@@ -69,6 +80,6 @@ export default class ProductQuantity extends BaseComponent {
     const quantityInput = this.createQuantityInput();
 
     element.textContent = `${text} ${(price * this.count).toFixed(2)} ${PRODUCT_TEXT.CURRENCY}`;
-    this.component.append(minusButton, quantityInput, plusButton);
+    this.component.append(minusButton.getElement(), quantityInput, plusButton);
   }
 }
