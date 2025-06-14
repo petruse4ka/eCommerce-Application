@@ -6,11 +6,12 @@ import {
   AUTHORIZATION_MENU_TEXT,
   UNAUTHORIZED_MENU_ITEMS,
 } from '@/constants';
+import { ALERT_TEXT } from '@/constants';
 import { SVG_ICONS } from '@/data';
 import Router from '@/router';
 import { userState } from '@/store/user-state';
 import { SUBHEADER_STYLES } from '@/styles/header/subheader';
-import { AlertStatus, AlertText } from '@/types/enums';
+import { AlertStatus } from '@/types/enums';
 import ElementBuilder from '@/utils/element-builder';
 import SVGBuilder from '@/utils/svg-builder';
 
@@ -103,7 +104,7 @@ export default class AuthorizationMenu extends BaseComponent {
           userState.setAuthorizationState(false);
           void API.authentication();
           Alert.render({
-            textContent: AlertText.LOGOUT_SUCCESS,
+            textContent: ALERT_TEXT.LOGOUT_SUCCESS,
             status: AlertStatus.SUCCESS,
             visibleTime: 3000,
           });

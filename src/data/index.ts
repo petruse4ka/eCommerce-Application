@@ -27,8 +27,9 @@ import anonimDeliveryIcon from '@/assets/images/product/anonimDeliveryIcon.png';
 import payDeliveryIcon from '@/assets/images/product/payDeliveryIcon.png';
 import selfDeliveryIcon from '@/assets/images/product/selfDeliveryIcon.png';
 import { FOOTER_TEXTS, GUARANTEES_TEXTS, PACKAGES_TEXTS, SUBHEADER_PROMO_TEXT } from '@/constants';
+import { CHECKBOX_TEXT, DELIVERY_TEXT } from '@/constants';
 import { ABOUT_STYLE } from '@/styles/pages/about';
-import { CheckboxText, DeliveryText, InputType } from '@/types/enums';
+import { InputType } from '@/types/enums';
 import type { About, Guarantees, Packages, SelectOption } from '@/types/interfaces';
 import { LanguageSelector } from '@/utils/language-selector';
 
@@ -176,15 +177,15 @@ export const INPUTS_CHANGE_ADDRESS_DATA = [
 export const CHECKBOXES_REGISTRATION_DATA = [
   {
     id: 'is-same-addresses',
-    labelText: CheckboxText.SAME_ADDRESSES,
+    labelText: CHECKBOX_TEXT.SAME_ADDRESSES,
   },
   {
     id: `is-default-address-shipping`,
-    labelText: CheckboxText.DEFAULT_SAVE,
+    labelText: CHECKBOX_TEXT.DEFAULT_SAVE,
   },
   {
     id: `is-default-address-billing`,
-    labelText: CheckboxText.DEFAULT_SAVE,
+    labelText: CHECKBOX_TEXT.DEFAULT_SAVE,
   },
 ];
 
@@ -334,9 +335,9 @@ export const SORTING_OPTIONS: SelectOption[] = [
 ];
 
 export const DELIVERY_ITEMS = [
-  { ICON: payDeliveryIcon, TEXT: DeliveryText.PAY },
-  { ICON: selfDeliveryIcon, TEXT: DeliveryText.SELF_DELIVERY },
-  { ICON: anonimDeliveryIcon, TEXT: DeliveryText.ANONIM_PRESENT },
+  { ICON: payDeliveryIcon, TEXT: DELIVERY_TEXT.PAY },
+  { ICON: selfDeliveryIcon, TEXT: DELIVERY_TEXT.SELF_DELIVERY },
+  { ICON: anonimDeliveryIcon, TEXT: DELIVERY_TEXT.ANONIM_PRESENT },
 ];
 
 export const ABOUT: About = {

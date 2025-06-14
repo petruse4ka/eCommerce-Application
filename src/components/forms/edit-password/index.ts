@@ -4,10 +4,11 @@ import BaseComponent from '@/components/base';
 import Button from '@/components/buttons';
 import Input from '@/components/inputs';
 import { BTN_TEXT } from '@/constants';
+import { ALERT_TEXT, ERROR_MESSAGES } from '@/constants';
 import { INPUTS_EDIT_USER_PASSWORD } from '@/data';
 import { AUTHORIZATION_INPUTS_CONTAINER, FORM_PASSWORD } from '@/styles/forms/forms';
 import { HIDDEN } from '@/styles/inputs/inputs';
-import { AlertStatus, AlertText, ErrorMessages, InputType } from '@/types/enums';
+import { AlertStatus, InputType } from '@/types/enums';
 import { isErrorInfoPasswordChange, isPasswordInfo } from '@/types/guards';
 import type { PasswordBody } from '@/types/interfaces';
 import ApiErrors from '@/utils/api-errors';
@@ -139,7 +140,7 @@ export default class FormEditPassword extends BaseComponent {
                 if (isErrorInfoPasswordChange(item)) {
                   const errorInfo = ApiErrors.getErrorInfo(item.code);
 
-                  if (errorInfo === AlertText.INVALID_CURRENT_PASSWORD) {
+                  if (errorInfo === ALERT_TEXT.INVALID_CURRENT_PASSWORD) {
                     this.showValidationError('currentPassword', errorInfo);
                   } else {
                     const inputs = this.inputs.keys();
@@ -158,7 +159,7 @@ export default class FormEditPassword extends BaseComponent {
             }
           });
       } else {
-        this.showValidationError('repeatNewPassword', ErrorMessages.ERROR_REPEAT_PASSWORD);
+        this.showValidationError('repeatNewPassword', ERROR_MESSAGES.ERROR_REPEAT_PASSWORD);
       }
     }
   }

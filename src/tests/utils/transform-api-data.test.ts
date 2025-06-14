@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
+import { USER_INFO_KEY } from '@/constants';
 import { userState } from '@/store/user-state';
-import { UserInfoKey } from '@/types/enums';
 import { AddressType } from '@/types/enums';
 import type { AddressWithId, Customer, PasswordBody } from '@/types/interfaces';
 import type { UserInfoBody } from '@/types/interfaces';
@@ -49,10 +49,10 @@ describe('Transform API data', () => {
     it('should transform user info correctly', () => {
       const result = TransformApiData.transformUserInfo();
       expect(result).toEqual({
-        [UserInfoKey.FIRST_NAME]: 'Иван',
-        [UserInfoKey.LAST_NAME]: 'Иванов',
-        [UserInfoKey.DATA_OF_BIRTH]: '2000-10-10',
-        [UserInfoKey.EMAIL]: 'ivan@test.com',
+        [USER_INFO_KEY.FIRST_NAME]: 'Иван',
+        [USER_INFO_KEY.LAST_NAME]: 'Иванов',
+        [USER_INFO_KEY.DATA_OF_BIRTH]: '2000-10-10',
+        [USER_INFO_KEY.EMAIL]: 'ivan@test.com',
       });
     });
   });

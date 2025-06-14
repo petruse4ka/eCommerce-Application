@@ -1,6 +1,7 @@
 import Alert from '@/components/alert';
+import { ALERT_TEXT } from '@/constants';
 import { userState } from '@/store/user-state';
-import { AlertStatus, AlertText, ApiEndpoint, ApiMethods, ContentType } from '@/types/enums';
+import { AlertStatus, ApiEndpoint, ApiMethods, ContentType } from '@/types/enums';
 import type {
   AddAddressBody,
   Addresses,
@@ -38,7 +39,7 @@ export default class APIUpdateData {
           userState.setUserInfoState(body);
 
           Alert.render({
-            textContent: AlertText.CHANGE_SUCCESS,
+            textContent: ALERT_TEXT.CHANGE_SUCCESS,
             status: AlertStatus.SUCCESS,
             visibleTime: 3000,
           });
@@ -48,7 +49,7 @@ export default class APIUpdateData {
         console.error(error);
 
         Alert.render({
-          textContent: AlertText.ERROR_DEFAULT,
+          textContent: ALERT_TEXT.ERROR_DEFAULT,
           status: AlertStatus.ERROR,
           visibleTime: 3000,
         });
@@ -77,7 +78,7 @@ export default class APIUpdateData {
           userState.setUserInfoState(body);
 
           Alert.render({
-            textContent: AlertText.CHANGE_ADDRESS_SUCCESS,
+            textContent: ALERT_TEXT.CHANGE_ADDRESS_SUCCESS,
             status: AlertStatus.SUCCESS,
             visibleTime: 3000,
           });
@@ -87,7 +88,7 @@ export default class APIUpdateData {
         console.error(error);
 
         Alert.render({
-          textContent: AlertText.ERROR_DEFAULT,
+          textContent: ALERT_TEXT.ERROR_DEFAULT,
           status: AlertStatus.ERROR,
           visibleTime: 3000,
         });
@@ -126,7 +127,7 @@ export default class APIUpdateData {
             });
 
             Alert.render({
-              textContent: AlertText.PASSWORD_CHANGE_SUCCESS,
+              textContent: ALERT_TEXT.PASSWORD_CHANGE_SUCCESS,
               status: AlertStatus.SUCCESS,
               visibleTime: 3000,
             });
@@ -137,7 +138,7 @@ export default class APIUpdateData {
 
   public static async deleteAddress(
     id: string,
-    AlertContent: AlertText = AlertText.DELETE_ADDRESS_SUCCESS
+    AlertContent: (typeof ALERT_TEXT)[keyof typeof ALERT_TEXT] = ALERT_TEXT.DELETE_ADDRESS_SUCCESS
   ): Promise<void> {
     const token = userState.getTokenState();
 
@@ -170,7 +171,7 @@ export default class APIUpdateData {
         console.error(error);
 
         Alert.render({
-          textContent: AlertText.ERROR_DEFAULT,
+          textContent: ALERT_TEXT.ERROR_DEFAULT,
           status: AlertStatus.ERROR,
           visibleTime: 3000,
         });
@@ -199,7 +200,7 @@ export default class APIUpdateData {
           userState.setUserInfoState(body);
 
           Alert.render({
-            textContent: AlertText.SET_DEFAULT_ADDRESS,
+            textContent: ALERT_TEXT.SET_DEFAULT_ADDRESS,
             status: AlertStatus.SUCCESS,
             visibleTime: 3000,
           });
@@ -209,7 +210,7 @@ export default class APIUpdateData {
         console.error(error);
 
         Alert.render({
-          textContent: AlertText.ERROR_DEFAULT,
+          textContent: ALERT_TEXT.ERROR_DEFAULT,
           status: AlertStatus.ERROR,
           visibleTime: 3000,
         });
@@ -252,7 +253,7 @@ export default class APIUpdateData {
         console.error(error);
 
         Alert.render({
-          textContent: AlertText.ERROR_DEFAULT,
+          textContent: ALERT_TEXT.ERROR_DEFAULT,
           status: AlertStatus.ERROR,
           visibleTime: 3000,
         });
@@ -283,7 +284,7 @@ export default class APIUpdateData {
           userState.setUserInfoState(body);
           if (parameters.isAlert) {
             Alert.render({
-              textContent: AlertText.ADD_ADDRESS_SUCCESS,
+              textContent: ALERT_TEXT.ADD_ADDRESS_SUCCESS,
               status: AlertStatus.SUCCESS,
               visibleTime: 3000,
             });
@@ -293,7 +294,7 @@ export default class APIUpdateData {
       .catch((error) => {
         console.error(error);
         Alert.render({
-          textContent: AlertText.ERROR_DEFAULT,
+          textContent: ALERT_TEXT.ERROR_DEFAULT,
           status: AlertStatus.ERROR,
           visibleTime: 3000,
         });

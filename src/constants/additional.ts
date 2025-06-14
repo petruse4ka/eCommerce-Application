@@ -1,7 +1,6 @@
 import returns from '@/assets/images/additional/cancelled.png';
 import bicycle from '@/assets/images/additional/delivery-bicycle.png';
 import letter from '@/assets/images/additional/letter.png';
-//import pickup1 from '@/assets/images/additional/pickup-primary.png';
 import pickup2 from '@/assets/images/additional/pickup-secondary.png';
 import type { additionalPagesData } from '@/types/interfaces';
 import { LanguageSelector } from '@/utils/language-selector';

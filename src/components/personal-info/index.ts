@@ -1,7 +1,7 @@
 import { BTN_TEXT } from '@/constants';
+import { MODAL_TITLE, TAB_ACCOUNT } from '@/constants';
 import { INPUTS_EDIT_USER_INFO_DATA } from '@/data';
 import { PERSONAL_INFO } from '@/styles/personal';
-import { ModalTitle, TabAccount } from '@/types/enums';
 import type { UserInfo } from '@/types/interfaces';
 import ElementBuilder from '@/utils/element-builder';
 
@@ -37,7 +37,7 @@ export default class PersonalInfo extends BaseComponent {
     const title = new ElementBuilder({
       tag: 'h3',
       className: PERSONAL_INFO.TITLE,
-      textContent: TabAccount.INFO,
+      textContent: TAB_ACCOUNT.INFO,
     }).getElement();
 
     this.component.append(title);
@@ -78,7 +78,7 @@ export default class PersonalInfo extends BaseComponent {
           currentInputs: this.infoValue,
           id: 'userInfo',
         });
-        const modal = new Modal({ title: ModalTitle.CHANGE_USER_INFO, content: form });
+        const modal = new Modal({ title: MODAL_TITLE.CHANGE_USER_INFO, content: form });
         this.component.append(modal.getElement());
 
         modal.showModal();

@@ -1,5 +1,6 @@
+import { ADDRESS_KEY, USER_INFO_KEY } from '@/constants';
 import { userState } from '@/store/user-state';
-import { AddressKey, AddressType, UserInfoKey } from '@/types/enums';
+import { AddressType } from '@/types/enums';
 import { isUserInfo } from '@/types/guards';
 import type {
   AddAddress,
@@ -21,10 +22,10 @@ export default class TransformApiData {
       const { firstName, lastName, dateOfBirth, email } = userInfo;
 
       return {
-        [UserInfoKey.FIRST_NAME]: firstName,
-        [UserInfoKey.LAST_NAME]: lastName,
-        [UserInfoKey.DATA_OF_BIRTH]: dateOfBirth,
-        [UserInfoKey.EMAIL]: email,
+        [USER_INFO_KEY.FIRST_NAME]: firstName,
+        [USER_INFO_KEY.LAST_NAME]: lastName,
+        [USER_INFO_KEY.DATA_OF_BIRTH]: dateOfBirth,
+        [USER_INFO_KEY.EMAIL]: email,
       };
     }
   }
@@ -40,10 +41,10 @@ export default class TransformApiData {
         const { id, streetName, city, postalCode } = address;
 
         const addressTransform = {
-          [AddressKey.COUNTRY]: 'Россия',
-          [AddressKey.CITY]: city,
-          [AddressKey.STREET]: streetName,
-          [AddressKey.POSTAL_CODE]: postalCode,
+          [ADDRESS_KEY.COUNTRY]: 'Россия',
+          [ADDRESS_KEY.CITY]: city,
+          [ADDRESS_KEY.STREET]: streetName,
+          [ADDRESS_KEY.POSTAL_CODE]: postalCode,
           isDefault:
             userInfo.defaultBillingAddressId === id || userInfo.defaultShippingAddressId === id,
           id: id,

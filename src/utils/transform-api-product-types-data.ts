@@ -1,5 +1,6 @@
 import { CATALOG_TEXTS, FILTER_RANGES } from '@/constants';
-import { DropdownOptions, FilterType } from '@/types/enums';
+import { DROPDOWN_OPTIONS } from '@/constants';
+import { FilterType } from '@/types/enums';
 import type {
   CheckboxFilter,
   CheckboxOption,
@@ -132,9 +133,9 @@ export default class TransformApiProductTypesData {
       id: filterId,
       type: FilterType.DROPDOWN,
       options: [
-        { value: '', text: DropdownOptions.DEFAULT },
-        { value: 'true', text: DropdownOptions.TRUE },
-        { value: 'false', text: DropdownOptions.FALSE },
+        { value: '', text: DROPDOWN_OPTIONS.DEFAULT },
+        { value: 'true', text: DROPDOWN_OPTIONS.TRUE },
+        { value: 'false', text: DROPDOWN_OPTIONS.FALSE },
       ],
       title: filterTitle,
     });

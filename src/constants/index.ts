@@ -293,3 +293,95 @@ export const LANGUAGES = {
   [Language.RUSSIAN]: 'Русский',
   [Language.DUTCH]: 'Nederlands',
 };
+
+export const ERROR_MESSAGES = {
+  CHECK_YEAR: locale.errorCheckYear,
+  DATE_FORMAT: locale.errorDateFormat,
+  EMPTY_INPUT: locale.errorEmptyInput,
+  INVALID_AGE: locale.errorInvalidAge,
+  INVALID_DOMAIN: locale.errorInvalidDomain,
+  INVALID_EMAIL: locale.errorInvalidEmail,
+  INVALID_FIRST_CHAR: locale.errorInvalidFirstChar,
+  INVALID_USING_AT: locale.errorInvalidUsingAt,
+  INVALID_USING_DOTS: locale.errorInvalidUsingDots,
+  INVALID_PASSWORD: locale.errorInvalidPassword,
+  ONE_DIGIT: locale.errorOneDigit,
+  ONE_LOWER_LETTER: locale.errorOneLowerLetter,
+  ONE_UPPER_LETTER: locale.errorOneUpperLetter,
+  ONLY_LETTERS: locale.errorOnlyLetters,
+  PASSWORD_MUST_CONTAIN: locale.errorPasswordMustContain,
+  POSTAL_CODE_FORMAT: locale.errorPostalCodeFormat,
+  PASSWORD_LENGTH: locale.errorPasswordLength,
+  INVALID_SPACE: locale.errorInvalidSpace,
+  ERROR_REPEAT_PASSWORD: locale.errorRepeatPassword,
+};
+
+export const ALERT_TEXT = {
+  REGISTRATION_SUCCESS: locale.alertRegistrationSuccess,
+  AUTHORIZATION_SUCCESS: locale.alertAuthorizationSuccess,
+  LOGOUT_SUCCESS: locale.alertLogoutSuccess,
+  ACCOUNT_CREDENTIALS_ERROR: locale.alertAccountCredentialsError,
+  DUPLICATE_FIELD: locale.alertDuplicateField,
+  ERROR_DEFAULT: locale.alertErrorDefault,
+  CHANGE_SUCCESS: locale.alertChangeSuccess,
+  PASSWORD_CHANGE_SUCCESS: locale.alertPasswordChangeSuccess,
+  INVALID_CURRENT_PASSWORD: locale.alertInvalidCurrentPassword,
+  DELETE_ADDRESS_SUCCESS: locale.alertDeleteAddressSuccess,
+  CHANGE_ADDRESS_SUCCESS: locale.alertChangeAddressSuccess,
+  SET_DEFAULT_ADDRESS: locale.alertSetDefaultAddress,
+  DELETE_DEFAULT_ADDRESS: locale.alertDeleteDefaultAddress,
+  ADD_ADDRESS_SUCCESS: locale.alertAddAddressSuccess,
+  REMOVE_CART_ITEM: locale.alertRemoveCartItem,
+  DISCOUNT_CODE_NON: locale.alertDiscountCodeNon,
+};
+
+export const CHECKBOX_TEXT = {
+  DEFAULT_SAVE: locale.checkboxDefaultSave,
+  SAME_ADDRESSES: locale.checkboxSameAddresses,
+};
+
+export const DELIVERY_TEXT = {
+  PAY: locale.deliveryPay,
+  SELF_DELIVERY: locale.deliverySelfDelivery,
+  ANONIM_PRESENT: locale.deliveryAnonimPresent,
+};
+
+export const DROPDOWN_OPTIONS = {
+  DEFAULT: locale.dropdownDefault,
+  FALSE: locale.dropdownFalse,
+  TRUE: locale.dropdownTrue,
+};
+
+export const TAB_ACCOUNT = {
+  INFO: locale.tabAccountInfo,
+  ADDRESSES: locale.tabAccountAddresses,
+  CHANGE_PASS: locale.tabAccountChangePass,
+};
+
+export const ADDRESS_TYPE_TEXT = {
+  SHIPPING: locale.addressTypeShipping,
+  BILLING: locale.addressTypeBilling,
+  DEFAULT: locale.addressTypeDefault,
+  NONE: locale.addressTypeNone,
+};
+
+export const MODAL_TITLE = {
+  CHANGE: locale.modalTitleChange,
+  CHANGE_USER_INFO: locale.modalTitleChangeUserInfo,
+  NEW: locale.modalTitleNew,
+  CHANGE_PASSWORD: locale.modalTitleChangePassword,
+};
+
+export const ADDRESS_KEY = {
+  COUNTRY: locale.addressKeyCountry,
+  CITY: locale.addressKeyCity,
+  STREET: locale.addressKeyStreet,
+  POSTAL_CODE: locale.addressKeyPostalCode,
+};
+
+export const USER_INFO_KEY = {
+  FIRST_NAME: locale.userInfoKeyFirstName,
+  LAST_NAME: locale.userInfoKeyLastName,
+  DATA_OF_BIRTH: locale.userInfoKeyDataOfBirth,
+  EMAIL: locale.userInfoKeyEmail,
+};
