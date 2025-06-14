@@ -128,7 +128,7 @@ export const BTN_TEXT = {
   CHECKOUT: 'Оформить заказ',
   APPLY: 'Применить',
   CLEAR_CART: 'Очистить корзину',
-  FINISH_CART: 'Завершить заказ',
+  FINISH_CART: 'Спасибо за заказ',
 };
 
 export const INTRO_TEXTS = {
@@ -283,7 +283,7 @@ export const CART_TEXT = {
   CATALOG: 'В каталог',
   PROMO_CODE_APPLY: 'Применен промокод',
   LOADING_TOTAL: 'Обновляем стоимость...',
-  MODAL_TEXT: 'Спасибо за заказ! С вами свяжутся для подтверждения информации!',
+  MODAL_TEXT: 'Ваш заказ успешно принят! Мы свяжемся с вами для подтверждения информации',
 };
 
 export const PROMO_CODE_TEXT = 'SALE10 - промокод на первую покупку';

@@ -171,7 +171,7 @@ export enum ModalTitle {
   CHANGE_USER_INFO = 'Редактирование личной информации',
   NEW = 'Новый адрес',
   CHANGE_PASSWORD = 'Смена пароля',
-  CHECKOUT_CART = 'Завершение заказа',
+  CHECKOUT_CART = 'Вернуться в магазин',
 }
 
 export enum CartStateKey {
