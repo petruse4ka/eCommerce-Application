@@ -275,7 +275,7 @@ export const CUSTOM_BUTTON_STYLE = {
     'disabled:bg-gray-light',
     'disabled:border-gray',
     'disabled:cursor-not-allowed',
-    'hover:bg-accent-hover',
+    'hover:bg-gray',
     'active:bg-pink',
   ],
   PROMO_CODE_SUBMIT: [

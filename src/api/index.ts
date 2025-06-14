@@ -74,9 +74,10 @@ export default class API {
   public static async userSignInResponse(body: {
     userInfo: AuthorizationBody;
     isLogin: boolean;
-  }): Promise<string | void> {
+  }): Promise<void> {
     const { userInfo, isLogin } = body;
-    const token = await this.userAuthentication(userInfo);
+    const token = userState.getTokenState();
+    await this.userAuthentication(userInfo);
     const fetchBody = { ...userInfo };
 
     if (token) {
@@ -104,7 +105,6 @@ export default class API {
           userState.setUserInfoState(body.customer);
           userState.setAuthorizationState(true);
           void APICart.getCart();
-          return body.customer.id;
         });
     }
   }
@@ -134,7 +134,7 @@ export default class API {
       });
   }
 
-  private static async userAuthentication(body: AuthorizationBody): Promise<string | void> {
+  public static async userAuthentication(body: AuthorizationBody): Promise<string | void> {
     return await fetch(
       import.meta.env['VITE_CTP_AUTH_URL'] +
         ApiEndpoint.OATH +

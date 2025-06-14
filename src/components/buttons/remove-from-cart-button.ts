@@ -1,5 +1,5 @@
 import APICart from '@/api/cart';
-import cartRemoveIcon from '@/assets/icons/cart-remove.svg';
+import cartRemoveIcon from '@/assets/icons/cart-remove-accent.svg';
 import { PRODUCT_TEXT } from '@/constants';
 import { cartState } from '@/store/cart-state';
 import {
@@ -8,7 +8,7 @@ import {
   BUTTON_TEXT,
   CUSTOM_BUTTON_STYLE,
 } from '@/styles/buttons/buttons';
-import { ButtonType } from '@/types/enums';
+import { ButtonType, CartStateKey } from '@/types/enums';
 import type { addToCartButtonParameters } from '@/types/interfaces';
 import ButtonBuilder from '@/utils/button-builder';
 import ElementBuilder from '@/utils/element-builder';
@@ -44,14 +44,14 @@ export default class RemoveFromCartButton {
 
     this.textElement = new ElementBuilder({
       tag: 'span',
-      className: BUTTON_TEXT,
+      className: [...BUTTON_TEXT, 'text-accent'],
       textContent: PRODUCT_TEXT.REMOVE,
     }).getElement();
     const icon = RemoveFromCartButton.createIcon();
 
     this.button.getElement().append(icon, this.textElement);
 
-    cartState.subscribe(this.updateState.bind(this));
+    cartState.subscribe(CartStateKey.UPDATE_CART_LINE, this.updateState.bind(this));
     this.updateState();
   }
 

@@ -1,11 +1,19 @@
+import APICart from '@/api/cart';
+import macaronAstonaut from '@/assets/images/astronaut.png';
 import { BTN_TEXT, CART_TEXT, DEFAULT_CURRENCY } from '@/constants';
+import Router from '@/router';
 import { cartState } from '@/store/cart-state';
 import { CART_TOTAL } from '@/styles/cart/cart-total';
+import { MODAL } from '@/styles/modal';
+import { ASTRONAUT_STYLE, MAIN_CONTAINER } from '@/styles/pages/underconstruction';
+import { ModalTitle, Route } from '@/types/enums';
 import ElementBuilder from '@/utils/element-builder';
+import ImageBuilder from '@/utils/image-builder';
 
 import BaseComponent from '../base';
 import Button from '../buttons';
 import FormPromoCode from '../forms/promo-code';
+import Modal from '../modal';
 import LoaderOverlay from '../overlay/loader-overlay';
 
 export default class CartTotal extends BaseComponent {
@@ -33,6 +41,11 @@ export default class CartTotal extends BaseComponent {
     this.component.append(this.productLoader);
 
     this.render();
+  }
+
+  private static closeCart(): void {
+    void APICart.deleteCart();
+    Router.followRoute(Route.HOME);
   }
 
   private static createTotalItem(
@@ -135,6 +148,52 @@ export default class CartTotal extends BaseComponent {
     return totalInfoContainer;
   }
 
+  private checkoutModal(): void {
+    const content = new ElementBuilder({
+      tag: 'div',
+      className: MODAL.CONTENT.CHECKOUT_PAGE.CONTAINER,
+    });
+
+    const imageContainer = new ElementBuilder({
+      tag: 'div',
+      className: MAIN_CONTAINER,
+    }).getElement();
+
+    const img = new ImageBuilder({
+      className: ASTRONAUT_STYLE,
+      source: macaronAstonaut,
+      alt: 'astronaut macaron',
+    }).getElement();
+
+    imageContainer.append(img);
+
+    const text = new ElementBuilder({
+      tag: 'p',
+      className: MODAL.CONTENT.CHECKOUT_PAGE.TITLE,
+      textContent: CART_TEXT.MODAL_TEXT,
+    }).getElement();
+
+    const modal = new Modal({
+      title: ModalTitle.CHECKOUT_CART,
+      content,
+      callback: CartTotal.closeCart.bind(CartTotal),
+    });
+
+    const buttonFinish = new Button({
+      style: 'PRICE_BUTTON',
+      textContent: BTN_TEXT.FINISH_CART,
+      callback: (): void => {
+        modal.closeModal();
+        CartTotal.closeCart();
+      },
+    }).getElement();
+
+    content.getElement().append(imageContainer, text, buttonFinish);
+
+    this.component.append(modal.getElement());
+    modal.showModal();
+  }
+
   private render(): void {
     const title = new ElementBuilder({
       tag: 'h4',
@@ -156,7 +215,9 @@ export default class CartTotal extends BaseComponent {
     const checkoutButton = new Button({
       style: 'PRICE_BUTTON',
       textContent: BTN_TEXT.CHECKOUT,
-      callback: (): void => {},
+      callback: (): void => {
+        this.checkoutModal();
+      },
     }).getElement();
 
     this.component.append(title, totalInfo, totalPrice, this.formPromo, checkoutButton);

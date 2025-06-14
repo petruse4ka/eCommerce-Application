@@ -33,7 +33,7 @@ export const PRODUCT_STYLES = {
   DESCRIPTION: [],
   PARAMETER_NAME: ['font-semibold', 'pt-2', 'inline', 'mr-2'],
   PARAMETER_DESCRIPTION: ['inline', 'leading-[1.4]'],
-  WRAPPING_BLOCK: ['xl:flex', 'xl:flex-row', 'xl:justify-between', 'xl:items-center', 'py-4'],
+  WRAPPING_BLOCK: ['xl:flex', 'xl:flex-row', 'xl:justify-between', 'xl:items-start', 'py-4'],
   PRICES_CONTAINER: [
     'relative',
     'p-4',
