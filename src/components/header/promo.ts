@@ -25,7 +25,7 @@ export default class Promo extends BaseComponent {
 
       const text = new ElementBuilder({
         tag: 'span',
-        className: '',
+        className: SUBHEADER_STYLES.PROMO_TEXT,
         textContent: item.TEXT,
       }).getElement();
 

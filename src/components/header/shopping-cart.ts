@@ -1,11 +1,11 @@
-import cart from '@/assets/icons/basket.svg';
 import BaseComponent from '@/components/base';
+import { SVG_ICONS } from '@/data';
 import Router from '@/router';
 import { cartState } from '@/store/cart-state';
 import { HEADER_STYLES } from '@/styles/header/header';
 import { CartStateKey, Route } from '@/types/enums';
 import ElementBuilder from '@/utils/element-builder';
-import ImageBuilder from '@/utils/image-builder';
+import SVGBuilder from '@/utils/svg-builder';
 
 export default class ShoppingCartIcon extends BaseComponent {
   private itemsIndicator: HTMLElement;
@@ -33,10 +33,12 @@ export default class ShoppingCartIcon extends BaseComponent {
   }
 
   protected render(): void {
-    const cartIcon = new ImageBuilder({
-      className: HEADER_STYLES.CART_ICON,
-      source: cart,
-      alt: 'Cart Icon',
+    const cartIcon = new SVGBuilder({
+      source: SVG_ICONS.CART_ICON,
+      className: [],
+      classNameIcon: HEADER_STYLES.CART_ICON,
+      viewBox: '0 0 24 24',
+      iconSize: 40,
     }).getElement();
 
     this.component.append(cartIcon, this.itemsIndicator);

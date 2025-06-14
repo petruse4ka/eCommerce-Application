@@ -30,7 +30,7 @@ export const MAIN_CONTAINER = [
 export const TITLE_STYLE = [
   'text-xl',
   'z-1',
-  'text-white',
+  'text-white-permanent',
   'sm:text-2xl',
   'text-center',
   'px-3',

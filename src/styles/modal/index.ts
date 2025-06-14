@@ -4,7 +4,7 @@ export const MODAL = {
     'rounded-md',
     'bg-white',
     'border',
-    'border-orange',
+    'border-accent',
     'shadow-lg',
     'w-[95%]',
     'max-w-[600px]',

@@ -13,7 +13,7 @@ export const LOADER_STYLES = {
     'w-5',
     'h-5',
     'border-2',
-    'border-white',
+    'border-white-permanent',
     'border-t-transparent',
     'rounded-full',
     'animate-spin',

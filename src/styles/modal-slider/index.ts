@@ -28,13 +28,7 @@ const MODAL_SLIDER = {
     'items-center',
     'justify-center',
   ],
-  SLIDER_IMAGE: [
-    'max-w-[60%]',
-    'md:max-w-[80%]',
-    'max-h-full',
-    'object-contain',
-    'md:min-w-[300px]',
-  ],
+  SLIDER_IMAGE: ['w-full', 'md:max-w-[80%]', 'max-h-full', 'object-contain', 'md:min-w-[300px]'],
   FRAME_ACTIVE: ['opacity-100', 'visible'],
   CROSS: [
     'absolute',
