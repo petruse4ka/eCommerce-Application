@@ -49,7 +49,7 @@ export class LanguageSelector {
     }
   }
 
-  public getCurrentLanguage(): Language {
+  public getLanguage(): Language {
     return this.currentLanguage;
   }
 

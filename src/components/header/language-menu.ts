@@ -25,7 +25,7 @@ export default class LanguageMenu extends BaseComponent {
     });
 
     this.languageSelector = LanguageSelector.getInstance();
-    this.currentLanguage = this.languageSelector.getCurrentLanguage();
+    this.currentLanguage = this.languageSelector.getLanguage();
 
     this.languageDropdown = new ElementBuilder({
       tag: 'div',

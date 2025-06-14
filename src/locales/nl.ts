@@ -147,7 +147,60 @@ export const nl = {
   cartTextEmpty: 'Het is hier nog leeg, maar alles komt nog!\nVind wat u echt nodig heeft.',
   cartTextCatalog: 'Naar catalogus',
   cartTextPromoCodeApply: 'Promocode toegepast',
-  promoCodeText: 'SALE10 - promocode voor eerste aankoop',
-  promoCodeTextHeader: 'Korting met promocode SALE10',
-  promoPlaceholder: 'Voer promocode in',
+  promoCodeText: 'SALE10 - promotiecode voor je eerste aankoop',
+  promoCodeTextHeader: 'Korting met promotiecode SALE10',
+  promoPlaceholder: 'Voer promotiecode in',
+  additionalDeliveryTitle: 'Bezorging en betaling',
+  additionalDeliveryIntro:
+    'We bieden 2 bezorgmethoden voor onze klanten: koeriersbezorging en zelfophaal.',
+  additionalDeliveryCourierTitle: 'Koeriersbezorging',
+  additionalDeliveryCourierHours:
+    'Onze koeriers werken elke dag van 11:00 tot 21:00 uur, onvermoeibaar.',
+  additionalDeliveryCourierPrice:
+    'Als u bereid bent uw bestelling te ontvangen tussen 12:00 en 17:00 uur, kost de bezorging 300 roebel.',
+  additionalDeliveryCourierFree:
+    'Voor bestellingen boven 3000 roebel is de bezorging GRATIS! Is dat geen reden om blij te zijn?',
+  additionalDeliveryCourierNotice: 'De koerier zal u 30-40 minuten voor aankomst verwittigen.',
+  additionalDeliveryPickupTitle: 'Zelfophaal',
+  additionalDeliveryPickupInfo:
+    'U kunt een bestelling plaatsen en deze zelf ophalen bij ophaalpunten of direct bij onze productiefaciliteit op: Abrikozenstraat 25a, "Uil" café. Voor actuele adressen van andere ophaalpunten, bezoek onze Contactpagina.',
+  additionalDeliveryPickupTime:
+    'Bestellingen moeten voor 20:00 uur worden geplaatst om de volgende dag op een ophaalpunt op te halen op een tijdstip dat u uitkomt tussen 13:00 en 22:00 uur.',
+  additionalDeliveryPaymentTitle: 'Betaling:',
+  additionalDeliveryPaymentMethods:
+    'U kunt uw bestelling contant of per bankkaart betalen bij ontvangst: onze koeriers zijn uitgerust met moderne mobiele terminals.',
+  additionalTermsTitle: 'Gebruiksvoorwaarden voor "MACARON-SHOP" Online Winkel',
+  additionalTermsWarning:
+    'We raden af om onze site op een lege maag te bekijken, want u zou plotseling ALLES kunnen willen bestellen. Wees ook voorzichtig met eclairs - ze kunnen verslavend zijn!',
+  additionalTermsIntro:
+    'Het gebruik van de "MACARON-SHOP" online winkel (hierna - de "Site") wordt beheerd door deze Gebruiksvoorwaarden (hierna - de "Voorwaarden"). Het gebruik van de diensten van de Site betekent onvoorwaardelijke instemming van de Gebruiker met deze Voorwaarden; bij meningsverschil moet de Gebruiker zich onthouden van het gebruik van de diensten.',
+  additionalTermsSecurityTitle: 'Informatiesysteembeveiliging',
+  additionalTermsSecurityContent:
+    'Gebruikers mogen de beveiliging van het informatiesysteem van de Site niet schenden en/of acties ondernemen die de beveiliging van het informatiesysteem van de Site kunnen schenden. Schending van de informatiesysteembeveiliging door de Gebruiker brengt aansprakelijkheid met zich mee in overeenstemming met de toepasselijke wetgeving.',
+  additionalTermsPrivacyTitle: 'Verwerking van persoonsgegevens',
+  additionalTermsPrivacyContent:
+    'We verzamelen en verwerken persoonsgegevens van gebruikers uitsluitend om de werking van de online winkel te waarborgen: gegevens worden gebruikt voor orderverwerking, bezorging, klantcommunicatie en het verlenen van de nodige service. We garanderen dat persoonsgegevens niet aan derden worden doorgegeven zonder toestemming van de gebruiker, behalve in gevallen die door de wet zijn voorzien.',
+  additionalTermsParentsTitle:
+    'Informatie voor ouders en wettelijke vertegenwoordigers van minderjarige gebruikers',
+  additionalTermsParentsContent:
+    'Onze online winkel biedt diensten aan gebruikers van 13 jaar en ouder. We zijn niet verantwoordelijk voor de acties van minderjarigen onder de aangegeven leeftijd die onbeperkte toegang hebben gekregen tot een computer of andere apparaten en zelfstandig een bestelling hebben geplaatst.',
+  additionalTermsContactTitle: 'Contactgegevens van de site-eigenaar',
+  additionalTermsContactContent:
+    'Gebruikers van de site kunnen suggesties, opmerkingen en vragen met betrekking tot deze Gebruiksvoorwaarden sturen naar het e-mailadres macaron-city@gmail.com',
+  additionalContactsTitle: 'Contacten',
+  additionalContactsProductionTitle: 'Productie',
+  additionalContactsProductionAddress: 'Sint-Petersburg, Abrikozenstraat 25a, "Uil" café',
+  additionalContactsPickupTitle: 'Ophaalpunten',
+  additionalContactsPickupAddress1: 'Sint-Petersburg, Nevski Prospekt 13, "Amsterdam" restaurant',
+  additionalContactsPickupAddress2:
+    'Sint-Petersburg, Bonch-Bruevichstraat 3a, "Minsk" banketbakkerij café',
+  additionalContactsPickupAddress3: 'Belynichi, Druivenstraat, "Blije Kat" café',
+  additionalContactsPhonesTitle: 'Telefoons',
+  additionalContactsPhoneMain: '+7 (812) 309-82-88 hoofdnummer',
+  additionalContactsPhoneSupport: '+375 (17) 199-82-88 voor klachten en suggesties',
+  additionalReturnsTitle: 'Annulering en retournering van bestellingen',
+  additionalReturnsCancelTime:
+    'Bestellingen kunnen worden geannuleerd tot 20:00 uur de dag voor de besteldatum',
+  additionalReturnsQuality:
+    'We besteden speciale aandacht aan de kwaliteit van onze producten. Als u bij ontvangst van uw bestelling een duidelijk productiefout in de gebakjes ontdekt, is retour of ruil van het product mogelijk. Voor snelle probleemoplossing, neem contact op met onze klantenservice.',
 };

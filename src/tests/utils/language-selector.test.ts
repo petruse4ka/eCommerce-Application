@@ -11,7 +11,7 @@ describe('LanguageSelector', () => {
 
   test('should set and get language correctly', () => {
     languageSelector.setLanguage(Language.ENGLISH);
-    expect(languageSelector.getCurrentLanguage()).toBe(Language.ENGLISH);
+    expect(languageSelector.getLanguage()).toBe(Language.ENGLISH);
   });
 
   test('should return same instance when instance is called multiple times', () => {

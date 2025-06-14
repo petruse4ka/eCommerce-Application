@@ -145,7 +145,57 @@ export const en = {
   cartTextEmpty: "It's empty here for now, but everything is ahead!\nFind what you really need.",
   cartTextCatalog: 'To catalog',
   cartTextPromoCodeApply: 'Promo code applied',
-  promoCodeText: 'SALE10 - promo code for first purchase',
+  promoCodeText: 'SALE10 - promo code for your first purchase',
   promoCodeTextHeader: 'Discount with promo code SALE10',
   promoPlaceholder: 'Enter promo code',
+  additionalDeliveryTitle: 'Delivery and Payment',
+  additionalDeliveryIntro:
+    'We offer 2 delivery methods for our customers: courier delivery and self-pickup.',
+  additionalDeliveryCourierTitle: 'Courier Delivery',
+  additionalDeliveryCourierHours: 'Our couriers work every day from 11 AM to 9 PM, tirelessly.',
+  additionalDeliveryCourierPrice:
+    'If you are ready to receive your order between 12 PM and 5 PM, delivery will cost 300 rubles.',
+  additionalDeliveryCourierFree:
+    "For orders over 3000 rubles, delivery is FREE! Isn't that a reason to be happy?",
+  additionalDeliveryCourierNotice: 'The courier will notify you 30-40 minutes before arrival.',
+  additionalDeliveryPickupTitle: 'Self-Pickup',
+  additionalDeliveryPickupInfo:
+    'You can place an order and pick it up yourself either from pickup points or directly from our production facility at: Apricot St., 25a, "Owl" cafe. For current addresses of other pickup points, please visit our Contacts page.',
+  additionalDeliveryPickupTime:
+    'Orders must be placed by 8 PM to be picked up the next day at a pickup point at your convenient time between 1 PM and 10 PM.',
+  additionalDeliveryPaymentTitle: 'Payment:',
+  additionalDeliveryPaymentMethods:
+    'You can pay for your order in cash or by bank card upon receipt: our couriers are equipped with modern mobile terminals.',
+  additionalTermsTitle: 'Terms of Use for "MACARON-SHOP" Online Store',
+  additionalTermsWarning:
+    "We don't recommend browsing our site on an empty stomach, as you might suddenly want to order EVERYTHING. Also, be careful with eclairs - they can be addictive!",
+  additionalTermsIntro:
+    'The use of the "MACARON-SHOP" online store (hereinafter - the "Site") is governed by these Terms of Use (hereinafter - the "Terms"). Using the Site\'s services means unconditional agreement of the User with these Terms; in case of disagreement, the User must refrain from using the services.',
+  additionalTermsSecurityTitle: 'Information System Security',
+  additionalTermsSecurityContent:
+    "Users are prohibited from violating the security of the Site's information system and/or performing actions that may violate the security of the Site's information system. Violation of information system security by the User entails liability in accordance with applicable law.",
+  additionalTermsPrivacyTitle: 'Personal Data Processing',
+  additionalTermsPrivacyContent:
+    'We collect and process personal data of users solely to ensure the operation of the online store: data is used for order processing, delivery, customer communication, and providing necessary service. We guarantee that personal data is not transferred to third parties without user consent, except in cases provided by law.',
+  additionalTermsParentsTitle: 'Information for Parents and Legal Representatives of Minor Users',
+  additionalTermsParentsContent:
+    'Our online store provides services to users aged 13 and older. We are not responsible for the actions of minors under the specified age who have received unlimited access to a computer or other devices and independently placed an order.',
+  additionalTermsContactTitle: 'Site Owner Contact Information',
+  additionalTermsContactContent:
+    'Site users can send suggestions, comments, and questions related to these Terms of Use to the email address macaron-city@gmail.com',
+  additionalContactsTitle: 'Contacts',
+  additionalContactsProductionTitle: 'Production',
+  additionalContactsProductionAddress: 'St. Petersburg, Apricot St., 25a, "Owl" cafe',
+  additionalContactsPickupTitle: 'Pickup Points',
+  additionalContactsPickupAddress1: 'St. Petersburg, Nevsky Prospect, 13, "Amsterdam" restaurant',
+  additionalContactsPickupAddress2:
+    'St. Petersburg, Bonch-Bruevich St., 3a, "Minsk" confectionery cafe',
+  additionalContactsPickupAddress3: 'Belynichi, Grape St., "Happy Cat" cafe',
+  additionalContactsPhonesTitle: 'Phones',
+  additionalContactsPhoneMain: '+7 (812) 309-82-88 main number',
+  additionalContactsPhoneSupport: '+375 (17) 199-82-88 for complaints and suggestions',
+  additionalReturnsTitle: 'Order Cancellation and Returns',
+  additionalReturnsCancelTime: 'Orders can be cancelled until 8 PM the day before the order date',
+  additionalReturnsQuality:
+    'We pay special attention to the quality of our products. If you discover an obvious manufacturing defect in the pastries upon receiving your order, return or exchange of the product is possible. For prompt problem resolution, please contact our support service.',
 };
