@@ -1,34 +1,63 @@
-import { TRANSLATIONS } from '@/constants';
-import type { Language } from '@/types/enums';
-import { isValidLanguage } from '@/types/guards';
+import { en } from '../locales/en';
+import { nl } from '../locales/nl';
+import { ru } from '../locales/ru';
+import { Language } from '../types/enums';
+import { isValidLanguage } from '../types/guards';
 
 export class LanguageSelector {
+  private static instance: LanguageSelector;
+  public translations: typeof ru;
   private currentLanguage: Language;
 
-  constructor(defaultLanguage: Language) {
+  private constructor() {
+    this.currentLanguage = LanguageSelector.getInitialLanguage();
+    this.translations = LanguageSelector.getTranslations(this.currentLanguage);
+  }
+
+  public static getInstance(): LanguageSelector {
+    if (!LanguageSelector.instance) {
+      LanguageSelector.instance = new LanguageSelector();
+    }
+    return LanguageSelector.instance;
+  }
+
+  private static getInitialLanguage(): Language {
     const savedLanguage = localStorage.getItem('great-js-minds-ecommerce-locale');
-
     if (savedLanguage && isValidLanguage(savedLanguage)) {
-      this.currentLanguage = savedLanguage;
-    } else {
-      const browserLang = navigator.language.split('-')[0];
-      this.currentLanguage = isValidLanguage(browserLang) ? browserLang : defaultLanguage;
+      return savedLanguage;
+    }
+
+    const browserLanguage = navigator.language.split('-')[0];
+    if (isValidLanguage(browserLanguage)) {
+      return browserLanguage;
+    }
+
+    return Language.RUSSIAN;
+  }
+
+  private static getTranslations(language: Language): typeof ru {
+    switch (language) {
+      case Language.ENGLISH: {
+        return en;
+      }
+      case Language.DUTCH: {
+        return nl;
+      }
+      default: {
+        return ru;
+      }
     }
   }
 
-  public setLanguage(lang: Language): void {
-    if (!isValidLanguage(lang)) {
-      return;
-    }
-    this.currentLanguage = lang;
-    localStorage.setItem('great-js-minds-ecommerce-locale', lang);
-  }
-
-  public getLanguage(): Language {
+  public getCurrentLanguage(): Language {
     return this.currentLanguage;
   }
 
-  public getTranslations(): (typeof TRANSLATIONS)[Language] {
-    return TRANSLATIONS[this.currentLanguage];
+  public setLanguage(language: Language): void {
+    if (this.currentLanguage !== language) {
+      this.currentLanguage = language;
+      this.translations = LanguageSelector.getTranslations(language);
+      localStorage.setItem('great-js-minds-ecommerce-locale', language);
+    }
   }
 }

@@ -13,10 +13,10 @@ import { LanguageSelector } from '@/utils/language-selector';
 
 export default class LanguageMenu extends BaseComponent {
   private isOpen = false;
-  private languageSelectorUtility: LanguageSelector;
   private currentLanguage: Language;
   private languageDropdown: HTMLElement;
   private languageButton: ButtonWithIcon;
+  private languageSelector: LanguageSelector;
 
   constructor() {
     super({
@@ -24,8 +24,8 @@ export default class LanguageMenu extends BaseComponent {
       className: SUBHEADER_STYLES.LANGUAGE_OPTION,
     });
 
-    this.languageSelectorUtility = new LanguageSelector(Language.RUSSIAN);
-    this.currentLanguage = this.languageSelectorUtility.getLanguage();
+    this.languageSelector = LanguageSelector.getInstance();
+    this.currentLanguage = this.languageSelector.getCurrentLanguage();
 
     this.languageDropdown = new ElementBuilder({
       tag: 'div',
@@ -122,7 +122,9 @@ export default class LanguageMenu extends BaseComponent {
       return;
     }
 
-    this.languageSelectorUtility.setLanguage(language);
+    this.languageSelector.setLanguage(language);
+    this.currentLanguage = language;
     this.closeDropdown();
+    globalThis.location.reload();
   }
 }

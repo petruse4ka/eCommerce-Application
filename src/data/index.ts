@@ -261,32 +261,38 @@ export const INPUTS_EDIT_USER_PASSWORD = [
 
 export const PACKAGES: Packages[] = [
   {
-    ...PACKAGES_TEXTS.PACKAGES.READY_PACK,
+    title: PACKAGES_TEXTS.PACKAGES.READY_PACK.TITLE,
+    description: PACKAGES_TEXTS.PACKAGES.READY_PACK.DESCRIPTION,
     icon: readyIcon,
     gradient: ['bg-gradient-to-br', 'from-peach', 'to-peach-light'],
   },
   {
-    ...PACKAGES_TEXTS.PACKAGES.CREATE_OWN,
+    title: PACKAGES_TEXTS.PACKAGES.CREATE_OWN.TITLE,
+    description: PACKAGES_TEXTS.PACKAGES.CREATE_OWN.DESCRIPTION,
     icon: customIcon,
     gradient: ['bg-gradient-to-br', 'from-red', 'to-red-light'],
   },
   {
-    ...PACKAGES_TEXTS.PACKAGES.INDIVIDUAL_PACK,
+    title: PACKAGES_TEXTS.PACKAGES.INDIVIDUAL_PACK.TITLE,
+    description: PACKAGES_TEXTS.PACKAGES.INDIVIDUAL_PACK.DESCRIPTION,
     icon: stampIcon,
     gradient: ['bg-gradient-to-br', 'from-green', 'to-green-light'],
   },
   {
-    ...PACKAGES_TEXTS.PACKAGES.WEDDING_PACK,
+    title: PACKAGES_TEXTS.PACKAGES.WEDDING_PACK.TITLE,
+    description: PACKAGES_TEXTS.PACKAGES.WEDDING_PACK.DESCRIPTION,
     icon: weddingIcon,
     gradient: ['bg-gradient-to-br', 'from-orange', 'to-orange-light'],
   },
   {
-    ...PACKAGES_TEXTS.PACKAGES.CORPORATE_PACK,
+    title: PACKAGES_TEXTS.PACKAGES.CORPORATE_PACK.TITLE,
+    description: PACKAGES_TEXTS.PACKAGES.CORPORATE_PACK.DESCRIPTION,
     icon: corporateIcon,
     gradient: ['bg-gradient-to-br', 'from-mint', 'to-mint-light'],
   },
   {
-    ...PACKAGES_TEXTS.PACKAGES.WHOLESALE_PACK,
+    title: PACKAGES_TEXTS.PACKAGES.WHOLESALE_PACK.TITLE,
+    description: PACKAGES_TEXTS.PACKAGES.WHOLESALE_PACK.DESCRIPTION,
     icon: wholesaleIcon,
     gradient: ['bg-gradient-to-br', 'from-lilac', 'to-lilac-light'],
   },
@@ -294,19 +300,23 @@ export const PACKAGES: Packages[] = [
 
 export const GUARANTEES: Guarantees[] = [
   {
-    ...GUARANTEES_TEXTS.GUARANTEES.INGREDIENTS,
+    title: GUARANTEES_TEXTS.GUARANTEES.INGREDIENTS.TITLE,
+    description: GUARANTEES_TEXTS.GUARANTEES.INGREDIENTS.DESCRIPTION,
     image: ingerientsIcon,
   },
   {
-    ...GUARANTEES_TEXTS.GUARANTEES.PACKAGING,
+    title: GUARANTEES_TEXTS.GUARANTEES.PACKAGING.TITLE,
+    description: GUARANTEES_TEXTS.GUARANTEES.PACKAGING.DESCRIPTION,
     image: packagingIcon,
   },
   {
-    ...GUARANTEES_TEXTS.GUARANTEES.DELIVERY,
+    title: GUARANTEES_TEXTS.GUARANTEES.DELIVERY.TITLE,
+    description: GUARANTEES_TEXTS.GUARANTEES.DELIVERY.DESCRIPTION,
     image: deliveryIcon,
   },
   {
-    ...GUARANTEES_TEXTS.GUARANTEES.ANONYMOUS,
+    title: GUARANTEES_TEXTS.GUARANTEES.ANONYMOUS.TITLE,
+    description: GUARANTEES_TEXTS.GUARANTEES.ANONYMOUS.DESCRIPTION,
     image: anonymousIcon,
   },
 ];

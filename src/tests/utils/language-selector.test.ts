@@ -6,15 +6,17 @@ describe('LanguageSelector', () => {
 
   beforeEach(() => {
     localStorage.clear();
-    languageSelector = new LanguageSelector(Language.ENGLISH);
-  });
-
-  test('should initialize with default language when no languages are saved in local storage', () => {
-    expect(languageSelector.getLanguage()).toBe(Language.ENGLISH);
+    languageSelector = LanguageSelector.getInstance();
   });
 
   test('should set and get language correctly', () => {
-    languageSelector.setLanguage(Language.RUSSIAN);
-    expect(languageSelector.getLanguage()).toBe(Language.RUSSIAN);
+    languageSelector.setLanguage(Language.ENGLISH);
+    expect(languageSelector.getCurrentLanguage()).toBe(Language.ENGLISH);
+  });
+
+  test('should return same instance when instance is called multiple times', () => {
+    const firstInstance = LanguageSelector.getInstance();
+    const secondInstance = LanguageSelector.getInstance();
+    expect(firstInstance).toBe(secondInstance);
   });
 });

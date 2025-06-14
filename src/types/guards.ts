@@ -4,7 +4,6 @@ import type {
   Category,
   CategoryResponse,
   ErrorInfo,
-  LanguageChangeEvent,
   PasswordBody,
   ProductResponse,
   ProductTypeResponse,
@@ -109,8 +108,4 @@ export function isActionHandler<T>(
 
 export function isValidLanguage(lang: string): lang is Language {
   return lang === Language.ENGLISH || lang === Language.RUSSIAN || lang === Language.DUTCH;
-}
-
-export function isLanguageChangeEvent(event: Event): event is LanguageChangeEvent {
-  return event instanceof CustomEvent && 'language' in event.detail;
 }
