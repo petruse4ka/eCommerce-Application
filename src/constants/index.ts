@@ -275,7 +275,6 @@ export const DEFAULT_QUANTITY_AMOUNT = 1;
 
 export const CART_TEXT = {
   TITLE: 'Ваша корзина',
-  PRICE: 'Стоимость: ',
   TOTAL_TITLE: 'Итого',
   PRODUCTS_PRICE: 'Стоимость товаров',
   SALE: 'Скидка',
@@ -285,6 +284,8 @@ export const CART_TEXT = {
   CATALOG: 'В каталог',
   PROMO_CODE_APPLY: 'Применен промокод',
   LOADING_TOTAL: 'Обновляем стоимость...',
+  LOADING_DELETE_PRODUCT: 'Удаляем товар...',
+  LOADING_DELETE_CART: 'Очистка корзины...',
   MODAL_TEXT: 'Ваш заказ успешно принят! Мы свяжемся с вами для подтверждения информации',
 };
 

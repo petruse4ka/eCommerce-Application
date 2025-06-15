@@ -1,3 +1,4 @@
+import { CUSTOM_BUTTON_STYLE } from '@/styles/buttons/buttons';
 import type { ButtonParameters } from '@/types/interfaces';
 
 import ElementBuilder from './element-builder';
@@ -9,14 +10,14 @@ export default class ButtonBuilder extends ElementBuilder {
   }
 
   public disableButton(): void {
-    this.element.classList.add('button--disabled');
+    this.element.classList.add(...CUSTOM_BUTTON_STYLE.DISABLE);
     if (this.element instanceof HTMLButtonElement) {
       this.element.disabled = true;
     }
   }
 
   public enableButton(): void {
-    this.element.classList.remove('button--disabled');
+    this.element.classList.remove(...CUSTOM_BUTTON_STYLE.DISABLE);
     if (this.element instanceof HTMLButtonElement) {
       this.element.disabled = false;
     }

@@ -2,7 +2,7 @@ export const CART_ITEM = {
   CONTAINER: [
     'grid',
     'grid-cols-[150px_1fr]',
-    'md:grid-cols-[80px_1fr_100px_200px]',
+    'md:grid-cols-[80px_1fr_100px_150px]',
     'items-center',
     'relative',
     'p-3',
@@ -16,6 +16,6 @@ export const CART_ITEM = {
   PRICE: {
     DEFAULT: ['font-bold', 'text-left', 'md:text-right', 'md:pr-5', 'text-black'],
     ACCENT: ['text-accent'],
-    OLD: ['text-gray-medium', 'line-through', 'block'],
+    OLD: ['text-gray', 'line-through', 'block'],
   },
 };

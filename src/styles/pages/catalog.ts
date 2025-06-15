@@ -34,6 +34,7 @@ export const CATALOG_STYLES = {
     'z-10',
     'min-h-[200px]',
     'rounded-lg',
+    'pt-10',
   ],
   OVERLAY_FILTERS: [
     'absolute',

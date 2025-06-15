@@ -130,6 +130,7 @@ export default class API {
       .then((body: AuthResponse) => {
         const { access_token: token } = body;
         userState.setTokenState(token);
+
         return token;
       });
   }
