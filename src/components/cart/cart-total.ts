@@ -1,12 +1,13 @@
 import APICart from '@/api/cart';
 import macaronAstonaut from '@/assets/images/astronaut.png';
 import { BTN_TEXT, CART_TEXT, DEFAULT_CURRENCY } from '@/constants';
+import { MODAL_TITLE } from '@/constants';
 import Router from '@/router';
 import { cartState } from '@/store/cart-state';
 import { CART_TOTAL } from '@/styles/cart/cart-total';
 import { MODAL } from '@/styles/modal';
 import { ASTRONAUT_STYLE, MAIN_CONTAINER } from '@/styles/pages/underconstruction';
-import { ModalTitle, Route } from '@/types/enums';
+import { Route } from '@/types/enums';
 import ElementBuilder from '@/utils/element-builder';
 import ImageBuilder from '@/utils/image-builder';
 
@@ -196,7 +197,7 @@ export default class CartTotal extends BaseComponent {
     }).getElement();
 
     const modal = new Modal({
-      title: ModalTitle.CHECKOUT_CART,
+      title: MODAL_TITLE.CHECKOUT_CART,
       content,
       callback: CartTotal.closeCart.bind(CartTotal),
     });

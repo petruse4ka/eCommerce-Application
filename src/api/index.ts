@@ -1,14 +1,8 @@
 import Alert from '@/components/alert';
+import { ALERT_TEXT } from '@/constants';
 import Router from '@/router';
 import { userState } from '@/store/user-state';
-import {
-  AlertStatus,
-  AlertText,
-  AlertTime,
-  ApiEndpoint,
-  ApiMethods,
-  ContentType,
-} from '@/types/enums';
+import { AlertStatus, AlertTime, ApiEndpoint, ApiMethods, ContentType } from '@/types/enums';
 import { Route } from '@/types/enums';
 import type {
   AuthorizationBody,
@@ -51,7 +45,7 @@ export default class API {
           throw new Error(JSON.stringify(body.errors));
         } else {
           Alert.render({
-            textContent: AlertText.REGISTRATION_SUCCESS,
+            textContent: ALERT_TEXT.REGISTRATION_SUCCESS,
             status: AlertStatus.SUCCESS,
             visibleTime: AlertTime.DEFAULT,
           });
@@ -96,7 +90,7 @@ export default class API {
         .then((body: CustomerResponse) => {
           if (isLogin) {
             Alert.render({
-              textContent: AlertText.AUTHORIZATION_SUCCESS,
+              textContent: ALERT_TEXT.AUTHORIZATION_SUCCESS,
               status: AlertStatus.SUCCESS,
               visibleTime: AlertTime.DEFAULT,
             });

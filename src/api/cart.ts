@@ -1,14 +1,8 @@
 import Alert from '@/components/alert';
+import { ALERT_TEXT } from '@/constants';
 import { cartState } from '@/store/cart-state';
 import { userState } from '@/store/user-state';
-import {
-  AlertStatus,
-  AlertText,
-  AlertTime,
-  ApiEndpoint,
-  ApiMethods,
-  ContentType,
-} from '@/types/enums';
+import { AlertStatus, AlertTime, ApiEndpoint, ApiMethods, ContentType } from '@/types/enums';
 import type { CartResponse, DiscountCodeResponse, ErrorResponse } from '@/types/interfaces';
 import { TransformApiCartData } from '@/utils/transform-api-cart-data';
 
@@ -275,7 +269,7 @@ export default class APICart {
     console.error(error);
 
     Alert.render({
-      textContent: AlertText.ERROR_DEFAULT,
+      textContent: ALERT_TEXT.ERROR_DEFAULT,
       status: AlertStatus.ERROR,
       visibleTime: AlertTime.DEFAULT,
     });

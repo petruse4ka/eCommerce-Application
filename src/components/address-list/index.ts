@@ -1,10 +1,10 @@
 import APIUpdateData from '@/api/update-data';
 import { BTN_TEXT } from '@/constants';
+import { ADDRESS_TYPE_TEXT, ALERT_TEXT, MODAL_TITLE } from '@/constants';
 import { INPUTS_CHANGE_ADDRESS_DATA } from '@/data';
 import { SVG_ICONS } from '@/data';
 import { ADDRESS } from '@/styles/address';
 import { CUSTOM_BUTTON_STYLE } from '@/styles/buttons/buttons';
-import { AddressTypeText, AlertText, ModalTitle } from '@/types/enums';
 import { ButtonType } from '@/types/enums';
 import type { AddressInfo } from '@/types/interfaces';
 import ButtonBuilder from '@/utils/button-builder';
@@ -26,7 +26,7 @@ export default class AddressList extends BaseComponent {
     });
 
     this.addressType =
-      titleContent === AddressTypeText.SHIPPING
+      titleContent === ADDRESS_TYPE_TEXT.SHIPPING
         ? 'setDefaultShippingAddress'
         : 'setDefaultBillingAddress';
 
@@ -100,16 +100,18 @@ export default class AddressList extends BaseComponent {
       const titleCard = new ElementBuilder({
         tag: 'h3',
         className: ADDRESS.CARD.DEFAULT_TITLE,
-        textContent: AddressTypeText.DEFAULT,
+        textContent: ADDRESS_TYPE_TEXT.DEFAULT,
       }).getElement();
 
       cardInfo.append(titleCard);
     }
 
     for (const [key, value] of Object.entries(addressInfo)) {
-      currentValue.push(value);
-      const line = AddressList.createAddressInfoLine(key, value);
-      cardInfo.append(line);
+      if (typeof value === 'string') {
+        currentValue.push(value);
+        const line = AddressList.createAddressInfoLine(key, value);
+        cardInfo.append(line);
+      }
     }
 
     card.append(cardInfo, this.createButtons(id, isDefault, currentValue));
@@ -127,7 +129,7 @@ export default class AddressList extends BaseComponent {
             ? 'addShippingAddressId'
             : 'addBillingAddressId';
         const form = new FormAddNewAddress(type);
-        const modal = new Modal({ title: ModalTitle.NEW, content: form });
+        const modal = new Modal({ title: MODAL_TITLE.NEW, content: form });
         this.component.append(modal.getElement());
 
         modal.showModal();
@@ -140,8 +142,8 @@ export default class AddressList extends BaseComponent {
   private createClearAddressInfo(): void {
     const info = new ElementBuilder({
       tag: 'div',
-      className: '',
-      textContent: AddressTypeText.NONE,
+      className: ADDRESS.NONE,
+      textContent: ADDRESS_TYPE_TEXT.NONE,
     }).getElement();
 
     this.component.append(info);
@@ -187,7 +189,7 @@ export default class AddressList extends BaseComponent {
           currentInputs: currentLine,
           id,
         });
-        const modal = new Modal({ title: ModalTitle.CHANGE, content: form });
+        const modal = new Modal({ title: MODAL_TITLE.CHANGE, content: form });
         this.component.append(modal.getElement());
 
         modal.showModal();
@@ -218,7 +220,7 @@ export default class AddressList extends BaseComponent {
             postalCode: currentLine[3],
           };
 
-          void APIUpdateData.deleteAddress(id, AlertText.DELETE_DEFAULT_ADDRESS).then(() => {
+          void APIUpdateData.deleteAddress(id, ALERT_TEXT.DELETE_DEFAULT_ADDRESS).then(() => {
             void APIUpdateData.userAddNewAddress(type, body, false);
           });
         } else {

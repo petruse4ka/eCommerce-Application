@@ -1,5 +1,10 @@
 import { Route } from '@/types/enums';
+import { Language } from '@/types/enums';
 import type { MenuItem } from '@/types/interfaces';
+import { LanguageSelector } from '@/utils/language-selector';
+
+const languageSelector = LanguageSelector.getInstance();
+const locale = languageSelector.translations;
 
 export const VALIDATE_CONST = {
   MIN_AGE: 13,
@@ -40,42 +45,42 @@ export const FILTER_RANGES = {
 };
 
 export const SUBHEADER_PROMO_TEXT = {
-  DELIVERY: 'Быстрая доставка',
-  FRESH: 'Гарантия свежести',
-  WHOLESALE: 'Оптовые поставки',
-  INGREDIENTS: 'Натуральные ингредиенты',
+  DELIVERY: locale.subheaderPromoDelivery,
+  FRESH: locale.subheaderPromoFresh,
+  WHOLESALE: locale.subheaderPromoWholesale,
+  INGREDIENTS: locale.subheaderPromoIngredients,
 };
 
 export const AUTHORIZATION_MENU_TEXT = {
-  LOGIN: 'Войти',
-  REGISTRATION: 'Регистрация',
-  ACCOUNT: 'Личный кабинет',
-  LOGOUT: 'Выйти',
+  LOGIN: locale.authMenuLogin,
+  REGISTRATION: locale.authMenuRegister,
+  ACCOUNT: locale.authMenuAccount,
+  LOGOUT: locale.authMenuLogout,
 };
 
 export const MENU_TEXT = {
-  HOME: 'Главная',
-  CATALOG: 'Каталог',
-  ABOUT: 'О нас',
-  CONTACTS: 'Контакты',
+  HOME: locale.menuHome,
+  CATALOG: locale.menuCatalog,
+  ABOUT: locale.menuAbout,
+  CONTACTS: locale.menuContacts,
 };
 
 export const FOOTER_TEXTS = {
-  PROMO_TITLE: 'Наши преимущества',
-  MENU_TITLE: 'Полезная информация',
-  TEAM_TITLE: 'Наши кондитеры',
-  COPYRIGHT: 'JS/FE 2024Q4 | RS School',
+  PROMO_TITLE: locale.footerPromoTitle,
+  MENU_TITLE: locale.footerMenuTitle,
+  TEAM_TITLE: locale.footerTeamTitle,
+  COPYRIGHT: locale.footerCopyright,
   FOOTER_PROMO_TEXT: {
-    LOVE: 'Приготовлено c любовью',
-    DELIVERY: 'Доставка в день заказа',
-    INGREDIENTS: '100% миндальная мука',
+    LOVE: locale.footerPromoLove,
+    DELIVERY: locale.footerPromoDelivery,
+    INGREDIENTS: locale.footerPromoIngredients,
   },
   FOOTER_MENU_TEXT: {
-    ABOUT: 'О компании',
-    DELIVERY: 'Доставка и оплата',
-    TERMS: 'Условия конфиденциальности',
-    RETURNS: 'Возврат заказа',
-    CONTACTS: 'Наши контакты',
+    ABOUT: locale.footerMenuAbout,
+    DELIVERY: locale.footerMenuDelivery,
+    TERMS: locale.footerMenuTerms,
+    RETURNS: locale.footerMenuReturns,
+    CONTACTS: locale.footerMenuContacts,
   },
 };
 
@@ -89,14 +94,14 @@ export const UNAUTHORIZED_MENU_ITEMS: MenuItem[] = [
   { name: AUTHORIZATION_MENU_TEXT.LOGOUT, route: Route.HOME },
 ];
 
-export const ERRORPAGE_TEXTS = {
-  HOME: 'Вернуться домой',
-  SORRY: 'Извините, страница не найдена',
+export const ERROR_PAGE_TEXTS = {
+  HOME: locale.errorHome,
+  SORRY: locale.errorSorry,
 };
 
 export const UNDER_CONSTRUCTION_TEXTS = {
-  HOME: 'Вернуться домой',
-  SORRY: 'Эта страница ещё в работе, но скоро всё будет готово!',
+  HOME: locale.constructionHome,
+  SORRY: locale.constructionSorry,
 };
 
 export const MENU_ITEMS: MenuItem[] = [
@@ -115,180 +120,276 @@ export const FOOTER_MENU_ITEMS: MenuItem[] = [
 ];
 
 export const BTN_TEXT = {
-  REGISTRATION_PAGE: 'Зарегистрироваться',
-  REGISTRATION_REDIRECT: 'Перейти к регистрации',
-  LOGIN_PAGE: 'Вход',
-  LOGIN_REDIRECT: 'Перейти к авторизации',
-  EDIT: 'Редактировать',
-  DELETE: 'Удалить',
-  SET_PRIMARY: 'Сделать по умолчанию',
-  DELETE_PRIMARY: 'Отменить по умолчанию',
-  SAVE_CHANGES: 'Сохранить изменения',
-  ADD_NEW_ADDRESS: 'Добавить новый адрес',
-  CHECKOUT: 'Оформить заказ',
-  APPLY: 'Применить',
-  CLEAR_CART: 'Очистить корзину',
-  FINISH_CART: 'Спасибо за заказ',
+  REGISTRATION_PAGE: locale.btnRegistrationPage,
+  REGISTRATION_REDIRECT: locale.btnRegistrationRedirect,
+  LOGIN_PAGE: locale.btnLoginPage,
+  LOGIN_REDIRECT: locale.btnLoginRedirect,
+  EDIT: locale.btnEdit,
+  DELETE: locale.btnDelete,
+  SET_PRIMARY: locale.btnSetPrimary,
+  DELETE_PRIMARY: locale.btnDeletePrimary,
+  SAVE_CHANGES: locale.btnSaveChanges,
+  ADD_NEW_ADDRESS: locale.btnAddNewAddress,
+  CHECKOUT: locale.btnCheckout,
+  APPLY: locale.btnApply,
+  CLEAR_CART: locale.btnClearCart,
+  FINISH_CART: locale.btnFinishCart,
 };
 
 export const INTRO_TEXTS = {
-  NAME: 'MACARONSHOP',
-  SINCE: 'since 2013',
-  TITLE: 'Настоящая любовь',
-  CATCH_PHRASE:
-    'Пирожные макарон и другие десерты из натуральных ингредиентов, приготовленные с любовью',
+  NAME: locale.introName,
+  SINCE: locale.introSince,
+  TITLE: locale.introTitle,
+  CATCH_PHRASE: locale.introCatchPhrase,
 };
 
 export const PACKAGES_TEXTS = {
-  TITLE: 'Предложения для самых искушенных',
+  TITLE: locale.packagesTitle,
   PACKAGES: {
     READY_PACK: {
-      title: 'Готовые наборы',
-      description: 'Готовые наборы со скидкой. Вы можете подобрать набор на подходящий случай',
+      TITLE: locale.packagesReadyPackTitle,
+      DESCRIPTION: locale.packagesReadyPackDescription,
     },
     CREATE_OWN: {
-      title: 'Соберите свой набор',
-      description: 'Выберите количество макарун и уникальные вкусы',
+      TITLE: locale.packagesCreateOwnTitle,
+      DESCRIPTION: locale.packagesCreateOwnDescription,
     },
     INDIVIDUAL_PACK: {
-      title: 'Набор с индивидуальной печатью',
-      description: 'Соберите набор макарун с уникальным дизайном',
+      TITLE: locale.packagesIndividualPackTitle,
+      DESCRIPTION: locale.packagesIndividualPackDescription,
     },
     WEDDING_PACK: {
-      title: 'Свадебные предложения',
-      description: 'Нежные макаруны с разными вкусами для украшения вашего торжества',
+      TITLE: locale.packagesWeddingPackTitle,
+      DESCRIPTION: locale.packagesWeddingPackDescription,
     },
     CORPORATE_PACK: {
-      title: 'Корпоративные подарки',
-      description: 'От 85р. за штуку с уникальным дизайном для ваших коллег и партнеров',
+      TITLE: locale.packagesCorporatePackTitle,
+      DESCRIPTION: locale.packagesCorporatePackDescription,
     },
     WHOLESALE_PACK: {
-      title: 'Оптовые поставки',
-      description: 'Уникальные предложения для кофеен, кафе, отелей и других бизнесов',
+      TITLE: locale.packagesWholesalePackTitle,
+      DESCRIPTION: locale.packagesWholesalePackDescription,
     },
   },
 };
 
 export const GUARANTEES_TEXTS = {
-  TITLE: 'Мы обо всем позаботились',
+  TITLE: locale.guaranteesTitle,
   GUARANTEES: {
     INGREDIENTS: {
-      title: 'Лучшие ингредиенты',
-      description:
-        'Мы используем только премиальные ингредиенты, отборную муку, натуральные красители и свежие начинки',
+      TITLE: locale.guaranteesIngredientsTitle,
+      DESCRIPTION: locale.guaranteesIngredientsDescription,
     },
     PACKAGING: {
-      title: 'Красивая упаковка',
-      description:
-        'Каждый заказ оформляем в элегантную и стильную упаковку, которая подчеркнёт изысканность макарун',
+      TITLE: locale.guaranteesPackagingTitle,
+      DESCRIPTION: locale.guaranteesPackagingDescription,
     },
     DELIVERY: {
-      title: 'Доставка в день заказа',
-      description:
-        'Мы доставляем ваш заказ в тот же день, чтобы вы могли наслаждаться ими именно тогда, когда хочется',
+      TITLE: locale.guaranteesDeliveryTitle,
+      DESCRIPTION: locale.guaranteesDeliveryDescription,
     },
     ANONYMOUS: {
-      title: 'Анонимная доставка',
-      description:
-        'Если вам нужна максимальная конфиденциальность, мы обеспечим анонимную доставку – без логотипов и лишних вопросов',
+      TITLE: locale.guaranteesAnonymousTitle,
+      DESCRIPTION: locale.guaranteesAnonymousDescription,
     },
   },
 };
 
 export const FIELDSET_LABELS = {
-  PERSONAL_DATA: 'Персональные данные',
-  SHIPPING: 'Адрес доставки',
-  BILLING: 'Расчетный адрес',
+  PERSONAL_DATA: locale.fieldsetPersonalData,
+  SHIPPING: locale.fieldsetShipping,
+  BILLING: locale.fieldsetBilling,
 };
 
 export const PAGE_TITLES = {
-  CATALOG: 'Каталог',
-  ACCOUNT: 'Личный Кабинет',
-  REGISTRATION: 'Регистрация',
+  CATALOG: locale.pageCatalog,
+  ACCOUNT: locale.pageAccount,
+  REGISTRATION: locale.pageRegistration,
 };
 
 export const CATALOG_TEXTS = {
-  TOTAL_PRODUCTS: 'Всего товаров',
-  SORTY_BY: 'Сортировка',
-  SEARCH_PLACEHOLDER: 'Поиск...',
-  PRODUCT_TYPE_FILTER: 'Тип десерта',
-  TASTE_FILTER: 'Вкус',
-  DIET_FILTER: 'Диета',
-  FILLING_FILTER: 'Наполнитель',
-  TOPPING_FILTER: 'Глазурь',
-  PROMO_FILTER: 'Спецпредложение',
-  PRICE_FILTER: 'Цена',
-  WEIGHT_FILTER: 'Вес',
-  SHOW_MORE: 'Показать еще ↓',
-  SHOW_LESS: 'Скрыть ↑',
-  RANGE_FROM: 'от',
-  RANGE_TO: 'до',
-  CLEAR_ALL: 'Удалить все фильтры',
-  APPLIED_FILTERS: 'Выбранные фильтры',
-  NO_APPLIED_FILTERS:
-    'В данный момент ни один фильтр не выбран. Вы можете выбрать фильтры в списке снизу',
-  SHOW_FILTERS: 'Показать фильтры',
-  HIDE_FILTERS: 'Скрыть фильтры',
-  LOADING_PRODUCTS: 'Обновляем каталог...',
-  LOADING_FILTERS: 'Обновляем фильтры...',
-  NO_PRODUCTS: 'К сожалению, по выбранным фильтрам в данной категории продуктов не найдено.',
-  NO_FILTERS: 'Подходящие фильтры отсутствуют',
-  PRICE: 'Цена',
+  TOTAL_PRODUCTS: locale.catalogTotalProducts,
+  SORT_BY: locale.catalogSortBy,
+  SEARCH_PLACEHOLDER: locale.catalogSearchPlaceholder,
+  PRODUCT_TYPE_FILTER: locale.catalogFiltersProductType,
+  TASTE_FILTER: locale.catalogFiltersTaste,
+  DIET_FILTER: locale.catalogFiltersDiet,
+  FILLING_FILTER: locale.catalogFiltersFilling,
+  TOPPING_FILTER: locale.catalogFiltersTopping,
+  PROMO_FILTER: locale.catalogFiltersPromo,
+  PRICE_FILTER: locale.catalogFiltersPrice,
+  WEIGHT_FILTER: locale.catalogFiltersWeight,
+  SHOW_MORE: locale.catalogShowMore,
+  SHOW_LESS: locale.catalogShowLess,
+  RANGE_FROM: locale.catalogRangeFrom,
+  RANGE_TO: locale.catalogRangeTo,
+  CLEAR_ALL: locale.catalogClearAll,
+  APPLIED_FILTERS: locale.catalogAppliedFilters,
+  NO_APPLIED_FILTERS: locale.catalogNoAppliedFilters,
+  SHOW_FILTERS: locale.catalogShowFilters,
+  HIDE_FILTERS: locale.catalogHideFilters,
+  LOADING_PRODUCTS: locale.catalogLoadingProducts,
+  LOADING_FILTERS: locale.catalogLoadingFilters,
+  NO_PRODUCTS: locale.catalogNoProducts,
+  NO_FILTERS: locale.catalogNoFilters,
+  PRICE: locale.catalogPrice,
   PRICE_ID: 'price',
-  CATEGORY: 'Категория',
+  CATEGORY: locale.catalogCategory,
   CATEGORY_ID: 'category',
-  PROMO_TAG: 'Акция',
-  SHORT_SEARCH_QUERY: 'Используйте более 2 символов для поиска',
-  HOME: 'Главная',
-  CATALOG: 'Каталог',
-  ALL_CATEGORIES: 'Все продукты',
-  ERROR_LOADING_PRODUCTS: 'Произошла ошибка при загрузке продуктов. Пожалуйста, попробуйте позже.',
-  PAGE: 'Страница',
-  OUT: 'из',
-  ADD_TO_CART: 'В корзину',
-  ADDING_TO_CART: 'Кладем в корзину...',
-  ADDED_TO_CART: 'Товар в корзине',
+  PROMO_TAG: locale.catalogPromoTag,
+  SHORT_SEARCH_QUERY: locale.catalogShortSearchQuery,
+  HOME: locale.catalogHome,
+  CATALOG: locale.catalogCatalog,
+  ALL_CATEGORIES: locale.catalogAllCategories,
+  ERROR_LOADING_PRODUCTS: locale.catalogErrorLoadingProducts,
+  PAGE: locale.catalogPage,
+  OUT: locale.catalogOut,
+  ADD_TO_CART: locale.catalogAddToCart,
+  ADDING_TO_CART: locale.catalogAddingToCart,
+  ADDED_TO_CART: locale.catalogAddedToCart,
 };
 
 export const PRODUCT_ATTRIBUTES = {
-  WEIGHT: 'Вес',
-  FLAVORS: 'Вкус',
-  DIET: 'Диета',
-  TOPING: 'Глазурь',
-  FILLING: 'Начинка',
+  WEIGHT: locale.productAttributesWeight,
+  FLAVORS: locale.productAttributesFlavors,
+  DIET: locale.productAttributesDiet,
+  TOPING: locale.productAttributesToping,
+  FILLING: locale.productAttributesFilling,
 };
 
 export const PRODUCT_TEXT = {
-  BASKET: 'В корзину',
-  REMOVE: 'Убрать из корзины',
-  TOTAL: 'Итого по данной позиции: ',
+  BASKET: locale.productTextBasket,
+  TOTAL: locale.productTextTotal,
   CURRENCY: DEFAULT_CURRENCY,
-  DESCRIPTION: 'Описание',
-  GRAMM: 'г',
-  ERROR_ADDRESS:
-    'Увы, этот десерт закончился, но загляните в каталог — там вас ждут другие вкусные находки!',
-  CATALOG: 'В каталог',
-  LOADING_PRODUCT: 'Загружаем продукт...',
+  DESCRIPTION: locale.productTextDescription,
+  GRAMM: locale.productTextGramm,
+  ERROR_ADDRESS: locale.productTextErrorAddress,
+  CATALOG: locale.productTextCatalog,
+  LOADING_PRODUCT: locale.productTextLoadingProduct,
+  REMOVE: locale.productTextRemove,
 };
 
 export const DEFAULT_QUANTITY_AMOUNT = 1;
 
 export const CART_TEXT = {
-  TITLE: 'Ваша корзина',
-  TOTAL_TITLE: 'Итого',
-  PRODUCTS_PRICE: 'Стоимость товаров',
-  SALE: 'Скидка',
-  DELIVERY: 'Доставка',
-  TOTAL_PRICE: 'К оплате',
-  EMPTY: 'Пока здесь пусто, но всё впереди!\nНайдите то, что вам действительно нужно.',
-  CATALOG: 'В каталог',
-  PROMO_CODE_APPLY: 'Применен промокод',
-  LOADING_TOTAL: 'Обновляем стоимость...',
-  LOADING_DELETE_PRODUCT: 'Удаляем товар...',
-  LOADING_DELETE_CART: 'Очистка корзины...',
-  MODAL_TEXT: 'Ваш заказ успешно принят! Мы свяжемся с вами для подтверждения информации',
+  TITLE: locale.cartTextTitle,
+  PRICE: locale.cartTextPrice,
+  TOTAL_TITLE: locale.cartTextTotalTitle,
+  PRODUCTS_PRICE: locale.cartTextProductsPrice,
+  SALE: locale.cartTextSale,
+  DELIVERY: locale.cartTextDelivery,
+  TOTAL_PRICE: locale.cartTextTotalPrice,
+  EMPTY: locale.cartTextEmpty,
+  CATALOG: locale.cartTextCatalog,
+  PROMO_CODE_APPLY: locale.cartTextPromoCodeApply,
+  LOADING_TOTAL: locale.cartTextLoadingTotal,
+  MODAL_TEXT: locale.cartTextModalText,
+  LOADING_DELETE_PRODUCT: locale.cartTextLoadingDeleteProduct,
+  LOADING_DELETE_CART: locale.cartTextLoadingDeleteProductCart,
 };
 
-export const PROMO_CODE_TEXT = 'SALE10 - промокод на первую покупку';
+export const PROMO_CODE_TEXT = locale.promoCodeText;
 
-export const PROMO_PLACEHOLDER = 'Введите промокод';
+export const PROMO_PLACEHOLDER = locale.promoPlaceholder;
+
+export const PROMO_HEADER_TEXT = locale.promoCodeTextHeader;
+
+export const LANGUAGES = {
+  [Language.ENGLISH]: 'English',
+  [Language.RUSSIAN]: 'Русский',
+  [Language.BELARUS]: 'Беларускi',
+  [Language.DUTCH]: 'Nederlands',
+};
+
+export const ERROR_MESSAGES = {
+  CHECK_YEAR: locale.errorCheckYear,
+  DATE_FORMAT: locale.errorDateFormat,
+  EMPTY_INPUT: locale.errorEmptyInput,
+  INVALID_AGE: locale.errorInvalidAge,
+  INVALID_DOMAIN: locale.errorInvalidDomain,
+  INVALID_EMAIL: locale.errorInvalidEmail,
+  INVALID_FIRST_CHAR: locale.errorInvalidFirstChar,
+  INVALID_USING_AT: locale.errorInvalidUsingAt,
+  INVALID_USING_DOTS: locale.errorInvalidUsingDots,
+  INVALID_PASSWORD: locale.errorInvalidPassword,
+  ONE_DIGIT: locale.errorOneDigit,
+  ONE_LOWER_LETTER: locale.errorOneLowerLetter,
+  ONE_UPPER_LETTER: locale.errorOneUpperLetter,
+  ONLY_LETTERS: locale.errorOnlyLetters,
+  PASSWORD_MUST_CONTAIN: locale.errorPasswordMustContain,
+  POSTAL_CODE_FORMAT: locale.errorPostalCodeFormat,
+  PASSWORD_LENGTH: locale.errorPasswordLength,
+  INVALID_SPACE: locale.errorInvalidSpace,
+  ERROR_REPEAT_PASSWORD: locale.errorRepeatPassword,
+};
+
+export const ALERT_TEXT = {
+  REGISTRATION_SUCCESS: locale.alertRegistrationSuccess,
+  AUTHORIZATION_SUCCESS: locale.alertAuthorizationSuccess,
+  LOGOUT_SUCCESS: locale.alertLogoutSuccess,
+  ACCOUNT_CREDENTIALS_ERROR: locale.alertAccountCredentialsError,
+  DUPLICATE_FIELD: locale.alertDuplicateField,
+  ERROR_DEFAULT: locale.alertErrorDefault,
+  CHANGE_SUCCESS: locale.alertChangeSuccess,
+  PASSWORD_CHANGE_SUCCESS: locale.alertPasswordChangeSuccess,
+  INVALID_CURRENT_PASSWORD: locale.alertInvalidCurrentPassword,
+  DELETE_ADDRESS_SUCCESS: locale.alertDeleteAddressSuccess,
+  CHANGE_ADDRESS_SUCCESS: locale.alertChangeAddressSuccess,
+  SET_DEFAULT_ADDRESS: locale.alertSetDefaultAddress,
+  DELETE_DEFAULT_ADDRESS: locale.alertDeleteDefaultAddress,
+  ADD_ADDRESS_SUCCESS: locale.alertAddAddressSuccess,
+  REMOVE_CART_ITEM: locale.alertRemoveCartItem,
+  DISCOUNT_CODE_NON: locale.alertDiscountCodeNon,
+};
+
+export const CHECKBOX_TEXT = {
+  DEFAULT_SAVE: locale.checkboxDefaultSave,
+  SAME_ADDRESSES: locale.checkboxSameAddresses,
+};
+
+export const DELIVERY_TEXT = {
+  PAY: locale.deliveryPay,
+  SELF_DELIVERY: locale.deliverySelfDelivery,
+  ANONIM_PRESENT: locale.deliveryAnonimPresent,
+};
+
+export const DROPDOWN_OPTIONS = {
+  DEFAULT: locale.dropdownDefault,
+  FALSE: locale.dropdownFalse,
+  TRUE: locale.dropdownTrue,
+};
+
+export const TAB_ACCOUNT = {
+  INFO: locale.tabAccountInfo,
+  ADDRESSES: locale.tabAccountAddresses,
+  CHANGE_PASS: locale.tabAccountChangePass,
+};
+
+export const ADDRESS_TYPE_TEXT = {
+  SHIPPING: locale.addressTypeShipping,
+  BILLING: locale.addressTypeBilling,
+  DEFAULT: locale.addressTypeDefault,
+  NONE: locale.addressTypeNone,
+};
+
+export const MODAL_TITLE = {
+  CHANGE: locale.modalTitleChange,
+  CHANGE_USER_INFO: locale.modalTitleChangeUserInfo,
+  NEW: locale.modalTitleNew,
+  CHANGE_PASSWORD: locale.modalTitleChangePassword,
+  CHECKOUT_CART: locale.modalTitleCheckoutCart,
+};
+
+export const ADDRESS_KEY = {
+  COUNTRY: locale.addressKeyCountry,
+  CITY: locale.addressKeyCity,
+  STREET: locale.addressKeyStreet,
+  POSTAL_CODE: locale.addressKeyPostalCode,
+};
+
+export const USER_INFO_KEY = {
+  FIRST_NAME: locale.userInfoKeyFirstName,
+  LAST_NAME: locale.userInfoKeyLastName,
+  DATA_OF_BIRTH: locale.userInfoKeyDataOfBirth,
+  EMAIL: locale.userInfoKeyEmail,
+};

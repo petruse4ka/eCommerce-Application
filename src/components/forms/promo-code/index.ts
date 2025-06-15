@@ -4,8 +4,9 @@ import BaseComponent from '@/components/base';
 import Button from '@/components/buttons';
 import Input from '@/components/inputs';
 import { BTN_TEXT, PROMO_PLACEHOLDER } from '@/constants';
+import { ALERT_TEXT } from '@/constants';
 import { FORM_PROMO_CODE } from '@/styles/forms/forms';
-import { AlertStatus, AlertText, AlertTime, InputType } from '@/types/enums';
+import { AlertStatus, AlertTime, InputType } from '@/types/enums';
 import { isErrorInfoPasswordChange } from '@/types/guards';
 import type { ErrorInfo } from '@/types/interfaces';
 import type { UpdateViewTotalCart } from '@/types/types';
@@ -49,7 +50,8 @@ export default class FormPromoCode extends BaseComponent {
             const parsedError: unknown = JSON.parse(error.message);
             if (isErrorInfoPasswordChange(parsedError)) {
               const errorInfo = ApiErrors.getErrorInfo(parsedError.code);
-              if (errorInfo === AlertText.DISCOUNT_CODE_NON) {
+
+              if (errorInfo === ALERT_TEXT.DISCOUNT_CODE_NON) {
                 input.setError(errorInfo);
               } else {
                 Alert.render({

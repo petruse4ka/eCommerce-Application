@@ -43,4 +43,5 @@ export const ADDRESS = {
     TITLE: ['font-semibold', 'text-base', 'w-[200px]', 'shrink-0'],
     VALUE: ['text-base', 'break-words', 'break-all'],
   },
+  NONE: ['text-black'],
 };

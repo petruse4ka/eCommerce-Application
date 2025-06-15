@@ -4,7 +4,7 @@ import macaronImg from '@/assets/images/error-big-macaron.png';
 import crumbImg from '@/assets/images/error-crumb.png';
 import BaseComponent from '@/components/base';
 import Button from '@/components/buttons';
-import { ERRORPAGE_TEXTS } from '@/constants';
+import { ERROR_PAGE_TEXTS } from '@/constants';
 import Router from '@/router';
 import { CONTAINER, CRUMB_STYLE, MAIN_CONTAINER, TITLE_STYLE } from '@/styles/pages/errorpage';
 import { Route } from '@/types/enums';
@@ -47,7 +47,7 @@ export default class ErrorPage extends BaseComponent {
 
     const returnButton = new Button({
       style: 'SECONDARY_PINK',
-      textContent: ERRORPAGE_TEXTS.HOME,
+      textContent: ERROR_PAGE_TEXTS.HOME,
       callback: (): void => {
         Router.followRoute(Route.HOME);
       },
@@ -61,7 +61,7 @@ export default class ErrorPage extends BaseComponent {
     const title = new ElementBuilder({
       tag: 'h1',
       className: TITLE_STYLE,
-      textContent: ERRORPAGE_TEXTS.SORRY,
+      textContent: ERROR_PAGE_TEXTS.SORRY,
     }).getElement();
 
     this.component.append(title);
