@@ -85,6 +85,7 @@ export enum Language {
   ENGLISH = 'en',
   RUSSIAN = 'ru',
   DUTCH = 'nl',
+  BELARUS = 'by',
 }
 
 export enum CartStateKey {

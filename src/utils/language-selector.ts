@@ -1,3 +1,4 @@
+import { by } from '../locales/by';
 import { en } from '../locales/en';
 import { nl } from '../locales/nl';
 import { ru } from '../locales/ru';
@@ -42,6 +43,9 @@ export class LanguageSelector {
       }
       case Language.DUTCH: {
         return nl;
+      }
+      case Language.BELARUS: {
+        return by;
       }
       default: {
         return ru;

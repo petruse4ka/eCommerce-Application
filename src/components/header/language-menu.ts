@@ -1,3 +1,4 @@
+import byFlag from '@/assets/icons/flags/belarus.png';
 import nlFlag from '@/assets/icons/flags/netherlands.png';
 import ruFlag from '@/assets/icons/flags/russia.png';
 import ukFlag from '@/assets/icons/flags/united-kingdom.png';
@@ -53,9 +54,15 @@ export default class LanguageMenu extends BaseComponent {
   protected render(): void {
     const englishLanguageOption = this.createLanguageItem(Language.ENGLISH, ukFlag, LANGUAGES.en);
     const russianLanguageOption = this.createLanguageItem(Language.RUSSIAN, ruFlag, LANGUAGES.ru);
+    const belarusLanguageOption = this.createLanguageItem(Language.BELARUS, byFlag, LANGUAGES.by);
     const dutchLanguageOption = this.createLanguageItem(Language.DUTCH, nlFlag, LANGUAGES.nl);
 
-    this.languageDropdown.append(englishLanguageOption, russianLanguageOption, dutchLanguageOption);
+    this.languageDropdown.append(
+      englishLanguageOption,
+      russianLanguageOption,
+      belarusLanguageOption,
+      dutchLanguageOption
+    );
     this.component.append(this.languageButton.getElement(), this.languageDropdown);
   }
 

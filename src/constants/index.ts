@@ -295,6 +295,7 @@ export const PROMO_HEADER_TEXT = locale.promoCodeTextHeader;
 export const LANGUAGES = {
   [Language.ENGLISH]: 'English',
   [Language.RUSSIAN]: 'Русский',
+  [Language.BELARUS]: 'Беларускi',
   [Language.DUTCH]: 'Nederlands',
 };
 

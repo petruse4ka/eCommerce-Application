@@ -107,5 +107,10 @@ export function isActionHandler<T>(
 }
 
 export function isValidLanguage(lang: string): lang is Language {
-  return lang === Language.ENGLISH || lang === Language.RUSSIAN || lang === Language.DUTCH;
+  return (
+    lang === Language.ENGLISH ||
+    lang === Language.RUSSIAN ||
+    lang === Language.BELARUS ||
+    lang === Language.DUTCH
+  );
 }
