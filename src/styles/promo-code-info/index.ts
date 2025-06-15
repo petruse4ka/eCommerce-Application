@@ -24,9 +24,9 @@ export const PROMO_CODE_INFO_GRADIENT = [
   'flex',
   'items-center',
   'w-full',
-  'bg-gradient-to-br',
-  'from-accent',
-  'to-accent-hover',
+  'bg-linear-65',
+  'from-purple-light',
+  'to-pink-light',
   'rounded-md',
   'font-bold',
   'h-[60px]',
@@ -36,4 +36,17 @@ export const PROMO_CODE_INFO_GRADIENT = [
   'sm:text-lg',
   'md:text-xl',
   'shadow-md',
+  'relative',
 ];
+
+export const STARS_CONTAINER = [
+  'hidden',
+  'md:block',
+  'absolute',
+  'inset-0',
+  'bg-[url(@/assets/images/promo/promo-stars-gold.svg)]',
+  'bg-no-repeat',
+  'bg-right',
+];
+
+export const TEXT_CONTAINER = ['relative', 'z-10', 'w-full', 'text-center'];

@@ -11,8 +11,10 @@
   --color-black: #1a1a2e;
   --color-black-permanent: #1a1a2e;
   --color-pink: #ca5166;
+  --color-pink-light: #ec4899;
   --color-dark: #2b1414;
   --color-purple: #49387a;
+  --color-purple-light: #8b5cf6;
   --color-accent: #e7426a;
   --color-accent-hover: #f45d82;
   --color-bright: #ca5166;
@@ -39,8 +41,10 @@
   --color-gray-light-dark: #242436;
   --color-black-dark: #fff;
   --color-pink-dark: #ff6b81;
+  --color-pink-light-dark: #ec4899;
   --color-dark-dark: #fff;
   --color-purple-dark: #4e3c83;
+  --color-purple-light-dark: #8b5cf6;
   --color-accent-dark: #ff4d6d;
   --color-accent-hover-dark: #f45d82;
   --color-bright-dark: #2d2d3a;
@@ -117,8 +121,10 @@
   --color-gray-light: var(--color-gray-light-dark);
   --color-black: var(--color-black-dark);
   --color-pink: var(--color-pink-dark);
+  --color-pink-light: var(--color-pink-light-dark);
   --color-dark: var(--color-dark-dark);
   --color-purple: var(--color-purple-dark);
+  --color-purple-light: var(--color-purple-light-dark);
   --color-accent: var(--color-accent-dark);
   --color-accent-hover: var(--color-accent-hover-dark);
   --color-bright: var(--color-bright-dark);
