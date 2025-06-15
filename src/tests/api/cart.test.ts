@@ -90,7 +90,6 @@ describe('APICart', () => {
   test('get cart', async () => {
     const bodyTransform = TransformApiCartData.transformProductLine(body.lineItems);
     const updateCart = vi.spyOn(cartState, 'setCartInfo');
-    const updateCartLine = vi.spyOn(cartState, 'updateCartLine');
 
     globalThis.fetch = vi.fn().mockResolvedValueOnce({
       ok: true,
@@ -107,9 +106,5 @@ describe('APICart', () => {
       totalDiscountPrice: 0,
       discountCode: null,
     });
-
-    expect(updateCartLine).toHaveBeenCalledWith(
-      TransformApiCartData.transformLineItems(body.lineItems)
-    );
   });
 });

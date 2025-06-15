@@ -7,6 +7,15 @@ class CartState {
   private cartInfo: CartInfo | null = null;
   private subscribers: Map<string, ActionWithArgumentHandler<number>[]> = new Map();
   private lineItems: CartLineItem[] = [];
+  private isCartCreated: boolean = false;
+
+  public getIsCartCreated(): boolean {
+    return this.isCartCreated;
+  }
+
+  public setIsCartCreated(value: boolean): void {
+    this.isCartCreated = value;
+  }
 
   public getItemsCount(): number {
     return this.itemsCount;
@@ -58,6 +67,7 @@ class CartState {
     this.cartInfo = null;
     this.lineItems = [];
     this.itemsCount = 0;
+    this.isCartCreated = false;
     this.notify(CartStateKey.CART_INFO);
     this.notify(CartStateKey.UPDATE_CART_LINE);
     this.notify(CartStateKey.ITEMS_COUNT);

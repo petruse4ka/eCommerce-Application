@@ -28,13 +28,8 @@ export default class AddToCartButton {
     this.button = new ButtonBuilder({
       type: ButtonType.BUTTON,
       className: ['button', ...CUSTOM_BUTTON_STYLE[parameters.style]],
-      callback: async (): Promise<void> => {
-        this.setLoadingState();
-        try {
-          await APICart.addProductInCart(this.productId);
-        } catch {
-          this.setDefaultState();
-        }
+      callback: (): void => {
+        void this.callbackButton();
       },
     });
 
@@ -85,13 +80,40 @@ export default class AddToCartButton {
     this.button.enableButton();
   }
 
+  private async callbackButton(): Promise<void> {
+    this.setLoadingState();
+    try {
+      if (cartState.getCartInfo() || cartState.getIsCartCreated()) {
+        await APICart.addProductInCart(this.productId);
+      } else {
+        cartState.setIsCartCreated(true);
+        await APICart.createCart();
+        await APICart.addProductInCart(this.productId);
+      }
+    } catch {
+      if (cartState.getIsCartCreated()) {
+        const repeat = setTimeout(() => {
+          void (async (): Promise<void> => {
+            try {
+              await APICart.addProductInCart(this.productId);
+              this.setDefaultState();
+              clearTimeout(repeat);
+            } catch {
+              this.setDefaultState();
+            }
+          })();
+        }, 1000);
+      } else {
+        this.setDefaultState();
+      }
+    }
+  }
+
   private updateState(): void {
     const lineItems = cartState.getLineItems();
     const isInCart = lineItems.some((item) => item.productId === this.productId);
     if (isInCart) {
       this.setSuccessState();
-    } else {
-      this.setDefaultState();
     }
   }
 
