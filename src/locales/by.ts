@@ -146,6 +146,8 @@ export const by = {
   cartTextCatalog: 'У каталог',
   cartTextPromoCodeApply: 'Прамакод ужыты',
   cartTextLoadingTotal: 'Абнаўляем кошт...',
+  cartTextLoadingDeleteProduct: 'Выдаленне тавару...',
+  cartTextLoadingDeleteProductCart: 'Ачыстка кошыка...',
   cartTextModalText: 'Ваш заказ паспяхова прыняты! Мы звяжамся з вамі для пацверджання інфармацыі',
   promoCodeText: 'SALE10 - прамакод на першую пакупку',
   promoCodeTextHeader: 'Зніжка па прамакодзе SALE10',

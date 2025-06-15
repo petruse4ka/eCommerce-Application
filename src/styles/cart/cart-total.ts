@@ -14,7 +14,7 @@ export const CART_TOTAL = {
   ITEM: {
     CONTAINER: {
       DEFAULT: ['flex', 'justify-between', 'py-1'],
-      ACCENT: ['flex', 'justify-between', 'border-y-1', 'border-primary', 'py-3'],
+      ACCENT: ['flex', 'justify-between', 'border-y-1', 'border-primary', 'py-3', 'my-3'],
     },
     TEXT: {
       DEFAULT: ['text-l', 'text-black'],
@@ -22,5 +22,5 @@ export const CART_TOTAL = {
     },
     DOTTED: ['flex-grow', 'border-b', 'border-dotted', 'border-gray', 'mx-2'],
   },
-  LOADER: ['absolute', 'p-3', 'w-full', 'h-full', 'bg-gray/80', 'top-0', 'left-0'],
+  LOADER: ['absolute', 'p-3', 'w-full', 'h-full', 'bg-gray/80', 'top-0', 'left-0', 'z-999'],
 };

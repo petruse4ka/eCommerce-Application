@@ -284,6 +284,8 @@ export const CART_TEXT = {
   PROMO_CODE_APPLY: locale.cartTextPromoCodeApply,
   LOADING_TOTAL: locale.cartTextLoadingTotal,
   MODAL_TEXT: locale.cartTextModalText,
+  LOADING_DELETE_PRODUCT: locale.cartTextLoadingDeleteProduct,
+  LOADING_DELETE_CART: locale.cartTextLoadingDeleteProductCart,
 };
 
 export const PROMO_CODE_TEXT = locale.promoCodeText;

@@ -9,12 +9,13 @@ import { FORM_PROMO_CODE } from '@/styles/forms/forms';
 import { AlertStatus, AlertTime, InputType } from '@/types/enums';
 import { isErrorInfoPasswordChange } from '@/types/guards';
 import type { ErrorInfo } from '@/types/interfaces';
+import type { UpdateViewTotalCart } from '@/types/types';
 import ApiErrors from '@/utils/api-errors';
 
 export default class FormPromoCode extends BaseComponent {
-  private callback: (isLoading: boolean) => void;
+  private callback: UpdateViewTotalCart;
 
-  constructor(callback: (isLoading: boolean) => void) {
+  constructor(callback: UpdateViewTotalCart) {
     super({
       tag: 'form',
       className: FORM_PROMO_CODE,
@@ -39,9 +40,13 @@ export default class FormPromoCode extends BaseComponent {
       style: 'PROMO_CODE_SUBMIT',
       textContent: BTN_TEXT.APPLY,
       callback: (): void => {
-        this.callback(true);
+        this.callback({ isLoading: true, success: false });
         APICart.addPromoCode(input.getValue())
+          .then(() => {
+            this.callback({ isLoading: false, success: true });
+          })
           .catch((error: ErrorInfo) => {
+            this.callback({ isLoading: false, success: false });
             const parsedError: unknown = JSON.parse(error.message);
             if (isErrorInfoPasswordChange(parsedError)) {
               const errorInfo = ApiErrors.getErrorInfo(parsedError.code);
@@ -56,9 +61,6 @@ export default class FormPromoCode extends BaseComponent {
                 });
               }
             }
-          })
-          .finally(() => {
-            this.callback(false);
           });
       },
     }).getElement();

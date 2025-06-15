@@ -146,6 +146,8 @@ export const ru = {
   cartTextCatalog: 'В каталог',
   cartTextPromoCodeApply: 'Промокод применен',
   cartTextLoadingTotal: 'Обновляем стоимость...',
+  cartTextLoadingDeleteProduct: 'Удаляем товар...',
+  cartTextLoadingDeleteProductCart: 'Очистка корзины...',
   cartTextModalText: 'Ваш заказ успешно принят! Мы свяжемся с вами для подтверждения информации',
   promoCodeText: 'SALE10 - промокод на первую покупку',
   promoCodeTextHeader: 'Скидка по промокоду SALE10',

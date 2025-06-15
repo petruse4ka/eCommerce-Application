@@ -146,6 +146,8 @@ export const en = {
   cartTextCatalog: 'To catalog',
   cartTextPromoCodeApply: 'Promocode applied',
   cartTextLoadingTotal: 'Updating price...',
+  cartTextLoadingDeleteProduct: 'Deleting product...',
+  cartTextLoadingDeleteProductCart: 'Clearing cart...',
   cartTextModalText:
     'Your order has been successfully received! We will contact you to confirm the information',
   promoCodeText: 'SALE10 - promo code for your first purchase',

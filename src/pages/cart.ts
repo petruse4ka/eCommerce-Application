@@ -6,9 +6,11 @@ import EmptyComponent from '@/components/base/empty';
 import Button from '@/components/buttons';
 import CartList from '@/components/cart/cart-list';
 import CartTotal from '@/components/cart/cart-total';
+import LoaderOverlay from '@/components/overlay/loader-overlay';
 import { CART_TEXT } from '@/constants';
 import Router from '@/router';
 import { cartState } from '@/store/cart-state';
+import { CART_TOTAL } from '@/styles/cart/cart-total';
 import { CART_PAGE } from '@/styles/pages/cart';
 import { CartStateKey, Route } from '@/types/enums';
 import ElementBuilder from '@/utils/element-builder';
@@ -30,11 +32,23 @@ export default class CartPage extends BaseComponent {
     }).getElement();
 
     this.cartTotal = new CartTotal();
-    this.cartList = new CartList(this.cartTotal.updateView.bind(this.cartTotal));
+    this.cartList = new CartList(
+      this.cartTotal.updateView.bind(this.cartTotal),
+      this.loading.bind(this)
+    );
 
     cartState.subscribe(CartStateKey.UPDATE_CART_LINE, this.updateInfo.bind(this));
 
     this.render();
+  }
+
+  private loading(text: string): void {
+    const loader = new LoaderOverlay({
+      text,
+      className: CART_TOTAL.LOADER,
+    }).getElement();
+
+    this.component.append(loader);
   }
 
   private updateInfo(): void {
@@ -50,7 +64,7 @@ export default class CartPage extends BaseComponent {
 
     if (total) {
       this.cartList.updateInfo();
-      this.cartTotal.updateView(false);
+      this.cartTotal.updateView({ isLoading: false, success: true });
       this.container.append(this.cartList.getElement(), this.cartTotal.getElement());
       this.component.append(this.container);
     } else {

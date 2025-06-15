@@ -1,7 +1,7 @@
 import APICart from '@/api/cart';
 import cartAddIcon from '@/assets/icons/cart-add.svg';
 import cartAddedIcon from '@/assets/icons/cart-added.svg';
-import { CATALOG_TEXTS } from '@/constants';
+import { CATALOG_TEXTS, LOADING_CONFIG } from '@/constants';
 import { cartState } from '@/store/cart-state';
 import {
   BUTTON_ICON,
@@ -22,26 +22,19 @@ export default class AddToCartButton {
   private textElement: HTMLElement;
   private currentIcon: HTMLElement;
   private productId: string;
+  private isLoading: boolean;
 
   constructor(parameters: addToCartButtonParameters) {
     this.productId = parameters.productId;
     this.button = new ButtonBuilder({
       type: ButtonType.BUTTON,
       className: ['button', ...CUSTOM_BUTTON_STYLE[parameters.style]],
-      callback: async (): Promise<void> => {
-        this.setLoadingState();
-        try {
-          if (cartState.getCartInfo()) {
-            await APICart.addProductInCart(this.productId);
-          } else {
-            await APICart.createCart();
-            await APICart.addProductInCart(this.productId);
-          }
-        } catch {
-          this.setDefaultState();
-        }
+      callback: (): void => {
+        void this.callbackButton();
       },
     });
+
+    this.isLoading = false;
 
     this.iconContainer = new ElementBuilder({
       tag: 'div',
@@ -90,13 +83,41 @@ export default class AddToCartButton {
     this.button.enableButton();
   }
 
+  private async callbackButton(): Promise<void> {
+    this.setLoadingState();
+    try {
+      if (cartState.getCartInfo() || cartState.getIsCartCreated()) {
+        await APICart.addProductInCart(this.productId);
+      } else {
+        cartState.setIsCartCreated(true);
+        await APICart.createCart();
+        await APICart.addProductInCart(this.productId);
+      }
+    } catch {
+      if (cartState.getIsCartCreated()) {
+        const repeat = setTimeout(() => {
+          void (async (): Promise<void> => {
+            try {
+              await APICart.addProductInCart(this.productId);
+              clearTimeout(repeat);
+            } catch {
+              this.setDefaultState();
+            }
+          })();
+        }, LOADING_CONFIG.DELAY);
+      } else {
+        this.setDefaultState();
+      }
+    }
+  }
+
   private updateState(): void {
     const lineItems = cartState.getCartInfo()?.lineItems;
     if (Array.isArray(lineItems)) {
       const isInCart = lineItems.some((item) => item.productId === this.productId);
       if (isInCart) {
         this.setSuccessState();
-      } else {
+      } else if (!this.isLoading) {
         this.setDefaultState();
       }
     } else {
@@ -123,6 +144,7 @@ export default class AddToCartButton {
   }
 
   private setLoadingState(): void {
+    this.isLoading = true;
     this.setState({
       loading: true,
       inCart: false,
@@ -133,6 +155,7 @@ export default class AddToCartButton {
   }
 
   private setSuccessState(): void {
+    this.isLoading = false;
     this.setState({
       loading: false,
       inCart: true,
@@ -143,6 +166,7 @@ export default class AddToCartButton {
   }
 
   private setDefaultState(): void {
+    this.isLoading = false;
     this.setState({
       loading: false,
       inCart: false,

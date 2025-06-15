@@ -26,14 +26,15 @@ export default class APICart {
         if ('errors' in body) {
           throw new Error(JSON.stringify(body.errors));
         } else {
-          cartState.setItemsCount(body.totalLineItemQuantity ?? 0);
+          cartState.setIsCartCreated(true);
           const cartInfo = await TransformApiCartData.transformCartState(body);
           cartState.setCartInfo(cartInfo);
-          cartState.updateCartLine(TransformApiCartData.transformLineItems(body.lineItems));
         }
       })
       .catch((error: Error) => {
         this.alertError(error);
+        cartState.setIsCartCreated(false);
+        throw new Error('Create cart error');
       });
   }
 
@@ -62,11 +63,15 @@ export default class APICart {
             const cartInfo = await TransformApiCartData.transformCartState(body);
             cartState.setCartInfo(cartInfo);
             cartState.updateCartLine(TransformApiCartData.transformLineItems(body.lineItems));
+            return true;
           }
         })
         .catch((error: Error) => {
           this.alertError(error);
+          throw new Error('Add cart item error');
         });
+    } else {
+      throw new Error('Add cart item error');
     }
   }
 
@@ -122,7 +127,7 @@ export default class APICart {
           if ('errors' in body) {
             throw new Error(JSON.stringify(body.errors));
           } else {
-            cartState.setItemsCount(body.totalLineItemQuantity ?? 0);
+            cartState.setItemsCount(body.totalLineItemQuantity);
             const cartInfo = await TransformApiCartData.transformCartState(body);
             if (cartInfo) {
               cartState.setCartInfo(cartInfo);
@@ -161,7 +166,7 @@ export default class APICart {
           if ('errors' in body) {
             throw new Error(JSON.stringify(body.errors));
           } else {
-            cartState.setItemsCount(body.totalLineItemQuantity ?? 0);
+            cartState.setItemsCount(body.totalLineItemQuantity);
             cartState.setCartInfo(await TransformApiCartData.transformCartState(body));
 
             return true;
@@ -236,7 +241,7 @@ export default class APICart {
     }
   }
 
-  public static getDiscountCodeInfo(codeId: string): Promise<string | void> {
+  public static async getDiscountCodeInfo(codeId: string): Promise<string | void> {
     const token = userState.getTokenState();
 
     return fetch(
