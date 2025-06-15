@@ -274,7 +274,6 @@ export const DEFAULT_QUANTITY_AMOUNT = 1;
 
 export const CART_TEXT = {
   TITLE: 'Ваша корзина',
-  PRICE: 'Стоимость: ',
   TOTAL_TITLE: 'Итого',
   PRODUCTS_PRICE: 'Стоимость товаров',
   SALE: 'Скидка',

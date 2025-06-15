@@ -1,6 +1,6 @@
 import APICart from '@/api/cart';
 import deleteIcon from '@/assets/icons/delete.svg';
-import { CART_TEXT } from '@/constants';
+import { PRODUCT_TEXT } from '@/constants';
 import { ADDRESS } from '@/styles/address';
 import { CART_ITEM } from '@/styles/cart/cart-item';
 import type { CartItemView } from '@/types/interfaces';
@@ -28,11 +28,18 @@ export default class CartItem extends BaseComponent {
     this.render();
   }
 
+  private createPriceOld(): ElementBuilder {
+    return new ElementBuilder({
+      tag: 'span',
+      className: CART_ITEM.PRICE.OLD,
+      textContent: `${this.productInfo.prices.toFixed(2)} ${PRODUCT_TEXT.CURRENCY}`,
+    });
+  }
+
   private createPriceAndQuantity(): void {
     const priceContainer = new ElementBuilder({
       tag: 'p',
       className: CART_ITEM.PRICE.DEFAULT,
-      textContent: CART_TEXT.PRICE,
     }).getElement();
 
     const priceValue = new ElementBuilder({
@@ -42,12 +49,23 @@ export default class CartItem extends BaseComponent {
 
     priceContainer.append(priceValue);
 
+    let priceOld = null;
+    if (this.productInfo.discountedPrice) {
+      priceOld = this.createPriceOld();
+      priceContainer.append(priceOld.getElement());
+    }
+
     const quantityInputBlock = new ProductQuantity({
       price: this.productInfo.discountedPrice ?? this.productInfo.prices,
       element: priceValue,
       text: '',
       count: this.productInfo.quantity,
       callback: async (count: number): Promise<boolean> => {
+        if (this.productInfo.discountedPrice && priceOld) {
+          priceOld.applyTextContent(
+            `${(this.productInfo.prices * count).toFixed(2)} ${PRODUCT_TEXT.CURRENCY}`
+          );
+        }
         this.callback(true);
         const fetchResult = await APICart.changeProductQuantity({
           id: this.productInfo.id,
