@@ -120,6 +120,8 @@ export default class AddToCartButton {
       } else if (!this.isLoading) {
         this.setDefaultState();
       }
+    } else {
+      this.setDefaultState();
     }
   }
 
