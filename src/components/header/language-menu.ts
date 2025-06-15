@@ -69,7 +69,10 @@ export default class LanguageMenu extends BaseComponent {
   private createLanguageItem(language: Language, flag: string, text: string): HTMLElement {
     const languageItem = new ElementBuilder({
       tag: 'div',
-      className: SUBHEADER_STYLES.LANGUAGE_ITEM,
+      className: [
+        ...SUBHEADER_STYLES.LANGUAGE_ITEM,
+        ...(language === this.currentLanguage ? SUBHEADER_STYLES.LANGUAGE_ITEM_ACTIVE : []),
+      ],
       callback: (): void => this.changeLanguage(language),
     }).getElement();
 
