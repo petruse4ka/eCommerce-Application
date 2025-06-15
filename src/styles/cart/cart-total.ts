@@ -22,5 +22,5 @@ export const CART_TOTAL = {
     },
     DOTTED: ['flex-grow', 'border-b', 'border-dotted', 'border-gray', 'mx-2'],
   },
-  LOADER: ['absolute', 'p-3', 'w-full', 'h-full', 'bg-gray/80', 'top-0', 'left-0'],
+  LOADER: ['absolute', 'p-3', 'w-full', 'h-full', 'bg-gray/80', 'top-0', 'left-0', 'z-999'],
 };

@@ -284,6 +284,7 @@ export const CART_TEXT = {
   CATALOG: 'В каталог',
   PROMO_CODE_APPLY: 'Применен промокод',
   LOADING_TOTAL: 'Обновляем стоимость...',
+  LOADING_DELETE_PRODUCT: 'Удаляем товар...',
   MODAL_TEXT: 'Ваш заказ успешно принят! Мы свяжемся с вами для подтверждения информации',
 };
 

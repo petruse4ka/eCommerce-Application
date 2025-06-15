@@ -1,14 +1,16 @@
 import APICart from '@/api/cart';
 import deleteIcon from '@/assets/icons/delete.svg';
-import { PRODUCT_TEXT } from '@/constants';
+import { CART_TEXT, PRODUCT_TEXT } from '@/constants';
 import { ADDRESS } from '@/styles/address';
 import { CART_ITEM } from '@/styles/cart/cart-item';
+import { CART_TOTAL } from '@/styles/cart/cart-total';
 import type { CartItemView } from '@/types/interfaces';
 import ElementBuilder from '@/utils/element-builder';
 import ImageBuilder from '@/utils/image-builder';
 
 import BaseComponent from '../base';
 import ButtonWithIcon from '../buttons/button-with-icon';
+import LoaderOverlay from '../overlay/loader-overlay';
 import ProductQuantity from '../product/quantity';
 
 export default class CartItem extends BaseComponent {
@@ -105,6 +107,11 @@ export default class CartItem extends BaseComponent {
       },
       callback: async (): Promise<void> => {
         this.callback(true);
+        const loader = new LoaderOverlay({
+          text: CART_TEXT.LOADING_DELETE_PRODUCT,
+          className: CART_TOTAL.LOADER,
+        }).getElement();
+        this.component.append(loader);
         deleteButton.disableButton();
         await APICart.removeCartProduct(this.productInfo.id);
         deleteButton.enableButton();
