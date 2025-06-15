@@ -63,16 +63,16 @@ export default class CartItem extends BaseComponent {
       text: '',
       count: this.productInfo.quantity,
       callback: async (count: number): Promise<boolean> => {
-        if (this.productInfo.discountedPrice && priceOld) {
-          priceOld.applyTextContent(
-            `${(this.productInfo.prices * count).toFixed(2)} ${PRODUCT_TEXT.CURRENCY}`
-          );
-        }
         this.callback(true);
         const fetchResult = await APICart.changeProductQuantity({
           id: this.productInfo.id,
           quantity: count,
         });
+        if (this.productInfo.discountedPrice && priceOld) {
+          priceOld.applyTextContent(
+            `${(this.productInfo.prices * count).toFixed(2)} ${PRODUCT_TEXT.CURRENCY}`
+          );
+        }
         this.callback(false);
 
         return fetchResult;

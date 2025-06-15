@@ -1,5 +1,5 @@
 import APICart from '@/api/cart';
-import { BTN_TEXT } from '@/constants';
+import { BTN_TEXT, CART_TEXT } from '@/constants';
 import { cartState } from '@/store/cart-state';
 import { CART_LIST } from '@/styles/cart/cart-list';
 
@@ -9,7 +9,9 @@ import CartItem from './cart-item';
 
 export default class CartList extends BaseComponent {
   private callback: (isLoading: boolean) => void;
-  constructor(callback: (isLoading: boolean) => void) {
+  private loading: (text: string) => void;
+
+  constructor(callback: (isLoading: boolean) => void, loading: (text: string) => void) {
     super({
       tag: 'section',
       className: CART_LIST.CONTAINER,
@@ -18,6 +20,8 @@ export default class CartList extends BaseComponent {
     this.callback = (isLoading: boolean): void => {
       callback(isLoading);
     };
+
+    this.loading = loading;
 
     this.render();
   }
@@ -44,11 +48,14 @@ export default class CartList extends BaseComponent {
     const clearButton = new Button({
       style: 'CLEAR_CART',
       textContent: BTN_TEXT.CLEAR_CART,
-      callback: (): void => {
-        void APICart.deleteCart();
+      callback: async (): Promise<void> => {
+        this.loading(CART_TEXT.LOADING_DELETE_CART);
+        clearButton.disableButton();
+        await APICart.deleteCart();
+        clearButton.enableButton();
       },
-    }).getElement();
+    });
 
-    this.component.append(clearButton);
+    this.component.append(clearButton.getElement());
   }
 }
