@@ -1,4 +1,5 @@
-import { ERROR_MESSAGES, VALIDATE_CONST } from '@/constants';
+import { VALIDATE_CONST } from '@/constants';
+import { ERROR_MESSAGES } from '@/constants';
 import {
   validateDateOfBirth,
   validateEMail,
@@ -36,7 +37,9 @@ describe('Email validation', () => {
   test('should reject empty input', () => {
     expect(validateEMail('')).toBe(ERROR_MESSAGES.EMPTY_INPUT);
   });
+});
 
+describe('Email validation', () => {
   test('should reject email without @', () => {
     expect(validateEMail('exampletut.by')).toBe(ERROR_MESSAGES.INVALID_EMAIL);
   });
@@ -73,33 +76,42 @@ describe('Password validation', () => {
 
   test('should reject password without uppercase letter', () => {
     expect(validatePassword('a1234567')).toBe(
-      'Пароль должен содержать минимум одну заглавную букву.'
+      `${ERROR_MESSAGES.PASSWORD_MUST_CONTAIN} ${ERROR_MESSAGES.ONE_UPPER_LETTER}.`
     );
   });
+});
 
+describe('Password validation', () => {
   test('should reject password without lowercase letter', () => {
     expect(validatePassword('A1234567')).toBe(
-      'Пароль должен содержать минимум одну строчную букву.'
+      `${ERROR_MESSAGES.PASSWORD_MUST_CONTAIN} ${ERROR_MESSAGES.ONE_LOWER_LETTER}.`
     );
   });
 
   test('should reject password without number', () => {
-    expect(validatePassword('ABCDEFabcdef')).toBe('Пароль должен содержать минимум одну цифру.');
+    expect(validatePassword('ABCDEFabcdef')).toBe(
+      `${ERROR_MESSAGES.PASSWORD_MUST_CONTAIN} ${ERROR_MESSAGES.ONE_DIGIT}.`
+    );
   });
 
   test('should reject password without uppercase and number', () => {
     expect(validatePassword('asdfghjk')).toBe(
-      'Пароль должен содержать минимум: одну заглавную букву, одну цифру.'
+      `${ERROR_MESSAGES.PASSWORD_MUST_CONTAIN}: ${ERROR_MESSAGES.ONE_UPPER_LETTER}, ${ERROR_MESSAGES.ONE_DIGIT}.`
     );
   });
 
   test('should reject password shorter than 8 characters', () => {
-    expect(validatePassword('aA8')).toBe('Пароль должен содержать минимум 8 символов.');
+    expect(validatePassword('aA8')).toBe(
+      `${ERROR_MESSAGES.PASSWORD_MUST_CONTAIN} ${ERROR_MESSAGES.PASSWORD_LENGTH.replace('${}', String(VALIDATE_CONST.MIN_PASSWORD_LENGTH))}.`
+    );
   });
 
   test('should reject password with multiple rule violations', () => {
     expect(validatePassword('pass')).toBe(
-      'Пароль должен содержать минимум: 8 символов, одну заглавную букву, одну цифру.'
+      `${ERROR_MESSAGES.PASSWORD_MUST_CONTAIN}: ${ERROR_MESSAGES.PASSWORD_LENGTH.replace(
+        '${}',
+        String(VALIDATE_CONST.MIN_PASSWORD_LENGTH)
+      )}, ${ERROR_MESSAGES.ONE_UPPER_LETTER}, ${ERROR_MESSAGES.ONE_DIGIT}.`
     );
   });
 });

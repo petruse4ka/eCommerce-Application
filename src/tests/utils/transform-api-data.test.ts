@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { USER_INFO_KEY } from '@/constants';
+import { ADDRESS_KEY, USER_INFO_KEY } from '@/constants';
 import { userState } from '@/store/user-state';
 import { AddressType } from '@/types/enums';
 import type { AddressWithId, Customer, PasswordBody } from '@/types/interfaces';
@@ -67,20 +67,20 @@ describe('Transform API data', () => {
           {
             id: 'test-address',
             isDefault: true,
-            Город: 'Тестовый Город',
-            Страна: 'Россия',
-            Улица: 'Тестовая Улица',
-            'Почтовый индекс': '12345',
+            [ADDRESS_KEY.CITY]: 'Тестовый Город',
+            [ADDRESS_KEY.COUNTRY]: 'Россия',
+            [ADDRESS_KEY.STREET]: 'Тестовая Улица',
+            [ADDRESS_KEY.POSTAL_CODE]: '12345',
           },
         ],
         [AddressType.BILLING]: [
           {
             id: 'test-address',
             isDefault: true,
-            Город: 'Тестовый Город',
-            Страна: 'Россия',
-            Улица: 'Тестовая Улица',
-            'Почтовый индекс': '12345',
+            [ADDRESS_KEY.CITY]: 'Тестовый Город',
+            [ADDRESS_KEY.COUNTRY]: 'Россия',
+            [ADDRESS_KEY.STREET]: 'Тестовая Улица',
+            [ADDRESS_KEY.POSTAL_CODE]: '12345',
           },
         ],
       });

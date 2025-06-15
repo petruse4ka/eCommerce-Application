@@ -303,7 +303,7 @@ export const nl = {
   aboutKonstantinDesc1:
     'Konstantin is onze vaste hoofd banketbakker en JavaScript goeroe! Hij houdt het strategische plan in zijn hoofd en zijn hand aan de pols van het huidige werk. Altijd klaar om bij te springen in moeilijke situaties en brandende eclairs te redden of een code-bug van een collega op te lossen.',
   aboutKonstantinDesc2:
-    'Geboren in Moskou, wonend in Nederland - een meester in strategisch ondernemen met 15 jaar ervaring in projectmanagement, weet hij hoe hij elk initiatief tot een succes kan maken - of het nu een startup is, een perfect gebakken profiterole, of een RS School trainingsproject.',
+    'Geboren in Moskou, wonend in Nederland - een MSc in strategisch ondernemen met 15 jaar ervaring in projectmanagement, weet hij hoe hij elk initiatief tot een succes kan maken - of het nu een startup is, een perfect gebakken profiterole, of een RS School trainingsproject.',
   aboutKonstantinDesc3:
     'In zijn zeldzame vrije uren veroverd Konstantin virtuele werelden in computerspellen, debugt code, en heft enthousiast een glas van zijn favoriete bier (vooral op vrijdagen - omdat strategie een goede planning vereist!).',
   aboutDaniilName: 'Daniil Beaver',
