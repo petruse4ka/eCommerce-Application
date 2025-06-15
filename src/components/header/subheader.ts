@@ -5,16 +5,19 @@ import { SUBHEADER_STYLES } from '@/styles/header/subheader';
 import ElementBuilder from '@/utils/element-builder';
 
 import AuthorizationMenu from './authorisation-menu';
+import type MainMenu from './main-menu';
 import Promo from './promo';
 
 export default class SubHeader extends BaseComponent {
   private themeButton: ButtonWithIcon;
+  private mainMenu: MainMenu;
 
-  constructor() {
+  constructor(mainMenu: MainMenu) {
     super({
       tag: 'div',
       className: SUBHEADER_STYLES.SUBHEADER,
     });
+    this.mainMenu = mainMenu;
     this.themeButton = SubHeader.createThemeSelector();
     this.render();
   }
@@ -56,7 +59,7 @@ export default class SubHeader extends BaseComponent {
     }).getElement();
 
     const promo = new Promo();
-    const authorizationMenu = new AuthorizationMenu();
+    const authorizationMenu = new AuthorizationMenu(this.mainMenu);
 
     settingsContainer.append(this.themeButton.getElement());
     subheaderContainer.append(

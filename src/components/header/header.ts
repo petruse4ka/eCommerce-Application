@@ -10,13 +10,15 @@ import SubHeader from './subheader';
 
 export default class Header extends BaseComponent {
   private subHeader: SubHeader;
+  private mainMenu: MainMenu;
 
   constructor() {
     super({
       tag: 'header',
       className: HEADER_STYLES.HEADER,
     });
-    this.subHeader = new SubHeader();
+    this.mainMenu = new MainMenu();
+    this.subHeader = new SubHeader(this.mainMenu);
     this.render();
   }
 
@@ -27,11 +29,14 @@ export default class Header extends BaseComponent {
       className: HEADER_STYLES.HEADER_CONTAINER,
     }).getElement();
 
-    const logo = new Logo();
-    const mainMenu = new MainMenu();
-    const shoppingCart = new ShoppingCartIcon();
+    const logo = new Logo(this.mainMenu);
+    const shoppingCart = new ShoppingCartIcon(this.mainMenu);
 
-    headerContainer.append(logo.getElement(), mainMenu.getElement(), shoppingCart.getElement());
+    headerContainer.append(
+      logo.getElement(),
+      this.mainMenu.getElement(),
+      shoppingCart.getElement()
+    );
     this.component.append(promoHeader.getElement(), this.subHeader.getElement(), headerContainer);
   }
 }

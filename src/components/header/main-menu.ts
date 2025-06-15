@@ -34,6 +34,13 @@ export default class MainMenu extends BaseComponent {
     this.render();
   }
 
+  public closeBurgerMenu(): void {
+    if (this.isOpen) {
+      this.isOpen = false;
+      this.closeMenu();
+    }
+  }
+
   protected render(): void {
     for (const item of MENU_ITEMS) {
       const menuItem = new ElementBuilder({
@@ -57,6 +64,7 @@ export default class MainMenu extends BaseComponent {
       callback: (): void => {
         this.isOpen = !this.isOpen;
         if (this.isOpen) {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
           this.openMenu();
         } else {
           this.closeMenu();

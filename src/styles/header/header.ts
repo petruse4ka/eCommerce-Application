@@ -12,8 +12,7 @@ const MENU_NAV = [
   'fixed',
   'md:relative',
   'top-0',
-  'md:top-0',
-  'z-5',
+  'z-15',
   'md:bg-white',
   'bg-gray-medium',
   'justify-center',
@@ -44,7 +43,7 @@ export const HEADER_STYLES = {
     'md:px-4',
     'md:py-4',
   ],
-  LOGO: ['w-120px]', 'cursor-pointer', 'z-15', 'relative'],
+  LOGO: ['w-120px]', 'cursor-pointer', 'relative'],
   MAIN_MENU: [
     'flex',
     'flex-1',
@@ -68,7 +67,6 @@ export const HEADER_STYLES = {
     'items-center',
     'justify-center',
     'group',
-    'z-15',
   ],
   CART_ICON: [
     'w-10',
@@ -119,10 +117,10 @@ export const HEADER_STYLES = {
     'absolute',
     'top-[145px]',
     'right-[10px]',
-    'z-10',
     'cursor-pointer',
     'p-2',
     'group',
+    'z-30',
   ],
   BURGER_ICON_TOP_CLOSED: [...BURGER_ICON],
   BURGER_ICON_TOP_OPEN: [

@@ -5,11 +5,17 @@ import { HEADER_STYLES } from '@/styles/header/header';
 import { Route } from '@/types/enums';
 import ImageBuilder from '@/utils/image-builder';
 
+import type MainMenu from './main-menu';
+
 export default class Logo extends BaseComponent {
-  constructor() {
+  private mainMenu: MainMenu;
+
+  constructor(mainMenu: MainMenu) {
     super({ tag: 'div', className: '' });
+    this.mainMenu = mainMenu;
 
     this.component.addEventListener('click', () => {
+      this.mainMenu.closeBurgerMenu();
       Router.followRoute(Route.HOME);
     });
 

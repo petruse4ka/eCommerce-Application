@@ -1,5 +1,5 @@
 export const SUBHEADER_STYLES = {
-  SUBHEADER: ['bg-primary', 'py-2', 'text-[14px]', 'flex', 'justify-center', 'relative', 'z-10'],
+  SUBHEADER: ['bg-primary', 'py-2', 'text-[14px]', 'flex', 'justify-center', 'relative'],
   SUBHEADER_CONTAINER: ['max-w-[1440px]', 'flex', 'justify-between', 'w-full', 'px-3', 'md:px-4'],
   SETTINGS_CONTAINER: ['flex', 'gap-4', 'mr-5', 'items-center'],
   PROMO: ['hidden', 'xl:flex', 'flex-row', 'items-center', 'gap-4', 'lg:gap-8', 'xl:gap-12'],

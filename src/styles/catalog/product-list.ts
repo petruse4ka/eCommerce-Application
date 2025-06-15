@@ -53,7 +53,7 @@ export const PRODUCT_LIST_STYLES = {
     'py-1',
     'text-sm',
     'font-semibold',
-    'z-5',
+    'z-10',
   ],
   EMPTY_CATALOG_CONTAINER: [
     'flex',
