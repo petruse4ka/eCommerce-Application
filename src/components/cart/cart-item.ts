@@ -1,6 +1,6 @@
 import APICart from '@/api/cart';
-import deleteIcon from '@/assets/icons/delete.svg';
 import { CART_TEXT } from '@/constants';
+import { SVG_ICONS } from '@/data';
 import { ADDRESS } from '@/styles/address';
 import { CART_ITEM } from '@/styles/cart/cart-item';
 import type { CartItemView } from '@/types/interfaces';
@@ -82,7 +82,7 @@ export default class CartItem extends BaseComponent {
     const deleteButton = new ButtonWithIcon({
       style: 'DELETE_CART_ITEM',
       icon: {
-        source: deleteIcon,
+        source: SVG_ICONS.DELETE_ICON,
         classNameIcon: ADDRESS.CARD.ICON,
       },
       callback: async (): Promise<void> => {
