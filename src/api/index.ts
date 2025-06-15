@@ -46,7 +46,7 @@ export default class API {
       }
     )
       .then((response) => response.json())
-      .then((body: CustomerResponse | ErrorResponse) => {
+      .then(async (body: CustomerResponse | ErrorResponse) => {
         if ('errors' in body) {
           throw new Error(JSON.stringify(body.errors));
         } else {
@@ -55,6 +55,8 @@ export default class API {
             status: AlertStatus.SUCCESS,
             visibleTime: AlertTime.DEFAULT,
           });
+
+          await this.authentication();
 
           void API.userSignInResponse({
             userInfo: {
