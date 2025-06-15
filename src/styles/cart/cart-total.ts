@@ -14,7 +14,7 @@ export const CART_TOTAL = {
   ITEM: {
     CONTAINER: {
       DEFAULT: ['flex', 'justify-between', 'py-1'],
-      ACCENT: ['flex', 'justify-between', 'border-y-1', 'border-primary', 'py-3'],
+      ACCENT: ['flex', 'justify-between', 'border-y-1', 'border-primary', 'py-3', 'my-3'],
     },
     TEXT: {
       DEFAULT: ['text-l', 'text-black'],

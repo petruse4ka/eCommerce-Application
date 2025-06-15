@@ -5,6 +5,7 @@ import { ADDRESS } from '@/styles/address';
 import { CART_ITEM } from '@/styles/cart/cart-item';
 import { CART_TOTAL } from '@/styles/cart/cart-total';
 import type { CartItemView } from '@/types/interfaces';
+import type { UpdateViewTotalCart } from '@/types/types';
 import ElementBuilder from '@/utils/element-builder';
 import ImageBuilder from '@/utils/image-builder';
 
@@ -15,9 +16,9 @@ import ProductQuantity from '../product/quantity';
 
 export default class CartItem extends BaseComponent {
   private productInfo: CartItemView;
-  private callback: (isLoading: boolean) => void;
+  private callback: UpdateViewTotalCart;
 
-  constructor(product: CartItemView, callback: (isLoading: boolean) => void) {
+  constructor(product: CartItemView, callback: UpdateViewTotalCart) {
     super({
       tag: 'article',
       className: CART_ITEM.CONTAINER,
@@ -63,7 +64,7 @@ export default class CartItem extends BaseComponent {
       text: '',
       count: this.productInfo.quantity,
       callback: async (count: number): Promise<boolean> => {
-        this.callback(true);
+        this.callback({ isLoading: true, success: false });
         const fetchResult = await APICart.changeProductQuantity({
           id: this.productInfo.id,
           quantity: count,
@@ -73,7 +74,7 @@ export default class CartItem extends BaseComponent {
             `${(this.productInfo.prices * count).toFixed(2)} ${PRODUCT_TEXT.CURRENCY}`
           );
         }
-        this.callback(false);
+        this.callback({ isLoading: false, success: false });
 
         return fetchResult;
       },
@@ -106,7 +107,7 @@ export default class CartItem extends BaseComponent {
         classNameIcon: ADDRESS.CARD.ICON,
       },
       callback: async (): Promise<void> => {
-        this.callback(true);
+        this.callback({ isLoading: true, success: false });
         const loader = new LoaderOverlay({
           text: CART_TEXT.LOADING_DELETE_PRODUCT,
           className: CART_TOTAL.LOADER,
@@ -115,7 +116,7 @@ export default class CartItem extends BaseComponent {
         deleteButton.disableButton();
         await APICart.removeCartProduct(this.productInfo.id);
         deleteButton.enableButton();
-        this.callback(false);
+        this.callback({ isLoading: false, success: false });
       },
     });
 

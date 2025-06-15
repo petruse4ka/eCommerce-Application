@@ -2,23 +2,24 @@ import APICart from '@/api/cart';
 import { BTN_TEXT, CART_TEXT } from '@/constants';
 import { cartState } from '@/store/cart-state';
 import { CART_LIST } from '@/styles/cart/cart-list';
+import type { UpdateViewTotalCart } from '@/types/types';
 
 import BaseComponent from '../base';
 import Button from '../buttons';
 import CartItem from './cart-item';
 
 export default class CartList extends BaseComponent {
-  private callback: (isLoading: boolean) => void;
+  private callback: UpdateViewTotalCart;
   private loading: (text: string) => void;
 
-  constructor(callback: (isLoading: boolean) => void, loading: (text: string) => void) {
+  constructor(callback: UpdateViewTotalCart, loading: (text: string) => void) {
     super({
       tag: 'section',
       className: CART_LIST.CONTAINER,
     });
 
-    this.callback = (isLoading: boolean): void => {
-      callback(isLoading);
+    this.callback = (parameters: { isLoading: boolean; success: boolean }): void => {
+      callback(parameters);
     };
 
     this.loading = loading;

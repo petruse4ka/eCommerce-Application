@@ -64,7 +64,7 @@ export default class CartPage extends BaseComponent {
 
     if (total) {
       this.cartList.updateInfo();
-      this.cartTotal.updateView(false);
+      this.cartTotal.updateView({ isLoading: false, success: true });
       this.container.append(this.cartList.getElement(), this.cartTotal.getElement());
       this.component.append(this.container);
     } else {
