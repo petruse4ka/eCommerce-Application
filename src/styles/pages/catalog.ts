@@ -48,5 +48,6 @@ export const CATALOG_STYLES = {
     'min-h-[75px]',
     'xl:min-h-[150px]',
     'rounded-lg',
+    'pt-15',
   ],
 };

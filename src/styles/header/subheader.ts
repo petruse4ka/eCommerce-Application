@@ -62,6 +62,7 @@ export const SUBHEADER_STYLES = {
     'min-w-[150px]',
     'border',
     'border-accent',
+    'z-1',
   ],
   LANGUAGE_DROPDOWN_INACTIVE: ['invisible'],
   LANGUAGE_DROPDOWN_ACTIVE: ['visible'],
