@@ -113,10 +113,14 @@ export default class AddToCartButton {
 
   private updateState(): void {
     console.log('dw');
-    const lineItems = cartState.getLineItems();
-    const isInCart = lineItems.some((item) => item.productId === this.productId);
-    if (isInCart) {
-      this.setSuccessState();
+    const lineItems = cartState.getCartInfo()?.lineItems;
+    if (Array.isArray(lineItems)) {
+      const isInCart = lineItems.some((item) => item.productId === this.productId);
+      if (isInCart) {
+        this.setSuccessState();
+      } else {
+        this.setDefaultState();
+      }
     } else if (!this.isLoading) {
       this.setDefaultState();
     }
