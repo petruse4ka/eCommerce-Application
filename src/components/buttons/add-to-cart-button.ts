@@ -22,6 +22,7 @@ export default class AddToCartButton {
   private textElement: HTMLElement;
   private currentIcon: HTMLElement;
   private productId: string;
+  private isLoading: boolean;
 
   constructor(parameters: addToCartButtonParameters) {
     this.productId = parameters.productId;
@@ -32,6 +33,8 @@ export default class AddToCartButton {
         void this.callbackButton();
       },
     });
+
+    this.isLoading = false;
 
     this.iconContainer = new ElementBuilder({
       tag: 'div',
@@ -96,7 +99,6 @@ export default class AddToCartButton {
           void (async (): Promise<void> => {
             try {
               await APICart.addProductInCart(this.productId);
-              this.setDefaultState();
               clearTimeout(repeat);
             } catch {
               this.setDefaultState();
@@ -110,10 +112,13 @@ export default class AddToCartButton {
   }
 
   private updateState(): void {
+    console.log('dw');
     const lineItems = cartState.getLineItems();
     const isInCart = lineItems.some((item) => item.productId === this.productId);
     if (isInCart) {
       this.setSuccessState();
+    } else if (!this.isLoading) {
+      this.setDefaultState();
     }
   }
 
@@ -136,6 +141,7 @@ export default class AddToCartButton {
   }
 
   private setLoadingState(): void {
+    this.isLoading = true;
     this.setState({
       loading: true,
       inCart: false,
@@ -146,6 +152,7 @@ export default class AddToCartButton {
   }
 
   private setSuccessState(): void {
+    this.isLoading = false;
     this.setState({
       loading: false,
       inCart: true,
@@ -156,6 +163,7 @@ export default class AddToCartButton {
   }
 
   private setDefaultState(): void {
+    this.isLoading = false;
     this.setState({
       loading: false,
       inCart: false,
