@@ -10,14 +10,14 @@ export default class ButtonBuilder extends ElementBuilder {
   }
 
   public disableButton(): void {
-    this.element.classList.add('button--disabled', ...CUSTOM_BUTTON_STYLE.DISABLE);
+    this.element.classList.add(...CUSTOM_BUTTON_STYLE.DISABLE);
     if (this.element instanceof HTMLButtonElement) {
       this.element.disabled = true;
     }
   }
 
   public enableButton(): void {
-    this.element.classList.remove('button--disabled', ...CUSTOM_BUTTON_STYLE.DISABLE);
+    this.element.classList.remove(...CUSTOM_BUTTON_STYLE.DISABLE);
     if (this.element instanceof HTMLButtonElement) {
       this.element.disabled = false;
     }

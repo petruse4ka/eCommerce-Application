@@ -1,7 +1,7 @@
 import APICart from '@/api/cart';
 import cartAddIcon from '@/assets/icons/cart-add.svg';
 import cartAddedIcon from '@/assets/icons/cart-added.svg';
-import { CATALOG_TEXTS } from '@/constants';
+import { CATALOG_TEXTS, LOADING_CONFIG } from '@/constants';
 import { cartState } from '@/store/cart-state';
 import {
   BUTTON_ICON,
@@ -104,7 +104,7 @@ export default class AddToCartButton {
               this.setDefaultState();
             }
           })();
-        }, 1000);
+        }, LOADING_CONFIG.DELAY);
       } else {
         this.setDefaultState();
       }
