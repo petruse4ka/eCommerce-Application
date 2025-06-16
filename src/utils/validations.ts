@@ -29,7 +29,7 @@ export function getValidator(type: string): ValidationFunction | undefined {
 export function validateEMail(string_: string): string | null {
   if (string_.trim() === '') return ERROR_MESSAGES.EMPTY_INPUT;
   if (/ /.test(string_)) return ERROR_MESSAGES.INVALID_SPACE;
-  if (/[^\dA-Za-zЁА-яё]/.test(string_[0])) return ERROR_MESSAGES.INVALID_FIRST_CHAR;
+  if (/[^\dA-Za-z]/.test(string_[0])) return ERROR_MESSAGES.INVALID_FIRST_CHAR;
   if (!/@/.test(string_)) return ERROR_MESSAGES.INVALID_EMAIL;
 
   const rightDomain = /@[\dA-Za-z][\d.A-Za-z-]*\.[A-Za-z]{2,}$/;
