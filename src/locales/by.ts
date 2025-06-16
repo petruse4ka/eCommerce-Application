@@ -276,6 +276,7 @@ export const by = {
   modalTitleNew: 'Новы адрас',
   modalTitleChangePassword: 'Змена пароля',
   modalTitleCheckoutCart: 'Вярнуцца ў краму',
+  modalTitleClearCart: 'Вы ўпэўнены?',
   errorCheckYear: 'Праверце карэктнасць году нараджэння',
   errorDateFormat: 'Увядзіце дату ў фармаце: ДД-ММ-ГГГГ',
   errorEmptyInput: 'Поле абавязкова да запаўнення',

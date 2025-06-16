@@ -274,6 +274,7 @@ export const en = {
   modalTitleNew: 'New Address',
   modalTitleChangePassword: 'Change Password',
   modalTitleCheckoutCart: 'Return to the store',
+  modalTitleClearCart: 'Are you sure?',
   errorCheckYear: 'Please check the year of birth',
   errorDateFormat: 'Enter date in format: DD-MM-YYYY',
   errorEmptyInput: 'This field is required',

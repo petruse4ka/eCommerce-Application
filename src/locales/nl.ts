@@ -278,6 +278,7 @@ export const nl = {
   modalTitleNew: 'Nieuw Adres',
   modalTitleChangePassword: 'Wachtwoord Wijzigen',
   modalTitleCheckoutCart: 'Terug naar de winkel',
+  modalTitleClearCart: 'Weet u het zeker?',
   errorCheckYear: 'Controleer het geboortejaar',
   errorDateFormat: 'Voer de datum in het formaat in: DD-MM-YYYY',
   errorEmptyInput: 'Dit veld is verplicht',

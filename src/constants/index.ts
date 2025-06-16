@@ -379,6 +379,7 @@ export const MODAL_TITLE = {
   NEW: locale.modalTitleNew,
   CHANGE_PASSWORD: locale.modalTitleChangePassword,
   CHECKOUT_CART: locale.modalTitleCheckoutCart,
+  APPROVE_CLEAR_CART: locale.modalTitleClearCart,
 };
 
 export const ADDRESS_KEY = {

@@ -275,6 +275,7 @@ export const ru = {
   modalTitleNew: 'Новый адрес',
   modalTitleChangePassword: 'Смена пароля',
   modalTitleCheckoutCart: 'Вернуться в магазин',
+  modalTitleClearCart: 'Вы уверены?',
   errorCheckYear: 'Проверьте корректность года рождения',
   errorDateFormat: 'Введите дату в формате: ДД-ММ-ГГГГ',
   errorEmptyInput: 'Поле обязательно к заполнению',

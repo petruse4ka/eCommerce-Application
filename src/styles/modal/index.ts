@@ -28,5 +28,6 @@ export const MODAL = {
       CONTAINER: ['flex', 'flex-col', 'items-center', 'gap-5'],
       TITLE: ['text-center', 'text-xl', 'font-bold', 'text-white-permanent'],
     },
+    APPROVE_CLEAR_CART: ['flex', 'gap-5', 'flex-col', 'md:flex-row'],
   },
 };
