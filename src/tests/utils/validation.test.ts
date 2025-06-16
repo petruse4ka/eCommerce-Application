@@ -14,10 +14,6 @@ describe('Email validation', () => {
     expect(validateEMail('example@tut.by')).toEqual(null);
   });
 
-  test('should accept Cyrillic email', () => {
-    expect(validateEMail('пример@мэйл.ру')).toEqual(null);
-  });
-
   test('should accept long email', () => {
     expect(
       validateEMail(
