@@ -28,5 +28,19 @@ export const MODAL = {
       CONTAINER: ['flex', 'flex-col', 'items-center', 'gap-5'],
       TITLE: ['text-center', 'text-xl', 'font-bold'],
     },
+    ABOUT: {
+      CONTAINER: ['flex', 'flex-col', 'gap-6', 'p-4'],
+      IMAGE: ['w-full', 'h-[400px]', 'object-cover', 'rounded-lg'],
+      ROLE: ['text-sm', 'font-medium', 'text-accent', 'uppercase'],
+      GITHUB: [
+        'text-accent',
+        'text-sm',
+        'font-medium',
+        'hover:text-accent-hover',
+        'transition-colors',
+        'duration-300',
+      ],
+      DESCRIPTION: ['flex', 'flex-col', 'gap-4'],
+    },
   },
 };

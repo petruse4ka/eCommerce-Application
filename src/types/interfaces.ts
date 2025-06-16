@@ -787,6 +787,6 @@ export interface About {
   DANIIL: Personal;
   OLGA: Personal;
   title: string;
-  text: string;
+  text: string[] | string;
   image: string;
 }
