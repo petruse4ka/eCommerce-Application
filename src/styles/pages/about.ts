@@ -35,7 +35,7 @@ export const ABOUT_STYLE = {
     'rounded-lg',
     'grid',
     'grid-cols-1',
-    'grid-rows-[60px_40px_150px_25px]',
+    'grid-rows-[60px_40px_160px_25px]',
   ],
   NAME: ['font-bold', 'text-[24px]', 'my-3', 'px-1', 'bg-orange'],
   ROLE: ['font-bold', 'text-[10px]', 'text-dark', 'px-1', 'place-self-start', 'w-fit', 'uppercase'],

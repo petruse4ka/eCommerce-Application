@@ -71,28 +71,22 @@ export default class Person extends BaseComponent {
       textContent: texts.role,
     }).getElement();
 
-    const description = texts.description ? this.createDescription(texts.description) : '';
+    const description = texts.description ? this.createDescription(texts.annotation) : '';
 
     const gitHubLink = Team.createGithubLink(texts.github);
     gitHubLink.classList.add(...ABOUT_STYLE.GIT);
-
-    /*const moreButton = new Button({
-      style: 'SECONDARY_BLUE_DARK',
-      textContent: 'Подробнее',
-      callback: (): void => {},
-    }).getElement();*/
 
     textContainer.append(name, role, description, gitHubLink);
     return textContainer;
   }
 
-  private static createDescription(text: string[]): HTMLElement {
+  private static createDescription(text: string): HTMLElement {
     const description = new BaseComponent({
       tag: 'div',
       className: ABOUT_STYLE.DESCRIPTION,
     }).getElement();
-    const paragraph = text[0];
-    //for (const paragraph of text) {
+    const paragraph = text;
+
     const currentStyle = /Спасибо/.test(paragraph)
       ? ABOUT_STYLE.DESCRIPTION_THANKS
       : ABOUT_STYLE.DESCRIPTION_PARAGRAPH;
@@ -111,7 +105,6 @@ export default class Person extends BaseComponent {
     moreLink.append(' Подробнее...');
     fullText.append(moreLink);
     description.append(fullText);
-    //}
     return description;
   }
 }
