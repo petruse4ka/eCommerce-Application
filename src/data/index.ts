@@ -345,7 +345,7 @@ export const ABOUT: About = {
     PersonalText: {
       name: locale.aboutKonstantinName,
       role: locale.aboutKonstantinRole,
-      annotation: 'Константин – наш бессменный шеф-кондитер и гуру JavaScript! ',
+      annotation: locale.aboutKonstantinAnnotation,
       description: [
         locale.aboutKonstantinDesc1,
         locale.aboutKonstantinDesc2,
@@ -362,8 +362,7 @@ export const ABOUT: About = {
     PersonalText: {
       name: locale.aboutDaniilName,
       role: locale.aboutDaniilRole,
-      annotation:
-        'Программный код и крем на эклер — одинаково хороши, когда за дело берётся петербуржец Даниил.',
+      annotation: locale.aboutDaniilAnnotation,
       description: [locale.aboutDaniilDesc1, locale.aboutDaniilDesc2, locale.aboutDaniilDesc3],
       github: TEAM[1],
     },
@@ -376,7 +375,7 @@ export const ABOUT: About = {
     PersonalText: {
       name: locale.aboutOlgaName,
       role: locale.aboutOlgaRole,
-      annotation: 'Ольга – кондитер-оформитель, мастер эстетики и здравого смысла. ',
+      annotation: locale.aboutOlgaAnnotation,
       description: [locale.aboutOlgaDesc1, locale.aboutOlgaDesc2],
       github: TEAM[2],
     },
@@ -389,7 +388,7 @@ export const ABOUT: About = {
     PersonalText: {
       name: locale.aboutMargoName,
       role: locale.aboutMargoRole,
-      annotation: 'Маргарита - наш ментор, она же наша муза, она же наш ангел-хранитель!',
+      annotation: locale.aboutMargoAnnotation,
       description: [locale.aboutMargoDesc1, locale.aboutMargoDesc2],
       github: TEAM[3],
     },
@@ -399,6 +398,7 @@ export const ABOUT: About = {
   },
   title: locale.aboutTitle,
   text: locale.aboutText,
+  more: locale.aboutMore,
   image: cafe,
 };
 

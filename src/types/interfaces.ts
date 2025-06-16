@@ -791,6 +791,7 @@ export interface About {
   title: string;
   text: string;
   image: string;
+  more: string;
 }
 
 export interface LanguageChangeEvent extends CustomEvent {

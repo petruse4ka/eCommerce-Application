@@ -302,6 +302,7 @@ export const nl = {
     'Ons recept voor succes? Een royale snuf doorzettingsvermogen, een zoete jam van creativiteit, een beetje slapeloosheid bij het afronden van een nieuwe sprint, en een paar async functies om alles soepel te laten draaien. Dus, als je op zoek bent naar de perfecte mix van smaak, logica en lichte ironie, welkom in ons gebak (en frontend) universum!',
   aboutKonstantinName: 'Konstantin Petrov',
   aboutKonstantinRole: 'Hoofd Banketbakker',
+  aboutKonstantinAnnotation: 'Konstantin is onze vaste hoofd banketbakker en JavaScript goeroe!',
   aboutKonstantinDesc1:
     'Konstantin is onze vaste hoofd banketbakker en JavaScript goeroe! Hij houdt het strategische plan in zijn hoofd en zijn hand aan de pols van het huidige werk. Altijd klaar om bij te springen in moeilijke situaties en brandende eclairs te redden of een code-bug van een collega op te lossen.',
   aboutKonstantinDesc2:
@@ -310,6 +311,8 @@ export const nl = {
     'In zijn zeldzame vrije uren veroverd Konstantin virtuele werelden in computerspellen, debugt code, en heft enthousiast een glas van zijn favoriete bier (vooral op vrijdagen - omdat strategie een goede planning vereist!).',
   aboutDaniilName: 'Daniil Beaver',
   aboutDaniilRole: 'Banketbakker-Technoloog',
+  aboutDaniilAnnotation:
+    'Programmacode en room op een eclair zijn even goed wanneer de Petersburgse Daniil de leiding neemt.',
   aboutDaniilDesc1:
     'Programmacode en room op een eclair zijn even goed wanneer de Petersburgse Daniil de leiding neemt. Met een hogere opleiding in fundamentele informatica en drie jaar commerciële ervaring als HTML-layouter, voelt hij zich thuis, niet alleen bij het fornuis maar ook in de logica van complexe API-interacties.',
   aboutDaniilDesc2:
@@ -318,13 +321,17 @@ export const nl = {
     'Hij was ooit gepassioneerd over het naaien van tassen en T-shirts, en deze ervaring leerde hem het belangrijkste: als de steek scheef ging - opnieuw doen tot het perfect is. Dit principe past hij met succes toe in programmeren, alleen nu in plaats van stof - regels code, en in plaats van een naald - een strenge linter die geen fouten vergeeft.',
   aboutOlgaName: 'Olga Poklonskaya',
   aboutOlgaRole: 'Banketbakker-Decorateur',
+  aboutOlgaAnnotation:
+    'Olga is een banketbakker-decorateur, een meester in esthetiek en gezond verstand.',
   aboutOlgaDesc1:
     "Olga is een banketbakker-decorateur, een meester in esthetiek en gezond verstand. Gedurende haar hele professionele leven heeft ze gezocht naar harmonie tussen code-preciesheid en de levendige waarneming van webpagina's. De laatste 13 jaar heeft ze JavaScript lesgegeven aan webdesigners, en nu werken haar studenten in verschillende hoeken van de wereld - van Japan tot Zweden, van EPAM tot Google. Waar, haar pad in IT werd onderbroken niet door haar eigen wens, maar een gesloten deur is gewoon een reden om een raam te zoeken.",
   aboutOlgaDesc2:
     "Een jonge Minskse, wiens leeftijd nog steeds onderdoet voor de som van jaren van twee van haar collega's, leert ze met interesse van het team en investeert haar kennis in het project. Reizen en tekenen inspireren haar tot nieuwe ideeën, en haar liefde voor programmeren helpt creatieve chaos te organiseren. En laat de door haar ontworpen pagina's niet de geur van vanille en chocolade geven, het plezier van het bezoeken ervan doet niet onder voor het genieten van een perfect versierde eclair.",
   aboutMargoName: 'Margarita Malets',
   aboutMargoRole: 'Algemeen Directeur van Personeelsselectie en Inspiratie',
+  aboutMargoAnnotation: 'Margarita is onze mentor, ze is onze muze, ze is onze beschermengel!',
   aboutMargoDesc1:
     'Margarita is onze mentor, ze is onze muze, ze is onze beschermengel, ze gelooft in ons zelfs wanneer we zelf niet weten of het de moeite waard is om te geloven... De lijst van epitheta kan eindeloos worden voortgezet, maar de essentie is één:',
   aboutMargoDesc2: '"Dank je, Margarita!"',
+  aboutMore: 'Meer details...',
 };

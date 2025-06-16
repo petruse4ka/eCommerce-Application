@@ -1,3 +1,4 @@
+import { ABOUT } from '@/data';
 import { ABOUT_STYLE } from '@/styles/pages/about';
 import type { Personal } from '@/types/interfaces';
 import ImageBuilder from '@/utils/image-builder';
@@ -102,7 +103,8 @@ export default class Person extends BaseComponent {
       target: '_blank',
       className: ABOUT_STYLE.MORE_LINK,
     }).getElement();
-    moreLink.append(' Подробнее...');
+
+    moreLink.append(ABOUT.more);
     fullText.append(moreLink);
     description.append(fullText);
     return description;
