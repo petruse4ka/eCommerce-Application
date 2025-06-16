@@ -280,7 +280,8 @@ export const by = {
   errorEmptyInput: 'Поле абавязкова да запаўнення',
   errorInvalidAge: 'Рэгістрацыя даступная толькі карыстальнікам старэйшыя за 13 гадоў',
   errorInvalidDomain: 'Няправільны фармат дамена',
-  errorInvalidEmail: 'Выкарыстоўвайце літары, лічбы і спецыяльныя сімвалы. Сімвал «@» абавязковы.',
+  errorInvalidEmail:
+    'Выкарыстоўвайце лацiнскiя літары, лічбы і спецыяльныя сімвалы. Сімвал «@» абавязковы.',
   errorInvalidFirstChar: 'Першы сімвал павінен быць літарай ці лічбай',
   errorInvalidUsingAt: 'Не павінна быць больш за адзін знак @',
   errorInvalidUsingDots: 'Няправільны email',

@@ -279,7 +279,8 @@ export const ru = {
   errorEmptyInput: 'Поле обязательно к заполнению',
   errorInvalidAge: 'Регистрация доступна только пользователям старше 13 лет',
   errorInvalidDomain: 'Неверный формат домена',
-  errorInvalidEmail: 'Используйте буквы, цифры и специальные символы. Символ «@» обязателен',
+  errorInvalidEmail:
+    'Используйте латинские буквы, цифры и специальные символы. Символ «@» обязателен',
   errorInvalidFirstChar: 'Первый символ должен быть буквой или цифрой',
   errorInvalidUsingAt: 'Не должно быть более одного знака @',
   errorInvalidUsingDots: 'Некорректный email',
