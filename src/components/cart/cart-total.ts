@@ -199,6 +199,8 @@ export default class CartTotal extends BaseComponent {
     const modal = new Modal({
       title: MODAL_TITLE.CHECKOUT_CART,
       content,
+      className: MODAL.CART_COMPONENT,
+      classNameTitle: MODAL.HEADER.CART_TITLE,
       callback: CartTotal.closeCart.bind(CartTotal),
     });
 

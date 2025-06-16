@@ -197,6 +197,9 @@ export const CUSTOM_BUTTON_STYLE = {
     'border-gray',
     'hover:bg-accent-hover',
     'hover:border-accent-hover',
+    'fill-black',
+    'hover:fill-white-permanent',
+    'hover:text-white-permanent',
   ],
   DELETE_CART_ITEM: [
     'flex-none',

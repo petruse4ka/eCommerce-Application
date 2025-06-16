@@ -130,7 +130,7 @@ export default class CartItem extends BaseComponent {
       style: 'DELETE_CART_ITEM',
       icon: {
         source: SVG_ICONS.DELETE_ICON,
-        classNameIcon: ADDRESS.CARD.ICON,
+        classNameIcon: ADDRESS.CARD.ICON_CART,
       },
       callback: async (): Promise<void> => {
         this.callback({ isLoading: true, success: false });
