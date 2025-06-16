@@ -109,7 +109,7 @@ export const nl = {
   catalogNoFilters: 'Geen geschikte filters',
   catalogPrice: 'Prijs',
   catalogCategory: 'Categorie',
-  catalogPromoTag: 'Aanbieding',
+  catalogPromoTag: 'Actie',
   catalogShortSearchQuery: 'Gebruik meer dan 2 tekens om te zoeken',
   catalogHome: 'Home',
   catalogCatalog: 'Producten',
