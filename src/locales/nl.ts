@@ -41,6 +41,7 @@ export const nl = {
   btnApply: 'Toepassen',
   btnClearCart: 'Winkelwagen legen',
   btnFinishCart: 'Bedankt voor uw bestelling',
+  joinRS: 'Sluit je aan bij RS School',
   introName: 'MACARONSHOP',
   introSince: 'sinds 2013',
   introTitle: 'Ware liefde',
@@ -298,10 +299,19 @@ export const nl = {
   errorInvalidSpace: 'Waarde mag geen spaties bevatten',
   errorRepeatPassword: 'Nieuw wachtwoord komt niet overeen',
   aboutTitle: 'Ons Team',
-  aboutText:
-    'Ons recept voor succes? Een royale snuf doorzettingsvermogen, een zoete jam van creativiteit, een beetje slapeloosheid bij het afronden van een nieuwe sprint, en een paar async functies om alles soepel te laten draaien. Dus, als je op zoek bent naar de perfecte mix van smaak, logica en lichte ironie, welkom in ons gebak (en frontend) universum!',
+  aboutSuccessRecipeTitle: 'Ons recept voor succes',
+  aboutTributeText:
+    'We bedanken de school, haar maker, alle curator, moderators, activiests, collega-studenten en iedereen die betrokken is voor de waardevolle kennis, ervaring, steun en inspiratie. Dankzij jullie hebben we niet alleen geleerd te programmeren, maar ook deelgenomen aan een geweldige gemeenschap waar iedereen bereid is om anderen te helpen om nieuwe hoogten te bereiken.',
+  aboutText: [
+    'Ons recept voor succes? Een flinke snuf doorzettingsvermogen, een zoete laag creativiteit, een beetje slapeloosheid bij het afronden van een sprint en een paar asynchrone functies om alles soepel te laten draaien. Dus, als je op zoek bent naar de perfecte combinatie van smaak, logica en een vleugje ironie, welkom in ons patisserie- (en frontend) universum!',
+    'Ons team werkte als een goed geoliede machine: elke dag begon met een ochtendstand-up op Discord, waar we onze voortgang deelden en taken planden. GitHub Projects was onze trouwe metgezel bij het organiseren van werk - we volgden alle taken, markeerden de voortgang en vierden elke afgeronde kaart. Code reviews waren een integraal onderdeel van ons proces - elke pull request werd grondig gecontroleerd, wat hielp om de hoge codekwaliteit te behouden.',
+    'Wat vooral waardevol was, was hoe we elkaar ondersteunden: als iemand vastliep op een probleem, waren de anderen altijd klaar om te helpen, zelfs als dat een slapeloze nacht voor de deadline betekende. Onze chats op Discord waren niet alleen gevuld met technische discussies, maar ook met memes die ons hielpen om de moraal hoog te houden in de moeilijkste momenten. En de lachbuien! Vooral wanneer we ontdekten dat we allemaal om drie uur ’s nachts met dezelfde bug worstelden!',
+    'En wanneer alles hopeloos leek, wanneer de code niet compileerde en de deadlines angstaanjagend snel naderden, verscheen Margarita. Zodra ze in de chat opdook, werd alles meteen beter - ze hielp niet alleen met technische problemen, maar gaf ons ook het vertrouwen dat we het konden redden. Haar steun, wijze advies en geloof in onze vaardigheden hielpen ons om elke moeilijkheid te overwinnen en vooruit te blijven gaan.',
+    'Onze wekelijkse retrospectieven hielpen ons om ons werkproces voortdurend te verbeteren en het teamgevoel te versterken, en soms veranderden ze zelfs in echte sessies van wederzijdse steun en motivatie.',
+  ],
   aboutKonstantinName: 'Konstantin Petrov',
   aboutKonstantinRole: 'Hoofd Banketbakker',
+  aboutKonstantinAnnotation: 'Konstantin is onze vaste hoofd banketbakker en JavaScript goeroe!',
   aboutKonstantinDesc1:
     'Konstantin is onze vaste hoofd banketbakker en JavaScript goeroe! Hij houdt het strategische plan in zijn hoofd en zijn hand aan de pols van het huidige werk. Altijd klaar om bij te springen in moeilijke situaties en brandende eclairs te redden of een code-bug van een collega op te lossen.',
   aboutKonstantinDesc2:
@@ -310,6 +320,8 @@ export const nl = {
     'In zijn zeldzame vrije uren veroverd Konstantin virtuele werelden in computerspellen, debugt code, en heft enthousiast een glas van zijn favoriete bier (vooral op vrijdagen - omdat strategie een goede planning vereist!).',
   aboutDaniilName: 'Daniil Beaver',
   aboutDaniilRole: 'Banketbakker-Technoloog',
+  aboutDaniilAnnotation:
+    'Programmacode en room op een eclair zijn even goed wanneer de Petersburgse Daniil de leiding neemt.',
   aboutDaniilDesc1:
     'Programmacode en room op een eclair zijn even goed wanneer de Petersburgse Daniil de leiding neemt. Met een hogere opleiding in fundamentele informatica en drie jaar commerciële ervaring als HTML-layouter, voelt hij zich thuis, niet alleen bij het fornuis maar ook in de logica van complexe API-interacties.',
   aboutDaniilDesc2:
@@ -318,13 +330,20 @@ export const nl = {
     'Hij was ooit gepassioneerd over het naaien van tassen en T-shirts, en deze ervaring leerde hem het belangrijkste: als de steek scheef ging - opnieuw doen tot het perfect is. Dit principe past hij met succes toe in programmeren, alleen nu in plaats van stof - regels code, en in plaats van een naald - een strenge linter die geen fouten vergeeft.',
   aboutOlgaName: 'Olga Poklonskaya',
   aboutOlgaRole: 'Banketbakker-Decorateur',
+  aboutOlgaAnnotation:
+    'Olga is een banketbakker-decorateur, een meester in esthetiek en gezond verstand.',
   aboutOlgaDesc1:
     "Olga is een banketbakker-decorateur, een meester in esthetiek en gezond verstand. Gedurende haar hele professionele leven heeft ze gezocht naar harmonie tussen code-preciesheid en de levendige waarneming van webpagina's. De laatste 13 jaar heeft ze JavaScript lesgegeven aan webdesigners, en nu werken haar studenten in verschillende hoeken van de wereld - van Japan tot Zweden, van EPAM tot Google. Waar, haar pad in IT werd onderbroken niet door haar eigen wens, maar een gesloten deur is gewoon een reden om een raam te zoeken.",
   aboutOlgaDesc2:
     "Een jonge Minskse, wiens leeftijd nog steeds onderdoet voor de som van jaren van twee van haar collega's, leert ze met interesse van het team en investeert haar kennis in het project. Reizen en tekenen inspireren haar tot nieuwe ideeën, en haar liefde voor programmeren helpt creatieve chaos te organiseren. En laat de door haar ontworpen pagina's niet de geur van vanille en chocolade geven, het plezier van het bezoeken ervan doet niet onder voor het genieten van een perfect versierde eclair.",
   aboutMargoName: 'Margarita Malets',
-  aboutMargoRole: 'Algemeen Directeur van Personeelsselectie en Inspiratie',
+  aboutMargoRole: 'Algemeen Directeur van HR en Inspiratie',
+  aboutMargoAnnotation: 'Margarita is onze mentor, ze is onze muze, ze is onze beschermengel!',
   aboutMargoDesc1:
     'Margarita is onze mentor, ze is onze muze, ze is onze beschermengel, ze gelooft in ons zelfs wanneer we zelf niet weten of het de moeite waard is om te geloven... De lijst van epitheta kan eindeloos worden voortgezet, maar de essentie is één:',
   aboutMargoDesc2: '"Dank je, Margarita!"',
+  aboutMore: 'Meer leren',
+  aboutTributeTitle: 'Speciale dank',
+  aboutShowMore: 'Meer leren',
+  aboutShowLess: 'Minder leren',
 };

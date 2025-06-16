@@ -7,12 +7,9 @@ import naturalIngredients from '@/assets/icons/natural-ingredients.svg';
 import wholesaleSale from '@/assets/icons/wholesale-offer.svg';
 import cafe from '@/assets/images/about/cafe.png';
 import DaniilPhoto from '@/assets/images/about/daniil.png';
-import DaniilHat from '@/assets/images/about/hat2.png';
-import KonstantinHat from '@/assets/images/about/hat7.png';
-import OlgaHat from '@/assets/images/about/hat8.png';
 import KonstantinPhoto from '@/assets/images/about/kostya.png';
 import MargoPhoto from '@/assets/images/about/margarita.png';
-import OlgaPhoto from '@/assets/images/about/olga-photo.png';
+import OlgaPhoto from '@/assets/images/about/olga.png';
 import anonymousIcon from '@/assets/images/guarantees/anonymous.png';
 import deliveryIcon from '@/assets/images/guarantees/delivery.png';
 import ingerientsIcon from '@/assets/images/guarantees/ingredients.png';
@@ -345,6 +342,7 @@ export const ABOUT: About = {
     PersonalText: {
       name: locale.aboutKonstantinName,
       role: locale.aboutKonstantinRole,
+      annotation: locale.aboutKonstantinAnnotation,
       description: [
         locale.aboutKonstantinDesc1,
         locale.aboutKonstantinDesc2,
@@ -354,37 +352,37 @@ export const ABOUT: About = {
     },
     PersonalImageBox: {
       photo: { url: KonstantinPhoto, style: ABOUT_STYLE.PHOTO },
-      hat: { url: KonstantinHat, style: ABOUT_STYLE.KONSTANTIN_HAT },
     },
   },
   DANIIL: {
     PersonalText: {
       name: locale.aboutDaniilName,
       role: locale.aboutDaniilRole,
+      annotation: locale.aboutDaniilAnnotation,
       description: [locale.aboutDaniilDesc1, locale.aboutDaniilDesc2, locale.aboutDaniilDesc3],
       github: TEAM[1],
     },
     PersonalImageBox: {
       photo: { url: DaniilPhoto, style: ABOUT_STYLE.PHOTO },
-      hat: { url: DaniilHat, style: ABOUT_STYLE.DANIIL_HAT },
     },
   },
   OLGA: {
     PersonalText: {
       name: locale.aboutOlgaName,
       role: locale.aboutOlgaRole,
+      annotation: locale.aboutOlgaAnnotation,
       description: [locale.aboutOlgaDesc1, locale.aboutOlgaDesc2],
       github: TEAM[2],
     },
     PersonalImageBox: {
       photo: { url: OlgaPhoto, style: ABOUT_STYLE.PHOTO },
-      hat: { url: OlgaHat, style: ABOUT_STYLE.OLGA_HAT },
     },
   },
   MARGO: {
     PersonalText: {
       name: locale.aboutMargoName,
       role: locale.aboutMargoRole,
+      annotation: locale.aboutMargoAnnotation,
       description: [locale.aboutMargoDesc1, locale.aboutMargoDesc2],
       github: TEAM[3],
     },
@@ -393,8 +391,15 @@ export const ABOUT: About = {
     },
   },
   title: locale.aboutTitle,
+  successRecipeTitle: locale.aboutSuccessRecipeTitle,
   text: locale.aboutText,
+  tributeText: locale.aboutTributeText,
+  more: locale.aboutMore,
   image: cafe,
+  tributeTitle: locale.aboutTributeTitle,
+  joinRS: locale.joinRS,
+  ShowMore: locale.aboutShowMore,
+  ShowLess: locale.aboutShowLess,
 };
 
 export const SVG_ICONS = {

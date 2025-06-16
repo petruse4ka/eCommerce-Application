@@ -762,6 +762,7 @@ export interface AddDiscountCode {
 export interface PersonalText {
   name: string;
   role: string;
+  annotation: string;
   description?: string[];
   github: Crewman;
 }
@@ -788,8 +789,15 @@ export interface About {
   DANIIL: Personal;
   OLGA: Personal;
   title: string;
-  text: string;
+  successRecipeTitle: string;
+  text: string[];
+  tributeText: string;
   image: string;
+  more: string;
+  tributeTitle: string;
+  joinRS: string;
+  ShowMore: string;
+  ShowLess: string;
 }
 
 export interface LanguageChangeEvent extends CustomEvent {
