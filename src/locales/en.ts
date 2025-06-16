@@ -281,8 +281,9 @@ export const en = {
   errorEmptyInput: 'This field is required',
   errorInvalidAge: 'Registration is only available for users over 13 years old',
   errorInvalidDomain: 'Invalid domain format',
-  errorInvalidEmail: 'Use letters, numbers and special characters. The "@" symbol is required',
-  errorInvalidFirstChar: 'First character must be a letter or number',
+  errorInvalidEmail:
+    'Use Latin letters, numbers and special characters. The "@" symbol is required',
+  errorInvalidFirstChar: 'First character must be a Latin letter or number',
   errorInvalidUsingAt: 'There should not be more than one @ sign',
   errorInvalidUsingDots: 'Invalid email',
   errorInvalidPassword: 'Password can only contain Latin letters, numbers and special characters',

@@ -285,8 +285,9 @@ export const nl = {
   errorEmptyInput: 'Dit veld is verplicht',
   errorInvalidAge: 'Registratie is alleen beschikbaar voor gebruikers ouder dan 13 jaar',
   errorInvalidDomain: 'Ongeldig domeinformaat',
-  errorInvalidEmail: 'Gebruik letters, cijfers en speciale tekens. Het "@" symbool is verplicht',
-  errorInvalidFirstChar: 'Eerste teken moet een letter of cijfer zijn',
+  errorInvalidEmail:
+    'Gebruik Latijnse letters, cijfers en speciale tekens. Het "@" symbool is verplicht',
+  errorInvalidFirstChar: 'Eerste teken moet een Latijnse letter of cijfer zijn',
   errorInvalidUsingAt: 'Er mag niet meer dan één @ teken zijn',
   errorInvalidUsingDots: 'Ongeldig e-mail',
   errorInvalidPassword:

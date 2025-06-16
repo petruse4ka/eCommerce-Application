@@ -41,7 +41,7 @@ export const by = {
   btnApply: 'Ужыць',
   btnClearCart: 'Ачысціць кошык',
   btnFinishCart: 'Дзякуй за замову',
-  joinRS: 'Прысоединіцеся да RS School',
+  joinRS: 'Далучайцеся да RS School',
   introName: 'MACARONSHOP',
   introSince: 'з 2013',
   introTitle: 'Сапраўдная любоў',
@@ -285,7 +285,7 @@ export const by = {
   errorInvalidDomain: 'Няправільны фармат дамена',
   errorInvalidEmail:
     'Выкарыстоўвайце лацiнскiя літары, лічбы і спецыяльныя сімвалы. Сімвал «@» абавязковы.',
-  errorInvalidFirstChar: 'Першы сімвал павінен быць літарай ці лічбай',
+  errorInvalidFirstChar: 'Першы сімвал павінен быць лацінскім літарам ці лічбай',
   errorInvalidUsingAt: 'Не павінна быць больш за адзін знак @',
   errorInvalidUsingDots: 'Няправільны email',
   errorInvalidPassword: 'Пароль можа змяшчаць толькі лацінскія літары, лічбы і спецыяльныя сімвалы',

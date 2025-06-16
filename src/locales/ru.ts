@@ -284,7 +284,7 @@ export const ru = {
   errorInvalidDomain: 'Неверный формат домена',
   errorInvalidEmail:
     'Используйте латинские буквы, цифры и специальные символы. Символ «@» обязателен',
-  errorInvalidFirstChar: 'Первый символ должен быть буквой или цифрой',
+  errorInvalidFirstChar: 'Первый символ должен быть латинской буквой или цифрой',
   errorInvalidUsingAt: 'Не должно быть более одного знака @',
   errorInvalidUsingDots: 'Некорректный email',
   errorInvalidPassword:
