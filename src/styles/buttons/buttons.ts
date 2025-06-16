@@ -303,4 +303,5 @@ export const CUSTOM_BUTTON_STYLE = {
     'self-center',
     'transition-all',
   ],
+  DISABLE: ['!cursor-not-allowed', '!bg-gray', '!border-gray', '!text-white'],
 };

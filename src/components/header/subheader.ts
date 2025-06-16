@@ -5,6 +5,7 @@ import { SUBHEADER_STYLES } from '@/styles/header/subheader';
 import ElementBuilder from '@/utils/element-builder';
 
 import AuthorizationMenu from './authorisation-menu';
+import LanguageMenu from './language-menu';
 import Promo from './promo';
 
 export default class SubHeader extends BaseComponent {
@@ -57,8 +58,9 @@ export default class SubHeader extends BaseComponent {
 
     const promo = new Promo();
     const authorizationMenu = new AuthorizationMenu();
+    const languageMenu = new LanguageMenu();
 
-    settingsContainer.append(this.themeButton.getElement());
+    settingsContainer.append(this.themeButton.getElement(), languageMenu.getElement());
     subheaderContainer.append(
       settingsContainer,
       promo.getElement(),

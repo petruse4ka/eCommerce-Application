@@ -3,153 +3,144 @@ import bicycle from '@/assets/images/additional/delivery-bicycle.png';
 import letter from '@/assets/images/additional/letter.png';
 import pickup2 from '@/assets/images/additional/pickup-secondary.png';
 import type { additionalPagesData } from '@/types/interfaces';
+import { LanguageSelector } from '@/utils/language-selector';
+
+const languageSelector = LanguageSelector.getInstance();
+const locale = languageSelector.translations;
 
 export const DELIVERY: additionalPagesData = {
-  TITLE: 'Доставка и оплата',
+  TITLE: locale.additionalDeliveryTitle,
   CONTENT: [
     {
       type: 'text',
-      content:
-        'Для наших покупателей доступны 2 способа доставки: курьерская доставка и самовывоз.',
+      content: locale.additionalDeliveryIntro,
     },
-    { type: 'subtitle', content: 'Курьерская доставка' },
+    { type: 'subtitle', content: locale.additionalDeliveryCourierTitle },
     {
       type: 'text',
-      content: 'Наши курьеры работают каждый день с 11 до 21 часа, не покладая рук (и ног).',
-    },
-    {
-      type: 'text',
-      content:
-        'Если Вы готовы принять заказ в интервале с 12 до 17 часов, то доставка будет стоить 300 рублей. ',
+      content: locale.additionalDeliveryCourierHours,
     },
     {
       type: 'text',
-      content: 'При заказе от 3000 рублей доставку мы делаем БЕСПЛАТНОЙ! Чем не повод для радости?',
-    },
-    { type: 'text', content: 'Курьер предупредит Вас о своём прибытии за 30-40 минут.' },
-    { type: 'subtitle', content: 'Самовывоз' },
-    {
-      type: 'text',
-      content:
-        'Вы можете сделать заказ и забрать его самостоятельно как с точек самовывоза, так и непосредственно с нашего производства по адресу: ул. Абрикосовая, 25а, кафе «Сова». С актуальными адресами других точек самовывоза можно ознакомиться на странице Наши контакты',
+      content: locale.additionalDeliveryCourierPrice,
     },
     {
       type: 'text',
-      content:
-        'Заказ необходимо сделать до 20 часов, чтобы забрать его на следующий день в пункте самовывоза в удобное для вас время в промежутке с 13 до 22 часов.',
+      content: locale.additionalDeliveryCourierFree,
     },
-    { type: 'subtitle', content: 'Оплата:' },
+    { type: 'text', content: locale.additionalDeliveryCourierNotice },
+    { type: 'subtitle', content: locale.additionalDeliveryPickupTitle },
     {
       type: 'text',
-      content:
-        'Оплатить заказ можно наличными или банковской картой при получении: курьеры оснащены современными мобильными терминалами.',
+      content: locale.additionalDeliveryPickupInfo,
+    },
+    {
+      type: 'text',
+      content: locale.additionalDeliveryPickupTime,
+    },
+    { type: 'subtitle', content: locale.additionalDeliveryPaymentTitle },
+    {
+      type: 'text',
+      content: locale.additionalDeliveryPaymentMethods,
     },
   ],
   IMAGE: bicycle,
 };
 
 export const TERMS: additionalPagesData = {
-  TITLE: 'Условия использования интернет-витрины «MACARON-SHOP»',
+  TITLE: locale.additionalTermsTitle,
   CONTENT: [
     {
       type: 'text',
-      content:
-        'Мы не рекомендуем читать наш сайт натощак, иначе велик риск внезапного желания заказать ВСЁ. Также будьте осторожны с эклерами – они могут вызвать зависимость!',
+      content: locale.additionalTermsWarning,
     },
     {
       type: 'text',
-      content:
-        'Порядок использования интернет-витрины «MACARON-SHOP» (далее – «Сайт»), регулируется настоящими Условиями использования (далее – «Условия»). Использование сервисов Сайта означает безоговорочное согласие Пользователя с настоящими Условиями; в случае несогласия Пользователь должен воздержаться от использования сервисов.',
+      content: locale.additionalTermsIntro,
     },
-    { type: 'subtitle', content: 'Безопасность информационной системы' },
+    { type: 'subtitle', content: locale.additionalTermsSecurityTitle },
     {
       type: 'text',
-      content:
-        'Пользователю запрещено нарушать безопасность информационной системы Сайта и (или) совершать действия, которые могут нарушить безопасность информационной системы Сайта. Нарушение безопасности информационной системы со стороны Пользователя влечет за собой ответственность в соответствии с применимым законодательством. ',
+      content: locale.additionalTermsSecurityContent,
     },
     {
       type: 'subtitle',
-      content: 'Обработка персональных данных',
+      content: locale.additionalTermsPrivacyTitle,
     },
     {
       type: 'text',
-      content:
-        'Мы собираем и обрабатываем персональные данные пользователей исключительно для обеспечения работы интернет-магазина: данные используются для обработки заказов, доставки, связи с клиентами и предоставления необходимого сервиса. Мы гарантируем, что персональные данные не передаются третьим лицам без согласия пользователя, за исключением случаев, предусмотренных законодательством.',
+      content: locale.additionalTermsPrivacyContent,
     },
     {
       type: 'subtitle',
-      content:
-        'Информация для родителей и законных представителей несовершеннолетних пользователей ',
+      content: locale.additionalTermsParentsTitle,
     },
     {
       type: 'text',
-      content:
-        'Наш интернет-магазин предоставляет услуги пользователям от 13 лет и старше. Мы не несем ответственности за действия несовершеннолетних младше указанного возраста, которые получили неограниченный доступ к компьютеру или другим устройствам и самостоятельно совершили заказ. ',
+      content: locale.additionalTermsParentsContent,
     },
-    { type: 'subtitle', content: 'Контактные данные собственника Сайта' },
+    { type: 'subtitle', content: locale.additionalTermsContactTitle },
     {
       type: 'text',
-      content:
-        'Пользователи Сайта могут направлять предложения, замечания, вопросы, имеющие отношение к настоящим Условиям пользования, на адрес электронной почты macaron-city@gmail.com',
+      content: locale.additionalTermsContactContent,
     },
   ],
   IMAGE: pickup2,
 };
 
 export const CONTACTS: additionalPagesData = {
-  TITLE: 'Контакты',
+  TITLE: locale.additionalContactsTitle,
   CONTENT: [
     {
       type: 'subtitle',
-      content: 'Производство',
+      content: locale.additionalContactsProductionTitle,
     },
     {
       type: 'text',
-      content: 'Санкт-Петербург, ул. Абрикосовая, 25а, кафе «Сова»',
+      content: locale.additionalContactsProductionAddress,
     },
     {
       type: 'subtitle',
-      content: 'Пункты самовывоза',
+      content: locale.additionalContactsPickupTitle,
     },
     {
       type: 'text',
-      content: 'Санкт-Петербург, Невский проспект, 13, ресторан «Амстердам»',
+      content: locale.additionalContactsPickupAddress1,
     },
     {
       type: 'text',
-      content: 'Санкт-Петербург,  ул.Бонч-Бруевича, 3а, кафе-кондитерская «Минск» ',
+      content: locale.additionalContactsPickupAddress2,
     },
     {
       type: 'text',
-      content: 'Белыничи, ул. Виноградная, кафе «Веселый кот»',
+      content: locale.additionalContactsPickupAddress3,
     },
     {
       type: 'subtitle',
-      content: 'Телефоны',
+      content: locale.additionalContactsPhonesTitle,
     },
     {
       type: 'text',
-      content: '+7 (812) 309-82-88 основной номер',
+      content: locale.additionalContactsPhoneMain,
     },
     {
       type: 'text',
-      content: '+375 (17) 199-82-88  для жалоб и предложений',
+      content: locale.additionalContactsPhoneSupport,
     },
   ],
   IMAGE: letter,
 };
 
 export const RETURNS: additionalPagesData = {
-  TITLE: 'Отмена заказа и возврат',
+  TITLE: locale.additionalReturnsTitle,
   CONTENT: [
     {
       type: 'text',
-      content: 'Отменить заказ можно до 20.00 за день до даты заказа',
+      content: locale.additionalReturnsCancelTime,
     },
     {
       type: 'text',
-      content:
-        'Мы уделяем особое внимание качеству наших изделий. Если при получении заказа вы обнаружите явный производственный брак пирожных, возврат или обмен изделия возможен. Для оперативного решения проблемы просим обратиться в службу поддержки.',
+      content: locale.additionalReturnsQuality,
     },
   ],
   IMAGE: returns,

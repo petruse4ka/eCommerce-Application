@@ -1,12 +1,13 @@
 import APICart from '@/api/cart';
 import macaronAstonaut from '@/assets/images/astronaut.png';
 import { BTN_TEXT, CART_TEXT, DEFAULT_CURRENCY } from '@/constants';
+import { MODAL_TITLE } from '@/constants';
 import Router from '@/router';
 import { cartState } from '@/store/cart-state';
 import { CART_TOTAL } from '@/styles/cart/cart-total';
 import { MODAL } from '@/styles/modal';
 import { ASTRONAUT_STYLE, MAIN_CONTAINER } from '@/styles/pages/underconstruction';
-import { ModalTitle, Route } from '@/types/enums';
+import { Route } from '@/types/enums';
 import ElementBuilder from '@/utils/element-builder';
 import ImageBuilder from '@/utils/image-builder';
 
@@ -21,7 +22,7 @@ export default class CartTotal extends BaseComponent {
   private totalDiscountPrice: number = 0;
   private discountCode: string | null = null;
   private productLoader: HTMLElement;
-  private formPromo: HTMLElement;
+  private totalInfoContainer: HTMLElement;
 
   constructor() {
     super({
@@ -36,9 +37,13 @@ export default class CartTotal extends BaseComponent {
       className: CART_TOTAL.LOADER,
     }).getElement();
 
-    this.formPromo = new FormPromoCode(this.updateView.bind(this)).getElement();
+    this.totalInfoContainer = new ElementBuilder({
+      tag: 'div',
+      className: '',
+    }).getElement();
 
     this.component.append(this.productLoader);
+    this.createTotalInfo();
 
     this.render();
   }
@@ -85,17 +90,31 @@ export default class CartTotal extends BaseComponent {
     return container;
   }
 
-  public updateView(isLoading: boolean): void {
+  public updateView(parameters: { isLoading: boolean; success: boolean }): void {
+    const { isLoading, success } = parameters;
+    this.updateInfo();
     if (isLoading) {
       this.component.append(this.productLoader);
-    } else {
+    } else if (success) {
       while (this.component.firstChild) {
         this.component.firstChild.remove();
       }
 
-      this.updateInfo();
+      while (this.totalInfoContainer.firstChild) {
+        this.totalInfoContainer.firstChild.remove();
+      }
+
+      this.createTotalInfo();
 
       this.render();
+    } else {
+      while (this.totalInfoContainer.firstChild) {
+        this.totalInfoContainer.firstChild.remove();
+      }
+
+      this.createTotalInfo();
+
+      this.productLoader.remove();
     }
   }
 
@@ -107,12 +126,7 @@ export default class CartTotal extends BaseComponent {
     this.discountCode = cartInfo?.discountCode ?? null;
   }
 
-  private createTotalInfo(): HTMLElement {
-    const totalInfoContainer = new ElementBuilder({
-      tag: 'div',
-      className: '',
-    }).getElement();
-
+  private createTotalInfo(): void {
     const productsPrice = CartTotal.createTotalItem(
       CART_TEXT.PRODUCTS_PRICE,
       `${(this.totalPrice + this.totalDiscountPrice).toFixed(2)} ${DEFAULT_CURRENCY}`,
@@ -130,7 +144,7 @@ export default class CartTotal extends BaseComponent {
       }
     );
 
-    totalInfoContainer.append(productsPrice, sale);
+    this.totalInfoContainer.append(productsPrice, sale);
 
     if (this.discountCode) {
       const codeInfo = CartTotal.createTotalItem(
@@ -142,10 +156,19 @@ export default class CartTotal extends BaseComponent {
         }
       );
 
-      totalInfoContainer.append(codeInfo);
+      this.totalInfoContainer.append(codeInfo);
     }
 
-    return totalInfoContainer;
+    const totalPrice = CartTotal.createTotalItem(
+      CART_TEXT.TOTAL_PRICE,
+      `${this.totalPrice} ${DEFAULT_CURRENCY}`,
+      {
+        isDotted: false,
+        isAccent: true,
+      }
+    );
+
+    this.totalInfoContainer.append(totalPrice);
   }
 
   private checkoutModal(): void {
@@ -174,7 +197,7 @@ export default class CartTotal extends BaseComponent {
     }).getElement();
 
     const modal = new Modal({
-      title: ModalTitle.CHECKOUT_CART,
+      title: MODAL_TITLE.CHECKOUT_CART,
       content,
       callback: CartTotal.closeCart.bind(CartTotal),
     });
@@ -201,16 +224,7 @@ export default class CartTotal extends BaseComponent {
       textContent: CART_TEXT.TOTAL_TITLE,
     }).getElement();
 
-    const totalInfo = this.createTotalInfo();
-
-    const totalPrice = CartTotal.createTotalItem(
-      CART_TEXT.TOTAL_PRICE,
-      `${this.totalPrice} ${DEFAULT_CURRENCY}`,
-      {
-        isDotted: false,
-        isAccent: true,
-      }
-    );
+    const promo = new FormPromoCode(this.updateView.bind(this)).getElement();
 
     const checkoutButton = new Button({
       style: 'PRICE_BUTTON',
@@ -220,6 +234,6 @@ export default class CartTotal extends BaseComponent {
       },
     }).getElement();
 
-    this.component.append(title, totalInfo, totalPrice, this.formPromo, checkoutButton);
+    this.component.append(title, this.totalInfoContainer, promo, checkoutButton);
   }
 }

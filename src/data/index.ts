@@ -27,9 +27,14 @@ import anonimDeliveryIcon from '@/assets/images/product/anonimDeliveryIcon.png';
 import payDeliveryIcon from '@/assets/images/product/payDeliveryIcon.png';
 import selfDeliveryIcon from '@/assets/images/product/selfDeliveryIcon.png';
 import { FOOTER_TEXTS, GUARANTEES_TEXTS, PACKAGES_TEXTS, SUBHEADER_PROMO_TEXT } from '@/constants';
+import { CHECKBOX_TEXT, DELIVERY_TEXT } from '@/constants';
 import { ABOUT_STYLE } from '@/styles/pages/about';
-import { CheckboxText, DeliveryText, InputType } from '@/types/enums';
+import { InputType } from '@/types/enums';
 import type { About, Guarantees, Packages, SelectOption } from '@/types/interfaces';
+import { LanguageSelector } from '@/utils/language-selector';
+
+const languageSelector = LanguageSelector.getInstance();
+const locale = languageSelector.translations;
 
 export const PROMO_ITEMS = [
   { ICON: fastDeliveryIcon, TEXT: SUBHEADER_PROMO_TEXT.DELIVERY },
@@ -60,39 +65,39 @@ export const SCHOOL_URL = 'https://rs.school/';
 export const INPUTS_REGISTRATION_DATA = [
   {
     id: 'firstName',
-    labelText: 'Имя',
-    placeholder: 'Укажите имя',
+    labelText: locale.dataRegistrationFirstName,
+    placeholder: locale.dataRegistrationFirstNamePlaceholder,
     type: InputType.TEXT,
     isRequired: true,
     callback: (): void => {},
   },
   {
     id: 'lastName',
-    labelText: 'Фамилия',
-    placeholder: 'Укажите фамилию',
+    labelText: locale.dataRegistrationLastName,
+    placeholder: locale.dataRegistrationLastNamePlaceholder,
     type: InputType.TEXT,
     isRequired: true,
     callback: (): void => {},
   },
   {
     id: 'dateOfBirth',
-    labelText: 'Дата рождения',
+    labelText: locale.dataRegistrationBirthDate,
     type: InputType.DATE,
     isRequired: true,
     callback: (): void => {},
   },
   {
     id: 'email',
-    labelText: 'E-mail',
-    placeholder: 'Укажите e-mail',
+    labelText: locale.dataRegistrationEmail,
+    placeholder: locale.dataRegistrationEmailPlaceholder,
     type: InputType.EMAIL,
     isRequired: true,
     callback: (): void => {},
   },
   {
     id: 'password',
-    labelText: 'Пароль',
-    placeholder: 'Укажите пароль',
+    labelText: locale.dataRegistrationPassword,
+    placeholder: locale.dataRegistrationPasswordPlaceholder,
     type: InputType.PASSWORD,
     isRequired: true,
     callback: (): void => {},
@@ -102,32 +107,32 @@ export const INPUTS_REGISTRATION_DATA = [
 export const INPUTS_ADDRESS_DATA = [
   {
     id: 'Country',
-    labelText: 'Страна',
-    placeholder: 'Россия',
+    labelText: locale.dataAddressCountry,
+    placeholder: locale.dataAddressCountryPlaceholder,
     type: InputType.TEXT,
     isDisabled: true,
     callback: (): void => {},
   },
   {
     id: 'City',
-    labelText: 'Город',
-    placeholder: 'Укажите город',
+    labelText: locale.dataAddressCity,
+    placeholder: locale.dataAddressCityPlaceholder,
     type: InputType.TEXT,
     isRequired: true,
     callback: (): void => {},
   },
   {
     id: 'Street',
-    labelText: 'Улица',
-    placeholder: 'Укажите улицу',
+    labelText: locale.dataAddressStreet,
+    placeholder: locale.dataAddressStreetPlaceholder,
     type: InputType.TEXT,
     isRequired: true,
     callback: (): void => {},
   },
   {
     id: 'PostalCode',
-    labelText: 'Почтовый индекс',
-    placeholder: 'Укажите почтовый индекс',
+    labelText: locale.dataAddressPostalCode,
+    placeholder: locale.dataAddressPostalCodePlaceholder,
     type: InputType.TEXT,
     isRequired: true,
     callback: (): void => {},
@@ -137,32 +142,32 @@ export const INPUTS_ADDRESS_DATA = [
 export const INPUTS_CHANGE_ADDRESS_DATA = [
   {
     id: 'country',
-    labelText: 'Страна',
-    placeholder: 'Россия',
+    labelText: locale.dataAddressCountry,
+    placeholder: locale.dataAddressCountryPlaceholder,
     type: InputType.TEXT,
     isDisabled: true,
     callback: (): void => {},
   },
   {
     id: 'city',
-    labelText: 'Город',
-    placeholder: 'Укажите город',
+    labelText: locale.dataAddressCity,
+    placeholder: locale.dataAddressCityPlaceholder,
     type: InputType.TEXT,
     isRequired: true,
     callback: (): void => {},
   },
   {
     id: 'streetName',
-    labelText: 'Улица',
-    placeholder: 'Укажите улицу',
+    labelText: locale.dataAddressStreet,
+    placeholder: locale.dataAddressStreetPlaceholder,
     type: InputType.TEXT,
     isRequired: true,
     callback: (): void => {},
   },
   {
     id: 'postalCode',
-    labelText: 'Почтовый индекс',
-    placeholder: 'Укажите почтовый индекс',
+    labelText: locale.dataAddressPostalCode,
+    placeholder: locale.dataAddressPostalCodePlaceholder,
     type: InputType.TEXT,
     isRequired: true,
     callback: (): void => {},
@@ -172,30 +177,30 @@ export const INPUTS_CHANGE_ADDRESS_DATA = [
 export const CHECKBOXES_REGISTRATION_DATA = [
   {
     id: 'is-same-addresses',
-    labelText: CheckboxText.SAME_ADDRESSES,
+    labelText: CHECKBOX_TEXT.SAME_ADDRESSES,
   },
   {
     id: `is-default-address-shipping`,
-    labelText: CheckboxText.DEFAULT_SAVE,
+    labelText: CHECKBOX_TEXT.DEFAULT_SAVE,
   },
   {
     id: `is-default-address-billing`,
-    labelText: CheckboxText.DEFAULT_SAVE,
+    labelText: CHECKBOX_TEXT.DEFAULT_SAVE,
   },
 ];
 
 export const INPUTS_AUTHORIZATION_DATA = [
   {
     id: 'email',
-    labelText: 'E-mail',
-    placeholder: 'Укажите e-mail',
+    labelText: locale.dataRegistrationEmail,
+    placeholder: locale.dataRegistrationEmailPlaceholder,
     type: InputType.EMAIL,
     isRequired: true,
   },
   {
     id: 'password',
-    labelText: 'Пароль',
-    placeholder: 'Укажите пароль',
+    labelText: locale.dataRegistrationPassword,
+    placeholder: locale.dataRegistrationPasswordPlaceholder,
     type: InputType.PASSWORD,
     isRequired: true,
   },
@@ -204,31 +209,31 @@ export const INPUTS_AUTHORIZATION_DATA = [
 export const INPUTS_EDIT_USER_INFO_DATA = [
   {
     id: 'firstName',
-    labelText: 'Имя',
-    placeholder: 'Укажите имя',
+    labelText: locale.dataRegistrationFirstName,
+    placeholder: locale.dataRegistrationFirstNamePlaceholder,
     type: InputType.TEXT,
     isRequired: true,
     callback: (): void => {},
   },
   {
     id: 'lastName',
-    labelText: 'Фамилия',
-    placeholder: 'Укажите фамилию',
+    labelText: locale.dataRegistrationLastName,
+    placeholder: locale.dataRegistrationLastNamePlaceholder,
     type: InputType.TEXT,
     isRequired: true,
     callback: (): void => {},
   },
   {
     id: 'dateOfBirth',
-    labelText: 'Дата рождения',
+    labelText: locale.dataRegistrationBirthDate,
     type: InputType.DATE,
     isRequired: true,
     callback: (): void => {},
   },
   {
     id: 'email',
-    labelText: 'E-mail',
-    placeholder: 'Укажите e-mail',
+    labelText: locale.dataRegistrationEmail,
+    placeholder: locale.dataRegistrationEmailPlaceholder,
     type: InputType.EMAIL,
     isRequired: true,
     callback: (): void => {},
@@ -238,22 +243,22 @@ export const INPUTS_EDIT_USER_INFO_DATA = [
 export const INPUTS_EDIT_USER_PASSWORD = [
   {
     id: 'currentPassword',
-    labelText: 'Текущий пароль',
-    placeholder: 'Укажите пароль',
+    labelText: locale.dataRegistrationCurrentPassword,
+    placeholder: locale.dataRegistrationPasswordPlaceholder,
     type: InputType.PASSWORD,
     isRequired: true,
   },
   {
     id: 'newPassword',
-    labelText: 'Новый пароль',
-    placeholder: 'Укажите пароль',
+    labelText: locale.dataRegistrationNewPassword,
+    placeholder: locale.dataRegistrationPasswordPlaceholder,
     type: InputType.PASSWORD,
     isRequired: true,
   },
   {
     id: 'repeatNewPassword',
-    labelText: 'Повторите новый пароль',
-    placeholder: 'Укажите пароль',
+    labelText: locale.dataRegistrationRepeatNewPassword,
+    placeholder: locale.dataRegistrationPasswordPlaceholder,
     type: InputType.PASSWORD,
     isRequired: true,
   },
@@ -261,32 +266,38 @@ export const INPUTS_EDIT_USER_PASSWORD = [
 
 export const PACKAGES: Packages[] = [
   {
-    ...PACKAGES_TEXTS.PACKAGES.READY_PACK,
+    title: PACKAGES_TEXTS.PACKAGES.READY_PACK.TITLE,
+    description: PACKAGES_TEXTS.PACKAGES.READY_PACK.DESCRIPTION,
     icon: readyIcon,
     gradient: ['bg-gradient-to-br', 'from-peach', 'to-peach-light'],
   },
   {
-    ...PACKAGES_TEXTS.PACKAGES.CREATE_OWN,
+    title: PACKAGES_TEXTS.PACKAGES.CREATE_OWN.TITLE,
+    description: PACKAGES_TEXTS.PACKAGES.CREATE_OWN.DESCRIPTION,
     icon: customIcon,
     gradient: ['bg-gradient-to-br', 'from-red', 'to-red-light'],
   },
   {
-    ...PACKAGES_TEXTS.PACKAGES.INDIVIDUAL_PACK,
+    title: PACKAGES_TEXTS.PACKAGES.INDIVIDUAL_PACK.TITLE,
+    description: PACKAGES_TEXTS.PACKAGES.INDIVIDUAL_PACK.DESCRIPTION,
     icon: stampIcon,
     gradient: ['bg-gradient-to-br', 'from-green', 'to-green-light'],
   },
   {
-    ...PACKAGES_TEXTS.PACKAGES.WEDDING_PACK,
+    title: PACKAGES_TEXTS.PACKAGES.WEDDING_PACK.TITLE,
+    description: PACKAGES_TEXTS.PACKAGES.WEDDING_PACK.DESCRIPTION,
     icon: weddingIcon,
     gradient: ['bg-gradient-to-br', 'from-orange', 'to-orange-light'],
   },
   {
-    ...PACKAGES_TEXTS.PACKAGES.CORPORATE_PACK,
+    title: PACKAGES_TEXTS.PACKAGES.CORPORATE_PACK.TITLE,
+    description: PACKAGES_TEXTS.PACKAGES.CORPORATE_PACK.DESCRIPTION,
     icon: corporateIcon,
     gradient: ['bg-gradient-to-br', 'from-mint', 'to-mint-light'],
   },
   {
-    ...PACKAGES_TEXTS.PACKAGES.WHOLESALE_PACK,
+    title: PACKAGES_TEXTS.PACKAGES.WHOLESALE_PACK.TITLE,
+    description: PACKAGES_TEXTS.PACKAGES.WHOLESALE_PACK.DESCRIPTION,
     icon: wholesaleIcon,
     gradient: ['bg-gradient-to-br', 'from-lilac', 'to-lilac-light'],
   },
@@ -294,47 +305,51 @@ export const PACKAGES: Packages[] = [
 
 export const GUARANTEES: Guarantees[] = [
   {
-    ...GUARANTEES_TEXTS.GUARANTEES.INGREDIENTS,
+    title: GUARANTEES_TEXTS.GUARANTEES.INGREDIENTS.TITLE,
+    description: GUARANTEES_TEXTS.GUARANTEES.INGREDIENTS.DESCRIPTION,
     image: ingerientsIcon,
   },
   {
-    ...GUARANTEES_TEXTS.GUARANTEES.PACKAGING,
+    title: GUARANTEES_TEXTS.GUARANTEES.PACKAGING.TITLE,
+    description: GUARANTEES_TEXTS.GUARANTEES.PACKAGING.DESCRIPTION,
     image: packagingIcon,
   },
   {
-    ...GUARANTEES_TEXTS.GUARANTEES.DELIVERY,
+    title: GUARANTEES_TEXTS.GUARANTEES.DELIVERY.TITLE,
+    description: GUARANTEES_TEXTS.GUARANTEES.DELIVERY.DESCRIPTION,
     image: deliveryIcon,
   },
   {
-    ...GUARANTEES_TEXTS.GUARANTEES.ANONYMOUS,
+    title: GUARANTEES_TEXTS.GUARANTEES.ANONYMOUS.TITLE,
+    description: GUARANTEES_TEXTS.GUARANTEES.ANONYMOUS.DESCRIPTION,
     image: anonymousIcon,
   },
 ];
 
 export const SORTING_OPTIONS: SelectOption[] = [
-  { value: '', text: 'Без сортировки' },
-  { value: 'price asc', text: 'Цена: по возрастанию' },
-  { value: 'price desc', text: 'Цена: по убыванию' },
-  { value: 'name.ru asc', text: 'Название: от А-Я' },
-  { value: 'name.ru desc', text: 'Название: от Я-А' },
+  { value: '', text: locale.dataSortingNoSort },
+  { value: 'price asc', text: locale.dataSortingPriceAsc },
+  { value: 'price desc', text: locale.dataSortingPriceDesc },
+  { value: 'name.ru asc', text: locale.dataSortingNameAsc },
+  { value: 'name.ru desc', text: locale.dataSortingNameDesc },
 ];
 
 export const DELIVERY_ITEMS = [
-  { ICON: payDeliveryIcon, TEXT: DeliveryText.PAY },
-  { ICON: selfDeliveryIcon, TEXT: DeliveryText.SELF_DELIVERY },
-  { ICON: anonimDeliveryIcon, TEXT: DeliveryText.ANONIM_PRESENT },
+  { ICON: payDeliveryIcon, TEXT: DELIVERY_TEXT.PAY },
+  { ICON: selfDeliveryIcon, TEXT: DELIVERY_TEXT.SELF_DELIVERY },
+  { ICON: anonimDeliveryIcon, TEXT: DELIVERY_TEXT.ANONIM_PRESENT },
 ];
 
 export const ABOUT: About = {
   KONSTANTIN: {
     PersonalText: {
-      name: 'Константин Петров',
-      role: 'Шеф-кондитер',
+      name: locale.aboutKonstantinName,
+      role: locale.aboutKonstantinRole,
       annotation: 'Константин – наш бессменный шеф-кондитер и гуру JavaScript! ',
       description: [
-        'Константин – наш бессменный шеф-кондитер и гуру JavaScript! Держит в голове стратегический план, а руку - на пульсе текущей работы. Всегда готов стать рядом в сложной ситуации и спасти подгорающие эклеры или исправить баг в коде коллеги.',
-        'Родился в Москве, живёт в Нидерландах, - магистр стратегического бизнеса с 15-летним опытом управления проектами, он знает, как превратить любое начинание в успех – будь то стартап, идеально пропечённый профитроль или учебный проект в RS School.',
-        'В редкие свободные часы Константин покоряет виртуальные миры в компьютерных играх, дебажит код и с энтузиазмом поднимает бокал любимого пива (особенно по пятницам – потому что стратегия требует правильного планирования!).',
+        locale.aboutKonstantinDesc1,
+        locale.aboutKonstantinDesc2,
+        locale.aboutKonstantinDesc3,
       ],
       github: TEAM[0],
     },
@@ -345,15 +360,11 @@ export const ABOUT: About = {
   },
   DANIIL: {
     PersonalText: {
-      name: 'Даниил Бивер',
-      role: 'Кондитер-технолог',
+      name: locale.aboutDaniilName,
+      role: locale.aboutDaniilRole,
       annotation:
         'Программный код и крем на эклер — одинаково хороши, когда за дело берётся петербуржец Даниил.',
-      description: [
-        'Программный код и крем на эклер — одинаково хороши, когда за дело берётся петербуржец Даниил. С высшим образованием по фундаментальной информатике и трёхлетним коммерческим опытом HTML-верстальщика, он уверенно чувствует себя не только у плиты, но и в логике взаимодействия сложных API.',
-        'Он работает не с визуалом, а с начинкой — авторизовать пользователя, применить промокод, пересчитать корзину... При этом даже под давлением сохраняет хладнокровие, как заварной крем — стабильную текстуру. В каждом проекте он оставляет частичку инженерной точности и немного сладкой магии и умеет сделать это в нужное время, в правильной последовательности и обязательно с любовью к деталям.',
-        'Когда-то он увлекался пошивом сумок и футболок, и этот опыт научил его главному: если строчка легла криво – переделывай, пока не станет идеально. Этот принцип он успешно применяет и в программировании, только теперь вместо ткани – строки кода, а вместо иглы – строгий линтер, который не прощает ошибок.',
-      ],
+      description: [locale.aboutDaniilDesc1, locale.aboutDaniilDesc2, locale.aboutDaniilDesc3],
       github: TEAM[1],
     },
     PersonalImageBox: {
@@ -363,13 +374,10 @@ export const ABOUT: About = {
   },
   OLGA: {
     PersonalText: {
-      name: 'Ольга Поклонская',
-      role: 'Кондитер-оформитель',
+      name: locale.aboutOlgaName,
+      role: locale.aboutOlgaRole,
       annotation: 'Ольга – кондитер-оформитель, мастер эстетики и здравого смысла. ',
-      description: [
-        'Ольга – кондитер-оформитель, мастер эстетики и здравого смысла. Всю профессиональную жизнь она искала гармонию между точностью кода и живым восприятием веб-страниц. Последние 13 лет преподавала JavaScript для веб-дизайнеров, и теперь её ученики работают в самых разных уголках мира – от Японии до Швеции, от EPAM до Google. Правда, её путь в IT прервался не по её желанию, но закрытая дверь – это просто повод поискать окно.',
-        'Юная минчанка, возраст которой всё ещё уступает сумме лет двух её коллег, с интересом учится у команды и вкладывает свои знания в проект. Путешествия и рисование вдохновляют её на новые идеи, а любовь к программированию помогает упорядочить творческий хаос. И пусть оформленные ею страницы не дарят аромата ванили и шоколада, удовольствие от их посещения не уступает наслаждению идеально украшенным эклером.',
-      ],
+      description: [locale.aboutOlgaDesc1, locale.aboutOlgaDesc2],
       github: TEAM[2],
     },
     PersonalImageBox: {
@@ -379,21 +387,18 @@ export const ABOUT: About = {
   },
   MARGO: {
     PersonalText: {
-      name: 'Маргарита Малец',
-      role: 'Генеральный директор по подбору персонала и вдохновению',
+      name: locale.aboutMargoName,
+      role: locale.aboutMargoRole,
       annotation: 'Маргарита - наш ментор, она же наша муза, она же наш ангел-хранитель!',
-      description: [
-        'Маргарита - наш ментор, она же наша муза, она же наш ангел-хранитель, она же верит в нас даже тогда, когда мы сами не знаем, стоит ли верить... Список эпитетов можно продолжать бесконечно, но суть одна:',
-        '«Спасибо, Маргарита!»',
-      ],
+      description: [locale.aboutMargoDesc1, locale.aboutMargoDesc2],
       github: TEAM[3],
     },
     PersonalImageBox: {
       photo: { url: MargoPhoto, style: ABOUT_STYLE.PHOTO },
     },
   },
-  title: 'Наша команда',
-  text: 'Наш рецепт успеха? Добрая щепотка упорства, сладкий джем творчества, немного бессонницы при завершении очередного спринта и парочка асинхронных функций, чтобы всё работало без сбоя. Так что, если вы ищете идеальное сочетание вкуса, логики и лёгкой иронии, добро пожаловать в нашу кондитерскую (и фронтенд) вселенную!',
+  title: locale.aboutTitle,
+  text: locale.aboutText,
   image: cafe,
 };
 
@@ -430,4 +435,6 @@ export const SVG_ICONS = {
     'M12,15.39L8.24,17.66L9.23,13.38L5.91,10.5L10.29,10.13L12,6.09L13.71,10.13L18.09,10.5L14.77,13.38L15.76,17.66M22,9.24L14.81,8.63L12,2L9.19,8.63L2,9.24L7.45,13.97L5.82,21L12,17.27L18.18,21L16.54,13.97L22,9.24Z',
   STAR_OFF_ICON:
     'M22.1 21.5L2.4 1.7L1.1 3L6.9 8.8L2 9.2L7.5 14L5.9 21L12.1 17.3L18.3 21L18 19.8L20.9 22.7L22.1 21.5M15.8 17.7L12 15.4L8.2 17.7L9.2 13.4L5.9 10.5L8.4 10.3L15.8 17.7M11.2 8L10 6.8L12 2L14.8 8.6L22 9.2L16.9 13.6L15.8 12.5L18.2 10.5L13.8 10.1L12.1 6.1L11.2 8Z',
+  LANGUAGE_ICON:
+    'M12.87,15.07L10.33,12.56L10.36,12.53C12.1,10.59 13.34,8.36 14.07,6H17V4H10V2H8V4H1V6H12.17C11.5,7.92 10.44,9.75 9,11.35C8.07,10.32 7.3,9.19 6.69,8H4.69C5.42,9.63 6.42,11.17 7.67,12.56L2.58,17.58L4,19L9,14L12.11,17.11L12.87,15.07M18.5,10H16.5L12,22H14L15.12,19H19.87L21,22H23L18.5,10M15.88,17L17.5,12.67L19.12,17H15.88Z',
 };

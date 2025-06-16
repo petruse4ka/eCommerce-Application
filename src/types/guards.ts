@@ -1,3 +1,4 @@
+import { Language } from './enums';
 import type {
   Addresses,
   Category,
@@ -103,4 +104,13 @@ export function isActionHandler<T>(
   callback: ActionWithArgumentHandler<T> | ActionHandler
 ): callback is ActionHandler {
   return callback.length === 0;
+}
+
+export function isValidLanguage(lang: string): lang is Language {
+  return (
+    lang === Language.ENGLISH ||
+    lang === Language.RUSSIAN ||
+    lang === Language.BELARUS ||
+    lang === Language.DUTCH
+  );
 }

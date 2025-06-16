@@ -1,5 +1,6 @@
 import '@/styles/main.css';
 
+import APICart from '@/api/cart';
 import CatalogAPI from '@/api/catalog';
 import BaseComponent from '@/components/base';
 import Breadcrumbs from '@/components/breadcrumbs';
@@ -132,6 +133,7 @@ export default class CatalogPage extends BaseComponent {
             CatalogAPI.getProducts(),
             CatalogAPI.getProductTypes(),
             CatalogAPI.getCategories(),
+            APICart.getCart(),
           ]);
 
           if (productsData) {
