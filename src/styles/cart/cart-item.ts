@@ -9,7 +9,18 @@ export const CART_ITEM = {
     'gap-1',
     'md:gap-3',
   ],
-  IMAGE: ['w-[80px]', 'h-[80px]', 'object-contain', 'm-auto', 'm-[0px]', 'cursor-pointer'],
+  IMAGE: [
+    'w-[80px]',
+    'h-[80px]',
+    'object-contain',
+    'm-auto',
+    'm-[0px]',
+    'cursor-pointer',
+    'border',
+    'border-transparent',
+    'rounded-lg',
+    'hover:border-accent',
+  ],
   INFO: {
     NAME: [
       'text-l',

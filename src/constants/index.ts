@@ -267,6 +267,7 @@ export const PRODUCT_TEXT = {
   CATALOG: locale.productTextCatalog,
   LOADING_PRODUCT: locale.productTextLoadingProduct,
   REMOVE: locale.productTextRemove,
+  REMOVING: locale.productTextRemoving,
 };
 
 export const DEFAULT_QUANTITY_AMOUNT = 1;

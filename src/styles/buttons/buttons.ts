@@ -20,8 +20,12 @@ export const DEFAULT_BUTTON_WITH_ICON = ['button', 'items-center', 'gap-2'];
 export const BUTTON_ICON_CONTAINER = ['flex', 'items-center'];
 export const BUTTON_ICON = ['w-5', 'h-5'];
 export const BUTTON_TEXT = ['text-[14px]', 'font-semibold'];
-export const REMOVE_BUTTON_TEXT = ['text-[14px]', 'font-semibold'];
-export const REMOVE_BUTTON_ICON = ['fill-accent', 'group-hover:fill-white-permanent'];
+export const REMOVE_BUTTON_TEXT = [
+  'text-[14px]',
+  'font-semibold',
+  'group-hover:text-white-permanent',
+];
+export const REMOVE_BUTTON_ICON = ['w-5', 'h-5', 'fill-accent', 'group-hover:fill-white-permanent'];
 
 export const CUSTOM_BUTTON_STYLE = {
   PRIMARY_PINK: [

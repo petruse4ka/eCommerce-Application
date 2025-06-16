@@ -134,6 +134,7 @@ export const ru = {
   productTextCatalog: 'В каталог',
   productTextLoadingProduct: 'Загрузка товара...',
   productTextRemove: 'Убрать из корзины',
+  productTextRemoving: 'Убираем из корзины...',
   cartTextTitle: 'Ваша корзина',
   cartTextPrice: 'Цена: ',
   cartTextTotalTitle: 'Итого',

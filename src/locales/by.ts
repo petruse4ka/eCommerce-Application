@@ -134,6 +134,7 @@ export const by = {
   productTextCatalog: 'У каталог',
   productTextLoadingProduct: 'Загрузка тавару...',
   productTextRemove: 'Прыбраць з кошыка',
+  productTextRemoving: 'Выдаленне з кошыка...',
   cartTextTitle: 'Ваш кошык',
   cartTextPrice: 'Цана: ',
   cartTextTotalTitle: 'Усяго',

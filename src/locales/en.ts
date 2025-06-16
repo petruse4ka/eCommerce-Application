@@ -134,6 +134,7 @@ export const en = {
   productTextCatalog: 'To catalog',
   productTextLoadingProduct: 'Loading product...',
   productTextRemove: 'Remove from cart',
+  productTextRemoving: 'Removing from cart...',
   cartTextTitle: 'Your cart',
   cartTextPrice: 'Price: ',
   cartTextTotalTitle: 'Total',

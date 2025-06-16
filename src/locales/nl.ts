@@ -135,6 +135,7 @@ export const nl = {
   productTextCatalog: 'Naar catalogus',
   productTextLoadingProduct: 'Product bijwerken...',
   productTextRemove: 'Verwijderen',
+  productTextRemoving: 'Verwijderen uit winkelwagen...',
   cartTextTitle: 'Uw winkelwagen',
   cartTextPrice: 'Prijs: ',
   cartTextTotalTitle: 'Totaal',
