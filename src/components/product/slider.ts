@@ -30,6 +30,7 @@ export default class ProductSlider extends BaseComponent {
         const modal = new ModalSlider(images, this.currentIndex);
         document.body.append(modal.getElement());
         modal.showModal();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       },
     }).getElement();
 
