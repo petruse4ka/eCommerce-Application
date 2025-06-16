@@ -1,18 +1,18 @@
 import APICart from '@/api/cart';
-import cartRemoveIcon from '@/assets/icons/cart-remove-accent.svg';
 import { PRODUCT_TEXT } from '@/constants';
+import { SVG_ICONS } from '@/data';
 import { cartState } from '@/store/cart-state';
 import {
-  BUTTON_ICON,
   BUTTON_ICON_CONTAINER,
-  BUTTON_TEXT,
   CUSTOM_BUTTON_STYLE,
+  REMOVE_BUTTON_ICON,
+  REMOVE_BUTTON_TEXT,
 } from '@/styles/buttons/buttons';
 import { ButtonType, CartStateKey } from '@/types/enums';
 import type { addToCartButtonParameters } from '@/types/interfaces';
 import ButtonBuilder from '@/utils/button-builder';
 import ElementBuilder from '@/utils/element-builder';
-import ImageBuilder from '@/utils/image-builder';
+import SVGBuilder from '@/utils/svg-builder';
 
 export default class RemoveFromCartButton {
   private button: ButtonBuilder;
@@ -44,7 +44,7 @@ export default class RemoveFromCartButton {
 
     this.textElement = new ElementBuilder({
       tag: 'span',
-      className: [...BUTTON_TEXT, 'text-accent'],
+      className: [...REMOVE_BUTTON_TEXT],
       textContent: PRODUCT_TEXT.REMOVE,
     }).getElement();
     const icon = RemoveFromCartButton.createIcon();
@@ -61,10 +61,12 @@ export default class RemoveFromCartButton {
       className: BUTTON_ICON_CONTAINER,
     }).getElement();
 
-    const currentIcon = new ImageBuilder({
-      source: cartRemoveIcon,
-      className: BUTTON_ICON,
-      alt: '',
+    const currentIcon = new SVGBuilder({
+      source: SVG_ICONS.REMOVE_FROM_CART,
+      className: [],
+      classNameIcon: REMOVE_BUTTON_ICON,
+      viewBox: '0 0 24 24',
+      iconSize: 24,
     }).getElement();
 
     iconContainer.append(currentIcon);
