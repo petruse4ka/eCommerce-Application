@@ -47,6 +47,7 @@ export const STARS_CONTAINER = [
   'bg-[url(@/assets/images/promo/promo-stars-gold.svg)]',
   'bg-no-repeat',
   'bg-right',
+  'mr-5',
 ];
 
 export const TEXT_CONTAINER = ['relative', 'z-10', 'w-full', 'text-center'];
