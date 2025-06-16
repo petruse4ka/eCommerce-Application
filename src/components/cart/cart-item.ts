@@ -84,6 +84,32 @@ export default class CartItem extends BaseComponent {
     this.component.append(quantityInputBlock.getElement(), priceContainer);
   }
 
+  private createProductName(): HTMLElement {
+    const container = new ElementBuilder({
+      tag: 'div',
+      className: CART_ITEM.INFO.CONTAINER,
+      callback: (): void => {
+        globalThis.location.hash = `${Route.PRODUCT}/${this.productInfo.key}`;
+      },
+    }).getElement();
+
+    const productName = new ElementBuilder({
+      tag: 'p',
+      className: CART_ITEM.INFO.NAME,
+      textContent: `${this.productInfo.name}`,
+    }).getElement();
+
+    const productPrice = new ElementBuilder({
+      tag: 'p',
+      className: CART_ITEM.INFO.PRICE,
+      textContent: `${(this.productInfo.discountedPrice ?? this.productInfo.prices).toFixed(2)} ${PRODUCT_TEXT.CURRENCY}`,
+    }).getElement();
+
+    container.append(productName, productPrice);
+
+    return container;
+  }
+
   private render(): void {
     const productImg = new ImageBuilder({
       source: this.productInfo.img.url,
@@ -94,16 +120,9 @@ export default class CartItem extends BaseComponent {
       },
     }).getElement();
 
-    const productName = new ElementBuilder({
-      tag: 'p',
-      className: CART_ITEM.INFO.NAME,
-      textContent: this.productInfo.name,
-      callback: (): void => {
-        globalThis.location.hash = `${Route.PRODUCT}/${this.productInfo.key}`;
-      },
-    }).getElement();
+    const productNameContainer = this.createProductName();
 
-    this.component.append(productImg, productName);
+    this.component.append(productImg, productNameContainer);
 
     this.createPriceAndQuantity();
 

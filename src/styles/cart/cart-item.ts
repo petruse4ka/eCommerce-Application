@@ -22,15 +22,18 @@ export const CART_ITEM = {
     'hover:border-accent',
   ],
   INFO: {
-    NAME: [
+    CONTAINER: [
+      'md:pl-5',
+      'justify-self-start',
+      'flex',
+      'flex-col',
       'text-l',
       'font-bold',
-      'md:pl-5',
-      'text-black',
+      'group',
       'cursor-pointer',
-      'inline',
-      'hover:text-accent',
     ],
+    NAME: ['text-black', 'group-hover:text-accent-hover', 'transition', 'inline-block'],
+    PRICE: ['text-accent', 'group-hover:text-accent-hover', 'transition', 'inline-block'],
   },
   PRICE: {
     DEFAULT: ['font-bold', 'text-left', 'md:text-right', 'md:pr-5', 'text-black'],

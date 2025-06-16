@@ -161,7 +161,7 @@ export default class CartTotal extends BaseComponent {
 
     const totalPrice = CartTotal.createTotalItem(
       CART_TEXT.TOTAL_PRICE,
-      `${this.totalPrice} ${DEFAULT_CURRENCY}`,
+      `${this.totalPrice.toFixed(2)} ${DEFAULT_CURRENCY}`,
       {
         isDotted: false,
         isAccent: true,
