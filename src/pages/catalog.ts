@@ -1,9 +1,11 @@
 import '@/styles/main.css';
 
+import APICart from '@/api/cart';
 import CatalogAPI from '@/api/catalog';
 import BaseComponent from '@/components/base';
 import Breadcrumbs from '@/components/breadcrumbs';
 import Categories from '@/components/catalog/categories';
+import Paginator from '@/components/catalog/paginator';
 import ProductFilters from '@/components/catalog/product-filters';
 import ProductList from '@/components/catalog/product-list';
 import ProductSorting from '@/components/catalog/product-sorting';
@@ -11,6 +13,7 @@ import SelectedFilters from '@/components/catalog/selected-filters';
 import LoaderOverlay from '@/components/overlay/loader-overlay';
 import { CATALOG_TEXTS, LOADING_CONFIG, PAGE_TITLES } from '@/constants';
 import { filterState } from '@/store/filter-state';
+import { paginatorState } from '@/store/paginator-state';
 import { productsState } from '@/store/products-state';
 import { userState } from '@/store/user-state';
 import { CATALOG_STYLES } from '@/styles/pages/catalog';
@@ -26,6 +29,7 @@ export default class CatalogPage extends BaseComponent {
   private selectedFilters: SelectedFilters;
   private breadcrumbs: Breadcrumbs;
   private categories: Categories | null;
+  private paginator: Paginator;
   private isLoading: boolean;
   private isLoadingCategories: boolean;
   private productListLoader: LoaderOverlay;
@@ -41,6 +45,7 @@ export default class CatalogPage extends BaseComponent {
     this.productFilters = new ProductFilters();
     this.selectedFilters = new SelectedFilters();
     this.breadcrumbs = new Breadcrumbs();
+    this.paginator = new Paginator();
     this.categories = null;
     this.isLoading = true;
     this.isLoadingCategories = true;
@@ -57,6 +62,38 @@ export default class CatalogPage extends BaseComponent {
     filterState.subscribe(() => {
       void this.handleFilterChange();
     });
+    paginatorState.subscribe(() => {
+      void this.handlePageChange();
+    });
+  }
+
+  private static createProductListSection(
+    productList: ProductList,
+    productSorting: ProductSorting,
+    paginator: Paginator,
+    isLoading: boolean,
+    productListLoader: LoaderOverlay
+  ): HTMLElement {
+    const productListSection = new ElementBuilder({
+      tag: 'div',
+      className: CATALOG_STYLES.PRODUCT_LIST_SECTION,
+    }).getElement();
+
+    const productListContainer = new ElementBuilder({
+      tag: 'div',
+      className: CATALOG_STYLES.PRODUCT_LIST_CONTAINER,
+    }).getElement();
+
+    productListContainer.append(productList.getElement());
+    if (isLoading) productListContainer.append(productListLoader.getElement());
+
+    productListSection.append(
+      productSorting.getElement(),
+      productListContainer,
+      paginator.getElement()
+    );
+
+    return productListSection;
   }
 
   private handleCategories(loadedCategories: CategoryResponse['results'] | null): void {
@@ -96,11 +133,12 @@ export default class CatalogPage extends BaseComponent {
             CatalogAPI.getProducts(),
             CatalogAPI.getProductTypes(),
             CatalogAPI.getCategories(),
+            APICart.getCart(),
           ]);
 
           if (productsData) {
             productsState.updateProducts(productsData.products);
-            this.productSorting.updateProductCount(productsData.products.length);
+            this.productSorting.updateProductCount(productsData.total);
 
             if (loadedProductTypes && loadedCategories) {
               this.handleProductTypes(loadedProductTypes, productsData, loadedCategories);
@@ -135,6 +173,7 @@ export default class CatalogPage extends BaseComponent {
 
   private handleFilterChange = async (): Promise<void> => {
     this.isLoading = true;
+    paginatorState.setCurrentPageWithoutNotification(1);
     this.render();
 
     try {
@@ -143,7 +182,29 @@ export default class CatalogPage extends BaseComponent {
 
       if (productsData) {
         productsState.updateProducts(productsData.products);
-        this.productSorting.updateProductCount(productsData.products.length);
+        this.productSorting.updateProductCount(productsData.total);
+      }
+    } catch (error) {
+      console.error('Error updating products:', error);
+      productsState.notifyError();
+    } finally {
+      this.isLoading = false;
+      this.render();
+    }
+  };
+
+  private handlePageChange = async (): Promise<void> => {
+    this.isLoading = true;
+    this.render();
+    this.productSorting.getElement().scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    try {
+      const selectedFilters = filterState.getSelectedFilters();
+      const productsData = await CatalogAPI.getProducts(selectedFilters);
+
+      if (productsData) {
+        productsState.updateProducts(productsData.products);
+        this.productSorting.updateProductCount(productsData.total);
       }
     } catch (error) {
       console.error('Error updating products:', error);
@@ -188,20 +249,14 @@ export default class CatalogPage extends BaseComponent {
       this.filtersLoader.getElement().remove();
     }
 
-    const productListSection = new ElementBuilder({
-      tag: 'div',
-      className: CATALOG_STYLES.PRODUCT_LIST_SECTION,
-    }).getElement();
+    const productListSection = CatalogPage.createProductListSection(
+      this.productList,
+      this.productSorting,
+      this.paginator,
+      this.isLoading,
+      this.productListLoader
+    );
 
-    const productListContainer = new ElementBuilder({
-      tag: 'div',
-      className: CATALOG_STYLES.PRODUCT_LIST_CONTAINER,
-    }).getElement();
-
-    productListContainer.append(this.productList.getElement());
-    if (this.isLoading) productListContainer.append(this.productListLoader.getElement());
-
-    productListSection.append(this.productSorting.getElement(), productListContainer);
     catalogContainer.append(filtersSection, productListSection);
 
     this.component.append(title, catalogContainer);

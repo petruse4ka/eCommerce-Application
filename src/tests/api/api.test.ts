@@ -1,4 +1,5 @@
 import API from '@/api';
+import { userState } from '@/store/user-state';
 
 describe('API', () => {
   test('should handle successful login', async () => {
@@ -15,7 +16,19 @@ describe('API', () => {
       json: () => Promise.resolve({ customer: { id: 'test-id' } }),
     });
 
-    const result = await API.userSignInResponse({
+    mockFetchRequest.mockResolvedValueOnce({
+      ok: true,
+      json: () =>
+        Promise.resolve({
+          id: 'mock-cart-id',
+          version: 1,
+        }),
+    });
+
+    vi.spyOn(userState, 'getTokenState').mockReturnValue('mock-token');
+    const setAuth = vi.spyOn(userState, 'setAuthorizationState').mockImplementation(() => {});
+
+    await API.userSignInResponse({
       userInfo: {
         email: 'testmail@testdomain.ru',
         password: '123qweQWE',
@@ -23,9 +36,12 @@ describe('API', () => {
       isLogin: true,
     });
 
-    expect(result).toBe('test-id');
+    expect(setAuth).toHaveBeenCalledTimes(1);
+    expect(setAuth).toHaveBeenCalledWith(true);
   });
+});
 
+describe('API', () => {
   test('should handle failed login', async () => {
     const mockFetchRequest = vi.fn();
     globalThis.fetch = mockFetchRequest;

@@ -3,7 +3,7 @@ import { ButtonType } from '@/types/enums';
 import type { customButtonParameters } from '@/types/interfaces';
 import ButtonBuilder from '@/utils/button-builder';
 import ElementBuilder from '@/utils/element-builder';
-import ImageBuilder from '@/utils/image-builder';
+import SVGBuilder from '@/utils/svg-builder';
 
 export default class ButtonWithIcon {
   protected button: ButtonBuilder;
@@ -15,10 +15,10 @@ export default class ButtonWithIcon {
       callback: parameters.callback,
     });
 
-    const icon = new ImageBuilder({
+    const icon = new SVGBuilder({
       source: parameters.icon.source,
-      alt: parameters.icon.alt,
-      className: parameters.icon.className || [],
+      className: [],
+      classNameIcon: parameters.icon.classNameIcon || [],
     }).getElement();
 
     const text = new ElementBuilder({

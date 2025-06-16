@@ -1,7 +1,8 @@
 import Alert from '@/components/alert';
+import { ALERT_TEXT } from '@/constants';
 import Router from '@/router';
 import { userState } from '@/store/user-state';
-import { AlertStatus, AlertText, ApiEndpoint, ApiMethods, ContentType } from '@/types/enums';
+import { AlertStatus, AlertTime, ApiEndpoint, ApiMethods, ContentType } from '@/types/enums';
 import { Route } from '@/types/enums';
 import type {
   AuthorizationBody,
@@ -12,6 +13,8 @@ import type {
   RegistrationBody,
 } from '@/types/interfaces';
 import ApiErrors from '@/utils/api-errors';
+
+import APICart from './cart';
 
 const clientCredentials = btoa(
   import.meta.env['VITE_CTP_CLIENT_ID'] + ':' + import.meta.env['VITE_CTP_CLIENT_SECRET']
@@ -42,9 +45,9 @@ export default class API {
           throw new Error(JSON.stringify(body.errors));
         } else {
           Alert.render({
-            textContent: AlertText.REGISTRATION_SUCCESS,
+            textContent: ALERT_TEXT.REGISTRATION_SUCCESS,
             status: AlertStatus.SUCCESS,
-            visibleTime: 3000,
+            visibleTime: AlertTime.DEFAULT,
           });
 
           void API.userSignInResponse({
@@ -65,9 +68,11 @@ export default class API {
   public static async userSignInResponse(body: {
     userInfo: AuthorizationBody;
     isLogin: boolean;
-  }): Promise<string | void> {
+  }): Promise<void> {
     const { userInfo, isLogin } = body;
-    const token = await this.userAuthentication(userInfo);
+    const token = userState.getTokenState();
+    await this.userAuthentication(userInfo);
+    const fetchBody = { ...userInfo };
 
     if (token) {
       return await fetch(
@@ -78,22 +83,22 @@ export default class API {
             Authorization: `Bearer ${token}`,
             'Content-Type': ContentType.JSON,
           },
-          body: JSON.stringify(userInfo),
+          body: JSON.stringify(fetchBody),
         }
       )
         .then((response) => response.json())
         .then((body: CustomerResponse) => {
           if (isLogin) {
             Alert.render({
-              textContent: AlertText.AUTHORIZATION_SUCCESS,
+              textContent: ALERT_TEXT.AUTHORIZATION_SUCCESS,
               status: AlertStatus.SUCCESS,
-              visibleTime: 3000,
+              visibleTime: AlertTime.DEFAULT,
             });
             Router.followRoute(Route.HOME);
           }
           userState.setUserInfoState(body.customer);
           userState.setAuthorizationState(true);
-          return body.customer.id;
+          void APICart.getCart();
         });
     }
   }
@@ -119,11 +124,12 @@ export default class API {
       .then((body: AuthResponse) => {
         const { access_token: token } = body;
         userState.setTokenState(token);
+
         return token;
       });
   }
 
-  private static async userAuthentication(body: AuthorizationBody): Promise<string | void> {
+  public static async userAuthentication(body: AuthorizationBody): Promise<string | void> {
     return await fetch(
       import.meta.env['VITE_CTP_AUTH_URL'] +
         ApiEndpoint.OATH +
@@ -158,7 +164,7 @@ export default class API {
         Alert.render({
           textContent: errorInfo,
           status: AlertStatus.ERROR,
-          visibleTime: 4000,
+          visibleTime: AlertTime.DEFAULT,
         });
 
         throw new Error(error.message);

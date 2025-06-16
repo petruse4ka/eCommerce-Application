@@ -8,7 +8,7 @@ export const ADDRESS = {
     'bg-white',
     'rounded-md',
     'border',
-    'border-orange',
+    'border-primary',
   ],
   TITLE: ['text-xl', 'font-semibold', 'text-dark', 'mb-2'],
   CARD: {
@@ -21,7 +21,7 @@ export const ADDRESS = {
       'bg-white',
       'rounded-md',
       'border',
-      'border-orange',
+      'border-primary',
     ],
     DEFAULT_TITLE: ['text-sm', 'font-semibold', 'text-accent', 'mb-2'],
     ACTIVE: ['bg-orange-light'],
@@ -35,7 +35,7 @@ export const ADDRESS = {
       'md:min-w-[200px]',
     ],
     CARD_INFO: ['flex', 'flex-col', 'gap-4', 'flex-grow'],
-    ICON: ['w-5', 'h-5'],
+    ICON: ['w-6', 'h-6', 'fill-black'],
     TEXT: ['text-sm', 'md:block', 'hidden'],
   },
   LINE: {
@@ -43,4 +43,5 @@ export const ADDRESS = {
     TITLE: ['font-semibold', 'text-base', 'w-[200px]', 'shrink-0'],
     VALUE: ['text-base', 'break-words', 'break-all'],
   },
+  NONE: ['text-black'],
 };

@@ -75,10 +75,11 @@ export default class ElementBuilder {
   ): void {
     if (eventType && callback) {
       this.element.addEventListener(eventType, (event: Event) => {
+        event.stopPropagation();
         if (!(this.element instanceof HTMLInputElement)) {
           event.preventDefault();
         }
-        callback(event);
+        void callback(event);
       });
     }
   }

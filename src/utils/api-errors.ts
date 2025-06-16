@@ -1,22 +1,26 @@
-import { AlertText } from '@/types/enums';
+import { ALERT_TEXT } from '@/constants';
 
 export default class ApiErrors {
   public static getErrorInfo(key: string): string {
     switch (key) {
       case 'invalid_customer_account_credentials': {
-        return AlertText.ACCOUNT_CREDENTIALS_ERROR;
+        return ALERT_TEXT.ACCOUNT_CREDENTIALS_ERROR;
       }
 
       case 'DuplicateField': {
-        return AlertText.DUPLICATE_FIELD;
+        return ALERT_TEXT.DUPLICATE_FIELD;
       }
 
       case 'InvalidCurrentPassword': {
-        return AlertText.INVALID_CURRENT_PASSWORD;
+        return ALERT_TEXT.INVALID_CURRENT_PASSWORD;
+      }
+
+      case 'DiscountCodeNonApplicable': {
+        return ALERT_TEXT.DISCOUNT_CODE_NON;
       }
 
       default: {
-        return AlertText.ERROR_DEFAULT;
+        return ALERT_TEXT.ERROR_DEFAULT;
       }
     }
   }

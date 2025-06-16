@@ -19,7 +19,8 @@ export default class TransformApiProductsData {
         const priceDivider = 10 ** fractionDigits;
 
         products.push({
-          id: product.key,
+          id: product.id,
+          key: product.key,
           name: typeof nameAttribute?.value === 'string' ? nameAttribute.value : '',
           description:
             typeof descAttribute?.value === 'object' && 'ru' in descAttribute.value
@@ -45,11 +46,12 @@ export default class TransformApiProductsData {
       const { attributes, prices, images } = masterVariant;
 
       return {
+        id: response.id,
         attributes,
         prices,
         images,
       };
     }
-    return { attributes: [], prices: [], images: [] };
+    return { id: '', attributes: [], prices: [], images: [] };
   }
 }

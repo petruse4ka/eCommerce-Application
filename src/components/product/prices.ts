@@ -1,16 +1,18 @@
 import BaseComponent from '@/components/base';
-import Button from '@/components/buttons';
-import { DEFAULT_CURRENCY, PRODUCT_TEXT } from '@/constants';
+import AddToCartButton from '@/components/buttons/add-to-cart-button';
+import RemoveFromCartButton from '@/components/buttons/remove-from-cart-button';
+import ProductList from '@/components/catalog/product-list';
+import { DEFAULT_CURRENCY } from '@/constants';
 import { PRODUCT_STYLES } from '@/styles/pages/product';
 import type { Price, PriceValue } from '@/types/interfaces';
 import ElementBuilder from '@/utils/element-builder';
 
-import ProductList from '../catalog/product-list';
-import ProductQuantity from './quantity';
-
 export default class ProductPrices extends BaseComponent {
-  constructor(inputPrices: Price[]) {
+  private productId: string;
+
+  constructor(inputPrices: Price[], productId: string) {
     super({ tag: 'div', className: PRODUCT_STYLES.PRICES_CONTAINER });
+    this.productId = productId;
     const prices = ProductPrices.parsePrices(inputPrices);
     this.render(prices);
   }
@@ -31,6 +33,20 @@ export default class ProductPrices extends BaseComponent {
       console.error('data error');
       throw new Error('data error');
     }
+  }
+
+  private static createAddToCartButton(productId: string): HTMLElement {
+    return new AddToCartButton({
+      style: 'ADD_TO_CART',
+      productId: productId,
+    }).getElement();
+  }
+
+  private static createRemoveFromCartButton(productId: string): HTMLElement {
+    return new RemoveFromCartButton({
+      style: 'REMOVE_FROM_CART',
+      productId: productId,
+    }).getElement();
   }
 
   protected render(prices: PriceValue): void {
@@ -55,20 +71,10 @@ export default class ProductPrices extends BaseComponent {
 
     this.component.append(oldPrice);
 
-    const button = new Button({
-      style: 'PRICE_BUTTON',
-      textContent: PRODUCT_TEXT.BASKET,
-      callback: (): void => {},
-    }).getElement();
+    const button = ProductPrices.createAddToCartButton(this.productId);
+    const deleteButton = ProductPrices.createRemoveFromCartButton(this.productId);
 
-    const totalAmount = new ElementBuilder({
-      tag: 'div',
-      className: PRODUCT_STYLES.QUANTITY_MESSAGE,
-      textContent: `${PRODUCT_TEXT.TOTAL} ${actualPrice}`,
-    }).getElement();
-
-    const quantityInputBlock = new ProductQuantity(prices.price, totalAmount);
-
-    this.component.append(quantityInputBlock.getElement(), totalAmount, button);
+    this.component.append(button);
+    this.component.append(deleteButton);
   }
 }

@@ -1,3 +1,4 @@
+import { OVERLAY_STYLES } from '@/styles/overlay';
 import ElementBuilder from '@/utils/element-builder';
 
 export default class Overlay {
@@ -6,7 +7,7 @@ export default class Overlay {
   constructor() {
     this.overlay = new ElementBuilder({
       tag: 'div',
-      className: ['absolute', 'inset-0', 'bg-black/50'],
+      className: OVERLAY_STYLES,
     });
   }
 

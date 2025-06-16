@@ -2,18 +2,17 @@ import API from '@/api';
 import BaseComponent from '@/components/base';
 import Footer from '@/components/footer/footer';
 import Header from '@/components/header/header';
+import { CONTACTS, DELIVERY, RETURNS, TERMS } from '@/constants/additional';
 import AboutPage from '@/pages/about';
 import AccountPage from '@/pages/account';
+import AdditionalPage from '@/pages/additional';
+import CartPage from '@/pages/cart';
 import CatalogPage from '@/pages/catalog';
-import ContactsPage from '@/pages/contacts';
-import DeliveryPage from '@/pages/delivery';
 import ErrorPage from '@/pages/errorpage';
 import HomePage from '@/pages/homepage';
 import LoginPage from '@/pages/login';
 import ProductPage from '@/pages/product';
 import RegistrationPage from '@/pages/registration';
-import ReturnsPage from '@/pages/returns';
-import TermsPage from '@/pages/terms';
 import Router from '@/router';
 import { userState } from '@/store/user-state';
 import { APP_STYLE } from '@/styles/app/app';
@@ -26,14 +25,15 @@ export default class App extends BaseComponent {
   private loginPage: LoginPage = new LoginPage();
   private catalogPage: CatalogPage = new CatalogPage();
   private productPage: ProductPage = new ProductPage();
-  private contactPage: ContactsPage = new ContactsPage();
+  private contactPage: AdditionalPage = new AdditionalPage(CONTACTS);
   private aboutPage: AboutPage = new AboutPage();
   private registrationPage: RegistrationPage = new RegistrationPage();
   private errorPage: ErrorPage = new ErrorPage();
-  private deliveryPage: DeliveryPage = new DeliveryPage();
-  private termsPage: TermsPage = new TermsPage();
-  private returnsPage: ReturnsPage = new ReturnsPage();
+  private deliveryPage: AdditionalPage = new AdditionalPage(DELIVERY);
+  private termsPage: AdditionalPage = new AdditionalPage(TERMS);
+  private returnsPage: AdditionalPage = new AdditionalPage(RETURNS);
   private accountPage: AccountPage = new AccountPage();
+  private cartPage: CartPage = new CartPage();
   private router: Router;
   private currentPage: BaseComponent;
 
@@ -50,6 +50,7 @@ export default class App extends BaseComponent {
     [Route.ACCOUNT, this.accountPage],
     [Route.CATALOG, this.catalogPage],
     [Route.PRODUCT, this.productPage],
+    [Route.CART, this.cartPage],
   ]);
 
   constructor() {
@@ -58,6 +59,20 @@ export default class App extends BaseComponent {
     this.setupRoutes();
     this.header = new Header();
     this.footer = new Footer();
+
+    const savedTheme = localStorage.getItem('great-js-minds-ecommerce-theme');
+    if (savedTheme) {
+      if (savedTheme === 'dark') {
+        document.documentElement.classList.add('dark');
+      }
+    } else {
+      if (globalThis.matchMedia && globalThis.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.documentElement.classList.add('dark');
+        localStorage.setItem('great-js-minds-ecommerce-theme', 'dark');
+      } else {
+        localStorage.setItem('great-js-minds-ecommerce-theme', 'light');
+      }
+    }
 
     const defaultRoute = this.router.getDefaultRoute();
 

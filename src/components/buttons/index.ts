@@ -8,7 +8,7 @@ export default class Button {
   constructor(parameters: {
     style: keyof typeof CUSTOM_BUTTON_STYLE;
     textContent: string;
-    callback: () => void;
+    callback: () => void | Promise<void>;
   }) {
     this.button = new ButtonBuilder({
       type: ButtonType.BUTTON,
@@ -28,5 +28,9 @@ export default class Button {
 
   public enableButton(): void {
     this.button.enableButton();
+  }
+
+  public changeTextContent(text: string): void {
+    this.button.applyTextContent(text);
   }
 }

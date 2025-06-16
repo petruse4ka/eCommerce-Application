@@ -18,12 +18,14 @@ const STANDARD_INPUT_STYLE = [
   'pl-2',
   'pr-2',
   'w-full',
+  '[&::-webkit-calendar-picker-indicator]:[filter:invert(0.4)_sepia(1)_saturate(20)_hue-rotate(320deg)_brightness(0.9)_contrast(0.9)]',
+  'cursor-text',
 ];
 
 export const CUSTOM_INPUT_STYLE = {
   INPUT_DEFAULT: [...STANDARD_INPUT_STYLE],
   INPUT_PASSWORD: [...STANDARD_INPUT_STYLE, 'pr-10'],
-  INPUT_ERROR: [...STANDARD_INPUT_STYLE, 'border-accent', 'placeholder-accent', 'text-accent'],
+  INPUT_ERROR: [...STANDARD_INPUT_STYLE, '!border-accent', '!placeholder-accent', 'text-accent'],
 };
 
 export const CHECKBOX_CONTAINER_STYLE = ['flex', 'gap-2', 'justify-start'];

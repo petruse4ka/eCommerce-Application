@@ -1,3 +1,4 @@
+import { Language } from './enums';
 import type {
   Addresses,
   Category,
@@ -8,6 +9,7 @@ import type {
   ProductTypeResponse,
   UserInfoBody,
 } from './interfaces';
+import type { ActionHandler, ActionWithArgumentHandler } from './types';
 
 export function isErrorInfo(data: unknown): data is ErrorInfo {
   return (
@@ -96,4 +98,19 @@ export function isCategory(object: unknown): object is Category {
     }
   }
   return false;
+}
+
+export function isActionHandler<T>(
+  callback: ActionWithArgumentHandler<T> | ActionHandler
+): callback is ActionHandler {
+  return callback.length === 0;
+}
+
+export function isValidLanguage(lang: string): lang is Language {
+  return (
+    lang === Language.ENGLISH ||
+    lang === Language.RUSSIAN ||
+    lang === Language.BELARUS ||
+    lang === Language.DUTCH
+  );
 }

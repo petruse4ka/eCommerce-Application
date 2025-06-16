@@ -28,13 +28,7 @@ const MODAL_SLIDER = {
     'items-center',
     'justify-center',
   ],
-  SLIDER_IMAGE: [
-    'max-w-[60%]',
-    'md:max-w-[80%]',
-    'max-h-full',
-    'object-contain',
-    'md:min-w-[300px]',
-  ],
+  SLIDER_IMAGE: ['w-full', 'md:max-w-[80%]', 'max-h-full', 'object-contain', 'md:min-w-[300px]'],
   FRAME_ACTIVE: ['opacity-100', 'visible'],
   CROSS: [
     'absolute',
@@ -63,7 +57,7 @@ const MODAL_SLIDER = {
     'items-center',
     'text-3xl',
     'font-bold',
-    'bg-gray/50',
+    'bg-white/50',
     'select-none',
     'cursor-pointer',
     'hover:text-secondary',

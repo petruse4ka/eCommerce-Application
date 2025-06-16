@@ -1,8 +1,5 @@
 import '@/styles/main.css';
 
-import accountEditIcon from '@/assets/icons/account-edit.svg';
-import homeEditIcon from '@/assets/icons/home-edit.svg';
-import shieldEditIcon from '@/assets/icons/shield-edit.svg';
 import AddressList from '@/components/address-list';
 import BaseComponent from '@/components/base';
 import FormEditPassword from '@/components/forms/edit-password';
@@ -10,12 +7,14 @@ import Modal from '@/components/modal';
 import PersonalInfo from '@/components/personal-info';
 import Tabs from '@/components/tabs';
 import { PAGE_TITLES } from '@/constants';
+import { ADDRESS_TYPE_TEXT, MODAL_TITLE, TAB_ACCOUNT } from '@/constants';
+import { SVG_ICONS } from '@/data';
 import { userState } from '@/store/user-state';
 import { ACCOUNT_PAGE } from '@/styles/pages/account';
 import { TAB } from '@/styles/tab';
-import { AddressType, AddressTypeText, ModalTitle, TabAccount } from '@/types/enums';
+import { AddressType } from '@/types/enums';
 import ElementBuilder from '@/utils/element-builder';
-import ImageBuilder from '@/utils/image-builder';
+import SVGBuilder from '@/utils/svg-builder';
 import TransformApiData from '@/utils/transform-api-data';
 
 export default class AccountPage extends BaseComponent {
@@ -62,22 +61,28 @@ export default class AccountPage extends BaseComponent {
     addressesIcon: HTMLElement;
     passwordIcon: HTMLElement;
   } {
-    const personalInfoIcon = new ImageBuilder({
-      source: accountEditIcon,
-      alt: 'Personal Info',
-      className: TAB.ICON,
+    const personalInfoIcon = new SVGBuilder({
+      source: SVG_ICONS.ACCOUNT_EDIT_ICON,
+      className: [],
+      classNameIcon: TAB.ICON,
+      viewBox: '0 0 24 24',
+      iconSize: 24,
     }).getElement();
 
-    const addressesIcon = new ImageBuilder({
-      source: homeEditIcon,
-      alt: 'Addresses',
-      className: TAB.ICON,
+    const addressesIcon = new SVGBuilder({
+      source: SVG_ICONS.HOME_EDIT_ICON,
+      className: [],
+      classNameIcon: TAB.ICON,
+      viewBox: '0 0 24 24',
+      iconSize: 24,
     }).getElement();
 
-    const passwordIcon = new ImageBuilder({
-      source: shieldEditIcon,
-      alt: 'Change Password',
-      className: TAB.ICON,
+    const passwordIcon = new SVGBuilder({
+      source: SVG_ICONS.SHIELD_EDIT_ICON,
+      className: [],
+      classNameIcon: TAB.ICON,
+      viewBox: '0 0 24 24',
+      iconSize: 24,
     }).getElement();
 
     return { personalInfoIcon, addressesIcon, passwordIcon };
@@ -127,12 +132,12 @@ export default class AccountPage extends BaseComponent {
     const addressInfo = TransformApiData.transformUserAddresses();
 
     const shippingAddressList = new AddressList(
-      AddressTypeText.SHIPPING,
+      ADDRESS_TYPE_TEXT.SHIPPING,
       addressInfo[AddressType.SHIPPING]
     ).getElement();
 
     const billingAddressList = new AddressList(
-      AddressTypeText.BILLING,
+      ADDRESS_TYPE_TEXT.BILLING,
       addressInfo[AddressType.BILLING]
     ).getElement();
 
@@ -153,7 +158,7 @@ export default class AccountPage extends BaseComponent {
 
     const tab = new Tabs([
       {
-        textContent: TabAccount.INFO,
+        textContent: TAB_ACCOUNT.INFO,
         isActive: this.currentActive === 'userInfo',
         callback: (): void => {
           this.visibleCurrentContent(this.userInfoNode);
@@ -162,7 +167,7 @@ export default class AccountPage extends BaseComponent {
         icon: personalInfoIcon,
       },
       {
-        textContent: TabAccount.ADDRESSES,
+        textContent: TAB_ACCOUNT.ADDRESSES,
         isActive: this.currentActive === 'addresses',
         callback: (): void => {
           this.visibleCurrentContent(this.addressesNode);
@@ -171,10 +176,10 @@ export default class AccountPage extends BaseComponent {
         icon: addressesIcon,
       },
       {
-        textContent: TabAccount.CHANGE_PASS,
+        textContent: TAB_ACCOUNT.CHANGE_PASS,
         callback: (): void => {
           const form = new FormEditPassword();
-          const modal = new Modal({ title: ModalTitle.CHANGE_PASSWORD, content: form });
+          const modal = new Modal({ title: MODAL_TITLE.CHANGE_PASSWORD, content: form });
           this.component.append(modal.getElement());
           modal.showModal();
         },

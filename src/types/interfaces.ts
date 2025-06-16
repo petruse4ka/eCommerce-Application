@@ -1,12 +1,14 @@
+import type { ADDRESS_KEY, USER_INFO_KEY } from '@/constants';
 import type { CUSTOM_BUTTON_STYLE } from '@/styles/buttons/buttons';
 
-import type { AddressKey, ButtonType, FilterType, InputType, Route, UserInfoKey } from './enums';
+import type { ButtonType, FilterType, InputType, Language, Route } from './enums';
+import type { Crewman } from './types';
 
 export interface ElementParameters {
   tag: string;
   className: string | string[];
   textContent?: string;
-  callback?: (event: Event) => void;
+  callback?: (event: Event) => void | Promise<void>;
   eventType?: string;
   attributes?: Record<string, string>;
   id?: string;
@@ -34,6 +36,13 @@ export interface ImageParameters extends ElementParameters {
   height?: string;
 }
 
+export interface SVGParameters extends ElementParameters {
+  source: string;
+  classNameIcon: string | string[];
+  iconSize?: number;
+  viewBox?: string;
+}
+
 export interface LinkParameters extends ElementParameters {
   href: string;
   target: '_blank' | '_self';
@@ -45,14 +54,28 @@ export interface ButtonParameters extends ElementParameters {
 
 export interface customButtonParameters {
   style: keyof typeof CUSTOM_BUTTON_STYLE;
-  textContent: string;
+  textContent?: string;
   icon: {
     source: string;
-    alt: string;
-    className?: string[];
+    classNameIcon: string[];
   };
   textClassName?: string[];
-  callback: () => void;
+  callback: () => void | Promise<void>;
+}
+
+export interface addToCartButtonParameters {
+  style: keyof typeof CUSTOM_BUTTON_STYLE;
+  textContent?: string;
+  productId: string;
+  callback?: () => void | Promise<void>;
+}
+
+export interface AddToCartStateParameters {
+  loading: boolean;
+  inCart: boolean;
+  text: string;
+  icon: string;
+  alt: string;
 }
 
 export interface AuthResponse {
@@ -100,7 +123,7 @@ export interface InputComponent {
   id: string;
   type: InputType;
   callback?: (event: Event) => void;
-  labelText: string;
+  labelText?: string;
   isRequired?: boolean;
   isDisabled?: boolean;
   value?: string;
@@ -151,6 +174,7 @@ export interface RegistrationBody {
 export interface AuthorizationBody {
   email: string;
   password: string;
+  anonymousId?: string;
 }
 
 export interface MenuItem {
@@ -167,6 +191,7 @@ export interface Packages {
 
 export interface Products {
   id: string;
+  key: string;
   name: string;
   description: string;
   image: string;
@@ -327,6 +352,7 @@ export interface ProductVariant {
 }
 
 export interface ProductVariantView {
+  id: string;
   prices: Price[];
   images?: Image[];
   attributes?: Attribute[];
@@ -376,19 +402,19 @@ export interface Attribute {
 }
 
 export interface AddressInfo {
-  [AddressKey.COUNTRY]: string;
-  [AddressKey.CITY]: string;
-  [AddressKey.STREET]: string;
-  [AddressKey.POSTAL_CODE]: string;
+  [ADDRESS_KEY.COUNTRY]: string;
+  [ADDRESS_KEY.CITY]: string;
+  [ADDRESS_KEY.STREET]: string;
+  [ADDRESS_KEY.POSTAL_CODE]: string;
   isDefault: boolean;
   id: string;
 }
 
 export interface UserInfo {
-  [UserInfoKey.FIRST_NAME]: string;
-  [UserInfoKey.LAST_NAME]: string;
-  [UserInfoKey.DATA_OF_BIRTH]: string;
-  [UserInfoKey.EMAIL]: string;
+  [USER_INFO_KEY.FIRST_NAME]: string;
+  [USER_INFO_KEY.LAST_NAME]: string;
+  [USER_INFO_KEY.DATA_OF_BIRTH]: string;
+  [USER_INFO_KEY.EMAIL]: string;
 }
 
 export interface TitleProduct {
@@ -523,8 +549,259 @@ export interface TabInfo {
   icon?: HTMLElement;
 }
 
-export interface addAddressBody {
+export interface AddAddressBody {
   action: string;
   id: string;
   isAlert: boolean;
+}
+
+export interface CartInfo {
+  id: string;
+  version: number;
+  lineItems: CartItemView[];
+  totalPrice: number;
+  totalDiscountPrice: number;
+  discountCode: string | null;
+}
+
+export interface CartItem {
+  id: string;
+  productId: string;
+  productKey: string;
+  name: {
+    ru: string;
+  };
+  productType: {
+    typeId: string;
+    id: string;
+    version: number;
+  };
+  productSlug: {
+    ru: string;
+  };
+  variant: ProductVariant;
+  price: Price;
+  quantity: number;
+  addedAt: string;
+  lastModifiedAt: string;
+  totalPrice: {
+    type: string;
+    currencyCode: string;
+    centAmount: number;
+    fractionDigits: number;
+  };
+}
+
+export interface CartResponse {
+  type: string;
+  id: string;
+  version: number;
+  versionModifiedAt: string;
+  lastMessageSequenceNumber: number;
+  createdAt: string;
+  lastModifiedAt: string;
+  lastModifiedBy: {
+    clientId: string;
+    isPlatformClient: boolean;
+    anonymousId: string;
+  };
+  createdBy: {
+    clientId: string;
+    isPlatformClient: boolean;
+    anonymousId: string;
+  };
+  lineItems: CartItem[];
+  cartState: string;
+  totalPrice: {
+    type: string;
+    currencyCode: string;
+    centAmount: number;
+    fractionDigits: number;
+  };
+  shippingMode: string;
+  shipping: [];
+  customLineItems: [];
+  discountCodes: [
+    {
+      discountCode: {
+        typeId: string;
+        id: string;
+        obj?: {
+          code: string;
+        };
+      };
+      state: string;
+    },
+  ];
+  directDiscounts: [];
+  inventoryMode: string;
+  taxMode: string;
+  taxRoundingMode: string;
+  taxCalculationMode: string;
+  deleteDaysAfterLastModification: number;
+  refusedGifts: [];
+  origin: string;
+  itemShippingAddresses: [];
+  discountTypeCombination: {
+    type: string;
+  };
+  totalLineItemQuantity: number;
+  discountOnTotalPrice?: {
+    discountedAmount: {
+      type: string;
+      currencyCode: string;
+      centAmount: number;
+      fractionDigits: number;
+    };
+  };
+}
+
+export interface DiscountCodeResponse {
+  id: string;
+  version: number;
+  code: string;
+  name: {
+    ru: string;
+  };
+}
+
+export interface CartLineItem {
+  productId: string;
+  quantity: number;
+}
+
+export interface CartLineItem {
+  productId: string;
+  quantity: number;
+}
+
+export interface CartLineItem {
+  productId: string;
+  quantity: number;
+}
+
+export interface CartLineItem {
+  productId: string;
+  quantity: number;
+}
+
+export interface AddProductBody {
+  version: number;
+  actions: {
+    action: string;
+    productId: string;
+    variantId: number;
+    quantity: number;
+  }[];
+}
+
+export interface CartItemView {
+  id: string;
+  productId: string;
+  name: string;
+  prices: number;
+  discountedPrice?: number;
+  img: {
+    url: string;
+    alt: string | undefined;
+  };
+  quantity: number;
+}
+
+export interface ProductQuantityParameters {
+  price: number;
+  element: HTMLElement;
+  text: string;
+  count: number;
+  secondElement?: HTMLElement;
+  callback?: (count: number) => Promise<boolean>;
+}
+
+export interface ProductQuantityTransform {
+  version: number;
+  actions: [
+    {
+      action: string;
+      lineItemId: string;
+      quantity: number;
+    },
+  ];
+}
+
+export interface RemoveCartItem {
+  version: number;
+  actions: [
+    {
+      action: string;
+      lineItemId: string;
+    },
+  ];
+}
+
+interface additionalPagesContentItem {
+  type: 'text' | 'subtitle';
+  content: string;
+}
+
+export interface additionalPagesData {
+  TITLE: string;
+  CONTENT: additionalPagesContentItem[];
+  IMAGE?: string | string[];
+}
+
+export interface AddDiscountCode {
+  version: number;
+  actions: [
+    {
+      action: string;
+      code: string;
+    },
+  ];
+}
+
+export interface PersonalText {
+  name: string;
+  role: string;
+  annotation: string;
+  description?: string[];
+  github: Crewman;
+}
+
+export interface PersonalImageBox {
+  photo: {
+    url: string;
+    style: string[];
+  };
+  hat?: {
+    url: string;
+    style: string[];
+  };
+}
+
+export interface Personal {
+  PersonalText: PersonalText;
+  PersonalImageBox: PersonalImageBox;
+}
+
+export interface About {
+  MARGO: Personal;
+  KONSTANTIN: Personal;
+  DANIIL: Personal;
+  OLGA: Personal;
+  title: string;
+  successRecipeTitle: string;
+  text: string[];
+  tributeText: string;
+  image: string;
+  more: string;
+  tributeTitle: string;
+  joinRS: string;
+  ShowMore: string;
+  ShowLess: string;
+}
+
+export interface LanguageChangeEvent extends CustomEvent {
+  detail: {
+    language: Language;
+  };
 }
