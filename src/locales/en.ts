@@ -41,6 +41,7 @@ export const en = {
   btnApply: 'Apply',
   btnClearCart: 'Clear cart',
   btnFinishCart: 'Thank you for order',
+  joinRS: 'Join RS School',
   introName: 'MACARONSHOP',
   introSince: 'since 2013',
   introTitle: 'Pure love',
@@ -295,10 +296,19 @@ export const en = {
   errorInvalidSpace: 'Value must not contain spaces',
   errorRepeatPassword: 'New password does not match',
   aboutTitle: 'Our Team',
-  aboutText:
+  aboutSuccessRecipeTitle: 'Our Success Recipe',
+  aboutTributeText:
+    'We thank the school, its creator, all curators, moderators, activists, fellow students, and everyone involved for the invaluable knowledge, experience, support, and inspiration. Thanks to you, we not only learned to program but also became part of an amazing community where everyone is ready to help others reach new heights.',
+  aboutText: [
     "Our recipe for success? A generous pinch of perseverance, a sweet jam of creativity, a bit of sleeplessness when finishing another sprint, and a couple of async functions to keep everything running smoothly. So, if you're looking for the perfect blend of taste, logic, and light irony, welcome to our pastry (and frontend) universe!",
+    'Our team worked like a well-oiled machine: each day started with morning stand-up meetings in Discord, where we shared progress and planned tasks. GitHub Projects became our faithful assistant in organizing work - we tracked all tasks, marked progress, and celebrated each closed card. Code reviews became an integral part of our process - each PR was thoroughly checked, which helped us maintain high code quality.',
+    'What was especially valuable was how we supported each other: if someone got stuck on a problem, others were always ready to help, even if it meant a sleepless night before the deadline. Our Discord chats were full of not only technical discussions but also memes that helped us maintain morale in the most challenging moments. And how much laughter there was when we discovered that we were all simultaneously working on the same bug at 3 AM!',
+    "And when everything seemed completely hopeless, when the code wouldn't compile and deadlines were approaching at a frightening speed, Margarita would appear. With her arrival in the chat, it immediately became easier - she not only helped us figure out technical problems but also instilled confidence in us that we would succeed. Her support, wise advice, and belief in our abilities helped us overcome any difficulties and move forward.",
+    'Our weekly retrospectives helped us constantly improve our work process and strengthen team spirit, sometimes turning into real sessions of mutual support and motivation.',
+  ],
   aboutKonstantinName: 'Konstantin Petrov',
   aboutKonstantinRole: 'Head Pastry Chef',
+  aboutKonstantinAnnotation: 'Konstantin is our permanent head pastry chef and JavaScript guru!',
   aboutKonstantinDesc1:
     "Konstantin is our permanent head pastry chef and JavaScript guru! He keeps the strategic plan in his head and his hand on the pulse of current tasks. Always ready to stand by in difficult situations and save burning eclairs or fix a colleague's code bug.",
   aboutKonstantinDesc2:
@@ -307,6 +317,8 @@ export const en = {
     'In his rare free hours, Konstantin conquers virtual worlds in computer games, debugs code, and enthusiastically raises a glass of his favorite beer (especially on Fridays - because strategy requires proper planning!).',
   aboutDaniilName: 'Daniil Beaver',
   aboutDaniilRole: 'Pastry Technologist',
+  aboutDaniilAnnotation:
+    'Production code and creamy eclairs are equally good when St. Petersburg native Daniil takes charge.',
   aboutDaniilDesc1:
     'Production code and creamy eclairs are equally good when St. Petersburg native Daniil takes charge. With a higher education in fundamental computer science and three years of commercial experience as an HTML layout designer, he confidently feels at home not only at the stove but also in the logic of complex API interactions.',
   aboutDaniilDesc2:
@@ -315,13 +327,18 @@ export const en = {
     "He once was passionate about sewing bags and T-shirts, and this experience taught him the main thing: if the stitch went crooked - redo it until it becomes perfect. He successfully applies this principle in programming, only now instead of fabric - lines of code, and instead of a needle - a strict linter that doesn't forgive mistakes.",
   aboutOlgaName: 'Olga Poklonskaya',
   aboutOlgaRole: 'Pastry Decorator',
+  aboutOlgaAnnotation: 'Olga is a pastry decorator, a master of aesthetics and common sense.',
   aboutOlgaDesc1:
     'Olga is a pastry decorator, a master of aesthetics and common sense. Throughout her professional life, she has been seeking harmony between code precision and the living perception of web pages. For the last 13 years, she has been teaching JavaScript to web designers, and now her students work in various corners of the world - from Japan to Sweden, from EPAM to Google. Even though her path in IT was interrupted not by her desire, but a closed door is just a reason to look for a window.',
   aboutOlgaDesc2:
     'A young Minsk native, whose age still yields to the sum of years of two of her colleagues, she learns from the team with interest and invests her knowledge in the project. Travel and drawing inspire her to new ideas, and her love for programming helps organize creative chaos. And let the pages she designed not give the aroma of vanilla and chocolate, the pleasure from visiting them is not inferior to enjoying a perfectly decorated eclair.',
   aboutMargoName: 'Margarita Malets',
-  aboutMargoRole: 'Chief Executive Officer of Personnel Selection and Inspiration',
-  aboutMargoDesc1:
-    "Margarita is our mentor, she is our muse, she is our guardian angel, she believes in us even when we ourselves don't know if it's worth believing... The list of epithets can be continued endlessly, but the essence is one:",
+  aboutMargoRole: 'Chief Executive Officer of HR and Inspiration',
+  aboutMargoAnnotation: 'Margarita is our mentor, she is our muse, she is our guardian angel!',
+  aboutMargoDesc1: `Margarita is our mentor, she is our muse, she is our guardian angel, she believes in us even when we ourselves don't know if it's worth believing... The list of epithets can be continued endlessly, but the essence is one:`,
   aboutMargoDesc2: '"Thank you, Margarita!"',
+  aboutMore: 'Learn more',
+  aboutTributeTitle: 'Special Thanks',
+  aboutShowMore: 'Show more',
+  aboutShowLess: 'Show less',
 };

@@ -1,6 +1,5 @@
 export const PRODUCT_STYLES = {
   MAIN_CONTAINER: [
-    'min-h-[500px]',
     'relative',
     'w-full',
     'px-4',
