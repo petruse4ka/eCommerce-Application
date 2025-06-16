@@ -1,6 +1,7 @@
+import type { ADDRESS_KEY, USER_INFO_KEY } from '@/constants';
 import type { CUSTOM_BUTTON_STYLE } from '@/styles/buttons/buttons';
 
-import type { AddressKey, ButtonType, FilterType, InputType, Route, UserInfoKey } from './enums';
+import type { ButtonType, FilterType, InputType, Language, Route } from './enums';
 import type { Crewman } from './types';
 
 export interface ElementParameters {
@@ -401,19 +402,19 @@ export interface Attribute {
 }
 
 export interface AddressInfo {
-  [AddressKey.COUNTRY]: string;
-  [AddressKey.CITY]: string;
-  [AddressKey.STREET]: string;
-  [AddressKey.POSTAL_CODE]: string;
+  [ADDRESS_KEY.COUNTRY]: string;
+  [ADDRESS_KEY.CITY]: string;
+  [ADDRESS_KEY.STREET]: string;
+  [ADDRESS_KEY.POSTAL_CODE]: string;
   isDefault: boolean;
   id: string;
 }
 
 export interface UserInfo {
-  [UserInfoKey.FIRST_NAME]: string;
-  [UserInfoKey.LAST_NAME]: string;
-  [UserInfoKey.DATA_OF_BIRTH]: string;
-  [UserInfoKey.EMAIL]: string;
+  [USER_INFO_KEY.FIRST_NAME]: string;
+  [USER_INFO_KEY.LAST_NAME]: string;
+  [USER_INFO_KEY.DATA_OF_BIRTH]: string;
+  [USER_INFO_KEY.EMAIL]: string;
 }
 
 export interface TitleProduct {
@@ -761,6 +762,7 @@ export interface AddDiscountCode {
 export interface PersonalText {
   name: string;
   role: string;
+  annotation: string;
   description?: string[];
   github: Crewman;
 }
@@ -789,4 +791,11 @@ export interface About {
   title: string;
   text: string[] | string;
   image: string;
+  more: string;
+}
+
+export interface LanguageChangeEvent extends CustomEvent {
+  detail: {
+    language: Language;
+  };
 }

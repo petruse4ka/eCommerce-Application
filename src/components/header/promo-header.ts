@@ -1,4 +1,5 @@
 import BaseComponent from '@/components/base';
+import { PROMO_HEADER_TEXT } from '@/constants';
 import { PROMO_HEADER_STYLES } from '@/styles/header/promo-header';
 import ElementBuilder from '@/utils/element-builder';
 
@@ -15,7 +16,7 @@ export default class PromoHeader extends BaseComponent {
     return new ElementBuilder({
       tag: 'div',
       className: PROMO_HEADER_STYLES.PROMO_CODE,
-      textContent: 'Скидка по промокоду SALE10',
+      textContent: PROMO_HEADER_TEXT,
     }).getElement();
   }
 

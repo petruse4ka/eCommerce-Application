@@ -1,6 +1,8 @@
+import { ABOUT } from '@/data';
 import { ABOUT_STYLE } from '@/styles/pages/about';
 import type { Personal } from '@/types/interfaces';
 import ImageBuilder from '@/utils/image-builder';
+import LinkBuilder from '@/utils/link-builder';
 
 import BaseComponent from '../base';
 import Team from '../footer/team';
@@ -70,7 +72,7 @@ export default class Person extends BaseComponent {
       textContent: texts.role,
     }).getElement();
 
-    const description = texts.description ? this.createDescription(texts.description) : '';
+    const description = texts.description ? this.createDescription(texts.annotation) : '';
 
     const gitHubLink = Team.createGithubLink(texts.github);
     gitHubLink.classList.add(...ABOUT_STYLE.GIT);
@@ -79,28 +81,32 @@ export default class Person extends BaseComponent {
     return textContainer;
   }
 
-  private static createDescription(text: string[]): HTMLElement {
+  private static createDescription(text: string): HTMLElement {
     const description = new BaseComponent({
       tag: 'div',
       className: ABOUT_STYLE.DESCRIPTION,
     }).getElement();
+    const paragraph = text;
 
-    description.addEventListener('mouseleave', function () {
-      this.scrollTo(0, 0);
-    });
+    const currentStyle = /Спасибо/.test(paragraph)
+      ? ABOUT_STYLE.DESCRIPTION_THANKS
+      : ABOUT_STYLE.DESCRIPTION_PARAGRAPH;
 
-    for (const paragraph of text) {
-      const currentStyle = /Спасибо/.test(paragraph)
-        ? ABOUT_STYLE.DESCRIPTION_THANKS
-        : ABOUT_STYLE.DESCRIPTION_PARAGRAPH;
+    const fullText = new BaseComponent({
+      tag: 'p',
+      className: currentStyle,
+      textContent: paragraph,
+    }).getElement();
 
-      const fullText = new BaseComponent({
-        tag: 'p',
-        className: currentStyle,
-        textContent: paragraph,
-      }).getElement();
-      description.append(fullText);
-    }
+    const moreLink = new LinkBuilder({
+      href: '#',
+      target: '_blank',
+      className: ABOUT_STYLE.MORE_LINK,
+    }).getElement();
+
+    moreLink.append(ABOUT.more);
+    fullText.append(moreLink);
+    description.append(fullText);
     return description;
   }
 }
