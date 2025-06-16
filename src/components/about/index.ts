@@ -1,6 +1,7 @@
 import { ABOUT_STYLE } from '@/styles/pages/about';
 import type { Personal } from '@/types/interfaces';
 import ImageBuilder from '@/utils/image-builder';
+import LinkBuilder from '@/utils/link-builder';
 
 import BaseComponent from '../base';
 import Team from '../footer/team';
@@ -75,6 +76,12 @@ export default class Person extends BaseComponent {
     const gitHubLink = Team.createGithubLink(texts.github);
     gitHubLink.classList.add(...ABOUT_STYLE.GIT);
 
+    /*const moreButton = new Button({
+      style: 'SECONDARY_BLUE_DARK',
+      textContent: 'Подробнее',
+      callback: (): void => {},
+    }).getElement();*/
+
     textContainer.append(name, role, description, gitHubLink);
     return textContainer;
   }
@@ -84,23 +91,27 @@ export default class Person extends BaseComponent {
       tag: 'div',
       className: ABOUT_STYLE.DESCRIPTION,
     }).getElement();
+    const paragraph = text[0];
+    //for (const paragraph of text) {
+    const currentStyle = /Спасибо/.test(paragraph)
+      ? ABOUT_STYLE.DESCRIPTION_THANKS
+      : ABOUT_STYLE.DESCRIPTION_PARAGRAPH;
 
-    description.addEventListener('mouseleave', function () {
-      this.scrollTo(0, 0);
-    });
+    const fullText = new BaseComponent({
+      tag: 'p',
+      className: currentStyle,
+      textContent: paragraph,
+    }).getElement();
 
-    for (const paragraph of text) {
-      const currentStyle = /Спасибо/.test(paragraph)
-        ? ABOUT_STYLE.DESCRIPTION_THANKS
-        : ABOUT_STYLE.DESCRIPTION_PARAGRAPH;
-
-      const fullText = new BaseComponent({
-        tag: 'p',
-        className: currentStyle,
-        textContent: paragraph,
-      }).getElement();
-      description.append(fullText);
-    }
+    const moreLink = new LinkBuilder({
+      href: '#',
+      target: '_blank',
+      className: ABOUT_STYLE.MORE_LINK,
+    }).getElement();
+    moreLink.append(' Подробнее...');
+    fullText.append(moreLink);
+    description.append(fullText);
+    //}
     return description;
   }
 }
