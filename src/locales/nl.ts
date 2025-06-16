@@ -41,6 +41,7 @@ export const nl = {
   btnApply: 'Toepassen',
   btnClearCart: 'Winkelwagen legen',
   btnFinishCart: 'Bedankt voor uw bestelling',
+  joinRS: 'Sluit je aan bij RS School',
   introName: 'MACARONSHOP',
   introSince: 'sinds 2013',
   introTitle: 'Ware liefde',
@@ -298,8 +299,16 @@ export const nl = {
   errorInvalidSpace: 'Waarde mag geen spaties bevatten',
   errorRepeatPassword: 'Nieuw wachtwoord komt niet overeen',
   aboutTitle: 'Ons Team',
-  aboutText:
-    'Ons recept voor succes? Een royale snuf doorzettingsvermogen, een zoete jam van creativiteit, een beetje slapeloosheid bij het afronden van een nieuwe sprint, en een paar async functies om alles soepel te laten draaien. Dus, als je op zoek bent naar de perfecte mix van smaak, logica en lichte ironie, welkom in ons gebak (en frontend) universum!',
+  aboutSuccessRecipeTitle: 'Ons recept voor succes',
+  aboutTributeText:
+    'We bedanken de school, haar maker, alle curator, moderators, activiests, collega-studenten en iedereen die betrokken is voor de waardevolle kennis, ervaring, steun en inspiratie. Dankzij jullie hebben we niet alleen geleerd te programmeren, maar ook deelgenomen aan een geweldige gemeenschap waar iedereen bereid is om anderen te helpen om nieuwe hoogten te bereiken.',
+  aboutText: [
+    'Ons recept voor succes? Een flinke snuf doorzettingsvermogen, een zoete laag creativiteit, een beetje slapeloosheid bij het afronden van een sprint en een paar asynchrone functies om alles soepel te laten draaien. Dus, als je op zoek bent naar de perfecte combinatie van smaak, logica en een vleugje ironie, welkom in ons patisserie- (en frontend) universum!',
+    'Ons team werkte als een goed geoliede machine: elke dag begon met een ochtendstand-up op Discord, waar we onze voortgang deelden en taken planden. GitHub Projects was onze trouwe metgezel bij het organiseren van werk - we volgden alle taken, markeerden de voortgang en vierden elke afgeronde kaart. Code reviews waren een integraal onderdeel van ons proces - elke pull request werd grondig gecontroleerd, wat hielp om de hoge codekwaliteit te behouden.',
+    'Wat vooral waardevol was, was hoe we elkaar ondersteunden: als iemand vastliep op een probleem, waren de anderen altijd klaar om te helpen, zelfs als dat een slapeloze nacht voor de deadline betekende. Onze chats op Discord waren niet alleen gevuld met technische discussies, maar ook met memes die ons hielpen om de moraal hoog te houden in de moeilijkste momenten. En de lachbuien! Vooral wanneer we ontdekten dat we allemaal om drie uur ’s nachts met dezelfde bug worstelden!',
+    'En wanneer alles hopeloos leek, wanneer de code niet compileerde en de deadlines angstaanjagend snel naderden, verscheen Margarita. Zodra ze in de chat opdook, werd alles meteen beter - ze hielp niet alleen met technische problemen, maar gaf ons ook het vertrouwen dat we het konden redden. Haar steun, wijze advies en geloof in onze vaardigheden hielpen ons om elke moeilijkheid te overwinnen en vooruit te blijven gaan.',
+    'Onze wekelijkse retrospectieven hielpen ons om ons werkproces voortdurend te verbeteren en het teamgevoel te versterken, en soms veranderden ze zelfs in echte sessies van wederzijdse steun en motivatie.',
+  ],
   aboutKonstantinName: 'Konstantin Petrov',
   aboutKonstantinRole: 'Hoofd Banketbakker',
   aboutKonstantinAnnotation: 'Konstantin is onze vaste hoofd banketbakker en JavaScript goeroe!',
@@ -328,10 +337,13 @@ export const nl = {
   aboutOlgaDesc2:
     "Een jonge Minskse, wiens leeftijd nog steeds onderdoet voor de som van jaren van twee van haar collega's, leert ze met interesse van het team en investeert haar kennis in het project. Reizen en tekenen inspireren haar tot nieuwe ideeën, en haar liefde voor programmeren helpt creatieve chaos te organiseren. En laat de door haar ontworpen pagina's niet de geur van vanille en chocolade geven, het plezier van het bezoeken ervan doet niet onder voor het genieten van een perfect versierde eclair.",
   aboutMargoName: 'Margarita Malets',
-  aboutMargoRole: 'Algemeen Directeur van Personeelsselectie en Inspiratie',
+  aboutMargoRole: 'Algemeen Directeur van HR en Inspiratie',
   aboutMargoAnnotation: 'Margarita is onze mentor, ze is onze muze, ze is onze beschermengel!',
   aboutMargoDesc1:
     'Margarita is onze mentor, ze is onze muze, ze is onze beschermengel, ze gelooft in ons zelfs wanneer we zelf niet weten of het de moeite waard is om te geloven... De lijst van epitheta kan eindeloos worden voortgezet, maar de essentie is één:',
   aboutMargoDesc2: '"Dank je, Margarita!"',
-  aboutMore: 'Meer details...',
+  aboutMore: 'Meer leren',
+  aboutTributeTitle: 'Speciale dank',
+  aboutShowMore: 'Meer leren',
+  aboutShowLess: 'Minder leren',
 };

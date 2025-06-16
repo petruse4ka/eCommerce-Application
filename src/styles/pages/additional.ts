@@ -1,7 +1,8 @@
 const ADDITIONAL = {
   TITLE: ['text-black', 'font-semibold', 'text-3xl', 'my-6'],
   MAIN_CONTAINER: [
-    'max-w-screen-xl',
+    'w-full',
+    'max-w-[1440px]',
     'mx-auto',
     'relative',
     'flex',
@@ -14,7 +15,8 @@ const ADDITIONAL = {
     'flex-grow',
   ],
   TEXT_CONTAINER: [
-    'max-w-screen-xl',
+    'w-full',
+    'max-w-[1440px]',
     'place-self-start',
     'lg:w-2/3',
     'p-4',
