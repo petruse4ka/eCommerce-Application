@@ -698,6 +698,7 @@ export interface AddProductBody {
 export interface CartItemView {
   id: string;
   productId: string;
+  key: string;
   name: string;
   prices: number;
   discountedPrice?: number;

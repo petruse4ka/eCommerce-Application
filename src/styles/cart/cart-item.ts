@@ -9,13 +9,21 @@ export const CART_ITEM = {
     'gap-1',
     'md:gap-3',
   ],
-  IMAGE: ['w-[80px]', 'h-[80px]', 'object-contain', 'm-auto', 'm-[0px]'],
+  IMAGE: ['w-[80px]', 'h-[80px]', 'object-contain', 'm-auto', 'm-[0px]', 'cursor-pointer'],
   INFO: {
-    NAME: ['text-l', 'font-bold', 'md:pl-5', 'text-black'],
+    NAME: [
+      'text-l',
+      'font-bold',
+      'md:pl-5',
+      'text-black',
+      'cursor-pointer',
+      'inline',
+      'hover:text-accent',
+    ],
   },
   PRICE: {
     DEFAULT: ['font-bold', 'text-left', 'md:text-right', 'md:pr-5', 'text-black'],
     ACCENT: ['text-accent'],
-    OLD: ['text-gray', 'line-through', 'block'],
+    OLD: ['text-dark', 'line-through', 'block', 'text-sm', 'font-normal'],
   },
 };

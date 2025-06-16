@@ -48,6 +48,7 @@ export class TransformApiCartData {
         const itemBody = {
           id: item.id,
           productId: item.productId,
+          key: item.productKey,
           name: item.name.ru,
           prices: item.price.value.centAmount / priceDivider,
           discountedPrice: discount ? discount.value.centAmount / priceDivider : undefined,

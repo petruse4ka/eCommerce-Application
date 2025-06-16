@@ -108,6 +108,9 @@ export const CUSTOM_BUTTON_STYLE = {
     'active:bg-primary',
     'rounded-sm',
     'text-black',
+    'disabled:bg-gray-light',
+    'disabled:border-gray',
+    'disabled:cursor-not-allowed',
   ],
   CLEAR: [
     'hidden',
@@ -275,7 +278,7 @@ export const CUSTOM_BUTTON_STYLE = {
     'disabled:bg-gray-light',
     'disabled:border-gray',
     'disabled:cursor-not-allowed',
-    'hover:bg-gray',
+    'hover:bg-red-light',
     'active:bg-pink',
   ],
   PROMO_CODE_SUBMIT: [
@@ -303,5 +306,4 @@ export const CUSTOM_BUTTON_STYLE = {
     'self-center',
     'transition-all',
   ],
-  DISABLE: ['!cursor-not-allowed', '!bg-gray', '!border-gray', '!text-white'],
 };
