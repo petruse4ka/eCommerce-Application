@@ -23,6 +23,7 @@ export const BUTTON_TEXT = ['text-[14px]', 'font-semibold'];
 export const REMOVE_BUTTON_TEXT = [
   'text-[14px]',
   'font-semibold',
+  'text-accent',
   'group-hover:text-white-permanent',
 ];
 export const REMOVE_BUTTON_ICON = ['w-5', 'h-5', 'fill-accent', 'group-hover:fill-white-permanent'];

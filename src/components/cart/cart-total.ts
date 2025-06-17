@@ -209,7 +209,6 @@ export default class CartTotal extends BaseComponent {
       textContent: BTN_TEXT.FINISH_CART,
       callback: (): void => {
         modal.closeModal();
-        CartTotal.closeCart();
       },
     }).getElement();
 
