@@ -9,7 +9,7 @@ export const PROMO_HEADER_STYLES = {
     'justify-center',
     'items-center',
   ],
-  PROMO_CODE: ['text-base', 'font-medium', 'text-center'],
+  PROMO_CODE: ['text-[12px]', 'md:text-base', 'font-medium', 'text-center'],
   STARS_CONTAINER: [
     'hidden',
     'sm:block',

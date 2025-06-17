@@ -154,7 +154,7 @@ export const nl = {
   cartTextModalText:
     'Uw bestelling is succesvol geplaatst! We zullen u contacteren om de informatie te bevestigen',
   promoCodeText: 'SALE10 - promotiecode voor je eerste aankoop',
-  promoCodeTextHeader: 'Zommer korting met promotiecode WELOVEMACARONS',
+  promoCodeTextHeader: 'Zommer korting met code WELOVEMACARONS',
   promoPlaceholder: 'Voer promotiecode in',
   additionalDeliveryTitle: 'Bezorging en betaling',
   additionalDeliveryIntro:

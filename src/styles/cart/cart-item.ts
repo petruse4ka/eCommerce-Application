@@ -32,7 +32,7 @@ export const CART_ITEM = {
       'group',
       'cursor-pointer',
     ],
-    NAME: ['text-black', 'group-hover:text-accent-hover', 'transition', 'inline-block'],
+    NAME: ['text-black', 'group-hover:text-accent-hover', 'transition', 'inline-block', 'pr-7'],
     PRICE: ['text-accent', 'group-hover:text-accent-hover', 'transition', 'inline-block'],
   },
   PRICE: {

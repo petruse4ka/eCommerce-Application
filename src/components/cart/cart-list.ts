@@ -55,7 +55,7 @@ export default class CartList extends BaseComponent {
     }).getElement();
 
     const buttonCancel = new Button({
-      style: 'PRICE_BUTTON',
+      style: 'SECONDARY_PRICE_BUTTON',
       textContent: DROPDOWN_OPTIONS.FALSE,
       callback: (): void => {
         modal.closeModal();
