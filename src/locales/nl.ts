@@ -120,7 +120,7 @@ export const nl = {
   catalogPage: 'Pagina',
   catalogOut: 'van',
   catalogAddToCart: 'In winkelwagen',
-  catalogAddingToCart: 'Toevoegen aan winkelwagen...',
+  catalogAddingToCart: 'Toevoegen...',
   catalogAddedToCart: 'Artikel in winkelwagen',
   productAttributesWeight: 'Gewicht',
   productAttributesFlavors: 'Smaak',

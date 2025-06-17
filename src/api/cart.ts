@@ -133,6 +133,12 @@ export default class APICart {
               cartState.setCartInfo(cartInfo);
             }
             cartState.updateCartLine(TransformApiCartData.transformLineItems(body.lineItems));
+
+            Alert.render({
+              textContent: ALERT_TEXT.REMOVE_CART_ITEM,
+              status: AlertStatus.SUCCESS,
+              visibleTime: AlertTime.DEFAULT,
+            });
           }
         })
         .catch((error: Error) => {

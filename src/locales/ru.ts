@@ -119,7 +119,7 @@ export const ru = {
   catalogPage: 'Страница',
   catalogOut: 'из',
   catalogAddToCart: 'Добавить в корзину',
-  catalogAddingToCart: 'Добавление в корзину...',
+  catalogAddingToCart: 'Добавляем в корзину...',
   catalogAddedToCart: 'Товар в корзине',
   productAttributesWeight: 'Вес',
   productAttributesFlavors: 'Вкус',

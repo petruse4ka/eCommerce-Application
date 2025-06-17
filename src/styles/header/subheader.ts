@@ -2,7 +2,7 @@ export const SUBHEADER_STYLES = {
   SUBHEADER: ['bg-primary', 'py-2', 'text-[14px]', 'flex', 'justify-center', 'relative'],
   SUBHEADER_CONTAINER: ['max-w-[1440px]', 'flex', 'justify-between', 'w-full', 'px-3', 'md:px-4'],
   SETTINGS_CONTAINER: ['flex', 'gap-4', 'mr-5', 'items-center'],
-  PROMO: ['hidden', 'xl:flex', 'flex-row', 'items-center', 'gap-4', 'lg:gap-8', 'xl:gap-12'],
+  PROMO: ['hidden', 'xl:flex', 'flex-row', 'items-center', 'gap-4', 'lg:gap-8', 'xl:gap-10'],
   PROMO_ITEM: ['flex', 'items-center', 'gap-1.5', 'md:gap-2'],
   PROMO_ICON: ['w-4', 'h-4', 'md:w-5', 'md:h-5'],
   PROMO_TEXT: ['text-dark', 'text-sm'],
