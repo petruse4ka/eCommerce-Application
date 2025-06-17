@@ -317,6 +317,8 @@ export const en = {
     "Born in Moscow, living in the Netherlands - a master of strategic business with 15 years of project management experience, he knows how to turn any venture into success - whether it's a startup, a perfectly baked profiterole, or an RS School group project.",
   aboutKonstantinDesc3:
     'In his rare free hours, Konstantin conquers virtual worlds in computer games, debugs code, and enthusiastically raises a glass of his favorite beer (especially on Fridays - because strategy requires proper planning!).',
+  aboutKonstantinDesc4:
+    'During the project, Konstantin was responsible for the home page, catalog, routing, and configuration. When Konstantin was not writing code, you could find him looking for perfect macaron.',
   aboutDaniilName: 'Daniil Beaver',
   aboutDaniilRole: 'Pastry Technologist',
   aboutDaniilAnnotation:
@@ -327,6 +329,8 @@ export const en = {
     'He works not with visuals, but with fillings - authorize a user, apply a promo code, recalculate the cart... At the same time, even under pressure, he maintains composure, like custard - a stable texture. In each project, he leaves a piece of engineering precision and a bit of sweet magic, and he knows how to do it at the right time, in the correct sequence, and definitely with love for details.',
   aboutDaniilDesc3:
     "He once was passionate about sewing bags and T-shirts, and this experience taught him the main thing: if the stitch went crooked - redo it until it becomes perfect. He successfully applies this principle in programming, only now instead of fabric - lines of code, and instead of a needle - a strict linter that doesn't forgive mistakes.",
+  aboutDaniilDesc4:
+    'During the project, Daniil was responsible for the Registration and Authorization pages, Personal Account, and Cart. Daniil, also known as a master of API requests, made the server dance to his tune, and made promo codes work even in the morning on Monday.',
   aboutOlgaName: 'Olga Poklonskaya',
   aboutOlgaRole: 'Pastry Decorator',
   aboutOlgaAnnotation: 'Olga is a pastry decorator, a master of aesthetics and common sense.',
@@ -334,11 +338,15 @@ export const en = {
     'Olga is a pastry decorator, a master of aesthetics and common sense. Throughout her professional life, she has been seeking harmony between code precision and the living perception of web pages. For the last 13 years, she has been teaching JavaScript to web designers, and now her students work in various corners of the world - from Japan to Sweden, from EPAM to Google. Even though her path in IT was interrupted not by her desire, but a closed door is just a reason to look for a window.',
   aboutOlgaDesc2:
     'A young Minsk native, whose age still yields to the sum of years of two of her colleagues, she learns from the team with interest and invests her knowledge in the project. Travel and drawing inspire her to new ideas, and her love for programming helps organize creative chaos. And let the pages she designed not give the aroma of vanilla and chocolate, the pleasure from visiting them is not inferior to enjoying a perfectly decorated eclair.',
+  aboutOlgaDesc3:
+    'During the project, Olga was responsible for validation, the product page, and all auxiliary pages of the site. Olga was also the main expert in transforming "this is not a bug, this is a feature" into "this is really a feature".',
   aboutMargoName: 'Margarita Malets',
   aboutMargoRole: 'Chief Executive Officer of HR and Inspiration',
   aboutMargoAnnotation: 'Margarita is our mentor, she is our muse, she is our guardian angel!',
   aboutMargoDesc1: `Margarita is our mentor, she is our muse, she is our guardian angel, she believes in us even when we ourselves don't know if it's worth believing... The list of epithets can be continued endlessly, but the essence is one:`,
-  aboutMargoDesc2: '"Thank you, Margarita!"',
+  aboutMargoDesc2:
+    "During the project, Margarita was responsible for ensuring that we didn't go crazy from bugs, didn't quarrel over code conflicts, didn't turn our project into a zoo of different styles, and didn't drown in a sea of console errors!",
+  aboutMargoDesc3: '"Thank you, Margarita!"',
   aboutMore: 'Learn more',
   aboutTributeTitle: 'Special Thanks',
   aboutShowMore: 'Show more',

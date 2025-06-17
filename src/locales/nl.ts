@@ -322,6 +322,8 @@ export const nl = {
     'Geboren in Moskou, wonend in Nederland - een MSc in strategisch ondernemen met 15 jaar ervaring in projectmanagement, weet hij hoe hij elk initiatief tot een succes kan maken - of het nu een startup is, een perfect gebakken profiterole, of een RS School trainingsproject.',
   aboutKonstantinDesc3:
     'In zijn zeldzame vrije uren veroverd Konstantin virtuele werelden in computerspellen, debugt code, en heft enthousiast een glas van zijn favoriete bier (vooral op vrijdagen - omdat strategie een goede planning vereist!).',
+  aboutKonstantinDesc4:
+    'Tijdens het project was Konstantin verantwoordelijk voor de homepagina, catalogus, routing en configuratie. Wanneer Konstantin niet code schreef, kon je hem vinden op zoek naar de perfecte macaron.',
   aboutDaniilName: 'Daniil Beaver',
   aboutDaniilRole: 'Banketbakker-Technoloog',
   aboutDaniilAnnotation:
@@ -332,6 +334,8 @@ export const nl = {
     'Hij werkt niet met visuals, maar met vullingen - gebruikers autoriseren, een promocode toepassen, de winkelwagen herberekenen... Tegelijkertijd behoudt hij, zelfs onder druk, zijn kalmte, zoals banketbakkersroom - een stabiele textuur. In elk project laat hij een stukje technische precisie en een beetje zoete magie achter, en hij weet hoe hij dit moet doen op het juiste moment, in de juiste volgorde, en zeker met liefde voor details.',
   aboutDaniilDesc3:
     'Hij was ooit gepassioneerd over het naaien van tassen en T-shirts, en deze ervaring leerde hem het belangrijkste: als de steek scheef ging - opnieuw doen tot het perfect is. Dit principe past hij met succes toe in programmeren, alleen nu in plaats van stof - regels code, en in plaats van een naald - een strenge linter die geen fouten vergeeft.',
+  aboutDaniilDesc4:
+    "Tijdens het project was Daniil verantwoordelijk voor de registratie- en autorisatiepagina's, persoonlijke account en winkelwagen. Daniil, ook bekend als een meester van API-aanvragen, maakte de server dansen naar zijn tune, en maakte promotiecodes zelfs in de ochtend op maandag werken.",
   aboutOlgaName: 'Olga Poklonskaya',
   aboutOlgaRole: 'Banketbakker-Decorateur',
   aboutOlgaAnnotation:
@@ -340,12 +344,16 @@ export const nl = {
     "Olga is een banketbakker-decorateur, een meester in esthetiek en gezond verstand. Gedurende haar hele professionele leven heeft ze gezocht naar harmonie tussen code-preciesheid en de levendige waarneming van webpagina's. De laatste 13 jaar heeft ze JavaScript lesgegeven aan webdesigners, en nu werken haar studenten in verschillende hoeken van de wereld - van Japan tot Zweden, van EPAM tot Google. Waar, haar pad in IT werd onderbroken niet door haar eigen wens, maar een gesloten deur is gewoon een reden om een raam te zoeken.",
   aboutOlgaDesc2:
     "Een jonge Minskse, wiens leeftijd nog steeds onderdoet voor de som van jaren van twee van haar collega's, leert ze met interesse van het team en investeert haar kennis in het project. Reizen en tekenen inspireren haar tot nieuwe ideeën, en haar liefde voor programmeren helpt creatieve chaos te organiseren. En laat de door haar ontworpen pagina's niet de geur van vanille en chocolade geven, het plezier van het bezoeken ervan doet niet onder voor het genieten van een perfect versierde eclair.",
+  aboutOlgaDesc3:
+    'Tijdens het project was Olga verantwoordelijk voor validatie, de productpagina en alle hulppagina\'s van de website. Olga was ook de belangrijkste expert in het transformeren van "dit is geen bug, dit is een functie" in "dit is echt een functie".',
   aboutMargoName: 'Margarita Malets',
   aboutMargoRole: 'Algemeen Directeur van HR en Inspiratie',
   aboutMargoAnnotation: 'Margarita is onze mentor, ze is onze muze, ze is onze beschermengel!',
   aboutMargoDesc1:
     'Margarita is onze mentor, ze is onze muze, ze is onze beschermengel, ze gelooft in ons zelfs wanneer we zelf niet weten of het de moeite waard is om te geloven... De lijst van epitheta kan eindeloos worden voortgezet, maar de essentie is één:',
-  aboutMargoDesc2: '"Dank je, Margarita!"',
+  aboutMargoDesc2:
+    'Tijdens het project was Margarita verantwoordelijk voor het zorgen dat we niet van bugs gekomen waren, niet in conflict raakten over codeconflicten, onze project niet in een dierenpark van verschillende stijlen veranderden, en niet in een zee van consolefouten zonk!',
+  aboutMargoDesc3: '"Dank je, Margarita!"',
   aboutMore: 'Meer leren',
   aboutTributeTitle: 'Speciale dank',
   aboutShowMore: 'Meer leren',

@@ -347,6 +347,7 @@ export const ABOUT: About = {
         locale.aboutKonstantinDesc1,
         locale.aboutKonstantinDesc2,
         locale.aboutKonstantinDesc3,
+        locale.aboutKonstantinDesc4,
       ],
       github: TEAM[0],
     },
@@ -359,7 +360,12 @@ export const ABOUT: About = {
       name: locale.aboutDaniilName,
       role: locale.aboutDaniilRole,
       annotation: locale.aboutDaniilAnnotation,
-      description: [locale.aboutDaniilDesc1, locale.aboutDaniilDesc2, locale.aboutDaniilDesc3],
+      description: [
+        locale.aboutDaniilDesc1,
+        locale.aboutDaniilDesc2,
+        locale.aboutDaniilDesc3,
+        locale.aboutDaniilDesc4,
+      ],
       github: TEAM[1],
     },
     PersonalImageBox: {
@@ -371,7 +377,7 @@ export const ABOUT: About = {
       name: locale.aboutOlgaName,
       role: locale.aboutOlgaRole,
       annotation: locale.aboutOlgaAnnotation,
-      description: [locale.aboutOlgaDesc1, locale.aboutOlgaDesc2],
+      description: [locale.aboutOlgaDesc1, locale.aboutOlgaDesc2, locale.aboutOlgaDesc3],
       github: TEAM[2],
     },
     PersonalImageBox: {
@@ -383,7 +389,7 @@ export const ABOUT: About = {
       name: locale.aboutMargoName,
       role: locale.aboutMargoRole,
       annotation: locale.aboutMargoAnnotation,
-      description: [locale.aboutMargoDesc1, locale.aboutMargoDesc2],
+      description: [locale.aboutMargoDesc1, locale.aboutMargoDesc2, locale.aboutMargoDesc3],
       github: TEAM[3],
     },
     PersonalImageBox: {

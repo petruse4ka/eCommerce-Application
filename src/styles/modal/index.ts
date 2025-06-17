@@ -64,7 +64,7 @@ export const MODAL = {
         'mt-2',
       ],
       GITHUB: ['mt-auto', 'pt-4'],
-      DESCRIPTION: ['mt-8', 'text-md', 'flex-grow'],
+      DESCRIPTION: ['mt-4', 'text-md', 'flex-grow'],
     },
     APPROVE_CLEAR_CART: ['flex', 'gap-5', 'flex-col', 'md:flex-row'],
   },
