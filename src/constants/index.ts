@@ -267,6 +267,7 @@ export const PRODUCT_TEXT = {
   CATALOG: locale.productTextCatalog,
   LOADING_PRODUCT: locale.productTextLoadingProduct,
   REMOVE: locale.productTextRemove,
+  REMOVING: locale.productTextRemoving,
 };
 
 export const DEFAULT_QUANTITY_AMOUNT = 1;
@@ -340,6 +341,7 @@ export const ALERT_TEXT = {
   ADD_ADDRESS_SUCCESS: locale.alertAddAddressSuccess,
   REMOVE_CART_ITEM: locale.alertRemoveCartItem,
   DISCOUNT_CODE_NON: locale.alertDiscountCodeNon,
+  DISCOUNT_CODE_REPEAT: locale.alertDiscountCodeRepeat,
 };
 
 export const CHECKBOX_TEXT = {
@@ -378,6 +380,7 @@ export const MODAL_TITLE = {
   NEW: locale.modalTitleNew,
   CHANGE_PASSWORD: locale.modalTitleChangePassword,
   CHECKOUT_CART: locale.modalTitleCheckoutCart,
+  APPROVE_CLEAR_CART: locale.modalTitleClearCart,
 };
 
 export const ADDRESS_KEY = {

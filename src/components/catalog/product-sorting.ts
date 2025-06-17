@@ -39,9 +39,11 @@ export default class ProductSorting extends BaseComponent {
       type: InputType.TEXT,
       placeholder: CATALOG_TEXTS.SEARCH_PLACEHOLDER,
       className: SORTING_STYLES.SEARCH_INPUT,
-      eventType: 'keydown',
-      callback: this.handleSearchKeydown,
+      eventType: 'input',
+      callback: this.handleSearchInput,
     });
+
+    this.searchInput.getElement().addEventListener('keydown', this.handleSearchKeydown);
 
     this.clearButton = new Button({
       style: 'CLEAR',
@@ -95,19 +97,16 @@ export default class ProductSorting extends BaseComponent {
     return this.searchContainer;
   }
 
-  private handleSearchKeydown = (event: Event): void => {
+  private handleSearchInput = (event: Event): void => {
     const input = event.target;
     if (input instanceof HTMLInputElement) {
       this.clearButton.classList.toggle('hidden', !input.value);
+    }
+  };
 
-      if (event instanceof KeyboardEvent && event.key === 'Enter') {
-        const searchQuery = input.value.trim();
-        if (searchQuery.length > 0 && searchQuery.length <= 2) {
-          this.showValidationMessage();
-        } else {
-          filterState.setSearchQuery(searchQuery);
-        }
-      }
+  private handleSearchKeydown = (event: Event): void => {
+    if (event instanceof KeyboardEvent && event.key === 'Enter') {
+      this.handleSearchClick();
     }
   };
 

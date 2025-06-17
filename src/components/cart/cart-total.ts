@@ -161,7 +161,7 @@ export default class CartTotal extends BaseComponent {
 
     const totalPrice = CartTotal.createTotalItem(
       CART_TEXT.TOTAL_PRICE,
-      `${this.totalPrice} ${DEFAULT_CURRENCY}`,
+      `${this.totalPrice.toFixed(2)} ${DEFAULT_CURRENCY}`,
       {
         isDotted: false,
         isAccent: true,
@@ -199,6 +199,8 @@ export default class CartTotal extends BaseComponent {
     const modal = new Modal({
       title: MODAL_TITLE.CHECKOUT_CART,
       content,
+      className: MODAL.CART_COMPONENT,
+      classNameTitle: MODAL.HEADER.CART_TITLE,
       callback: CartTotal.closeCart.bind(CartTotal),
     });
 

@@ -115,8 +115,37 @@ This will set up Husky to run the Git hooks for pre-commit and other automation.
 
 5. **Add environment configuration files**
 
-- Create `.env.development` and `.env.production` files in the root directory.
-- Configure necessary environment variables inside these files.
+Create a `.env` file in the root directory with the following CommerceTools API variables:
+```
+VITE_CTP_PROJECT_KEY=your_project_key
+VITE_CTP_CLIENT_SECRET=your_client_secret
+VITE_CTP_CLIENT_ID=your_client_id
+VITE_CTP_AUTH_URL=your_auth_url
+VITE_CTP_API_URL=your_api_url
+VITE_CTP_SCOPES=your_api_scopes
+```
+
+Also create environment-specific files:
+- `.env.development` - Used when running `npm run dev`
+- `.env.production` - Used when running `npm run build`
+
+These files should contain environment-specific configurations, including, but not limited to:
+```
+# .env.development
+VITE_API_URL=http://localhost:3000
+VITE_DEBUG=true 
+
+# .env.production
+VITE_DEBUG=false
+```
+
+For local development, you can create a `.env.local` file which will override the values in `.env`.
+
+> ⚠️ **Important:** 
+> - Make sure that all the `.env` files are placed in `.gitignore` and are not committed to version control. 
+> - All environment variables must be prefixed with `VITE_`.
+> - The loading order is: `.env` → `.env.[mode]` → `.env.local` → `.env.[mode].local`
+> - Later files override earlier ones.
 
 6. **Start the development server**
 

@@ -56,7 +56,7 @@ export default class Router {
     }
     const route = Router.checkRouteValidity(currentHash) ? currentHash : Route.ERROR;
     const handler = this.routes.get(route);
-    globalThis.scrollTo(0, 0);
+    globalThis.scrollTo({ top: 0, behavior: 'smooth' });
 
     if (handler) {
       handler();

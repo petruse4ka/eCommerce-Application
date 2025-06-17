@@ -16,9 +16,14 @@ import { AlertStatus, AlertTime } from '@/types/enums';
 import ElementBuilder from '@/utils/element-builder';
 import SVGBuilder from '@/utils/svg-builder';
 
+import type MainMenu from './main-menu';
+
 export default class AuthorizationMenu extends BaseComponent {
-  constructor() {
+  private mainMenu: MainMenu;
+
+  constructor(mainMenu: MainMenu) {
     super({ tag: 'div', className: SUBHEADER_STYLES.AUTHORIZATION_MENU });
+    this.mainMenu = mainMenu;
     userState.subscribe(this.updateMenu.bind(this));
     this.render();
   }
@@ -69,6 +74,7 @@ export default class AuthorizationMenu extends BaseComponent {
       menuItem.append(icon, text);
 
       menuItem.addEventListener('click', () => {
+        this.mainMenu.closeBurgerMenu();
         Router.followRoute(item.route);
       });
 
@@ -101,6 +107,7 @@ export default class AuthorizationMenu extends BaseComponent {
       menuItem.append(icon, text);
 
       menuItem.addEventListener('click', () => {
+        this.mainMenu.closeBurgerMenu();
         if (item.name === AUTHORIZATION_MENU_TEXT.LOGOUT) {
           userState.setAuthorizationState(false);
           void API.authentication();

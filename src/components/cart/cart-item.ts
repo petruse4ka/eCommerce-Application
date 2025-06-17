@@ -1,9 +1,10 @@
 import APICart from '@/api/cart';
-import deleteIcon from '@/assets/icons/delete.svg';
 import { CART_TEXT, PRODUCT_TEXT } from '@/constants';
+import { SVG_ICONS } from '@/data';
 import { ADDRESS } from '@/styles/address';
 import { CART_ITEM } from '@/styles/cart/cart-item';
 import { CART_TOTAL } from '@/styles/cart/cart-total';
+import { Route } from '@/types/enums';
 import type { CartItemView } from '@/types/interfaces';
 import type { UpdateViewTotalCart } from '@/types/types';
 import ElementBuilder from '@/utils/element-builder';
@@ -83,28 +84,53 @@ export default class CartItem extends BaseComponent {
     this.component.append(quantityInputBlock.getElement(), priceContainer);
   }
 
-  private render(): void {
-    const productImg = new ImageBuilder({
-      source: this.productInfo.img.url,
-      alt: this.productInfo.img.alt ?? 'Product image',
-      className: CART_ITEM.IMAGE,
+  private createProductName(): HTMLElement {
+    const container = new ElementBuilder({
+      tag: 'div',
+      className: CART_ITEM.INFO.CONTAINER,
+      callback: (): void => {
+        globalThis.location.hash = `${Route.PRODUCT}/${this.productInfo.key}`;
+      },
     }).getElement();
 
     const productName = new ElementBuilder({
       tag: 'p',
       className: CART_ITEM.INFO.NAME,
-      textContent: this.productInfo.name,
+      textContent: `${this.productInfo.name}`,
     }).getElement();
 
-    this.component.append(productImg, productName);
+    const productPrice = new ElementBuilder({
+      tag: 'p',
+      className: CART_ITEM.INFO.PRICE,
+      textContent: `${(this.productInfo.discountedPrice ?? this.productInfo.prices).toFixed(2)} ${PRODUCT_TEXT.CURRENCY}`,
+    }).getElement();
+
+    container.append(productName, productPrice);
+
+    return container;
+  }
+
+  private render(): void {
+    const productImg = new ImageBuilder({
+      source: this.productInfo.img.url,
+      alt: this.productInfo.img.alt ?? 'Product image',
+      className: CART_ITEM.IMAGE,
+      callback: (): void => {
+        globalThis.location.hash = `${Route.PRODUCT}/${this.productInfo.key}`;
+      },
+    }).getElement();
+
+    const productNameContainer = this.createProductName();
+
+    this.component.append(productImg, productNameContainer);
 
     this.createPriceAndQuantity();
 
     const deleteButton = new ButtonWithIcon({
       style: 'DELETE_CART_ITEM',
       icon: {
-        source: deleteIcon,
-        classNameIcon: ADDRESS.CARD.ICON,
+        source: SVG_ICONS.DELETE_ICON,
+        classNameIcon: ADDRESS.CARD.ICON_CART,
       },
       callback: async (): Promise<void> => {
         this.callback({ isLoading: true, success: false });

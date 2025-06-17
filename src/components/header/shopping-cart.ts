@@ -7,11 +7,15 @@ import { CartStateKey, Route } from '@/types/enums';
 import ElementBuilder from '@/utils/element-builder';
 import SVGBuilder from '@/utils/svg-builder';
 
+import type MainMenu from './main-menu';
+
 export default class ShoppingCartIcon extends BaseComponent {
   private itemsIndicator: HTMLElement;
+  private mainMenu: MainMenu;
 
-  constructor() {
+  constructor(mainMenu: MainMenu) {
     super({ tag: 'div', className: HEADER_STYLES.CART_CONTAINER });
+    this.mainMenu = mainMenu;
 
     this.itemsIndicator = new ElementBuilder({
       tag: 'div',
@@ -20,6 +24,7 @@ export default class ShoppingCartIcon extends BaseComponent {
     }).getElement();
 
     this.component.addEventListener('click', () => {
+      this.mainMenu.closeBurgerMenu();
       Router.followRoute(Route.CART);
     });
 

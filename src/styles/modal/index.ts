@@ -2,7 +2,18 @@ export const MODAL = {
   COMPONENT: [
     'm-auto',
     'rounded-md',
-    'bg-gray-medium',
+    'bg-white',
+    'border',
+    'border-accent',
+    'shadow-lg',
+    'w-[95%]',
+    'max-w-[600px]',
+    'm-4',
+  ],
+  CART_COMPONENT: [
+    'm-auto',
+    'rounded-md',
+    'bg-purple',
     'border',
     'border-accent',
     'shadow-lg',
@@ -21,12 +32,13 @@ export const MODAL = {
       'border-primary',
     ],
     TITLE: ['text-xl', 'font-semibold', 'text-black'],
+    CART_TITLE: ['text-xl', 'font-semibold', 'text-white-permanent'],
   },
   CONTENT: {
     CONTAINER: ['p-4'],
     CHECKOUT_PAGE: {
       CONTAINER: ['flex', 'flex-col', 'items-center', 'gap-5'],
-      TITLE: ['text-center', 'text-xl', 'font-bold', 'text-black'],
+      TITLE: ['text-center', 'text-xl', 'font-bold', 'text-white-permanent'],
     },
     ABOUT: {
       CONTAINER: ['flex', 'flex-col', 'p-4'],
@@ -52,7 +64,8 @@ export const MODAL = {
         'mt-2',
       ],
       GITHUB: ['mt-auto', 'pt-4'],
-      DESCRIPTION: ['mt-8', 'text-md', 'flex-grow'],
+      DESCRIPTION: ['mt-4', 'text-md', 'flex-grow'],
     },
+    APPROVE_CLEAR_CART: ['flex', 'gap-5', 'flex-col', 'md:flex-row'],
   },
 };

@@ -83,6 +83,7 @@ export const FILTERS_STYLES = {
     'gap-3',
     'items-center',
     'min-h-[100px]',
+    'mt-10',
   ],
   EMPTY_FILTERS_IMAGE: ['w-[75px]', 'xl:w-[125x]', 'grow-0'],
   EMPTY_FILTERS_TEXT: ['text-accent', 'text-xl', 'font-semibold', 'text-center'],

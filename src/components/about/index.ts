@@ -130,7 +130,10 @@ export default class Person extends BaseComponent {
       textContent: personal.PersonalText.name,
     }).getElement();
 
-    container.getElement().append(image, name);
+    const gitHubLink = Team.createGithubLink(personal.PersonalText.github);
+    gitHubLink.classList.add(...MODAL.CONTENT.ABOUT.GITHUB);
+
+    container.getElement().append(image, name, gitHubLink);
 
     if (personal.PersonalText.description) {
       const description = new ElementBuilder({
@@ -149,11 +152,6 @@ export default class Person extends BaseComponent {
 
       container.getElement().append(description);
     }
-
-    const gitHubLink = Team.createGithubLink(personal.PersonalText.github);
-    gitHubLink.classList.add(...MODAL.CONTENT.ABOUT.GITHUB);
-
-    container.getElement().append(gitHubLink);
 
     return container;
   }

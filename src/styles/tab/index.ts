@@ -34,9 +34,23 @@ export const TAB = {
     'group',
   ],
   BUTTON_STYLE: {
-    DEFAULT: [...TAB_BUTTON, 'bg-white', 'border-primary'],
-    ACTIVE: [...TAB_BUTTON, 'bg-accent', 'border-accent'],
+    DEFAULT: [
+      ...TAB_BUTTON,
+      'bg-white',
+      'border-primary',
+      'fill-black',
+      'text-black',
+      'hover:fill-white-permanent',
+      'hover:text-white-permanent',
+    ],
+    ACTIVE: [
+      ...TAB_BUTTON,
+      'bg-accent',
+      'border-accent',
+      'fill-white-permanent',
+      'text-white-permanent',
+    ],
   },
-  ICON: ['w-8', 'h-8', 'fill-black'],
+  ICON: ['w-8', 'h-8'],
   NAME: ['hidden', 'md:block'],
 };

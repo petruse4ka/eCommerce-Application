@@ -20,6 +20,12 @@ export const DEFAULT_BUTTON_WITH_ICON = ['button', 'items-center', 'gap-2'];
 export const BUTTON_ICON_CONTAINER = ['flex', 'items-center'];
 export const BUTTON_ICON = ['w-5', 'h-5'];
 export const BUTTON_TEXT = ['text-[14px]', 'font-semibold'];
+export const REMOVE_BUTTON_TEXT = [
+  'text-[14px]',
+  'font-semibold',
+  'group-hover:text-white-permanent',
+];
+export const REMOVE_BUTTON_ICON = ['w-5', 'h-5', 'fill-accent', 'group-hover:fill-white-permanent'];
 
 export const CUSTOM_BUTTON_STYLE = {
   PRIMARY_PINK: [
@@ -91,6 +97,19 @@ export const CUSTOM_BUTTON_STYLE = {
     'text-[14px]',
     'w-full',
   ],
+  SECONDARY_PRICE_BUTTON: [
+    ...STANDARD_BUTTON_STYLE,
+    'bg-white',
+    'text-accent',
+    'border-accent',
+    'hover:bg-accent-hover',
+    'hover:text-white-permanent',
+    'lg:col-span-2',
+    'w-[200px]',
+    'place-self-center',
+    'text-[14px]',
+    'w-full',
+  ],
   PRICE_QUANTITY: [
     'cursor-pointer',
     'w-8',
@@ -108,6 +127,9 @@ export const CUSTOM_BUTTON_STYLE = {
     'active:bg-primary',
     'rounded-sm',
     'text-black',
+    'disabled:bg-gray-light',
+    'disabled:border-gray',
+    'disabled:cursor-not-allowed',
   ],
   CLEAR: [
     'hidden',
@@ -188,6 +210,9 @@ export const CUSTOM_BUTTON_STYLE = {
     'border-gray',
     'hover:bg-accent-hover',
     'hover:border-accent-hover',
+    'fill-black',
+    'hover:fill-white-permanent',
+    'hover:text-white-permanent',
   ],
   DELETE_CART_ITEM: [
     'flex-none',
@@ -275,8 +300,9 @@ export const CUSTOM_BUTTON_STYLE = {
     'disabled:bg-gray-light',
     'disabled:border-gray',
     'disabled:cursor-not-allowed',
-    'hover:bg-gray',
+    'hover:bg-accent-hover',
     'active:bg-pink',
+    'group',
   ],
   PROMO_CODE_SUBMIT: [
     'h-[52px]',
@@ -303,5 +329,4 @@ export const CUSTOM_BUTTON_STYLE = {
     'self-center',
     'transition-all',
   ],
-  DISABLE: ['!cursor-not-allowed', '!bg-gray', '!border-gray', '!text-white'],
 };

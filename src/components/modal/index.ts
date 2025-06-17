@@ -9,16 +9,22 @@ import FormEditPassword from '../forms/edit-password';
 
 export default class Modal extends BaseComponent {
   private callback: (() => void) | undefined;
+  private classNameTitle: string[];
+
   constructor(parameters: {
     title: string;
     content: FormEditUserInfo | FormAddNewAddress | FormEditPassword | ElementBuilder;
     callback?: () => void;
+    className?: string[];
+    classNameTitle?: string[];
   }) {
     super({
       tag: 'dialog',
-      className: MODAL.COMPONENT,
+      className: parameters.className || MODAL.COMPONENT,
       attributes: { 'aria-label': parameters.title },
     });
+
+    this.classNameTitle = parameters.classNameTitle || MODAL.HEADER.TITLE;
 
     this.callback = parameters.callback;
 
@@ -76,7 +82,7 @@ export default class Modal extends BaseComponent {
 
     const title = new ElementBuilder({
       tag: 'h3',
-      className: MODAL.HEADER.TITLE,
+      className: this.classNameTitle,
       textContent: titleText,
     }).getElement();
 
