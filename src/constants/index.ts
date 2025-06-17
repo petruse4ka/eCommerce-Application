@@ -341,6 +341,7 @@ export const ALERT_TEXT = {
   ADD_ADDRESS_SUCCESS: locale.alertAddAddressSuccess,
   REMOVE_CART_ITEM: locale.alertRemoveCartItem,
   DISCOUNT_CODE_NON: locale.alertDiscountCodeNon,
+  DISCOUNT_CODE_REPEAT: locale.alertDiscountCodeRepeat,
 };
 
 export const CHECKBOX_TEXT = {

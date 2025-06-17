@@ -5,6 +5,7 @@ import Button from '@/components/buttons';
 import Input from '@/components/inputs';
 import { BTN_TEXT, PROMO_PLACEHOLDER } from '@/constants';
 import { ALERT_TEXT } from '@/constants';
+import { cartState } from '@/store/cart-state';
 import { FORM_PROMO_CODE } from '@/styles/forms/forms';
 import { AlertStatus, AlertTime, InputType } from '@/types/enums';
 import { isErrorInfoPasswordChange } from '@/types/guards';
@@ -26,7 +27,7 @@ export default class FormPromoCode extends BaseComponent {
     this.render();
   }
 
-  private render(): void {
+  private static createPromoInput(): Input {
     const input = new Input({
       id: 'promoCode',
       type: InputType.TEXT,
@@ -36,10 +37,22 @@ export default class FormPromoCode extends BaseComponent {
       },
     });
 
+    return input;
+  }
+
+  private render(): void {
+    const input = FormPromoCode.createPromoInput();
+
     const button = new Button({
       style: 'PROMO_CODE_SUBMIT',
       textContent: BTN_TEXT.APPLY,
       callback: (): void => {
+        const cartInfo = cartState.getCartInfo();
+        if (cartInfo?.discountCode) {
+          input.setError(ALERT_TEXT.DISCOUNT_CODE_REPEAT);
+          return;
+        }
+
         this.callback({ isLoading: true, success: false });
         APICart.addPromoCode(input.getValue())
           .then(() => {

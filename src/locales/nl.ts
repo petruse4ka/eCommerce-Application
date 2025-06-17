@@ -154,7 +154,7 @@ export const nl = {
   cartTextModalText:
     'Uw bestelling is succesvol geplaatst! We zullen u contacteren om de informatie te bevestigen',
   promoCodeText: 'SALE10 - promotiecode voor je eerste aankoop',
-  promoCodeTextHeader: 'Korting met promotiecode SALE10',
+  promoCodeTextHeader: 'Zommer korting met promotiecode WELOVEMACARONS',
   promoPlaceholder: 'Voer promotiecode in',
   additionalDeliveryTitle: 'Bezorging en betaling',
   additionalDeliveryIntro:
@@ -250,6 +250,7 @@ export const nl = {
   alertAddAddressSuccess: 'Nieuw adres is toegevoegd',
   alertRemoveCartItem: 'Artikel is verwijderd uit winkelwagen',
   alertDiscountCodeNon: 'Deze promotiecode bestaat niet',
+  alertDiscountCodeRepeat: 'U kunt slechts 1 promotiecode gebruiken',
   checkboxDefaultSave: 'Opslaan als standaardadres',
   checkboxSameAddresses: 'Gebruik dezelfde adressen',
   deliveryPay:

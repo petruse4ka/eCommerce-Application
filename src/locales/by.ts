@@ -152,7 +152,7 @@ export const by = {
   cartTextLoadingDeleteProductCart: 'Ачыстка кошыка...',
   cartTextModalText: 'Ваш заказ паспяхова прыняты! Мы звяжамся з вамі для пацверджання інфармацыі',
   promoCodeText: 'SALE10 - прамакод на першую пакупку',
-  promoCodeTextHeader: 'Зніжка па прамакодзе SALE10',
+  promoCodeTextHeader: 'Летняя зніжка па прамакодзе WELOVEMACARONS',
   promoPlaceholder: 'Увядзіце прамакод',
   additionalDeliveryTitle: 'Дастаўка і аплата',
   additionalDeliveryIntro:
@@ -248,6 +248,7 @@ export const by = {
   alertAddAddressSuccess: 'Новы адрас дададзены',
   alertRemoveCartItem: 'Тавар выдалены з кошыка',
   alertDiscountCodeNon: 'Такога прамакоду не iснуе',
+  alertDiscountCodeRepeat: 'Вы можаце выкарыстоўваць толькі 1 прамакод',
   checkboxDefaultSave: 'Захаваць адрас па змаўчанні',
   checkboxSameAddresses: 'Выкарыстоўваць аднолькавыя адрасы',
   deliveryPay:

@@ -152,7 +152,7 @@ export const ru = {
   cartTextLoadingDeleteProductCart: 'Очистка корзины...',
   cartTextModalText: 'Ваш заказ успешно принят! Мы свяжемся с вами для подтверждения информации',
   promoCodeText: 'SALE10 - промокод на первую покупку',
-  promoCodeTextHeader: 'Скидка по промокоду SALE10',
+  promoCodeTextHeader: 'Летняя скидка по промокоду WELOVEMACARONS',
   promoPlaceholder: 'Введите промокод',
   additionalDeliveryTitle: 'Доставка и оплата',
   additionalDeliveryIntro:
@@ -247,6 +247,7 @@ export const ru = {
   alertAddAddressSuccess: 'Новый адрес добавлен',
   alertRemoveCartItem: 'Товар удален из корзины',
   alertDiscountCodeNon: 'Такого промокода нет',
+  alertDiscountCodeRepeat: 'Вы можете использовать только 1 промокод',
   checkboxDefaultSave: 'Сохранить адрес по умолчанию',
   checkboxSameAddresses: 'Использовать одинаковые адреса',
   deliveryPay:

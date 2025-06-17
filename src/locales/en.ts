@@ -153,7 +153,7 @@ export const en = {
   cartTextModalText:
     'Your order has been successfully received! We will contact you to confirm the information',
   promoCodeText: 'SALE10 - promo code for your first purchase',
-  promoCodeTextHeader: 'Discount with promocode SALE10',
+  promoCodeTextHeader: 'Summer discount with promocode WELOVEMACARONS',
   promoPlaceholder: 'Enter promocode',
   additionalDeliveryTitle: 'Delivery and payment',
   additionalDeliveryIntro:
@@ -246,6 +246,7 @@ export const en = {
   alertAddAddressSuccess: 'New address has been added',
   alertRemoveCartItem: 'Item has been removed from cart',
   alertDiscountCodeNon: 'No such promocode exists',
+  alertDiscountCodeRepeat: 'You can use only 1 promocode',
   checkboxDefaultSave: 'Save as default address',
   checkboxSameAddresses: 'Use same addresses',
   deliveryPay:
